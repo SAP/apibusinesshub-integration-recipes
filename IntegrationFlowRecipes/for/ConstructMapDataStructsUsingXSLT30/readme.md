@@ -1,6 +1,6 @@
 # Use Map data structures in XSLT Mapping
 
-![Kamlesh Zanje](https://github.wdf.sap.corp/avatars/u/16035?s=50 )|[Kamlesh Zanje](https://github.wdf.sap.corp/I043359 )|
+![Kamlesh Zanje](https://avatars0.githubusercontent.com/u/54795177?s=50 )|[Kamlesh Zanje](https://github.com/kamleshzanje)|
 ----|----|
 
 Utilize [Map](https://www.w3.org/TR/xslt-30/#map) data structures in XSLT Mappings flow step.
