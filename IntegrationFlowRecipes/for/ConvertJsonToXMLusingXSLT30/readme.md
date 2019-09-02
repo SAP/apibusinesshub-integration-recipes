@@ -1,6 +1,6 @@
 # Convert JSON to XML using XSLT Mappings
 
-![Kamlesh Zanje](https://avatars0.githubusercontent.com/u/54795177?s=50 )|[Kamlesh Zanje](https://github.com/kamleshzanje)|
+![Kamlesh Zanje](https://github.com/kamleshzanje.png?size=50 )|[Kamlesh Zanje](https://github.com/kamleshzanje)|
 ----|----|
 
 This recipe converts and incoming file in JSON format into XML format
