@@ -1,6 +1,6 @@
 # Invoke Java functions from XSLT Mapping
 
-![Kamlesh Zanje](https://github.wdf.sap.corp/avatars/u/16035?s=50 )|[Kamlesh Zanje](https://github.wdf.sap.corp/I043359 )|
+![Kamlesh Zanje](https://avatars0.githubusercontent.com/u/54795177?s=50 )|[Kamlesh Zanje](https://github.com/kamleshzanje)|
 ----|----|
 
 
