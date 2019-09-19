@@ -3,7 +3,7 @@
 Accelerate your SAP Cloud Platform Integration projects with samples available in this repository. This repository contains samples of integration flows and mapping intended to be used as starting points.
 
 ## Requirements
-You will need a SAP Cloud Integration Tenant to consume and enhance this content.
+You will need a SAP Cloud Integration tenant to consume and enhance this content.
 
 ## Download and Installation
 In this repo all integration flow samples are uploaded as .zip files.
@@ -20,4 +20,4 @@ Explore [Integration Flow Recipes](IntegrationFlowRecipes) to find best practice
 Contribute to this repository with reusable content or samples. Please read the [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 ## LICENSE
 Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
-This file is licensed under the SAP SAMPLE CODE LICENSE FOR DEVELOPED APPLICATIONS except as noted otherwise in the [LICENSE file](LICENSE.md).”
+This file is licensed under the SAP SAMPLE CODE LICENSE FOR DEVELOPED APPLICATIONS except as noted otherwise in the [LICENSE](LICENSE).
