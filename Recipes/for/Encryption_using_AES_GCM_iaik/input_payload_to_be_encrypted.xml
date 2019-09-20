@@ -1,0 +1,34 @@
+<n0:ActivityReplicationRequest xmlns:n0="http://sap.com/xi/CUANCOD" xmlns:prx="urn:sap.com:proxy:CC2:/1SAI/TAS22E7C73ED8224CFC7D8B:768">
+	<MessageHeader>
+		<ID>8CDCD4008ED01EE6BCD11800D3D20BC6</ID>
+		<CreationDateTime>2017-02-14T07:38:52.424198Z</CreationDateTime>
+		<SenderParty>
+			<InternalID schemeAgencyID="310" schemeID="LocalSystemID">0LO7HJB</InternalID>
+		</SenderParty>
+	</MessageHeader>
+	<ActivityReplicateRequest>
+		<MessageHeader/>
+		<Activity actionCode="01">
+			<TypeCode>02</TypeCode>
+			<CategoryCode>01</CategoryCode>
+			<Name>TestSW Appointment TestAll14</Name>
+			<PriorityCode>2</PriorityCode>
+			<Note>SAP HANA Cloud Integration facilitates the integration of business processes and data across on-premise and cloud applications (cloud to cloud and cloud to on-premise integration).SAP HANA Cloud Integration for process integration allows you to integrate</Note>
+			<StartDateTime>2017-02-14T07:39:33Z</StartDateTime>
+			<EndDateTime>2017-02-14T09:39:33Z</EndDateTime>
+			<Campaign>
+				<ID>0000000711</ID>
+				<Name>Test SW Appointment1  TestAll14</Name>
+				<PlannedStartDate>2017-02-09</PlannedStartDate>
+				<PlannedEndDate>2017-02-16</PlannedEndDate>
+				<PriorityCode>3</PriorityCode>
+			</Campaign>
+			<Contact>
+				<ID>
+					<ID>0040000024</ID>
+					<IdOrigin>SAP_CRM_BUPA</IdOrigin>
+				</ID>
+			</Contact>
+		</Activity>
+	</ActivityReplicateRequest>
+</n0:ActivityReplicationRequest>

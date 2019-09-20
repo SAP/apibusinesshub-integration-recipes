@@ -10,7 +10,7 @@ In this repo all integration flow samples are uploaded as .zip files.
 
 This content can be uploaded to your TMN environment.
 
-Explore [Integration Flow Recipes](IntegrationFlowRecipes) to find best practices to deliver specific features or capabilities in your integration flows. Sample Integration flow, Re-useable Integration flows or scripts are available for download.
+Explore [Integration Flow Recipes](Recipes) to find best practices to deliver specific features or capabilities in your integration flows. Sample Integration flow, Re-useable Integration flows or scripts are available for download.
 
 ## How to Obtain support
 [Create an issue on this repository to report problems or request recipes](https://github.com/SAP-samples/cloud-integration-flow/issues/new).
