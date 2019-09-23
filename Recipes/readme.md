@@ -1,7 +1,7 @@
 # Integration Flow recipes
 
 ## Topics
-* [Amazon Web Service](#amazon-web-services)
+* [Amazon Web Services](#amazon-web-services)
 * [Database Connectivity](#amazon-developer-connectivity)
 * [Mappings](#mappings)
 * [Security](#security)
