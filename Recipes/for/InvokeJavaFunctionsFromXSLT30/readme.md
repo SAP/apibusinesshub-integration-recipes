@@ -3,6 +3,7 @@
 ![Kamlesh Zanje](https://github.com/kamleshzanje.png?size=50 )|[Kamlesh Zanje](https://github.com/kamleshzanje)|
 ----|----|
 
+Writing reflexive extension functions in Java to be invoked from XSLT Mappings.
 
 [Download the integration flow Sample](XSLT_3.0_Java_function_call.zip)
 
@@ -10,7 +11,7 @@
 
 Step|Code|Why?
 ----|----|----
-Extensibility capability - [Java function call](http://www.saxonica.com/html/documentation/extensibility/functions/)|| Writing reflexive extension functions in Java
+Extensibility capability - [Java function call](http://www.saxonica.com/html/documentation/extensibility/functions/)|```<xsl:template match="/"	xmlns:date="java:java.util.Date"> <xsl:value-of select="date:new()"/>	</xsl:template>``` | Writing reflexive extension functions in Java|
 
 
 
@@ -30,7 +31,8 @@ This is the script used in the sample integration flow which starts with namespa
 <xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:template match="/"
         xmlns:date="java:java.util.Date">
-    <xsl:value-of select="date:new()"/>	</xsl:template>
+    <xsl:value-of select="date:new()"/>
+	</xsl:template>
 </xsl:stylesheet>
 
 ```

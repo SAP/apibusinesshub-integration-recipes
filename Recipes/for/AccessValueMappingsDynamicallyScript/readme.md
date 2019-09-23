@@ -1,8 +1,9 @@
 # Accessing Value Mappings from Groovy script
-Use ```ITApiFactory.getApi()``` to get ```ValueMappingAPI``` class that can be used to retrieve the mappings.
 
-![Sharad Dixit](https://github.wdf.sap.corp/avatars/u/20800?s=70&u=71dccdbd9e0cc84d61643b435edd10ff28ac8093 )|[Sharad Dixit](https://github.wdf.sap.corp/I300294)|
+![Sharad Dixit](https://github.com/sharadiiita.png?size=50 )|[Sharad Dixit](https://github.com/sharadiiita)|
 ----|----|
+
+Use ```ITApiFactory.getApi()``` to get ```ValueMappingAPI``` class that can be used to retrieve the mappings.
 
 [Download the integration flow Sample](AccessValueMappingsFromScript.zip)
 

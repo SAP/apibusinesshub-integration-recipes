@@ -1,4 +1,8 @@
 # Generate AWS4-HMAC-SHA256 Signature
+
+![Sunny Kapoor](https://github.com/simplykapoor.png?size=50 )|[Sunny Kapoor](https://github.com/simplykapoor)|
+----|----|
+
 This reusable recipe generates an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.\
 The main challenge is to generate AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header. Creating this signature is a multi-step procedure and if single step goes wrong, AWS gives the signature mismatch error.\
 You can directly use the reusable integration flow extension to avoid building this functionality again.

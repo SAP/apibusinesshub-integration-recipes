@@ -1,4 +1,8 @@
 # Accessing keystore artifacts using a Groovy script
+
+![Shweta Walaskar](https://github.com/swalaskar.png?size=50 )|[Shweta Walaskar](https://github.com/swalaskar)|
+----|----|
+
 Any keypair available in tenant keystore can be accessed programmatically from a script with the help of the getKey and getCertificate api of the KeyStoreService class
 
 
@@ -18,21 +22,21 @@ To download a sample integration flow that used this script, refer to [Decryptio
 Below code snippet is used to access these details from tenant keystore.
 ```
     def clientSignKeyAlias = "sap_cloudintegrationcertificate";
-        
+
         def service = ITApiFactory.getApi(KeystoreService.class, null);   
         if( service == null) {
             throw new IllegalStateException("Keystore Store Service is not available.");
         }
-        
+
         //Get Private Key from the system.jks
         PrivateKey privateSignKey = (PrivateKey)service.getKey(clientSignKeyAlias);
     	if( privateSignKey == null) {
            	throw new IllegalStateException("privateSignKey is not available.");
         }
-        
-        //Get Public certificate from the system.jks	
+
+        //Get Public certificate from the system.jks
         X509Certificate encryptCert = (X509Certificate)service.getCertificate(clientSignKeyAlias);
-       
+
         if(encryptCert == null) {
             throw new IllegalStateException("signCert is not available.");
         }

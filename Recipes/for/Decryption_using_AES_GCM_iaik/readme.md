@@ -1,10 +1,13 @@
 # CMS Decryption with AES256-GCM algorithm using iaik libraries
+
+![Shweta Walaskar](https://github.com/swalaskar.png?size=50 )|[Shweta Walaskar](https://github.com/swalaskar)|
+----|----|
+
 Standard Decryptor component in CPI doesn't provide an option for Encryption algorithm AES256-GCM. Hence, there was a need to develop this custom decryptor
 The examples available in internet use BouncyCastle as security provider and this needs BouncyCastle registration as security provider on CPI tenant, which is not recommended.
 Hence we chose to do this using iaik which is the default security provider for CPI
 
 [Download the integration flow Sample](CMS_AES256GCM_Decryption_iaik.zip)\
-[Download the reuseable integration flow](<<Name>>.zip) -[How to consume a reusable integration flow?](<<Full path>>)
 
 ## Recipe
 
@@ -51,8 +54,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import no.difi.asic.*;
 import no.difi.asic.extras.*;
-import java.security.KeyStore; 
-import java.security.cert.X509Certificate; 
+import java.security.KeyStore;
+import java.security.cert.X509Certificate;
 
 //Java keystore
 import com.sap.it.api.keystore.KeystoreService;
@@ -75,38 +78,38 @@ import iaik.asn1.structures.AlgorithmID;
 
 def Message processData(Message message) {
 
-    //Body 
+    //Body
     def body = message.getBody(byte[].class);
 
        def clientSignKeyAlias = "sap_cloudintegrationcertificate";
-        
+
         def service = ITApiFactory.getApi(KeystoreService.class, null);   
         if( service == null) {
             throw new IllegalStateException("Keystore Store Service is not available.");
         }
-        
+
         //Get Private Key from the system.jks
         PrivateKey privateSignKey = (PrivateKey)service.getKey(clientSignKeyAlias);
     	if( privateSignKey == null) {
            	throw new IllegalStateException("privateSignKey is not available.");
         }
-        
-        //Get Public certificate from the system.jks	
+
+        //Get Public certificate from the system.jks
         X509Certificate encryptCert = (X509Certificate)service.getCertificate(clientSignKeyAlias);
-       
+
         if(encryptCert == null) {
             throw new IllegalStateException("signCert is not available.");
         }
         encryptCert.checkValidity();
-        
-        
-    	    			
+
+
+
  //try {
-        
+
         InputStream is = new ByteArrayInputStream(body);
         EnvelopedDataStream enveloped_data = new EnvelopedDataStream(is);
         GCMParameterSpec params = null;
-        
+
         RecipientInfo[] recipients = enveloped_data.getRecipientInfos();
         SecretKey secretKey = recipients[0].decryptKey(privateSignKey);
         EncryptedContentInfoStream eci = (EncryptedContentInfoStream) enveloped_data.getEncryptedContentInfo();
@@ -127,11 +130,11 @@ def Message processData(Message message) {
 
 
    message.setBody(decrypted);
-   
+
    return message;
 }
 ```
-### Sample input 
+### Sample input
 [Sample input encrypted file](aes256_gcm_encrypted_payload.p7m)
 ### Sample output
 [Decrypted output](aes256_gcm_decrypted_payload.xml)

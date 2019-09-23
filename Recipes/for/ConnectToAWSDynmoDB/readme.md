@@ -1,4 +1,8 @@
 # Connect to Amazon DynamoDB
+
+![Sunny Kapoor](https://github.com/simplykapoor.png?size=50 )|[Sunny Kapoor](https://github.com/simplykapoor)|
+----|----|
+
 Amazon DynamoDB is a fully managed non-relational database service that provides fast and predictable performance with seamless scalability. It is a schema-less database that only requires a table name and primary key.
 
 To achieve the integration with Amazon DynamoDB, SAP CPI needs to make a rest call to DynamoDB endpoint.

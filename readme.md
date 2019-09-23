@@ -1,16 +1,17 @@
 # Welcome to SAP Cloud Platform Integration Accelerators
 ## Description
-Accelerate your SAP Cloud Platform Integration projects with samples available in this repository. This repository contains samples of integration flows and mapping intended to be used as starting points.
+Accelerate your SAP Cloud Platform Integration projects with samples available in this repository. This repo contains recipes (best practices), samples and reusable code to serve as starting points for your integration projects.
 
 ## Requirements
 You will need a SAP Cloud Integration tenant to consume and enhance this content.
 
 ## Download and Installation
-In this repo all integration flow samples are uploaded as .zip files.
+This repo contains
+1. Scripts [XSLT or Groovy] that can be used in already created integration flows
+2. Sample integration flows as zip file that can be uploaded into already created integration packages
+3. Reusable integration that can be reused by your integration flows with necessary configurations.
 
-This content can be uploaded to your TMN environment.
-
-Explore [Integration Flow Recipes](Recipes) to find best practices to deliver specific features or capabilities in your integration flows. Sample Integration flow, Re-useable Integration flows or scripts are available for download.
+These 3 types of artifacts embody  [Integration Flow Recipes](Recipes) or best practices to deliver specific features or capabilities in your integration flows.
 
 ## How to Obtain support
 [Create an issue on this repository to report problems or request recipes](https://github.com/SAP-samples/cloud-integration-flow/issues/new).

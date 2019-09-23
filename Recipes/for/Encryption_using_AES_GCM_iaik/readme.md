@@ -1,10 +1,13 @@
 # Encryption with AES256-GCM algorithm using iaik libraries
+
+![Shweta Walaskar](https://github.com/swalaskar.png?size=50 )|[Shweta Walaskar](https://github.com/swalaskar)|
+----|----|
+
 Standard Encryptor component in CPI doesn't provide an option for Encryption algorithm AES256-GCM. Hence, there was a need to develop this custom encryptor.
 The examples available in internet use BouncyCastle as security provider and this needs BouncyCastle registration as security provider on CPI tenant, which is not recommended.
 Hence we chose to do this using iaik which is the default security provider for CPI
 
 [Download the integration flow Sample](CMS_AES256GCM_Encryption_iaik.zip)\
-[Download the reuseable integration flow](<<Name>>.zip) -[How to consume a reusable integration flow?](<<Full path>>)
 
 ## Recipe
 
@@ -56,7 +59,7 @@ import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 import no.difi.asic.*;
 import no.difi.asic.extras.*;
-import java.security.KeyStore; 
+import java.security.KeyStore;
 import java.security.cert.X509Certificate;
 
 //Java keystore
@@ -86,41 +89,41 @@ import iaik.x509.X509Certificate;
 import com.google.common.io.ByteStreams;
 
 def Message processData(Message message) {
-    
+
     try {
         def map = message.getProperties();
-        
+
         def clientSignKeyAlias = "sap_cloudintegrationcertificate";
-        
+
         def service = ITApiFactory.getApi(KeystoreService.class, null);   
         if( service == null) {
             throw new IllegalStateException("Keystore Store Service is not available.");
         }
-        
+
         //Get Private Key from the system.jks
         PrivateKey privateSignKey = (PrivateKey)service.getKey(clientSignKeyAlias);
     	if( privateSignKey == null) {
            	throw new IllegalStateException("privateSignKey is not available.");
         }
-        
-        //Get Public certificate from the system.jks	
+
+        //Get Public certificate from the system.jks
         X509Certificate encryptCert = (X509Certificate)service.getCertificate(clientSignKeyAlias);
-       
+
         if(encryptCert == null) {
             throw new IllegalStateException("signCert is not available.");
         }
         encryptCert.checkValidity();
-    	
-    	def body_bytes = message.getBody(byte[].class); 
-    	
+
+    	def body_bytes = message.getBody(byte[].class);
+
     	InputStream inputStream = new ByteArrayInputStream(body_bytes);
-        
+
         // the stream to which to write the EnvelopedData
         ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
         EnvelopedDataStream envelopedData;
-        
-        AlgorithmID contentEA = (AlgorithmID)AlgorithmID.aes256_GCM.clone(); 
-        
+
+        AlgorithmID contentEA = (AlgorithmID)AlgorithmID.aes256_GCM.clone();
+
         // generate parameters (iv and key length)
         // create iv
         SecureRandom random;
@@ -136,12 +139,12 @@ def Message processData(Message message) {
         key_gen.init(128);
         // generate a new key
         SecretKey secretKey = key_gen.generateKey();
-        
+
         //GCMParameterSpec params = new GCMParameterSpec(secretKey.getEncoded().length, iv);
         GCMParameterSpec params = new GCMParameterSpec(128, iv);
-        
+
         iaik.x509.X509Certificate cert = new iaik.x509.X509Certificate(encryptCert.getEncoded());
-    
+
         // create the EncryptedContentInfo for the content to be encrypted
         EncryptedContentInfoStream eci = new EncryptedContentInfoStream(ObjectID.cms_data, inputStream);
         // setup the cipher for encryption
@@ -153,17 +156,17 @@ def Message processData(Message message) {
         ContentInfoStream cis = new ContentInfoStream(envelopedData);   
         cis.writeTo(resultStream);  
 
-        
+
         byte[] encoding = resultStream.toByteArray();
         message.setBody(encoding);
     } catch (Exception e) {
         throw new IOException(e.getMessage(), e);
     }
-        
+
     return message;
 }
 ```
-### Sample input 
+### Sample input
 [Sample input XML](input_payload_to_be_encrypted.xml)
 ### Sample output
 [Encrypted output](aes256_gcm_encrypted_payload.p7m)
