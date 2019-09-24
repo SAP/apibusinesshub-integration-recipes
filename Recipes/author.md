@@ -1,5 +1,5 @@
 # Integration Flow recipes
-
+\| [Browse by Topic](readme.md) \| Browsing by Author \| [Browse by Artefact Type](for/readme.md) \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new ) \| [Report an issue or broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new) \|
 ## Author
 
 ### [Kamlesh Zanje](https://github.com/kamleshzanje)

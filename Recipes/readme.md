@@ -1,4 +1,5 @@
 # Integration Flow recipes
+\| Browsing by Topic \| [Browse by Author](author.md) \| [Browse by Artefact Type](for/readme.md) \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new) \|[Report an issue or broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new) \|
 
 ## Topics
 * [Amazon Web Services](#amazon-web-services)
@@ -6,16 +7,22 @@
 * [Mappings](#mappings)
 * [Security](#security)
 
+***
+
 ### Amazon Web Services
 Recipe|Description|Author
 ---|---|---
 [Connect to Amazon DynamoDB](for/ConnectToAWSDynmoDB)|SAP CPI needs to make a rest call to DynamoDB endpoint|[Sunny Kapoor](author.md#sunny-kapoor)|
 [Generate AWS4-HMAC-SHA256 Signature](for/GenerateAWS4_HMAC_SHA256)| A reusable recipe to generate an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.|[Sunny Kapoor](author.md#sunny-kapoor)|
 
+***
+
 ### Database Connectivity
 Recipe|Description|Author
 ---|---|---
 [Connect to Amazon DynamoDB](for/ConnectToAWSDynmoDB)|SAP CPI needs to make a rest call to DynamoDB endpoint|[Sunny Kapoor](author.md#sunny-kapoor)|
+
+***
 
 ### Mappings
 Recipe|Description|Author
@@ -25,6 +32,7 @@ Recipe|Description|Author
 [Invoke Java functions from XSLT Mapping](for/InvokeJavaFunctionsFromXSLT30)|Writing reflexive extension functions in Java to be invoked from XSLT |[Kamlesh Zanje](author.md#kamlesh-zanje)|
 [Use Map data structures in XSLT Mapping](for/ConstructMapDataStructsUsingXSLT30)|Utilize [Map](https://www.w3.org/TR/xslt-30/#map) data structures in XSLT Mappings flow step.|[Kamlesh Zanje](author.md#kamlesh-zanje) |
 
+***
 
 ### Security
 Recipe|Description|Author
@@ -33,3 +41,5 @@ Recipe|Description|Author
 [CMS Decryption with AES256-GCM algorithm using iaik libraries](for/Decryption_using_AES_GCM_iaik)|Decryption algorithm AES256-GCM using iaik which is the default security provider for CPI|[Shweta Walaskar](author.md#shweta-walaskar)|
 [Encryption with AES256-GCM algorithm using iaik libraries](for/Encryption_using_AES_GCM_iaik)|Encryption algorithm AES256-GCM using iaik which is the default security provider for CPI|[Shweta Walaskar](author.md#shweta-walaskar)|
 [Generate AWS4-HMAC-SHA256 Signature](for/GenerateAWS4_HMAC_SHA256)| A reusable recipe to generate an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.|[Sunny Kapoor](author.md#sunny-kapoor)|
+
+***
