@@ -1,5 +1,5 @@
 # Integration Flow recipes
-\| Browsing by Topic \| [Browse by Author](author.md) \| [Browse by Artefact Type](for/readme.md) \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new) \|[Report an issue or broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new) \|
+\| Browsing by Topic \| [Browse by Author](author.md) \| [Browse by Artefact Type](for/readme.md) \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Request&template=recipe-request.md&title=How+to++) \| Report [an issue](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=bug&template=bug_report.md&title=) or [a broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=documentation&template=bug_report.md&title=Broken%20Link) \|
 
 ## Topics
 * [Amazon Web Services](#amazon-web-services)

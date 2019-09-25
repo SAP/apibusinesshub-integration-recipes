@@ -1,5 +1,5 @@
 # Integration Flow Recipes
-\| [Browse by Topic](../readme.md)  \| [Browse by Author](../author.md) \| Browsing by Artefact Type \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new ) \| [Report an issue or broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new) \|
+\| [Browse by Topic](../readme.md)  \| [Browse by Author](../author.md) \| Browsing by Artefact Type \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Request&template=recipe-request.md&title=How+to++) \| Report [an issue](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=bug&template=bug_report.md&title=) or [a broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=documentation&template=bug_report.md&title=Broken%20Link) \|
 
 ## Artefact Type
 * [Groovy Scripts](#groovy-scripts)

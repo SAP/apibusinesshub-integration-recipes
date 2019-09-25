@@ -1,6 +1,5 @@
 # Integration Flow recipes
-\| [Browse by Topic](readme.md) \| Browsing by Author \| [Browse by Artefact Type](for/readme.md) \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new ) \| [Report an issue or broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new) \|
-## Author
+\| [Browse by Topic](readme.md) \| Browsing by Author \| [Browse by Artefact Type](for/readme.md) \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Request&template=recipe-request.md&title=How+to++) \| Report [an issue](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=bug&template=bug_report.md&title=) or [a broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=documentation&template=bug_report.md&title=Broken%20Link) \|
 
 ### [Kamlesh Zanje](https://github.com/kamleshzanje)
 ![Kamlesh Zanje](https://github.com/kamleshzanje.png?size=50 )| Product Owner for SAP Cloud Platform Integration|
