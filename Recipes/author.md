@@ -8,14 +8,14 @@
 * [Sunny Kapoor](#sunny-kapoor)
 
 ***
-||
+
 ### [Amrita Laxmi](https://github.com/amritalaxmi )
 ![Amrita Laxmi](https://github.com/amritalaxmi.png?size=50) | |
 ----|----|
 
 Recipe|Description|Topic
 ---|---|---
-[Accessing Partner Directory entries from within a Groovy script](Accessing-Partner-Directory-entries-from-within-a-script)|The String and Binary parameters from the Partner Directory can be accessed using a script with the help of getParameter API of the PartnerDirectoryService class. |[Partner Directory](readme.md#partner-directory) |
+[Accessing Partner Directory entries from within a Groovy script](for/Accessing-Partner-Directory-entries-from-within-a-script)|The String and Binary parameters from the Partner Directory can be accessed using a script with the help of getParameter API of the PartnerDirectoryService class. |[Partner Directory](readme.md#partner-directory) |
 ***
 
 ### [Kamlesh Zanje](https://github.com/kamleshzanje)
