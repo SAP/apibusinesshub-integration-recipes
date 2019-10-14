@@ -1,4 +1,5 @@
 # Connect to Amazon DynamoDB
+\| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20Connect%20to%20Amazon%20DynamoDB ) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20Connect%20to%20Amazon%20DynamoDB ) \| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20Connect%20to%20Amazon%20DynamoDB ) \|
 
 ![Sunny Kapoor](https://github.com/simplykapoor.png?size=50 )|[Sunny Kapoor](https://github.com/simplykapoor)|
 ----|----|

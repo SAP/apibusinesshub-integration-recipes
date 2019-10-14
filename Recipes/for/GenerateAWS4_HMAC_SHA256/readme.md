@@ -1,4 +1,5 @@
 # Generate AWS4-HMAC-SHA256 Signature
+\| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20Generate%20AWS4-HMAC-SHA256%20Signature ) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20Generate%20AWS4-HMAC-SHA256%20Signature ) \| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20Generate%20AWS4-HMAC-SHA256%20Signature ) \|
 
 ![Sunny Kapoor](https://github.com/simplykapoor.png?size=50 )|[Sunny Kapoor](https://github.com/simplykapoor)|
 ----|----|
