@@ -1,8 +1,8 @@
 # Accessing Partner Directory entries from within a Groovy script
 
-\| [Request Enhancement](https://github.wdf.sap.corp/integration-pm/cloud-integration-flow-samples/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20Accessing%20Partner%20Directory%20entries%20from%20within%20a%20Groovy%20script) \| [Report a bug](https://github.wdf.sap.corp/integration-pm/cloud-integration-flow-samples/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20Accessing%20Partner%20Directory%20entries%20from%20within%20a%20Groovy%20script) \| [Fix documentation](https://github.wdf.sap.corp/integration-pm/cloud-integration-flow-samples/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20Accessing%20Partner%20Directory%20entries%20from%20within%20a%20Groovy%20script) \|
+\| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md )\| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20Accessing%20Partner%20Directory%20entries%20from%20within%20a%20Groovy%20script) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20Accessing%20Partner%20Directory%20entries%20from%20within%20a%20Groovy%20script) \| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20Accessing%20Partner%20Directory%20entries%20from%20within%20a%20Groovy%20script) \|
 
-![Amrita Laxmi](https://github.wdf.sap.corp/i069413.png?size=50)|[Amrita Laxmi](https://github.wdf.sap.corp/i069413 )|
+![Amrita Laxmi](https://github.com/amritalaxmi.png?size=50)|[Amrita Laxmi](https://github.com/amritalaxmi )|
 ----|----|
 
 The String and Binary parameters from the Partner Directory can be accessed using a script with the help of getParameter API of the PartnerDirectoryService class.
@@ -20,8 +20,8 @@ Retrieve the Binary Parameter and store it in a header | ```message.setHeader("x
 
 ## References
 [Parameterizing Integration Flows Using the Partner Directory](https://help.sap.com/viewer/368c481cd6954bdfa5d0435479fd4eaf/Cloud/en-US/b7812a546ab14de6aa0a7c919d8272bb.html/)\
-[Cloud Integration – Partner Directory – Step-by-Step Example](https://blogs.sap.com/2017/07/25/cloud-integration-partner-directory-step-by-step-example/)\
-[Cloud Integration – Partner Directory – Partner Dependent XML Structures and IDs](https://blogs.sap.com/2017/08/22/cloud-integration-partner-directory-partner-dependent-xml-structures-and-ids/)
+[Cloud Integration - Partner Directory - Step-by-Step Example](https://blogs.sap.com/2017/07/25/cloud-integration-partner-directory-step-by-step-example/)\
+[Cloud Integration - Partner Directory - Partner Dependent XML Structures and IDs](https://blogs.sap.com/2017/08/22/cloud-integration-partner-directory-partner-dependent-xml-structures-and-ids/)
 
 ## Sample integration flow
 We have a scheduler set at 'Run Once'. A Content Modifier to initialize the Partner ID in a property 'PartnerId' and a script to access the String and Binary parameters for this Partner ID. The AS2 receiver and XSLT mapping validates the fetched parameters.\
