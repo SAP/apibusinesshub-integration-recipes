@@ -7,7 +7,7 @@ You will need a SAP Cloud Integration tenant to consume and enhance this content
 
 ## Download and Installation
 This repo contains
-1. Scripts [XSLT](Recipes/for/readme.md#xslt-scripts) or [Groovy](Recipes/for/readme.md#groovy-scripts) that can be used in already created integration flows
+1. [XSLT Scripts ](Recipes/for/readme.md#xslt-scripts) or [Groovy Scripts](Recipes/for/readme.md#groovy-scripts) that can be used in already created integration flows
 2. [Sample integration](Recipes) flows as zip file that can be uploaded into already created integration packages
 3. [Reusable integration](Recipes/for/readme.md#reusable-integration-flows) that can be reused by your integration flows with necessary configurations.
 
