@@ -1,6 +1,8 @@
 # Welcome to SAP API Business Hub Community for Integration Recipes
 ## Description
-Accelerate your SAP Cloud Platform Integration projects with samples available in this repository. This repo contains [recipes (best practices), samples and reusable code](Recipes) to serve as starting points for your integration projects.
+Accelerate your SAP Cloud Platform Integration projects with recipes available in this repository. This repo contains [recipes (best practices), samples and reusable code](Recipes) to serve as starting points for your integration projects. Learn more from our [wiki page](https://github.com/SAP-samples/apibusinesshub-integration-recipes/wiki).\
+This is a community driven repo; you can simply discover and consume the best practices here or contribute and govern them. [Find our how you can be a part ](https://github.com/SAP-samples/apibusinesshub-integration-recipes/wiki/Things-to-do-on-this-repo) of this repo.\
+If you would like to make [a mark for yourself](https://github.com/SAP-samples/apibusinesshub-integration-recipes/blob/master/Recipes/author.md), start with [contributing a recipe](https://github.com/SAP-samples/apibusinesshub-integration-recipes/blob/master/CONTRIBUTING.md) to showcase your expertise.
 
 ## Requirements
 You will need a SAP Cloud Integration tenant to consume and enhance this content.
