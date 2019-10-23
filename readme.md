@@ -1,4 +1,4 @@
-# Welcome to SAP Cloud Platform Integration Accelerators
+# Welcome to SAP API Business Hub Community for Integration Recipes
 ## Description
 Accelerate your SAP Cloud Platform Integration projects with samples available in this repository. This repo contains [recipes (best practices), samples and reusable code](Recipes) to serve as starting points for your integration projects.
 
