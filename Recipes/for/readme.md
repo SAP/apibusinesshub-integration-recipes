@@ -28,7 +28,7 @@ Recipe|Description|Topic
 
 ***
 
-### Sample integration flow
+### Sample integration flows
 These recipes only have sample integration flows, other types usually **also** have samples included.
 
 Recipe|Description|Topic
