@@ -4,6 +4,7 @@
 ## Topics
 * [Amazon Web Services](#amazon-web-services)
 * [Database Connectivity](#amazon-developer-connectivity)
+* [Enterprise Integration Patterns](#enterprise-integration-patterns)
 * [Mappings](#mappings)
 * [Partner Directory](#partner-directory)
 * [Security](#security)
@@ -22,6 +23,13 @@ Recipe|Description|Author
 Recipe|Description|Author
 ---|---|---
 [Connect to Amazon DynamoDB](for/ConnectToAWSDynmoDB)|SAP CPI needs to make a rest call to DynamoDB endpoint|[Sunny Kapoor](author.md#sunny-kapoor)|
+
+***
+
+### Enterprise Integration Patterns
+Recipe|Description|Author
+---|---|---
+[Command Message](for/Enterprise%20Integration%20Patterns/Message%20Construction/2%20Command%20Message) | This recipe lets you try out Command Message pattern | [Bhalchandra Wadekar](author.md#bhalchandra-wadekar)
 
 ***
 

@@ -3,6 +3,7 @@
 
 ## Authors
 * [Amrita Laxmi](#amrita-Laxmi)
+* [Bhalchandra Wadekar](#bhalchandra-wadekar)
 * [Kamlesh Zanje](#kamlesh-zanje)
 * [Sharad Dixit](#sharad-dixit)
 * [Shweta Walaskar](#shweta-walaskar)
@@ -17,6 +18,16 @@
 Recipe|Description|Topic
 ---|---|---
 [Accessing Partner Directory entries from within a Groovy script](for/Accessing-Partner-Directory-entries-from-within-a-script)|The String and Binary parameters from the Partner Directory can be accessed using a script with the help of getParameter API of the PartnerDirectoryService class. |[Partner Directory](readme.md#partner-directory) |
+
+***
+
+### [Bhalchandra Wadekar](https://github.com/BhalchandraSW)
+![Bhalchandra Wadekar](https://github.com/BhalchandraSW.png?size=50) | Senior Consultant, Syniti (LinkedIn: [BhalchandraSW](https://www.linkedin.com/in/bhalchandrasw/)) |
+----|----|
+
+Recipe|Description|Topic
+---|---|---
+[Command Message](for/Enterprise%20Integration%20Patterns/Message%20Construction/2%20Command%20Message) | This recipe lets you try out Command Message pattern | [Enterprise Integration Patterns](readme.md#enterprise-integration-patterns) |
 
 ***
 
