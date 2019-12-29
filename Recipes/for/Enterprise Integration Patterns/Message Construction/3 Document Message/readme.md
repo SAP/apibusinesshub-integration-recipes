@@ -8,7 +8,7 @@
 This recipe lets you try out Document Message pattern using this example:
 * Sending an Email
 
-[Download the integration flow Sample for invoking a SOAP operation](Document%20Message%20-%20Sending%20an%20Email.zip)
+[Download the integration flow Sample for sending an Email](Document%20Message%20-%20Sending%20an%20Email.zip)
 
 ## Recipe
 
