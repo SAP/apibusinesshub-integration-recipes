@@ -30,6 +30,7 @@ Recipe|Description|Author
 Recipe|Description|Author
 ---|---|---
 [Command Message](for/Enterprise%20Integration%20Patterns/Message%20Construction/2%20Command%20Message) | This recipe lets you try out Command Message pattern | [Bhalchandra Wadekar](author.md#bhalchandra-wadekar)
+[Document Message](for/Enterprise%20Integration%20Patterns/Message%20Construction/2%20Document%20Message) | This recipe lets you try out Document Message pattern | [Bhalchandra Wadekar](author.md#bhalchandra-wadekar)
 
 ***
 
