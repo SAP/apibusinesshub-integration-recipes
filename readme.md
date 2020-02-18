@@ -24,4 +24,4 @@ These 3 types of artifacts embody  [Integration Flow Recipes](Recipes) or best p
 Contribute to this repository with reusable content or samples. Please read the [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 ## LICENSE
 Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
-This file is licensed under the SAP SAMPLE CODE LICENSE FOR DEVELOPED APPLICATIONS except as noted otherwise in the [LICENSE](LICENSE).
+This file is licensed under the Apache 2.0 except as noted otherwise in the [LICENSE](LICENSE).
