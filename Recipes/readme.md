@@ -10,6 +10,11 @@
 
 ***
 
+### Integration Patterns
+Recipe|Description|Author
+---|---|---
+
+
 ### Amazon Web Services
 Recipe|Description|Author
 ---|---|---
