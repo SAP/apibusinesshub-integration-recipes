@@ -3,27 +3,25 @@
 ![Abhinav Verma](https://github.com/abhinavverma0501.png?size=50 )|[Abhinav Verma](https://github.com/abhinavverma0501)|
 ----|----|
 
-This recipe will explain how we can simulate  and read the value of Write Variable in Content Modifer.Also,we will learn to simulate the Datastore Select Operation by leveraging Integration Flow Simulation feature.  
-
-To know more about this feature and various functionalities, please refer the reference section.
-
-The intension of this recipe is to show how to Simulate the Write Variable and Datastore, hence some values are hardcoded.
+Use this recipe to 
+* Simulate read the value of Write Variable in Content Modifer
+* Simulate the Datastore Select Operation.  
 
 [Download the integration flow sample](Simulate-Response-from-Write-Variable-and-DataStore-Select.zip)
 
 ## Recipe
 
-Step|Code|Why?
+Step|Screenshots|Why?
 ----|----|----
-Open integration flow in read mode | | Simulation feature as of now is available in the read-mode of integration flow. On the top right corner of the integration flow editor, you see a toggle button that helps you to enable the simulation. It is switched off by default.
- Switch on simulation mode| | On enabling the Simulation button, the simulation tool appears over the integration flow. This tool let you run simulation, clear simulation.
-Define start point ||To define the start point of your simulation. Click on the connector line where you need to define the start of your simulation. In our scenario, it will be after start timer event.
-Define end point ||To define the end point of your simulation. Click on the connector where you need to define the end of your simulation. Here, it will be before End Message.
-Provide an input to simulate the flow||To start simulation, message input is required. Click start point which will open the simulation input dialog.Enter the input payload in the body(provide below).
-Simulate response from Datastore Select Operation|| Add the response payload from Datastore Select Operation.Details are below.Add Simulation  Response speed button would appear. On click of this speed button, a dialog would appear to simulate the response Datastore Select Operation.
-Read the value of Write Variable in Content Modifier|| Simulate Response to read the value of Write Variable in Content Modifer.
-Run Simulation|| Click the Run simulation from the Simulation tool.
-Clear Simulation|| In order to clear the simulation input, output and commence to test other subset of integration flow.
+Open integration flow in read mode | | Simulation is available in the read-mode of integration flow. 
+Switch on simulation mode| | Enables the simulation tool bar to run simulation or clear simulation.
+Define start point || Click on the connector line where you need to define the start of your simulation. In our scenario, it will be after start timer event.
+Define end point || Click on the connector where you need to define the end of your simulation. Here, it will be before End Message.
+Provide an input||To start simulation, message input is required. Click start point to open the simulation input dialog.Enter the input payload in the body.
+Simulate response from Datastore Select Operation|| Click Add Simulation  Response speed button would appear to enter the response Datastore Select Operation.
+Read the value of Write Variable in Content Modifier|| 
+Run Simulation|| 
+Clear Simulation|| 
 
 
 ## References
