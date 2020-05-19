@@ -3,7 +3,7 @@
 ![Abhinav Verma](https://github.com/abhinavverma0501.png?size=50 )|[Abhinav Verma](https://github.com/abhinavverma0501)|
 ----|----|
 
-Use this recipe to 
+Use this recipe to
 * Simulate read the value of Write Variable in Content Modifer
 * Simulate the Datastore Select Operation.  
 
@@ -13,15 +13,15 @@ Use this recipe to
 
 Step|Screenshots|Why?
 ----|----|----
-Open integration flow in read mode | | Simulation is available in the read-mode of integration flow. 
-Switch on simulation mode| | Enables the simulation tool bar to run simulation or clear simulation.
-Define start point || Click on the connector line where you need to define the start of your simulation. In our scenario, it will be after start timer event.
-Define end point || Click on the connector where you need to define the end of your simulation. Here, it will be before End Message.
-Provide an input||To start simulation, message input is required. Click start point to open the simulation input dialog.Enter the input payload in the body.
-Simulate response from Datastore Select Operation|| Click Add Simulation  Response speed button would appear to enter the response Datastore Select Operation.
-Read the value of Write Variable in Content Modifier|| 
-Run Simulation|| 
-Clear Simulation|| 
+Open integration flow in read mode || Simulation is available in the read-mode of integration flow.
+Switch on simulation mode|![simulationmode](simulationmode.jpg) | Enables the simulation tool bar to run simulation or clear simulation.
+Define start point |![startpoint](startpoint.jpg)| Click on the connector line where you need to define the start of your simulation. In our scenario, it will be after start timer event.
+Define end point |![endpoint](endpoint.jpg)| Click on the connector where you need to define the end of your simulation. Here, it will be before End Message.
+Provide an input|![inputDialog](inputDialog1.jpg)|To start simulation, message input is required. Click start point to open the simulation input dialog.Enter the input payload in the body.
+Simulate response from Datastore Select Operation|![selectresponse1](selectresponse.jpg)| Click Add Simulation  Response speed button would appear to enter the response Datastore Select Operation.
+Read the value of Write Variable in Content Modifier||To simulate the value of Write Variable in the Exchange Property of  Content Modifier. 
+Run Simulation|![runsimulation](runsimulation.jpg)| It is used to run the simulation once the start and end point have been defined.
+Clear Simulation|![clearsimulation](clearsimulation1.jpg)| It  is used to remove all the simulation elements like start point, end point, message processing output for all the previously defined.
 
 
 ## References
