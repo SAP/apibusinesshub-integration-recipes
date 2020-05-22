@@ -4,7 +4,7 @@
 ----|----|
 
 Use this recipe to
-* Simulate read the value of Write Variable in Content Modifer
+* Simulate reading of Write Variable in Content Modifer
 * Simulate the Datastore Select Operation.  
 
 [Download the integration flow sample](Simulate-Response-from-Write-Variable-and-DataStore-Select.zip)
@@ -30,15 +30,12 @@ Clear Simulation|![clearsimulation](clearsimulation1.jpg)| It  is used to remove
 
 
 ## Sample integration flow
-The scenario will show how we can simulate and read the value of Write  variable in content modifier. Also, it will show how we can simulate the Datastore Select Operation.
-
-Integration flow constitutes of various steps like content modifier, Write variable, Datastore: Write and Select.
 
 ![iflowimage](Integration-Flow-Scenario.jpg)
 
 
 ### Input Payload
-This is the simulation input payload used in the sample integration flow. Select the Start point, the XML payload provide in should be feed in the Simulation Input Dialog.
+Sample input payload to start the simulation, click on the start simulation to open the dialog to enter the input payload.
 ```
 <Products>
     <Product>
@@ -77,19 +74,18 @@ This is the simulation input payload used in the sample integration flow. Select
 
 ![Input payload](Simulation-Input-payload.jpg)
 
-Content Modifier1 will receive the  input payload.
-
-Add the Write variable after the Content Modifier1 define the variable name "Timestamp".We will read the value of Write variable in Content Modifier2 by leveraging Integration Flow Simulation feature.
+Add the Write variable after the Content Modifier1 and define the variable name "Timestamp". This variable can be read via the simulation feature.
 
 ![Define Write Variable](Write-Variable-Input.jpg)
 
-Add below properties in Content Modifier2
-"Update_Timestamp"and "Payload".
+Add the following properties in Content Modifier2
+* "Update_Timestamp"
+* "Payload".
 
 ![Content Modifier2 Property Details](Content-Modifer2-Property.jpg)
 
 ### Response payload from Select DataStore
-Add this below payload as Simulated response from the Select Datastore flowstep.
+Sample response from the Select Datastore flowstep.
 ```
 <Products>
     <Product>
@@ -105,22 +101,20 @@ Add this below payload as Simulated response from the Select Datastore flowstep.
 
 ### Simulate the value of Write Variable
 
-Go to the Content Modifier2 and click on add Simulation Response.Click on add Variable and write the Variable name i.e "Timestamp"and put the below value.
+On the Content Modifier2, click on add Simulation Response. Click on add Variable and write the Variable name i.e "Timestamp"and input the following value.
 
 ```
 Timestamp 2020-04-27 12:11:00
 ```
 ![Click Add Simulation Response](Add-Simulation-Response-from-Write-Variable.jpg)
 
-This is how we can simulate and read the value of Write  variable in content modifier.
-
-
 ### Run Simulation
 
-Once all the necessary input and response payload is provided, you can run the simulation. Once the simulation is complete,we can read the simulated value of  Write Variable in Content Modifier2 as property in Trace Envelope.After that click on the Message Body of Trace Envelope of Content Modifer2,you will see the payload updated after simulating the Datastore Select operation.
+The Simulation can be run once all input values are populated. On successful run of the simulation, the simulated value of Write Variable in Content Modifier2 can be read as a property in Trace Envelope. 
+
+To view the payload updated after simulation of the Datastore Select operation click of the message body of Trace Envelope of Content Modifer2.
 
 ![Write Variable simulated](Write-Variable-Timestamp-simulated.jpg)
 
 ![Response payload](Payload-Updated-after-Simulating-Select-Step.jpg)
 
-This ends the recipe of integration flow simulation for Datastore Select and Write Variable.
