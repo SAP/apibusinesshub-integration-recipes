@@ -4,16 +4,13 @@
 ## Topics
 * [Amazon Web Services](#amazon-web-services)
 * [Database Connectivity](#amazon-developer-connectivity)
+* [How to Guides](#how-to-guide)
+* [Integration Pattern](#integration-pattern)
 * [Mappings](#mappings)
 * [Partner Directory](#partner-directory)
 * [Security](#security)
 
 ***
-
-### Integration Patterns
-Recipe|Description|Author
----|---|---
-
 
 ### Amazon Web Services
 Recipe|Description|Author
@@ -27,6 +24,19 @@ Recipe|Description|Author
 Recipe|Description|Author
 ---|---|---
 [Connect to Amazon DynamoDB](for/ConnectToAWSDynmoDB)|SAP CPI needs to make a rest call to DynamoDB endpoint|[Sunny Kapoor](author.md#sunny-kapoor)|
+
+***
+
+### How to Guides
+Recipe|Description|Author
+---|---|---
+[Simulate Response from Datastore Select Operation and Write Variable](for/SimulateResponseFromWriteVariableAndDataStores)|Test a still under development integration flow with dummy data without the need for deployment. This recipe simulate reading of Write Variable in Content Modifer and the Datastore Select operation|[Abhinav Verma](author.md#abhinav-verma)|
+
+***
+
+### Integration Patterns
+Recipe|Description|Author
+---|---|---
 
 ***
 
@@ -55,4 +65,3 @@ Recipe|Description|Author
 [Encryption with AES256-GCM algorithm using iaik libraries](for/Encryption_using_AES_GCM_iaik)|Encryption algorithm AES256-GCM using iaik which is the default security provider for CPI|[Shweta Walaskar](author.md#shweta-walaskar)|
 [Generate AWS4-HMAC-SHA256 Signature](for/GenerateAWS4_HMAC_SHA256)| A reusable recipe to generate an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.|[Sunny Kapoor](author.md#sunny-kapoor)|
 
-***
