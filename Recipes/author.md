@@ -3,6 +3,7 @@
 
 ## Authors
 * [Amrita Laxmi](#amrita-Laxmi)
+* [Abhinav Verma](#abhinav-verma)
 * [Kamlesh Zanje](#kamlesh-zanje)
 * [Sharad Dixit](#sharad-dixit)
 * [Shweta Walaskar](#shweta-walaskar)
@@ -17,6 +18,16 @@
 Recipe|Description|Topic
 ---|---|---
 [Accessing Partner Directory entries from within a Groovy script](for/Accessing-Partner-Directory-entries-from-within-a-script)|The String and Binary parameters from the Partner Directory can be accessed using a script with the help of getParameter API of the PartnerDirectoryService class. |[Partner Directory](readme.md#partner-directory) |
+
+***
+
+### [Abhinav Verma](https://github.com/abhinavverma0501 )
+![Abhinav Verma](https://github.com/abhinavverma0501.png?size=50) | Integration scenario developer for Cloud Platform Integration, SAP Labs India |
+----|----|
+
+Recipe|Description|Topic
+---|---|---
+[Simulate Response from Datastore Select Operation and Write Variable](for/SimulateResponseFromWriteVariableAndDataStores)|Test a still under development integration flow with dummy data without the need for deployment. This recipe simulate reading of Write Variable in Content Modifer and the Datastore Select operation|[How to Guides](readme.md#how-to-guide)|
 
 ***
 
