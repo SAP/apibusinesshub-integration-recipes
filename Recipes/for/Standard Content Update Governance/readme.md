@@ -7,8 +7,6 @@
 
 Understand the nitty-gritty details about Standard Content Governance
 
-[Download the integration flow Sample](zip-file-name.zip)\
-[Download the reusable integration flow](zip-file-name.zip)
 
 ## Recipe
 **Overview:**
@@ -122,8 +120,3 @@ In case of an artifact is already deployed and an automatic update is released f
 
 **A24.**  In case of manual update, all the affected entities shall be marked with “Update available”, but only the ones that are not customized will be updatable. For automatic update, all the non-customized artifacts shall be automatically updated.
 
-
-
-### Related Recipes
-* [upstream-recipe-name](../upstream-recipe-folder-name)
-* [alternate-recipe-name](../alternate-recipe-folder-name)
