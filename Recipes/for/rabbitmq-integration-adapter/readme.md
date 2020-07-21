@@ -30,4 +30,4 @@ The hard coded message in the content modifier will be pushed to the queue. \
 
 ### Sample Output
 Here we see the message sent is visible on the RabbitMQ server\
-![Output Image](RabbitMQMessageInput.png)
+![Output Image](RabbitMQServer.png)
