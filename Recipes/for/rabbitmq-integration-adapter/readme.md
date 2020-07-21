@@ -11,7 +11,7 @@ This integration adapter enables an integration flow to persist or read messages
 
 [Download the integration flow sample](IntegrationFlow/RabbitMQ-integrationflow.zip)\
 
-[Instructions to build the adapter](../build-deploy-camel-community=adapters.md)
+[Instructions to build the adapter](../../build-deploy-camel-community-adapters.md)
 
 
 ## References

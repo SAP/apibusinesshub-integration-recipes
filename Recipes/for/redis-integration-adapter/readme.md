@@ -11,7 +11,7 @@ This integration adapter allows an integration flow to access Redis.
 
 [Download the integration flow Sample](IntegrationFlow/redis-integrationflow.zip)\
 
-[Instructions to build the adapter](../build-deploy-camel-community=adapters.md)
+[Instructions to build the adapter](../../build-deploy-camel-community-adapters.md)
 
 ## References
 * [Using Apache Camel Redis component as SAP Cloud Platform Integration Adapter](https://blogs.sap.com/2020/07/21/using-apache-camel-redis-component-as-sap-cloud-platform-integration-adapter)\
