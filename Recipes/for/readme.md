@@ -3,6 +3,7 @@
 
 ## Artefact Type
 * [Groovy Scripts](#groovy-scripts)
+* [Integration Adapters](#integration-adapters)
 * [Reusable integration flows](#reusable-integration-flows)
 * [Sample integration flows](#sample-integration-flow)
 * [XSLT Scripts](#xslt-scripts)
@@ -19,6 +20,13 @@ Recipe|Description|Topic
 [Encryption with AES256-GCM algorithm using iaik libraries](Encryption_using_AES_GCM_iaik)|Encryption algorithm AES256-GCM using iaik which is the default security provider for CPI|[Security](../readme.md#security)|
 [Generate AWS4-HMAC-SHA256 Signature](GenerateAWS4_HMAC_SHA256)| A reusable recipe to generate an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.|[Amazon Web Service](../readme.md#amazon-web-service)\|[Security](../readme.md#security)|
 
+****
+
+### Integration Adapter
+Recipe|Description|Topic
+---|---|---|
+[Build custom Redis integration adapter](for\redis-integration-adapter\readme.md)|Redis is advanced key-value store where keys can contain strings, hashes, lists, sets and sorted sets. In addition it provides pub/sub functionality for inter-app communications. This integration adapter allows an integration flow to access Redis.| [Integration Adapters](../readme.md#integration-adapters)|
+[Build custom Rabbit MQ integration adapter](for\rabbitmq-integration-adapter\readme.md)|The rabbitmq: component allows you produce and consume messages from RabbitMQ instances. Using the RabbitMQ AMQP client, this component offers a pure RabbitMQ approach over the generic AMQP component. This integration adapter enables an integration flow to persist or read messages in a RabbitMQ queue. | [Integration Adapters](../readme.md#integration-adapters)|
 ***
 
 ### Reusable Integration flows

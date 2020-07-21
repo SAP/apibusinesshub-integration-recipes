@@ -5,6 +5,7 @@
 * [Amrita Laxmi](#amrita-Laxmi)
 * [Abhinav Verma](#abhinav-verma)
 * [Kamlesh Zanje](#kamlesh-zanje)
+* [Mayur Mohan Belur](#mayur-mohan-belur)
 * [Sharad Dixit](#sharad-dixit)
 * [Shweta Walaskar](#shweta-walaskar)
 * [Sunny Kapoor](#sunny-kapoor)
@@ -43,6 +44,17 @@ Recipe|Description|Topic
 
 
 ***
+### [Mayur Mohan Belur](https://github.com/mayurmohan)
+![Mayur Mohan Belur](https://github.com/mayurmohan.png?size=50 )| Product Owner for SAP Cloud Platform Integration|
+----|----|
+
+Recipe|Description|Topic
+---|---|---
+[Build custom Redis integration adapter](for\redis-integration-adapter\readme.md)|Redis is advanced key-value store where keys can contain strings, hashes, lists, sets and sorted sets. In addition it provides pub/sub functionality for inter-app communications. This integration adapter allows an integration flow to access Redis.| [Integration Adapters](readme.md#integration-adapters)|
+[Build custom Rabbit MQ integration adapter](for\rabbitmq-integration-adapter\readme.md)|The rabbitmq: component allows you produce and consume messages from RabbitMQ instances. Using the RabbitMQ AMQP client, this component offers a pure RabbitMQ approach over the generic AMQP component. This integration adapter enables an integration flow to persist or read messages in a RabbitMQ queue. | [Integration Adapters](readme.md#integration-adapters)|
+
+***
+
 
 ### [Sharad Dixit](https://github.com/sharadiiita)
 ![Sharad Dixit](https://github.com/sharadiiita.png?size=50 ) | Senior Software Developer in SAP Sales Cloud with in-depth experience of designing and developing software for business solution. \(https://www.linkedin.com/in/dixitsharad/ \)|

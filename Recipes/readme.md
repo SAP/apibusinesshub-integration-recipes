@@ -5,6 +5,7 @@
 * [Amazon Web Services](#amazon-web-services)
 * [Database Connectivity](#amazon-developer-connectivity)
 * [How to Guides](#how-to-guide)
+* [Integration Adapters](#integration-adapters)
 * [Integration Pattern](#integration-pattern)
 * [Mappings](#mappings)
 * [Partner Directory](#partner-directory)
@@ -31,6 +32,16 @@ Recipe|Description|Author
 Recipe|Description|Author
 ---|---|---
 [Simulate Response from Datastore Select Operation and Write Variable](for/SimulateResponseFromWriteVariableAndDataStores)|Test a still under development integration flow with dummy data without the need for deployment. This recipe simulate reading of Write Variable in Content Modifer and the Datastore Select operation|[Abhinav Verma](author.md#abhinav-verma)|
+
+***
+
+### Integration Adapters
+Recipe|Description|Author
+---|---|---
+[Build custom Redis integration adapter](for\redis-integration-adapter\readme.md)|Redis is advanced key-value store where keys can contain strings, hashes, lists, sets and sorted sets. In addition it provides pub/sub functionality for inter-app communications. This integration adapter allows an integration flow to access Redis.| [Mayur Mohan Belur](author.md#mayur-mohan-belur)|
+[Build custom Rabbit MQ integration adapter](for\rabbitmq-integration-adapter\readme.md)|The rabbitmq: component allows you produce and consume messages from RabbitMQ instances. Using the RabbitMQ AMQP client, this component offers a pure RabbitMQ approach over the generic AMQP component. This integration adapter enables an integration flow to persist or read messages in a RabbitMQ queue. | [Mayur Mohan Belur](author.md#mayur-mohan-belur) |
+
+***
 
 ***
 
@@ -64,4 +75,3 @@ Recipe|Description|Author
 [CMS Decryption with AES256-GCM algorithm using iaik libraries](for/Decryption_using_AES_GCM_iaik)|Decryption algorithm AES256-GCM using iaik which is the default security provider for CPI|[Shweta Walaskar](author.md#shweta-walaskar)|
 [Encryption with AES256-GCM algorithm using iaik libraries](for/Encryption_using_AES_GCM_iaik)|Encryption algorithm AES256-GCM using iaik which is the default security provider for CPI|[Shweta Walaskar](author.md#shweta-walaskar)|
 [Generate AWS4-HMAC-SHA256 Signature](for/GenerateAWS4_HMAC_SHA256)| A reusable recipe to generate an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.|[Sunny Kapoor](author.md#sunny-kapoor)|
-
