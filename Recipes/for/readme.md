@@ -44,8 +44,8 @@ These recipes only have sample integration flows, other types usually **also** h
 Recipe|Description|Topic
 ---|---|---|
 [Connect to Amazon DynamoDB](ConnectToAWSDynmoDB)|SAP CPI needs to make a rest call to DynamoDB endpoint|[Amazon Web Service](../readme.md#amazon-web-service) \|[Database](../readme.md#database)|
-[Command Message](for/Ent-Int-Pattern-MessageConstruction-Command Message) | This recipe lets you try out Command Message pattern for SOAP, OData and a BAPI| [Integration Pattern](../readme.md#integration-pattern)
-[Return Address](for/Ent-Int-Pattern-MessageConstruction-Return Address) | This recipe lets you try out Return Address pattern | [Integration Pattern](../readme.md#integration-pattern)
+[Command Message](EIP-MessageConstruction-CommandMessage ) | This recipe lets you try out Command Message pattern for SOAP, OData and a BAPI| [Integration Pattern](../readme.md#integration-pattern)
+[Return Address](EIP-MessageConstruction-ReturnAddress/readme.md) | This recipe lets you try out Return Address pattern | [Integration Pattern](../readme.md#integration-pattern)
 
 ***
 

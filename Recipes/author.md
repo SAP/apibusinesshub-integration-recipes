@@ -39,8 +39,8 @@ Recipe|Description|Topic
 
 Recipe|Description|Topic
 ---|---|---
-[Command Message](for/Ent-Int-Pattern-MessageConstruction-Command Message) | This recipe lets you try out Command Message pattern for SOAP, OData and a BAPI | [Integration Pattern](readme.md#integration-pattern)
-[Return Address](for/Ent-Int-Pattern-MessageConstruction-Return Address) | This recipe lets you try out Return Address pattern | [Integration Pattern](readme.md#integration-pattern)
+[Command Message](for/EIP-MessageConstruction-CommandMessage/readme.md) | This recipe lets you try out Command Message pattern for SOAP, OData and a BAPI | [Integration Patterns](readme.md#integration-patterns)
+[Return Address](for/EIP-MessageConstruction-ReturnAddress/readme.md) | This recipe lets you try out Return Address pattern | [Integration Patterns](readme.md#integration-patterns)
 
 ***
 
