@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ComponentMetadata ComponentId="ctype::Adapter/cname::Redis/vendor::ApacheCamel/version::2.17.4" ComponentName="Redis" UIElementType="Adapter" IsExtension="false" IsFinal="true" IsPreserves="true" IsDefaultGenerator="true" ComponentDisplayName="Redis" xmlns:gen="http://www.sap.hci.adk.com/gen" xmlns:bp="http://www.adk.gen/xmlns/blueprint">
+    <Variant VariantName="Redis Component Sender" VariantId="ctype::AdapterVariant/cname::Redis/vendor::ApacheCamel/tp::spring-redis/mp::spring-redis/direction::Sender" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="spring-redis" AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </OutputContent>
+        <Tab id="connection">
+            <GuiLabels guid="6dfb9c80-9151-4b93-b233-eada4f2de444">
+                <Label language="EN">Connection</Label>
+                <Label language="DE">Connection</Label>
+            </GuiLabels>
+            <AttributeGroup id="defaultUriParameter">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">URI Setting</Name>
+                <GuiLabels guid="88a0976d-8aa4-444e-bb96-6cbacfbe2982">
+                    <Label language="EN">URI Setting</Label>
+                    <Label language="DE">URI Setting</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>firstUriPart</ReferenceName>
+                    <description>Configure First URI Part</description>
+                </AttributeReference>
+            </AttributeGroup>
+               <AttributeGroup id="RedisEndpoint">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Redis Endpoint</Name>
+                <GuiLabels guid="9fa5b108-d47d-48cd-a772-95eeb68f81fc">
+                    <Label language="EN">Redis Endpoint</Label>
+                    <Label language="DE">Redis Endpoint</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>redisTemplate</ReferenceName>
+                    <description>Configure redisTemplate</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>channels</ReferenceName>
+                    <description>Configure channels</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>configuration</ReferenceName>
+                    <description>Configure configuration</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>connectionFactory</ReferenceName>
+                    <description>Configure connectionFactory</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>serializer</ReferenceName>
+                    <description>Configure serializer</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>listenerContainer</ReferenceName>
+                    <description>Configure listenerContainer</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>command</ReferenceName>
+                    <description>Configure command</description>
+                </AttributeReference>
+
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+    <Variant VariantName="Redis Component Receiver" VariantId="ctype::AdapterVariant/cname::Redis/vendor::ApacheCamel/tp::spring-redis/mp::spring-redis/direction::Receiver" IsRequestResponse="true" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="spring-redis" AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </OutputContent>
+        <Tab id="connection">
+            <GuiLabels guid="15b9137d-3642-42de-a023-9e31b5e4fb0e">
+                <Label language="EN">Connection</Label>
+                <Label language="DE">Connection</Label>
+            </GuiLabels>
+            <AttributeGroup id="defaultUriParameter">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">URI Setting</Name>
+                <GuiLabels guid="548de610-7cec-4425-b3de-0f53fa303752">
+                    <Label language="EN">URI Setting</Label>
+                    <Label language="DE">URI Setting</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>firstUriPart</ReferenceName>
+                    <description>Configure First URI Part</description>
+                </AttributeReference>
+            </AttributeGroup>
+           <AttributeGroup id="RedisEndpoint">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Redis Endpoint</Name>
+                <GuiLabels guid="9fa5b108-d47d-48cd-a772-95eeb68f81fc">
+                    <Label language="EN">Redis Endpoint</Label>
+                    <Label language="DE">Redis Endpoint</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>redisTemplate</ReferenceName>
+                    <description>Configure redisTemplate</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>channels</ReferenceName>
+                    <description>Configure channels</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>configuration</ReferenceName>
+                    <description>Configure configuration</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>connectionFactory</ReferenceName>
+                    <description>Configure connectionFactory</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>serializer</ReferenceName>
+                    <description>Configure serializer</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>listenerContainer</ReferenceName>
+                    <description>Configure listenerContainer</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>command</ReferenceName>
+                    <description>Configure command</description>
+                </AttributeReference>
+
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+    <AttributeMetadata>
+        <Name>firstUriPart</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="8dd3d6da-e3d6-405c-ac12-c3ef6b466a48">
+            <Label language="EN">First URI Part</Label>
+            <Label language="DE">First URI Part</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>redisTemplate</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="e37d4581-9305-4679-be08-2b1be6198052">
+            <Label language="EN">redisTemplate</Label>
+            <Label language="DE">redisTemplate</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>channels</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="78440cee-921e-4bb7-9ae4-cb740ffb31bc">
+            <Label language="EN">channels</Label>
+            <Label language="DE">channels</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>configuration</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="7b075c95-e3ed-4b35-9492-bb3b8600b201">
+            <Label language="EN">configuration</Label>
+            <Label language="DE">configuration</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>connectionFactory</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="2a49351a-f5b2-4fa8-bb8f-394520d88f2f">
+            <Label language="EN">connectionFactory</Label>
+            <Label language="DE">connectionFactory</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>serializer</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="20292b9e-15dd-4c5f-af71-9b310ada3313">
+            <Label language="EN">serializer</Label>
+            <Label language="DE">serializer</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>listenerContainer</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="8d510b87-17fc-4fb2-965f-33c42696d837">
+            <Label language="EN">listenerContainer</Label>
+            <Label language="DE">listenerContainer</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>command</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="778a0b5f-b726-4ed8-aca3-3f4e7bebff44">
+            <Label language="EN">command</Label>
+            <Label language="DE">command</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+</ComponentMetadata>
