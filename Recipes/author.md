@@ -3,7 +3,10 @@
 
 ## Authors
 * [Amrita Laxmi](#amrita-Laxmi)
+* [Abhinav Verma](#abhinav-verma)
+* [Balchandra Wadekar](#bhalchandra-wadekar)
 * [Kamlesh Zanje](#kamlesh-zanje)
+* [Mayur Mohan Belur](#mayur-mohan-belur)
 * [Sharad Dixit](#sharad-dixit)
 * [Shweta Walaskar](#shweta-walaskar)
 * [Sunny Kapoor](#sunny-kapoor)
@@ -20,6 +23,27 @@ Recipe|Description|Topic
 
 ***
 
+### [Abhinav Verma](https://github.com/abhinavverma0501 )
+![Abhinav Verma](https://github.com/abhinavverma0501.png?size=50) | Integration scenario developer for Cloud Platform Integration, SAP Labs India |
+----|----|
+
+Recipe|Description|Topic
+---|---|---
+[Simulate Response from Datastore Select Operation and Write Variable](for/SimulateResponseFromWriteVariableAndDataStores)|Test a still under development integration flow with dummy data without the need for deployment. This recipe simulate reading of Write Variable in Content Modifer and the Datastore Select operation|[How to Guides](readme.md#how-to-guide)|
+
+***
+
+### [Bhalchandra Wadekar](https://github.com/BhalchandraSW )
+![Bhalchandra Wadekar](https://github.com/BhalchandraSW.png?size=50) |  |
+----|----|
+
+Recipe|Description|Topic
+---|---|---
+[Command Message](for/EIP-MessageConstruction-CommandMessage/readme.md) | This recipe lets you try out Command Message pattern for SOAP, OData and a BAPI | [Integration Patterns](readme.md#integration-patterns)
+[Return Address](for/EIP-MessageConstruction-ReturnAddress/readme.md) | This recipe lets you try out Return Address pattern | [Integration Patterns](readme.md#integration-patterns)
+
+***
+
 ### [Kamlesh Zanje](https://github.com/kamleshzanje)
 ![Kamlesh Zanje](https://github.com/kamleshzanje.png?size=50 )| Product Owner for SAP Cloud Platform Integration|
 ----|----|
@@ -32,6 +56,20 @@ Recipe|Description|Topic
 
 
 ***
+
+### [Mayur Mohan Belur](https://github.com/mayurmohan)
+![Mayur Mohan Belur](https://github.com/mayurmohan.png?size=50 )| Product Manager SAP Cloud platform Integration Suite, SAP Cloud platform Integration expert, JAVA developer, SAP Labs India|
+----|----|
+
+Recipe|Description|Topic
+---|---|---
+[Build custom Redis integration adapter](for/redis-integration-adapter/readme.md)|Redis is advanced key-value store where keys can contain strings, hashes, lists, sets and sorted sets. In addition it provides pub/sub functionality for inter-app communications. This integration adapter allows an integration flow to access Redis.| [Integration Adapters](readme.md#integration-adapters)|
+[Build custom Rabbit MQ integration adapter](for/redis-integration-adapter/readme.md)|The rabbitmq: component allows you produce and consume messages from RabbitMQ instances. Using the RabbitMQ AMQP client, this component offers a pure RabbitMQ approach over the generic AMQP component. This integration adapter enables an integration flow to persist or read messages in a RabbitMQ queue. | [Integration Adapters](readme.md#integration-adapters)|
+[Build custom MongoDB integration adapter](for/mongodb-integration-adapter/readme.md)|MongoDB is a very popular NoSQL solution and the camel-mongodb component integrates Camel with MongoDB allowing you to interact with MongoDB collections both as a producer (performing operations on the collection) and as a consumer (consuming documents from a MongoDB collection). This integration adapter enables an integration flow to connect to MongoDb collection.| [Integration Adapters](readme.md#integration-adapters) |
+
+
+***
+
 
 ### [Sharad Dixit](https://github.com/sharadiiita)
 ![Sharad Dixit](https://github.com/sharadiiita.png?size=50 ) | Senior Software Developer in SAP Sales Cloud with in-depth experience of designing and developing software for business solution. \(https://www.linkedin.com/in/dixitsharad/ \)|

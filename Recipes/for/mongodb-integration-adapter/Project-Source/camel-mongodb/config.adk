@@ -1,0 +1,7 @@
+#Properties file
+#Sat Jan 26 13:58:29 IST 2019
+Adapter-Name=MongoDB
+Adapter-Vendor=ApacheCamel
+Enable-Maven=true
+Adapter-ID=MongoDB
+Adapter-Version=2.17.4
