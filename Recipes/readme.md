@@ -48,7 +48,8 @@ Recipe|Description|Author
 ### Integration Patterns
 Recipe|Description|Author
 ---|---|---
-
+[Command Message](for/Ent-Int-Pattern-MessageConstruction-Command Message) | This recipe lets you try out Command Message pattern for SOAP, OData and a BAPI| [Bhalchandra Wadekar](author.md#bhalchandra-wadekar)
+[Return Address](for/Ent-Int-Pattern-MessageConstruction-Return Address) | This recipe lets you try out Return Address pattern | [Bhalchandra Wadekar](author.md#bhalchandra-wadekar)
 ***
 
 ### Mappings

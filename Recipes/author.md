@@ -4,6 +4,7 @@
 ## Authors
 * [Amrita Laxmi](#amrita-Laxmi)
 * [Abhinav Verma](#abhinav-verma)
+* [Balchandra Wadekar](#bhalchandra-wadekar)
 * [Kamlesh Zanje](#kamlesh-zanje)
 * [Mayur Mohan Belur](#mayur-mohan-belur)
 * [Sharad Dixit](#sharad-dixit)
@@ -29,6 +30,17 @@ Recipe|Description|Topic
 Recipe|Description|Topic
 ---|---|---
 [Simulate Response from Datastore Select Operation and Write Variable](for/SimulateResponseFromWriteVariableAndDataStores)|Test a still under development integration flow with dummy data without the need for deployment. This recipe simulate reading of Write Variable in Content Modifer and the Datastore Select operation|[How to Guides](readme.md#how-to-guide)|
+
+***
+
+### [Bhalchandra Wadekar](https://github.com/BhalchandraSW )
+![Bhalchandra Wadekar](https://github.com/BhalchandraSW.png?size=50) |  |
+----|----|
+
+Recipe|Description|Topic
+---|---|---
+[Command Message](for/Ent-Int-Pattern-MessageConstruction-Command Message) | This recipe lets you try out Command Message pattern for SOAP, OData and a BAPI | [Integration Pattern](readme.md#integration-pattern)
+[Return Address](for/Ent-Int-Pattern-MessageConstruction-Return Address) | This recipe lets you try out Return Address pattern | [Integration Pattern](readme.md#integration-pattern)
 
 ***
 
