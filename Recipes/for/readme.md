@@ -3,6 +3,7 @@
 
 ## Artefact Type
 * [Groovy Scripts](#groovy-scripts)
+* [Integration Adapters](#integration-adapters)
 * [Reusable integration flows](#reusable-integration-flows)
 * [Sample integration flows](#sample-integration-flow)
 * [XSLT Scripts](#xslt-scripts)
@@ -18,6 +19,15 @@ Recipe|Description|Topic
 [CMS Decryption with AES256-GCM algorithm using iaik libraries](Decryption_using_AES_GCM_iaik)|Decryption algorithm AES256-GCM using iaik which is the default security provider for CPI|[Security](../readme.md#security)|
 [Encryption with AES256-GCM algorithm using iaik libraries](Encryption_using_AES_GCM_iaik)|Encryption algorithm AES256-GCM using iaik which is the default security provider for CPI|[Security](../readme.md#security)|
 [Generate AWS4-HMAC-SHA256 Signature](GenerateAWS4_HMAC_SHA256)| A reusable recipe to generate an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.|[Amazon Web Service](../readme.md#amazon-web-service)\|[Security](../readme.md#security)|
+
+****
+
+### Integration Adapters
+Recipe|Description|Topic
+---|---|---|
+[Build custom Redis integration adapter](redis-integration-adapter/readme.md)|Redis is advanced key-value store where keys can contain strings, hashes, lists, sets and sorted sets. In addition it provides pub/sub functionality for inter-app communications. This integration adapter allows an integration flow to access Redis.| [Integration Adapters](../readme.md#integration-adapters)|
+[Build custom Rabbit MQ integration adapter](rabbitmq-integration-adapter/readme.md)|The rabbitmq: component allows you produce and consume messages from RabbitMQ instances. Using the RabbitMQ AMQP client, this component offers a pure RabbitMQ approach over the generic AMQP component. This integration adapter enables an integration flow to persist or read messages in a RabbitMQ queue. | [Integration Adapters](../readme.md#integration-adapters)|
+[Build custom MongoDB integration adapter](mongodb-integration-adapter/readme.md)|MongoDB is a very popular NoSQL solution and the camel-mongodb component integrates Camel with MongoDB allowing you to interact with MongoDB collections both as a producer (performing operations on the collection) and as a consumer (consuming documents from a MongoDB collection). This integration adapter enables an integration flow to connect to MongoDb collection.| [Integration Adapters](../readme.md#integration-adapters) |
 
 ***
 

@@ -1,5 +1,5 @@
 # Welcome to SAP API Business Hub Community for Integration Recipes
-\| [Recipes by Topic](Recipes/readme.md)  \| [Recipes by Author](Recipes/author.md) \| [Recipes by Artefact Type](Recipes/for/readme.md) \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Request&template=recipe-request.md&title=How+to++) \| [Report a broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=documentation&template=bug_report.md&title=Broken%20Link) \| [Contribute](https://github.com/SAP-samples/apibusinesshub-integration-recipes/blob/master/CONTRIBUTING.md) \|
+\| [Recipes by Topic](Recipes/readme.md)  \| [Recipes by Author](Recipes/author.md) \| [Recipes by Artefact Type](Recipes/for/readme.md) \| [Request a Recipe](https://github.com/SAP/apibusinesshub-integration-recipes/issues/new?assignees=&labels=Recipe%20Request&template=recipe-request.md&title=How+to++) \| [Report a broken link](https://github.com/SAP/apibusinesshub-integration-recipes/issues/new?assignees=&labels=documentation&template=bug_report.md&title=Broken%20Link) \| [Contribute](CONTRIBUTING.md) \|
 
 
 ## Description
@@ -19,9 +19,9 @@ This repository contains
 These 3 types of artifacts embody  [Integration Flow Recipes](Recipes) or best practices to deliver specific features or capabilities in your integration flows.
 
 ## How to Obtain support
-[Create an issue on this repository to report problems or request recipes](https://github.com/SAP-samples/cloud-integration-flow/issues/new).
+[Create an issue on this repository to report problems or request recipes](https://github.com/SAP/apibusinesshub-integration-recipes/issues/new).
 ## Contributing
 Contribute to this repository with reusable content or samples. Please read the [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 ## LICENSE
 Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
-This file is licensed under the SAP SAMPLE CODE LICENSE FOR DEVELOPED APPLICATIONS except as noted otherwise in the [LICENSE](LICENSE).
+This file is licensed under the Apache 2.0 except as noted otherwise in the [LICENSE](LICENSE).
