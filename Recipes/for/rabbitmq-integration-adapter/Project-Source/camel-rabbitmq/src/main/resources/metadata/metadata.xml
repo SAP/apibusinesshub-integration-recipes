@@ -1,0 +1,968 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ComponentMetadata ComponentId="ctype::Adapter/cname::RabbitMQ/vendor::ApacheCamel/version::2.17.4" ComponentName="RabbitMQ" UIElementType="Adapter" IsExtension="false" IsFinal="true" IsPreserves="true" IsDefaultGenerator="true" ComponentDisplayName="RabbitMQ" xmlns:gen="http://www.sap.hci.adk.com/gen" xmlns:bp="http://www.adk.gen/xmlns/blueprint">
+    <Variant VariantName="RabbitMQ Component Sender" VariantId="ctype::AdapterVariant/cname::RabbitMQ/vendor::ApacheCamel/tp::rabbitmq/mp::rabbitmq/direction::Sender" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="rabbitmq" AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </OutputContent>
+        <Tab id="connection">
+            <GuiLabels guid="3f058467-1c17-46aa-bdba-fb13fc7afe9e">
+                <Label language="EN">Connection</Label>
+                <Label language="DE">Connection</Label>
+            </GuiLabels>
+            <AttributeGroup id="defaultUriParameter">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">URI Setting</Name>
+                <GuiLabels guid="0e1bef99-0f39-4b90-92b5-941411221956">
+                    <Label language="EN">URI Setting</Label>
+                    <Label language="DE">URI Setting</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>firstUriPart</ReferenceName>
+                    <description>Configure First URI Part</description>
+                </AttributeReference>
+            </AttributeGroup>
+               <AttributeGroup id="RabbitMQEndpoint">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">RabbitMQ Endpoint</Name>
+                <GuiLabels guid="8b595fcf-a72c-4b6e-bb11-bcc2d6467619">
+                    <Label language="EN">RabbitMQ Endpoint</Label>
+                    <Label language="DE">RabbitMQ Endpoint</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>prefetchCount</ReferenceName>
+                    <description>Configure prefetchCount</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>publisherAcknowledgementsTimeout</ReferenceName>
+                    <description>Configure publisherAcknowledgementsTimeout</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>addresses</ReferenceName>
+                    <description>Configure addresses</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>declare</ReferenceName>
+                    <description>Configure declare</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>requestTimeoutCheckerInterval</ReferenceName>
+                    <description>Configure requestTimeoutCheckerInterval</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>prefetchGlobal</ReferenceName>
+                    <description>Configure prefetchGlobal</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>skipQueueDeclare</ReferenceName>
+                    <description>Configure skipQueueDeclare</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>exchangeType</ReferenceName>
+                    <description>Configure exchangeType</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>queueArgsConfigurer</ReferenceName>
+                    <description>Configure queueArgsConfigurer</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>mandatory</ReferenceName>
+                    <description>Configure mandatory</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>requestedFrameMax</ReferenceName>
+                    <description>Configure requestedFrameMax</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>prefetchSize</ReferenceName>
+                    <description>Configure prefetchSize</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>durable</ReferenceName>
+                    <description>Configure durable</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>password</ReferenceName>
+                    <description>Configure password</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>channelPoolMaxWait</ReferenceName>
+                    <description>Configure channelPoolMaxWait</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>exchangeArgsConfigurer</ReferenceName>
+                    <description>Configure exchangeArgsConfigurer</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>deadLetterRoutingKey</ReferenceName>
+                    <description>Configure deadLetterRoutingKey</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>transferException</ReferenceName>
+                    <description>Configure transferException</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>trustManager</ReferenceName>
+                    <description>Configure trustManager</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>connectionTimeout</ReferenceName>
+                    <description>Configure connectionTimeout</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>networkRecoveryInterval</ReferenceName>
+                    <description>Configure networkRecoveryInterval</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>bridgeEndpoint</ReferenceName>
+                    <description>Configure bridgeEndpoint</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>requestTimeout</ReferenceName>
+                    <description>Configure requestTimeout</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>autoAck</ReferenceName>
+                    <description>Configure autoAck</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>requestedChannelMax</ReferenceName>
+                    <description>Configure requestedChannelMax</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>automaticRecoveryEnabled</ReferenceName>
+                    <description>Configure automaticRecoveryEnabled</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>skipExchangeDeclare</ReferenceName>
+                    <description>Configure skipExchangeDeclare</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>clientProperties</ReferenceName>
+                    <description>Configure clientProperties</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>deadLetterExchange</ReferenceName>
+                    <description>Configure deadLetterExchange</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>channelPoolMaxSize</ReferenceName>
+                    <description>Configure channelPoolMaxSize</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>deadLetterExchangeType</ReferenceName>
+                    <description>Configure deadLetterExchangeType</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>concurrentConsumers</ReferenceName>
+                    <description>Configure concurrentConsumers</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>vhost</ReferenceName>
+                    <description>Configure vhost</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>threadPoolSize</ReferenceName>
+                    <description>Configure threadPoolSize</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>deadLetterQueue</ReferenceName>
+                    <description>Configure deadLetterQueue</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>immediate</ReferenceName>
+                    <description>Configure immediate</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>connectionFactory</ReferenceName>
+                    <description>Configure connectionFactory</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>autoDelete</ReferenceName>
+                    <description>Configure autoDelete</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>requestedHeartbeat</ReferenceName>
+                    <description>Configure requestedHeartbeat</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>sslProtocol</ReferenceName>
+                    <description>Configure sslProtocol</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>topologyRecoveryEnabled</ReferenceName>
+                    <description>Configure topologyRecoveryEnabled</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>publisherAcknowledgements</ReferenceName>
+                    <description>Configure publisherAcknowledgements</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>prefetchEnabled</ReferenceName>
+                    <description>Configure prefetchEnabled</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>queue</ReferenceName>
+                    <description>Configure queue</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>routingKey</ReferenceName>
+                    <description>Configure routingKey</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>username</ReferenceName>
+                    <description>Configure username</description>
+                </AttributeReference>
+
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+    <Variant VariantName="RabbitMQ Component Receiver" VariantId="ctype::AdapterVariant/cname::RabbitMQ/vendor::ApacheCamel/tp::rabbitmq/mp::rabbitmq/direction::Receiver" IsRequestResponse="true" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="rabbitmq" AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </OutputContent>
+        <Tab id="connection">
+            <GuiLabels guid="57d4de11-ae50-4578-8318-d88b4c398b68">
+                <Label language="EN">Connection</Label>
+                <Label language="DE">Connection</Label>
+            </GuiLabels>
+            <AttributeGroup id="defaultUriParameter">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">URI Setting</Name>
+                <GuiLabels guid="32a71b9d-b33a-49a7-b953-a7b31908b6ac">
+                    <Label language="EN">URI Setting</Label>
+                    <Label language="DE">URI Setting</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>firstUriPart</ReferenceName>
+                    <description>Configure First URI Part</description>
+                </AttributeReference>
+            </AttributeGroup>
+           <AttributeGroup id="RabbitMQEndpoint">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">RabbitMQ Endpoint</Name>
+                <GuiLabels guid="8b595fcf-a72c-4b6e-bb11-bcc2d6467619">
+                    <Label language="EN">RabbitMQ Endpoint</Label>
+                    <Label language="DE">RabbitMQ Endpoint</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>prefetchCount</ReferenceName>
+                    <description>Configure prefetchCount</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>publisherAcknowledgementsTimeout</ReferenceName>
+                    <description>Configure publisherAcknowledgementsTimeout</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>addresses</ReferenceName>
+                    <description>Configure addresses</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>declare</ReferenceName>
+                    <description>Configure declare</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>requestTimeoutCheckerInterval</ReferenceName>
+                    <description>Configure requestTimeoutCheckerInterval</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>prefetchGlobal</ReferenceName>
+                    <description>Configure prefetchGlobal</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>skipQueueDeclare</ReferenceName>
+                    <description>Configure skipQueueDeclare</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>exchangeType</ReferenceName>
+                    <description>Configure exchangeType</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>queueArgsConfigurer</ReferenceName>
+                    <description>Configure queueArgsConfigurer</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>mandatory</ReferenceName>
+                    <description>Configure mandatory</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>requestedFrameMax</ReferenceName>
+                    <description>Configure requestedFrameMax</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>prefetchSize</ReferenceName>
+                    <description>Configure prefetchSize</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>durable</ReferenceName>
+                    <description>Configure durable</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>password</ReferenceName>
+                    <description>Configure password</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>channelPoolMaxWait</ReferenceName>
+                    <description>Configure channelPoolMaxWait</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>exchangeArgsConfigurer</ReferenceName>
+                    <description>Configure exchangeArgsConfigurer</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>deadLetterRoutingKey</ReferenceName>
+                    <description>Configure deadLetterRoutingKey</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>transferException</ReferenceName>
+                    <description>Configure transferException</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>trustManager</ReferenceName>
+                    <description>Configure trustManager</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>connectionTimeout</ReferenceName>
+                    <description>Configure connectionTimeout</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>networkRecoveryInterval</ReferenceName>
+                    <description>Configure networkRecoveryInterval</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>bridgeEndpoint</ReferenceName>
+                    <description>Configure bridgeEndpoint</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>requestTimeout</ReferenceName>
+                    <description>Configure requestTimeout</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>autoAck</ReferenceName>
+                    <description>Configure autoAck</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>requestedChannelMax</ReferenceName>
+                    <description>Configure requestedChannelMax</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>automaticRecoveryEnabled</ReferenceName>
+                    <description>Configure automaticRecoveryEnabled</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>skipExchangeDeclare</ReferenceName>
+                    <description>Configure skipExchangeDeclare</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>clientProperties</ReferenceName>
+                    <description>Configure clientProperties</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>deadLetterExchange</ReferenceName>
+                    <description>Configure deadLetterExchange</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>channelPoolMaxSize</ReferenceName>
+                    <description>Configure channelPoolMaxSize</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>deadLetterExchangeType</ReferenceName>
+                    <description>Configure deadLetterExchangeType</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>concurrentConsumers</ReferenceName>
+                    <description>Configure concurrentConsumers</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>vhost</ReferenceName>
+                    <description>Configure vhost</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>threadPoolSize</ReferenceName>
+                    <description>Configure threadPoolSize</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>deadLetterQueue</ReferenceName>
+                    <description>Configure deadLetterQueue</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>immediate</ReferenceName>
+                    <description>Configure immediate</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>connectionFactory</ReferenceName>
+                    <description>Configure connectionFactory</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>autoDelete</ReferenceName>
+                    <description>Configure autoDelete</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>requestedHeartbeat</ReferenceName>
+                    <description>Configure requestedHeartbeat</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>sslProtocol</ReferenceName>
+                    <description>Configure sslProtocol</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>topologyRecoveryEnabled</ReferenceName>
+                    <description>Configure topologyRecoveryEnabled</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>publisherAcknowledgements</ReferenceName>
+                    <description>Configure publisherAcknowledgements</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>prefetchEnabled</ReferenceName>
+                    <description>Configure prefetchEnabled</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>queue</ReferenceName>
+                    <description>Configure queue</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>routingKey</ReferenceName>
+                    <description>Configure routingKey</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>username</ReferenceName>
+                    <description>Configure username</description>
+                </AttributeReference>
+
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+    <AttributeMetadata>
+        <Name>firstUriPart</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="779f6e70-e6fb-42bc-941a-1b61cdc39a18">
+            <Label language="EN">First URI Part</Label>
+            <Label language="DE">First URI Part</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>prefetchCount</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="c1391929-f086-4dc0-92cc-75655b83672c">
+            <Label language="EN">prefetchCount</Label>
+            <Label language="DE">prefetchCount</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>publisherAcknowledgementsTimeout</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:long</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="5bf65827-5a94-4839-a614-5033e408dab4">
+            <Label language="EN">publisherAcknowledgementsTimeout</Label>
+            <Label language="DE">publisherAcknowledgementsTimeout</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>addresses</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="9b35f1b1-1f66-482d-8654-08afea85a856">
+            <Label language="EN">addresses</Label>
+            <Label language="DE">addresses</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>declare</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="d447cc6e-3101-4bc7-a778-772557b33ccf">
+            <Label language="EN">declare</Label>
+            <Label language="DE">declare</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>requestTimeoutCheckerInterval</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:long</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="272a6d28-683c-4059-a7f0-593f059253c0">
+            <Label language="EN">requestTimeoutCheckerInterval</Label>
+            <Label language="DE">requestTimeoutCheckerInterval</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>prefetchGlobal</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="4e86b23f-49b7-47ef-be38-ef3f22a6bc02">
+            <Label language="EN">prefetchGlobal</Label>
+            <Label language="DE">prefetchGlobal</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>skipQueueDeclare</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="22125acb-2b15-4e91-a13e-6e240263b061">
+            <Label language="EN">skipQueueDeclare</Label>
+            <Label language="DE">skipQueueDeclare</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>exchangeType</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="808cc027-9fcc-484e-9aaa-9f681da549ac">
+            <Label language="EN">exchangeType</Label>
+            <Label language="DE">exchangeType</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>queueArgsConfigurer</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="b811178f-dc17-4573-b61c-d651de8b93e6">
+            <Label language="EN">queueArgsConfigurer</Label>
+            <Label language="DE">queueArgsConfigurer</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>mandatory</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="05886b9f-a2a5-4ce0-bef3-76024bd3aa67">
+            <Label language="EN">mandatory</Label>
+            <Label language="DE">mandatory</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>requestedFrameMax</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="1a0f2418-7dac-40fa-a104-78d434f15459">
+            <Label language="EN">requestedFrameMax</Label>
+            <Label language="DE">requestedFrameMax</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>prefetchSize</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="8f19331a-f2ee-40e9-b736-7daf76acffc1">
+            <Label language="EN">prefetchSize</Label>
+            <Label language="DE">prefetchSize</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>durable</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="03be7821-d3b1-40b9-ba60-be7dd65367a3">
+            <Label language="EN">durable</Label>
+            <Label language="DE">durable</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>password</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="041c7b46-4529-4d36-a794-6230fb0c340b">
+            <Label language="EN">password</Label>
+            <Label language="DE">password</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>channelPoolMaxWait</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:long</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="60cd6597-c402-4971-a37f-5b65e8ddb105">
+            <Label language="EN">channelPoolMaxWait</Label>
+            <Label language="DE">channelPoolMaxWait</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>exchangeArgsConfigurer</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="8957408c-57fb-49bd-97ee-8e8d3eb9668b">
+            <Label language="EN">exchangeArgsConfigurer</Label>
+            <Label language="DE">exchangeArgsConfigurer</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>deadLetterRoutingKey</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="1f46abc2-790e-4a8b-bc97-b76ad8224a32">
+            <Label language="EN">deadLetterRoutingKey</Label>
+            <Label language="DE">deadLetterRoutingKey</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>transferException</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="8317df22-f0e2-444f-a05e-cf18d7cda129">
+            <Label language="EN">transferException</Label>
+            <Label language="DE">transferException</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>trustManager</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="313054fe-3a6b-4bdf-bb64-7a548eea3739">
+            <Label language="EN">trustManager</Label>
+            <Label language="DE">trustManager</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>connectionTimeout</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="199d7173-2f77-462a-81f8-a1c5d80162e5">
+            <Label language="EN">connectionTimeout</Label>
+            <Label language="DE">connectionTimeout</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>networkRecoveryInterval</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="b9f98241-4715-4842-b93b-6a6eddfe379a">
+            <Label language="EN">networkRecoveryInterval</Label>
+            <Label language="DE">networkRecoveryInterval</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>bridgeEndpoint</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ceed88e8-38c3-4394-b42d-c610ecd07e1f">
+            <Label language="EN">bridgeEndpoint</Label>
+            <Label language="DE">bridgeEndpoint</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>requestTimeout</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:long</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="c6ece872-d175-4b1f-9911-9031185876ae">
+            <Label language="EN">requestTimeout</Label>
+            <Label language="DE">requestTimeout</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>autoAck</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="1b861d92-0021-419a-8a1f-13b57cf91a9c">
+            <Label language="EN">autoAck</Label>
+            <Label language="DE">autoAck</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>requestedChannelMax</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="fc3dbc18-87d4-46f8-ac56-1f978642ce67">
+            <Label language="EN">requestedChannelMax</Label>
+            <Label language="DE">requestedChannelMax</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>automaticRecoveryEnabled</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="131098f0-458a-4a3d-bfaa-34ffad601ef2">
+            <Label language="EN">automaticRecoveryEnabled</Label>
+            <Label language="DE">automaticRecoveryEnabled</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>skipExchangeDeclare</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="8f72b280-e06a-4b41-b788-5d423a5f2e2e">
+            <Label language="EN">skipExchangeDeclare</Label>
+            <Label language="DE">skipExchangeDeclare</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>clientProperties</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="cfd6e689-26df-405c-8c00-ee2d1ad0da7d">
+            <Label language="EN">clientProperties</Label>
+            <Label language="DE">clientProperties</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>deadLetterExchange</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="63c8e0d7-5f67-40ca-855b-338e74819471">
+            <Label language="EN">deadLetterExchange</Label>
+            <Label language="DE">deadLetterExchange</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>channelPoolMaxSize</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="c93323b2-cd99-44ec-b2de-af10c31294ec">
+            <Label language="EN">channelPoolMaxSize</Label>
+            <Label language="DE">channelPoolMaxSize</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>deadLetterExchangeType</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="9e6039b5-af72-4f33-b953-65d4f4950c0b">
+            <Label language="EN">deadLetterExchangeType</Label>
+            <Label language="DE">deadLetterExchangeType</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>concurrentConsumers</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="624d6c63-7a5f-4634-910a-4499e7fe6d45">
+            <Label language="EN">concurrentConsumers</Label>
+            <Label language="DE">concurrentConsumers</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>vhost</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="e992f75f-6e0c-4905-adcc-a345973883e0">
+            <Label language="EN">vhost</Label>
+            <Label language="DE">vhost</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>threadPoolSize</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="24f0e3ce-4f06-4002-b32a-b11f7e66123f">
+            <Label language="EN">threadPoolSize</Label>
+            <Label language="DE">threadPoolSize</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>deadLetterQueue</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="93d32c40-e4e0-42e0-81bf-0c0fbc3b6962">
+            <Label language="EN">deadLetterQueue</Label>
+            <Label language="DE">deadLetterQueue</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>immediate</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="744e40c8-9f2a-4b9f-9f7b-8a1cd3b9dc93">
+            <Label language="EN">immediate</Label>
+            <Label language="DE">immediate</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>connectionFactory</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="00506513-802b-4662-9345-a2ae2b7a9e6b">
+            <Label language="EN">connectionFactory</Label>
+            <Label language="DE">connectionFactory</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>autoDelete</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="0b8fa753-3778-4a28-9ff5-8ebe1f74e89b">
+            <Label language="EN">autoDelete</Label>
+            <Label language="DE">autoDelete</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>requestedHeartbeat</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="b9bbc3f1-1cc3-4387-98f7-01ee55c752c3">
+            <Label language="EN">requestedHeartbeat</Label>
+            <Label language="DE">requestedHeartbeat</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>sslProtocol</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ff7d68d6-def7-4018-bd9a-8b928ccce0d9">
+            <Label language="EN">sslProtocol</Label>
+            <Label language="DE">sslProtocol</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>topologyRecoveryEnabled</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="396d54c6-2e2d-411b-9db4-6b56aed39dde">
+            <Label language="EN">topologyRecoveryEnabled</Label>
+            <Label language="DE">topologyRecoveryEnabled</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>publisherAcknowledgements</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="d696e52b-b131-4c59-b051-8ef3524d57d7">
+            <Label language="EN">publisherAcknowledgements</Label>
+            <Label language="DE">publisherAcknowledgements</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>prefetchEnabled</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="72aa9ee2-475c-41df-a14b-9b3e7b1eaa3a">
+            <Label language="EN">prefetchEnabled</Label>
+            <Label language="DE">prefetchEnabled</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>queue</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="7c911b9d-c765-4099-acb3-c9d83c29a7c8">
+            <Label language="EN">queue</Label>
+            <Label language="DE">queue</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>routingKey</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="47a45bbc-8ad4-4c99-a7f1-9c3a837f7ba5">
+            <Label language="EN">routingKey</Label>
+            <Label language="DE">routingKey</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>username</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="2777af5f-5321-4a7f-844f-0bb75615ee21">
+            <Label language="EN">username</Label>
+            <Label language="DE">username</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+</ComponentMetadata>
