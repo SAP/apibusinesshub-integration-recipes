@@ -34,12 +34,15 @@ Recipe|Description|Topic
 ***
 
 ### [Bhalchandra Wadekar](https://github.com/BhalchandraSW )
-![Bhalchandra Wadekar](https://github.com/BhalchandraSW.png?size=50) |  |
+![Bhalchandra Wadekar](https://github.com/BhalchandraSW.png?size=50) | Senior Consultant, Syniti (LinkedIn: [BhalchandraSW](https://www.linkedin.com/in/bhalchandrasw/))  |
 ----|----|
 
 Recipe|Description|Topic
 ---|---|---
 [Command Message](for/EIP-MessageConstruction-CommandMessage/readme.md) | This recipe lets you try out Command Message pattern for SOAP, OData and a BAPI | [Integration Patterns](readme.md#integration-patterns)
+[Document Message](for/EIP-MessageConstruction-DocumentMessage/readme.md)|This recipe lets you send a Email using the Document Message pattern |[Integration Patterns](readme.md#integration-patterns)|
+[Event Message](for/EIP-MessageConstruction-EventMessage/readme.md)|This recipe lets you send a product update using the Event Message pattern|[Integration Patterns](readme.md#integration-patterns)|
+[Request Reply](for/EIP-MessageConstruction-Request-Reply/readme.md)|This recipe retrieves a list of products using the Request-Reply pattern|[Integration Patterns](readme.md#integration-patterns)|
 [Return Address](for/EIP-MessageConstruction-ReturnAddress/readme.md) | This recipe lets you try out Return Address pattern | [Integration Patterns](readme.md#integration-patterns)
 
 ***

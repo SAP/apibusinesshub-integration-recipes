@@ -5,7 +5,7 @@
 ![Bhalchandra Wadekar](https://github.com/BhalchandraSW.png?size=50) | [Bhalchandra Wadekar](https://github.com/BhalchandraSW)
 ----|----
 
-This recipe lets you try out Event Message pattern using an example of:
+This recipe lets you try out Request-Reply pattern using an example of:
 * Getting Products
 
 [Download the integration flow Sample for getting products operation](Request-Reply%20-%20Getting%20Products.zip)
