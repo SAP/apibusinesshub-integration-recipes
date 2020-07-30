@@ -1,0 +1,7 @@
+#Properties file
+#Wed Jan 09 13:31:08 IST 2019
+Adapter-Name=RabbitMQ
+Adapter-Vendor=ApacheCamel
+Enable-Maven=true
+Adapter-ID=RabbitMQ
+Adapter-Version=2.17.4

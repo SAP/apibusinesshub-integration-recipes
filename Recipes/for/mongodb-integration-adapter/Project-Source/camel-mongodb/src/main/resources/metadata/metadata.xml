@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ComponentMetadata ComponentId="ctype::Adapter/cname::MongoDB/vendor::ApacheCamel/version::2.17.4" ComponentName="MongoDB" UIElementType="Adapter" IsExtension="false" IsFinal="true" IsPreserves="true" IsDefaultGenerator="true" ComponentDisplayName="MongoDB" xmlns:gen="http://www.sap.hci.adk.com/gen" xmlns:bp="http://www.adk.gen/xmlns/blueprint">
+    <Variant VariantName="MongoDB Component Sender" VariantId="ctype::AdapterVariant/cname::MongoDB/vendor::ApacheCamel/tp::mongodb/mp::mongodb/direction::Sender" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="mongodb" AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </OutputContent>
+        <Tab id="connection">
+            <GuiLabels guid="952403b2-0875-4d51-99a6-548dd37de299">
+                <Label language="EN">Connection</Label>
+                <Label language="DE">Connection</Label>
+            </GuiLabels>
+            <AttributeGroup id="defaultUriParameter">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">URI Setting</Name>
+                <GuiLabels guid="6dcbd07a-4111-45b7-84d2-04793570513e">
+                    <Label language="EN">URI Setting</Label>
+                    <Label language="DE">URI Setting</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>firstUriPart</ReferenceName>
+                    <description>Configure First URI Part</description>
+                </AttributeReference>
+            </AttributeGroup>
+               <AttributeGroup id="MongoDBEndpoint">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">MongoDB Endpoint</Name>
+                <GuiLabels guid="85a2ecfc-8245-4b73-8d8e-908af2b366ad">
+                    <Label language="EN">MongoDB Endpoint</Label>
+                    <Label language="DE">MongoDB Endpoint</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>database</ReferenceName>
+                    <description>Configure database</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>operaton</ReferenceName>
+                    <description>Configure operaton</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>collection</ReferenceName>
+                    <description>Configure collection</description>
+                </AttributeReference>
+
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+    <Variant VariantName="MongoDB Component Receiver" VariantId="ctype::AdapterVariant/cname::MongoDB/vendor::ApacheCamel/tp::mongodb/mp::mongodb/direction::Receiver" IsRequestResponse="true" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="mongodb" AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </OutputContent>
+        <Tab id="connection">
+            <GuiLabels guid="45955e86-1c84-427a-b0e7-a1378b149f6b">
+                <Label language="EN">Connection</Label>
+                <Label language="DE">Connection</Label>
+            </GuiLabels>
+            <AttributeGroup id="defaultUriParameter">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">URI Setting</Name>
+                <GuiLabels guid="93bea8c4-8d81-455c-808d-bee611157ebd">
+                    <Label language="EN">URI Setting</Label>
+                    <Label language="DE">URI Setting</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>firstUriPart</ReferenceName>
+                    <description>Configure First URI Part</description>
+                </AttributeReference>
+            </AttributeGroup>
+           <AttributeGroup id="MongoDBEndpoint">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">MongoDB Endpoint</Name>
+                <GuiLabels guid="85a2ecfc-8245-4b73-8d8e-908af2b366ad">
+                    <Label language="EN">MongoDB Endpoint</Label>
+                    <Label language="DE">MongoDB Endpoint</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>database</ReferenceName>
+                    <description>Configure database</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>operaton</ReferenceName>
+                    <description>Configure operaton</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>collection</ReferenceName>
+                    <description>Configure collection</description>
+                </AttributeReference>
+
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+    <AttributeMetadata>
+        <Name>firstUriPart</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="beec1357-d3b9-4f38-90e4-33bad227f63d">
+            <Label language="EN">First URI Part</Label>
+            <Label language="DE">First URI Part</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>database</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="e826a5de-d86b-4bdd-b2e6-1c5654f44ff2">
+            <Label language="EN">database</Label>
+            <Label language="DE">database</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>operaton</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="30566701-8cba-4a27-a3c3-1c2b6f922ee4">
+            <Label language="EN">operaton</Label>
+            <Label language="DE">operaton</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>collection</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="8a748192-f735-454c-afbc-078b2089f25b">
+            <Label language="EN">collection</Label>
+            <Label language="DE">collection</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+</ComponentMetadata>

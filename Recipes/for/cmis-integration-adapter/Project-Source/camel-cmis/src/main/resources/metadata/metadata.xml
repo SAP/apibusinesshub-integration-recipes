@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ComponentMetadata ComponentId="ctype::Adapter/cname::CMIS/vendor::ApacheCamel/version::2.17.4" ComponentName="CMIS" UIElementType="Adapter" IsExtension="false" IsFinal="true" IsPreserves="true" IsDefaultGenerator="true" ComponentDisplayName="CMIS" xmlns:gen="http://www.sap.hci.adk.com/gen" xmlns:bp="http://www.adk.gen/xmlns/blueprint">
+    <Variant VariantName="CMIS Component Sender" VariantId="ctype::AdapterVariant/cname::CMIS/vendor::ApacheCamel/tp::cmis/mp::cmis/direction::Sender" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="cmis" AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </OutputContent>
+        <Tab id="connection">
+            <GuiLabels guid="76a2eb97-395b-44cd-a33b-4f270986aaf1">
+                <Label language="EN">Connection</Label>
+                <Label language="DE">Connection</Label>
+            </GuiLabels>
+            <AttributeGroup id="defaultUriParameter">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">URI Setting</Name>
+                <GuiLabels guid="b4a0b63e-3304-44ae-a638-6c858944dbca">
+                    <Label language="EN">URI Setting</Label>
+                    <Label language="DE">URI Setting</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>firstUriPart</ReferenceName>
+                    <description>Configure First URI Part</description>
+                </AttributeReference>
+            </AttributeGroup>
+               <AttributeGroup id="CMISEndpoint">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">CMIS Endpoint</Name>
+                <GuiLabels guid="49aa04fb-4059-43df-85d8-e210e5dd18fb">
+                    <Label language="EN">CMIS Endpoint</Label>
+                    <Label language="DE">CMIS Endpoint</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>queryMode</ReferenceName>
+                    <description>Configure queryMode</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>password</ReferenceName>
+                    <description>Configure password</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>readContent</ReferenceName>
+                    <description>Configure readContent</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>query</ReferenceName>
+                    <description>Configure query</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>repositoryId</ReferenceName>
+                    <description>Configure repositoryId</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>pageSize</ReferenceName>
+                    <description>Configure pageSize</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>readCount</ReferenceName>
+                    <description>Configure readCount</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>username</ReferenceName>
+                    <description>Configure username</description>
+                </AttributeReference>
+
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+    <Variant VariantName="CMIS Component Receiver" VariantId="ctype::AdapterVariant/cname::CMIS/vendor::ApacheCamel/tp::cmis/mp::cmis/direction::Receiver" IsRequestResponse="true" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="cmis" AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </OutputContent>
+        <Tab id="connection">
+            <GuiLabels guid="71e44ccc-0ca1-48b2-be39-ac96d5661175">
+                <Label language="EN">Connection</Label>
+                <Label language="DE">Connection</Label>
+            </GuiLabels>
+            <AttributeGroup id="defaultUriParameter">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">URI Setting</Name>
+                <GuiLabels guid="f5170e82-51dd-48d9-a392-316a5da8e250">
+                    <Label language="EN">URI Setting</Label>
+                    <Label language="DE">URI Setting</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>firstUriPart</ReferenceName>
+                    <description>Configure First URI Part</description>
+                </AttributeReference>
+            </AttributeGroup>
+           <AttributeGroup id="CMISEndpoint">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">CMIS Endpoint</Name>
+                <GuiLabels guid="49aa04fb-4059-43df-85d8-e210e5dd18fb">
+                    <Label language="EN">CMIS Endpoint</Label>
+                    <Label language="DE">CMIS Endpoint</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>queryMode</ReferenceName>
+                    <description>Configure queryMode</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>password</ReferenceName>
+                    <description>Configure password</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>readContent</ReferenceName>
+                    <description>Configure readContent</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>query</ReferenceName>
+                    <description>Configure query</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>repositoryId</ReferenceName>
+                    <description>Configure repositoryId</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>pageSize</ReferenceName>
+                    <description>Configure pageSize</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>readCount</ReferenceName>
+                    <description>Configure readCount</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>username</ReferenceName>
+                    <description>Configure username</description>
+                </AttributeReference>
+
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+    <AttributeMetadata>
+        <Name>firstUriPart</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="20a3acfd-54ec-4ea2-b0cf-69088b984b78">
+            <Label language="EN">First URI Part</Label>
+            <Label language="DE">First URI Part</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>queryMode</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="07bccd32-dff6-4226-a78b-8d81a70d0bce">
+            <Label language="EN">queryMode</Label>
+            <Label language="DE">queryMode</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>password</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="be104b38-717e-48c0-b142-407f1579693d">
+            <Label language="EN">password</Label>
+            <Label language="DE">password</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>readContent</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="b826fabb-89c0-46e7-bafb-148d12fd73a5">
+            <Label language="EN">readContent</Label>
+            <Label language="DE">readContent</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>query</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="6cefa148-3a26-4899-b646-dd6bdfb34233">
+            <Label language="EN">query</Label>
+            <Label language="DE">query</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>repositoryId</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="c8f8b539-5e88-41b6-a167-6b6fac8ba913">
+            <Label language="EN">repositoryId</Label>
+            <Label language="DE">repositoryId</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>pageSize</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="5f87a824-1a13-49cc-b605-7d6e8d7ae157">
+            <Label language="EN">pageSize</Label>
+            <Label language="DE">pageSize</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>readCount</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="2051a93a-eec9-4fd0-8049-0459899cc825">
+            <Label language="EN">readCount</Label>
+            <Label language="DE">readCount</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>username</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="fc2337b1-2c9b-488a-b8ab-c74923b807c6">
+            <Label language="EN">username</Label>
+            <Label language="DE">username</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+</ComponentMetadata>
