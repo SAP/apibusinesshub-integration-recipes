@@ -1,0 +1,7 @@
+#Properties file
+#Tue Oct 20 08:00:00 IST 2020
+Adapter-Name=Azure
+Adapter-Vendor=ApacheCamel
+Enable-Maven=true
+Adapter-ID=Azure
+Adapter-Version=2.24.2
