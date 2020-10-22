@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-Name: Azure
+SAP-AdapterName: Azure
+Bundle-Vendor: ApacheCamel
+Bundle-SymbolicName: Azure
+Bundle-Version: 2.24.2
+SAP-NodeType: IFLMAP
+SAP-BundleType: IntegrationAdapter

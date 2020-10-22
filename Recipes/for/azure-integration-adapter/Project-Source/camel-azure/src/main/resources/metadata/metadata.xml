@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ComponentMetadata ComponentId="ctype::Adapter/cname::Azure/vendor::ApacheCamel/version::2.24.2" ComponentName="Azure" UIElementType="Adapter" IsExtension="false" IsFinal="true" IsPreserves="true" IsDefaultGenerator="true" ComponentDisplayName="Azure" xmlns:gen="http://www.sap.hci.adk.com/gen" xmlns:bp="http://www.adk.gen/xmlns/blueprint">
+    <Variant VariantName="Azure Component Sender" VariantId="ctype::AdapterVariant/cname::Azure/vendor::ApacheCamel/tp::azure-blob/mp::azure-blob/direction::Sender" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="azure-blob" AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </OutputContent>
+        <Tab id="connection">
+            <GuiLabels guid="b5340b95-03ec-4225-b297-57065df06adc">
+                <Label language="EN">Connection</Label>
+                <Label language="DE">Connection</Label>
+            </GuiLabels>
+            <AttributeGroup id="defaultUriParameter">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">URI Setting</Name>
+                <GuiLabels guid="becb6625-0fbd-475f-846b-cfd6427875f6">
+                    <Label language="EN">URI Setting</Label>
+                    <Label language="DE">URI Setting</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>firstUriPart</ReferenceName>
+                    <description>Configure First URI Part</description>
+                </AttributeReference>
+            </AttributeGroup>
+               <AttributeGroup id="AzureEndpoint">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Azure Endpoint</Name>
+                <GuiLabels guid="c8dca08a-ac66-46aa-ba87-09b2cfb8c770">
+                    <Label language="EN">Azure Endpoint</Label>
+                    <Label language="DE">Azure Endpoint</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>blobMetadata</ReferenceName>
+                    <description>Configure blobMetadata</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>streamReadSize</ReferenceName>
+                    <description>Configure streamReadSize</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>configuration</ReferenceName>
+                    <description>Configure configuration</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>credentials</ReferenceName>
+                    <description>Configure credentials</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>dataLength</ReferenceName>
+                    <description>Configure dataLength</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>azureQueueClient</ReferenceName>
+                    <description>Configure azureQueueClient</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>streamWriteSize</ReferenceName>
+                    <description>Configure streamWriteSize</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>publicForRead</ReferenceName>
+                    <description>Configure publicForRead</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>blobOffset</ReferenceName>
+                    <description>Configure blobOffset</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>azureBlobClient</ReferenceName>
+                    <description>Configure azureBlobClient</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>messageVisibilityDelay</ReferenceName>
+                    <description>Configure messageVisibilityDelay</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>blobPrefix</ReferenceName>
+                    <description>Configure blobPrefix</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>fileDir</ReferenceName>
+                    <description>Configure fileDir</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>messageTimeToLive</ReferenceName>
+                    <description>Configure messageTimeToLive</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>queuePrefix</ReferenceName>
+                    <description>Configure queuePrefix</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>closeStreamAfterRead</ReferenceName>
+                    <description>Configure closeStreamAfterRead</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>blobType</ReferenceName>
+                    <description>Configure blobType</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>operation</ReferenceName>
+                    <description>Configure operation</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>closeStreamAfterWrite</ReferenceName>
+                    <description>Configure closeStreamAfterWrite</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>useFlatListing</ReferenceName>
+                    <description>Configure useFlatListing</description>
+                </AttributeReference>
+
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+    <Variant VariantName="Azure Component Receiver" VariantId="ctype::AdapterVariant/cname::Azure/vendor::ApacheCamel/tp::azure-blob/mp::azure-blob/direction::Receiver" IsRequestResponse="true" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="azure-blob" AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </OutputContent>
+        <Tab id="connection">
+            <GuiLabels guid="e1264fdf-e011-4eaa-b2ea-27a847777702">
+                <Label language="EN">Connection</Label>
+                <Label language="DE">Connection</Label>
+            </GuiLabels>
+            <AttributeGroup id="defaultUriParameter">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">URI Setting</Name>
+                <GuiLabels guid="a47d49bb-989d-4055-b8e8-5d119ccf834d">
+                    <Label language="EN">URI Setting</Label>
+                    <Label language="DE">URI Setting</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>firstUriPart</ReferenceName>
+                    <description>Configure First URI Part</description>
+                </AttributeReference>
+            </AttributeGroup>
+           <AttributeGroup id="AzureEndpoint">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Azure Endpoint</Name>
+                <GuiLabels guid="c8dca08a-ac66-46aa-ba87-09b2cfb8c770">
+                    <Label language="EN">Azure Endpoint</Label>
+                    <Label language="DE">Azure Endpoint</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>blobMetadata</ReferenceName>
+                    <description>Configure blobMetadata</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>streamReadSize</ReferenceName>
+                    <description>Configure streamReadSize</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>configuration</ReferenceName>
+                    <description>Configure configuration</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>credentials</ReferenceName>
+                    <description>Configure credentials</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>dataLength</ReferenceName>
+                    <description>Configure dataLength</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>azureQueueClient</ReferenceName>
+                    <description>Configure azureQueueClient</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>streamWriteSize</ReferenceName>
+                    <description>Configure streamWriteSize</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>publicForRead</ReferenceName>
+                    <description>Configure publicForRead</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>blobOffset</ReferenceName>
+                    <description>Configure blobOffset</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>azureBlobClient</ReferenceName>
+                    <description>Configure azureBlobClient</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>messageVisibilityDelay</ReferenceName>
+                    <description>Configure messageVisibilityDelay</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>blobPrefix</ReferenceName>
+                    <description>Configure blobPrefix</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>fileDir</ReferenceName>
+                    <description>Configure fileDir</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>messageTimeToLive</ReferenceName>
+                    <description>Configure messageTimeToLive</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>queuePrefix</ReferenceName>
+                    <description>Configure queuePrefix</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>closeStreamAfterRead</ReferenceName>
+                    <description>Configure closeStreamAfterRead</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>blobType</ReferenceName>
+                    <description>Configure blobType</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>operation</ReferenceName>
+                    <description>Configure operation</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>closeStreamAfterWrite</ReferenceName>
+                    <description>Configure closeStreamAfterWrite</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>useFlatListing</ReferenceName>
+                    <description>Configure useFlatListing</description>
+                </AttributeReference>
+
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+    <AttributeMetadata>
+        <Name>firstUriPart</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="988b906b-7831-425b-b067-66182c12521a">
+            <Label language="EN">First URI Part</Label>
+            <Label language="DE">First URI Part</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    <AttributeMetadata>
+        <Name>blobMetadata</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="16910e90-8438-4f6b-a3f6-fb2af05f9556">
+            <Label language="EN">blobMetadata</Label>
+            <Label language="DE">blobMetadata</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>streamReadSize</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ebbc07a4-e6af-443c-91bb-5599c90219bb">
+            <Label language="EN">streamReadSize</Label>
+            <Label language="DE">streamReadSize</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>configuration</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="615581a8-e281-4281-9882-3c82438fdae7">
+            <Label language="EN">configuration</Label>
+            <Label language="DE">configuration</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>credentials</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ba3c02ba-c1d2-4597-9671-e846d4d843fe">
+            <Label language="EN">credentials</Label>
+            <Label language="DE">credentials</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>dataLength</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ff1fe129-7a54-4a52-89c9-f4048285d166">
+            <Label language="EN">dataLength</Label>
+            <Label language="DE">dataLength</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>azureQueueClient</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="3e30cd50-e09a-4f08-8a33-9fdc1cbd7605">
+            <Label language="EN">azureQueueClient</Label>
+            <Label language="DE">azureQueueClient</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>streamWriteSize</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="3bca8e97-b760-48fe-9eb5-9c89d6dbb829">
+            <Label language="EN">streamWriteSize</Label>
+            <Label language="DE">streamWriteSize</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>publicForRead</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="89189c4d-882c-4ff5-bc4c-8e8e4fd6f0e4">
+            <Label language="EN">publicForRead</Label>
+            <Label language="DE">publicForRead</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>blobOffset</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="eb726cd0-eb91-4668-a837-1d06dac2e024">
+            <Label language="EN">blobOffset</Label>
+            <Label language="DE">blobOffset</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>azureBlobClient</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="846637dd-9b08-4b4c-ae26-006d7379e361">
+            <Label language="EN">azureBlobClient</Label>
+            <Label language="DE">azureBlobClient</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>messageVisibilityDelay</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="950dde10-7350-49b0-977e-8090c247e403">
+            <Label language="EN">messageVisibilityDelay</Label>
+            <Label language="DE">messageVisibilityDelay</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>blobPrefix</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="3966f8b4-6297-40ad-9770-79f65231a07d">
+            <Label language="EN">blobPrefix</Label>
+            <Label language="DE">blobPrefix</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>fileDir</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ae8f1892-cf23-4934-93c3-99f250c31892">
+            <Label language="EN">fileDir</Label>
+            <Label language="DE">fileDir</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>messageTimeToLive</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:integer</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="312cc14d-0b27-442a-983b-93cc67375c23">
+            <Label language="EN">messageTimeToLive</Label>
+            <Label language="DE">messageTimeToLive</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>queuePrefix</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="41206b4e-abbd-4e91-9685-1d2e0b430ed1">
+            <Label language="EN">queuePrefix</Label>
+            <Label language="DE">queuePrefix</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>closeStreamAfterRead</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="c1f537ab-2b6c-4424-b728-08cccded9f0f">
+            <Label language="EN">closeStreamAfterRead</Label>
+            <Label language="DE">closeStreamAfterRead</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>blobType</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="e5212d6c-0053-4161-943b-c74087890540">
+            <Label language="EN">blobType</Label>
+            <Label language="DE">blobType</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>operation</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="a830b4ca-3f72-4a98-92be-b82c71f54e67">
+            <Label language="EN">operation</Label>
+            <Label language="DE">operation</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>closeStreamAfterWrite</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="01ce8f0e-505c-42c6-8601-fe60222a07cb">
+            <Label language="EN">closeStreamAfterWrite</Label>
+            <Label language="DE">closeStreamAfterWrite</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>useFlatListing</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="57028435-b283-485f-827d-8f649540893b">
+            <Label language="EN">useFlatListing</Label>
+            <Label language="DE">useFlatListing</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+</ComponentMetadata>
