@@ -2,7 +2,7 @@
 
 [Recipes by Topic](../../../../readme.md) | [Recipes by Author](../../../../author.md) | [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20EIPinCPI%3A%20Request-Reply) | [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20EIPinCPI%3A%20Request-Reply) | [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20EIPinCPI%3A%20Request-Reply)
 
-![Bhalchandra Wadekar](https://github.com/BhalchandraSW.png?size=50) | [Bhalchandra Wadekar](https://github.com/BhalchandraSW)
+![Bhalchandra Wadekar](https://github.com/BhalchandraSW.png?size=50) | [Bhalchandra Wadekar](../../../../author.md#bhalchandra-wadekar)
 ----|----
 
 This recipe lets you try out Request-Reply pattern using an example of:
@@ -18,6 +18,9 @@ Start Immediately | |
 Get Products | |
 Log | ```messageLog.addAttachmentAsString('Products', message.getBody(String), 'application/xml')``` |
 
+### Related Recipes
+* [Return Address](../EIP-MessageConstruction-ReturnAddress/readme.md): This recipe lets you try out Return Address pattern.
+* [Correlation Identifier](../EIP-MessageConstruction-CorrelationIdentifier\readme.md)| When sending the request, the sender adds a unique key to request. The receiver processes the request and puts the unique key as the Correlation Identifier in the reply message. Thus when a reply is received independent of the request, the sender knows the request corresponding the received reply based on the Correlation Identifier.
 ## References
 * [EIPinCPI: Request-Reply](https://blogs.sap.com/2019/01/12/eipincpi-request-reply)
 

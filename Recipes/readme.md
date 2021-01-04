@@ -51,6 +51,7 @@ Recipe|Description|Author
 Recipe|Description|Author
 ---|---|---
 [Command Message](for/EIP-MessageConstruction-CommandMessage/readme.md)| This recipe lets you try out Command Message pattern for SOAP, OData and a BAPI| [Bhalchandra Wadekar](author.md#bhalchandra-wadekar)|
+[Correlation Identifier](for/EIP-MessageConstruction-CorrelationIdentifier\readme.md)| When sending the request, the sender adds a unique key to request. The receiver processes the request and puts the unique key as the Correlation Identifier in the reply message. Thus when a reply is received independent of the request, the sender knows the request corresponding the received reply based on the Correlation Identifier. |  [Bhalchandra Wadekar](author.md#bhalchandra-wadekar)|
 [Document Message](for/EIP-MessageConstruction-DocumentMessage/readme.md)|This recipe lets you send a Email using the Document Message pattern |[Bhalchandra Wadekar](author.md#bhalchandra-wadekar)|
 [Event Message](for/EIP-MessageConstruction-EventMessage/readme.md)|This recipe lets you send a product update using the Event Message pattern|[Bhalchandra Wadekar](author.md#bhalchandra-wadekar)|
 [Request Reply](for/EIP-MessageConstruction-Request-Reply/readme.md)|This recipe retrieves a list of products using the Request-Reply pattern|[Bhalchandra Wadekar](author.md#bhalchandra-wadekar)|
