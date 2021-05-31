@@ -25,6 +25,7 @@ GITFolder | ```"IntegrationContent/API"``` |Specify the folder structure in your
 GITComment | ```"Key Value Map update from CICD pipeline"``` |Specify the text to be used during check-in to your source code repository |
 
 ## Related Recipes
+* [CICD - Upload Single Key Value Map](../CICD-UploadSingleKeyValueMap)
 * [More CICD Recipes](../../readme.md#CICD)
 
 ## References

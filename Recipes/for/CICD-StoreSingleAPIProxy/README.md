@@ -25,6 +25,7 @@ GITFolder | ```"IntegrationContent/API"``` |Specify the folder structure in your
 GITComment | ```"API Proxy update from CICD pipeline"``` |Specify the text to be used during check-in to your source code repository |
 
 ## Related Recipes
+* [CICD - Upload Single API Proxy](../CICD-UploadSingleAPIProxy)
 * [More CICD Recipes](../../readme.md#CICD)
 
 ## References

@@ -25,6 +25,8 @@ GITBranch | "${env.GIT_BRANCH_NAME}" <br/> ```"refs/heads/master"``` |Specify th
 GITFolder | ```"IntegrationContent/API"``` |Specify the folder structure in your source code repository from where you like to read the API Provider |
 
 ## Related Recipes
+* [CICD - Store Single API Provider](../CICD-StoreSingleAPIProvider)
+* [CICD - Store All API Providers](../CICD-StoreAllAPIProviders)
 * [More CICD Recipes](../../readme.md#CICD)
 
 ## References

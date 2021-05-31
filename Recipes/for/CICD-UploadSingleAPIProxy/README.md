@@ -24,6 +24,7 @@ GITBranch | "${env.GIT_BRANCH_NAME}" <br/> ```"refs/heads/master"``` |Specify th
 GITFolder | ```"IntegrationContent/API"``` |Specify the folder structure in your source code repository from where you like to read the API Proxy |
 
 ## Related Recipes
+* [CICD - Store Single API Proxy](../CICD-StoreSingleAPIProxy)
 * [More CICD Recipes](../../readme.md#CICD)
 
 ## References

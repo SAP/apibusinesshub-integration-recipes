@@ -24,6 +24,8 @@ GITFolder | ```"IntegrationContent/API"``` |Specify the folder structure in your
 GITComment | ```"All API Providers update from CICD pipeline"``` |Specify the text to be used during check-in to your source code repository |
 
 ## Related Recipes
+* [CICD - Store Single API Provider](../CICD-StoreSingleAPIProvider)
+* [CICD - Upload Single API Provider](../CICD-UploadSingleAPIProvider)
 * [More CICD Recipes](../../readme.md#CICD)
 
 ## References
