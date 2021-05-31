@@ -1,0 +1,364 @@
+pipeline {
+  agent any
+  
+  //Configure the following environment variables before executing the Jenkins Job
+  environment {
+    CPIHost = "${env.CPI_HOST}"
+    CPIOAuthHost = "${env.CPI_OAUTH_HOST}"
+    CPIOAuthCredentials = "${env.CPI_OAUTH_CRED}"
+    GITRepositoryURL = "${env.GIT_REPOSITORY_URL}"
+    GITCredentials = "${env.GIT_CRED}"
+    GITBranch = "${env.GIT_BRANCH_NAME}"
+    GITFolder = "IntegrationContent/IntegrationArtefacts/Flow_with_XSLT_mapping"
+  } 
+  
+  /*
+  The job is parameterized with the same names as the variables which we configured in the generic webhook trigger,
+  so that the job can be rebuild manually in case of any error.
+  */
+  parameters { 
+    string name: 'branch', defaultValue: ''
+    string name: 'changed_files', defaultValue: ''
+    string name: 'new_files', defaultValue: ''
+    string name: 'modified_files', defaultValue: ''
+    string name: 'removed_files', defaultValue: ''
+    string name: 'name', defaultValue: ''
+    string name: 'email', defaultValue: ''
+  }
+  
+  //To apply the generic trigger configuration,the pipeline needs to run once and after that this plugin will be able to trigger the job.
+  //https://github.com/jenkinsci/generic-webhook-trigger-plugin/
+  triggers {
+    GenericTrigger(
+      genericVariables: [
+          [
+            key: 'branch', 
+            value: '$.ref',
+            defaultValue: '',
+            regexpFilter: ''
+          ],
+          [
+              key: 'changed_files',
+              value: '$.commits[*].[\'modified\',\'added\',\'removed\'][*]',
+              defaultValue: '',
+              regexpFilter: ''
+          ], 
+          [
+              key: 'new_files',
+              value: '$.commits[*].[\'added\'][*]',
+              defaultValue: '',
+              regexpFilter: ''
+          ], 
+          [
+              key: 'modified_files',
+              value: '$.commits[*].[\'modified\'][*]',
+              defaultValue: '',
+              regexpFilter: ''
+          ], 
+          [
+              key: 'removed_files',
+              value: '$.commits[*].[\'removed\'][*]',
+              defaultValue: '',
+              regexpFilter: ''
+          ], 
+          [
+              key: 'name',
+              value: '$.pusher.name',
+              defaultValue: 'Name is not available',
+              regexpFilter: ''
+          ],
+          [
+              key: 'email',
+              value: '$.pusher.email',
+              defaultValue: 'Email is not available',
+              regexpFilter: ''
+          ]
+     ],
+     causeString: '$name($email) committed successfully to $branch',
+     
+      //This is a special token parameter. When supplied, the invocation will only trigger jobs with that exact token.
+     token: 'SAPIS_CICDJOB',
+     tokenCredentialId: '',
+
+     printContributedVariables: false,
+     printPostContent: false,
+     silentResponse: false,
+     
+     //Use the regexp filter to trigger only if that parameter has a specific value.
+     //This job only triggers when the committed branch is 'master' and changed resources files are either xslt,groovy,javascript or jar
+     regexpFilterText: '$branch $changed_files',
+     regexpFilterExpression: '^refs\\/heads\\/master .+\\/src\\/main\\/resources\\/(mapping\\/.+\\.xsl|script\\/.+\\.gsh|script\\/.+\\.groovy|script\\/.+\\.js|lib\\/.+\\.jar)".*$'
+    )
+  }
+
+  stages {
+ 
+    stage('Log Committed Branch and Changed Files') {
+      steps {
+        script {
+          println '**** Branch & Changed Files ****';
+          println 'Changed Files: ' + changed_files;
+        }
+      }
+    }
+    
+    stage('Clone Git Repository to Workspace') {
+      steps {
+        script {
+          //Delete workspace before cloning from GIT
+          println '**** Delete workspace before cloning from GIT ****';
+          deleteDir();
+
+          //Checkout from Git
+          checkout([
+            $class: 'GitSCM',
+            branches: [
+              [name: env.GITBranch]
+            ],
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [
+              [$class: 'RelativeTargetDirectory', relativeTargetDir: "."],
+              [$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [
+                [$class: 'SparseCheckoutPath', path: "${env.GITFolder}"]
+              ]]
+            ],
+            submoduleCfg: [],
+            userRemoteConfigs: [
+              [
+                credentialsId: env.GITCredentials,
+                url: 'https://' + env.GITRepositoryURL
+              ]
+            ]
+          ])
+        }
+      }
+    }
+   
+    stage('Generate CPI tenant OAuth Bearer token') {
+      steps {
+        script {
+          //Generate CPI tenant OAuth Bearer token
+          println '**** Generate CPI tenant OAuth Bearer token ****';
+          try {
+            def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
+              authentication: env.CPIOAuthCredentials,
+              contentType: 'APPLICATION_JSON',
+              httpMode: 'POST',
+              ignoreSslErrors: true,
+              responseHandle: 'LEAVE_OPEN',
+              timeout: 30,
+              url: 'https://' + env.CPIOAuthHost + '/oauth/token?grant_type=client_credentials'
+            def jsonObj = readJSON text: getTokenResp.content
+            def token_s1 = 'bearer' + ' ' + jsonObj.access_token
+            env.token = token_s1
+            getTokenResp.close();
+          } catch (Exception e) {
+            error("Bearer token generation failed:\n${e}")
+          }
+        }
+      }
+    }
+    
+    stage('Check and Upload new resource files to CPI tenant') {
+      steps {
+        script {
+          //Check and upload new resource files to CPI tenant
+          println '**** Check and upload new resource files to CPI tenant ****';
+          println 'New Files: ' + new_files;
+          
+          def newFiles = readJSON text: new_files;
+          //Loop all the new files and upload of type xslt,groovy,javascript or jar
+          newFiles.each {item ->
+            def pathArr = item.split('src/main/resources');
+            if(pathArr.size() == 2){
+              def iflowID = pathArr[0].split('/');
+              iflowID = iflowID[iflowID.size()-1];
+              def fileNameWithExtension = pathArr[1].split('/');
+              fileNameWithExtension = fileNameWithExtension[fileNameWithExtension.size()-1];
+              def fileNameArr = fileNameWithExtension.split('\\.');
+              def fileExtension = fileNameArr.size()>=2 ? fileNameArr[fileNameArr.size()-1] : '';
+              def resourceType = '';
+              switch(fileExtension) {
+                case 'xsl':
+                  resourceType = 'xslt';
+                  break;
+                case 'gsh':
+                  resourceType = 'groovy';
+                  break;
+                case 'groovy':
+                  resourceType = fileExtension;
+                  break;
+                case 'js':
+                  resourceType = fileExtension;
+                  break;
+                case 'jar':
+                  resourceType = fileExtension;
+                  break;
+                default:
+                  resourceType = '';
+                  break;
+              }
+              if(resourceType != ''){
+                def fileContent = readFile encoding: 'Base64', file: item;
+                def postPayload = '{\"Name\": \"' + fileNameWithExtension + '\", \"ResourceType\": \"' + resourceType + '\", \"ResourceContent\": \"' + fileContent + '\"}';
+                try {
+                  def addResource = httpRequest acceptType: 'APPLICATION_JSON',
+                      contentType: 'APPLICATION_JSON',
+                      httpMode: 'POST',
+                      ignoreSslErrors: true,
+                      consoleLogResponseBody: true,
+                      responseHandle: 'LEAVE_OPEN',
+                      validResponseCodes: '200,201,202',
+                      customHeaders: [
+                        [maskValue: true, name: 'Authorization', value: env.token]
+                      ],
+                      timeout: 30,
+                      requestBody: postPayload, 
+                      url: "https://" + env.CPIHost + '/api/v1/IntegrationDesigntimeArtifacts(Id=\'' + iflowID + '\',Version=\'active\')/Resources';
+                } catch (Exception e) {
+                    error("Adding a resource to an integration flow failed");
+                }
+              }else{
+                println("Added file is not of type 'xslt | groovy | js | jar'");
+              }
+            }
+          }
+        }
+      }
+    }
+
+    stage('Check and Upload modified resource files to CPI tenant') {
+      steps {
+        script {
+          //Check and upload modified resource files to CPI tenant
+          println '**** Check and upload modified resource files to CPI tenant ****';
+          println 'Modified Files: ' + modified_files;
+          
+          def modFiles = readJSON text: modified_files;
+          //Loop all the modified files and upload of type xslt,groovy,javascript or jar
+          modFiles.each {item ->
+            def pathArr = item.split('src/main/resources');
+            if(pathArr.size() == 2){
+              def iflowID = pathArr[0].split('/');
+              iflowID = iflowID[iflowID.size()-1];
+              def fileNameWithExtension = pathArr[1].split('/');
+              fileNameWithExtension = fileNameWithExtension[fileNameWithExtension.size()-1];
+              def fileNameArr = fileNameWithExtension.split('\\.');
+              def fileExtension = fileNameArr.size()>=2 ? fileNameArr[fileNameArr.size()-1] : '';
+              switch(fileExtension) {
+                case 'xsl':
+                  resourceType = 'xslt';
+                  break;
+                case 'gsh':
+                  resourceType = 'groovy';
+                  break;
+                case 'groovy':
+                  resourceType = fileExtension;
+                  break;
+                case 'js':
+                  resourceType = fileExtension;
+                  break;
+                case 'jar':
+                  resourceType = fileExtension;
+                  break;
+                default:
+                  resourceType = '';
+                  break;
+              }
+              if(resourceType != ''){
+                def fileContent = readFile encoding: 'Base64', file: item;
+                def postPayload = '{\"ResourceContent\": \"' + fileContent + '\"}';
+                try {
+                  def updateResource = httpRequest acceptType: 'APPLICATION_JSON',
+                      contentType: 'APPLICATION_JSON',
+                      httpMode: 'PUT',
+                      ignoreSslErrors: true,
+                      consoleLogResponseBody: true,
+                      responseHandle: 'LEAVE_OPEN',
+                      validResponseCodes: '200,202',
+                      customHeaders: [
+                        [maskValue: true, name: 'Authorization', value: env.token]
+                      ],
+                      timeout: 30,
+                      requestBody: postPayload, 
+                      url: "https://" + env.CPIHost + '/api/v1/IntegrationDesigntimeArtifacts(Id=\'' + iflowID + '\',Version=\'active\')/$links/Resources(Name=\'' + fileNameWithExtension + '\',ResourceType=\'' + resourceType + '\')';
+                } catch (Exception e) {
+                    error("Updating a resource of an integration flow failed");
+                }
+              }else{
+                println("Modified file is not of type 'xslt | groovy | js | jar'");
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    stage('Check and Delete removed resource files to CPI tenant') {
+      steps {
+        script {
+          //Check and Delete removed resource files to CPI tenant
+          println '**** Check and Delete removed resource files to CPI tenant ****';
+          println 'Deleted Files: ' + removed_files;
+          
+          def delFiles = readJSON text: removed_files;
+          //Loop all the deleted files and upload of type xslt,groovy,javascript or jar
+          delFiles.each {item ->
+            def pathArr = item.split('src/main/resources');
+            if(pathArr.size() == 2){
+              def iflowID = pathArr[0].split('/');
+              iflowID = iflowID[iflowID.size()-1];
+              def fileNameWithExtension = pathArr[1].split('/');
+              fileNameWithExtension = fileNameWithExtension[fileNameWithExtension.size()-1];
+              def fileNameArr = fileNameWithExtension.split('\\.');
+              def fileExtension = fileNameArr.size()>=2 ? fileNameArr[fileNameArr.size()-1] : '';
+              def resourceType = '';
+              switch(fileExtension) {
+                case 'xsl':
+                  resourceType = 'xslt';
+                  break;
+                case 'gsh':
+                  resourceType = 'groovy';
+                  break;
+                case 'groovy':
+                  resourceType = fileExtension;
+                  break;
+                case 'js':
+                  resourceType = fileExtension;
+                  break;
+                case 'jar':
+                  resourceType = fileExtension;
+                  break;
+                default:
+                  resourceType = '';
+                  break;
+              }
+              if(resourceType != ''){
+                try {
+                  def deleteResource = httpRequest acceptType: 'APPLICATION_JSON',
+                      contentType: 'APPLICATION_JSON',
+                      httpMode: 'DELETE',
+                      ignoreSslErrors: true,
+                      consoleLogResponseBody: true,
+                      responseHandle: 'LEAVE_OPEN',
+                      validResponseCodes: '200,201,202',
+                      customHeaders: [
+                        [maskValue: true, name: 'Authorization', value: env.token]
+                      ],
+                      timeout: 30,
+                      url: "https://" + env.CPIHost + '/api/v1/IntegrationDesigntimeArtifacts(Id=\'' + iflowID + '\',Version=\'active\')/$links/Resources(Name=\'' + fileNameWithExtension + '\',ResourceType=\'' + resourceType + '\')';
+                } catch (Exception e) {
+                    error("Deleting a resource of an integration flow failed");
+                }
+              }else{
+                println("Deleted file is not of type 'xslt | groovy | js | jar'");
+              }
+            }
+          }
+          //Delete workspace
+          deleteDir()
+        }
+      }
+    }
+  }
+}

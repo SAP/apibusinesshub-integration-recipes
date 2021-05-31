@@ -1,0 +1,179 @@
+pipeline {
+  agent any
+
+  //Configure the following environment variables before executing the Jenkins Job
+  environment {
+    KeyValueMapName = "Sample KVM"
+    IsDeleteRequired = "Yes" //Assign "Yes", in case the artefact has to be deleted from the API Portal before uploading the artefact from Git. Else set it to "No"
+    APIPortalHost = "${env.API_HOST}"
+    APIPortalOAuthHost = "${env.API_OAUTH_HOST}"
+    APIPortalOAuthCredentials = "${env.API_OAUTH_CRED}"
+    GITRepositoryURL = "${env.GIT_REPOSITORY_URL}"
+    GITCredentials = "${env.GIT_CRED}"
+    GITBranch = "${env.GIT_BRANCH_NAME}"
+    GITFolder = "IntegrationContent/API"
+  }
+
+  stages {
+
+    stage('Clone Git Repository to Workspace') {
+      steps {
+        script {
+          //Delete workspace before cloning from Git
+          println '**** Delete workspace before cloning from Git ****';
+          deleteDir();
+
+          //Checkout from Git
+          checkout([
+            $class: 'GitSCM',
+            branches: [
+              [name: env.GITBranch]
+            ],
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [
+              [$class: 'RelativeTargetDirectory', relativeTargetDir: "."],
+              [$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [
+                [$class: 'SparseCheckoutPath', path: "${env.GITFolder}"]
+              ]]
+            ],
+            submoduleCfg: [],
+            userRemoteConfigs: [
+              [
+                credentialsId: env.GITCredentials,
+                url: 'https://' + env.GITRepositoryURL
+              ]
+            ]
+          ])
+        }
+      }
+    }
+
+    stage('Generate API Portal OAuth Bearer token') {
+      steps {
+        script {
+          //Generate API Portal OAuth Bearer token
+          println '**** Generate API Portal OAuth Bearer token ****';
+          try {
+            def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
+              authentication: env.APIPortalOAuthCredentials,
+              contentType: 'APPLICATION_JSON',
+              httpMode: 'POST',
+              ignoreSslErrors: true,
+              responseHandle: 'LEAVE_OPEN',
+              timeout: 30,
+              url: 'https://' + env.APIPortalOAuthHost + '/oauth/token?grant_type=client_credentials'
+            def jsonObj = readJSON text: getTokenResp.content
+            def token_s1 = 'bearer' + ' ' + jsonObj.access_token
+            env.token = token_s1
+            getTokenResp.close();
+          } catch (Exception e) {
+              error("Bearer token generation failed:\n${e}")
+          }
+        }
+      }
+    }
+
+    stage('Check for KVM file in workspace after Git Clone') {
+      steps {
+        script {
+          def records = readCSV file: (env.GITFolder + '//' + env.KeyValueMapName + '.csv')
+          if (records[0] == null) {
+            error("Specified KVM file " + env.KeyValueMapName + ".csv is not available in Git Repository")
+          }
+        }
+      }
+    }
+
+    stage('Delete Key Value Map -- Optional step') {
+      steps {
+        script {
+          //Delete API Provider from API Portal if configured
+          println '**** Delete Key Value Map from API Portal if configured ****'
+
+          //Handle space in key value map artifact name
+          if (env.KeyValueMapName.contains(' ')) {
+            KeyValueMapName = env.KeyValueMapName.replace(' ','%20')
+          }
+
+          if (env.IsDeleteRequired.equalsIgnoreCase('Yes')) {
+            try {
+              //Delete Key Value Map
+              println '**** Delete Key Value Map ****'
+              def DeleteKVM = httpRequest acceptType: 'APPLICATION_JSON',
+                contentType: 'APPLICATION_JSON',
+                httpMode: 'DELETE',
+                ignoreSslErrors: true,
+                responseHandle: 'LEAVE_OPEN',
+                customHeaders: [
+                  [maskValue: true, name: 'Authorization', value: env.token]
+                ],
+                timeout: 30,
+                url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries(' + '\'' + KeyValueMapName + '\'' + ')'
+
+              DeleteKVM.close();
+            } catch (Exception e) {
+              error("Key Value Map DELETE call failed:\n${e}")
+            }
+          }
+        }
+      }
+    }
+
+    stage('Create Key Value Map') {
+      steps {
+        script {
+          //Iterating over CSV and extracting values to create Key Value Map
+          println '**** Iterating over CSV and extracting values to create Key Value Map ****';
+          
+          def payload = ''
+          def records = readCSV file: (env.GITFolder + '//' + env.KeyValueMapName + '.csv')
+          records.each {
+            key ->
+            if (key[0] != 'key' || key[1] != 'value' || key[2] != 'isEncrypted') {
+              env.encrypted = key[2]
+              if (payload != '') {
+                payload = payload + ',' + '{\"name\": ' + '\"' + key[0] + '\",\"map_name\": ' + '\"' + env.KeyValueMapName + '\","value": ' + '\"' + key[1] + '\"}'
+              } else {
+                payload = '{\"name\": ' + '\"' + key[0] + '\",\"map_name\": ' + '\"' + env.KeyValueMapName + '\","value": ' + '\"' + key[1] + '\"}'
+              }
+            }
+          }
+
+          //Constructing payload
+          println '**** Constructing payload ****'
+          payload = '{\"name\":' + '\"' + env.KeyValueMapName + '\"' + ',\"encrypted\":' + env.encrypted + ',\"scope\":\"ENV\",\"keyMapEntryValues\":[' + payload + ']}'
+          
+          //Create Key Value Map
+          println '**** Create Key Value Map ****';
+          def CreateKVM = httpRequest acceptType: 'APPLICATION_JSON',
+            contentType: 'APPLICATION_JSON',
+            httpMode: 'POST',
+            requestBody: payload,
+            ignoreSslErrors: true,
+            validResponseCodes: '100:399,400',
+            responseHandle: 'LEAVE_OPEN',
+            customHeaders: [
+              [maskValue: true, name: 'Authorization', value: env.token]
+            ],
+            timeout: 30,
+            url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries'
+          
+          def respKVM = readJSON text: CreateKVM.content
+          CreateKVM.close();
+
+          //Delete workspace
+          deleteDir()
+
+          if (respKVM.error.toString() != "null") {
+            def response = respKVM.error.message.value
+            if (response.toString().toLowerCase().contains("entity already exists")) {
+              error(response.toString())
+            } else {
+              error("Key Value Map Create call failed with \"" + response.toString() + "\"")
+            }
+          }
+        }
+      }
+    }
+  }
+}

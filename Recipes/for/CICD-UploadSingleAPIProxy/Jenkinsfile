@@ -1,0 +1,120 @@
+pipeline {
+  agent any
+
+  //Configure the following environment variables before executing the Jenkins Job
+  environment {
+    APIProxyName = "CICDAPIProxy"
+    APIPortalHost = "${env.API_HOST}"
+    APIPortalOAuthHost = "${env.API_OAUTH_HOST}"
+    APIPortalOAuthCredentials = "${env.API_OAUTH_CRED}"
+    GITRepositoryURL = "${env.GIT_REPOSITORY_URL}"
+    GITCredentials = "${env.GIT_CRED}"
+    GITBranch = "${env.GIT_BRANCH_NAME}"
+    GITFolder = "IntegrationContent/API"
+  }
+
+  stages {
+
+    stage('Clone Git Repository to Workspace') {
+      steps {
+        script {
+          //Delete workspace before cloning from Git
+          println '**** Delete workspace before cloning from Git ****';
+          deleteDir();
+
+          //Checkout from Git
+          checkout([
+            $class: 'GitSCM',
+            branches: [
+              [name: env.GITBranch]
+            ],
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [
+              [$class: 'RelativeTargetDirectory', relativeTargetDir: "."],
+              [$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [
+                [$class: 'SparseCheckoutPath', path: "${env.GITFolder}"]
+              ]]
+            ],
+            submoduleCfg: [],
+            userRemoteConfigs: [
+              [
+                credentialsId: env.GITCredentials,
+                url: 'https://' + env.GITRepositoryURL
+              ]
+            ]
+          ])
+        }
+      }
+    }
+
+    stage('Generate API Portal OAuth Bearer token') {
+      steps {
+        script {
+          //Generate API Portal OAuth Bearer token
+          println '**** Generate API Portal OAuth Bearer token ****';
+          try {
+            def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
+              authentication: env.APIPortalOAuthCredentials,
+              contentType: 'APPLICATION_JSON',
+              httpMode: 'POST',
+              ignoreSslErrors: true,
+              responseHandle: 'LEAVE_OPEN',
+              timeout: 30,
+              url: 'https://' + env.APIPortalOAuthHost + '/oauth/token?grant_type=client_credentials'
+            def jsonObj = readJSON text: getTokenResp.content
+            def token_s1 = 'bearer' + ' ' + jsonObj.access_token
+            env.token = token_s1
+            getTokenResp.close();
+          } catch (Exception e) {
+              error("Bearer token generation failed:\n${e}")
+          }
+        }
+      }
+    }
+    
+    stage('Check for API Proxy file in workspace after Git Clone') {
+      steps {
+        script {
+          try {
+            readFile file: env.GITFolder + '//' + env.APIProxyName + '/APIProxy/' + env.APIProxyName + '.xml'
+          } catch (Exception e) {
+              error("Specified API Proxy file " + env.APIProxyName + "is not available in Git Repository:\n${e}")
+          }
+        }
+      }
+    }
+    
+    stage('Create API Proxy') {
+      steps {
+        script {
+
+          //Create API Proxy Zip file
+          println '**** Create API Proxy Zip file ****';
+          def zippedFolder = fileOperations([fileZipOperation(folderPath: env.GITFolder + '//' + env.APIProxyName + '/APIProxy', outputFolderPath: env.GITFolder + '//' + env.APIProxyName)])
+          def filecontent = readFile encoding: 'Base64', file: (env.GITFolder + '//' + env.APIProxyName + '/APIProxy.zip')
+
+          //Create API Provider
+          println '**** Create API Provider ****';
+          try {
+            def APIProxy = httpRequest acceptType: 'APPLICATION_ZIP',
+              httpMode: 'POST',
+              requestBody: filecontent,
+              ignoreSslErrors: true,
+              customHeaders: [
+                [maskValue: true, name: 'Authorization', value: env.token]
+              ],
+              timeout: 30,
+              url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Transport.svc/APIProxies'
+
+            APIProxy.close();
+
+            //Delete workspace
+            deleteDir()
+          } catch (Exception e) {
+              error("API Proxy Create call failed:\n${e}")
+          }
+        }
+      }
+    }
+  }
+}
