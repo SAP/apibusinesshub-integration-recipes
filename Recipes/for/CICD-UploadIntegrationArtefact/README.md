@@ -34,10 +34,10 @@ GITBranch | "${env.GIT_BRANCH_NAME}" <br/> ```"refs/heads/master"``` |Specify th
 GITFolder | ```"IntegrationContent/IntegrationArtefacts"``` |Specify the folder structure in your source code repository from where you like to read the integration artefact |
 
 ## Related Recipes
-* [CICD - Deploy Run Once Integration Artefact and Check Mpl and Store If Success](../CICD-DeployRunOnceIntegrationArtefactAndCheckMplAndStoreIfSuccess)
+* [CICD - Deploy Run Once Integration Artefact and Check MPL and Store If Success](../CICD-DeployRunOnceIntegrationArtefactAndCheckMplAndStoreIfSuccess)
 * [CICD - Deploy Integration Artefact and Get Endpoint](../CICD-DeployIntegrationArtefactGetEndpoint)
 * [CICD - Store Integration Artefact](../CICD-StoreIntegrationArtefact)
-* [More CICD Recipes](../../readme.md#CICD)
+* [More CICD Recipes](../../readme.md#cicd)
 
 ## References
 * [CICD Blog Post](https://blogs.sap.com/2021/06/01/ci-cd-for-sap-integration-suite-here-you-go/)

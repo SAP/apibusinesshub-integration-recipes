@@ -3,9 +3,9 @@ pipeline {
 
   environment {
     IntegrationFlowID = "IntegrationFlow1"
-    FailJobOnFailedMPL = true; //if you are expecting your message to fail, set this to false, so that your job won't fail
-    DeploymentCheckRetryCounter = 20; //multiply by 3 to get the maximum deployment time
-    MPLCheckRetryCounter = 10; //multiply by 3 to get the maximum processing time. Example: 10 would be sufficient for message processings <30s
+    FailJobOnFailedMPL = true //if you are expecting your message to fail, set this to false, so that your job won't fail
+    DeploymentCheckRetryCounter = 20 //multiply by 3 to get the maximum deployment time
+    MPLCheckRetryCounter = 10 //multiply by 3 to get the maximum processing time. Example: 10 would be sufficient for message processings <30s
     CPIHost = "${env.CPI_HOST}"
     CPIOAuthHost = "${env.CPI_OAUTH_HOST}"
     CPIOAuthCredentials = "${env.CPI_OAUTH_CRED}"
@@ -177,10 +177,10 @@ pipeline {
           } else if (mplStatus.equalsIgnoreCase("Completed")) {
             println("Message processing successful.");
 		  } else {
-            error("Unexpected error. Kindly check the tenant.");
-          }
+              error("Unexpected error. Kindly check the tenant.");
+            }
 		  
-          //Proceed with the download. Delete the old flow content first so that only the latest content gets stored
+            //Proceed with the download. Delete the old flow content first so that only the latest content gets stored
             dir(env.GITFolder + '/' + env.FlowId) {
               deleteDir();
             }
@@ -215,7 +215,7 @@ pipeline {
               [$class: 'UsernamePasswordMultiBinding', credentialsId: env.GITCredentials, usernameVariable: 'GitUserName', passwordVariable: 'GitPassword']
             ]) {
               sh 'git diff-index --quiet HEAD || git commit -am ' + '\'' + env.GITComment + '\''
-			        sh('git push https://${GitUserName}:${GitPassword}@' + env.GITRepositoryURL  + ' HEAD:' + env.GITBranch)
+              sh('git push https://${GitUserName}:${GitPassword}@' + env.GITRepositoryURL  + ' HEAD:' + env.GITBranch)
             }
         }
       }

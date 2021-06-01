@@ -7,7 +7,7 @@
 
 This CICD Jenkins job simply enables you to download a Key Value Map from the API Portal and store it in your source code repository like Git.
 
-[Instructions to consume the CICD Jenkins file](http-link)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the Jenkins Job
@@ -26,7 +26,7 @@ GITComment | ```"Key Value Map update from CICD pipeline"``` |Specify the text t
 
 ## Related Recipes
 * [CICD - Upload Single Key Value Map](../CICD-UploadSingleKeyValueMap)
-* [More CICD Recipes](../../readme.md#CICD)
+* [More CICD Recipes](../../readme.md#cicd)
 
 ## References
 * [CICD Blog Post](https://blogs.sap.com/2021/06/01/ci-cd-for-sap-integration-suite-here-you-go/)

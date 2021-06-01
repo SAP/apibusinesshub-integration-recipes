@@ -41,7 +41,7 @@ GITComment | ```"Integration Artefacts update from CICD pipeline"``` |Specify th
 ## Related Recipes
 * [CICD - Upload Integration Artefact](../CICD-UploadIntegrationArtefact)
 * [CICD - Undeploy Integration Artefact](../CICD-UndeployIntegrationArtefact)
-* [More CICD Recipes](../../readme.md#CICD)
+* [More CICD Recipes](../../readme.md#cicd)
 
 ## References
 * [CICD Blog Post](https://blogs.sap.com/2021/06/01/ci-cd-for-sap-integration-suite-here-you-go/)
