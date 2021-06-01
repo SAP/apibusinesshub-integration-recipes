@@ -1,0 +1,130 @@
+pipeline {
+  agent any
+  
+  //Configure the following environment variables before executing the Jenkins Job
+  environment {
+    APIProviderName = "Northwind_APIs"
+    APIPortalHost = "${env.API_HOST}"
+    APIPortalOAuthHost = "${env.API_OAUTH_HOST}"
+    APIPortalOAuthCredentials = "${env.API_OAUTH_CRED}"
+    GITRepositoryURL = "${env.GIT_REPOSITORY_URL}"
+    GITCredentials = "${env.GIT_CRED}"
+    GITBranch = "${env.GIT_BRANCH_NAME}"
+    GITFolder = "IntegrationContent/API"
+    GITComment = "API Provider update from CICD pipeline"
+  }
+  
+  stages {
+    
+    stage('Clone Git Repository to Workspace') {
+      steps {
+        script {
+          //Delete workspace before cloning from Git
+          println '**** Delete workspace before cloning from Git ****';
+          deleteDir();
+
+          //Checkout from Git
+          checkout([
+            $class: 'GitSCM',
+            branches: [
+              [name: env.GITBranch]
+            ],
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [
+              [$class: 'RelativeTargetDirectory', relativeTargetDir: "."],
+              [$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [
+                [$class: 'SparseCheckoutPath', path: "${env.GITFolder}"]
+              ]]
+            ],
+            submoduleCfg: [],
+            userRemoteConfigs: [
+              [
+                credentialsId: env.GITCredentials,
+                url: 'https://' + env.GITRepositoryURL
+              ]
+            ]
+          ])
+        }
+      }
+    }
+
+    stage('Generate API Portal OAuth Bearer token') {
+      steps {
+        script {
+          //Generate API Portal OAuth Bearer token
+          println '**** Generate API Portal OAuth Bearer token ****';
+          try {
+            def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
+              authentication: env.APIPortalOAuthCredentials,
+              contentType: 'APPLICATION_JSON',
+              httpMode: 'POST',
+              ignoreSslErrors: true,
+              responseHandle: 'LEAVE_OPEN',
+              timeout: 30,
+              url: 'https://' + env.APIPortalOAuthHost + '/oauth/token?grant_type=client_credentials'
+            def jsonObj = readJSON text: getTokenResp.content
+            def token_s1 = 'bearer' + ' ' + jsonObj.access_token
+            env.token = token_s1
+            getTokenResp.close();
+          } catch (Exception e) {
+              error("Bearer token generation failed:\n${e}")
+          }
+        }
+      }
+    }
+
+    stage('Get API Provider') {
+      steps {
+        script {
+          //Get API Provider
+          println '**** Get API Provider ****';
+          try {
+            def APIProvider = httpRequest acceptType: 'APPLICATION_JSON',
+              httpMode: 'GET',
+              ignoreSslErrors: true,
+              customHeaders: [
+                [maskValue: true, name: 'Authorization', value: env.token]
+              ],
+              timeout: 30,
+              url: 'https://' + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/APIProviders(' + '\'' + env.APIProviderName + '\'' + ')'
+            
+            def jsonProvider = readJSON text: APIProvider.content
+            APIProvider.close();
+
+            //Write API Provider content to a JSON file
+            println '**** Write API Provider content to a JSON file ****';
+            def payload = '{\"destType\":\"' + jsonProvider.d.destType + '\",\"host\":\"' + jsonProvider.d.host + '\",\"name\":\"' + jsonProvider.d.name + '\",\"trustAll\":false,\"title\":\"' + jsonProvider.d.name + '\",\"authType\":\"' + jsonProvider.d.authType + '\",\"port\":' + jsonProvider.d.port + ',\"pathPrefix\":\"\",\"useSSL\":true,\"isOnPremise\":' + jsonProvider.d.isOnPremise + ',\"rt_auth\":null,\"userName\":\"' + jsonProvider.d.userName + '\","password\":\"' + jsonProvider.d.password + '\",\"url\":\"\",\"sslInfo\":{\"enabled\":true,\"ciphers\":\"\","protocols\":\"\"}}'
+            
+            writeJSON file: env.APIProviderName + '.json',
+              json: payload
+
+            fileOperations([fileCopyOperation(excludes: '', includes: env.APIProviderName + '.json', targetLocation: env.GITFolder)])
+          } catch (Exception e) {
+              error("API Provider GET call failed:\n${e}")
+          }
+        }
+      }
+    }
+    
+    stage('Push Downloaded API Provider as JSON file to Git') {
+      steps {
+        script {
+          // Push API Provider as JSON File to Git
+          println '**** Push API Provider as JSON File to Git ****';
+          dir(env.GITFolder) {
+            sh 'git add .'
+          }
+          withCredentials([
+            [$class: 'UsernamePasswordMultiBinding', credentialsId: env.GITCredentials, usernameVariable: 'GIT_AUTHOR_NAME', passwordVariable: 'GIT_PASSWORD']
+          ]) {
+            sh 'git diff-index --quiet HEAD || git commit -am ' + '\'' + env.GITComment + '\''
+            sh('git push https://${GIT_AUTHOR_NAME}:${GIT_PASSWORD}@' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
+          }
+          
+          //Delete workspace
+          deleteDir()
+        }
+      }
+    }
+  }
+}
