@@ -24,7 +24,7 @@ Name|Example|Description
 IntegrationFlowID| ```"IntegrationFlow1"``` | The ID of the integration artefact that shall be uploaded to the configured Cloud Integration tenant |
 IntegrationPackage  | ```"CICD"``` | The ID of the integration package. In case the integration flow artefact does not exist in the Cloud Integration design time yet, for the first upload an integration package has to be specified, so that the integration flow can be added there. If it already exists in the design time, this parameter can be ignored. |
 DeployFlow  | ```true``` <br/> ```false``` |Based on this flag, after the upload the integration flow artefact will be deployed to the Cloud Integration tenant runtime |
-DeploymentCheckRetryCounter | ```20``` |Multiply by 3 to get the maximum deployment time. |
+DeploymentCheckRetryCounter | ```20``` |Specify the maximum count of retries checking for a final deployment status as the deployment of the integration artefact might take a few seconds. Between each check we'll wait for 3 seconds |
 CPIHost| "${env.CPI_HOST}" <br/> Neo: ```"xxxxxx-tmn.hci.eu2.hana.ondemand.com"``` <br/>CF: ```"xxxxxx.it-cpi001.cfapps.eu10.hana.ondemand.com"```| The host name (without HTTPS) of your Cloud Integration tenant |
 CPIOAuthHost | "${env.CPI_OAUTH_HOST}" <br/>```"xxxxxx.authentication.sap.hana.ondemand.com"``` | The host name (without HTTPS) of the OAuth token server of your Cloud Integration tenant |
 CPIOAuthCredentials | "${env.CPI_OAUTH_CRED}" <br/>       ```"CPIOAuthCredentials"``` | The alias of the OAuth credentials for the Cloud Integration tenant which is deployed on your build server (like Jenkins) |

@@ -1,6 +1,7 @@
 pipeline {
   agent any
 
+  //Configure the following environment variables before executing the Jenkins Job
   environment {
     IntegrationFlowID = "IntegrationFlow1"
     FailJobOnFailedMPL = true //if you are expecting your message to fail, set this to false, so that your job won't fail
