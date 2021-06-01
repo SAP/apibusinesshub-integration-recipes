@@ -105,3 +105,11 @@ Recipe|Description|Topic
 ---|---|---
 [Connect to Amazon DynamoDB](for/ConnectToAWSDynmoDB)|SAP CPI needs to make a rest call to DynamoDB endpoint|[Amazon Web Service](readme.md#amazon-web-services) \|[Database](readme.md#database)|
 [Generate AWS4-HMAC-SHA256 Signature](for/GenerateAWS4_HMAC_SHA256)| A reusable recipe to generate an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.|[Amazon Web Service](readme.md#amazon-web-services)\|[Security](readme.md#security)|
+[Store All API Providers](for/CICD-StoreAllAPIProviders)|Download all API Providers from the API Portal and store it in your source code repository like Git.|[CICD](readme.md#cicd)|
+[Store Single API Provider](for/CICD-StoreSingleAPIProvider)|Download one API Provider from the API Portal and store it in your source code repository like Git|[CICD](readme.md#cicd)|
+[Store Single API Proxy](for/CICD-StoreSingleAPIProxy)|Download one API Proxy from the API Portal and store it in your source code repository like Git |[CICD](readme.md#cicd)|
+[Store Single Key Value Map](for/CICD-StoreSingleKeyValueMap)|Download one Key Value Map from the API Portal and store it in your source code repository like Git|[CICD](readme.md#cicd)|
+[Update Integration Resources on Git Commit](for/CICD-UpdateIntegrationResourcesOnGitCommit)|Develop and manage your integration resources like scripts and XSLT mappings using external IDEs and SCM tools like Git|[CICD](readme.md#cicd)|
+[Upload Single API Provider](for/CICD-UploadSingleAPIProvider)|Checkout the configured API Provider from the source code repository and either update or create the artefact on the API Portal tenant|[CICD](readme.md#cicd)|
+[Upload Single API Proxy](for/CICD-UploadSingleAPIProxy)|checkout the configured API Proxy from the source code repository and either update or create the artefact on the API Portal tenant.|[CICD](readme.md#cicd)|
+[Upload Single Key Value Map](for/CICD-UploadSingleKeyValueMap)|Checkout the configured Key Value Map from the source code repository and either update or create the artefact on the API Portal tenant.|[CICD](readme.md#cicd)|
