@@ -1,5 +1,7 @@
 pipeline {
   agent any
+
+  //Configure the following environment variables before executing the Jenkins Job
   environment {
     IntegrationFlowID = "IntegrationFlow1"
     IntegrationPackage = "CICD" //relevant for flows that are uploaded the first time 

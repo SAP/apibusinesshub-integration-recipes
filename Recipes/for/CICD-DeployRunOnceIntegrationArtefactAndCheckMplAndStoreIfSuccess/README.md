@@ -25,10 +25,10 @@ Configure the following environment variables before executing the Jenkins Job
 
 Name|Example|Description
 ----|----|----
-IntegrationFlowID| ```"IntegrationFlow1"``` | The ID of the integration artefact that shall be deployed to the configured Cloud Integration tenant |
-FailJobOnFailedMPL | ```true``` <br/> ```false``` |If you are expecting your message to fail, set this to false, so that your job won't fail |
-DeploymentCheckRetryCounter | ```20``` |Multiply by 3 to get the maximum deployment time. |
-MPLCheckRetryCounter | ```10``` <br/>  |Multiply by 3 to get the maximum processing time. 10 would be sufficient for message processing < 30s|
+IntegrationFlowID| ```"IntegrationFlow1"``` |The ID of the integration artefact that shall be deployed to the configured Cloud Integration tenant |
+FailJobOnFailedMPL | ```true``` <br/> ```false``` |Specify if the job should fail in case the status of the retrieved message processing log is Failed or Retry. If you are doing negative testing and you're expecting the integration artefact run to fail, set this to "false" |
+DeploymentCheckRetryCounter | ```20``` |Specify the maximum count of retries checking for a final deployment status as the deployment of the integration artefact might take a few seconds. Between each check we'll wait for 3 seconds|
+MPLCheckRetryCounter | ```10``` <br/>  |Specify the maximum count of retries for checking the final MPL status as the process might run for a while. Between each check we'll wait for 3 seconds. |
 CPIHost| "${env.CPI_HOST}" <br/> Neo: ```"xxxxxx-tmn.hci.eu2.hana.ondemand.com"``` <br/>CF: ```"xxxxxx.it-cpi001.cfapps.eu10.hana.ondemand.com"```| The host name (without HTTPS) of your Cloud Integration tenant |
 CPIOAuthHost | "${env.CPI_OAUTH_HOST}" <br/>```"xxxxxx.authentication.sap.hana.ondemand.com"``` | The host name (without HTTPS) of the OAuth token server of your Cloud Integration tenant |
 CPIOAuthCredentials | "${env.CPI_OAUTH_CRED}" <br/>       ```"CPIOAuthCredentials"``` | The alias of the OAuth credentials for the Cloud Integration tenant which is deployed on your build server (like Jenkins) |
