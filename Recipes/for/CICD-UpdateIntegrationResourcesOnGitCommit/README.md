@@ -16,7 +16,7 @@ The Jenkins job takes care that the resources would be synchronized with the int
  * Push the changes of the XSLT file using external IDE to the same Git.
  * The Git push would trigger the Jenkins Pipeline (with the help of a web hook) which then uploads only the changed/added/deleted resources to the Integration Flow.
 
-[Instructions to consume the CICD Jenkins file](http-link)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the Jenkins Job
@@ -33,8 +33,8 @@ GITFolder | ```"IntegrationContent/IntegrationArtefacts/Flow_with_XSLT_mapping"`
 
 ## Related Recipes
 * [CICD - Upload Integration Artefact](../CICD-UploadIntegrationArtefact)
-* [CICD - Store Integration Artefact on New Version](../CICD-StoreIntegrationArtefactOnNewVersion)
-* [More CICD Recipes](../../readme.md#CICD)
+* [CICD - Store Integration Artefact](../CICD-StoreIntegrationArtefact)
+* [More CICD Recipes](../../readme.md#cicd)
 
 ## References
 * [CICD Blog Post](https://blogs.sap.com/2021/06/01/ci-cd-for-sap-integration-suite-here-you-go/)

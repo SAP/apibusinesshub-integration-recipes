@@ -7,7 +7,7 @@
 
 This CICD Jenkins job allows you to checkout the configured API Provider from the source code repository and either update or create the artefact on the API Portal tenant.
 
-[Instructions to consume the CICD Jenkins file](http-link)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the Jenkins Job
@@ -27,7 +27,7 @@ GITFolder | ```"IntegrationContent/API"``` |Specify the folder structure in your
 ## Related Recipes
 * [CICD - Store Single API Provider](../CICD-StoreSingleAPIProvider)
 * [CICD - Store All API Providers](../CICD-StoreAllAPIProviders)
-* [More CICD Recipes](../../readme.md#CICD)
+* [More CICD Recipes](../../readme.md#cicd)
 
 ## References
 * [CICD Blog Post](https://blogs.sap.com/2021/06/01/ci-cd-for-sap-integration-suite-here-you-go/)
