@@ -1,17 +1,19 @@
-# CICD - Store Integration Artefact
+# CICD - Deploy Run Once Integration Artefact and Check MPL
 
 \| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP/apibusinesshub-integration-recipes/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20escaped-do-some-code-thing-%20 ) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20escaped-do-some-code-thing-%20 ) \| [Fix documentation](https://github.com/SAP/apibusinesshub-integration-recipes/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20escaped-do-some-code-thing-%20 ) \|
 
 ![Axel Albrecht](https://github.com/axelalbrechtsap.png?size=50 ) | [Axel Albrecht](https://github.com/axelalbrechtsap ) |
 ----|----|
 
-This CICD Jenkins job simply enables you to download an integration artefact from the Cloud Integration tenant and store it in your source code repository like Git.
+This CICD Jenkins job allows you to deploy an integration flow, check its deployment status and the message processing log status of the message execution that gets automatically triggered after the deployment due to a scheduler configuration or the consumption of files from a (S)FTP server or messages from a JMS queue.
+In case of a failure during deployment or during message processing the job will provide you the error details as well.
 
  A typical work flow would look something like this:
 
  * You build an integration flow on your Cloud Integration tenant.
- * Using this job you download the integration artefact and store it in your source code repository.
- * You do activities like security scans on the resources or can compare versions.
+ * Using this job, the integration artefact will be deployed and a message will be automatically triggered.
+ * The job will provide you the message processing log status.
+ * Based on the message processing log status you can perform certain activities like passing a Q-Gate, etc.
 
 [Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
 
@@ -20,20 +22,18 @@ Configure the following environment variables before executing the pipeline job
 
 Name|Example|Description
 ----|----|----
-IntegrationFlowID| ```"IntegrationFlow1"``` | The ID of the integration artefact that needs to be stored in the source code repository  |
+IntegrationFlowID| ```"IntegrationFlow1"``` | The ID of the integration artefact that shall be deployed to the configured Cloud Integration tenant |
+FailJobOnFailedMPL | ```true``` <br/> ```false``` |Specify if the job should fail in case the status of the retrieved message processing log is Failed or Retry. If you are doing negative testing and you're expecting the integration artefact run to fail, set this to "false" |
+DeploymentCheckRetryCounter | ```20``` |Specify the maximum count of retries checking for a final deployment status as the deployment of the integration artefact might take a few seconds. Between each check we'll wait for 3 seconds|
+MPLCheckRetryCounter | ```10``` <br/>  |Specify the maximum count of retries for checking the final MPL status as the process might run for a while. Between each check we'll wait for 3 seconds. |
 CPIHost| "${env.CPI_HOST}" <br/> Neo: ```"xxxxxx-tmn.hci.eu2.hana.ondemand.com"``` <br/>CF: ```"xxxxxx.it-cpi001.cfapps.eu10.hana.ondemand.com"```| The host name (without HTTPS) of your Cloud Integration tenant |
 CPIOAuthHost | "${env.CPI_OAUTH_HOST}" <br/>```"xxxxxx.authentication.sap.hana.ondemand.com"``` | The host name (without HTTPS) of the OAuth token server of your Cloud Integration tenant |
 CPIOAuthCredentials | "${env.CPI_OAUTH_CRED}" <br/>       ```"CPIOAuthCredentials"``` | The alias of the OAuth credentials for the Cloud Integration tenant which is deployed on your build server (like Jenkins) |
-GITRepositoryURL | "${env.GIT_REPOSITORY_URL}" <br/>```"github.com/CICD/integrations.git"```| The full URL of the source code repository without HTTPS |
-GITCredentials | "${env.GIT_CRED}" <br/> ```"GIT_Credentials"``` |The alias of the source code repository credentials which is deployed on your build server (like Jenkins)|
-GITBranch | "${env.GIT_BRANCH_NAME}" <br/> ```"refs/heads/master"``` |Specify the source code repository branch that you want to work with |
-GITFolder | ```"IntegrationContent/IntegrationArtefacts"``` |Specify the folder structure in your source code repository where you like to store the integration artefact |
-GITComment | ```"Integration Artefacts update from CICD pipeline"``` |Specify the text to be used during check-in to your source code repository |
 
 ## Related Recipes
 * [CICD - Upload Integration Artefact](../CICD-UploadIntegrationArtefact)
-* [CICD - Get Latest Message Processing Log](../CICD-GetLatestMessageProcessingLog)
-* [CICD - Get Specific Message Processing Log](../CICD-GetSpecificMessageProcessingLog)
+* [CICD - Store Integration Artefact](../CICD-StoreIntegrationArtefact)
+* [CICD - Undeploy Integration Artefact](../CICD-UndeployIntegrationArtefact)
 * [More CICD Recipes](../../readme.md#cicd)
 
 ## References
