@@ -26,11 +26,13 @@ Recipe|Description|Author
 
 Recipe|Description|Author
 ---|---|---
+[Deploy Run Once Integration Artefact and Check MPL and Store If Success](for/CICD-DeployRunOnceIntegrationArtefactAndCheckMplAndStoreIfSuccess)|Deploy an integration flow, check its deployment status and the MPL (message processing log) status| [Mayur Mohan Belur](author.md#mayur-mohan-belur) |
 [Store All API Providers](for/CICD-StoreAllAPIProviders)|Download all API Providers from the API Portal and store it in your source code repository like Git.|[Sunny Kapoor](author.md#sunny-kapoor)|
 [Store Single API Provider](for/CICD-StoreSingleAPIProvider)|Download one API Provider from the API Portal and store it in your source code repository like Git|[Sunny Kapoor](author.md#sunny-kapoor)|
 [Store Single API Proxy](for/CICD-StoreSingleAPIProxy)|Download one API Proxy from the API Portal and store it in your source code repository like Git |[Sunny Kapoor](author.md#sunny-kapoor)|
 [Store Single Key Value Map](for/CICD-StoreSingleKeyValueMap)|Download one Key Value Map from the API Portal and store it in your source code repository like Git|[Sunny Kapoor](author.md#sunny-kapoor)|
 [Update Integration Resources on Git Commit](for/CICD-UpdateIntegrationResourcesOnGitCommit)|Develop and manage your integration resources like scripts and XSLT mappings using external IDEs and SCM tools like Git|[Sunny Kapoor](author.md#sunny-kapoor)|
+[Upload Integration Artefact](for/CICD-UploadIntegrationArtefact)|Checkout the latest version of the configured integration flow artefact from your source code repository and either update or create the artefact on the Cloud Integration tenant| [Mayur Mohan Belur](author.md#mayur-mohan-belur) |
 [Upload Single API Provider](for/CICD-UploadSingleAPIProvider)|Checkout the configured API Provider from the source code repository and either update or create the artefact on the API Portal tenant|[Sunny Kapoor](author.md#sunny-kapoor)|
 [Upload Single API Proxy](for/CICD-UploadSingleAPIProxy)|checkout the configured API Proxy from the source code repository and either update or create the artefact on the API Portal tenant.|[Sunny Kapoor](author.md#sunny-kapoor)|
 [Upload Single Key Value Map](for/CICD-UploadSingleKeyValueMap)|Checkout the configured Key Value Map from the source code repository and either update or create the artefact on the API Portal tenant.|[Sunny Kapoor](author.md#sunny-kapoor)|
