@@ -37,5 +37,5 @@ GITComment | ```"Integration Artefacts update from CICD pipeline"``` |Specify th
 * [More CICD Recipes](../../readme.md#cicd)
 
 ## References
-* [CI/CD Blog](https://blogs.sap.com/2021/06/01/ci-cd-for-sap-integration-suite-here-you-go/)
+* [CICD Blog Post](https://blogs.sap.com/2021/06/01/ci-cd-for-sap-integration-suite-here-you-go/)
 * [Cloud Integration OData APIs](https://api.sap.com/package/CloudIntegrationAPI?section=Artifacts)

@@ -22,7 +22,7 @@ Configure the following environment variables before executing the pipeline job
 
 Name|Example|Description
 ----|----|----
-IntegrationFlowID| ```"IntegrationFlow1"``` | The ID of the integration artefact that shall be deployed |
+IntegrationFlowID| ```"IntegrationFlow1"``` | The ID of the integration artefact that shall be deployed to the configured Cloud Integration tenant |
 GetEndpoint | ```true``` <br/> ```false``` | Specify if you like to retrieve the endpoint of the deployed integration artefact. If you don't need the endpoint or the artefact does not provide an endpoint, set the value to false |
 DeploymentCheckRetryCounter | ```20``` | Specify the maximum count of retries checking for a final deployment status as the deployment of the integration artefact might take a few seconds. Between each check we'll wait 3 seconds |
 CPIHost| "${env.CPI_HOST}" <br/> Neo: ```"xxxxxx-tmn.hci.eu2.hana.ondemand.com"``` <br/>CF: ```"xxxxxx.it-cpi001.cfapps.eu10.hana.ondemand.com"```| The host name (without HTTPS) of your Cloud Integration tenant |
