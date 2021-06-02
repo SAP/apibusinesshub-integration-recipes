@@ -1,0 +1,148 @@
+pipeline {
+   agent any
+
+	//Configure the following environment variables before executing the Jenkins Job
+   	environment {
+		SearchCriteria = "IntegrationFlowID" //select either "IntegrationFlowID" or "MPLID"
+		IntegrationFlowID = "IntegrationFlow1"
+		MPLID = "AGB2y3D65NFlH-8tWDxqAZKoZD58"
+		AcceptIntermediateStatus = false //change to true if you accept "Processing" as a final status, otherwise the job will keep polling for a final state or until the maximum MPL check retry counter is exceeded
+		FailJobOnFailedMPL = true //if you are expecting your message to fail, set this to false, so that your job won't fail
+	  	MPLCheckRetryCounter = 10; //multiply by 3 to get the maximum processing time. Example: 10 would be sufficient for message processings <30s
+		CPIHost = "${env.MY_CPI_HOST}"
+		CPIOAuthHost = "${env.MY_CPI_TOKEN_HOST}"
+		CPIOAuthCredentials = "${env.MY_CPI_OAUTH_CREDS}"	
+	}
+
+	stages {
+		stage('Generate oauth bearer token') {
+		  steps {
+			script {
+			  //Get oauth token
+			  	try {
+				  	def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
+						authentication: env.CPIOAuthCredentials,
+						contentType: 'APPLICATION_JSON',
+						httpMode: 'POST',
+						responseHandle: 'LEAVE_OPEN',
+						timeout: 30,
+						url: 'https://' + env.CPIOAuthHost + '/oauth/token?grant_type=client_credentials';
+					def jsonObjToken = readJSON text: getTokenResp.content
+					def token = "Bearer " + jsonObjToken.access_token
+					env.token = token
+					getTokenResp.close();
+				} catch (Exception e) {
+					error("Oauth bearer token generation failed:\n${e}")
+				}
+			}
+		  }
+		}
+        stage('Check Message processing status') {
+			steps {
+				script {
+					//check for latest MPL status based on MPL ID or flow ID 
+					def requestUrl;
+					if(SearchCriteria.equalsIgnoreCase("IntegrationFlowID")){
+						requestUrl = 'https://' + env.CPIHost + '/api/v1/MessageProcessingLogs?$filter=IntegrationArtifact/Id%20eq%20\'' + env.IntegrationFlowID + '\'and%20Status%20ne%20\'DISCARDED\'&$orderby=LogEnd+desc&$top=1';
+					} else {
+						requestUrl = 'https://' + env.CPIHost + '/api/v1/MessageProcessingLogs(\'' + env.MPLID + '\')?%24select=Status';
+					}
+					println("Checking message processing log status");
+					Integer counter = 0;
+					def mplStatus = '';
+					def continueLoop = true;
+					def MPLId ='';
+					//let's loop until we find a final MPL status or run into the max retry counter
+					while (counter < env.MPLCheckRetryCounter.toInteger() & continueLoop == true) {
+						//Call for MPL status
+						def checkMPLResp = httpRequest acceptType: 'APPLICATION_JSON',
+						  customHeaders: [[maskValue: false, name: 'Authorization', value: env.token] ],
+						  httpMode: 'GET',
+						  responseHandle: 'LEAVE_OPEN',
+						  validResponseCodes: '200:299,404',
+						  timeout: 30,
+						  url: requestUrl;
+						  
+						if (checkMPLResp.status == 404){
+							//invalid MPL ID
+							error("Received http response code 404. Please check your configuration.");
+						}
+
+						//extract MPL Status value
+						def jsonMPLStatus = readJSON text: checkMPLResp.content
+						if (env.SearchCriteria.equalsIgnoreCase("IntegrationFlowID")){
+							if (jsonMPLStatus.d.results.size() == 0){
+								//nothing found for this flow 
+								error("Could not find any MPL for the configured integration flow " + env.IntegrationFlowID + " on the configured tenant. Check the tenant or your configuration.");
+							}
+							jsonMPLStatus.d.results.each {
+								value -> 
+								mplStatus = value.Status;
+								MPLId = value.MessageGuid;
+								//If status is Processing, keep going unless the configuration has AcceptIntermediateStatus set to true 
+								if (mplStatus.equalsIgnoreCase("Processing") & !env.AcceptIntermediateStatus.equalsIgnoreCase("true")){
+									println("message processing not over yet, trying again in a short moment");
+									Thread.sleep(3000);
+									counter = counter + 1;
+								} else {
+									//we either got a final status or Processing is accepted, ending the loop
+									continueLoop = false;
+									checkMPLResp.close();
+								}
+							}
+						} else {
+							//search by MPL ID
+							mplStatus = jsonMPLStatus.d.Status;
+							
+							MPLId = env.MPLID;
+							//If status is Processing, keep going unless the configuration has AcceptIntermediateStatus set to true 
+							if (mplStatus.equalsIgnoreCase("Processing") & !env.AcceptIntermediateStatus.equalsIgnoreCase("true")){
+								println("message processing not over yet, trying again in a short moment");
+								Thread.sleep(3000);
+								counter = counter + 1;
+							} else {
+								//we either got a final status or Processing is accepted, ending the loop
+								continueLoop = false;
+								checkMPLResp.close();
+							}
+						}	
+					}
+
+					println("MPL ID: " + MPLId);
+					println("MPL Status: " + mplStatus);
+					
+					if (mplStatus.equalsIgnoreCase("Completed")) {
+						currentBuild.result = 'SUCCESS'
+						return
+					}
+					if (mplStatus.equalsIgnoreCase("Processing")){
+						if (env.AcceptIntermediateStatus.equalsIgnoreCase("true")){
+							currentBuild.result = 'SUCCESS';
+							return
+						} else {
+							//Intermediate state not accepted 
+							error("The message processing did not finish within the check timeframe. If it is a long running integration flow, increase the retry counter in the job configuration.");
+						}
+					}
+					if (mplStatus.equalsIgnoreCase("Failed") || mplStatus.equalsIgnoreCase("Retry")) {
+						//get error information
+						def cpiMplError = httpRequest acceptType: 'APPLICATION_ZIP',
+							contentType: 'APPLICATION_ZIP',
+							customHeaders: [
+							  [maskValue: false, name: 'Authorization', value: env.token]
+							],
+							ignoreSslErrors: false,
+							responseHandle: 'LEAVE_OPEN',
+							timeout: 30,
+							url: 'https://' + env.CPIHost + '/api/v1/MessageProcessingLogs(\'' + MPLId + '\')/ErrorInformation/$value';
+						println("Error information: " + cpiMplError.content);
+						cpiMplError.close();
+					}
+					if (env.FailJobOnFailedMPL.equalsIgnoreCase("true")){
+						error("Job is configured to fail on a failed MPL");
+					} 					
+				}
+			}
+		}
+	}
+}
