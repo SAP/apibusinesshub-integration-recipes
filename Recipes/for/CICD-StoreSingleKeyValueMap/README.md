@@ -29,5 +29,5 @@ GITComment | ```"Key Value Map update from CICD pipeline"``` |Specify the text t
 * [More CICD Recipes](../../readme.md#cicd)
 
 ## References
-* [CICD Blog Post](https://blogs.sap.com/2021/06/01/ci-cd-for-sap-integration-suite-here-you-go/)
+* [CICD Blog Post](https://blogs.sap.com/2021/06/02/ci-cd-for-sap-integration-suite-here-you-go/)
 * [API Management OData APIs](https://api.sap.com/package/APIMgmt)
