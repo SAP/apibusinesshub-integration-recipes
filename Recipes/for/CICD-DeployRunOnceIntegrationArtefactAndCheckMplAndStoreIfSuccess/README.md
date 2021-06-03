@@ -18,7 +18,7 @@ A typical work flow would look something like this:
  * If the message processing was successful the job will download the integration flow and store it into your source code repository.
  * The stored integration flow can be deployed to a productive Cloud Integration tenant.
 
-[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file/readme.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the Jenkins Job

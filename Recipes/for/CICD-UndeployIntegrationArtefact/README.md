@@ -14,7 +14,7 @@ This CICD Jenkins job simply enables you to undeploy an integration artefact fro
  * Based on the job results you can take certain actions.
  * Using this job, the integration artefact will be undeployed from the tenant.
 
-[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file/readme.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the pipeline job

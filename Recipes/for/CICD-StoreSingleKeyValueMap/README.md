@@ -7,7 +7,7 @@
 
 This CICD Jenkins job simply enables you to download a Key Value Map from the API Portal and store it in your source code repository like Git.
 
-[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file/readme.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the Jenkins Job
