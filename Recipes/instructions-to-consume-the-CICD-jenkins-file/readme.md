@@ -35,7 +35,7 @@ Store the following credentials with a separate alias/identifier:
 
 The identifier that you enter here is needed either in the pipeline script configuration directly or when creating Jenkins environment variables (see next step).
 
-<div style="text-align:center"><img src="jenkins_add_credentials.png" alt="Add Credentials in Jenkins" /></div>
+<div style="text-align:center"><img src="jenkins_add_credentials.png" alt="Add Credentials in Jenkins"/></div>
 <p align="center">Fig 1: Add Credentials in Jenkins</p>
 
 ### Add Parameters as Environment Variables on the Build Server
@@ -43,7 +43,7 @@ This step is optional, but we recommend storing all parameters such as credentia
 
 To do this, open your Jenkins, go to <b>Manage Jenkins > Configure > Global Properties > Environment variables</b>.
 
-<div style="text-align:center"><img src="jenkins_add_global_variable.png" alt="Add Environment Variables in Jenkins" /></div>
+<div style="text-align:center"><img src="jenkins_add_global_variable.png" alt="Add Environment Variables in Jenkins"/></div>
 <p align="center">Fig 2: Add Environment Variables in Jenkins</p>
 
 Be careful which variable names you choose as Jenkins uses certain predefined variable names. Overwriting them can cause undesired side effects. See the variable <i>GIT_BRANCH</i> as an example. For more details, see: https://plugins.jenkins.io/git/
@@ -54,7 +54,7 @@ To do this, open your Jenkins, go to <b>Manage Jenkins > Configure System > sect
 
 Enter the name and the email address of the user that will submit the changes to your integration content repository.
 
-<div style="text-align:center"><img src="Jenkins-git-user.png" alt="Add Global Git Configuration" /></div>
+<div style="text-align:center"><img src="Jenkins-git-user.png" alt="Add Global Git Configuration"/></div>
 <p align="center">Fig 3: Add Global Git Configuration</p>
 
 ### Copy the Pipeline Script to Your Source Code Repository
@@ -69,58 +69,54 @@ To do so, open your Jenkins and click on <b>New Item</b>. Enter a self-explainin
 
 1. <b>Job type Pipeline</b>
 
-  Select this pipeline type if you store one pipeline script per source code repository and your source code repository is Git. Confirm with OK.
+    Select this pipeline type if you store one pipeline script per source code repository and your source code repository is Git. Confirm with OK.
 
-  <div style="text-align:center"><img src="Jenkins_create_pipeline.png" alt="Select job type Pipeline" /></div>
-  <p align="center">Fig 4: Select job type Pipeline</p>
+    <div style="text-align:center"><img src="Jenkins_create_pipeline.png" alt="Select job type Pipeline"/></div>
+    <p align="center">Fig 4: Select job type Pipeline</p>
 
-  In the job configuration under section <b>“Pipeline”</b>, change the Definition to <b>“Pipeline script from SCM”</b>, choose <b>“Git”</b> as SCM, and then provide the URL and credentials to your Git repository where your pipeline script is located.
+    In the job configuration under section <b>“Pipeline”</b>, change the Definition to <b>“Pipeline script from SCM”</b>, choose <b>“Git”</b> as SCM, and then  provide the URL and credentials to your Git repository where your pipeline script is located.
 
-  <div style="text-align:center"><img src="Jenkins_create_Git_pipeline.png" alt="Configure Jenkins Pipeline with Git Repository of Pipeline Script" /></div>
-  <p align="center">Fig 5: Configure Jenkins Pipeline with Git Repository of Pipeline Script</p>
+    <div style="text-align:center"><img src="Jenkins_create_Git_pipeline.png" alt="Configure Jenkins Pipeline with Git Repository of Pipeline Script"/></div>
+    <p align="center">Fig 5: Configure Jenkins Pipeline with Git Repository of Pipeline Script</p>
 
-  When executing this Jenkins job, Jenkins will automatically search for a pipeline script called <b>“Jenkinsfile”</b> in the specified repository.
+    When executing this Jenkins job, Jenkins will automatically search for a pipeline script called <b>“Jenkinsfile”</b> in the specified repository.
 
 2. <b>Job type Multibranch Pipeline</b>
 
-  Select this pipeline type if you are using a different source code repository, e.g. GitHub, or if you plan to store multiple pipeline scripts in one repository. Confirm with OK.
+    Select this pipeline type if you are using a different source code repository, e.g. GitHub, or if you plan to store multiple pipeline scripts in one repository. Confirm with OK.
 
-  <div style="text-align:center"><img src="Jenkins_select_multibranch_pipeline.png" alt="Select Job Type Multibranch Pipeline" /></div>
-  <p align="center">Fig 6: Select Job Type Multibranch Pipeline</p>
+    <div style="text-align:center"><img src="Jenkins_select_multibranch_pipeline.png" alt="Select Job Type Multibranch Pipeline"/></div>
+    <p align="center">Fig 6: Select Job Type Multibranch Pipeline</p>
 
-  Under section <b>“Branch Sources”</b> select your source code repository.
+    <div style="text-align:center"><img src="Jenkins_select_repoTyp_for_multibranch_pipeline-1.png" alt="Select Repository Type"/></div>
+    <p align="center">Fig 7: Select Repository Type</p>
 
-  <div style="text-align:center"><img src="Jenkins_select_repoTyp_for_multibranch_pipeline-1.png" alt="Select Repository Type" /></div>
-  <p align="center">Fig 7: Select Repository Type</p>
+    Enter the repository URL and select the credentials for the repository (which you have uploaded before).
 
-  Enter the repository URL and select the credentials for the repository (which you have uploaded before).
+    <div style="text-align:center"><img src="Jenkins_add_multibranch_credentials.png" alt="Enter Repository Details"/></div>
+    <p align="center">Fig 8: Enter Repository Details</p>
 
-  <div style="text-align:center"><img src="Jenkins_add_multibranch_credentials.png" alt="Enter Repository Details" /></div>
-  <p align="center">Fig 8: Enter Repository Details</p>
+    Under <b>“Build Configuration”</b>, choose Mode <b>“by Jenkinsfile”</b> and provide the name of the pipeline script that you want to use for this Jenkins job.  It’s ok if the script does not exist yet.
 
-  Under <b>“Build Configuration”</b>, choose Mode <b>“by Jenkinsfile”</b> and provide the name of the pipeline script that you want to use for this Jenkins job. It’s ok if the script does not exist yet.
+    <div style="text-align:center"><img src="Jenkins_select_multibranch_script.png" alt="Specify Pipeline Script Name in Jenkins Job"/></div>
+    <p align="center">Fig 9: Specify Pipeline Script Name in Jenkins Job</p>
 
-  <div style="text-align:center"><img src="Jenkins_select_multibranch_script.png" alt="Specify Pipeline Script Name in Jenkins Job" /></div>
-  <p align="center">Fig 9: Specify Pipeline Script Name in Jenkins Job</p>
+    Save the Job configuration.
 
-  Save the Job configuration.
+    The job that you have created will perform the steps that will be given by the script. In case you want to change anything in your pipeline, don’t touch the job! Instead, change the pipeline script!
 
-  The job that you have created will perform the steps that will be given by the script. In case you want to change anything in your pipeline, don’t touch the job! Instead, change the pipeline script!
-
-  <b>Important:</b> Avoid running Jenkins jobs in parallel that submit content into the same repository as it might come to conflicts otherwise, same like when two people are working with the same Git repository.
+    <b>Important:</b> Avoid running Jenkins jobs in parallel that submit content into the same repository as it might come to conflicts otherwise, same like when two people are working with the same Git repository.
 
 ### Define a Folder Structure in the Integration Content Repository
 It is important to have a structured and consistent order for your integration content so that you get the most out of your CICD processes.
 
 In our scripts, we’ve used the following folder structure:
 
-<div style="text-align:center"><img src="folderstructure.png" /></div>
+<div style="text-align:center"><img src="folderstructure.png"/></div>
 <p align="center">Fig 10: Folder Structure</p>
 
 If you want to use a different folder structure, you can specify this in the pipeline scripts via the corresponding parameter.
 
 <b>Important:</b> Ensure that the folder structure that you want to use in your pipeline script already exists in your Git repository before running the pipeline, otherwise you will receive an error stating <i>“Sparse checkout leaves no entry on working directory”</i>.
-
-
 
 Now that you’re done with the setup, you can start configuring the scripts and perform the CICD processes on your SAP Integration Suite tenants using our pipeline scripts.
