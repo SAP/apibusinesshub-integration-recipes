@@ -14,7 +14,7 @@ This CICD Jenkins job enables you to fetch the message procesing log status of e
  * Using this job, you can retrieve the MPL status of the run.
  * Do some activities based on the result.
 
-[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file/readme.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the pipeline job

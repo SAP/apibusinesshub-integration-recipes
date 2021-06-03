@@ -15,7 +15,7 @@ In case of a failure during deployment or during message processing the job will
  * The job will provide you the message processing log status.
  * Based on the message processing log status you can perform certain activities like passing a Q-Gate, etc.
 
-[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file/readme.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the pipeline job

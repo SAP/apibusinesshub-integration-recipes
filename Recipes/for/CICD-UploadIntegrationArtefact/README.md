@@ -14,7 +14,7 @@ A typical flow would look something like this:
  * Using this job you can upload the integration flow to your Cloud Integration test tenant.
  * You perform some tests on your test tenant.
 
-[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file/readme.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the Jenkins Job

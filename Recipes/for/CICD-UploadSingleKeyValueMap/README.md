@@ -7,7 +7,7 @@
 
 This CICD Jenkins job allows you to checkout the configured Key Value Map from the source code repository and either update or create the artefact on the API Portal tenant.
 
-[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file/readme.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the Jenkins Job

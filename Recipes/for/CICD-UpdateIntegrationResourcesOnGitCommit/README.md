@@ -16,7 +16,7 @@ The Jenkins job takes care that the resources would be synchronized with the int
  * Push the changes of the XSLT file using external IDE to the same Git.
  * The Git push would trigger the Jenkins Pipeline (with the help of a web hook) which then uploads only the changed/added/deleted resources to the Integration Flow.
 
-[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file/readme.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the Jenkins Job

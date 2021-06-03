@@ -14,7 +14,7 @@ This CICD Jenkins job allows you to get the status of the last message execution
  * Using this job, you can retrieve the MPL status of the run.
  * Do some other activities based on the result.
 
-[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file/readme.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the pipeline job

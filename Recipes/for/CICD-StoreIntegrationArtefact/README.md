@@ -13,7 +13,7 @@ This CICD Jenkins job simply enables you to download an integration artefact fro
  * Using this job you download the integration artefact and store it in your source code repository.
  * You do activities like security scans on the resources or can compare versions.
 
-[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file/readme.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the pipeline job

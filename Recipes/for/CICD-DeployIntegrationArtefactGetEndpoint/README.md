@@ -15,7 +15,7 @@ This CICD Jenkins job allows you to deploy an existing integration flow on Cloud
  * Check the message processing log if the run was successful or not.
  * Do some other activities based on the result.
 
-[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file/readme.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the pipeline job

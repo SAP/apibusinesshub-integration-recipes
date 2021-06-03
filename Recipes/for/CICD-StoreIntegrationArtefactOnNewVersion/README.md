@@ -13,7 +13,7 @@ This CICD Jenkins job allows you to check the Cloud Integration tenant for a new
  * Continue working on the integration flow in Cloud Integration and whenever major building blocks are done save a new version of the flow.
  * Whenever the pipeline job is running, and there is a newer version of integration flow available in Cloud Integration tenant than the integration flow will be downloaded and stored in the source code repository like Git.
 
-[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file.md)
+[Instructions to consume the CICD Jenkins file](../../instructions-to-consume-the-CICD-jenkins-file/readme.md)
 
 ### Environment Variables List
 Configure the following environment variables before executing the Jenkins Job
