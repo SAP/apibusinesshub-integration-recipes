@@ -5,7 +5,7 @@
 ![Axel Albrecht](https://github.com/axelalbrechtsap.png?size=50 ) | [Axel Albrecht](https://github.com/axelalbrechtsap ) |
 ----|----|
 
-This CICD Jenkins job enables you to fetch the message procesing log status of either a specific message exchange ID or of the last run of a specific integration artefact. You can decide if an intermediate state like "Processing" is ok or if you want the final state. In case the run failed, the job also provides the error information.
+This CICD Jenkins job enables you to get the message procesing log status of either a specific message exchange ID or of the last run of a specific integration artefact. You can decide if an intermediate state like "Processing" is ok or if you want the final state. In case the message execution failed, the job also provides the error information.
 
  A typical flow would look something like this:
 
