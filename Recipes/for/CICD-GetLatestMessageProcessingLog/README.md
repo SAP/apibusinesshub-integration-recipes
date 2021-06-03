@@ -5,7 +5,7 @@
 ![Axel Albrecht](https://github.com/axelalbrechtsap.png?size=50 ) | [Axel Albrecht](https://github.com/axelalbrechtsap ) |
 ----|----|
 
-This CICD Jenkins job allows you to get the status of the last message execution of the configured integration artefact. In case the message execution failed, the job also provides the error information.
+This CICD Jenkins job enables you to get the status of the last message execution of the configured integration artefact. In case the message execution failed, the job also provides the error information.
 
  A typical flow would look something like this:
 
