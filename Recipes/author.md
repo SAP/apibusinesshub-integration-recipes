@@ -7,6 +7,7 @@
 * [Axel Albrecht](#axel-albrecht)
 * [Balchandra Wadekar](#bhalchandra-wadekar)
 * [Kamlesh Zanje](#kamlesh-zanje)
+* [Mahesh Srikrishnan](#mahesh-srikrishnan)
 * [Mayur Mohan Belur](#mayur-mohan-belur)
 * [Sharad Dixit](#sharad-dixit)
 * [Shweta Walaskar](#shweta-walaskar)
@@ -76,6 +77,18 @@ Recipe|Description|Topic
 [Use Map data structures in XSLT Mapping](for/ConstructMapDataStructsUsingXSLT30)|Utilize [Map](https://www.w3.org/TR/xslt-30/#map) data structures in XSLT Mappings flow step.|[Mappings](readme.md#mappings)||
 [Invoke Java functions from XSLT Mapping](for/InvokeJavaFunctionsFromXSLT30)|Writing reflexive extension functions in Java to be invoked from XSLT Mappings. | [Mappings](readme.md#mappings)|) |
 
+***
+
+### [Mahesh Srikrishnan](https://github.com/maheshsrikrishnan)
+![Mahesh Srikrishnan](https://github.com/maheshsrikrishnan.png?size=50)| Product Owner for SAP Cloud Integration ([LinkedIn](https://www.linkedin.com/in/mahesh-srikrishnan-08547518/))|
+----|----|
+
+Recipe|Description|Topic
+---|---|---
+[Store All API Providers](for/CICD-StoreAllAPIProviders)|Download all API Providers from the API Portal and store it in your source code repository like Git.|[CICD](readme.md#cicd)|
+[Store Single API Provider](for/CICD-StoreSingleAPIProvider)|Download a specific API Provider from the API Portal and store it in your source code repository like Git.|[CICD](readme.md#cicd)|
+[Store Single API Proxy](for/CICD-StoreSingleAPIProxy)|Download a specific API Proxy from the API Portal and store it in your source code repository like Git.|[CICD](readme.md#cicd)|
+[Store Single Key Value Map](for/CICD-StoreSingleKeyValueMap)|Download a specific Key Value Map from the API Portal and store it in your source code repository like Git.|[CICD](readme.md#cicd)|
 
 ***
 
@@ -93,7 +106,6 @@ Recipe|Description|Topic
 [Upload Integration Artefact](for/CICD-UploadIntegrationArtefact)|Checkout the latest version of the configured integration flow artefact from your source code repository and either update or create the artefact on the Cloud Integration tenant.|[CICD](readme.md#cicd)|
 
 ***
-
 
 ### [Sharad Dixit](https://github.com/sharadiiita)
 ![Sharad Dixit](https://github.com/sharadiiita.png?size=50 ) | Senior Software Developer in SAP Sales Cloud with in-depth experience of designing and developing software for business solution ([LinkedIn](https://www.linkedin.com/in/dixitsharad/))|
@@ -125,10 +137,6 @@ Recipe|Description|Topic
 ---|---|---
 [Connect to Amazon DynamoDB](for/ConnectToAWSDynmoDB)|SAP CPI needs to make a rest call to DynamoDB endpoint.|[Amazon Web Service](readme.md#amazon-web-services) \|[Database](readme.md#database)|
 [Generate AWS4-HMAC-SHA256 Signature](for/GenerateAWS4_HMAC_SHA256)| A reusable recipe to generate an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.|[Amazon Web Service](readme.md#amazon-web-services)\|[Security](readme.md#security)|
-[Store All API Providers](for/CICD-StoreAllAPIProviders)|Download all API Providers from the API Portal and store it in your source code repository like Git.|[CICD](readme.md#cicd)|
-[Store Single API Provider](for/CICD-StoreSingleAPIProvider)|Download a specific API Provider from the API Portal and store it in your source code repository like Git.|[CICD](readme.md#cicd)|
-[Store Single API Proxy](for/CICD-StoreSingleAPIProxy)|Download a specific API Proxy from the API Portal and store it in your source code repository like Git.|[CICD](readme.md#cicd)|
-[Store Single Key Value Map](for/CICD-StoreSingleKeyValueMap)|Download a specific Key Value Map from the API Portal and store it in your source code repository like Git.|[CICD](readme.md#cicd)|
 [Update Integration Resources on Git Commit](for/CICD-UpdateIntegrationResourcesOnGitCommit)|Develop and manage your integration resources like scripts and XSLT mappings using external IDEs and SCM tools like Git.|[CICD](readme.md#cicd)|
 [Upload Single API Provider](for/CICD-UploadSingleAPIProvider)|Checkout the configured API Provider from the source code repository and either update or create the artefact on the API Portal tenant.|[CICD](readme.md#cicd)|
 [Upload Single API Proxy](for/CICD-UploadSingleAPIProxy)|Checkout the configured API Proxy from the source code repository and either update or create the artefact on the API Portal tenant.|[CICD](readme.md#cicd)|
