@@ -6,6 +6,8 @@ pipeline {
     KeyValueMapName = "Sample KVM"
     IsDeleteRequired = "Yes" //Assign "Yes", in case the artefact has to be deleted from the API Portal before uploading the artefact from Git. Else set it to "No"
     APIPortalHost = "${env.API_HOST}"
+    AuthType = "OAuth" //Values can be "OAuth" or "Basic"
+    APIPortalBasicAuth = "${env.API_BasicAuth_CRED}"
     APIPortalOAuthHost = "${env.API_OAUTH_HOST}"
     APIPortalOAuthCredentials = "${env.API_OAUTH_CRED}"
     GITRepositoryURL = "${env.GIT_REPOSITORY_URL}"
@@ -51,23 +53,25 @@ pipeline {
     stage('Generate API Portal OAuth Bearer token') {
       steps {
         script {
-          //Generate API Portal OAuth Bearer token
-          println '**** Generate API Portal OAuth Bearer token ****';
-          try {
-            def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
-              authentication: env.APIPortalOAuthCredentials,
-              contentType: 'APPLICATION_JSON',
-              httpMode: 'POST',
-              ignoreSslErrors: true,
-              responseHandle: 'LEAVE_OPEN',
-              timeout: 30,
-              url: 'https://' + env.APIPortalOAuthHost + '/oauth/token?grant_type=client_credentials'
-            def jsonObj = readJSON text: getTokenResp.content
-            def token_s1 = 'bearer' + ' ' + jsonObj.access_token
-            env.token = token_s1
-            getTokenResp.close();
-          } catch (Exception e) {
-              error("Bearer token generation failed:\n${e}")
+          if (env.AuthType.toLowerCase() == "oauth") {
+            //Generate API Portal OAuth Bearer token
+            println '**** Generate API Portal OAuth Bearer token ****';
+            try {
+              def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
+                authentication: env.APIPortalOAuthCredentials,
+                contentType: 'APPLICATION_JSON',
+                httpMode: 'POST',
+                ignoreSslErrors: true,
+                responseHandle: 'LEAVE_OPEN',
+                timeout: 30,
+                url: 'https://' + env.APIPortalOAuthHost + '/oauth/token?grant_type=client_credentials'
+              def jsonObj = readJSON text: getTokenResp.content
+              def token_s1 = 'bearer' + ' ' + jsonObj.access_token
+              env.token = token_s1
+              getTokenResp.close();
+            } catch (Exception e) {
+                error("Bearer token generation failed:\n${e}")
+            }
           }
         }
       }
@@ -83,13 +87,14 @@ pipeline {
         }
       }
     }
-
+      
     stage('Delete Key Value Map -- Optional step') {
       steps {
         script {
           //Delete API Provider from API Portal if configured
           println '**** Delete Key Value Map from API Portal if configured ****'
-
+          def getToken = "";
+          def DeleteKVM = "";
           //Handle space in key value map artifact name
           if (env.KeyValueMapName.contains(' ')) {
             KeyValueMapName = env.KeyValueMapName.replace(' ','%20')
@@ -97,20 +102,57 @@ pipeline {
 
           if (env.IsDeleteRequired.equalsIgnoreCase('Yes')) {
             try {
-              //Delete Key Value Map
-              println '**** Delete Key Value Map ****'
-              def DeleteKVM = httpRequest acceptType: 'APPLICATION_JSON',
-                contentType: 'APPLICATION_JSON',
-                httpMode: 'DELETE',
-                ignoreSslErrors: true,
-                responseHandle: 'LEAVE_OPEN',
-                customHeaders: [
-                  [maskValue: true, name: 'Authorization', value: env.token]
-                ],
-                timeout: 30,
-                url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries(' + '\'' + KeyValueMapName + '\'' + ')'
-
-              DeleteKVM.close();
+              if (env.AuthType.toLowerCase() == "basic") {
+                getToken = httpRequest acceptType: 'APPLICATION_JSON',
+                  authentication: env.APIPortalBasicAuth,
+                  contentType: 'APPLICATION_JSON',
+                  httpMode: 'GET',
+                  ignoreSslErrors: true,
+                  responseHandle: 'LEAVE_OPEN',
+                  customHeaders: [
+                    [maskValue: true, name: 'x-csrf-token', value: 'fetch']
+                  ],
+                  timeout: 30,
+                  url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries(' + '\'' + KeyValueMapName + '\'' + ')'
+                
+                def fetchCSRF = getToken.headers.get("X-CSRF-Token");
+                def cookieContent = getToken.headers.get("Set-Cookie");
+                fetchCSRF = fetchCSRF.toString().replace("[","");
+                fetchCSRF = fetchCSRF.replace("]","");
+                
+                cookieContent = cookieContent.toString().replace("[","");
+                cookieContent = cookieContent.replace("]","");
+                env.cookieContent = cookieContent;
+                env.fetchCSRF = fetchCSRF;
+                
+                //Delete Key Value Map
+                println '**** Delete Key Value Map ****'
+                DeleteKVM = httpRequest acceptType: 'APPLICATION_JSON',
+                  authentication: env.APIPortalBasicAuth,
+                  contentType: 'APPLICATION_JSON',
+                  httpMode: 'DELETE',
+                  ignoreSslErrors: true,
+                  responseHandle: 'LEAVE_OPEN',
+                  customHeaders: [
+                    [maskValue: true, name: 'x-csrf-token', value: env.fetchCSRF], [maskValue: true, name: 'Cookie', value: env.cookieContent]
+                  ],
+                  timeout: 30,
+                  url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries(' + '\'' + KeyValueMapName + '\'' + ')'
+              } else if (env.AuthType.toLowerCase() == "oauth") {
+                //Delete Key Value Map
+                println '**** Delete Key Value Map ****'
+                DeleteKVM = httpRequest acceptType: 'APPLICATION_JSON',
+                  contentType: 'APPLICATION_JSON',
+                  httpMode: 'DELETE',
+                  ignoreSslErrors: true,
+                  responseHandle: 'LEAVE_OPEN',
+                  customHeaders: [
+                    [maskValue: true, name: 'Authorization', value: env.token]
+                  ],
+                  timeout: 30,
+                  url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries(' + '\'' + KeyValueMapName + '\'' + ')'
+             }
+             DeleteKVM.close();
             } catch (Exception e) {
               error("Key Value Map DELETE call failed:\n${e}")
             }
@@ -142,22 +184,37 @@ pipeline {
           //Constructing payload
           println '**** Constructing payload ****'
           payload = '{\"name\":' + '\"' + env.KeyValueMapName + '\"' + ',\"encrypted\":' + env.encrypted + ',\"scope\":\"ENV\",\"keyMapEntryValues\":[' + payload + ']}'
-          
+          def CreateKVM = "";
           //Create Key Value Map
           println '**** Create Key Value Map ****';
-          def CreateKVM = httpRequest acceptType: 'APPLICATION_JSON',
-            contentType: 'APPLICATION_JSON',
-            httpMode: 'POST',
-            requestBody: payload,
-            ignoreSslErrors: true,
-            validResponseCodes: '100:399,400',
-            responseHandle: 'LEAVE_OPEN',
-            customHeaders: [
-              [maskValue: true, name: 'Authorization', value: env.token]
-            ],
-            timeout: 30,
-            url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries'
-          
+          if (env.AuthType.toLowerCase() == "basic") {
+            CreateKVM = httpRequest acceptType: 'APPLICATION_JSON',
+              authentication: env.APIPortalBasicAuth,
+              contentType: 'APPLICATION_JSON',
+              httpMode: 'POST',
+              requestBody: payload,
+              ignoreSslErrors: true,
+              validResponseCodes: '100:399,400',
+              responseHandle: 'LEAVE_OPEN',
+              customHeaders: [
+                [maskValue: true, name: 'x-csrf-token', value: env.fetchCSRF], [maskValue: true, name: 'Cookie', value: env.cookieContent]
+              ],
+              timeout: 30,
+              url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries'
+          } else if (env.AuthType.toLowerCase() == "oauth") {
+              CreateKVM = httpRequest acceptType: 'APPLICATION_JSON',
+                contentType: 'APPLICATION_JSON',
+                httpMode: 'POST',
+                requestBody: payload,
+                ignoreSslErrors: true,
+                validResponseCodes: '100:399,400',
+                responseHandle: 'LEAVE_OPEN',
+                customHeaders: [
+                  [maskValue: true, name: 'Authorization', value: env.token]
+                ],
+                timeout: 30,
+                url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries'
+          }
           def respKVM = readJSON text: CreateKVM.content
           CreateKVM.close();
 

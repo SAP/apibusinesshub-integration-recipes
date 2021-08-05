@@ -16,7 +16,8 @@ Name|Example|Description
 ----|----|----
 APIProxyName |```"CICDAPIProxy"``` |The name of the API Proxy that needs to be uploaded to the API Portal tenant |
 APIPortalHost | "${env.API_HOST}" <br/>```"eu20apiportal.cfapps.eu20.hana.ondemand.com"``` |The hostname (without HTTPS) of your API Portal tenant |
-APIPortalOAuthHost | "${env.API_OAUTH_HOST}" <br/> ```"xxxxxx.authentication.eu20.hana.ondemand.com"``` |The hostname (without HTTPS) of the OAuth token server of your API Portal tenant |
+AuthType |```"OAuth"``` <br/> ```"Basic"```  |The Authentication Type to be used to connect to the API Portal Tenant. Values can be "OAuth" or "Basic" |
+APIPortalBasicAuth | "${env.API_BasicAuth_CRED}" <br/>```"API_BasicAuth_Credentials"``` |The alias of the Basic credentials for the API Portal tenant which is deployed on your build server (like Jenkins) |
 APIPortalOAuthCredentials | ${env.API_OAUTH_CRED}" <br/>```"API_OAuth_Credentials"``` |The alias of the OAuth credentials for the API Portal tenant which is deployed on your build server (like Jenkins) |
 GITRepositoryURL | "${env.GIT_REPOSITORY_URL}" <br/>```"github.com/CICD/integrations.git"``` |The full URL of the source code repository without HTTPS |
 GITCredentials | "${env.GIT_CRED}" <br/> ```"GIT_Credentials"``` |The alias of the source code repository credentials which is deployed on your build server (like Jenkins) |
