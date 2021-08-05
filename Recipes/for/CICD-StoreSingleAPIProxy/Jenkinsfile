@@ -5,6 +5,8 @@ pipeline {
   environment {
     APIProxyName = "CICDAPIProxy"
     APIPortalHost = "${env.API_HOST}"
+    AuthType = "OAuth" //Values can be Basic/OAuth
+    APIPortalBasicAuth = "${env.API_BasicAuth_CRED}"
     APIPortalOAuthHost = "${env.API_OAUTH_HOST}"
     APIPortalOAuthCredentials = "${env.API_OAUTH_CRED}"
     GITRepositoryURL = "${env.GIT_REPOSITORY_URL}"
@@ -51,44 +53,58 @@ pipeline {
     stage('Generate API Portal OAuth Bearer token') {
       steps {
         script {
-          //Generate API Portal OAuth Bearer token
-          println '**** Generate API Portal OAuth Bearer token ****';
-          try {
-            def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
-              authentication: env.APIPortalOAuthCredentials,
-              contentType: 'APPLICATION_JSON',
-              httpMode: 'POST',
-              ignoreSslErrors: true,
-              responseHandle: 'LEAVE_OPEN',
-              timeout: 30,
-              url: 'https://' + env.APIPortalOAuthHost + '/oauth/token?grant_type=client_credentials'
-            def jsonObj = readJSON text: getTokenResp.content
-            def token_s1 = 'bearer' + ' ' + jsonObj.access_token
-            env.token = token_s1
-            getTokenResp.close();
-          } catch (Exception e) {
+          if (env.AuthType.toLowerCase() == "oauth") {
+            //Generate API Portal OAuth Bearer token
+            println '**** Generate API Portal OAuth Bearer token ****';
+            try {
+              def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
+                authentication: env.APIPortalOAuthCredentials,
+                contentType: 'APPLICATION_JSON',
+                httpMode: 'POST',
+                ignoreSslErrors: true,
+                responseHandle: 'LEAVE_OPEN',
+                timeout: 30,
+                url: 'https://' + env.APIPortalOAuthHost + '/oauth/token?grant_type=client_credentials'
+              def jsonObj = readJSON text: getTokenResp.content
+              def token_s1 = 'bearer' + ' ' + jsonObj.access_token
+              env.token = token_s1
+              getTokenResp.close();
+            } catch (Exception e) {
               error("Bearer token generation failed:\n${e}")
+            }
           }
         }
       }
     }
-    
+
     stage('Get API Proxy') {
       steps {
         script {
           //Get API Proxy
           println '**** Get API Proxy ****';
-          try {
-            def APIProxy = httpRequest acceptType: 'APPLICATION_ZIP',
-              httpMode: 'GET',
-              ignoreSslErrors: true,
-              customHeaders: [
-                [maskValue: true, name: 'Authorization', value: env.token]
-              ],
-              timeout: 30,
-              url: 'https://' + env.APIPortalHost + '/apiportal/api/1.0/Transport.svc/APIProxies?name=' + env.APIProxyName,
-              outputFile: env.GITFolder + '/APIProxy.zip'
+          def APIProxy = "";
 
+          try {
+            if (env.AuthType.toLowerCase() == "basic") {
+              APIProxy = httpRequest acceptType: 'APPLICATION_ZIP',
+                authentication: env.APIPortalBasicAuth,
+                httpMode: 'GET',
+                ignoreSslErrors: true,
+                responseHandle: 'LEAVE_OPEN',
+                timeout: 30,
+                url: 'https://' + env.APIPortalHost + '/apiportal/api/1.0/Transport.svc/APIProxies?name=' + env.APIProxyName,
+                outputFile: env.GITFolder + '/APIProxy.zip'
+            } else if (env.AuthType.toLowerCase() == "oauth") {
+              APIProxy = httpRequest acceptType: 'APPLICATION_ZIP',
+                httpMode: 'GET',
+                ignoreSslErrors: true,
+                customHeaders: [
+                  [maskValue: true, name: 'Authorization', value: env.token]
+                ],
+                timeout: 30,
+                url: 'https://' + env.APIPortalHost + '/apiportal/api/1.0/Transport.svc/APIProxies?name=' + env.APIProxyName,
+                outputFile: env.GITFolder + '/APIProxy.zip'
+            }
             def disposition = APIProxy.headers.toString();
             APIProxy.close();
 
@@ -100,11 +116,11 @@ pipeline {
             def folderName = fileName.substring(0, fileName.indexOf('.zip'));
             println 'folder': folderName
             fileOperations([fileUnZipOperation(filePath: env.GITFolder + '/APIProxy.zip', targetLocation: env.GITFolder + '//' + env.APIProxyName)])
-            
+
             //Delete ZIP file from the Workspace
             fileOperations([fileDeleteOperation(excludes: '', includes: env.GITFolder + '\\' + 'APIProxy.zip')])
           } catch (Exception e) {
-              error("API Proxy GET call failed:\n${e}")
+            error("API Proxy GET call failed:\n${e}")
           }
         }
       }
@@ -124,7 +140,7 @@ pipeline {
             sh 'git diff-index --quiet HEAD || git commit -am ' + '\'' + env.GITComment + '\''
             sh('git push https://${GIT_AUTHOR_NAME}:${GIT_PASSWORD}@' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
           }
-          
+
           //Delete workspace
           deleteDir()
         }
