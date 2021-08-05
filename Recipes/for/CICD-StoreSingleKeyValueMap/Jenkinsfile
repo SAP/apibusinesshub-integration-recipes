@@ -5,6 +5,8 @@ pipeline {
   environment {
     KeyValueMapName = "Sample KVM"
     APIPortalHost = "${env.API_HOST}"
+    AuthType = "OAuth" //Values can be Basic/OAuth
+    APIPortalBasicAuth = "${env.API_BasicAuth_CRED}"
     APIPortalOAuthHost = "${env.API_OAUTH_HOST}"
     APIPortalOAuthCredentials = "${env.API_OAUTH_CRED}"
     GITRepositoryURL = "${env.GIT_REPOSITORY_URL}"
@@ -51,23 +53,25 @@ pipeline {
     stage('Generate API Portal OAuth Bearer token') {
       steps {
         script {
-          //Generate API Portal OAuth Bearer token
-          println '**** Generate API Portal OAuth Bearer token ****';
-          try {
-            def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
-              authentication: env.APIPortalOAuthCredentials,
-              contentType: 'APPLICATION_JSON',
-              httpMode: 'POST',
-              ignoreSslErrors: true,
-              responseHandle: 'LEAVE_OPEN',
-              timeout: 30,
-              url: 'https://' + env.APIPortalOAuthHost + '/oauth/token?grant_type=client_credentials'
-            def jsonObj = readJSON text: getTokenResp.content
-            def token_s1 = 'bearer' + ' ' + jsonObj.access_token
-            env.token = token_s1
-            getTokenResp.close();
-          } catch (Exception e) {
+          if (env.AuthType.toLowerCase() == "oauth") {
+            //Generate API Portal OAuth Bearer token
+            println '**** Generate API Portal OAuth Bearer token ****';
+            try {
+              def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
+                authentication: env.APIPortalOAuthCredentials,
+                contentType: 'APPLICATION_JSON',
+                httpMode: 'POST',
+                ignoreSslErrors: true,
+                responseHandle: 'LEAVE_OPEN',
+                timeout: 30,
+                url: 'https://' + env.APIPortalOAuthHost + '/oauth/token?grant_type=client_credentials'
+              def jsonObj = readJSON text: getTokenResp.content
+              def token_s1 = 'bearer' + ' ' + jsonObj.access_token
+              env.token = token_s1
+              getTokenResp.close();
+            } catch (Exception e) {
               error("Bearer token generation failed:\n${e}")
+            }
           }
         }
       }
@@ -78,21 +82,31 @@ pipeline {
         script {
           //Get Key Value Map'
           println '**** Get Key Value Map ****';
-
+          def KVM = "";
           //Handled space in key value map artifact name
           if (env.KeyValueMapName.contains(' ')) {
             KeyValueMapName = env.KeyValueMapName.replace(' ', '%20')
           }
           try {
-            def KVM = httpRequest acceptType: 'APPLICATION_JSON',
-              httpMode: 'GET',
-              ignoreSslErrors: true,
-              customHeaders: [
-                [maskValue: true, name: 'Authorization', value: env.token]
-              ],
-              timeout: 30,
-              url: 'https://' + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries(' + '\'' + KeyValueMapName + '\'' + ')'
-            
+            if (env.AuthType.toLowerCase() == "basic") {
+              KVM = httpRequest acceptType: 'APPLICATION_JSON',
+                authentication: env.APIPortalBasicAuth,
+                contentType: 'APPLICATION_JSON',
+                httpMode: 'GET',
+                ignoreSslErrors: true,
+                responseHandle: 'LEAVE_OPEN',
+                timeout: 30,
+                url: 'https://' + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries(' + '\'' + KeyValueMapName + '\'' + ')'
+            } else if (env.AuthType.toLowerCase() == "oauth") {
+              KVM = httpRequest acceptType: 'APPLICATION_JSON',
+                httpMode: 'GET',
+                ignoreSslErrors: true,
+                customHeaders: [
+                  [maskValue: true, name: 'Authorization', value: env.token]
+                ],
+                timeout: 30,
+                url: 'https://' + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries(' + '\'' + KeyValueMapName + '\'' + ')'
+            }
             def KVMMetadata = readJSON text: KVM.content
             env.encryptFlag = KVMMetadata.d.encrypted
             KVM.close();
@@ -108,15 +122,26 @@ pipeline {
         script {
           //Get Key Value Map Entries'
           println '**** Get Key Value Map Entries ****';
-          def KVMValues = httpRequest acceptType: 'APPLICATION_JSON',
-            httpMode: 'GET',
-            ignoreSslErrors: true,
-            customHeaders: [
-              [maskValue: true, name: 'Authorization', value: env.token]
-            ],
-            timeout: 30,
-            url: 'https://' + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries(' + '\'' + KeyValueMapName + '\'' + ')/keyMapEntryValues'
-          
+          def KVMValues = "";
+          if (env.AuthType.toLowerCase() == "basic") {
+            KVMValues = httpRequest acceptType: 'APPLICATION_JSON',
+              authentication: env.APIPortalBasicAuth,
+              contentType: 'APPLICATION_JSON',
+              httpMode: 'GET',
+              ignoreSslErrors: true,
+              responseHandle: 'LEAVE_OPEN',
+              timeout: 30,
+              url: 'https://' + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries(' + '\'' + KeyValueMapName + '\'' + ')/keyMapEntryValues'
+          } else if (env.AuthType.toLowerCase() == "oauth") {
+            KVMValues = httpRequest acceptType: 'APPLICATION_JSON',            
+              httpMode: 'GET',
+              ignoreSslErrors: true,
+              customHeaders: [
+                [maskValue: true, name: 'Authorization', value: env.token]
+                ],
+              timeout: 30,
+              url: 'https://' + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/KeyMapEntries(' + '\'' + KeyValueMapName + '\'' + ')/keyMapEntryValues'
+          }
           def jsonKVM = readJSON text: KVMValues.content
           KVMValues.close();
           

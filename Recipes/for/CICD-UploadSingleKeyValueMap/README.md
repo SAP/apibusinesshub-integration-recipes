@@ -17,6 +17,8 @@ Name|Example|Description
 KeyValueMapName |```"Sample KVM"``` |The name of the Key Value Map that needs to be uploaded to the API Portal tenant |
 IsDeleteRequired | ```"Yes"``` <br/> ```"No"``` |Assign "Yes", in case the artefact has to be deleted from the API Portal before uploading the artefact from Git. Else set it to "No". In case you set it to "No" and if configured Key Value Map exists on the API portal, then the job will fail|
 APIPortalHost | "${env.API_HOST}" <br/>```"eu20apiportal.cfapps.eu20.hana.ondemand.com"``` |The hostname (without HTTPS) of your API Portal tenant |
+AuthType |```"OAuth"``` <br/> ```"Basic"```  |The Authentication Type to be used to connect to the API Portal Tenant. Values can be "OAuth" or "Basic" |
+APIPortalBasicAuth | "${env.API_BasicAuth_CRED}" <br/>```"API_BasicAuth_Credentials"``` |The alias of the Basic credentials for the API Portal tenant which is deployed on your build server (like Jenkins) |
 APIPortalOAuthHost | "${env.API_OAUTH_HOST}" <br/> ```"xxxxxx.authentication.eu20.hana.ondemand.com"``` |The hostname (without HTTPS) of the OAuth token server of your API Portal tenant |
 APIPortalOAuthCredentials | ${env.API_OAUTH_CRED}" <br/>```"API_OAuth_Credentials"``` |The alias of the OAuth credentials for the API Portal tenant which is deployed on your build server (like Jenkins) |
 GITRepositoryURL | "${env.GIT_REPOSITORY_URL}" <br/>```"github.com/CICD/integrations.git"``` |The full URL of the source code repository without HTTPS |

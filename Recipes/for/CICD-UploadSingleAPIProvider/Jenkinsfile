@@ -6,6 +6,8 @@ pipeline {
     APIProviderName = "Northwind_APIs"
     IsDeleteRequired = "Yes" //Assign "Yes", in case the artefact has to be deleted from the API Portal before uploading the artefact from Git. Else set it to "No"
     APIPortalHost = "${env.API_HOST}"
+    AuthType = "OAuth" //Values can be "OAuth" or "Basic"
+    APIPortalBasicAuth = "${env.API_BasicAuth_CRED}"
     APIPortalOAuthHost = "${env.API_OAUTH_HOST}"
     APIPortalOAuthCredentials = "${env.API_OAUTH_CRED}"
     GITRepositoryURL = "${env.GIT_REPOSITORY_URL}"
@@ -51,23 +53,25 @@ pipeline {
     stage('Generate API Portal OAuth Bearer token') {
       steps {
         script {
-          //Generate API Portal OAuth Bearer token
-          println '**** Generate API Portal OAuth Bearer token ****';
-          try {
-            def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
-              authentication: env.APIPortalOAuthCredentials,
-              contentType: 'APPLICATION_JSON',
-              httpMode: 'POST',
-              ignoreSslErrors: true,
-              responseHandle: 'LEAVE_OPEN',
-              timeout: 30,
-              url: 'https://' + env.APIPortalOAuthHost + '/oauth/token?grant_type=client_credentials'
-            def jsonObj = readJSON text: getTokenResp.content
-            def token_s1 = 'bearer' + ' ' + jsonObj.access_token
-            env.token = token_s1
-            getTokenResp.close();
-          } catch (Exception e) {
+          if (env.AuthType.toLowerCase() == "oauth") {
+            //Generate API Portal OAuth Bearer token
+            println '**** Generate API Portal OAuth Bearer token ****';
+            try {
+              def getTokenResp = httpRequest acceptType: 'APPLICATION_JSON',
+                authentication: env.APIPortalOAuthCredentials,
+                contentType: 'APPLICATION_JSON',
+                httpMode: 'POST',
+                ignoreSslErrors: true,
+                responseHandle: 'LEAVE_OPEN',
+                timeout: 30,
+                url: 'https://' + env.APIPortalOAuthHost + '/oauth/token?grant_type=client_credentials'
+              def jsonObj = readJSON text: getTokenResp.content
+              def token_s1 = 'bearer' + ' ' + jsonObj.access_token
+              env.token = token_s1
+              getTokenResp.close();
+            } catch (Exception e) {
               error("Bearer token generation failed:\n${e}")
+            }
           }
         }
       }
@@ -80,7 +84,7 @@ pipeline {
             def apip = readJSON file: (env.GITFolder + '//' + env.APIProviderName + '.json')
             env.payload = apip.toString()
           } catch (Exception e) {
-              error("Specified API Provider file " + env.APIProviderName + ".json is not available in Git Repository:\n${e}")
+            error("Specified API Provider file " + env.APIProviderName + ".json is not available in Git Repository:\n${e}")
           }
         }
       }
@@ -94,28 +98,53 @@ pipeline {
 
           if (env.IsDeleteRequired.equalsIgnoreCase('Yes')) {
             def checkResp = null
+            def APIProvider = "";
             try {
               //API call to check if API Provider has an associated API Proxy
               println '**** API call to check if API Provider has an associated API Proxy ****'
-              def APIProxy = httpRequest acceptType: 'APPLICATION_JSON',
-                contentType: 'APPLICATION_JSON',
-                httpMode: 'GET',
-                ignoreSslErrors: true,
-                responseHandle: 'LEAVE_OPEN',
-                customHeaders: [
-                  [maskValue: true, name: 'Authorization', value: env.token]
-                ],
-                timeout: 30,
-                url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/APIProviders(name=' + '\'' + env.APIProviderName + '\'' + ')/apiProxies'
+              if (env.AuthType.toLowerCase() == "basic") {
+                APIProvider = httpRequest acceptType: 'APPLICATION_JSON',
+                  authentication: env.APIPortalBasicAuth,
+                  contentType: 'APPLICATION_JSON',
+                  httpMode: 'GET',
+                  ignoreSslErrors: true,
+                  responseHandle: 'LEAVE_OPEN',
+                  customHeaders: [
+                    [maskValue: true, name: 'x-csrf-token', value: 'fetch']
+                  ],
+                  timeout: 30,
+                  url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/APIProviders(name=' + '\'' + env.APIProviderName + '\'' + ')/apiProxies'
+                def fetchCSRF = APIProvider.headers.get("X-CSRF-Token");
+                def cookieContent = APIProvider.headers.get("Set-Cookie");
+                fetchCSRF = fetchCSRF.toString().replace("[","");
+                fetchCSRF = fetchCSRF.replace("]","");
+                
+                cookieContent = cookieContent.toString().replace("[","");
+                cookieContent = cookieContent.replace("]","");
+                env.fetchCSRF = fetchCSRF;
+                env.cookieContent = cookieContent;
 
-              checkResp = readJSON text: APIProxy.content
-              APIProxy.close();
+              } else if (env.AuthType.toLowerCase() == "oauth") {
+                APIProvider = httpRequest acceptType: 'APPLICATION_JSON',
+                  contentType: 'APPLICATION_JSON',
+                  httpMode: 'GET',
+                  ignoreSslErrors: true,
+                  responseHandle: 'LEAVE_OPEN',
+                  customHeaders: [
+                    [maskValue: true, name: 'Authorization', value: env.token]
+                  ],
+                  timeout: 30,
+                  url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/APIProviders(name=' + '\'' + env.APIProviderName + '\'' + ')/apiProxies'
+              }
+              checkResp = readJSON text: APIProvider.content
+              APIProvider.close();
             } catch (Exception e) {
               error("Call to check if API Provider has an associated API Proxy failed:\n${e}")
             }
-            
+
             //Associated API Proxy check
             def results = ((checkResp.d.results).toString()).contains(env.APIProviderName)
+            println results
             if (results) {
               env.continueExecution = "false"
               error("API Provider has an associated API Proxies. Delete & Re-creation stages skipped")
@@ -124,19 +153,31 @@ pipeline {
             if (env.continueExecution != "false") {
               try {
                 //Delete API Provider
+                def DeleteAPIProvider = "";
                 println '**** Delete API Provider ****'
-                def DeleteAPIProvider = httpRequest acceptType: 'APPLICATION_JSON',
-                  contentType: 'APPLICATION_JSON',
-                  httpMode: 'DELETE',
-                  ignoreSslErrors: true,
-                  responseHandle: 'LEAVE_OPEN',
-                  customHeaders: [
-                    [maskValue: true, name: 'Authorization', value: env.token]
-                  ],
-                  timeout: 30,
-                  url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/APIProviders(' + '\'' + env.APIProviderName + '\'' + ')'
-
-                DeleteAPIProvider.close();
+                println env.cookie
+                if (env.AuthType.toLowerCase() == "basic") {
+                  DeleteAPIProvider = httpRequest acceptType: 'APPLICATION_JSON',
+                    contentType: 'APPLICATION_JSON',
+                    authentication: env.APIPortalBasicAuth,
+                    httpMode: 'DELETE',
+                    ignoreSslErrors: true,
+                    customHeaders: [
+                      [maskValue: true, name: 'x-csrf-token', value: env.fetchCSRF], [maskValue: true, name: 'Cookie', value: env.cookieContent]
+                    ],
+                    timeout: 30,
+                    url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/APIProviders(' + '\'' + env.APIProviderName + '\'' + ')'
+                } else if (env.AuthType.toLowerCase() == "oauth") {
+                  DeleteAPIProvider = httpRequest acceptType: 'APPLICATION_JSON',
+                    contentType: 'APPLICATION_JSON',
+                    httpMode: 'DELETE',
+                    ignoreSslErrors: true,
+                    customHeaders: [
+                      [maskValue: true, name: 'Authorization', value: env.token]
+                    ],
+                    timeout: 30,
+                    url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/APIProviders(' + '\'' + env.APIProviderName + '\'' + ')'
+                }
               } catch (Exception e) {
                 error("API Provider DELETE call failed:\n${e}")
               }
@@ -149,38 +190,55 @@ pipeline {
     stage('Create API Provider') {
       steps {
         script {
+           if (env.IsDeleteRequired.equalsIgnoreCase('Yes')) {
           if (env.continueExecution != "false") {
             //Create API Provider
             println '**** Create API Provider ****';
-            def CreateAPIProvider = httpRequest acceptType: 'APPLICATION_JSON',
+            def CreateAPIProvider = "";
+            if (env.AuthType.toLowerCase() == "basic") {
+              CreateAPIProvider = httpRequest acceptType: 'APPLICATION_JSON',
+                contentType: 'APPLICATION_JSON',
+                authentication: env.APIPortalBasicAuth,
+                httpMode: 'POST',
+                requestBody: env.payload,
+                ignoreSslErrors: true,
+                validResponseCodes: '100:399,400',
+                customHeaders: [
+                      [maskValue: true, name: 'x-csrf-token', value: env.fetchCSRF], [maskValue: true, name: 'Cookie', value: env.cookieContent]
+                ],
+                timeout: 30,
+                url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/APIProviders'
+              env.CreateAPIProvider = CreateAPIProvider.content;
+            } else if (env.AuthType.toLowerCase() == "oauth") {
+              CreateAPIProvider = httpRequest acceptType: 'APPLICATION_JSON',
                 contentType: 'APPLICATION_JSON',
                 httpMode: 'POST',
                 requestBody: env.payload,
                 ignoreSslErrors: true,
                 validResponseCodes: '100:399,400',
-                responseHandle: 'LEAVE_OPEN',
                 customHeaders: [
                   [maskValue: true, name: 'Authorization', value: env.token]
                 ],
                 timeout: 30,
                 url: "https://" + env.APIPortalHost + '/apiportal/api/1.0/Management.svc/APIProviders'
-                
-              def createCallResp = readJSON text: CreateAPIProvider.content
-              CreateAPIProvider.close();
-              
-              //Delete workspace
-              deleteDir()
+              env.CreateAPIProvider = CreateAPIProvider.content;
+            }
+            def createCallResp = readJSON text: env.CreateAPIProvider
 
-              if(createCallResp.error.toString()!="null") {
-                def response = createCallResp.error.message.value
-                if(response.toString().toLowerCase().contains("Entity already exists")) {
-                  error(response.toString())
-                }else {
-                  error("API Provider Create call failed with \""+ response.toString() + "\"")
+            //Delete workspace
+            deleteDir()
+
+            if (createCallResp.error.toString() != "null") {
+              def response = createCallResp.error.message.value
+              if (response.toString().toLowerCase().contains("Entity already exists")) {
+                error(response.toString())
+              } else {
+                error("API Provider Create call failed with \"" + response.toString() + "\"")
               }
-            } 
+            }
           }
         }
+      }
       }
     }
   }
