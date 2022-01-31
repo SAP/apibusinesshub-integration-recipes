@@ -6,7 +6,7 @@
 
 ## Description
 
-Accelerate your SAP Cloud Platform Integration projects with recipes available in this repository. This repository contains [recipes (best practices), samples and reusable code](Recipes) to serve as starting points for your integration projects. Learn more from our [wiki page](https://github.com/SAP-samples/apibusinesshub-integration-recipes/wiki).\
+Accelerate your SAP Cloud Integration projects with recipes available in this repository. This repository contains [recipes (best practices), samples and reusable code](Recipes) to serve as starting points for your integration projects. Learn more from our [wiki page](https://github.com/SAP-samples/apibusinesshub-integration-recipes/wiki).\
 This is a community driven repository; you can simply discover and consume the best practices here or contribute and govern them. [Find out how you can be a part](https://github.com/SAP-samples/apibusinesshub-integration-recipes/wiki/Things-to-do-on-this-repo) of this repo.\
 If you would like to make [a mark for yourself](https://github.com/SAP-samples/apibusinesshub-integration-recipes/blob/master/Recipes/author.md), start with [contributing a recipe](https://github.com/SAP-samples/apibusinesshub-integration-recipes/blob/master/CONTRIBUTING.md) to showcase your expertise.
 
@@ -19,10 +19,13 @@ You will need a SAP Cloud Integration tenant to consume and enhance this content
 This repository contains
 
 1. [XSLT Scripts](Recipes/for/readme.md#xslt-scripts) or [Groovy Scripts](Recipes/for/readme.md#groovy-scripts) that can be used in already created integration flows
-2. [Sample integration](Recipes/for/readme.md#sample-integration-flows) flows as zip file that can be uploaded into already created integration packages
-3. [Reusable integration](Recipes/for/readme.md#reusable-integration-flows) that can be reused by your integration flows with necessary configurations.
+2. [Reusable integration flows](Recipes/for/readme.md#reusable-integration-flows) that can be reused by your integration flows with necessary configurations.
+3. [Sample integration flows](Recipes/for/readme.md#sample-integration-flows) as zip file that can be uploaded into already created integration packages
+4. [Reusable Integration Packages](Recipes/for/readme.md#reusable-integration-packages), also shared on the SAP API Business Hub with near production quality code, just add your customizations
+5. [Reusable CI CD templates](Recipes/for/readme.md#reusable-jenkinsfiles) to create CI/CD pipelines.
 
-These 3 types of artifacts embody  [Integration Flow Recipes](Recipes) or best practices to deliver specific features or capabilities in your integration flows.
+
+These artifacts embody  [Integration Recipes](Recipes) to deliver specific features or capabilities in your integration scenarios.
 
 ## How to Obtain support
 

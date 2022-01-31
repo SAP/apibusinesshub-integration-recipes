@@ -1,8 +1,8 @@
-# Integration Flow recipes
+# Integration Recipes
 \| Browsing by Topic \| [Browse by Author](author.md) \| [Browse by Artefact Type](for/readme.md) \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Request&template=recipe-request.md&title=How+to++) \| [Report a broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=documentation&template=bug_report.md&title=Broken%20Link) \| [Contribute](https://github.com/SAP-samples/cloud-integration-flow/wiki/Things-to-do-on-this-repo#contribute)\|
 
 ## Topics
-* [Amazon Web Services](#amazon-web-services)
+* [Amazon](#amazon-web-services)
 * [CICD](#cicd)
 * [Database Connectivity](#amazon-developer-connectivity)
 * [How to Guides](#how-to-guide)
@@ -10,13 +10,25 @@
 * [Integration Patterns](#integration-patterns)
 * [Mappings](#mappings)
 * [Partner Directory](#partner-directory)
+* [Qualtrics](#qualtrics)
+* [SAP Ariba or SAP Business Network](#sap-ariba)
+* [SAP Concur](#sap-concur)
+* [SAP Customer Experience](#sap-customer-experience)
+* [SAP Document Compliance](#sap-document-compliance)
+* [SAP ERP](#sap-erp)
+* [SAP S/4HANA](#sap-s4hana)
+* [SAP S/4HANA Cloud](#sap-s4hana-cloud)
+* [SAP SuccessFactors Employee Central](#sap-successfactors-employee-central)
+* [Third-Party Integration](#third-party-integration)
 * [Security](#security)
+
 
 ***
 
-### Amazon Web Services
+### Amazon
 Recipe|Description|Author
 ---|---|---
+[Amazon Seller Marketplace Integration with Third Party](for/amazonsellermarketplaceintegrationwiththirdparty)|File based integration for sending Sales Transaction data from Amazon Seller Marketplace to Third Party (SAP Vistex template)  | [SAP API Business Hub](author.md#sap-api-business-hub)
 [Connect to Amazon DynamoDB](for/ConnectToAWSDynmoDB)|SAP CPI needs to make a rest call to DynamoDB endpoint.|[Sunny Kapoor](author.md#sunny-kapoor)|
 [Generate AWS4-HMAC-SHA256 Signature](for/GenerateAWS4_HMAC_SHA256)| A reusable recipe to generate an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.|[Sunny Kapoor](author.md#sunny-kapoor)|
 
@@ -70,7 +82,6 @@ Recipe|Description|Author
 [Build custom Redis integration adapter](for/redis-integration-adapter/readme.md)|Redis is advanced key-value store where keys can contain strings, hashes, lists, sets and sorted sets. In addition it provides pub/sub functionality for inter-app communications. This integration adapter allows an integration flow to access Redis.| [Mayur Mohan Belur](author.md#mayur-mohan-belur)|
 
 ***
-
 ### Integration Patterns
 Recipe|Description|Author
 ---|---|---
@@ -100,6 +111,80 @@ Recipe|Description|Author
 
 ***
 
+### [Qualtrics](#qualtrics)
+
+Recipe|Description|Author
+---|---|---
+[Qualtrics Transaction-Based Survey Integration with SAP Marketing Cloud](for/qualtricsextendedintegrationwithsapmarketingcloud)| Load data (customers and transactions with transcation based interaction in Marketing cloud) from SAP Marketing Cloud system to SAP Qualtrics. |[SAP API Business Hub](author.md#sap-api-business-hub)
+
+***
+
+### SAP Ariba
+Recipe|Description|Author
+---|---|---
+[ SAP Ariba Integration with Third-Party for Analytical Reporting](for/saparibaanalyticalreportingintegrationwiththirdparty)| Consumption of Ariba APIs (Job Submission API and Job Results API) for Analytical Reporting ( Standard/Custom Templates) with CSV Output for integrating with Third Party  |[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP Ariba Integration with Third-Party for Vendor And Questionnaires](for/saparibaintegrationwiththirdpartyforvendorandquestionnaires)| Ariba APIs for Vendor and Questionnaires with CSV Output for integrating with Third Party| ionnaires)| |[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP Business Network Integration with Non-SAP ERP](for/sapbusinessnetworkintegrationwithnonsaperp)| Baseline template to support the Purchase Order, Invoice and other transactional documents with the SAP Business Network|[SAP API Business Hub](author.md#sap-api-business-hub)
+
+***
+
+### SAP Concur
+Recipe|Description|Author
+---|---|---
+
+
+***
+
+### SAP Customer Experience
+Recipe|Description|Author
+---|---|---
+[Qualtrics Transaction-Based Survey Integration with SAP Marketing Cloud](for/qualtricsextendedintegrationwithsapmarketingcloud)| Load data (customers and transactions with transcation based interaction in Marketing cloud) from SAP Marketing Cloud system to SAP Qualtrics. |[SAP API Business Hub](author.md#sap-api-business-hub)
+
+
+***
+
+### SAP Document Compliance
+
+Recipe|Description|Author
+---|---|---
+[SAP Document Compliance with Third Party - eDocuments](for/saps4hanaintegrationwiththirdpartyedocuments)| Exchange electronic invoices with the tax authorities for Chile, Colombia and Mexico, available for SAP S/4HANA, and SAP ERP (available as of SAP ERP 6.0 EHP5)|[SAP API Business Hub](author.md#sap-api-business-hub)
+
+
+***
+
+### SAP ERP
+Recipe|Description|Author
+---|---|---
+[SAP Document Compliance with Third Party - eDocuments](for/saps4hanaintegrationwiththirdpartyedocuments)| Exchange electronic invoices with the tax authorities for Chile, Colombia and Mexico, available for SAP S/4HANA, and SAP ERP (available as of SAP ERP 6.0 EHP5)|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP SuccessFactors Employee Central Payroll Integration with SAP S_4HANA or SAP ERP](for/sapsuccessfactorsemployeecentralpayrollintegrationwithsaps4hanaorsaperp)| Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.|[SAP API Business Hub](author.md#sap-api-business-hub)
+
+
+***
+
+### SAP S4HANA
+Recipe|Description|Author
+---|---|---
+[SAP Document Compliance with Third Party - eDocuments](for/saps4hanaintegrationwiththirdpartyedocuments)| Exchange electronic invoices with the tax authorities for Chile, Colombia and Mexico, available for SAP S/4HANA, and SAP ERP (available as of SAP ERP 6.0 EHP5)|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP SuccessFactors Employee Central Payroll Integration with SAP S_4HANA or SAP ERP](for/sapsuccessfactorsemployeecentralpayrollintegrationwithsaps4hanaorsaperp)| Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.|[SAP API Business Hub](author.md#sap-api-business-hub)
+
+
+***
+
+### SAP S4HANA Cloud
+Recipe|Description|Author
+---|---|---
+
+
+***
+
+### SAP SuccessFactors Employee Central
+Recipe|Description|Author
+---|---|---
+[SAP SuccessFactors Employee Central Payroll Integration with SAP S_4HANA or SAP ERP](for/sapsuccessfactorsemployeecentralpayrollintegrationwithsaps4hanaorsaperp)| Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP SuccessFactors Employee Central with Third-Party Payroll Vendor](for/sapsuccessfactorsemployeecentralwiththirdpartypayrollvendor)| Integration of business processes in SAP SuccessFactors Employee Central system with Third Party Payroll Vendor; support for delta based integration with seperate files required for HIRE/REHIRE, Daily Changes and TERMINATION|[SAP API Business Hub](author.md#sap-api-business-hub)
+
+
+***
 ### Security
 Recipe|Description|Author
 ---|---|---
@@ -109,3 +194,12 @@ Recipe|Description|Author
 [Generate AWS4-HMAC-SHA256 Signature](for/GenerateAWS4_HMAC_SHA256)| A reusable recipe to generate an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.|[Sunny Kapoor](author.md#sunny-kapoor)|
 
 ***
+
+### Third-Party Integrations
+
+Recipe|Description|Author
+---|---|---
+[ SAP Ariba Integration with Third-Party for Analytical Reporting](for/saparibaanalyticalreportingintegrationwiththirdparty)| Consumption of Ariba APIs (Job Submission API and Job Results API) for Analytical Reporting ( Standard/Custom Templates) with CSV Output for integrating with Third Party  |[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP Ariba Integration with Third-Party for Vendor And Questionnaires](for/saparibaintegrationwiththirdpartyforvendorandquestionnaires)| Ariba APIs for Vendor and Questionnaires with CSV Output for integrating with Third Party| [SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP Business Network Integration with Non-SAP ERP](for/sapbusinessnetworkintegrationwithnonsaperp)| Baseline template to support the Purchase Order, Invoice and other transactional documents with the SAP Business Network|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP SuccessFactors Employee Central with Third-Party Payroll Vendor](for/sapsuccessfactorsemployeecentralwiththirdpartypayrollvendor)| Integration of business processes in SAP SuccessFactors Employee Central system with Third Party Payroll Vendor; support for delta based integration with seperate files required for HIRE/REHIRE, Daily Changes and TERMINATION|[SAP API Business Hub](author.md#sap-api-business-hub)

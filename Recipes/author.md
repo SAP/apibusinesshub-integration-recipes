@@ -9,6 +9,7 @@
 * [Kamlesh Zanje](#kamlesh-zanje)
 * [Mahesh Srikrishnan](#mahesh-srikrishnan)
 * [Mayur Mohan Belur](#mayur-mohan-belur)
+* [SAP API Business Hub](#sap-api-business-hub)
 * [Sharad Dixit](#sharad-dixit)
 * [Shweta Walaskar](#shweta-walaskar)
 * [Sunny Kapoor](#sunny-kapoor)
@@ -107,8 +108,25 @@ Recipe|Description|Topic
 
 ***
 
+### [SAP API Business Hub](https://github.com/SAPAPIBusinessHub)
+![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | Discover Integrations and Extensions on [SAP API Business Hub](https://api.sap.com) |
+
+Recipe|Description|Topic
+---|---|---
+[Amazon Seller Marketplace Integration with Third Party](for/amazonsellermarketplaceintegrationwiththirdparty)|File based integration for sending Sales Transaction data from Amazon Seller Marketplace to Third Party (SAP Vistex template)  | [Amazon](readme.md#amazon-web-services) \| [Third-Party Integration](readme.md#third-party-integration)
+[Qualtrics Transaction-Based Survey Integration with SAP Marketing Cloud](for/qualtricsextendedintegrationwithsapmarketingcloud)| Load data (customers and transactions with transcation based interaction in Marketing cloud) from SAP Marketing Cloud system to SAP Qualtrics. | [Qualtrics](readme.md#qualtrics) \| [SAP Customer Experience](readme.md#sap-customer-experience)
+[ SAP Ariba Integration with Third-Party for Analytical Reporting](for/saparibaanalyticalreportingintegrationwiththirdparty)| Consumption of Ariba APIs (Job Submission API and Job Results API) for Analytical Reporting ( Standard/Custom Templates) with CSV Output for integrating with Third Party  | [SAP Ariba or SAP Business Network](readme.md#sap-ariba) \| [Third-Party Integration](readme.md#third-party-integration)
+[SAP Ariba Integration with Third-Party for Vendor And Questionnaires](for/saparibaintegrationwiththirdpartyforvendorandquestionnaires)| Ariba APIs for Vendor and Questionnaires with CSV Output for integrating with Third Party| [SAP Ariba or SAP Business Network](readme.md#sap-ariba) \| [Third-Party Integration](readme.md#third-party-integration)
+[SAP Business Network Integration with Non-SAP ERP](for/sapbusinessnetworkintegrationwithnonsaperp)| Baseline template to support the Purchase Order, Invoice and other transactional documents with the SAP Business Network| [SAP Ariba or SAP Business Network](readme.md#sap-ariba) \| [Third-Party Integration](readme.md#third-party-integration)
+[SAP Document Compliance with Third Party - eDocuments](for/saps4hanaintegrationwiththirdpartyedocuments)| Exchange electronic invoices with the tax authorities for Chile, Colombia and Mexico, available for SAP S/4HANA, and SAP ERP (available as of SAP ERP 6.0 EHP5)|[SAP S/4HANA](readme.md#sap-s4hana) \| [SAP ERP](readme.md#sap-erp) \| [SAP Document Compliance](readme.md#sap-document-compliance)
+[SAP SuccessFactors Employee Central Payroll Integration with SAP S_4HANA or SAP ERP](for/sapsuccessfactorsemployeecentralpayrollintegrationwithsaps4hanaorsaperp)| Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.| [SAP SuccessFactors Employee Central](readme.md#sap-successfactors-employee-central) \| [SAP S/4HANA](readme.md#sap-s4hana) \| [SAP ERP](readme.md#sap-erp)
+[SAP SuccessFactors Employee Central with Third-Party Payroll Vendor](for/sapsuccessfactorsemployeecentralwiththirdpartypayrollvendor)| Integration of business processes in SAP SuccessFactors Employee Central system with Third Party Payroll Vendor; support for delta based integration with seperate files required for HIRE/REHIRE, Daily Changes and TERMINATION|[SAP SuccessFactors Employee Central](readme.md#sap-successfactors-employee-central) \| [Third-Party Integration](readme.md#third-party-integration)
+
+
+***
+
 ### [Sharad Dixit](https://github.com/sharadiiita)
-![Sharad Dixit](https://github.com/sharadiiita.png?size=50 ) | Senior Software Developer in SAP Sales Cloud with in-depth experience of designing and developing software for business solution ([LinkedIn](https://www.linkedin.com/in/dixitsharad/))|
+![Sharad Dixit](https://github.com/sharadiiita.png?size=50 ) | Senior Software Developer in SAP Sales Cloud with in-depth experience of designing and developing software for business solution ([LinkedIn](https://www.linkedin.com/in/dixitsharad/)|
 ----|----|
 
 Recipe|Description|Topic

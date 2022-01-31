@@ -5,6 +5,8 @@
 * [Groovy Scripts](#groovy-scripts)
 * [Integration Adapters](#integration-adapters)
 * [Reusable integration flows](#reusable-integration-flows)
+* [Reusable integraiton packages](#reusable-integration-packages)
+* [Reusable Jenkinsfiles](#reusable-jenkinsfiles)
 * [Sample integration flows](#sample-integration-flow)
 * [XSLT Scripts](#xslt-scripts)
 
@@ -33,13 +35,52 @@ Recipe|Description|Topic
 
 ***
 
-### Reusable Integration flows
+### Reusable Integration Flows
 Recipe|Description|Topic
 ---|---|---|
 [Generate AWS4-HMAC-SHA256 Signature](GenerateAWS4_HMAC_SHA256)| A reusable recipe to generate an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.|[Amazon Web Service](../readme.md#amazon-web-service)\|[Security](../readme.md#security)|
 
 ***
 
+### Reusable Integration packages
+
+Recipe|Description|Topic
+---|---|---|
+[Amazon Seller Marketplace Integration with Third Party](for/amazonsellermarketplaceintegrationwiththirdparty)|File based integration for sending Sales Transaction data from Amazon Seller Marketplace to Third Party (SAP Vistex template)  | [Amazon](readme.md#amazon-web-services) \| [Third-Party Integration](readme.md#third-party-integration)
+[Qualtrics Transaction-Based Survey Integration with SAP Marketing Cloud](for/qualtricsextendedintegrationwithsapmarketingcloud)| Load data (customers and transactions with transcation based interaction in Marketing cloud) from SAP Marketing Cloud system to SAP Qualtrics. | [Qualtrics](readme.md#qualtrics) \| [SAP Customer Experience](readme.md#sap-customer-experience)
+[ SAP Ariba Integration with Third-Party for Analytical Reporting](for/saparibaanalyticalreportingintegrationwiththirdparty)| Consumption of Ariba APIs (Job Submission API and Job Results API) for Analytical Reporting ( Standard/Custom Templates) with CSV Output for integrating with Third Party  | [SAP Ariba or SAP Business Network](readme.md#sap-ariba) \| [Third-Party Integration](readme.md#third-party-integration)
+[SAP Ariba Integration with Third-Party for Vendor And Questionnaires](for/saparibaintegrationwiththirdpartyforvendorandquestionnaires)| Ariba APIs for Vendor and Questionnaires with CSV Output for integrating with Third Party| [SAP Ariba or SAP Business Network](readme.md#sap-ariba) \| [Third-Party Integration](readme.md#third-party-integration)
+[SAP Business Network Integration with Non-SAP ERP](for/sapbusinessnetworkintegrationwithnonsaperp)| Baseline template to support the Purchase Order, Invoice and other transactional documents with the SAP Business Network| [SAP Ariba or SAP Business Network](readme.md#sap-ariba) \| [Third-Party Integration](readme.md#third-party-integration)
+[SAP Document Compliance with Third Party - eDocuments](for/saps4hanaintegrationwiththirdpartyedocuments)| Exchange electronic invoices with the tax authorities for Chile, Colombia and Mexico, available for SAP S/4HANA, and SAP ERP (available as of SAP ERP 6.0 EHP5)|[SAP S/4HANA](readme.md#sap-s4hana) \| [SAP ERP](readme.md#sap-erp) \| [SAP Document Compliance](readme.md#sap-document-compliance)
+[SAP SuccessFactors Employee Central Payroll Integration with SAP S_4HANA or SAP ERP](for/sapsuccessfactorsemployeecentralpayrollintegrationwithsaps4hanaorsaperp)| Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.| [SAP SuccessFactors Employee Central](readme.md#sap-successfactors-employee-central) \| [SAP S/4HANA](readme.md#sap-s4hana) \| [SAP ERP](readme.md#sap-erp)
+[SAP SuccessFactors Employee Central with Third-Party Payroll Vendor](for/sapsuccessfactorsemployeecentralwiththirdpartypayrollvendor)| Integration of business processes in SAP SuccessFactors Employee Central system with Third Party Payroll Vendor; support for delta based integration with seperate files required for HIRE/REHIRE, Daily Changes and TERMINATION|[SAP SuccessFactors Employee Central](readme.md#sap-successfactors-employee-central) \| [Third-Party Integration](readme.md#third-party-integration)
+
+***
+### Reusable JenkinsFiles
+
+Recipe|Description|Author
+---|---|---
+[Deploy Integration Artefact and Get Endpoint](for/CICD-DeployIntegrationArtefactGetEndpoint)|Deploy an existing integration flow on Cloud Integration runtime. Optionally you can also get the endpoint of the integration flow.| [CICD](../readme.md#cicd) |
+[Deploy Run Once Integration Artefact and Check MPL](for/CICD-DeployRunOnceIntegrationArtefactAndCheckMpl)|Deploy an integration flow, check its deployment status and the message processing log status of the message execution that gets automatically triggered after the deployment due to a scheduler configuration or the consumption of files from a (S)FTP server or messages from a JMS queue.| [CICD](../readme.md#cicd) |
+[Deploy Run Once Integration Artefact and Check MPL and Store If Success](for/CICD-DeployRunOnceIntegrationArtefactAndCheckMplAndStoreIfSuccess)|Deploy an integration flow, check its deployment status and the MPL (message processing log) status. In case of a successful message processing the job then downloads the integration flow artefact from the Cloud Integration tenant and commits it to the source code repository.| [CICD](../readme.md#cicd) |
+[Get Latest Message Processing Log](for/CICD-GetLatestMessageProcessingLog)|Get the status of the last message execution of the configured integration artefact. In case the message execution failed, the job also provides the error information.| [CICD](../readme.md#cicd) |
+[Get Specific Message Processing Log](for/CICD-GetSpecificMessageProcessingLog)|Get the message procesing log status of either a specific message exchange ID or of the last run of a specific integration artefact. In case the message execution failed, the job also provides the error information.| [CICD](../readme.md#cicd) |
+[Store All API Providers](for/CICD-StoreAllAPIProviders)|Download all API Providers from the API Portal and store it in your source code repository like Git.|[CICD](../readme.md#cicd)|
+[Store Integration Artefact](for/CICD-StoreIntegrationArtefact)|Download a specific integration artefact from the Cloud Integration tenant and store it in your source code repository like Git.| [CICD](../readme.md#cicd) |
+[Store Integration Artefact on New Version](for/CICD-StoreIntegrationArtefactOnNewVersion)|Check the Cloud Integration tenant for a new version of your integration artefact and if a new version exists, it downloads and stores it in a source code repository like Git.| [CICD](../readme.md#cicd) |
+[Store Single API Provider](for/CICD-StoreSingleAPIProvider)|Download a specific API Provider from the API Portal and store it in your source code repository like Git.|[CICD](../readme.md#cicd)|
+[Store Single API Proxy](for/CICD-StoreSingleAPIProxy)|Download a specific API Proxy from the API Portal and store it in your source code repository like Git.|[CICD](../readme.md#cicd)|
+[Store Single Key Value Map](for/CICD-StoreSingleKeyValueMap)|Download a specific Key Value Map from the API Portal and store it in your source code repository like Git.|[CICD](../readme.md#cicd)|
+[Undeploy Integration Artefact](for/CICD-UndeployIntegrationArtefact)|Undeploy a specific integration artefact from the Cloud Integration tenant.| [CICD](../readme.md#cicd) |
+[Update Integration Configuration Parameter](for/CICD-UpdateIntegrationConfigurationParameter)|Configure the value of an externalized parameter of a specific integration artefact in the Cloud Integration tenant.| [CICD](../readme.md#cicd) |
+[Update Integration Resources on Git Commit](for/CICD-UpdateIntegrationResourcesOnGitCommit)|Develop and manage your integration resources like scripts and XSLT mappings using external IDEs and SCM tools like Git.|[CICD](../readme.md#cicd)|
+[Upload Integration Artefact](for/CICD-UploadIntegrationArtefact)|Checkout the latest version of the configured integration flow artefact from your source code repository and either update or create the artefact on the Cloud Integration tenant.| [CICD](../readme.md#cicd) |
+[Upload Single API Provider](for/CICD-UploadSingleAPIProvider)|Checkout the configured API Provider from the source code repository and either update or create the artefact on the API Portal tenant.|[CICD](../readme.md#cicd)|
+[Upload Single API Proxy](for/CICD-UploadSingleAPIProxy)|Checkout the configured API Proxy from the source code repository and either update or create the artefact on the API Portal tenant.|[CICD](../readme.md#cicd)|
+[Upload Single Key Value Map](for/CICD-UploadSingleKeyValueMap)|Checkout the configured Key Value Map from the source code repository and either update or create the artefact on the API Portal tenant.| [CICD](../readme.md#cicd)|
+
+
+***
 ### Sample integration flows
 These recipes only have sample integration flows, other types usually **also** have samples included.
 
