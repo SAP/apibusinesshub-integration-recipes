@@ -131,7 +131,7 @@ Recipe|Description|Author
 ### SAP Concur
 Recipe|Description|Author
 ---|---|---
-
+[SAP S/4HANA OnPremise Integration with SAP Concur](for/S4HANAOnPremiseIntegrationwithSAPConcur)|SAP S/4HANA OnPremise Integration with SAP Concur in order to replicate the exchange rates via a standard BAPI to a SFTP Server.|[SAP API Business Hub](author.md#sap-api-business-hub)
 
 ***
 
@@ -139,7 +139,7 @@ Recipe|Description|Author
 Recipe|Description|Author
 ---|---|---
 [Qualtrics Transaction-Based Survey Integration with SAP Marketing Cloud](for/qualtricsextendedintegrationwithsapmarketingcloud)| Load data (customers and transactions with transcation based interaction in Marketing cloud) from SAP Marketing Cloud system to SAP Qualtrics. |[SAP API Business Hub](author.md#sap-api-business-hub)
-
+[SAP Customer Data Cloud Integration with SAP Service Cloud for Replicating Customer Details](for/SAPCustomerDataCloudIntegrationwithSAPServiceCloudReplicateCustomerDetails)|This package supports replication of Customer data of SAP Customer Data Cloud to SAP Service Cloud.|[SAP API Business Hub](author.md#sap-api-business-hub)
 
 ***
 
@@ -164,7 +164,9 @@ Recipe|Description|Author
 ### SAP S4HANA
 Recipe|Description|Author
 ---|---|---
+[Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise](for/BundesanzeigerIntegrationwithSAPS4HANAGTSOnPremise)|Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise provides an Integration with SLP sanction list of the Bundesanzeiger to SAP S/4HANA GTS (Global Trade System) System in order to replicate blocked Business Partners|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Document Compliance with Third Party - eDocuments](for/saps4hanaintegrationwiththirdpartyedocuments)| Exchange electronic invoices with the tax authorities for Chile, Colombia and Mexico, available for SAP S/4HANA, and SAP ERP (available as of SAP ERP 6.0 EHP5)|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP S/4HANA OnPremise Integration with SAP Concur](for/S4HANAOnPremiseIntegrationwithSAPConcur)|SAP S/4HANA OnPremise Integration with SAP Concur in order to replicate the exchange rates via a standard BAPI to a SFTP Server.|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP SuccessFactors Employee Central Payroll Integration with SAP S_4HANA or SAP ERP](for/sapsuccessfactorsemployeecentralpayrollintegrationwithsaps4hanaorsaperp)| Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.|[SAP API Business Hub](author.md#sap-api-business-hub)
 
 
@@ -173,7 +175,8 @@ Recipe|Description|Author
 ### SAP S4HANA Cloud
 Recipe|Description|Author
 ---|---|---
-
+[SAP S/4HANA Cloud Integration with File Server for Bank Statement Import](for/SAPS4HANACloudBankStatementImportfromFileServer)|Packaged Integration of Bank Statement in  BAI Format from File Server to SAP S/4HANA Cloud using Bank Statement API| [SAP API Business Hub](author.md#sap-api-business-hub)
+[Ticketmaster Journal Entry Integration with SAP S/4HANA Cloud](for/TicketmasterJournalEntryIntegrationwithSAPS4HANACloud)|Create Journal Entries from ticket sales originating from Ticketmaster Archtics and Host.|[SAP API Business Hub](author.md#sap-api-business-hub)
 
 ***
 
@@ -199,7 +202,10 @@ Recipe|Description|Author
 
 Recipe|Description|Author
 ---|---|---
+[Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise](for/BundesanzeigerIntegrationwithSAPS4HANAGTSOnPremise)|Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise provides an Integration with SLP sanction list of the Bundesanzeiger to SAP S/4HANA GTS (Global Trade System) System in order to replicate blocked Business Partners|[SAP API Business Hub](author.md#sap-api-business-hub)
 [ SAP Ariba Integration with Third-Party for Analytical Reporting](for/saparibaanalyticalreportingintegrationwiththirdparty)| Consumption of Ariba APIs (Job Submission API and Job Results API) for Analytical Reporting ( Standard/Custom Templates) with CSV Output for integrating with Third Party  |[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Ariba Integration with Third-Party for Vendor And Questionnaires](for/saparibaintegrationwiththirdpartyforvendorandquestionnaires)| Ariba APIs for Vendor and Questionnaires with CSV Output for integrating with Third Party| [SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Business Network Integration with Non-SAP ERP](for/sapbusinessnetworkintegrationwithnonsaperp)| Baseline template to support the Purchase Order, Invoice and other transactional documents with the SAP Business Network|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP S/4HANA Cloud Integration with File Server for Bank Statement Import](for/SAPS4HANACloudBankStatementImportfromFileServer)|Packaged Integration of Bank Statement in  BAI Format from File Server to SAP S/4HANA Cloud using Bank Statement API| [SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP SuccessFactors Employee Central with Third-Party Payroll Vendor](for/sapsuccessfactorsemployeecentralwiththirdpartypayrollvendor)| Integration of business processes in SAP SuccessFactors Employee Central system with Third Party Payroll Vendor; support for delta based integration with seperate files required for HIRE/REHIRE, Daily Changes and TERMINATION|[SAP API Business Hub](author.md#sap-api-business-hub)
+[Ticketmaster Journal Entry Integration with SAP S/4HANA Cloud](for/TicketmasterJournalEntryIntegrationwithSAPS4HANACloud)|Create Journal Entries from ticket sales originating from Ticketmaster Archtics and Host.|[SAP API Business Hub](author.md#sap-api-business-hub)

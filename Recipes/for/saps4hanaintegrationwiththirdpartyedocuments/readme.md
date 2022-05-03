@@ -1,4 +1,4 @@
-# SAP Document Compliance with Third Party - eDocuments
+# SAP Document Compliance with Third Party 
 
 \| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20SAP%20Document%20Compliance%20with%20Third%20Party%20-%20eDocuments ) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20SAP%20Document%20Compliance%20with%20Third%20Party%20-%20eDocuments ) \| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20SAP%20Document%20Compliance%20with%20Third%20Party%20-%20eDocuments ) \|
 
