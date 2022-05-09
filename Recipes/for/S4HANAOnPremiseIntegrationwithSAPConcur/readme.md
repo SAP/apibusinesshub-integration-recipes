@@ -13,8 +13,7 @@ This package enables consumption of below scenario.
 
 [Download the integration flow Sample](SAPS_4HANAOnPremiseIntegrationwithSAPConcur.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/S4HANAOnPremiseIntegrationwithSAPConcur/Overview)\
-[View documentation on the SAP API Business Hub](https://api.sap.com/package/S4HANAOnPremiseIntegrationwithSAPConcur/overview)
-
+[View documentation on the SAP API Business Hub](https://api.sap.com/package/S4HANAOnPremiseIntegrationwithSAPConcur/documents)
 ## Integration Flows
 
 ### Replicate Exchange Rates from SAP S/4HANA OnPremise and SAP Concur

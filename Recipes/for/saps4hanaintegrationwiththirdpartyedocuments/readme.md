@@ -1,6 +1,6 @@
-# SAP Document Compliance with Third Party 
+# SAP Document Compliance: Template for Electronic Document Integration
 
-\| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20SAP%20Document%20Compliance%20with%20Third%20Party%20-%20eDocuments ) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20SAP%20Document%20Compliance%20with%20Third%20Party%20-%20eDocuments ) \| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20SAP%20Document%20Compliance%20with%20Third%20Party%20-%20eDocuments ) \|
+\| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20SAP%20SAP%20Document%20Compliance:%20Template%20for%20Electronic%20Document%20Integration ) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20SAP%20SAP%20Document%20Compliance:%20Template%20for%20Electronic%20Document%20Integration ) \| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20SAP%20SAP%20Document%20Compliance:%20Template%20for%20Electronic%20Document%20Integration ) \|
 
 ![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP API Business Hub](https://api.sap.com/allcommunity) |
 ----|----|
@@ -9,6 +9,7 @@ Exchange electronic invoices with the tax authorities for Chile, Colombia and Me
 
 [Download the reuseable integration package](SAPDocumentCompliancewithThirdParty-eDocuments.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/SAPS4HANAIntegrationwithThirdPartyeDocuments/overview)
+[View documentation on the SAP API Business Hub](https://api.sap.com/package/SAPS4HANAIntegrationwithThirdPartyeDocuments/documents)
 
 ## Integration flows
 
