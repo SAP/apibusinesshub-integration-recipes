@@ -15,6 +15,11 @@ This package contains 2 iflows:
 [Download the reuseable integration package](SAPSuccessFactorsEmployeeCentralPayrollIntegrationwithSAPS_4HANAorSAPERP.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/SAPSuccessFactorsEmployeeCentralPayrollIntegrationwithSAPS4HANAorSAPERP/overview)
 
+## Reference
+* [BAPI_ACC_EMPLOYEE_EXP_CHECK.txt](BAPI_ACC_EMPLOYEE_EXP_CHECK.txt)
+* [BAPI_ACC_EMPLOYEE_PAY_CHECK.txt](BAPI_ACC_EMPLOYEE_PAY_CHECK.txt)
+* [BAPI_ACC_EMPLOYEE_REC_CHECK.txt](BAPI_ACC_EMPLOYEE_REC_CHECK.txt)
+
 ## Integration flows
 
 ### Prechecks for Payroll Posting

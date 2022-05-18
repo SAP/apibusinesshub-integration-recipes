@@ -1,0 +1,244 @@
+FUNCTION BAPI_ACC_EMPLOYEE_PAY_CHECK.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""$"$\SE:(1) Function Module BAPI_ACC_EMPLOYEE_PAY_CHECK, Start                                                                                                A
+*$*$-Start: (1)---------------------------------------------------------------------------------$*$*
+ENHANCEMENT 2  ZEIMP_HR_PAYROLL.    "active version
+*
+
+DATA: lo_exp_check TYPE REF TO co_hrpp_wsbapi_acc_employee_pa.
+DATA: lo_exception TYPE REF TO cx_root.
+DATA: lv_error     TYPE string.
+
+DATA: ls_in  TYPE hrpp_wsbapi_acc_employee_pay_1.
+DATA: ls_out TYPE hrpp_wsbapi_acc_employee_pay_c.
+
+DATA: ls_accountgl_class        TYPE LINE OF hrpp_wstable_of_bapiacgl06-item.
+DATA: ls_accountpayable_class   TYPE LINE OF hrpp_wstable_of_bapiacap06-item.
+DATA: ls_accounttax_class       TYPE LINE OF hrpp_wstable_of_bapiactx01-item.
+DATA: ls_currencyamount_class   TYPE LINE OF hrpp_wstable_of_bapiaccr04-item.
+DATA: ls_extension1_class       TYPE LINE OF hrpp_wstable_of_bapiextc-item.
+DATA: ls_return_class           TYPE LINE OF hrpp_wstable_of_bapiret2-item.
+DATA: ls_travel_class           TYPE LINE OF hrpp_wstable_of_bapiactr00-item.
+DATA: ls_travelamount_class     TYPE LINE OF hrpp_wstable_of_bapiaccrpo-item.
+
+
+DATA: ls_accountpayable_bapi LIKE	 bapiacap06.
+DATA: ls_accountgl_bapi      LIKE  bapiacgl06.
+DATA: ls_accounttax_bapi     LIKE  bapiactx01.
+DATA: ls_currencyamount_bapi LIKE  bapiaccr04.
+DATA: ls_return_bapi         LIKE  bapiret2.
+DATA: ls_travel_bapi         LIKE  bapiactr00.
+DATA: ls_travelamount_bapi   LIKE  bapiaccrpo.
+DATA: ls_extension1_bapi     LIKE  bapiextc.
+
+
+
+
+TRY.
+    CREATE OBJECT lo_exp_check
+      EXPORTING
+        logical_port_name = 'LP_PAYCHECK'.
+
+* set importing
+    MOVE-CORRESPONDING documentheader TO ls_in-documentheader.
+
+
+    CALL FUNCTION 'FORMAT_DATE_4_OUTPUT'
+      EXPORTING
+        datin         = documentheader-DOC_DATE
+        format        = 'YYYY-MM-DD'
+      IMPORTING
+        DATEX         = ls_in-documentheader-DOC_DATE.
+
+    CALL FUNCTION 'FORMAT_DATE_4_OUTPUT'
+      EXPORTING
+        datin         = documentheader-PSTNG_DATE
+        format        = 'YYYY-MM-DD'
+      IMPORTING
+        DATEX         = ls_in-documentheader-PSTNG_DATE.
+
+    CALL FUNCTION 'FORMAT_DATE_4_OUTPUT'
+      EXPORTING
+        datin         = documentheader-TRANS_DATE
+        format        = 'YYYY-MM-DD'
+      IMPORTING
+        DATEX         = ls_in-documentheader-TRANS_DATE.
+
+
+
+
+    LOOP AT accountPAYABLE INTO ls_accountPAYABLE_bapi.
+      MOVE-CORRESPONDING ls_accountPAYABLE_bapi TO ls_accountPAYABLE_class.
+
+      CALL FUNCTION 'FORMAT_DATE_4_OUTPUT'
+        EXPORTING
+          datin         = ls_accountPAYABLE_bapi-BLINE_DATE
+          format        = 'YYYY-MM-DD'
+        IMPORTING
+          DATEX         = ls_accountPAYABLE_class-BLINE_DATE.
+
+      APPEND ls_accountPAYABLE_class TO ls_in-accountPAYABLE-item.
+    ENDLOOP.
+
+    LOOP AT accountgl INTO ls_accountgl_bapi.
+      MOVE-CORRESPONDING ls_accountgl_bapi TO ls_accountgl_class.
+
+      CALL FUNCTION 'FORMAT_DATE_4_OUTPUT'
+        EXPORTING
+          datin         = ls_accountgl_bapi-PSTNG_DATE
+          format        = 'YYYY-MM-DD'
+        IMPORTING
+          DATEX         = ls_accountgl_class-PSTNG_DATE.
+
+      APPEND ls_accountgl_class TO ls_in-accountgl-item.
+    ENDLOOP.
+
+    LOOP AT accounttax INTO ls_accounttax_bapi.
+      MOVE-CORRESPONDING ls_accounttax_bapi TO ls_accounttax_class.
+
+      CALL FUNCTION 'FORMAT_DATE_4_OUTPUT'
+        EXPORTING
+          datin         = ls_accounttax_bapi-TAX_DATE
+          format        = 'YYYY-MM-DD'
+        IMPORTING
+          DATEX         = ls_accounttax_class-TAX_DATE.
+
+      APPEND ls_accounttax_class TO ls_in-accounttax-item.
+    ENDLOOP.
+
+    LOOP AT currencyamount INTO ls_currencyamount_bapi.
+      MOVE-CORRESPONDING ls_currencyamount_bapi TO ls_currencyamount_class.
+      APPEND ls_currencyamount_class TO ls_in-currencyamount-item.
+    ENDLOOP.
+
+*    RETURN
+
+    LOOP AT travel INTO ls_travel_bapi.
+      MOVE-CORRESPONDING ls_travel_bapi TO ls_travel_class.
+
+      CALL FUNCTION 'FORMAT_DATE_4_OUTPUT'
+        EXPORTING
+          datin         = ls_travel_bapi-PSTNG_DATE
+          format        = 'YYYY-MM-DD'
+        IMPORTING
+          DATEX         = ls_travel_class-PSTNG_DATE.
+
+      CALL FUNCTION 'FORMAT_DATE_4_OUTPUT'
+        EXPORTING
+          datin         = ls_travel_bapi-FM_TRANS_DATE
+          format        = 'YYYY-MM-DD'
+        IMPORTING
+          DATEX         = ls_travel_class-FM_TRANS_DATE.
+
+      APPEND ls_travel_class TO ls_in-travel-item.
+    ENDLOOP.
+
+    LOOP AT travelamount INTO ls_travelamount_bapi.
+      MOVE-CORRESPONDING ls_travelamount_bapi TO ls_travelamount_class.
+      APPEND ls_travelamount_class TO ls_in-travelamount-item.
+    ENDLOOP.
+
+
+    LOOP AT extension1 INTO ls_extension1_bapi.
+      MOVE-CORRESPONDING ls_extension1_bapi TO ls_extension1_class.
+      APPEND ls_extension1_class TO ls_in-extension1-item.
+    ENDLOOP.
+
+
+* call method
+    CLEAR ls_out.
+    CALL METHOD lo_exp_check->bapi_acc_employee_pay_check
+      EXPORTING
+        input  = ls_in
+      IMPORTING
+        output = ls_out.
+
+
+
+* get exporting
+    clear accountpayable[].
+    LOOP AT ls_out-accountpayable-item INTO ls_accountpayable_class.
+      MOVE-CORRESPONDING ls_accountpayable_class TO ls_accountpayable_bapi.
+
+      CONCATENATE ls_accountpayable_class-BLINE_DATE+0(4) ls_accountpayable_class-BLINE_DATE+5(2) ls_accountpayable_class-BLINE_DATE+8(2)
+             into ls_accountpayable_bapi-BLINE_DATE.
+
+      APPEND ls_accountpayable_bapi TO accountpayable.
+    ENDLOOP.
+
+    clear accountgl[].
+    LOOP AT ls_out-accountgl-item INTO ls_accountgl_class.
+      MOVE-CORRESPONDING ls_accountgl_class TO ls_accountgl_bapi.
+
+      CONCATENATE ls_accountgl_class-PSTNG_DATE+0(4) ls_accountgl_class-PSTNG_DATE+5(2) ls_accountgl_class-PSTNG_DATE+8(2)
+             into ls_accountgl_bapi-PSTNG_DATE.
+
+      APPEND ls_accountgl_bapi TO accountgl.
+    ENDLOOP.
+
+    clear accounttax[].
+    LOOP AT ls_out-accounttax-item INTO ls_accounttax_class.
+      MOVE-CORRESPONDING ls_accounttax_class TO ls_accounttax_bapi.
+
+      CONCATENATE ls_accounttax_class-TAX_DATE+0(4) ls_accounttax_class-TAX_DATE+5(2) ls_accounttax_class-TAX_DATE+8(2)
+             into ls_accounttax_bapi-TAX_DATE.
+
+      APPEND ls_accounttax_bapi TO accounttax.
+    ENDLOOP.
+
+    clear currencyamount[].
+    LOOP AT ls_out-currencyamount-item INTO ls_currencyamount_class.
+      MOVE-CORRESPONDING ls_currencyamount_class TO ls_currencyamount_bapi.
+      APPEND ls_currencyamount_bapi TO currencyamount.
+    ENDLOOP.
+
+    clear extension1[].
+    LOOP AT ls_out-extension1-item INTO ls_extension1_class.
+      MOVE-CORRESPONDING ls_extension1_class TO ls_extension1_bapi.
+      APPEND ls_extension1_bapi TO extension1.
+    ENDLOOP.
+
+    clear return[].
+    LOOP AT ls_out-return-item INTO ls_return_class.
+      MOVE-CORRESPONDING ls_return_class TO ls_return_bapi.
+      APPEND ls_return_bapi TO return.
+    ENDLOOP.
+
+    clear travel[].
+    LOOP AT ls_out-travel-item INTO ls_travel_class.
+      MOVE-CORRESPONDING ls_travel_class TO ls_travel_bapi.
+
+      CONCATENATE ls_travel_class-PSTNG_DATE+0(4) ls_travel_class-PSTNG_DATE+5(2) ls_travel_class-PSTNG_DATE+8(2)
+             into ls_travel_bapi-PSTNG_DATE.
+
+      CONCATENATE ls_travel_class-FM_TRANS_DATE+0(4) ls_travel_class-FM_TRANS_DATE+5(2) ls_travel_class-FM_TRANS_DATE+8(2)
+             into ls_travel_bapi-FM_TRANS_DATE.
+
+      APPEND ls_travel_bapi TO travel.
+    ENDLOOP.
+
+    clear travelamount[].
+    LOOP AT ls_out-travelamount-item INTO ls_travelamount_class.
+      MOVE-CORRESPONDING ls_travelamount_class TO ls_travelamount_bapi.
+      APPEND ls_travelamount_bapi TO travelamount.
+    ENDLOOP.
+
+
+
+
+CATCH cx_ai_system_fault INTO lo_exception.
+    lv_error = lo_exception->get_text( ).
+
+    CLEAR ls_return_bapi.
+    ls_return_bapi-type       = 'E'.
+    ls_return_bapi-id         = 'Z_HCM_MSGCLASS'.
+    ls_return_bapi-number     = 167.
+    ls_return_bapi-message_v1 = lv_error.
+    MESSAGE e167(z_hcm_msgclass) WITH lv_error INTO ls_return_bapi-message.
+
+    APPEND ls_return_bapi TO return.
+ENDTRY.
+
+RETURN.
+
+ENDENHANCEMENT.
+*$*$-End:   (1)---------------------------------------------------------------------------------$*$*
