@@ -122,8 +122,9 @@ Recipe|Description|Author
 ### SAP Ariba
 Recipe|Description|Author
 ---|---|---
+[SAP Ariba Integration Tookit](saparibaintegrationtoolkit)|Integration of SAP Ariba Buying and Sourcing solutions with third party systems |[SAP API Business Hub](author.md#sap-api-business-hub)
 [ SAP Ariba Integration with Third-Party for Analytical Reporting](for/saparibaanalyticalreportingintegrationwiththirdparty)| Consumption of Ariba APIs (Job Submission API and Job Results API) for Analytical Reporting ( Standard/Custom Templates) with CSV Output for integrating with Third Party  |[SAP API Business Hub](author.md#sap-api-business-hub)
-[SAP Ariba Integration with Third-Party for Vendor And Questionnaires](for/saparibaintegrationwiththirdpartyforvendorandquestionnaires)| Ariba APIs for Vendor and Questionnaires with CSV Output for integrating with Third Party| ionnaires)| |[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP Ariba Integration with Third-Party for Vendor And Questionnaires](for/saparibaintegrationwiththirdpartyforvendorandquestionnaires)| Ariba APIs for Vendor and Questionnaires with CSV Output for integrating with Third Party |[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Business Network Integration with Non-SAP ERP](for/sapbusinessnetworkintegrationwithnonsaperp)| Baseline template to support the Purchase Order, Invoice and other transactional documents with the SAP Business Network|[SAP API Business Hub](author.md#sap-api-business-hub)
 
 ***
@@ -203,6 +204,7 @@ Recipe|Description|Author
 Recipe|Description|Author
 ---|---|---
 [Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise](for/bundesanzeigerintegrationwithsaps4hanagtsonpremise)|Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise provides an Integration with SLP sanction list of the Bundesanzeiger to SAP S/4HANA GTS (Global Trade System) System in order to replicate blocked Business Partners|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP Ariba Integration Tookit](saparibaintegrationtoolkit)|Integration of SAP Ariba Buying and Sourcing solutions with third party systems |[SAP API Business Hub](author.md#sap-api-business-hub)
 [ SAP Ariba Integration with Third-Party for Analytical Reporting](for/saparibaanalyticalreportingintegrationwiththirdparty)| Consumption of Ariba APIs (Job Submission API and Job Results API) for Analytical Reporting ( Standard/Custom Templates) with CSV Output for integrating with Third Party  |[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Ariba Integration with Third-Party for Vendor And Questionnaires](for/saparibaintegrationwiththirdpartyforvendorandquestionnaires)| Ariba APIs for Vendor and Questionnaires with CSV Output for integrating with Third Party| [SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Business Network Integration with Non-SAP ERP](for/sapbusinessnetworkintegrationwithnonsaperp)| Baseline template to support the Purchase Order, Invoice and other transactional documents with the SAP Business Network|[SAP API Business Hub](author.md#sap-api-business-hub)

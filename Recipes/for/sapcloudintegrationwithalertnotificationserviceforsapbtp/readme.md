@@ -1,44 +1,23 @@
-# title-do-some-code-thing
+# SAP Cloud Integration with Alert Notification service for SAP BTP
 
-\| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20escaped-do-some-code-thing-%20 ) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20escaped-do-some-code-thing-%20 ) \| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20escaped-do-some-code-thing-%20 ) \|
+\| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20SAP%20Cloud%20Integration%20with%20Alert%20Notification%20service%20for%20SAP%20BTP%20 ) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20SAP%20Cloud%20Integration%20with%20Alert%20Notification%20service%20for%20SAP%20BTP%20 ) \| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20SAP%20Cloud%20Integration%20with%20Alert%20Notification%20service%20for%20SAP%20BTP%20 ) \|
 
-![author-name](https://github.com/author-profile.png?size=50 ) | [author-name](https://github.com/author-profile ) |
+![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP API Business Hub](https://api.sap.com/allcommunity) |
 ----|----|
 
-two-sentence-description-of-the-value-add-of-the-recipe
 
-[Download the integration flow Sample](zip-file-name.zip)\
-[Download the reuseable integration flow](zip-file-name.zip)
+Integrate SAP Alert Notification service for SAP BTP with Cloud Integration to get exhausted JMS resources. This integration flow "SAP Cloud Integration with Alert Notification service for SAP BTP" pulls JMS resource capacity of a Cloud Integration tenant and sends automated notifications to SAP Alert Notification service for SAP BTP in case the JMS resources are critical or exhausted. If all JMS resources are "OK", no notification is sent.
 
-## Recipe
+This package allows you to do the following:
 
-Step|Code|Why?
-----|----|----
-a-phrase-describing-step | ```single-line-of-code``` | optional-short-explanation |
-a-phrase-describing-step | ![imageOfCode](name-of-screenshot.jpg) |optional-short-explanation |
+* Send notifications for JMS resource overload with Alert Notification service
 
-### Related Recipes
-* [upstream-recipe-name](../upstream-recipe-folder-name)\
-* [alternate-recipe-name](../alternate-recipe-folder-name)
+[Download the integration package](SAPCloudIntegrationwithAlertNotificationserviceforSAPBTP.zip)\
+[View package on the SAP API Business Hub](https://api.sap.com/package/SAPCloudIntegrationwithAlertNotificationserviceforSAPBTP/overview)
 
-## References
-* [title-of-blogs](http-link)\
-* [title-of-Specs](http-link)\
-* [title-of-html-page](http-link)
+## Integration Flows
 
-## Sample integration flow
-describe-the-flow-of-the-integration-flow\
-![iflowimage](name-of-screenshot.jpg)
-
-### Sample Script
-This is the script used in this sample\
-``` sample-script-goes-here ```
-
-### Sample Input
-Description-of-the-input-file\
-[sample-input-file-description](file-name)\
-![input-image](name-of-the-screenshot.jpg)
-
-### Sample Output
-Description-of-the-output\
-![Output Image](Imagename.jpg)
+### Send notifications for JMS resource overload with Alert Notification service
+Pulls JMS resource capacity and sends automated notifications to SAP Alert Notification service for SAP BTP in case the JMS resources are critical or exhausted.\
+[View on SAP API Business Hub](https://api.sap.com/integrationflow/Send_notifications_for_JMS_resource_overload_with_Alert_Notification_service)
+![Connect to SAP Concur API](send-notifications-for-jms-resource-overload-with-alert-notification-service.png)
