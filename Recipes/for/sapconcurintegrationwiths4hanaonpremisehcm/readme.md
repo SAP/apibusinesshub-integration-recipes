@@ -14,7 +14,9 @@ This package allows you to do the following:
 * Value Mapping for Integration between SAP S4HANA HCM to SAP Concur
 
 [Download the integration package](SAPS_4HANAOnPremiseHCMIntegrationwithSAPConcur.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/SAPConcurIntegrationwithS4HANAOnPremiseHCM/overview)
+[View package on the SAP API Business Hub](https://api.sap.com/package/SAPConcurIntegrationwithS4HANAOnPremiseHCM/overview)\
+[View documentation](ReplicateEmployeedatafromSAPS4HANAHCMtoSAPConcur.pdf)\
+[View high level effort estimate](effort.md)
 
 ## Integration Flows/Value Mappings
 

@@ -15,7 +15,8 @@ This package enables consumption of the scenarios below:
 
 [Download the reuseable integration package](BundesanzeigerIntegrationwithSAPS4HANAGTSOnPremise.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/BundesanzeigerIntegrationwithSAPS4HANAGTSOnPremise/overview)\
-[View documentation on the SAP API Business Hub](https://api.sap.com/odata/1.0/catalog.svc/Files('e3766d1a584c4e4fb2eaacc5c858b4c0')/$value)
+[View documentation on the SAP API Business Hub](https://api.sap.com/odata/1.0/catalog.svc/Files('e3766d1a584c4e4fb2eaacc5c858b4c0')/$value)\
+[View high level effort estimate](effort.md)
 
 ## Integration Flows
 

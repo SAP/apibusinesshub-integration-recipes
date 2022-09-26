@@ -6,15 +6,17 @@
 ----|----|
 
 
-This integration package is used to replicate survey details from SAP Service Cloud to SAP Marketing Cloud. 
+This integration package is used to replicate survey details from SAP Service Cloud to SAP Marketing Cloud.
 
 This package supports integration of SAP Service Cloud with SAP Marketing Cloud .
 
 Replication of Survey Data.
-Supported Format - JSON 
+Supported Format - JSON
 
 [Download the integration package](zip-file-name.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/SAPServiceCloudIntegrationwithSAPMarketingCloudReplicateSurveyDetails/overview)
+[View package on the SAP API Business Hub](https://api.sap.com/package/SAPServiceCloudIntegrationwithSAPMarketingCloudReplicateSurveyDetails/overview)\
+[View Documentation](ReplicateSurveyDatafromSAPServiceCloudtoSAPMarketingCloud.pdf)\
+[View high level effort](effort.md)
 
 ## Integration Flows
 

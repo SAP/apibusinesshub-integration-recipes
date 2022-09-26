@@ -16,7 +16,10 @@ This package allows you to do the following:
 * Replicate Expense Report from SAP Concur to SAP Fieldglass
 
 [Download the integration package](SAPFieldglassUserIntegrationwithSAPConcur.zip.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/SAPFieldglassUserIntegrationwithSAPConcur/overview)
+[View package on the SAP API Business Hub](https://api.sap.com/package/SAPFieldglassUserIntegrationwithSAPConcur/overview)\
+[View Documentation - Replicate Expense Report from Concur to Fieldglass ](ReplicateExpenseReportfromConcurtoFieldglass.pdf)\
+[View Documentation - Replicate User Data from Fieldglass to Concur](ReplicateUserDatafromFieldglasstoConcur.pdf)\
+[View high level effort estimate](effort.md)
 
 ## Integration Flows
 

@@ -14,7 +14,8 @@ This package allows you to do the following:
 * Connect Third Party Invoice status to SAP Ariba network
 
 [Download the integration package](zip-file-name.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/ThirdPartyinvoicestatusIntegrationwiththeAribanetwork/overview)
+[View package on the SAP API Business Hub](https://api.sap.com/package/ThirdPartyinvoicestatusIntegrationwiththeAribanetwork/overview)\
+[View high level effort estimate](effort.md)
 
 ## Integration Flows
 
