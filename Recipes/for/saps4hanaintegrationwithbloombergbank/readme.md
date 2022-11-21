@@ -12,8 +12,9 @@ This package allows you to do the following:
 
 * Replicate Exchange Rate
 
-[Download the integration package](zip-file-name.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/SAPS4HANAIntegrationwithBloombergBank/overview)
+[Download the integration package](SAPS_4HANAIntegrationwithThird-Party-ExchangeRateLoad.zip)\
+[View package on the SAP API Business Hub](https://api.sap.com/package/SAPS4HANAIntegrationwithBloombergBank/overview)\
+[View high level effort](effort.md)
 
 ## Integration Flows
 
