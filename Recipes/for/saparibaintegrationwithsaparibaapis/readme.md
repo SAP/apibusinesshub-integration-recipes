@@ -11,7 +11,7 @@
 
 [Download the integration package](SAPAribaIntegrationwithSAPAribaAPIs.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/SAPAribaIntegrationwithSAPAribaAPIs)\
-[View documentation](SAPAribaIntegrationwithSAPAribaAPIs.pdf)\
+[View documentation](Documentation_saparibaintegrationwithsaparibaapis.pdf)\
 [View high level effort](effort.md)
 ## Integration flows
 ### Connect SAP Ariba to the SAP Ariba APIs 
