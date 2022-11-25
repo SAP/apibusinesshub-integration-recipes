@@ -4,3 +4,4 @@ Capability - Skill Level | T-Shirt Size
 --- | ---
 [SAP Cloud Integration - Advanced Skills](../Application_Skill_Level_Definition.md#cloud-integration---advanced-skills) | S
 [SAP Concur - Basic Skills](../Application_Skill_Level_Definition.md#sap-concur---basic-skills) | S
+[Third Party - Advanced Skills](../Application_Skill_Level_Definition.md#third-party---advanced-skills) | S
