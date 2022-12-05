@@ -8,9 +8,12 @@
 <p>This integration package enables you to build integration between SAP Retail solution (SAP S/4HANA Retail and SAP Customer Activity Repository) and SAP POS (Point-of-Sale).</p>
 <p>The integration scope includes a POS inbound scenario, uploading POS sales data from SAP POS to SAP CAR, and a POS outbound scenario, download article master and price, EAN/UPC (xref), department, and promotions from SAP S/4HANA to SAP POS.</p>
 
-[Download the integration package](SAP Retail Integration with SAP Point-of-Sale.zip)\
+[Download the integration package](SAPRetailIntegrationwithSAPPoint-of-Sale.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/SAPRetailIntegrationwithSAPPOS)\
-[View documentation](SAPRetailIntegrationwithSAPPOS.pdf)\
+[Documentation to Replicate Promotions from SAP S4HANA to SAP POS](Replicate_Promotions_from_SAP_S4HANA_to_POS.pdf)\
+[Documentation to Replicate MixMatch from SAP S4HANA to SAP POS](Replicate_MixMatch_from_SAP_S4HANA_to_POS.pdf)\
+[Documentation to Replicate Department from SAP S4HANA to SAP POS](Replicate_Department_from_SAP_S4HANA_to_POS.pdf)\
+[Documentation to Upload Sales Data from SAP POS to SAP Customer Activity Repository](Upload_Sales_Data_from_SAP_Point-of-Sale_to_SAP_Customer_Activity_Repository.pdf)\
 [View high level effort](effort.md)
 
  ## Integration flows

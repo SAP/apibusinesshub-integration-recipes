@@ -15,9 +15,9 @@
 
 [Download the integration package](SAPSuccessFactorsIntegrationwithThirdPartyEmpJobDeltaChange.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/SAPSuccessFactorsIntegrationwithThirdPartyEmpJobDeltaChange)\
-[View documentation - Job Information Delta Load](Documentation_SF EC Job Information Delta Load.pdf)\
-[View Documentation - Job Information Initial Load](Documentation_SF EC Job Information Initial Load.pdf)\
-[View Documentation - Job Information Special Deletion](Documentation_SF EC Job Information Special Deletion.pdf)\
+[View documentation - Job Information Delta Load](Documentation_SF-EC-Job-Information-Delta-Load.pdf)\
+[View Documentation - Job Information Initial Load](Documentation_SF-EC-Job-Information-Initial-Load.pdf)\
+[View Documentation - Job Information Special Deletion](Documentation_SF-EC-Job-Information-Special-Deletion.pdf)\
 [View high level effort](effort.md)
 
  ## Integration flows

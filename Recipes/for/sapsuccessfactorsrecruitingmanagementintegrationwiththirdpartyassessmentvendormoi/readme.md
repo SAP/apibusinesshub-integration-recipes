@@ -11,7 +11,7 @@ Package that contains an iFlow that integrates SAP SuccessFactors and the Saudi 
 
 [Download the integration package](SAPSuccessFactorsRecruitingManagementIntegrationwithThirdPartyAssessmentVendorMOI.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/SAPSuccessFactorsRecruitingManagementIntegrationwithThirdPartyAssessmentVendorMOI)\
-[View documentation](SAPSuccessFactorsRecruitingManagementIntegrationwithThirdPartyAssessmentVendorMOI.pdf)\
+[View documentation](SAPSuccessFactorsRecruitingManagementCustomized.pdf)\
 [View high level effort](effort.md)
 ## Integration flows
 ### SAP SuccessFactors Recruiting Management with MOI 
