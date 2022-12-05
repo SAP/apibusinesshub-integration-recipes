@@ -10,7 +10,7 @@
 
 [Download the integration package](SAPSuccessFactorsandSAPConcurIntegration.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/SAPSuccessFactorsandSAPConcurIntegration)\
-[View documentation](SAPSuccessFactorsandSAPConcurIntegration.pdf)
+[View documentation](ConfigurationGuide.pdf)
 
 [View high level effort](effort.md)
  ## Integration flows
