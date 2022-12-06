@@ -11,7 +11,10 @@ Template A - Provides support for Delta based integration with seperate files re
 
 
 [Download the reuseable integration Package](SAPSuccessFactorsEmployeeCentralwithThird-PartyPayrollVendor.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/SAPSuccessFactorsEmployeeCentralwithThirdPartyPayrollVendor/overview)
+[View package on the SAP API Business Hub](https://api.sap.com/package/SAPSuccessFactorsEmployeeCentralwithThirdPartyPayrollVendor/overview)\
+[Configuration Guide for Template A](ConfigGuide-SFECto3rdPartyPayroll-TemplateA.pdf)\
+[Configuration Guide for Template B](ConfigGuide-EmployeeMasterDataIntegrationSuccessfactorsEmployeeCentraltoThirdParty(SAP_IDOC).pdf)\
+[View high level effort](effort.md)
 
 ## Integration flows
 

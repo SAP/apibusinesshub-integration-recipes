@@ -1,6 +1,6 @@
-# SAP SuccessFactors Integration with Third Party - EmpJob Delta Change
+# SAP SuccessFactors Integration with Third Party  - Employee Job Delta Change
 
-\| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20SAP%20SuccessFactors%20Integration%20with%20Third%20Party%20-%20EmpJob%20Delta%20Change) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20SAP%20SuccessFactors%20Integration%20with%20Third%20Party%20-%20EmpJob%20Delta%20Change)\| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20SAP%20SuccessFactors%20Integration%20with%20Third%20Party%20-%20EmpJob%20Delta%20Change) \|
+\| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20SAP%20SuccessFactors%20Integration%20with%20Third%20Party%20-%20Employee%20Job%20Delta%20Change) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20SAP%20SuccessFactors%20Integration%20with%20Third%20Party%20-%20Employee%20Job%20Delta%20Change)\| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20SAP%20SuccessFactors%20Integration%20with%20Third%20Party%20-%20Employee%20Job%20Delta%20Change) \|
 
  ![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP API Business Hub](https://api.sap.com/allcommunity) |
  ----|----|
@@ -21,15 +21,15 @@
 [View high level effort](effort.md)
 
  ## Integration flows
-### SF EC Job Information Special Deletion Send
+### SAP SuccessFactors Employee Central Job Information Special Deletion Send
 Step2:Send data to Third Party for the special deletion situation :If all records of the employee were deleted, no record is returned in the response \
  ![input-image](SF_EC_Job_Information_Special_Deletion_Send.png)
-### SF EC Job Information Initial Load
+### SAP SuccessFactors Employee Central Job Information Initial Load
 Save Data to HANA DB as history data, if needed, send to Third Party for initial load \
  ![input-image](SF_EC_Job_Information_Initial_Load.png)
-### SF EC Job Information Special Deletion Compare
+### SAP SuccessFactors Employee Central Job Information Special Deletion Compare
 Step1:Send data to Third Party for the special deletion situation :If all records of the employee were deleted, no record is returned in the response \
  ![input-image](SF_EC_Job_Information_Special_Deletion_Compare.png)
-### SF EC Job Information Delta Load
+### SAP SuccessFactors Employee Central Job Information Delta Load
 Send data to Third Party for delta changes create, update and delete via ODATA API  \
  ![input-image](SF_EC_Job_Information_Delta_Load.png)

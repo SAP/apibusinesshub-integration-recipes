@@ -16,7 +16,7 @@ This package allows you to do the following:
 * Replicate travel request from SAP Concur to OpenText via Cognos reports
 * Timer_Triggers the replication of travel requests from SAP Concur to OpenText
 
-[Download the integration package](zip-file-name.zip)\
+[Download the integration package](IntegrationbetweenSAPConcurandOpenText.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/IntegrationbetweenSAPConcurandOpenText/overview)\
 [View documentation](Documentation_IntegrationbetweenSAPConcurandOpenText.pdf)\
 [View high level effort estimate](effort.md)
