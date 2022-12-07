@@ -8,12 +8,12 @@
 <p>With this integration package, you can transport the EmpJob delta changes (create, update&nbsp; and delete) via ODATA API from SAP SuccessFactors to Third Party.</p>
 <p>This package enables you to do the following:</p>
 <ul>
- <li>SF EC Job Information Initial Load(Save Data to HANA DB as history data, if needed, send to Third Party for initial load)</li>
- <li>SF EC Job Information Delta Load(Send data to Third Party for delta changes create, update and delete via ODATA API )</li>
- <li>SF EC Special Deletion EmpJob Compare /SF EC Special Deletion EmpJob Send(Send data to Third Party for the special deletion situation :If all records of the employee were deleted, no record is returned in the response )</li>
+ <li>SAP SuccessFactors Employee Central Job Information Initial Load (Save Data to HANA DB as history data, if needed, send to Third Party for initial load)</li>
+ <li>SAP SuccessFactors Employee Central Job Information Delta Load (Send data to Third Party for delta changes create, update and delete via ODATA API )</li>
+ <li>SAP SuccessFactors Employee Central Job Information Special Deletion Send (Send data to Third Party for the special deletion situation :If all records of the employee were deleted, no record is returned in the response )</li>
 </ul>
 
-[Download the integration package](SAPSuccessFactorsIntegrationwithThirdPartyEmpJobDeltaChange.zip)\
+[Download the integration package](SAPSuccessFactorsIntegrationwithThirdParty-EmployeeJobDeltaChange.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/SAPSuccessFactorsIntegrationwithThirdPartyEmpJobDeltaChange)\
 [View documentation - Job Information Delta Load](Documentation_SF-EC-Job-Information-Delta-Load.pdf)\
 [View Documentation - Job Information Initial Load](Documentation_SF-EC-Job-Information-Initial-Load.pdf)\
@@ -22,13 +22,13 @@
 
  ## Integration flows
 ### SAP SuccessFactors Employee Central Job Information Special Deletion Send
-Step2:Send data to Third Party for the special deletion situation :If all records of the employee were deleted, no record is returned in the response \
+Step2: Send data to Third Party for the special deletion situation :If all records of the employee were deleted, no record is returned in the response \
  ![input-image](SF_EC_Job_Information_Special_Deletion_Send.png)
 ### SAP SuccessFactors Employee Central Job Information Initial Load
 Save Data to HANA DB as history data, if needed, send to Third Party for initial load \
  ![input-image](SF_EC_Job_Information_Initial_Load.png)
 ### SAP SuccessFactors Employee Central Job Information Special Deletion Compare
-Step1:Send data to Third Party for the special deletion situation :If all records of the employee were deleted, no record is returned in the response \
+Step1: Send data to Third Party for the special deletion situation :If all records of the employee were deleted, no record is returned in the response \
  ![input-image](SF_EC_Job_Information_Special_Deletion_Compare.png)
 ### SAP SuccessFactors Employee Central Job Information Delta Load
 Send data to Third Party for delta changes create, update and delete via ODATA API  \
