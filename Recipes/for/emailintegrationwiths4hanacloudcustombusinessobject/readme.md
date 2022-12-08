@@ -5,7 +5,7 @@
  ![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP API Business Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
-Email based integration to create/modify/delete data in a CBO in S/4HANA Cloud
+Email based integration to create/modify/delete data in a CBO in S/4HANA Cloud. Create, modify or delete data in an SAP S/4HANA custom business object through a comma separated value file that is attached to an email.
 
 <p></p>
 
