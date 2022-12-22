@@ -21,7 +21,7 @@
 * [SAP S/4HANA](#sap-s4hana)
 * [SAP S/4HANA Cloud](#sap-s4hana-cloud)
 * [SAP SuccessFactors Employee Central](#sap-successfactors-employee-central)
-* [Third-Party Integration](#third-party-integration)
+* [Third-Party Integration](#third-party-integrations)
 * [Security](#security)
 
 
@@ -121,10 +121,11 @@ Recipe|Description|Author
 
 ***
 
-### SAP Ariba
+### SAP Ariba or SAP Business Network
 Recipe|Description|Author
 ---|---|---
 [SAP Ariba Integration Tookit](saparibaintegrationtoolkit)|Integration of SAP Ariba Buying and Sourcing solutions with third party systems |[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP Ariba Integration with SAP Ariba APIs](saparibaintegrationwithsaparibaapis)| This integration flow allows you to connect an Ariba system to the SAP Ariba APIs.|[SAP API Business Hub](author.md#sap-api-business-hub)
 [ SAP Ariba Integration with Third-Party for Analytical Reporting](for/saparibaanalyticalreportingintegrationwiththirdparty)| Consumption of Ariba APIs (Job Submission API and Job Results API) for Analytical Reporting ( Standard/Custom Templates) with CSV Output for integrating with Third Party  |[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Ariba Integration with Third-Party for Vendor And Questionnaires](for/saparibaintegrationwiththirdpartyforvendorandquestionnaires)| Ariba APIs for Vendor and Questionnaires with CSV Output for integrating with Third Party |[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Business Network Integration with Non-SAP ERP](for/sapbusinessnetworkintegrationwithnonsaperp)| Baseline template to support the Purchase Order, Invoice and other transactional documents with the SAP Business Network|[SAP API Business Hub](author.md#sap-api-business-hub)
@@ -132,10 +133,18 @@ Recipe|Description|Author
 
 ***
 
+###SAP Analytics Cloud
+Recipe|Description|Author
+---|---|---
+[SAP Analytics Cloud Integration with SAP SuccessFactors Position Write Back Outbound Flow](sapanalyticscloudintegrationwithsapsuccessfactorspositionwritebackoutboundflow)| Integration between SAP Analytics Cloud HXM Planning and SAP SuccessFactors Positions. |[SAP API Business Hub](author.md#sap-api-business-hub)
+
+***
+
 ### SAP BTP
 Recipe|Description|Author
 ---|---|---
-[SAP Cloud Integration with Alert Notification service for SAP BTP](for/sapcloudintegrationwithalertnotificationserviceforsapbtp)| Integrate SAP Alert Notification service for SAP BTP with Cloud Integration to get exhausted JMS resources.|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP Ariba Integration with SAP Ariba APIs](saparibaintegrationwithsaparibaapis)| This integration flow allows you to connect an Ariba system to the SAP Ariba APIs.|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP Cloud Integration with Alert Notification service for SAP BTP: JMS Service](for/sapcloudintegrationwithalertnotificationserviceforsapbtp)| Integrate SAP Alert Notification service for SAP BTP with Cloud Integration to get exhausted JMS resources.|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Concur API Integration with SAP Cloud Integration](for/integrationwithsapconcurapi)|Connect to any SAP Concur API by providing a way to authenticate and request data|[SAP API Business Hub](author.md#sap-api-business-hub)
 
 ***
@@ -143,6 +152,8 @@ Recipe|Description|Author
 ### SAP Concur
 Recipe|Description|Author
 ---|---|---
+[Employee Integration between SAP SuccessFactors and SAP Concur Integration](sapsuccessfactorsandsapconcurintegration)| This package contains the employee integration between SAP SuccessFactors and SAP Concur via SFTP servers.|[SAP API Business Hub](author.md#sap-api-business-hub)
+[Integration between SAP Concur and OpenText](integrationbetweensapconcurandopentext)| This integration package provides an integration between SAP Concur and the Third Party system OpenText for replicating travel requests.[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Concur API Integration with SAP Cloud Integration](for/integrationwithsapconcurapi)|Connect to any SAP Concur API by providing a way to authenticate and request data|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Fieldglass User Integration with SAP Concur](for/sapfieldglassuserintegrationwithsapconcur) | Transfer new hires from SAP Fieldglass to SAP Concur and synch their expenses with SAP Fieldglass.|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP S/4HANA OnPremise Integration with SAP Concur](for/s4hanaonpremiseintegrationwithsapconcur)|SAP S/4HANA OnPremise Integration with SAP Concur in order to replicate the exchange rates via a standard BAPI to a SFTP Server.|[SAP API Business Hub](author.md#sap-api-business-hub)
@@ -171,6 +182,7 @@ Recipe|Description|Author
 ### SAP Fieldglass
 Recipe|Description|Author
 ---|---|---
+[Integration between SAP Fieldglass and OpenText](integrationbetweensapfieldglassandopentext)| This integration package provides an integration between SAP Fieldglass and the Third Party system OpenText for replicating Fieldglass specific data, e.g. purchase orders.| [SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Fieldglass User Integration with SAP Concur](for/sapfieldglassuserintegrationwithsapconcur) | Transfer new hires from SAP Fieldglass to SAP Concur and synch their expenses with SAP Fieldglass.|[SAP API Business Hub](author.md#sap-api-business-hub)
 
 ***
@@ -182,6 +194,12 @@ Recipe|Description|Author
 [SAP Document Compliance with Third Party - eDocuments](for/saps4hanaintegrationwiththirdpartyedocuments)| Exchange electronic invoices with the tax authorities for Chile, Colombia and Mexico, available for SAP S/4HANA, and SAP ERP (available as of SAP ERP 6.0 EHP5)|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP SuccessFactors Employee Central Payroll Integration with SAP S_4HANA or SAP ERP](for/sapsuccessfactorsemployeecentralpayrollintegrationwithsaps4hanaorsaperp)| Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.|[SAP API Business Hub](author.md#sap-api-business-hub)
 
+***
+
+### SAP Point of Sale
+Recipe|Description|Author
+---|---|---
+[SAP Retail Integration with SAP Point-of-Sale](sapretailintegrationwithsappos) |Outbound/Inbound integration between SAP Retail Solution and SAP POS (Point-of-Sale) |[SAP API Business Hub](author.md#sap-api-business-hub)
 
 ***
 
@@ -191,10 +209,12 @@ Recipe|Description|Author
 [Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise](for/bundesanzeigerintegrationwithsaps4hanagtsonpremise)|Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise provides an Integration with SLP sanction list of the Bundesanzeiger to SAP S/4HANA GTS (Global Trade System) System in order to replicate blocked Business Partners|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP ERP or SAP S/4HANA Integration with SAP SuccessFactors Employee Central](for/saperporsaps4hanaintegrationwithsapsuccessfactorsemployeecentralbankkey)|Replicate Bank Key data from SAP ERP or SAP S/4HANA to SAP SuccessFactors Employee Central|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Document Compliance with Third Party - eDocuments](for/saps4hanaintegrationwiththirdpartyedocuments)| Exchange electronic invoices with the tax authorities for Chile, Colombia and Mexico, available for SAP S/4HANA, and SAP ERP (available as of SAP ERP 6.0 EHP5)|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP S/4HANA Integration with Third-Party - Exchange Rate Load](saps4hanaintegrationwithbloombergbank)|Automatically upload exchange rates daily in the SAP system from Bloomberg, a third-party provider of exchange rate data.|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP S/4HANA OnPremise Integration with SAP Concur](for/s4hanaonpremiseintegrationwithsapconcur)|SAP S/4HANA OnPremise Integration with SAP Concur in order to replicate the exchange rates via a standard BAPI to a SFTP Server.|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP S/4HANA OnPremise HCM Integration with SAP Concur](for/sapconcurintegrationwiths4hanaonpremisehcm)| SAP S/4HANA OnPremise HCM Integration with SAP Concur in order to replicate employee data via a custom BAPI and using an SFTP Server |[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP S/4HANA - Service Order Replication with SAP Marketing Cloud](for/s4hanaserviceorderintegrationwithsapmarketingcloud)| Send Service Orders from SAP S/4HANA OnPremise to SAP Marketing Cloud|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP SuccessFactors Employee Central Payroll Integration with SAP S_4HANA or SAP ERP](for/sapsuccessfactorsemployeecentralpayrollintegrationwithsaps4hanaorsaperp)| Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP Retail Integration with SAP Point-of-Sale](sapretailintegrationwithsappos) |Outbound/Inbound integration between SAP Retail Solution and SAP POS (Point-of-Sale) |[SAP API Business Hub](author.md#sap-api-business-hub)
 
 
 ***
@@ -210,9 +230,12 @@ Recipe|Description|Author
 ### SAP SuccessFactors Employee Central
 Recipe|Description|Author
 ---|---|---
+[Employee Integration between SAP SuccessFactors and SAP Concur Integration](sapsuccessfactorsandsapconcurintegration)| This package contains the employee integration between SAP SuccessFactors and SAP Concur via SFTP servers.|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP ERP or SAP S/4HANA Integration with SAP SuccessFactors Employee Central](for/saperporsaps4hanaintegrationwithsapsuccessfactorsemployeecentralbankkey)|Replicate Bank Key data from SAP ERP or SAP S/4HANA to SAP SuccessFactors Employee Central|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP SuccessFactors Employee Central Payroll Integration with SAP S_4HANA or SAP ERP](for/sapsuccessfactorsemployeecentralpayrollintegrationwithsaps4hanaorsaperp)| Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP SuccessFactors Integration with Third Party - Employee Job Delta Change](sapsuccessfactorsintegrationwiththirdpartyempjobdeltachange)| Sync only delta changes (create, update and delete) via ODATA API for EmpJob Effective-Dated Entity to Third Party.|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP SuccessFactors Employee Central with Third-Party Payroll Vendor](for/sapsuccessfactorsemployeecentralwiththirdpartypayrollvendor)| Integration of business processes in SAP SuccessFactors Employee Central system with Third Party Payroll Vendor; support for delta based integration with seperate files required for HIRE/REHIRE, Daily Changes and TERMINATION|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP SuccessFactors Employee Central Integration with Workday](sapsuccessfactorsemployeecentralintegrationwithworkday)| Replicate employee master data from Workday to SAP SuccessFactors Employee Central.|[SAP API Business Hub](author.md#sap-api-business-hub)
 
 
 ***
@@ -231,11 +254,16 @@ Recipe|Description|Author
 Recipe|Description|Author
 ---|---|---
 [Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise](for/bundesanzeigerintegrationwithsaps4hanagtsonpremise)|Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise provides an Integration with SLP sanction list of the Bundesanzeiger to SAP S/4HANA GTS (Global Trade System) System in order to replicate blocked Business Partners|[SAP API Business Hub](author.md#sap-api-business-hub)
+[Integration between SAP Concur and OpenText](integrationbetweensapconcurandopentext)| This integration package provides an integration between SAP Concur and the Third Party system OpenText for replicating travel requests.[SAP API Business Hub](author.md#sap-api-business-hub)
+[Integration between SAP Fieldglass and OpenText](integrationbetweensapfieldglassandopentext)| This integration package provides an integration between SAP Fieldglass and the Third Party system OpenText for replicating Fieldglass specific data, e.g. purchase orders.| [SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Ariba Integration Tookit](saparibaintegrationtoolkit)|Integration of SAP Ariba Buying and Sourcing solutions with third party systems |[SAP API Business Hub](author.md#sap-api-business-hub)
 [ SAP Ariba Integration with Third-Party for Analytical Reporting](for/saparibaanalyticalreportingintegrationwiththirdparty)| Consumption of Ariba APIs (Job Submission API and Job Results API) for Analytical Reporting ( Standard/Custom Templates) with CSV Output for integrating with Third Party  |[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Ariba Integration with Third-Party for Vendor And Questionnaires](for/saparibaintegrationwiththirdpartyforvendorandquestionnaires)| Ariba APIs for Vendor and Questionnaires with CSV Output for integrating with Third Party| [SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP Business Network Integration with Non-SAP ERP](for/sapbusinessnetworkintegrationwithnonsaperp)| Baseline template to support the Purchase Order, Invoice and other transactional documents with the SAP Business Network|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP S/4HANA Cloud Integration with File Server for Bank Statement Import](for/saps4hanacloudbankstatementimportfromfileserver)|Packaged Integration of Bank Statement in  BAI Format from File Server to SAP S/4HANA Cloud using Bank Statement API| [SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP S/4HANA Integration with Third-Party - Exchange Rate Load](saps4hanaintegrationwithbloombergbank)|Automatically upload exchange rates daily in the SAP system from Bloomberg, a third-party provider of exchange rate data.|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP SuccessFactors Integration with Third Party - Employee Job Delta Change](sapsuccessfactorsintegrationwiththirdpartyempjobdeltachange)| Sync only delta changes (create, update and delete) via ODATA API for EmpJob Effective-Dated Entity to Third Party.|[SAP API Business Hub](author.md#sap-api-business-hub)
 [SAP SuccessFactors Employee Central with Third-Party Payroll Vendor](for/sapsuccessfactorsemployeecentralwiththirdpartypayrollvendor)| Integration of business processes in SAP SuccessFactors Employee Central system with Third Party Payroll Vendor; support for delta based integration with seperate files required for HIRE/REHIRE, Daily Changes and TERMINATION|[SAP API Business Hub](author.md#sap-api-business-hub)
+[SAP SuccessFactors Employee Central Integration with Workday](sapsuccessfactorsemployeecentralintegrationwithworkday)| Replicate employee master data from Workday to SAP SuccessFactors Employee Central.|[SAP API Business Hub](author.md#sap-api-business-hub)
 [Third Party Invoice Status Integration with SAP Ariba network](for/thirdpartyinvoicestatusintegrationwiththearibanetwork) | Invoice status handling from any Invoice system to SAP Ariba Network based on cXML | [SAP API Business Hub](author.md#sap-api-business-hub)
 [Ticketmaster Journal Entry Integration with SAP S/4HANA Cloud](for/ticketmasterjournalentryintegrationwithsaps4hanacloud)|Create Journal Entries from ticket sales originating from Ticketmaster Archtics and Host.|[SAP API Business Hub](author.md#sap-api-business-hub)
