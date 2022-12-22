@@ -12,7 +12,7 @@
 * [Partner Directory](#partner-directory)
 * [Qualtrics](#qualtrics)
 * [SAP Analytics Cloud](#sap-analytics-cloud)
-* [SAP Ariba or SAP Business Network](#sap-ariba)
+* [SAP Ariba or SAP Business Network](#sap-ariba-or-sap-business-network)
 * [SAP BTP](#sap-btp)
 * [SAP Concur](#sap-concur)
 * [SAP Customer Experience](#sap-customer-experience)
@@ -21,6 +21,7 @@
 * [SAP Fieldglass](#sap-fieldglass)
 * [SAP S/4HANA](#sap-s4hana)
 * [SAP S/4HANA Cloud](#sap-s4hana-cloud)
+* [SAP Service Cloud](#sap-service-cloud)
 * [SAP SuccessFactors Employee Central](#sap-successfactors-employee-central)
 * [Third-Party Integrations](#third-party-integrations)
 * [Security](#security)
@@ -134,7 +135,7 @@ Recipe|Description|Author
 
 ***
 
-###SAP Analytics Cloud
+### SAP Analytics Cloud
 Recipe|Description|Author
 ---|---|---
 [SAP Analytics Cloud Integration with SAP SuccessFactors Position Write Back Outbound Flow](sapanalyticscloudintegrationwithsapsuccessfactorspositionwritebackoutboundflow)| Integration between SAP Analytics Cloud HXM Planning and SAP SuccessFactors Positions. |[SAP API Business Hub](author.md#sap-api-business-hub)
@@ -225,6 +226,13 @@ Recipe|Description|Author
 ---|---|---
 [SAP S/4HANA Cloud Integration with File Server for Bank Statement Import](for/saps4hanaintegrationwiththirdpartyedocuments)|Packaged Integration of Bank Statement in  BAI Format from File Server to SAP S/4HANA Cloud using Bank Statement API| [SAP API Business Hub](author.md#sap-api-business-hub)
 [Ticketmaster Journal Entry Integration with SAP S/4HANA Cloud](for/ticketmasterjournalentryintegrationwithsaps4hanacloud)|Create Journal Entries from ticket sales originating from Ticketmaster Archtics and Host.|[SAP API Business Hub](author.md#sap-api-business-hub)
+
+***
+
+### SAP Service Cloud
+Recipe|Description|Author
+---|---|---
+[SAP Customer Data Cloud Integration with SAP Service Cloud for Replicating Customer Details](for/sapcustomerdatacloudintegrationwithsapservicecloudreplicatecustomerdetails)|This package supports replication of Customer data of SAP Customer Data Cloud to SAP Service Cloud.|[SAP API Business Hub](author.md#sap-api-business-hub)
 
 ***
 
