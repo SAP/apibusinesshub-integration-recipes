@@ -1,0 +1,10 @@
+{
+  "operator": "and",
+  "criteria": [
+    {
+      "fieldName": "uniqueName",
+      "operator": "equals",
+      "value": "P-XXXXX"
+    }
+  ]
+}

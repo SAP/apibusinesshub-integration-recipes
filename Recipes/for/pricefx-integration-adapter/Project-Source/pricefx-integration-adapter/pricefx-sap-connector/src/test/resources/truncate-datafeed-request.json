@@ -1,0 +1,10 @@
+{
+  "operator": "and",
+  "criteria": [
+    {
+      "fieldName": "attribute1",
+      "operator": "startsWith",
+      "value": "PRODUCT"
+    }
+  ]
+}

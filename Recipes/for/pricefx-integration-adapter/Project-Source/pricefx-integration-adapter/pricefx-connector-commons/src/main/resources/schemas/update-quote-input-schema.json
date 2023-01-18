@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "QuoteUpdateRequest",
+  "type": "object",
+  "required": [
+    "uniqueName"
+  ],
+  "properties": {
+    "uniqueName": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "targetDate": {
+      "type": "string"
+    },
+    "headerText": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            },
+            "valueObject": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "name",
+            "value",
+            "valueObject"
+          ]
+        }
+      ]
+    },
+    "additionalInfo1": {
+      "type": "number"
+    },
+    "additionalInfo2": {
+      "type": "number"
+    },
+    "additionalInfo3": {
+      "type": "string"
+    },
+    "additionalInfo4": {
+      "type": "string"
+    },
+    "externalRef": {
+      "type": "string"
+    },
+    "expiryDate": {
+      "type": "string"
+    },
+    "lineItems": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "required": [
+            "lineId",
+            "inputs"
+          ],
+          "properties": {
+            "lineId": {
+              "type": "string"
+            },
+            "inputs": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "valueObject": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

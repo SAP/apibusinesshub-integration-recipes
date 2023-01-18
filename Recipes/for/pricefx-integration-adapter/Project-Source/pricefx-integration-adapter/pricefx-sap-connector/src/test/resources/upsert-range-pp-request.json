@@ -1,0 +1,12 @@
+[
+  {
+    "value": "PRODUCT1",
+    "lowerBound": 3,
+    "upperBound": 4
+  },
+  {
+    "value": "PRODUCT2",
+    "lowerBound": 2,
+    "upperBound": 3
+  }
+]

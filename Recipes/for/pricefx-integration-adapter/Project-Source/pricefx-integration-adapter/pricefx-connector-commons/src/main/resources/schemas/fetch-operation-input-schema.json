@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "FetchRequest",
+  "type": "object",
+  "examples": [
+    {
+      "sortBy": [
+        "uniqueName"
+      ],
+      "resultFields": [
+        "uniqueName"
+      ],
+      "data": {
+        "operator": "and",
+        "criteria": [
+          {
+            "fieldName": "uniqueName",
+            "operator": "equals",
+            "value": "12345.Q"
+          }
+        ]
+      }
+    }
+  ],
+  "required": [
+    "data",
+    "sortBy"
+  ],
+  "properties": {
+    "sortBy": {
+      "type": "array",
+      "description": "sort by fields",
+      "items": {
+        "type": "string"
+      }
+    },
+    "resultFields": {
+      "type": "array",
+      "description": "result fields",
+      "items": {
+        "type": "string"
+      }
+    },
+    "data": {
+      "type": "object",
+      "required": [
+        "operator",
+        "criteria"
+      ],
+      "properties": {
+        "operator": {
+          "type": "string",
+          "description": "Filter operation - AND / OR",
+          "default": "and"
+        },
+        "criteria": {
+          "type": "array",
+          "description": "List of filters",
+          "items": {
+            "type": "object",
+            "description": "Filter",
+            "required": [
+              "fieldName",
+              "operator"
+            ],
+            "properties": {
+              "fieldName": {
+                "type": "string",
+                "description": "field name"
+              },
+              "operator": {
+                "type": "string",
+                "description": "operator - equals, greaterThan, lessThan"
+              },
+              "value": {
+                "type": "string",
+                "description": "value"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

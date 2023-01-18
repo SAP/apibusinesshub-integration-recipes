@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "ManualPriceListItemResponse",
+  "type": "object",
+  "properties": {
+    "sku": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "unitOfMeasure": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "comments": {
+      "type": "string"
+    },
+    "lastUpdateByName": {
+      "type": "string"
+    },
+    "createdByName": {
+      "type": "string"
+    },
+    "pricelistId": {
+      "type": "number"
+    },
+    "lastUpdateDate": {
+      "type": "string"
+    },
+    "createDate": {
+      "type": "string"
+    },
+    "attribute1": {
+      "type": "string"
+    },
+    "attribute2": {
+      "type": "string"
+    },
+    "attribute3": {
+      "type": "string"
+    },
+    "attribute4": {
+      "type": "string"
+    },
+    "attribute5": {
+      "type": "string"
+    },
+    "attribute6": {
+      "type": "string"
+    },
+    "attribute7": {
+      "type": "string"
+    },
+    "attribute8": {
+      "type": "string"
+    },
+    "attribute9": {
+      "type": "string"
+    },
+    "attribute10": {
+      "type": "string"
+    },
+    "attribute11": {
+      "type": "string"
+    },
+    "attribute12": {
+      "type": "string"
+    },
+    "attribute13": {
+      "type": "string"
+    },
+    "attribute14": {
+      "type": "string"
+    },
+    "attribute15": {
+      "type": "string"
+    },
+    "attribute16": {
+      "type": "string"
+    },
+    "attribute17": {
+      "type": "string"
+    },
+    "attribute18": {
+      "type": "string"
+    },
+    "attribute19": {
+      "type": "string"
+    },
+    "attribute20": {
+      "type": "string"
+    },
+    "attribute21": {
+      "type": "string"
+    },
+    "attribute22": {
+      "type": "string"
+    },
+    "attribute23": {
+      "type": "string"
+    },
+    "attribute24": {
+      "type": "string"
+    },
+    "attribute25": {
+      "type": "string"
+    },
+    "attribute26": {
+      "type": "string"
+    },
+    "attribute27": {
+      "type": "string"
+    },
+    "attribute28": {
+      "type": "string"
+    },
+    "attribute29": {
+      "type": "string"
+    },
+    "attribute30": {
+      "type": "string"
+    }
+  }
+}

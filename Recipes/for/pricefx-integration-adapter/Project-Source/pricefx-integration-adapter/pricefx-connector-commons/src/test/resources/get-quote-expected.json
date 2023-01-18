@@ -1,0 +1,95 @@
+{
+  "uniqueName": "P-20833",
+  "label": "firstquote",
+  "lineItems": [
+    {
+      "inputs": [
+        {
+          "name": "headerQty",
+          "label": "headerQty",
+          "type": "",
+          "parameterConfig": {}
+        }
+      ],
+      "outputs": [
+        {
+          "resultName": "Qty",
+          "resultLabel": "Qty",
+          "displayOptions": 16,
+          "formatType": "NUMERIC",
+          "resultType": "SIMPLE",
+          "overrideAllowEmpty": true,
+          "overridable": false,
+          "overridden": false
+        },
+        {
+          "resultName": "Price",
+          "resultLabel": "Price",
+          "result": "0",
+          "displayOptions": 16,
+          "formatType": "MONEY",
+          "resultType": "SIMPLE",
+          "overrideAllowEmpty": true,
+          "overridable": false,
+          "overridden": false
+        }
+      ],
+      "dirty": false,
+      "lineId": "G8LxgFudZXoFnTQ",
+      "calculationStatus": 2,
+      "editabilityStatus": 0,
+      "label": "TEST",
+      "sku": "TEST",
+      "folder": false,
+      "treeLabel": "TEST",
+      "createDate": "2020-09-15T03:29:17",
+      "lastUpdateDate": "2020-09-15T03:29:17"
+    }
+  ],
+  "targetDate": "2020-06-09",
+  "workflowStatus": "WITHDRAWN",
+  "headerText": "",
+  "inputs": [
+    {
+      "name": "Customer",
+      "label": "Customer",
+      "url": "/fetch/C/",
+      "type": "CUSTOMER",
+      "value": "0001",
+      "valueHint": "Boomi",
+      "parameterConfig": {}
+    },
+    {
+      "name": "headerQty",
+      "label": "headerQty",
+      "type": "",
+      "parameterConfig": {}
+    }
+  ],
+  "outputs": [
+    {
+      "resultName": "ValueOfLine",
+      "resultLabel": "ValueOfLine",
+      "formatType": "MONEY",
+      "overrideAllowEmpty": false,
+      "overridable": false,
+      "overridden": false
+    }
+  ],
+  "lastUpdateByName": "price.fx",
+  "createdByName": "price.fx",
+  "submittedByName": "price.fx",
+  "calculationStatus": 2,
+  "dirty": false,
+  "refreshInputs": false,
+  "numberOfAttachments": 0,
+  "expiryDate": "2020-06-09",
+  "customerId": "0001",
+  "customerName": "Boomi",
+  "quoteStatus": "DRAFT",
+  "approvalRequiredEmailAttachmentsJson": "[]",
+  "hasWorkflowHistory": true,
+  "createDate": "2020-06-09T02:33:13",
+  "lastUpdateDate": "2020-09-15T03:29:24",
+  "rootUniqueName": "P-20833"
+}

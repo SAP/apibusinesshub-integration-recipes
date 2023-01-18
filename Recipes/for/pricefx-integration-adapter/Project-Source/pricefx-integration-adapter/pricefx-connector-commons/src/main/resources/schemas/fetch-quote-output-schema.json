@@ -1,0 +1,339 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "calculableInput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "valueObject": {
+          "type": "object"
+        },
+        "value": {
+          "type": "string"
+        },
+        "valueHint": {
+          "type": "string"
+        },
+        "parameterConfig": {
+          "type": "object"
+        },
+        "lookupTableId": {
+          "type": "string"
+        },
+        "readOnly": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "filter": {
+          "type": "string"
+        },
+        "parameterGroup": {
+          "type": "string"
+        },
+        "labelTranslations": {
+          "type": "string"
+        },
+        "addUnknownValues": {
+          "type": "string"
+        },
+        "alwaysEditable": {
+          "type": "boolean"
+        },
+        "parameterConfig": {
+          "type": "object"
+        },
+        "valueOptions": {
+          "type": "string"
+        }
+      }
+    },
+    "calculableOutput": {
+      "type": "object",
+      "properties": {
+        "resultName": {
+          "type": "string"
+        },
+        "resultLabel": {
+          "type": "string"
+        },
+        "resultObject": {
+          "type": "object"
+        },
+        "result": {
+          "type": "string"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alertMessage": {
+          "type": "string"
+        },
+        "alertType": {
+          "type": "string"
+        },
+        "displayOptions": {
+          "type": "number"
+        },
+        "formatType": {
+          "type": "string"
+        },
+        "suffix": {
+          "type": "string"
+        },
+        "resultType": {
+          "type": "string"
+        },
+        "cssProperties": {
+          "type": "string"
+        },
+        "userGroup": {
+          "type": "string"
+        },
+        "resultGroup": {
+          "type": "string"
+        },
+        "overrideValueOptions": {
+          "type": "string"
+        },
+        "overrideAllowEmpty": {
+          "type": "boolean"
+        },
+        "labelTranslations": {
+          "type": "string"
+        },
+        "overridable": {
+          "type": "boolean"
+        },
+        "overridden": {
+          "type": "boolean"
+        },
+        "resultDescription": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "uniqueName": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "targetDate": {
+      "type": "string"
+    },
+    "workflowStatus": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "headerText": {
+      "type": "string"
+    },
+    "userGroupEdit": {
+      "type": "string"
+    },
+    "userGroupViewDetails": {
+      "type": "string"
+    },
+    "additionalInfo1": {
+      "type": "number"
+    },
+    "additionalInfo2": {
+      "type": "number"
+    },
+    "additionalInfo3": {
+      "type": "string"
+    },
+    "additionalInfo4": {
+      "type": "string"
+    },
+    "serverMessages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "serverMessagesExtended": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "creationWorkflowStatus": {
+      "type": "string"
+    },
+    "creationWorkflowCurrentStep": {
+      "type": "string"
+    },
+    "creationWorkflowStepCount": {
+      "type": "string"
+    },
+    "creationWorkflowStepLabel": {
+      "type": "string"
+    },
+    "signature": {
+      "type": "string"
+    },
+    "externalRef": {
+      "type": "string"
+    },
+    "customerGroup": {
+      "type": "string"
+    },
+    "approvedByName": {
+      "type": "string"
+    },
+    "deniedByName": {
+      "type": "string"
+    },
+    "supersededBy": {
+      "type": "string"
+    },
+    "prevRev": {
+      "type": "string"
+    },
+    "quoteType": {
+      "type": "string"
+    },
+    "lastUpdateByName": {
+      "type": "string"
+    },
+    "createdByName": {
+      "type": "string"
+    },
+    "submittedByName": {
+      "type": "string"
+    },
+    "calculationStatus": {
+      "type": "number"
+    },
+    "dirty": {
+      "type": "boolean"
+    },
+    "refreshInputs": {
+      "type": "boolean"
+    },
+    "numberOfAttachments": {
+      "type": "number"
+    },
+    "expiryDate": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "string"
+    },
+    "customerName": {
+      "type": "string"
+    },
+    "quoteStatus": {
+      "type": "string"
+    },
+    "approvalRequiredEmailAttachmentsJson": {
+      "type": "string"
+    },
+    "hasWorkflowHistory": {
+      "type": "boolean"
+    },
+    "createDate": {
+      "type": "string"
+    },
+    "lastUpdateDate": {
+      "type": "string"
+    },
+    "rootUniqueName": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "#/definitions/calculableInput"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "#/definitions/calculableOutput"
+      }
+    },
+    "lineItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dirty": {
+            "type": "boolean"
+          },
+          "lineId": {
+            "type": "string"
+          },
+          "parentId": {
+            "type": "string"
+          },
+          "calculationStatus": {
+            "type": "number"
+          },
+          "editabilityStatus": {
+            "type": "number"
+          },
+          "label": {
+            "type": "string"
+          },
+          "sku": {
+            "type": "string"
+          },
+          "priceRecordId": {
+            "type": "string"
+          },
+          "folder": {
+            "type": "boolean"
+          },
+          "treeLabel": {
+            "type": "string"
+          },
+          "createDate": {
+            "type": "string"
+          },
+          "lastUpdateDate": {
+            "type": "string"
+          },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/definitions/calculableInput"
+            }
+          },
+          "outputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/definitions/calculableOutput"
+            }
+          }
+        }
+      }
+    }
+  }
+}

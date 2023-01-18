@@ -1,0 +1,32 @@
+[
+  {
+    "loginName": "USER",
+    "email": "user@pricefx.com",
+    "firstName": "user",
+    "lastName": "user",
+    "productFilterCriteria": {
+      "operator": "and",
+      "criteria": [
+        {
+          "operator": "notNull",
+          "fieldName": "sku"
+        }
+      ]
+    }
+  },
+  {
+    "loginName": "USER2",
+    "email": "user2@pricefx.com",
+    "firstName": "user2",
+    "lastName": "user2",
+    "productFilterCriteria": {
+      "operator": "and",
+      "criteria": [
+        {
+          "operator": "notNull",
+          "fieldName": "sku"
+        }
+      ]
+    }
+  }
+]

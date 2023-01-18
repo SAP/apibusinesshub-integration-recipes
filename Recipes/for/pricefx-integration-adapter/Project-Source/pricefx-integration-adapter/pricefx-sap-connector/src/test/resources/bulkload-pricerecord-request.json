@@ -1,0 +1,34 @@
+{
+  "header": [
+    "sourceId",
+    "lineId",
+    "sku",
+    "customerId",
+    "attribute1",
+    "attribute2",
+    "attribute3",
+    "validAfter"
+  ],
+  "data": [
+    [
+      "P-12345",
+      "PRICERECORD3",
+      "TEST",
+      "0001",
+      "1",
+      "1",
+      "1",
+      "2021-01-01"
+    ],
+    [
+      "P-12345",
+      "PRICERECORD4",
+      "TEST",
+      "0001",
+      "1",
+      "1",
+      "1",
+      "2021-01-01"
+    ]
+  ]
+}

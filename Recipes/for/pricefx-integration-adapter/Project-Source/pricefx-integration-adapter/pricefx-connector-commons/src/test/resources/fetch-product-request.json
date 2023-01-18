@@ -1,0 +1,19 @@
+{
+  "data": {
+    "operator": "and",
+    "criteria": [
+      {
+        "fieldName": "sku",
+        "operator": "startsWith",
+        "value": "PRODUCT"
+      }
+    ]
+  },
+  "sortBy": [
+    "sku"
+  ],
+  "resultFields": [
+    "sku",
+    "label"
+  ]
+}

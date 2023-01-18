@@ -1,0 +1,10 @@
+{
+  "operator": "and",
+  "criteria": [
+    {
+      "fieldName": "sku",
+      "operator": "startsWith",
+      "value": "PRODUCT"
+    }
+  ]
+}

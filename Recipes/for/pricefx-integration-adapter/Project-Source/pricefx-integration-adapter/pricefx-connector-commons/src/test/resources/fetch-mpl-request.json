@@ -1,0 +1,15 @@
+{
+  "data": {
+    "operator": "and",
+    "criteria": [
+      {
+        "fieldName": "uniqueName",
+        "operator": "equals",
+        "value": "TEST"
+      }
+    ]
+  },
+  "sortBy": [
+    "uniqueName"
+  ]
+}

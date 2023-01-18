@@ -1,0 +1,6 @@
+/.idea/
+*.iml
+/target/
+/src/test/integration/net/pricefx/adapter/sap/POCTest.java
+/src/test/integration/net/pricefx/adapter/sap/POCTest.groovy
+/src/test/integration/net/pricefx/adapter/sap/POCIntegrationTest.groovy

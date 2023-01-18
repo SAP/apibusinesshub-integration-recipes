@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "CustomerExtensionUpsertRequest",
+  "type": "array",
+  "default": [],
+  "items": {
+    "type": "object",
+    "required": [
+      "customerId"
+    ],
+    "properties": {
+      "customerId": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "sku": "PRODUCT1",
+    "label": "PRODUCT1",
+    "unitOfMeasure": "m",
+    "currency": "AUD",
+    "attribute1": 1,
+    "attribute2": "1"
+  },
+  {
+    "sku": "PRODUCT2",
+    "label": "PRODUCT2",
+    "unitOfMeasure": "m",
+    "currency": "AUD",
+    "attribute1": 2,
+    "attribute2": "1"
+  }
+]
