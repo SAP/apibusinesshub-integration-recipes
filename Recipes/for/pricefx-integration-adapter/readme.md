@@ -30,8 +30,8 @@ pricefx-sap-rabbitmq-connector % mvn clean install -Posgi
 ## Sample integration flows
 Before running these integration flows, you must set up a Pricefx partition and a security material for authentication.
 You could authenticate by either OAuth credentials and OAuth token, or a Secure Parameter with JWT token.
-![iflowimage](JWT Token.png)
-![iflowimage](Oauth Token.png)
+![iflowimage](JWT-Token.png)
+![iflowimage](Oauth-Token.png)
 ![iflowimage](adapter-connection-configuration.png)
 
 To run RabbitMQ listener integration flow, you need to get the connection details from Pricefx support or project team first.
@@ -39,7 +39,7 @@ To run RabbitMQ listener integration flow, you need to get the connection detail
 To see the response message, please deploy the flow and turn on trace mode.
 
 Pricefx Integration Adapter supports more operations than the ones used in the samples. Please refer to Pricefx integration adapter documentation for other operations.
-![iflowimage](adapter operation configuration.png)
+![iflowimage](adapter-operation-configuration.png)
 
 ### Pricefx RabbitMQ listener
 This integration shows an example on how Pricefx events are consumed.
@@ -57,7 +57,7 @@ This integration shows an example on how records are loaded to Pricefx
 
 #### Sample Input
 The sample request message of loading 2 product records is configured in externalized parameter.
-![iflowimage](external parameter payload.png)
+![iflowimage](external-parameter-payload.png)
 
 #### Sample Output
 The response message contains a number > 0 if records are successfully loaded.
@@ -96,7 +96,7 @@ This integration shows an example on how records are fetched from Pricefx by key
 There is no request message for this operation. The key is set in exchange property - uniqueId.
 It can be configured in externalized parameter.
 
-![iflowimage](content modifier.png)
+![iflowimage](content-modifier.png)
 
 #### Sample Output
 The response message contains the fetched record
