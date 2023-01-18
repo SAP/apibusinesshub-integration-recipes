@@ -2,8 +2,10 @@
 
 \| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP/apibusinesshub-integration-recipes/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20Pricefx-integration-adapter%20 ) \| [Report a bug](https://github.com/SAP/apibusinesshub-integration-recipes/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20Pricefx-integration-adapter%20 ) \| [Fix documentation](https://github.com/SAP/apibusinesshub-integration-recipes/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20Pricefx-integration-adapter%20 ) \|
 
-![Mandy Siu](https://github.com/mandy-siu.png?size=50 ) | [Mandy Siu](https://github.com/mandy-siu ) |
-----|--------------------------------------------|
+![Mandy Siu](https://github.com/mandy-siu.png?size=50 ) | [M. Siu](https://github.com/mandy-siu ) |
+----|-----------------------------------------|
+
+![iflowimage](pricefx.png)
 
 Pricefx is a cloud-native platform supporting the entire pricing journey, from setting optimal prices and managing the rebate process to maximizing your organization's pricing power. 
 
@@ -20,6 +22,16 @@ Integration flows can listen to Pricefx events via Pricefx RabbitMQ integration 
 * [Pricefx official site](https://www.pricefx.com/)
 * [Pricefx official documentation](https://knowledge.pricefx.com/)
 * [Pricefx integration adapter documentation](https://pricefx.atlassian.net/wiki/spaces/ACC/overview/)
+
+## Contact us:
+
+If you are interested in Pricefx product, please contact us at
+
+https://www.pricefx.com/contact-us/
+
+If you are Pricefx existing customers and have questions regarding configuring these integration flows, please contact your Customer Success Representative or contact helpdesk at
+
+https://support.pricefx.eu
 
 ## Building the Pricefx integration adapter
 pricefx-integration-adapter % mvn clean install -Posgi
