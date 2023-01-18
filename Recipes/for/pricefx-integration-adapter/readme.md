@@ -12,7 +12,7 @@ RabbitMQ is a popular open source message broker and Pricefx makes use of it to 
 These two integration adapters enable integration flows to connect to Pricefx so that Pricefx can integrate seamlessly with SAP applications.
 Integration flows can listen to Pricefx events via Pricefx RabbitMQ integration adapter and to perform any actions to Pricefx via Pricefx Integration Adapter.
 
-[Download the integration flow sample](IntegrationFlow/Pricefx Integration Adapter Samples.zip)\
+[Download the integration flow sample](IntegrationFlow/Pricefx-Integration-Adapter-Samples.zip)\
 
 [Instructions to build the adapter](../../build-deploy-camel-community-adapters.md)
 
