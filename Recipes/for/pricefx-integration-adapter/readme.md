@@ -32,7 +32,7 @@ Before running these integration flows, you must set up a Pricefx partition and 
 You could authenticate by either OAuth credentials and OAuth token, or a Secure Parameter with JWT token.
 ![iflowimage](JWT Token.png)
 ![iflowimage](Oauth Token.png)
-![iflowimage](adapter connection configuration.png)
+![iflowimage](adapter-connection-configuration.png)
 
 To run RabbitMQ listener integration flow, you need to get the connection details from Pricefx support or project team first.
 
