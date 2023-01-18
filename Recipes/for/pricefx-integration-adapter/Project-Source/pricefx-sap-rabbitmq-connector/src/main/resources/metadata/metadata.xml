@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ComponentMetadata xmlns:gen="http://www.sap.hci.adk.com/gen"
+                   ComponentId="ctype::Adapter/cname::Pricefx-MQ-Integration-Adapter/vendor::Pricefx/version::1.0.0"
+                   ComponentName="Pricefx-MQ-Integration-Adapter" UIElementType="Adapter"
+                   IsExtension="false" IsFinal="true" IsPreserves="true"
+                   IsDefaultGenerator="true" ComponentDisplayName="Pricefx-MQ-Integration-Adapter">
+
+
+    <Variant VariantName="Pricefx RabbitMQ Listener"
+             VariantId="ctype::AdapterVariant/cname::Pricefx-MQ-Integration-Adapter/vendor::Pricefx/tp::pfx-mq-general/mp::pfx-mq-general/direction::Sender"
+             MetadataVersion="2.0" gen:RuntimeComponentBaseUri="pfx-mq-general" AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></Schema>
+            </Content>
+        </OutputContent>
+
+        <Tab id="configuration">
+            <GuiLabels guid="989d409c-2959-4d9b-a789-66a3d8c99db5">
+                <Label language="EN">Configuration</Label>
+            </GuiLabels>
+            <AttributeGroup id="configuration">
+                <Name xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:type="xs:string">URI Setting
+                </Name>
+                <GuiLabels guid="fefb101a-dbfd-4806-b314-1e76df02f983">
+                    <Label language="EN">Configuration</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>hostname</ReferenceName>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>portNumber</ReferenceName>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>vhost</ReferenceName>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>queue</ReferenceName>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>credentials</ReferenceName>
+                </AttributeReference>
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+
+    <AttributeMetadata>
+        <Name>hostname</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="8350f968-538f-4fe6-93ae-9ae98a459209">
+            <Label language="EN">Host</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>portNumber</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:integer</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="c99e48fa-4fb9-4ebb-b0dc-97aca7894676">
+            <Label language="EN">Port</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>vhost</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ff641598-55fe-4656-9a94-63e16f1de335">
+            <Label language="EN">V Host</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>queue</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="e66d3b85-5e61-45b1-b9a4-974fb8cc1598">
+            <Label language="EN">Queue</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>credentials</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="eb00ef621-9323-4e88-8828-7e29f30046e8">
+            <Label language="EN">Credentials</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+
+
+
+
+
+
+</ComponentMetadata>
