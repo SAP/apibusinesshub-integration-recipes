@@ -47,7 +47,7 @@ This integration shows an example on how Pricefx events are consumed.
 #### Sample Input
 The sample event message can be captured from tracing the message processing log. 
 In this example, the integration flow listens to Pricefx events and only quote update events would be processed. Others are discarded.
-![iflowimage](Sample Event.png)
+![iflowimage](Sample-Event.png)
 
 #### Sample Output
 There is no response message in this example.
