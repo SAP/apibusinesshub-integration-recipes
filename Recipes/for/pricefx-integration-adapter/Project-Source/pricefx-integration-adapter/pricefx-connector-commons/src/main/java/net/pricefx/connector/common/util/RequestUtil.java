@@ -151,11 +151,13 @@ public class RequestUtil {
 
     public static boolean isOperatorSupported(String operatorIdValue) {
         if (StringUtils.isEmpty(operatorIdValue)) return false;
+        if ("isEmpty".equals(operatorIdValue) || "notEmpty".equals(operatorIdValue)) return true;
         return SUPPORTED_OPERATORS.stream().filter((OperatorId op) -> operatorIdValue.equals(op.getValue())).count() > 0;
     }
 
     public static boolean isValidValue(String operatorIdValue, JsonNode value) {
         OperatorId operatorId = getOperatorId(operatorIdValue);
+        if ("isEmpty".equals(operatorIdValue) || "notEmpty".equals(operatorIdValue)) return true;
         if (operatorId == null) return false;
 
         switch (operatorId) {
