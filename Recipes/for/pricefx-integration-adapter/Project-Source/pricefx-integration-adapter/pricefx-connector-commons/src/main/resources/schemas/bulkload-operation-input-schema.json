@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "BulkLoadRequest",
+  "type": "object",
+  "required": [
+    "header",
+    "data"
+  ],
+  "properties": {
+    "header": {
+      "type": "array",
+      "description": "list of header fields",
+      "items": {
+        "type": "string"
+      }
+    },
+    "data": {
+      "type": "array",
+      "description": "list of data fields",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

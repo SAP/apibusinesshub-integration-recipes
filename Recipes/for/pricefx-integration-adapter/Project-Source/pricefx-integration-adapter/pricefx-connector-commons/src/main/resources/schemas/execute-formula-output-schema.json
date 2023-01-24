@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "FormulaExecutionResponse",
+  "type": "object",
+  "properties": {
+    "resultName": {
+      "type": "string"
+    },
+    "result": {
+      "type": "string"
+    },
+    "resultObject": {
+      "type": "object"
+    },
+    "resultArray": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

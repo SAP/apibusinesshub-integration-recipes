@@ -1,0 +1,256 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "groupDefinition": {
+      "type": "object",
+      "properties": {
+        "uniqueName": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "createDate": {
+          "type": "string"
+        },
+        "lastUpdateDate": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "loginName": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "additionalInfo1": {
+      "type": "number"
+    },
+    "additionalInfo2": {
+      "type": "number"
+    },
+    "additionalInfo3": {
+      "type": "string"
+    },
+    "additionalInfo4": {
+      "type": "string"
+    },
+    "wizardDashboardName": {
+      "type": "string"
+    },
+    "emailLocale": {
+      "type": "string"
+    },
+    "defaultUserGroupEdit": {
+      "type": "string"
+    },
+    "defaultUserGroupViewDetails": {
+      "type": "string"
+    },
+    "passwordExpiry": {
+      "type": "string"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "#/definitions/groupDefinition"
+      }
+    },
+    "businessRoles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uniqueName": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uniqueName": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "module": {
+                  "type": "string"
+                },
+                "createDate": {
+                  "type": "string"
+                },
+                "lastUpdateDate": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/definitions/groupDefinition"
+            }
+          },
+          "createDate": {
+            "type": "string"
+          },
+          "lastUpdateDate": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "activated": {
+      "type": "boolean"
+    },
+    "workflowEmailingActivated": {
+      "type": "boolean"
+    },
+    "noSession": {
+      "type": "boolean"
+    },
+    "requireTFA": {
+      "type": "boolean"
+    },
+    "platformManaged": {
+      "type": "boolean"
+    },
+    "firstLogin": {
+      "type": "boolean"
+    },
+    "receiveAdminEmail": {
+      "type": "boolean"
+    },
+    "ssoOnly": {
+      "type": "boolean"
+    },
+    "firstLogin": {
+      "type": "boolean"
+    },
+    "roleNames": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "allRoleNames": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "allGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "#/definitions/groupDefinition"
+      }
+    },
+    "createDate": {
+      "type": "string"
+    },
+    "lastUpdateDate": {
+      "type": "string"
+    },
+    "lastLogin": {
+      "type": "string"
+    },
+    "productFilterCriteria": {
+      "type": "object",
+      "required": [
+        "operator",
+        "criteria"
+      ],
+      "properties": {
+        "operator": {
+          "type": "string",
+          "description": "Filter operation - AND / OR",
+          "default": "and"
+        },
+        "criteria": {
+          "type": "array",
+          "description": "List of filters",
+          "items": {
+            "type": "object",
+            "description": "Filter",
+            "required": [
+              "fieldName",
+              "operator"
+            ],
+            "properties": {
+              "fieldName": {
+                "type": "string",
+                "description": "field name"
+              },
+              "operator": {
+                "type": "string",
+                "description": "operator - equals, greaterThan, lessThan"
+              },
+              "value": {
+                "type": "string",
+                "description": "value"
+              }
+            }
+          }
+        }
+      }
+    },
+    "customerFilterCriteria": {
+      "type": "object",
+      "required": [
+        "operator",
+        "criteria"
+      ],
+      "properties": {
+        "operator": {
+          "type": "string",
+          "description": "Filter operation - AND / OR",
+          "default": "and"
+        },
+        "criteria": {
+          "type": "array",
+          "description": "List of filters",
+          "items": {
+            "type": "object",
+            "description": "Filter",
+            "required": [
+              "fieldName",
+              "operator"
+            ],
+            "properties": {
+              "fieldName": {
+                "type": "string",
+                "description": "field name"
+              },
+              "operator": {
+                "type": "string",
+                "description": "operator - equals, greaterThan, lessThan"
+              },
+              "value": {
+                "type": "string",
+                "description": "value"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

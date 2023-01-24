@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "MetadataResponse",
+  "type": "object",
+  "properties": {
+    "fieldName": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "module": {
+      "type": "string"
+    },
+    "fieldType": {
+      "type": "string"
+    },
+    "requiredField": {
+      "type": "boolean"
+    },
+    "readOnly": {
+      "type": "boolean"
+    },
+    "labelTranslations": {
+      "type": "string"
+    }
+  }
+}

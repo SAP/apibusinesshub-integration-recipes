@@ -1,0 +1,19 @@
+{
+  "header": [
+    "value",
+    "lowerBound",
+    "upperBound"
+  ],
+  "data": [
+    [
+      "PRODUCT3",
+      105,
+      205
+    ],
+    [
+      "PRODUCT4",
+      205,
+      305
+    ]
+  ]
+}

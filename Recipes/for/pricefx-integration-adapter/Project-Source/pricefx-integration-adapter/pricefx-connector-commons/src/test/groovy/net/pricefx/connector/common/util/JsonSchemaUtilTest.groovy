@@ -1,0 +1,125 @@
+package net.pricefx.connector.common.util
+
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.node.ObjectNode
+import com.fasterxml.jackson.databind.node.TextNode
+import com.google.common.collect.ImmutableList
+import spock.lang.Specification
+
+import static net.pricefx.connector.common.util.PFXTypeCode.LOOKUPTABLE
+
+class JsonSchemaUtilTest extends Specification {
+    def schema = "{\n" +
+            "  \"\$schema\": \"http://json-schema.org/draft-07/schema#\",\n" +
+            "  \"id\": \"ProductQuery\",\n" +
+            "  \"type\": \"object\",\n" +
+            "  \"properties\": {\n" +
+            "    \"sku\": {\n" +
+            "      \"type\": \"string\"\n" +
+            "    }\n" +
+            "  }\n" +
+            "}"
+
+    def arraySchema = "{\n" +
+            "  \"\$schema\": \"http://json-schema.org/draft-07/schema#\",\n" +
+            "  \"id\": \"ProductExtensionUpsertRequest\",\n" +
+            "  \"type\": \"array\",\n" +
+            "  \"default\": [],\n" +
+            "  \"items\": {\n" +
+            "    \"type\": \"object\",\n" +
+            "    \"required\": [\n" +
+            "      \"sku\"\n" +
+            "    ],\n" +
+            "    \"properties\": {\n" +
+            "      \"sku\": {\n" +
+            "        \"type\": \"string\"\n" +
+            "      }\n" +
+            "    }\n" +
+            "  }\n" +
+            "}"
+
+    def schemaNode = new ObjectMapper().readTree(schema)
+
+
+    def "getFields"() {
+        when:
+        def results = JsonSchemaUtil.getFields(schemaNode)
+
+        then:
+        [PFXConstants.FIELD_SKU] == results
+
+        when:
+        def empty = ((ObjectNode) schemaNode.deepCopy()).remove(JsonSchemaUtil.SCHEMA_PROPERTIES)
+        results = JsonSchemaUtil.getFields(empty)
+
+        then:
+        results.isEmpty()
+
+    }
+
+    def "updateSchemaWithMetadata"() {
+        given:
+        def matrix = PFXLookupTableType.valueOf(PFXLookupTableType.LookupTableType.MATRIX.name(), PFXLookupTableType.LookupTableType.MATRIX2.name())
+        def tempSchemaNode = schemaNode.deepCopy()
+
+        when:
+        JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, null)
+
+        then:
+        schemaNode == tempSchemaNode
+
+        when:
+        def field = new HashMap<String, String>()
+        field.put(PFXConstants.FIELD_NAME, "testing")
+        field.put("numeric", true)
+
+        List<Map<String, Object>> meta = ImmutableList.of(field)
+        JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, meta)
+
+        then:
+        null != tempSchemaNode.get(JsonSchemaUtil.SCHEMA_PROPERTIES).get("testing")
+
+        when:
+        tempSchemaNode = schemaNode.deepCopy()
+        JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, null, null, null, false, false, true)
+
+        then:
+        schemaNode == tempSchemaNode
+
+        when:
+        JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, LOOKUPTABLE, matrix, null, true, true, true)
+
+        then:
+
+
+        1 == tempSchemaNode.toString().count("\"attribute1\"")
+        1 == tempSchemaNode.toString().count("\"attribute10\"")
+        1 == tempSchemaNode.toString().count("\"key1\"")
+
+        when:
+        tempSchemaNode = new TextNode("x")
+        JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, LOOKUPTABLE, matrix, null, true, true, true)
+
+        then:
+        "x" == tempSchemaNode.textValue()
+
+        when:
+        tempSchemaNode = new ObjectMapper().readTree(arraySchema)
+        JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, LOOKUPTABLE, matrix, null, true, true, true)
+
+        then:
+        1 == tempSchemaNode.toString().count("\"attribute1\"")
+        1 == tempSchemaNode.toString().count("\"attribute10\"")
+        1 == tempSchemaNode.toString().count("\"key1\"")
+
+        when:
+        tempSchemaNode = new ObjectMapper().readTree(schema)
+        JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, LOOKUPTABLE, matrix, null, true, true, false)
+
+        then:
+        1 == tempSchemaNode.toString().count("\"attribute1\"")
+        1 == tempSchemaNode.toString().count("\"attribute10\"")
+        1 == tempSchemaNode.toString().count("\"key1\"")
+        2 == tempSchemaNode.toString().count("\"type\"")
+    }
+}

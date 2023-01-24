@@ -1,0 +1,15 @@
+{
+  "data": {
+    "operator": "and",
+    "criteria": [
+      {
+        "fieldName": "name",
+        "operator": "startsWith",
+        "value": "PRODUCT"
+      }
+    ]
+  },
+  "sortBy": [
+    "name"
+  ]
+}

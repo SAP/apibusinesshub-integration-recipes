@@ -1,0 +1,19 @@
+{
+  "data": {
+    "operator": "and",
+    "criteria": [
+      {
+        "fieldName": "customerId",
+        "operator": "startsWith",
+        "value": "CUSTOMER"
+      }
+    ]
+  },
+  "sortBy": [
+    "customerId"
+  ],
+  "resultFields": [
+    "customerId",
+    "attribute1"
+  ]
+}

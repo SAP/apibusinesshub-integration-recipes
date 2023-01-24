@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "CustomerResponse",
+  "type": "object",
+  "properties": {
+    "customerId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "isParent": {
+      "type": "boolean"
+    },
+    "userGroupEdit": {
+      "type": "string"
+    },
+    "userGroupViewDetails": {
+      "type": "string"
+    },
+    "lastUpdateDate": {
+      "type": "string"
+    },
+    "createDate": {
+      "type": "string"
+    }
+  }
+}

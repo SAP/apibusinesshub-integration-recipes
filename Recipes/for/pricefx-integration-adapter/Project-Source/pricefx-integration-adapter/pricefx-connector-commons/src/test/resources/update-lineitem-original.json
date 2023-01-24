@@ -1,0 +1,24 @@
+{
+  "uniqueName": "P-24049",
+  "version": 1,
+  "typedId": "24049.Q",
+  "headerText": "xxxxx",
+  "inputs": [
+    {
+      "name": "headerQty",
+      "value": 10
+    }
+  ],
+  "lineItems": [
+    {
+      "lineId": "12345",
+      "sku": "abc",
+      "inputs": [
+        {
+          "name": "lineQty",
+          "value": 20
+        }
+      ]
+    }
+  ]
+}

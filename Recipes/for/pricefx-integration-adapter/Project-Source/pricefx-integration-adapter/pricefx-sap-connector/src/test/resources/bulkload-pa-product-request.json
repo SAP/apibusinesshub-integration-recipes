@@ -1,0 +1,19 @@
+{
+  "header": [
+    "sku",
+    "label",
+    "image"
+  ],
+  "data": [
+    [
+      "inttest1",
+      "inttest1",
+      "yes"
+    ],
+    [
+      "inttest2",
+      "inttest2",
+      "yes"
+    ]
+  ]
+}

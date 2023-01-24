@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "DataloadResponse",
+  "type": "object",
+  "properties": {
+    "label": {
+      "type": "string"
+    },
+    "calculationMessages": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "targetName": {
+      "type": "string"
+    },
+    "sourceName": {
+      "type": "string"
+    },
+    "withTargetSnapshot": {
+      "type": "boolean"
+    },
+    "schedules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "numberOfItems": {
+      "type": "number"
+    },
+    "calculationConfig": {
+      "type": "object"
+    },
+    "createDate": {
+      "type": "string"
+    },
+    "requestTime": {
+      "type": "number"
+    },
+    "lastUpdateTime": {
+      "type": "number"
+    },
+    "loadCompleteTime": {
+      "type": "number"
+    },
+    "lastUpdateDate": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "calculationStartDate": {
+      "type": "string"
+    },
+    "calculationDate": {
+      "type": "string"
+    },
+    "isDefault": {
+      "type": "boolean"
+    },
+    "incremental": {
+      "type": "boolean"
+    },
+    "distributed": {
+      "type": "boolean"
+    },
+    "continuous": {
+      "type": "boolean"
+    },
+    "valid": {
+      "type": "boolean"
+    },
+    "isPlasma": {
+      "type": "boolean"
+    },
+    "incLoadDate": {
+      "type": "string"
+    }
+  }
+}

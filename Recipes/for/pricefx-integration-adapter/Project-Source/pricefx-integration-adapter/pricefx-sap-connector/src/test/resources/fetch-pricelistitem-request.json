@@ -1,0 +1,14 @@
+{
+  "data": {
+    "operator": "and",
+    "criteria": [
+      {
+        "fieldName": "sku",
+        "operator": "notNull"
+      }
+    ]
+  },
+  "sortBy": [
+    "sku"
+  ]
+}
