@@ -1,4 +1,4 @@
-# SAP Cloud Integration with Alert Notification service for SAP BTP
+# SAP Cloud Integration with Alert Notification service for SAP BTP: JMS Service
 
 \| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20SAP%20Cloud%20Integration%20with%20Alert%20Notification%20service%20for%20SAP%20BTP%20 ) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20SAP%20Cloud%20Integration%20with%20Alert%20Notification%20service%20for%20SAP%20BTP%20 ) \| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20SAP%20Cloud%20Integration%20with%20Alert%20Notification%20service%20for%20SAP%20BTP%20 ) \|
 
@@ -12,7 +12,7 @@ This package allows you to do the following:
 
 * Send notifications for JMS resource overload with Alert Notification service
 
-[Download the integration package](SAPCloudIntegrationwithAlertNotificationserviceforSAPBTP.zip)\
+[Download the integration package](SAPCloudIntegrationwithAlertNotificationserviceforSAPBTP_ JMSService.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/SAPCloudIntegrationwithAlertNotificationserviceforSAPBTP/overview)\
 [View documentation](SAPCloudIntegrationwithAlertNotificationserviceforSAPBTP.pdf)\
 [View high level effort](effort.md)

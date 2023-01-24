@@ -9,7 +9,7 @@ Package that contains an iFlow that integrates SAP SuccessFactors and the Saudi 
 
 <p></p>
 
-[Download the integration package](SAPSuccessFactorsRecruitingManagementIntegrationwithThirdPartyAssessmentVendorMOI.zip)\
+[Download the integration package](SAPSuccessFactorsRecruitingManagementIntegrationwithSaudiArabiasMinistryofInterior.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/SAPSuccessFactorsRecruitingManagementIntegrationwithThirdPartyAssessmentVendorMOI)\
 [View documentation](SAPSuccessFactorsRecruitingManagementCustomized.pdf)\
 [View high level effort](effort.md)

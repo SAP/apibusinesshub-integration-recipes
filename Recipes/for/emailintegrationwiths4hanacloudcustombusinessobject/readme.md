@@ -9,9 +9,9 @@ Email based integration to create/modify/delete data in a CBO in S/4HANA Cloud. 
 
 <p></p>
 
-[Download the integration package](EmailIntegrationwithS4HANACloudCustomBusinessObject.zip)\
+[Download the integration package](EmailIntegrationwithS_4HANACloudCustomBusinessObject.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/EmailIntegrationwithS4HANACloudCustomBusinessObject)\
-[View documentation](EmailIntegrationwithS4HANACloudCustomBusinessObject.pdf)\
+[View documentation](Email_Integration_S4HC_CBO.pdf)\
 [View high level effort](effort.md)
 ## Integration flows
 ### Load Data to CBO from Email to SAP S4HANA Cloud 
