@@ -1,0 +1,343 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "PriceListItemResponse",
+  "type": "object",
+  "properties": {
+    "sku": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "resultPrice": {
+      "type": "number"
+    },
+    "allowedOverrides": {
+      "type": "string"
+    },
+    "calculatedResultPrice": {
+      "type": "number"
+    },
+    "tainted": {
+      "type": "boolean"
+    },
+    "completeResultsAvailable": {
+      "type": "boolean"
+    },
+    "pricelistId": {
+      "type": "number"
+    },
+    "key2": {
+      "type": "string"
+    },
+    "lastUpdateDate": {
+      "type": "string"
+    },
+    "createDate": {
+      "type": "string"
+    },
+    "itemExtensions": {
+      "type": "object"
+    },
+    "attribute1": {
+      "type": "string"
+    },
+    "attribute2": {
+      "type": "string"
+    },
+    "attribute3": {
+      "type": "string"
+    },
+    "attribute4": {
+      "type": "string"
+    },
+    "attribute5": {
+      "type": "string"
+    },
+    "attribute6": {
+      "type": "string"
+    },
+    "attribute7": {
+      "type": "string"
+    },
+    "attribute8": {
+      "type": "string"
+    },
+    "attribute9": {
+      "type": "string"
+    },
+    "attribute10": {
+      "type": "string"
+    },
+    "attribute11": {
+      "type": "string"
+    },
+    "attribute12": {
+      "type": "string"
+    },
+    "attribute13": {
+      "type": "string"
+    },
+    "attribute14": {
+      "type": "string"
+    },
+    "attribute15": {
+      "type": "string"
+    },
+    "attribute16": {
+      "type": "string"
+    },
+    "attribute17": {
+      "type": "string"
+    },
+    "attribute18": {
+      "type": "string"
+    },
+    "attribute19": {
+      "type": "string"
+    },
+    "attribute20": {
+      "type": "string"
+    },
+    "attribute21": {
+      "type": "string"
+    },
+    "attribute22": {
+      "type": "string"
+    },
+    "attribute23": {
+      "type": "string"
+    },
+    "attribute24": {
+      "type": "string"
+    },
+    "attribute25": {
+      "type": "string"
+    },
+    "attribute26": {
+      "type": "string"
+    },
+    "attribute27": {
+      "type": "string"
+    },
+    "attribute28": {
+      "type": "string"
+    },
+    "attribute29": {
+      "type": "string"
+    },
+    "attribute30": {
+      "type": "string"
+    },
+    "attribute31": {
+      "type": "string"
+    },
+    "attribute32": {
+      "type": "string"
+    },
+    "attribute33": {
+      "type": "string"
+    },
+    "attribute34": {
+      "type": "string"
+    },
+    "attribute35": {
+      "type": "string"
+    },
+    "attribute36": {
+      "type": "string"
+    },
+    "attribute37": {
+      "type": "string"
+    },
+    "attribute38": {
+      "type": "string"
+    },
+    "attribute39": {
+      "type": "string"
+    },
+    "attribute40": {
+      "type": "string"
+    },
+    "attribute41": {
+      "type": "string"
+    },
+    "attribute42": {
+      "type": "string"
+    },
+    "attribute43": {
+      "type": "string"
+    },
+    "attribute44": {
+      "type": "string"
+    },
+    "attribute45": {
+      "type": "string"
+    },
+    "attribute46": {
+      "type": "string"
+    },
+    "attribute47": {
+      "type": "string"
+    },
+    "attribute48": {
+      "type": "string"
+    },
+    "attribute49": {
+      "type": "string"
+    },
+    "attribute50": {
+      "type": "string"
+    },
+    "attribute51": {
+      "type": "string"
+    },
+    "attribute52": {
+      "type": "string"
+    },
+    "attribute53": {
+      "type": "string"
+    },
+    "attribute54": {
+      "type": "string"
+    },
+    "attribute55": {
+      "type": "string"
+    },
+    "attribute56": {
+      "type": "string"
+    },
+    "attribute57": {
+      "type": "string"
+    },
+    "attribute58": {
+      "type": "string"
+    },
+    "attribute59": {
+      "type": "string"
+    },
+    "attribute60": {
+      "type": "string"
+    },
+    "attribute61": {
+      "type": "string"
+    },
+    "attribute62": {
+      "type": "string"
+    },
+    "attribute63": {
+      "type": "string"
+    },
+    "attribute64": {
+      "type": "string"
+    },
+    "attribute65": {
+      "type": "string"
+    },
+    "attribute66": {
+      "type": "string"
+    },
+    "attribute67": {
+      "type": "string"
+    },
+    "attribute68": {
+      "type": "string"
+    },
+    "attribute69": {
+      "type": "string"
+    },
+    "attribute70": {
+      "type": "string"
+    },
+    "attribute71": {
+      "type": "string"
+    },
+    "attribute72": {
+      "type": "string"
+    },
+    "attribute73": {
+      "type": "string"
+    },
+    "attribute74": {
+      "type": "string"
+    },
+    "attribute75": {
+      "type": "string"
+    },
+    "attribute76": {
+      "type": "string"
+    },
+    "attribute77": {
+      "type": "string"
+    },
+    "attribute78": {
+      "type": "string"
+    },
+    "attribute79": {
+      "type": "string"
+    },
+    "attribute80": {
+      "type": "string"
+    },
+    "attribute81": {
+      "type": "string"
+    },
+    "attribute82": {
+      "type": "string"
+    },
+    "attribute83": {
+      "type": "string"
+    },
+    "attribute84": {
+      "type": "string"
+    },
+    "attribute85": {
+      "type": "string"
+    },
+    "attribute86": {
+      "type": "string"
+    },
+    "attribute87": {
+      "type": "string"
+    },
+    "attribute88": {
+      "type": "string"
+    },
+    "attribute89": {
+      "type": "string"
+    },
+    "attribute90": {
+      "type": "string"
+    },
+    "attribute91": {
+      "type": "string"
+    },
+    "attribute92": {
+      "type": "string"
+    },
+    "attribute93": {
+      "type": "string"
+    },
+    "attribute94": {
+      "type": "string"
+    },
+    "attribute95": {
+      "type": "string"
+    },
+    "attribute96": {
+      "type": "string"
+    },
+    "attribute97": {
+      "type": "string"
+    },
+    "attribute98": {
+      "type": "string"
+    },
+    "attribute99": {
+      "type": "string"
+    },
+    "attribute100": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "UserUpsertRequest",
+  "type": "array",
+  "default": [],
+  "items": {
+    "type": "object",
+    "required": [
+      "loginName",
+      "email"
+    ],
+    "properties": {
+      "loginName": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string"
+      },
+      "firstName": {
+        "type": "string"
+      },
+      "lastName": {
+        "type": "string"
+      },
+      "activated": {
+        "type": "boolean"
+      },
+      "workflowEmailingActivated": {
+        "type": "boolean"
+      },
+      "noSession": {
+        "type": "boolean"
+      },
+      "requireTFA": {
+        "type": "boolean"
+      },
+      "receiveAdminEmail": {
+        "type": "boolean"
+      },
+      "ssoOnly": {
+        "type": "boolean"
+      },
+      "additionalInfo1": {
+        "type": "number"
+      },
+      "additionalInfo2": {
+        "type": "number"
+      },
+      "additionalInfo3": {
+        "type": "string"
+      },
+      "additionalInfo4": {
+        "type": "string"
+      },
+      "wizardDashboardName": {
+        "type": "string"
+      },
+      "emailLocale": {
+        "type": "string"
+      },
+      "defaultUserGroupEdit": {
+        "type": "string"
+      },
+      "defaultUserGroupViewDetails": {
+        "type": "string"
+      },
+      "passwordExpiry": {
+        "type": "string"
+      },
+      "productFilterCriteria": {
+        "type": "object",
+        "required": [
+          "operator",
+          "criteria"
+        ],
+        "properties": {
+          "operator": {
+            "type": "string",
+            "description": "Filter operation - AND / OR",
+            "default": "and"
+          },
+          "criteria": {
+            "type": "array",
+            "description": "List of filters",
+            "items": {
+              "type": "object",
+              "description": "Filter",
+              "required": [
+                "fieldName",
+                "operator"
+              ],
+              "properties": {
+                "fieldName": {
+                  "type": "string",
+                  "description": "field name"
+                },
+                "operator": {
+                  "type": "string",
+                  "description": "operator - equals, greaterThan, lessThan"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "value"
+                }
+              }
+            }
+          }
+        }
+      },
+      "customerFilterCriteria": {
+        "type": "object",
+        "required": [
+          "operator",
+          "criteria"
+        ],
+        "properties": {
+          "operator": {
+            "type": "string",
+            "description": "Filter operation - AND / OR",
+            "default": "and"
+          },
+          "criteria": {
+            "type": "array",
+            "description": "List of filters",
+            "items": {
+              "type": "object",
+              "description": "Filter",
+              "required": [
+                "fieldName",
+                "operator"
+              ],
+              "properties": {
+                "fieldName": {
+                  "type": "string",
+                  "description": "field name"
+                },
+                "operator": {
+                  "type": "string",
+                  "description": "operator - equals, greaterThan, lessThan"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "value"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

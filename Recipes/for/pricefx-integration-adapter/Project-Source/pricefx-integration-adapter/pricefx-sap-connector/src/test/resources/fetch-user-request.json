@@ -1,0 +1,15 @@
+{
+  "data": {
+    "operator": "and",
+    "criteria": [
+      {
+        "fieldName": "loginName",
+        "operator": "startsWith",
+        "value": "USER"
+      }
+    ]
+  },
+  "sortBy": [
+    "loginName"
+  ]
+}

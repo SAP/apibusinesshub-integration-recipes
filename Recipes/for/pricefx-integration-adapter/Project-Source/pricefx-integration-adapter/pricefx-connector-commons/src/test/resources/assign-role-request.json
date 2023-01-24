@@ -1,0 +1,8 @@
+{
+  "add": [
+    "PB_CUSTOMEREDITOR"
+  ],
+  "remove": [
+    "PB_PRICELISTS"
+  ]
+}

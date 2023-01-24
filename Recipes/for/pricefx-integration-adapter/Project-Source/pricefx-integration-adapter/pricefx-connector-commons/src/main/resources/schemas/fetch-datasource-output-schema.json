@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "DatasourceResponse",
+  "type": "object",
+  "properties": {
+    "uniqueName": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "rank": {
+            "type": "number"
+          },
+          "expression": {
+            "type": "string"
+          },
+          "system": {
+            "type": "boolean"
+          },
+          "numeric": {
+            "type": "boolean"
+          },
+          "key": {
+            "type": "boolean"
+          },
+          "time": {
+            "type": "boolean"
+          },
+          "aggregation": {
+            "type": "boolean"
+          },
+          "persisted": {
+            "type": "boolean"
+          },
+          "dimension": {
+            "type": "boolean"
+          },
+          "auxiliary": {
+            "type": "boolean"
+          },
+          "deployed": {
+            "type": "boolean"
+          },
+          "queryable": {
+            "type": "boolean"
+          },
+          "dbTable": {
+            "type": "string"
+          },
+          "calculated": {
+            "type": "boolean"
+          },
+          "dbColumn": {
+            "type": "string"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "type": {
+      "type": "string"
+    },
+    "reload": {
+      "type": "boolean"
+    },
+    "warningsOn": {
+      "type": "boolean"
+    },
+    "sourceTypeCode": {
+      "type": "string"
+    },
+    "sourceLabel": {
+      "type": "string"
+    },
+    "locked": {
+      "type": "boolean"
+    },
+    "valid": {
+      "type": "boolean"
+    },
+    "view": {
+      "type": "boolean"
+    },
+    "queryable": {
+      "type": "boolean"
+    },
+    "auxiliary": {
+      "type": "boolean"
+    },
+    "deployed": {
+      "type": "boolean"
+    },
+    "createDate": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "lastUpdateDate": {
+      "type": "string"
+    },
+    "lastUpdateByName": {
+      "type": "string"
+    },
+    "rowCount": {
+      "type": "number"
+    },
+    "loadableFields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "lastDataModificationDate": {
+      "type": "string"
+    },
+    "isPlasma": {
+      "type": "boolean"
+    },
+    "persistedObjectClass": {
+      "type": "string"
+    },
+    "typeCode": {
+      "type": "string"
+    },
+    "sourceName": {
+      "type": "string"
+    },
+    "calculationMessages": {
+      "type": "string"
+    },
+    "calculationStartDate": {
+      "type": "string"
+    },
+    "calculationDate": {
+      "type": "string"
+    }
+  }
+}

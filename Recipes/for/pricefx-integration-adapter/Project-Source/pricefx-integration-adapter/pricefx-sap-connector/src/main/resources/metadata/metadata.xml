@@ -1,0 +1,1401 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ComponentMetadata xmlns:gen="http://www.sap.hci.adk.com/gen"
+                   ComponentId="ctype::Adapter/cname::Pricefx-SAP-Integration-Adapter/vendor::Pricefx/version::1.0.0"
+                   ComponentName="Pricefx-SAP-Integration-Adapter" UIElementType="Adapter"
+                   IsExtension="false" IsFinal="true" IsPreserves="true"
+                   IsDefaultGenerator="true" ComponentDisplayName="Pricefx-SAP-Integration-Adapter"
+>
+    <Variant VariantName="Message Receiver"
+             VariantId="ctype::AdapterVariant/cname::Pricefx-SAP-Integration-Adapter/vendor::Pricefx/tp::pfx-sap-general/mp::pfx-sap-general/direction::Receiver"
+             IsRequestResponse="true" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="pfx-sap-general"
+             AttachmentBehavior="Preserve">
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:type="xs:string"></Schema>
+            </Content>
+        </InputContent>
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:type="xs:string"></Schema>
+            </Content>
+        </OutputContent>
+        <Tab id="operation">
+            <GuiLabels guid="ad0a3d58-285e-4da8-8545-8898ca4d7f76">
+                <Label language="EN">Operation</Label>
+            </GuiLabels>
+            <AttributeGroup id="connectorOperation">
+                <Name xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:type="xs:string">URI Setting
+                </Name>
+                <GuiLabels guid="8c0540b5-f344-4c82-9fc7-933bc4dd0690">
+                    <Label language="EN">Operation</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>operationType</ReferenceName>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>getTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>GET</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>updateTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>UPDATE</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>createTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>CREATE</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+
+                <AttributeReference>
+                    <ReferenceName>truncateTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>TRUNCATE</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>executeTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>EXECUTE</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>uploadTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>UPLOAD</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>bulkloadTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>BULKLOAD</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>validation</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>BULKLOAD</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>fetchTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>FETCH</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>deleteTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>DELETE</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>deleteByKeyTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>DELETE_BY_KEY</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>refreshTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>REFRESH</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>upsertTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>UPSERT</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>simpleResult</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>UPSERT</AttributeValue>
+                        </EditCondition>
+                        <NotCondition>
+                            <EditCondition>
+                                <AttributeName>upsertTargetType</AttributeName>
+                                <AttributeValue>USER</AttributeValue>
+                            </EditCondition>
+                        </NotCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>replaceNullWithEmpty</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>UPSERT</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>metadataTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>METADATA</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>statusTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>STATUS</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>extensionName</ReferenceName>
+                    <OrCondition>
+                        <EditCondition>
+                            <AttributeName>deleteTargetType</AttributeName>
+                            <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>deleteTargetType</AttributeName>
+                            <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>deleteTargetType</AttributeName>
+                            <AttributeValue>LOOKUPTABLE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>fetchTargetType</AttributeName>
+                            <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>fetchTargetType</AttributeName>
+                            <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>fetchTargetType</AttributeName>
+                            <AttributeValue>LOOKUPTABLE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>fetchTargetType</AttributeName>
+                            <AttributeValue>DATAFEED</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>fetchTargetType</AttributeName>
+                            <AttributeValue>DATAMART</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>fetchTargetType</AttributeName>
+                            <AttributeValue>DATASOURCE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>upsertTargetType</AttributeName>
+                            <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>upsertTargetType</AttributeName>
+                            <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>upsertTargetType</AttributeName>
+                            <AttributeValue>LOOKUPTABLE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>metadataTargetType</AttributeName>
+                            <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>refreshTargetType</AttributeName>
+                            <AttributeValue>DATAMART</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>metadataTargetType</AttributeName>
+                            <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>metadataTargetType</AttributeName>
+                            <AttributeValue>LOOKUPTABLE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>getTargetType</AttributeName>
+                            <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>getTargetType</AttributeName>
+                            <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>getTargetType</AttributeName>
+                            <AttributeValue>LOOKUPTABLE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>bulkloadTargetType</AttributeName>
+                            <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>bulkloadTargetType</AttributeName>
+                            <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>bulkloadTargetType</AttributeName>
+                            <AttributeValue>LOOKUPTABLE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>bulkloadTargetType</AttributeName>
+                            <AttributeValue>DATAFEED</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>uploadTargetType</AttributeName>
+                            <AttributeValue>DATAFEED</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>uploadTargetType</AttributeName>
+                            <AttributeValue>DATASOURCE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>truncateTargetType</AttributeName>
+                            <AttributeValue>DATASOURCE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>truncateTargetType</AttributeName>
+                            <AttributeValue>DATAFEED</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>truncateTargetType</AttributeName>
+                            <AttributeValue>DATAMART</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>executeTargetType</AttributeName>
+                            <AttributeValue>FORMULA</AttributeValue>
+                        </EditCondition>
+                    </OrCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>targetDate</ReferenceName>
+                    <OrCondition>
+                        <EditCondition>
+                            <AttributeName>bulkloadTargetType</AttributeName>
+                            <AttributeValue>LOOKUPTABLE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>upsertTargetType</AttributeName>
+                            <AttributeValue>LOOKUPTABLE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>getTargetType</AttributeName>
+                            <AttributeValue>LOOKUPTABLE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>metadataTargetType</AttributeName>
+                            <AttributeValue>LOOKUPTABLE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>fetchTargetType</AttributeName>
+                            <AttributeValue>LOOKUPTABLE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>deleteTargetType</AttributeName>
+                            <AttributeValue>LOOKUPTABLE</AttributeValue>
+                        </EditCondition>
+                    </OrCondition>
+                </AttributeReference>
+
+
+            </AttributeGroup>
+        </Tab>
+        <Tab id="configuration">
+            <GuiLabels guid="989d409c-2959-4d9b-a789-66a3d8c99db5">
+                <Label language="EN">Configuration</Label>
+            </GuiLabels>
+            <AttributeGroup id="configuration">
+                <Name xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:type="xs:string">URI Setting
+                </Name>
+                <GuiLabels guid="fefb101a-dbfd-4806-b314-1e76df02f983">
+                    <Label language="EN">Configuration</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>securityMaterial</ReferenceName>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>pricefxHost</ReferenceName>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>partition</ReferenceName>
+                </AttributeReference>
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+
+    <AttributeMetadata>
+        <Name>securityMaterial</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="7df7243a-a601-4c0d-9065-5c4cc478537d">
+            <Label language="EN">Security Material</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>pricefxHost</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="4dc09f00-3ce3-4378-8d39-95a6fdbed44a">
+            <Label language="EN">Pricefx Host</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>partition</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="db5f02c1-44ad-4810-8e41-7501169fb18c">
+            <Label language="EN">Pricefx Partition</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>extensionName</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ca7917b1-3533-4041-8524-b957e10fc499">
+            <Label language="EN">Target Name</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>targetDate</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="ee155bdf-53c6-4634-9370-b476a04131f3">
+            <Label language="EN">Target Date (YYYY-MM-DD)</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+
+    <AttributeMetadata>
+        <Name>simpleResult</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default>false</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="81baa89b-1f34-4d34-8873-9332ab616594">
+            <Label language="EN">Return only number of processed records</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>replaceNullWithEmpty</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default>false</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="113a61c0-fb36-4dee-b27c-1cf5fd28202b">
+            <Label language="EN">Replace Null Key with Empty String</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>validation</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default>true</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="7cfa66af-6bd0-4477-9ce5-ccae0246dd74">
+            <Label language="EN">Validation</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>operationType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>PING</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="3f98fd3a-5688-4c7e-85fb-b8391f78b9dd">
+            <Label language="EN">Operation</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>STATUS</Value>
+                <GuiLabels guid="0cb48e2d-7720-4daa-8681-2facda1c2955">
+                    <Label language="EN">Status</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>METADATA</Value>
+                <GuiLabels guid="adea14da-da7e-4b6a-bc1c-698e3711979b">
+                    <Label language="EN">Metadata</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>GET</Value>
+                <GuiLabels guid="e2f0cb1a-6367-4abd-8149-0ccd5695828d">
+                    <Label language="EN">Get</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>UPDATE</Value>
+                <GuiLabels guid="ef4b6367-3650-4746-a3c4-e07c18413caf">
+                    <Label language="EN">Update</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>UPSERT</Value>
+                <GuiLabels guid="d01facb3-fc1c-4887-a256-cb14fbc0e07d">
+                    <Label language="EN">Upsert</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CREATE</Value>
+                <GuiLabels guid="ff991e58-50b8-4148-8173-ff03a4b00314">
+                    <Label language="EN">Create</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DELETE</Value>
+                <GuiLabels guid="6a6631b7-bb0d-4977-be48-48ee9426852b">
+                    <Label language="EN">Delete</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DELETE_BY_KEY</Value>
+                <GuiLabels guid="d03cf8b5-0b21-4f16-968d-af5ced67f9e1">
+                    <Label language="EN">Delete by key</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>TRUNCATE</Value>
+                <GuiLabels guid="7d667ddf-1c8c-4307-9402-fd5936cc837d">
+                    <Label language="EN">Truncate</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>REFRESH</Value>
+                <GuiLabels guid="6e375f7f-e75b-4069-91c1-df47706fb5b2">
+                    <Label language="EN">Refresh</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>FETCH</Value>
+                <GuiLabels guid="942405c9-8c16-437a-bad3-58eaec872721">
+                    <Label language="EN">Fetch</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>EXECUTE</Value>
+                <GuiLabels guid="01485c6d-e0a3-47eb-94a0-b9314cbdb1cb">
+                    <Label language="EN">Execute</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>UPLOAD</Value>
+                <GuiLabels guid="e251e638-d294-4dac-abd9-e213c3dafd9f">
+                    <Label language="EN">Upload File</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>BULKLOAD</Value>
+                <GuiLabels guid="826dd993-700c-4a2b-88ec-bdab6959d801">
+                    <Label language="EN">Bulk Upload Data</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PING</Value>
+                <GuiLabels guid="c77f6b47-6d5b-4da1-a48e-1f1e55737ef8">
+                    <Label language="EN">Test Connection</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+
+
+    <AttributeMetadata>
+        <Name>statusTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="13554a8e-ec5a-4581-b126-f56538d837a9">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>PRODUCTIMAGE</Value>
+                <GuiLabels guid="9ef16164-84cd-47db-ab8c-2e24d038c936">
+                    <Label language="EN">Product Image</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATAFILE</Value>
+                <GuiLabels guid="56db8120-53a6-49f1-b4f4-c59a9540f724">
+                    <Label language="EN">Data File</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+
+
+    <AttributeMetadata>
+        <Name>metadataTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>PRODUCT</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="8d620b18-cd52-46c7-b2e8-83ad6a9cfca5">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>PRODUCT</Value>
+                <GuiLabels guid="7f0a4d4f-0a08-4c7e-ba72-0b0659483fcc">
+                    <Label language="EN">Product</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMER</Value>
+                <GuiLabels guid="cf61bba2-1490-4fa3-bc78-7bd4d97ed228">
+                    <Label language="EN">Customer</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRODUCTEXTENSION</Value>
+                <GuiLabels guid="bb67d1f4-1c77-4b61-a7ef-6e4e9e6e2422">
+                    <Label language="EN">Product Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMEREXTENSION</Value>
+                <GuiLabels guid="f5eeb3e1-95ad-47b3-a516-abf9197aa594">
+                    <Label language="EN">Customer Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>LOOKUPTABLE</Value>
+                <GuiLabels guid="f0078d1f-e4ac-41b0-bb9d-68c54c3aea4b">
+                    <Label language="EN">Price Parameter</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>ROLE</Value>
+                <GuiLabels guid="0ce07a62-73e2-409f-b344-b992cbe58299">
+                    <Label language="EN">Role</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>BUSINESSROLE</Value>
+                <GuiLabels guid="99400a43-0ec3-4e63-b0f3-fe82a8304bab">
+                    <Label language="EN">Business Role</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>USERGROUP</Value>
+                <GuiLabels guid="a6a9b24d-dc0d-477f-a097-b1c6eace19b1">
+                    <Label language="EN">User Group</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICELISTITEM</Value>
+                <GuiLabels guid="2523c591-feb0-43a3-9ef3-6c8a8ef36050">
+                    <Label language="EN">Price List Item</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICEGRIDITEM</Value>
+                <GuiLabels guid="a8ec5f46-484d-40d7-a994-902356adecc1">
+                    <Label language="EN">Price Grid Item</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>MANUALPRICELISTITEM</Value>
+                <GuiLabels guid="bf6889b8-2ef7-495c-9cc7-a4d882baf2f6">
+                    <Label language="EN">Manual Price List Item</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>QUOTE</Value>
+                <GuiLabels guid="c647fcab-a7a2-4792-b03f-4a65830ae14a">
+                    <Label language="EN">Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICERECORD</Value>
+                <GuiLabels guid="b7abda00-dacd-48d4-94f7-c3da1bef55a7">
+                    <Label language="EN">Price Record</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>getTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>PRODUCT</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="113f3733-5e31-4658-8cb5-e736d56840d4">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>TOKEN</Value>
+                <GuiLabels guid="ccf4b74b-daf8-4405-ab0a-fbee78b29fac">
+                    <Label language="EN">Token</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>TYPEDID</Value>
+                <GuiLabels guid="114701a2-b4d5-4184-a06a-fd6bd567dcf6">
+                    <Label language="EN">Typed Id</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRODUCT</Value>
+                <GuiLabels guid="553c0b31-5007-41c5-b936-6268f15f8af6">
+                    <Label language="EN">Product</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMER</Value>
+                <GuiLabels guid="9c88ff7a-1acc-4a6c-adaf-0e79a4eabded">
+                    <Label language="EN">Customer</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRODUCTEXTENSION</Value>
+                <GuiLabels guid="55780e1b-6ffa-47d2-b6af-97d646b4e73a">
+                    <Label language="EN">Product Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMEREXTENSION</Value>
+                <GuiLabels guid="b83e0fa6-3a28-4308-828a-42a5219ce652">
+                    <Label language="EN">Customer Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>LOOKUPTABLE</Value>
+                <GuiLabels guid="893a1d58-de04-4ebd-86bb-8160be274cdd">
+                    <Label language="EN">Price Parameter</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>QUOTE</Value>
+                <GuiLabels guid="90dde864-d7f9-4f94-a5a7-4e21209973b3">
+                    <Label language="EN">Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>USER</Value>
+                <GuiLabels guid="ebba0592-7b29-42ac-a47e-a16e80d30917">
+                    <Label language="EN">User</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>TYPEDID</Value>
+                <GuiLabels guid="30c95c69-3a4d-4676-8583-b113634a1dde">
+                    <Label language="EN">By TypedId</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATAFEED</Value>
+                <GuiLabels guid="0738a581-dc7f-4a28-95db-4b837ff82733">
+                    <Label language="EN">Data Feed</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATASOURCE</Value>
+                <GuiLabels guid="b2b8fddc-da8e-4d5f-a51c-3b361ac0ed7b">
+                    <Label language="EN">Data Source</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATAMART</Value>
+                <GuiLabels guid="9a5bd547-d6d6-4103-85da-bd969ca76303">
+                    <Label language="EN">Datamart</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICELIST</Value>
+                <GuiLabels guid="5f2bde35-36ef-490a-891e-d518295d05aa">
+                    <Label language="EN">Price List</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICELISTITEM</Value>
+                <GuiLabels guid="8ee7a919-99ce-455c-800e-02be87e761bc">
+                    <Label language="EN">Price List Item</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICEGRID</Value>
+                <GuiLabels guid="33cef337-f643-460b-88e3-04e57069dc9f">
+                    <Label language="EN">Price Grid</Label>
+                </GuiLabels>
+            </FixedValue>
+
+            <FixedValue>
+                <Value>PRICEGRIDITEM</Value>
+                <GuiLabels guid="5f2bde35-36ef-490a-891e-d518295d05aa">
+                    <Label language="EN">Price Grid Item</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>MANUALPRICELISTITEM</Value>
+                <GuiLabels guid="9a5bd547-d6d6-4103-85da-bd969ca76303">
+                    <Label language="EN">Manual Price List Item</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICERECORD</Value>
+                <GuiLabels guid="7ed0e931-bbec-482f-990f-353c7104ac41">
+                    <Label language="EN">Price Record</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>updateTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="8fbe714b-1adf-422d-864a-9313b3c66c1d">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>ROLE</Value>
+                <GuiLabels guid="2ec9166b-f356-4426-960a-2c414182f6c7">
+                    <Label language="EN">Role Access</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>BUSINESSROLE</Value>
+                <GuiLabels guid="51d98181-ae37-4bfd-9c9c-9394aa7be4bc">
+                    <Label language="EN">Business Role Access</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>USERGROUP</Value>
+                <GuiLabels guid="1f8a4323-70ce-4da8-81e4-18ba0f7d3fd8">
+                    <Label language="EN">User Group Access</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>QUOTE</Value>
+                <GuiLabels guid="c3067897-3f0e-4b27-b1a4-50e5a5347996">
+                    <Label language="EN">Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+
+    </AttributeMetadata>
+
+
+    <AttributeMetadata>
+        <Name>upsertTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>PRODUCT</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="e7edd8c8-8d14-4db6-a552-734838c5bc20">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>PRODUCT</Value>
+                <GuiLabels guid="085c7508-06e7-4581-bab4-f6fb87e4d9da">
+                    <Label language="EN">Product</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMER</Value>
+                <GuiLabels guid="d9860296-b9c6-4727-80a9-16da8991214b">
+                    <Label language="EN">Customer</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRODUCTEXTENSION</Value>
+                <GuiLabels guid="7f5e93e8-f058-4a1f-8b4a-7c9462a2bbbf">
+                    <Label language="EN">Product Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMEREXTENSION</Value>
+                <GuiLabels guid="54626373-b257-4722-9bf1-0d2e87b58e4b">
+                    <Label language="EN">Customer Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>LOOKUPTABLE</Value>
+                <GuiLabels guid="716de0d8-c961-4ff2-94c1-460b7b09e262">
+                    <Label language="EN">Price Parameter</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>USER</Value>
+                <GuiLabels guid="604908df-32b4-4d9e-a0a1-573cc1ecc9d7">
+                    <Label language="EN">User</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICERECORD</Value>
+                <GuiLabels guid="f4eff901-d256-41a5-aa5d-e9607ecf4594">
+                    <Label language="EN">Price Record</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>refreshTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>TOKEN</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="e376d574-c9e3-47ee-af50-3f89be13d8b6">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>DATAMART</Value>
+                <GuiLabels guid="bd04f6cf-edd1-49b9-a3a3-f4a4c600c335">
+                    <Label language="EN">Datamart</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>TOKEN</Value>
+                <GuiLabels guid="3fde4ed4-a07a-4128-ada3-21330afb8762">
+                    <Label language="EN">Token</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+
+    </AttributeMetadata>
+
+
+    <AttributeMetadata>
+        <Name>createTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="62a427c1-0e4c-4cd3-b8e1-5a002f7d9cd1">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>QUOTE</Value>
+                <GuiLabels guid="31bbdbe2-dd65-4bb5-a850-4c50bd891c57">
+                    <Label language="EN">Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+
+    </AttributeMetadata>
+
+
+    <AttributeMetadata>
+        <Name>deleteTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>PRODUCT</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="d3289fa8-8839-424d-aa54-d243741d8a53">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>PRODUCT</Value>
+                <GuiLabels guid="4db16bda-75e1-4023-86f2-1d1b599718e6">
+                    <Label language="EN">Product</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRODUCTIMAGE</Value>
+                <GuiLabels guid="15f98c40-0f54-437e-b04d-0bcad4251a87">
+                    <Label language="EN">Product Image</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMER</Value>
+                <GuiLabels guid="415b0d0b-aec9-4906-84a8-b9c0c5868844">
+                    <Label language="EN">Customer</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRODUCTEXTENSION</Value>
+                <GuiLabels guid="2db8b5b5-1268-4ef4-b45c-6a5e7687ed06">
+                    <Label language="EN">Product Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+
+            <FixedValue>
+                <Value>CUSTOMEREXTENSION</Value>
+                <GuiLabels guid="9b761884-2326-4350-939a-4fa605c6493c">
+                    <Label language="EN">Customer Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>LOOKUPTABLE</Value>
+                <GuiLabels guid="16423b57-a82b-4ee1-8599-7d5f90284cb9">
+                    <Label language="EN">Price Parameter</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>QUOTE</Value>
+                <GuiLabels guid="21185233-79cc-40f6-9dd1-effb6f95cf24">
+                    <Label language="EN">Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>USER</Value>
+                <GuiLabels guid="43980afd-47b0-4fb2-9f6b-934843d6cb2d">
+                    <Label language="EN">User</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+
+
+    <AttributeMetadata>
+        <Name>deleteByKeyTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>PRODUCT</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="e7d3106f-5b6e-4492-969f-c665b79c4f4e">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>PRODUCT</Value>
+                <GuiLabels guid="f1fe5e37-2e9a-4582-b22f-6699b155f485">
+                    <Label language="EN">Product</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMER</Value>
+                <GuiLabels guid="2130e5e9-ca5b-49b5-8be4-784e1651a40e">
+                    <Label language="EN">Customer</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>QUOTE</Value>
+                <GuiLabels guid="890d467d-556e-4e2a-b634-273c08695675">
+                    <Label language="EN">Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICERECORD</Value>
+                <GuiLabels guid="ac0126d6-26bd-4196-bad4-63d4dace1213">
+                    <Label language="EN">Price Record</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>USER</Value>
+                <GuiLabels guid="d889637e-149a-4e60-965a-9cd41fa38367">
+                    <Label language="EN">User</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+
+
+    <AttributeMetadata>
+        <Name>fetchTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>PRODUCT</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="b0905127-4a72-4228-b723-5e7c6bed2151">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>PRODUCT</Value>
+                <GuiLabels guid="3b958642-6867-4fb4-83dd-294d288d9b63">
+                    <Label language="EN">Product</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMER</Value>
+                <GuiLabels guid="2fd9bbc5-7b8e-4831-aec8-cb50b30480ac">
+                    <Label language="EN">Customer</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRODUCTEXTENSION</Value>
+                <GuiLabels guid="7fd11cc0-d3e8-40e8-8cbc-b51dc0aaf1c6">
+                    <Label language="EN">Product Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+
+            <FixedValue>
+                <Value>CUSTOMEREXTENSION</Value>
+                <GuiLabels guid="28d1173e-9bd3-4eb2-92e3-cdf5d9fb68da">
+                    <Label language="EN">Customer Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>LOOKUPTABLE</Value>
+                <GuiLabels guid="4c83a0ba-c4a8-47f2-bbd3-4ca09576e50a">
+                    <Label language="EN">Price Parameter</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>QUOTE</Value>
+                <GuiLabels guid="1d17d3c5-5adc-484f-931f-c5db08cd2d93">
+                    <Label language="EN">Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>USER</Value>
+                <GuiLabels guid="89021aa6-6766-4ad6-9602-c44c0129629c">
+                    <Label language="EN">User</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATAFEED</Value>
+                <GuiLabels guid="065f7a41-9e1a-40fb-a60b-2af42f23e87b">
+                    <Label language="EN">Data Feed</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATASOURCE</Value>
+                <GuiLabels guid="531e7238-7592-4b77-b0fe-4840df7bb781">
+                    <Label language="EN">Data Source</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATAMART</Value>
+                <GuiLabels guid="42ec1a51-65c9-48e8-a44e-3c99da5b3f99">
+                    <Label language="EN">Datamart</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATALOAD</Value>
+                <GuiLabels guid="c3e668ee-16ba-4a04-9fc1-77e8080bdf35">
+                    <Label language="EN">Data Load</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICELISTITEM</Value>
+                <GuiLabels guid="c6c5c029-6c21-4bba-beda-c257b21c4e5b">
+                    <Label language="EN">Price List Item</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICEGRIDITEM</Value>
+                <GuiLabels guid="e68bff90-f22c-4e34-af40-dc66060432b3">
+                    <Label language="EN">Price Grid Item</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>MANUALPRICELISTITEM</Value>
+                <GuiLabels guid="1f70c8e5-952e-428f-8cc7-6f78d3f16b20">
+                    <Label language="EN">Manual Price List Item</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICELIST</Value>
+                <GuiLabels guid="59990d60-2629-422c-9b50-ac46777ccc2a">
+                    <Label language="EN">Price List</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICEGRID</Value>
+                <GuiLabels guid="35192949-b986-49ff-9ce4-eea525536d89">
+                    <Label language="EN">Price Grid</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>MANUALPRICELIST</Value>
+                <GuiLabels guid="91b71428-a4ab-4b01-9f78-6bb5ffeeb84c">
+                    <Label language="EN">Manual Price List</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICERECORD</Value>
+                <GuiLabels guid="2cb64e3b-b398-4781-b626-da56d57a0e8c">
+                    <Label language="EN">Price Record</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>truncateTargetType</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>false</isparameterized>
+        <GuiLabels guid="437cb82f-25ea-45c0-8e01-0211a906717a">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+
+            <FixedValue>
+                <Value></Value>
+                <GuiLabels guid="c9e38694-51b2-4aed-bd25-d2ad4280bb4d">
+                    <Label language="EN"></Label>
+                </GuiLabels>
+            </FixedValue>
+
+            <FixedValue>
+                <Value>DATAFEED</Value>
+                <GuiLabels guid="c9e38694-51b2-4aed-bd25-d2ad4280bb4d">
+                    <Label language="EN">Data Feed</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATASOURCE</Value>
+                <GuiLabels guid="9dfb9d54-9c2c-4155-a61c-d8f0edeb0bc1">
+                    <Label language="EN">Data Source</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATAMART</Value>
+                <GuiLabels guid="7af3430a-4d5e-4bab-86c2-9552df4c0a8c">
+                    <Label language="EN">Datamart</Label>
+                </GuiLabels>
+            </FixedValue>
+
+        </FixedValues>
+    </AttributeMetadata>
+
+
+    <AttributeMetadata>
+        <Name>executeTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="4ab449e9-0b21-449c-aeb3-31708b63543f">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>QUOTE_COPY</Value>
+                <GuiLabels guid="162287ba-3d6c-42ae-8bd2-8704b27ff029">
+                    <Label language="EN">Copy Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>FORMULA</Value>
+                <GuiLabels guid="b00ef621-9323-4e88-8828-7e29f30046e8">
+                    <Label language="EN">Formula</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>QUOTE_REVISION</Value>
+                <GuiLabels guid="8350f968-538f-4fe6-93ae-9ae98a459209">
+                    <Label language="EN">Revise Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>QUOTE_WITHDRAW</Value>
+                <GuiLabels guid="bf3ed468-a877-4c9a-a389-e97a9ae74f50">
+                    <Label language="EN">Withdraw Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>QUOTE_SUBMIT</Value>
+                <GuiLabels guid="b0f2f6be-ff97-4082-8ce2-fc2663c2b1a3">
+                    <Label language="EN">Submit Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+
+
+    <AttributeMetadata>
+        <Name>uploadTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>PRODUCTIMAGE</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="0cf5226b-cbfa-4c8c-b527-6360044cfa1e">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+
+            <FixedValue>
+                <Value>DATAFEED</Value>
+                <GuiLabels guid="d4da5c26-8c1c-43bf-aaae-124ebb5b3a0c">
+                    <Label language="EN">Data Feed</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRODUCTIMAGE</Value>
+                <GuiLabels guid="0371d602-bebe-49d0-be7a-d8dd310a9dc1">
+                    <Label language="EN">Product Image</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATASOURCE</Value>
+                <GuiLabels guid="7a7187d9-345f-45ea-8a01-9c8ff8e72bcb">
+                    <Label language="EN">Data Source</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>bulkloadTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>PRODUCT</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="0e8390ef-61ff-4a7c-b7da-05446a453d47">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>PRODUCT</Value>
+                <GuiLabels guid="a703fd09-d74b-424d-9b26-aa90d4de3021">
+                    <Label language="EN">Product</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMER</Value>
+                <GuiLabels guid="757fde4f-fdb1-4753-a4c0-92b58cfc0f52">
+                    <Label language="EN">Customer</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRODUCTEXTENSION</Value>
+                <GuiLabels guid="0f917e68-b34a-4e98-b3ef-709acb01baee">
+                    <Label language="EN">Product Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMEREXTENSION</Value>
+                <GuiLabels guid="e66d3b85-5e61-45b1-b9a4-974fb8cc1598">
+                    <Label language="EN">Customer Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>LOOKUPTABLE</Value>
+                <GuiLabels guid="ff641598-55fe-4656-9a94-63e16f1de335">
+                    <Label language="EN">Price Parameter</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATAFEED</Value>
+                <GuiLabels guid="c99e48fa-4fb9-4ebb-b0dc-97aca7894676">
+                    <Label language="EN">Data Feed</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICERECORD</Value>
+                <GuiLabels guid="194aa514-5ba1-4b58-a68d-de57240ca568">
+                    <Label language="EN">Price Record</Label>
+                </GuiLabels>
+            </FixedValue>
+
+        </FixedValues>
+    </AttributeMetadata>
+
+
+</ComponentMetadata>

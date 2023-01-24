@@ -1,0 +1,20 @@
+[
+  {
+    "sourceId": "P-12345",
+    "lineId": "PRICERECORD1",
+    "sku": "TEST",
+    "customerId": "0001",
+    "attribute1": "1",
+    "attribute2": "12",
+    "validAfter": "2021-01-01"
+  },
+  {
+    "sourceId": "P-12345",
+    "lineId": "PRICERECORD2",
+    "sku": "TEST",
+    "customerId": "0001",
+    "attribute1": "1",
+    "attribute2": "12",
+    "validAfter": "2021-01-01"
+  }
+]

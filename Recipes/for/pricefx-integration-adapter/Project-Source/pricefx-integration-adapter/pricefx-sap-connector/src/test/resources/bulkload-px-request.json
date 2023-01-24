@@ -1,0 +1,25 @@
+{
+  "header": [
+    "sku",
+    "attribute1",
+    "attribute2",
+    "attribute3",
+    "attribute4"
+  ],
+  "data": [
+    [
+      "PRODUCT3",
+      "m",
+      1,
+      "m",
+      "m"
+    ],
+    [
+      "PRODUCT4",
+      "m",
+      2,
+      "m",
+      "m"
+    ]
+  ]
+}

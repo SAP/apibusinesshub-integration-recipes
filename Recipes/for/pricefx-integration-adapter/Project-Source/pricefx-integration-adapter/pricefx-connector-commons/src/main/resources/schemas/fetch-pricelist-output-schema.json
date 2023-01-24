@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "PriceListResponse",
+  "type": "object",
+  "properties": {
+    "targetDate": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "calculationMessages": {
+      "type": "string"
+    },
+    "numberOfItems": {
+      "type": "number"
+    },
+    "keepManualOverrides": {
+      "type": "boolean"
+    },
+    "writeOnlyChangedItems": {
+      "type": "boolean"
+    },
+    "configuration": {
+      "type": "string"
+    },
+    "errorMode": {
+      "type": "string"
+    },
+    "pricelistType": {
+      "type": "string"
+    },
+    "lastUpdateDate": {
+      "type": "string"
+    },
+    "approvalState": {
+      "type": "string"
+    },
+    "createdByName": {
+      "type": "string"
+    },
+    "lastUpdateByName": {
+      "type": "string"
+    },
+    "createDate": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "calculationStartDate": {
+      "type": "string"
+    },
+    "calculationDate": {
+      "type": "string"
+    },
+    "id": {
+      "type": "number"
+    }
+  }
+}

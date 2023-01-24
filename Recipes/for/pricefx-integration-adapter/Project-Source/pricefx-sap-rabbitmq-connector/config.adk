@@ -1,0 +1,5 @@
+Adapter-Name=Pricefx-MQ-Integration-Adapter
+Adapter-Vendor=Pricefx
+Adapter-Version=1.0.0
+Enable-Maven=true
+Adapter-ID=Pricefx-MQ-Integration-Adapter

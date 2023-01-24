@@ -1,0 +1,22 @@
+{
+  "uniqueName": "P-24049",
+  "headerText": "xxxxx",
+  "inputs": [
+    {
+      "name": "headerQty",
+      "value": 30
+    }
+  ],
+  "lineItems": [
+    {
+      "lineId": "12345",
+      "sku": "abc",
+      "inputs": [
+        {
+          "name": "lineQty",
+          "value": 40
+        }
+      ]
+    }
+  ]
+}

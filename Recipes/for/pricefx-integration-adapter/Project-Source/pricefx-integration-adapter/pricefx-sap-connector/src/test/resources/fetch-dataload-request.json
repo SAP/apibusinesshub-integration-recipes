@@ -1,0 +1,15 @@
+{
+  "data": {
+    "operator": "and",
+    "criteria": [
+      {
+        "fieldName": "label",
+        "operator": "startsWith",
+        "value": "P"
+      }
+    ]
+  },
+  "sortBy": [
+    "label"
+  ]
+}

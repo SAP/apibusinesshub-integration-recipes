@@ -1,0 +1,16 @@
+{
+  "header": [
+    "customerId",
+    "attribute1"
+  ],
+  "data": [
+    [
+      "CUSTOMER3",
+      "1"
+    ],
+    [
+      "CUSTOMER4",
+      "2"
+    ]
+  ]
+}

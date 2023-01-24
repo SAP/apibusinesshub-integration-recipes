@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "PostResponse",
+  "type": "object",
+  "examples": [
+    {
+      "response": {
+        "status": 0,
+        "startRow": 0,
+        "node": "node1",
+        "csrfToken": "xxx",
+        "data": [],
+        "endRow": 2,
+        "totalRows": 100
+      }
+    }
+  ],
+  "required": [
+    "response"
+  ],
+  "properties": {
+    "response": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer"
+        },
+        "startRow": {
+          "type": "integer"
+        },
+        "node": {
+          "type": "string"
+        },
+        "csrfToken": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "description": "list of returned results",
+          "items": {
+            "type": "object",
+            "description": "Result"
+          }
+        },
+        "endRow": {
+          "type": "integer"
+        },
+        "totalRows": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

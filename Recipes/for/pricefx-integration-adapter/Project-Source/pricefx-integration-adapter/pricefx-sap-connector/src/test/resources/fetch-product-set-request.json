@@ -1,0 +1,19 @@
+{
+  "data": {
+    "operator": "and",
+    "criteria": [
+      {
+        "fieldName": "sku",
+        "operator": "inSet",
+        "value": ["PRODUCT1","PRODUCT2","PRODUCT3","PRODUCT4"]
+      }
+    ]
+  },
+  "sortBy": [
+    "sku"
+  ],
+  "resultFields": [
+    "sku",
+    "attribute1"
+  ]
+}

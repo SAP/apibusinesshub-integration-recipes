@@ -1,0 +1,19 @@
+{
+  "data": {
+    "operator": "and",
+    "criteria": [
+      {
+        "fieldName": "sourceId",
+        "operator": "equals",
+        "value": "P-12345"
+      }
+    ]
+  },
+  "sortBy": [
+    "lineId"
+  ],
+  "resultFields": [
+    "sourceId",
+    "lineId"
+  ]
+}

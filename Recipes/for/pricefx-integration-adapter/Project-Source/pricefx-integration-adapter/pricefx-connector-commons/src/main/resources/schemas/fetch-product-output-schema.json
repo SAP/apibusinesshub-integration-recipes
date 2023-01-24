@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "ProductResponse",
+  "type": "object",
+  "properties": {
+    "sku": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "unitOfMeasure": {
+      "type": "string"
+    },
+    "image": {
+      "type": "boolean"
+    },
+    "userGroupEdit": {
+      "type": "string"
+    },
+    "userGroupViewDetails": {
+      "type": "string"
+    },
+    "lastUpdateDate": {
+      "type": "string"
+    },
+    "createDate": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    }
+  }
+}

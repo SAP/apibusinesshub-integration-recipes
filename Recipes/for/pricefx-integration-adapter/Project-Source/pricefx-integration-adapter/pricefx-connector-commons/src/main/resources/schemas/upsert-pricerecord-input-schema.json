@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "PriceRecordUpsertRequest",
+  "type": "array",
+  "default": [],
+  "items": {
+    "type": "object",
+    "required": [
+      "sourceId",
+      "lineId",
+      "validAfter"
+    ],
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "sourceId": {
+        "type": "string"
+      },
+      "lineId": {
+        "type": "string"
+      },
+      "priority": {
+        "type": "number"
+      },
+      "validAfter": {
+        "type": "string"
+      },
+      "expiryDate": {
+        "type": "string"
+      },
+      "externalRef": {
+        "type": "string"
+      },
+      "label": {
+        "type": "string"
+      },
+      "sku": {
+        "type": "string"
+      },
+      "customerId": {
+        "type": "string"
+      },
+      "customerGroup": {
+        "type": "string"
+      },
+      "productGroup": {
+        "type": "string"
+      },
+      "userGroupEdit": {
+        "type": "string"
+      },
+      "userGroupViewDetails": {
+        "type": "string"
+      }
+    }
+  }
+}
