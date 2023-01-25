@@ -12,7 +12,7 @@ This package allows you to do the following:
 
 * Send notifications for JMS resource overload with Alert Notification service
 
-[Download the integration package](SAPCloudIntegrationwithAlertNotificationserviceforSAPBTP_ JMSService.zip)\
+[Download the integration package](SAPCloudIntegrationwithAlertNotificationserviceforSAPBTP_JMSService.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/SAPCloudIntegrationwithAlertNotificationserviceforSAPBTP/overview)\
 [View documentation](SAPCloudIntegrationwithAlertNotificationserviceforSAPBTP.pdf)\
 [View high level effort](effort.md)
