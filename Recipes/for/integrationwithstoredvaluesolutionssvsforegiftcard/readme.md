@@ -15,7 +15,7 @@ This package provides iFlows for creating eGiftcard from stored value solutions 
  <li>Refresh the certificate key once currently used certificate key expires.&nbsp;</li>
 </ol>
 
-[Download the integration package](IntegrationwithStoredValueSolutionsSVSforeGiftCard.zip)\
+[Download the integration package](IntegrationwithStoredValueSolutionsforeGiftCard.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/IntegrationwithStoredValueSolutionsSVSforeGiftCard)\
 [Configuration Guideline for First ActiveKey Integration Flow](ConfigurationGuidelineforFirstActiveKeyIflow.pdf)\
 [Configuration Guideline for Refresh Active Key Integration Flow](ConfigurationGuidelineforRefreshActiveKeyIflow.pdf)\
