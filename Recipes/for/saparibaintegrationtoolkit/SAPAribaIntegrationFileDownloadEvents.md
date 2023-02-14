@@ -196,5 +196,6 @@ In case of correctly setup flow, in case of any issues you will get an email as 
 - Timeout exception – if you file is too large or the servers too slow, you might need to update timeouts set, if you are unable to find a suitable timeout, we suggest to download the file manually the first time and update the first\_run\_start\_date to the date of the download
 - SFTP issues – please review the documentation of the SFTP connector
 - Email issues – please review the documentation of the Email connector
+- No such file exist error - this can happen in some of the SFTP servers in case that they do not support special characters in file names, to try to resolve this, you can edit the package, update the SFTP connection from "Saving downloaded files", go to target, and remove ${header.timestamp} from the file name
 
 
