@@ -23,7 +23,9 @@ public enum PFXTypeCode {
     PRODUCTIMAGE("PRODUCTIMAGE", new String[]{"PRODUCTIMAGE"}),
     DATAFILE("DATAFILE", new String[]{"DATAFILE"}),
 
+
     //real PFX type
+    ADVANCED_CONFIG("AP", new String[]{FIELD_UNIQUENAME} ),
     CUSTOMER("C", new String[]{PFXConstants.FIELD_CUSTOMER_ID}, "CAM"),
     CUSTOMEREXTENSION("CX", "CUSTOMER EXTENSION", new String[]{PFXConstants.FIELD_CUSTOMER_ID}, "CXAM"),
 
