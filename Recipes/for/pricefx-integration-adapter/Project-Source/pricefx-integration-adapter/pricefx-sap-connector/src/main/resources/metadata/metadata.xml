@@ -740,6 +740,12 @@
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
+                <Value>ADVANCED_CONFIG</Value>
+                <GuiLabels guid="16b7498c-327f-4733-8a82-280ed264d5e0">
+                    <Label language="EN">Advanced Configuration</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
                 <Value>PRODUCT</Value>
                 <GuiLabels guid="553c0b31-5007-41c5-b936-6268f15f8af6">
                     <Label language="EN">Product</Label>
