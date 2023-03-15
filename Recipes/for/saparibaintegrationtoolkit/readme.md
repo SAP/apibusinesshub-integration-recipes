@@ -19,8 +19,8 @@ This package allows you to do the following:
 * Mapping of data centers to integation URLs.
 
 [Download the integration package](SAPAribaIntegrationToolkit.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/SAPAribaIntegrationToolkit/overview)
-[Documentation - SAP Ariba Integration File Download Events](SAPAribaIntegrationFileDownloadEvents.md)
+[View package on the SAP API Business Hub](https://api.sap.com/package/SAPAribaIntegrationToolkit/overview)\
+[Documentation - SAP Ariba Integration File Download Events](SAPAribaIntegrationFileDownloadEvents.md)\
 [Documentation - SAP Ariba Integration File Upload Events](SAPAribaIntegrationFileUploadEvents.md)
 
 ## Integration Flows/Value Mappings
