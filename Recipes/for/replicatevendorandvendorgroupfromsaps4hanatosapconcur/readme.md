@@ -27,4 +27,4 @@ Request session token from SAP Concur API on a scheduled basis. \
 ### Replicate Vendor and Vendor Group from SAP S4HANA to SAP Concur 
 Requests business partner data from SAP S/4HANA based on a Timer, and creates or updates vendor and creates vendor group \
  ![input-image](Vendor-and-Vendor-Gourp-Replicate-to-Concur-Main.png)\
- ![input-image](Vendor-and-Vendor-Gourp-Replicate-to-Concur-Concur.png)\ 
+ ![input-image](Vendor-and-Vendor-Gourp-Replicate-to-Concur-Concur.png)
