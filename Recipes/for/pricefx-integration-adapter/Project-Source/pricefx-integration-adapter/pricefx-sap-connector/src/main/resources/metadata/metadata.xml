@@ -734,12 +734,6 @@
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
-                <Value>TYPEDID</Value>
-                <GuiLabels guid="114701a2-b4d5-4184-a06a-fd6bd567dcf6">
-                    <Label language="EN">Typed Id</Label>
-                </GuiLabels>
-            </FixedValue>
-            <FixedValue>
                 <Value>ADVANCED_CONFIG</Value>
                 <GuiLabels guid="16b7498c-327f-4733-8a82-280ed264d5e0">
                     <Label language="EN">Advanced Configuration</Label>

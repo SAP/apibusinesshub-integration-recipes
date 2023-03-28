@@ -15,6 +15,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -110,6 +111,14 @@ public class RequestFactory {
 
         } else if (typeCode == PFXTypeCode.DATASOURCE) {
             request.set(OPTIONS, new ObjectNode(JsonNodeFactory.instance).put("direct2ds", true));
+        } else  {
+
+            ObjectNode options = new ObjectNode(JsonNodeFactory.instance);
+            ArrayNode businessKeys = new ArrayNode(JsonNodeFactory.instance);
+            Arrays.asList(typeCode.getIdentifierFieldNames()).forEach(businessKeys::add);
+            options.set("joinFields", businessKeys);
+            request.set(OPTIONS, options);
+
         }
 
         return request;
