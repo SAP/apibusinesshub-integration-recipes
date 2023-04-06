@@ -9,7 +9,7 @@ SAP Cloud Identity Services Identity Provisioning triggers the replication of us
 
 <p>The package provides iflows replicating user roles from SAP Cloud Identity Services Identity Provisioning (IPS) to SAP Sales Cloud and SAP Fieldglass.</p>
 
-[Download the integration package](SAPCloudIdentityServicesIntegrationwithSAPSalesCloudandSAPFieldglass.zip)\ 
+[Download the integration package](SAPCloudIdentityServicesIntegrationwithSAPSalesCloudandSAPFieldglass.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/SAPIPSIntegration)\
 [View documentation - Replicate Users to SAP Fieldglass](ReplicateUserfromSAPIPStoSAPFieldglass.pdf)\
 [View documentation - Replicate Users to SAP Sales Cloud](ReplicateUserfromSAPIPStoSAPSalesCloud.pdf)\
