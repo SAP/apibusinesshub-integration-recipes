@@ -5,4 +5,4 @@ Capability - Skill Level | T-Shirt Size
 [SAP Cloud Integration Basic Skills](../Application_Skill_Level_Definition.md#cloud-integration----basic-skills) | S
 [SAP Fieldglass - Advanced Skills](../Application_Skill_Level_Definition.md#sap-fieldglass---advanced-skills) | M
 [SAP Sales and Service Cloud - Advanced Skills](../Application_Skill_Level_Definition.md#sap-sales-and-service-cloud---advanced-skills) | M
-[SAP IPS - Professional Skills] | L
+[SAP Cloud Identity Access Governance Integration - Advanced Skills](../Application_Skill_Level_Definition.md#sap-cloud-identity-access-governance-integration---advanced-skills) | L

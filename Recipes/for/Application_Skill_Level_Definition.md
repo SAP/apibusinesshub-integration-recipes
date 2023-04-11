@@ -82,8 +82,12 @@ SAP EC: Confident in working with Intelligent Service Center, for example, to en
 SAP ECP: See [SAP S/4HANA (ABAP System)](/Application_Skill_Level_Definition.md#sap-s4hana-abap---professional-skills)
 
 ## Qualtrics - Basic Skills
+Basic understanding of Qualtrics platform and its capabilities.
+Familiarity with web-based technologies such as REST APIs, JSON, and XML.
+Ability to follow technical documentation and implement simple integrations.
 
 ## Qualtrics - Advanced Skills
+Expertise in developing custom Qualtrics integrations using APIs, webhooks, and other integration tools.
 
 ## Qualtrics - Professional Skills
 
@@ -111,6 +115,32 @@ Able to set up custom OData APIs
 Knowledge about the dependencies of the interfaces and their objects  <br>
 Having a strong technical and functional/business related knowledge
 
+## SAP Emarsys - Basic Skills
+Able to configure and set up the standard APIs<br>
+Able to set up the authentication method (OAuth)
+
+## SAP Emarsys - Advanced Skills
+Able to operate inside the system and to perform customizing tasks, for example, to create custom fields  <br>
+
+## SAP Emarsys - Professional Skills
+Knowledge about the dependencies of the interfaces and their objects  <br>
+Having a strong technical and functional/business related knowledge
+
+## SAP Cloud Identity Access Governance Integration - Advanced Skills
+Ability to enhance  Hire2Retire integration flows with minor changes e.g., Message Mapping additional Employee Attributes sent from SAP S/4HANA. <br>
+Ability to enhance integration flows to retrieve position-based roles from SAP Business Rules Service and map it to SAP Identity Access Governance ‘Create User’ API calls. <br>
+Ability to enhance integration flows to map employee attributes to SAP Identity Authentication user record via message mapping. E.g. map Manager, Department, Cost Centre, Active/Inactive Status.
+
+## SAP Cloud Identity Services – Identity Provisioning (IPS) - Advanced Skills
+Ability to enhance and configure existing interfaces/APIs based on customer specific requirements and to connect with different SAP systems <br>
+Basic knowledge about dependencies between different SAP Systems and the user roles.
+
+## SAP Cloud Identity Services – Identity Provisioning (IPS) - Professional Skills
+Knowledge about the interaction between SAP Identity Management and SAP Cloud Identity Services – Identity Provisioning (IPS) and the surrounding SAP Cloud systems, e.g. SAP Fieldglass, SAP ARIBA, SAP Sales Cloud. <br>
+Ability to set up completely new interfaces/APIs based on customer specific requirements and to connect with different SAP systems <br>
+Functional knowledge and ability to understand the dependencies between different SAP Systems and the user roles.
+
+
 ## Third Party - Basic Skills
 Able to set up standard interfaces and authentication methods
 
@@ -119,3 +149,4 @@ Able to operate inside the system and to perform customizing tasks
 
 ## Third Party - Professional Skills
 Having a strong technical and functional/business related knowledge to connect to the relevant interfaces
+
