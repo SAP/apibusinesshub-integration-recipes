@@ -11,7 +11,7 @@
     <name>${project.artifactId}</name>
 
     <properties>
-        <camel.version>2.24.2</camel.version>
+        <camel.version>3.2.0</camel.version>
 
         <guava.version>24.1.1-jre</guava.version>
         <junit.version>4.12</junit.version>
