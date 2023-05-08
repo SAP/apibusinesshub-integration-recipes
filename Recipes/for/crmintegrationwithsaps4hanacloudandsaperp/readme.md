@@ -16,7 +16,8 @@ This package enables creation or change of Customer master and sales data betwee
 
 [Download the integration package](MicrosoftDynamicsCRMIntegrationwithSAPS_4HANACloudandSAPERP.zip)\
 [View package on the SAP API Business Hub](https://api.sap.com/package/CRMIntegrationwithSAPS4HANACloudandSAPERP)\
-[View documentation](CreateorUpdateCustomerwithSalesDatafromCRMtoSAPS4HANACloudandSAPERP.pdf)\
+[View documentation for the creation and update of customer with sales data](CreateorUpdateCustomerwithSalesDatafromCRMtoSAPS4HANACloudandSAPERP.pdf)\
+[View documentation for sales order creation](CreateSalesOrderfromCRMtoSAPS4HANACloud.pdf)\
 [View high level effort](effort.md)
 ## Integration flows
 ### Create or Update Customer with Sales Data from Microsoft Dynamics CRM to SAP S4HANA Cloud and SAP ERP 

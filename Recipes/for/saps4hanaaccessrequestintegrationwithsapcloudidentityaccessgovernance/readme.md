@@ -5,7 +5,7 @@
  ![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP API Business Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
-Integrate SAP Cloud Identity Access Governance solution with your S/4HANA HR systems to enable changes in employee status (HR triggers) to initiate access requests via SAP Cloud Identity Access Governance.
+Integrate SAP Cloud Identity Access Governance (IAG) solution with your SAP S/4HANA HR systems to enable changes in employee status (HR triggers) to initiate access requests via SAP Cloud Identity Access Governance (IAG).
 
 <p></p>
 
@@ -14,6 +14,6 @@ Integrate SAP Cloud Identity Access Governance solution with your S/4HANA HR sys
 [View documentation](SAPS4HANAAccessRequestIntegrationwithSAPCloudIdentityAccessGovernance.pdf)\
 [View high level effort](effort.md)
 ## Integration flows
-### SAP S/4HANA Access Request Integration with SAP Cloud Identity Access Governance 
-Read, Insert, Update and Delete data in a custom business object by emailing an iFlow as an approved sender \
+### Replicate Access Request from SAP S4HANA to SAP Cloud Identity Access Governance 
+This integration will replicate Access Request from SAP S/4HANA (SOAP Abap Proxy) to SAP Cloud Identity Access Governance (REST) leveraging Identity Authentication Service (REST) and SAP Business Rules (REST) \
  ![input-image](IFlow_SAP_S4HANA_Access_Request_Integration_with_SAP_IAG.jpg)
