@@ -42,7 +42,7 @@ class UserUpsertorTest extends Specification {
                 new ObjectNode(JsonNodeFactory.instance).put(FIELD_USER_LOGINNAME, "abc1").put("email", "abc1@pricefx.com"))
 
         when:
-        def results = new UserUpsertor(pfxClient).upsert(request, true, false, false, false)
+        def results = new UserUpsertor(pfxClient).upsert(request, true, false, false, false, false)
 
         then:
         2 == results.size()

@@ -178,15 +178,16 @@ class GenericUpsertorTest extends Specification {
 
         when:
         def result = new GenericUpsertor(pfxClient, PFXOperation.INTEGRATE.getOperation(),
-                PFXTypeCode.PRODUCT, null, null).upsert(request, true, false, false, false)
+                PFXTypeCode.PRODUCT, null, null).upsert(request, true, false, false, false, false)
 
 
         then:
         original.get(0) == result.get(0)
 
+
         when:
         new GenericUpsertor(pfxClient, PFXOperation.INTEGRATE.getOperation(),
-                PFXTypeCode.PRODUCT, null, null).withMaximumRecords(1).upsert(request, true, false, false, false)
+                PFXTypeCode.PRODUCT, null, null).withMaximumRecords(1).upsert(request, true, false, false, false, false)
 
         then:
         thrown(RequestValidationException.class)

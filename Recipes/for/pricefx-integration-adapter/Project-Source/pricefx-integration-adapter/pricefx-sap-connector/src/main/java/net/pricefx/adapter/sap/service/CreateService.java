@@ -22,7 +22,7 @@ public class CreateService extends AbstractJsonRequestService {
         ObjectNode node;
         switch (typeCode) {
             case QUOTE:
-                node = (ObjectNode) new QuoteCreator(getPfxClient(), null).upsert(request, true, false, false, false).get(0);
+                node = (ObjectNode) new QuoteCreator(getPfxClient(), null).upsert(request, true, false, false, false, false).get(0);
                 break;
             default:
                 throw new UnsupportedOperationException("operation not supported");

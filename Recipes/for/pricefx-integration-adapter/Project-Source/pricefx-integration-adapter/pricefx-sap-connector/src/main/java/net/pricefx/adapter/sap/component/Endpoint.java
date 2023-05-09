@@ -20,6 +20,9 @@ public class Endpoint extends DefaultEndpoint {
     private boolean simpleResult;
 
     @UriParam
+    private boolean showSystemFields;
+
+    @UriParam
     private boolean validation;
 
     @UriParam
@@ -305,5 +308,13 @@ public class Endpoint extends DefaultEndpoint {
 
     public void setPartition(String partition) {
         this.partition = partition;
+    }
+
+    public boolean isShowSystemFields() {
+        return showSystemFields;
+    }
+
+    public void setShowSystemFields(boolean showSystemFields) {
+        this.showSystemFields = showSystemFields;
     }
 }

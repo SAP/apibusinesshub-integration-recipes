@@ -188,6 +188,22 @@
                 </AttributeReference>
 
                 <AttributeReference>
+                    <ReferenceName>showSystemFields</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>UPSERT</AttributeValue>
+                        </EditCondition>
+                        <NotCondition>
+                            <EditCondition>
+                                <AttributeName>upsertTargetType</AttributeName>
+                                <AttributeValue>USER</AttributeValue>
+                            </EditCondition>
+                        </NotCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
                     <ReferenceName>replaceNullWithEmpty</ReferenceName>
                     <AndCondition>
                         <EditCondition>
@@ -456,6 +472,17 @@
         </GuiLabels>
     </AttributeMetadata>
 
+    <AttributeMetadata>
+        <Name>showSystemFields</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default>false</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="7bd846c8-0899-418f-a9d1-e1bd63aa59ec">
+            <Label language="EN">Show systems fields (not in standard schema) </Label>
+        </GuiLabels>
+    </AttributeMetadata>
 
     <AttributeMetadata>
         <Name>simpleResult</Name>

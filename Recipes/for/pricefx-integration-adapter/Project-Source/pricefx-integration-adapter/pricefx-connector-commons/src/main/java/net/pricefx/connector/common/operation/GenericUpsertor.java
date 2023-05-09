@@ -58,7 +58,7 @@ public class GenericUpsertor implements IPFXObjectUpsertor {
     }
 
     @Override
-    public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple) {
+    public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple, boolean showSystemFields) {
         if (validate) {
             RequestUtil.validateExtensionType(typeCode, extensionType);
             validateRequest(request, replaceNullKey);
@@ -79,7 +79,12 @@ public class GenericUpsertor implements IPFXObjectUpsertor {
             } else {
                 results.forEach(result -> {
                     if (JsonUtil.isObjectNode(result)) {
-                        ResponseUtil.formatResponse(typeCode, (ObjectNode) result, convertValueToString);
+                        if (showSystemFields){
+                            ResponseUtil.preformatResponse(typeCode, (ObjectNode) result);
+                            ResponseUtil.postformatResponse(typeCode, (ObjectNode) result, convertValueToString);
+                        } else {
+                            ResponseUtil.formatResponse(typeCode, (ObjectNode) result, convertValueToString);
+                        }
                     }
                 });
                 return results;

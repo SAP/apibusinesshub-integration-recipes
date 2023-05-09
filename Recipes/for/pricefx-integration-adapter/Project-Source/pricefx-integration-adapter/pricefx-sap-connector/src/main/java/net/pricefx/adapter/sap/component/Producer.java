@@ -88,6 +88,7 @@ public class Producer extends DefaultProducer {
             case UPSERT:
                 node = new UpsertService(pfxClient, typeCode, extensionType,
                         ((Endpoint) getEndpoint()).isSimpleResult(),
+                        ((Endpoint) getEndpoint()).isShowSystemFields(),
                         ((Endpoint) getEndpoint()).isReplaceNullWithEmpty()).execute(token, input);
                 break;
             case DELETE:
