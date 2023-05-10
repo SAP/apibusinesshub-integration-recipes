@@ -2,7 +2,7 @@
 
 \| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20SAP%20Ariba%20Integration%20Toolkit%20 ) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20SAP%20Ariba%20Integration%20Toolkit%20 ) \| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20SAP%20Ariba%20Integration%20Toolkit%20 ) \|
 
-![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP API Business Hub](https://api.sap.com/allcommunity) |
+![SAP Accelerator Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Accelerator Business Hub](https://api.sap.com/allcommunity) |
 ----|----|
 
 
@@ -19,7 +19,7 @@ This package allows you to do the following:
 * Mapping of data centers to integation URLs.
 
 [Download the integration package](SAPAribaIntegrationToolkit.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/SAPAribaIntegrationToolkit/overview)\
+[View package on the SAP Accelerator Business Hub](https://api.sap.com/package/SAPAribaIntegrationToolkit/overview)\
 [Documentation - SAP Ariba Integration File Download Events](SAPAribaIntegrationFileDownloadEvents.md)\
 [Documentation - SAP Ariba Integration File Upload Events](SAPAribaIntegrationFileUploadEvents.md)
 
@@ -27,25 +27,25 @@ This package allows you to do the following:
 
 ### SAP Ariba Integration File Download Events - Buying
 This integration downloads files from SAP Ariba Buying and stores them on an SFTP server.\
-[View on SAP API Business Hub](https://api.sap.com/integrationflow/SAP_Ariba_Integration_File_Download_Events_-_Buying)
+[View on SAP Accelerator Business Hub](https://api.sap.com/integrationflow/SAP_Ariba_Integration_File_Download_Events_-_Buying)
 ![SAP Ariba Integration File Download Events - Buying](sap-ariba-integration-file-download-events-buying.png)
 
 ### SAP Ariba Integration File Download Events - Sourcing
 This integration flow downloads files from SAP Ariba Sourcing and stores them on an SFTP server.\
-[View on SAP API Business Hub](https://api.sap.com/integrationflow/SAP_Ariba_Integration_File_Download_Events_-_Sourcing)
+[View on SAP Accelerator Business Hub](https://api.sap.com/integrationflow/SAP_Ariba_Integration_File_Download_Events_-_Sourcing)
 ![SAP Ariba Integration File Download Events - Sourcing](sap-ariba-integration-file-download-events-sourcing.png)
 
 ### SAP Ariba Integration File Upload Events - Buying
 This integration flow uploads files from an SFTP server into the SAP Ariba Buying solution.\
-[View on SAP API Business Hub](https://api.sap.com/integrationflow/Ariba_Integration_File_Upload_Events_-_Buying)
+[View on SAP Accelerator Business Hub](https://api.sap.com/integrationflow/Ariba_Integration_File_Upload_Events_-_Buying)
 ![SAP Ariba Integration File Upload Events - Buying](sap-ariba-integration-file-upload-events-buying.png)
 
 ### SAP Ariba Integration File Upload Events - Sourcing
 This integration flow uploads files from an SFTP server into the SAP Ariba Sourcing solution.\
-[View on SAP API Business Hub](https://api.sap.com/integrationflow/SAP_Ariba_Integration_File_Upload_Events_-_Sourcing)
+[View on SAP Accelerator Business Hub](https://api.sap.com/integrationflow/SAP_Ariba_Integration_File_Upload_Events_-_Sourcing)
 ![SAP Ariba Integration File Upload Events - Sourcing](sap-ariba-integration-file-upload-events-sourcing.png)
 
 ### SAP Ariba Datacenter Value Mappings
 This value mapping maps SAP Ariba data centers to integration URLs.\
-[View on SAP API Business Hub](https://api.sap.com/valuemapping/Datacenter)
+[View on SAP Accelerator Business Hub](https://api.sap.com/valuemapping/Datacenter)
 ![SAP Ariba Datacenter Value Mappings](sap-ariba-datacenter-value-mappings.png)

@@ -2,7 +2,7 @@
 
 \| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20Integration%20between%20SAP%20Fieldglass%20and%20OpenText) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20Integration%20between%20SAP%20Fieldglass%20and%20OpenText)\| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20Integration%20between%20SAP%20Fieldglass%20and%20OpenText) \| 
 
- ![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP API Business Hub](https://api.sap.com/allcommunity) | 
+ ![SAP Accelerator Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Accelerator Business Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
 This integration package provides an integration between SAP Fieldglass and the Third Party system OpenText for replicating Fieldglass specific data, e.g. purchase orders.
@@ -11,7 +11,7 @@ This integration package provides an integration between SAP Fieldglass and the 
 <p>&nbsp;</p>
 
 [Download the integration package](IntegrationbetweenSAPFieldglassandOpenText.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/IntegrationbetweenSAPFieldglassandOpenText)\
+[View package on the SAP Accelerator Business Hub](https://api.sap.com/package/IntegrationbetweenSAPFieldglassandOpenText)\
 [View documentation](Documentation_IntegrationbetweenSAPFieldglassandOpenText.pdf)\
 [View high level effort](effort.md)
 ## Integration flows

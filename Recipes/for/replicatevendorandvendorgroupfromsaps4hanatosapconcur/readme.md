@@ -2,7 +2,7 @@
 
 \| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20Replicate%20vendor%20and%20vendor%20group%20from%20SAP%20S/4HANA%20to%20SAP%20Concur) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20Replicate%20vendor%20and%20vendor%20group%20from%20SAP%20S/4HANA%20to%20SAP%20Concur)\| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20Replicate%20vendor%20and%20vendor%20group%20from%20SAP%20S/4HANA%20to%20SAP%20Concur) \| 
 
- ![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP API Business Hub](https://api.sap.com/allcommunity) | 
+ ![SAP Accelerator Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Accelerator Business Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
 Requests business partner information from SAP S/4HANA and handles the replication to SAP Concur.
@@ -14,7 +14,7 @@ Requests business partner information from SAP S/4HANA and handles the replicati
 <p>- value mapping for supplier country and currency value mapping&nbsp;</p>
 
 [Download the integration package](ReplicatevendorandvendorgroupfromSAPS_4HANAtoSAPConcur.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/ReplicatevendorandvendorgroupfromSAPS4HANAtoSAPConcur)\
+[View package on the SAP Accelerator Business Hub](https://api.sap.com/package/ReplicatevendorandvendorgroupfromSAPS4HANAtoSAPConcur)\
 [View documentation](ConfigurationGuide_replicatevendorandvendorgroupfromsaps4hanatosapconcur.pdf)\
 [View high level effort](effort.md)
 ## Integration flows/Value mapping
