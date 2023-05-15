@@ -31,7 +31,7 @@ public class QuoteUpdater implements IPFXObjectUpsertor, ICalculableObjectUpsert
         this.initialSchema = schema;
     }
 
-    public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple) {
+    public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple, boolean showSystemFields) {
         String uniqueName = JsonUtil.getValueAsText(request.get(FIELD_UNIQUENAME));
 
         JsonNode quote = pfxClient.action(createPath(FETCH_QUOTE.getOperation(), uniqueName));

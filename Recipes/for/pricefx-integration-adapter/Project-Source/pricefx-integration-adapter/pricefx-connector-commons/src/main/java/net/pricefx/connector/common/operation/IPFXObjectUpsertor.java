@@ -14,7 +14,7 @@ import static net.pricefx.connector.common.util.JsonSchemaUtil.ITEMS;
 import static net.pricefx.connector.common.util.JsonSchemaUtil.SCHEMA_PROPERTIES;
 
 public interface IPFXObjectUpsertor {
-    List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple);
+    List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple, boolean showSystemFields);
 
     /**
      * get schema for validation. additional attributes are added from metadata

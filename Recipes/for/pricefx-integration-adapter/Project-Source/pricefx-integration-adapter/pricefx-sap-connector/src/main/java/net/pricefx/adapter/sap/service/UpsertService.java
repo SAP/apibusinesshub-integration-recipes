@@ -8,10 +8,8 @@ import net.pricefx.connector.common.connection.PFXOperationClient;
 import net.pricefx.connector.common.operation.GenericUpsertor;
 import net.pricefx.connector.common.operation.UserUpsertor;
 import net.pricefx.connector.common.util.IPFXExtensionType;
-import net.pricefx.connector.common.util.JsonUtil;
 import net.pricefx.connector.common.util.PFXTypeCode;
 import net.pricefx.connector.common.util.RequestPathFactory;
-import net.pricefx.connector.common.util.ResponseUtil;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
@@ -26,8 +24,9 @@ public class UpsertService extends AbstractJsonRequestService {
     private final boolean simpleResult;
     private final boolean replaceNullWithEmpty;
 
-
-    public UpsertService(PFXOperationClient pfxClient, PFXTypeCode typeCode, IPFXExtensionType extensionType, boolean simpleResult, boolean replaceNullWithEmpty) {
+    private final boolean showSystemFields;
+    public UpsertService(PFXOperationClient pfxClient, PFXTypeCode typeCode, IPFXExtensionType extensionType, boolean simpleResult,
+                         boolean showSystemFields, boolean replaceNullWithEmpty) {
         super(pfxClient);
         this.replaceNullWithEmpty = replaceNullWithEmpty;
         this.typeCode = typeCode;
@@ -35,7 +34,7 @@ public class UpsertService extends AbstractJsonRequestService {
 
         this.path = RequestPathFactory.buildUpsertPath(extensionType, typeCode);
         this.simpleResult = simpleResult;
-
+        this.showSystemFields = showSystemFields;
     }
 
     @Override
@@ -44,10 +43,10 @@ public class UpsertService extends AbstractJsonRequestService {
         List<JsonNode> results;
         switch (typeCode) {
             case USER:
-                results = new UserUpsertor(getPfxClient()).upsert(request, true, false, false, false);
+                results = new UserUpsertor(getPfxClient()).upsert(request, true, false, false, false, false);
                 break;
             default:
-                results = new GenericUpsertor(getPfxClient(), path, typeCode, extensionType, null).upsert(request, true, replaceNullWithEmpty, false, simpleResult);
+                results = new GenericUpsertor(getPfxClient(), path, typeCode, extensionType, null).upsert(request, true, replaceNullWithEmpty, false, simpleResult, showSystemFields);
         }
 
 
@@ -58,12 +57,6 @@ public class UpsertService extends AbstractJsonRequestService {
             if (simpleResult) {
                 return results.get(0);
             }
-
-            results.forEach(node -> {
-                if (JsonUtil.isObjectNode(node)) {
-                    ResponseUtil.formatResponse(typeCode, (ObjectNode) node, false);
-                }
-            });
 
             if (results.size() == 1) {
                 return results.get(0);

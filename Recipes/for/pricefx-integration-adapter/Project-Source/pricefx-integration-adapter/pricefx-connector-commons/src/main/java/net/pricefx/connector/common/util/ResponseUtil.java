@@ -188,7 +188,7 @@ public class ResponseUtil {
         }
     }
 
-    private static void preformatResponse(PFXTypeCode typeCode, ObjectNode result) {
+    public static void preformatResponse(PFXTypeCode typeCode, ObjectNode result) {
         if (typeCode == PFXTypeCode.MANUALPRICELIST && !StringUtils.isEmpty(
                 JsonUtil.getValueAsText(result.get(FIELD_TYPEDID))) &&
                 JsonUtil.getValueAsText(result.get(FIELD_TYPEDID)).endsWith("." + MANUALPRICELIST.getTypeCode())) {
@@ -198,7 +198,7 @@ public class ResponseUtil {
         }
     }
 
-    private static void postformatResponse(PFXTypeCode typeCode, ObjectNode result, boolean convertValueToString) {
+    public static void postformatResponse(PFXTypeCode typeCode, ObjectNode result, boolean convertValueToString) {
         if (typeCode == PFXTypeCode.LOOKUPTABLE) {
             formatLookupResponse(result);
         } else if (PFXTypeCode.isDataCollectionTypeCodes(typeCode)) {

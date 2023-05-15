@@ -25,12 +25,12 @@ public class UpdateService extends AbstractJsonRequestService {
         JsonNode node;
         switch (typeCode) {
             case QUOTE:
-                node = new QuoteUpdater(getPfxClient(), null).upsert(request, true, false, false, false).get(0);
+                node = new QuoteUpdater(getPfxClient(), null).upsert(request, true, false, false, false, false).get(0);
                 break;
             case ROLE:
             case BUSINESSROLE:
             case USERGROUP:
-                node = new UserAccessUpdater(getPfxClient(), typeCode, uniqueId, null).upsert(request, true, false, false, false).get(0);
+                node = new UserAccessUpdater(getPfxClient(), typeCode, uniqueId, null).upsert(request, true, false, false, false, false).get(0);
                 break;
             default:
                 throw new UnsupportedOperationException("Update Operation not supported for " + typeCode);

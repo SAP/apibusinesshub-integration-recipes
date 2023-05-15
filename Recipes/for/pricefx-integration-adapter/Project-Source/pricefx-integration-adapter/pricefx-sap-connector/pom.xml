@@ -13,13 +13,12 @@
     <properties>
         <camel.version>2.24.2</camel.version>
 
-        <guava.version>24.1.1-jre</guava.version>
-        <junit.version>4.12</junit.version>
+
         <spock.version>2.0-M2-groovy-3.0</spock.version>
         <surefire.version>2.22.2</surefire.version>
         <gmaven.version>1.9.0</gmaven.version>
 
-        <groovy.version>3.0.6</groovy.version>
+
 
     </properties>
 
@@ -30,11 +29,7 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
+
 
         <!-- Check for the latest version of this artifact in central maven repository -->
         <dependency>
@@ -62,9 +57,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
-            <version>${camel.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
         </dependency>
         <dependency>
             <groupId>javax.xml.bind</groupId>
@@ -80,8 +75,7 @@
             <systemPath>${project.basedir}/lib/cloud.integration.script.apis-2.7.1.jar</systemPath>
         </dependency>
 
-
-
+        <!-- not include this from maven repo as it is not osgi supported. this is re-packaged locally using osgi -->
         <dependency>
             <groupId>org.foundationdb</groupId>
             <artifactId>fdb-java</artifactId>

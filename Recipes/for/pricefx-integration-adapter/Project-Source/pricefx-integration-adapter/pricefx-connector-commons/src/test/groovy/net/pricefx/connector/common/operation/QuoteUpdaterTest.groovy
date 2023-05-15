@@ -18,7 +18,7 @@ class QuoteUpdaterTest extends Specification {
         def request = new ObjectMapper().readTree(QuoteUpdaterTest.class.getResourceAsStream(requestFile))
 
         when:
-        def result = new QuoteUpdater(pfxClient, null).upsert(request, true, false, false, false)
+        def result = new QuoteUpdater(pfxClient, null).upsert(request, true, false, false, false, false)
 
         then:
         "P-10000" == result.get(0).get(PFXConstants.FIELD_UNIQUENAME).textValue()
@@ -33,7 +33,7 @@ class QuoteUpdaterTest extends Specification {
         def request = new ObjectMapper().readTree(QuoteUpdaterTest.class.getResourceAsStream(fullRequestFile))
 
         when:
-        def result = new QuoteUpdater(pfxClient, null).upsert(request, true, false, false, false)
+        def result = new QuoteUpdater(pfxClient, null).upsert(request, true, false, false, false, false)
 
         then:
         "P-24049" == result.get(0).get(PFXConstants.FIELD_UNIQUENAME).textValue()

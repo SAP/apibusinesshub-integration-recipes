@@ -70,7 +70,7 @@ public class UserAccessUpdater implements IPFXObjectUpsertor {
 
 
     @Override
-    public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple) {
+    public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple, boolean showSystemFields) {
 
         if (validate) {
             validateRequest(request);

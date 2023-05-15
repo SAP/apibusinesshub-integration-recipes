@@ -55,7 +55,7 @@ class UserAccessUpdaterTest extends Specification {
         def request = new ObjectMapper().readTree(UserAccessUpdaterTest.class.getResourceAsStream(requestFile))
 
         when:
-        def result = new UserAccessUpdater(pfxClient, PFXTypeCode.ROLE, "USER", null).upsert(request, true, false, false, false)
+        def result = new UserAccessUpdater(pfxClient, PFXTypeCode.ROLE, "USER", null).upsert(request, true, false, false, false, false)
 
         then:
         Boolean.TRUE.toString() == result.get(0).get(PFXConstants.FIELD_VALUE).textValue()
