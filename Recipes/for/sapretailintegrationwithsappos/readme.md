@@ -2,14 +2,14 @@
 
 \| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20SAP%20Retail%20Integration%20with%20SAP%20Point-of-Sale) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20SAP%20Retail%20Integration%20with%20SAP%20Point-of-Sale)\| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20SAP%20Retail%20Integration%20with%20SAP%20Point-of-Sale) \|
 
- ![SAP Accelerator Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Accelerator Business Hub](https://api.sap.com/allcommunity) |
+ ![SAP Business Accelerator Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Business Accelerator Hub](https://api.sap.com/allcommunity) |
  ----|----|
 
 <p>This integration package enables you to build integration between SAP Retail solution (SAP S/4HANA Retail and SAP Customer Activity Repository) and SAP POS (Point-of-Sale).</p>
 <p>The integration scope includes a POS inbound scenario, uploading POS sales data from SAP POS to SAP CAR, and a POS outbound scenario, download article master and price, EAN/UPC (xref), department, and promotions from SAP S/4HANA to SAP POS.</p>
 
 [Download the integration package](SAPRetailIntegrationwithSAPPoint-of-Sale.zip)\
-[View package on the SAP Accelerator Business Hub](https://api.sap.com/package/SAPRetailIntegrationwithSAPPOS)\
+[View package on the SAP Business Accelerator Hub](https://api.sap.com/package/SAPRetailIntegrationwithSAPPOS)\
 [Documentation to Replicate Promotions from SAP S4HANA to SAP POS](Replicate_Promotions_from_SAP_S4HANA_to_POS.pdf)\
 [Documentation to Replicate MixMatch from SAP S4HANA to SAP POS](Replicate_MixMatch_from_SAP_S4HANA_to_POS.pdf)\
 [Documentation to Replicate Department from SAP S4HANA to SAP POS](Replicate_Department_from_SAP_S4HANA_to_POS.pdf)\

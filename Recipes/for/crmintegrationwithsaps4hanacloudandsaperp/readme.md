@@ -2,7 +2,7 @@
 
 \| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20Microsoft%20Dynamics%20CRM%20Integration%20with%20SAP%20S/4HANA%20Cloud%20and%20SAP%20ERP) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20Microsoft%20Dynamics%20CRM%20Integration%20with%20SAP%20S/4HANA%20Cloud%20and%20SAP%20ERP)\| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20Microsoft%20Dynamics%20CRM%20Integration%20with%20SAP%20S/4HANA%20Cloud%20and%20SAP%20ERP) \| 
 
- ![SAP Accelerator Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Accelerator Business Hub](https://api.sap.com/allcommunity) | 
+ ![SAP Business Accelerator Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Business Accelerator Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
 This package enables creation or change of Customer master and sales data between Microsoft Dynamics CRM, SAP S/4HANA Cloud and SAP ERP.
@@ -16,7 +16,7 @@ This package enables creation or change of Customer master and sales data betwee
 </ul>
 
 [Download the integration package](MicrosoftDynamicsCRMIntegrationwithSAPS_4HANACloudandSAPERP.zip)\
-[View package on the SAP Accelerator Business Hub](https://api.sap.com/package/CRMIntegrationwithSAPS4HANACloudandSAPERP)\
+[View package on the SAP Business Accelerator Hub](https://api.sap.com/package/CRMIntegrationwithSAPS4HANACloudandSAPERP)\
 [View documentation for the creation and update of customer with sales data](CreateorUpdateCustomerwithSalesDatafromCRMtoSAPS4HANACloudandSAPERP.pdf)\
 [View documentation for sales order creation](CreateSalesOrderfromCRMtoSAPS4HANACloud.pdf)\
 [View high level effort](effort.md)
