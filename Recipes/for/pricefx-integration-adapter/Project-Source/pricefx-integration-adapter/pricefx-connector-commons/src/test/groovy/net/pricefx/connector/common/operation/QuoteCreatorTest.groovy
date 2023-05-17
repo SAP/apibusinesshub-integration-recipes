@@ -16,7 +16,7 @@ class QuoteCreatorTest extends Specification {
         def request = new ObjectMapper().readTree(QuoteCreatorTest.class.getResourceAsStream(requestFileTooManyItems))
 
         when:
-        new QuoteCreator(pfxClient, null).upsert(request, true, false, false, false)
+        new QuoteCreator(pfxClient, null).upsert(request, true, false, false, false, false)
 
         then:
         thrown(RequestValidationException.class)
@@ -28,7 +28,7 @@ class QuoteCreatorTest extends Specification {
         def request = new ObjectMapper().readTree(QuoteCreatorTest.class.getResourceAsStream(requestFile))
 
         when:
-        def result = new QuoteCreator(pfxClient, null).upsert(request, true, false, false, false)
+        def result = new QuoteCreator(pfxClient, null).upsert(request, true, false, false, false, false)
 
         then:
         "P-1000" == result.get(0).get(PFXConstants.FIELD_UNIQUENAME).textValue()
