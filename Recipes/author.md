@@ -9,7 +9,7 @@
 * [Kamlesh Zanje](#kamlesh-zanje)
 * [Mahesh Srikrishnan](#mahesh-srikrishnan)
 * [Mayur Mohan Belur](#mayur-mohan-belur)
-* [SAP API Business Hub](#sap-api-business-hub)
+* [SAP Business Accelerator Hub](#sap-business-accelerator-hub)
 * [Sharad Dixit](#sharad-dixit)
 * [Shweta Walaskar](#shweta-walaskar)
 * [Sunny Kapoor](#sunny-kapoor)
@@ -108,8 +108,8 @@ Recipe|Description|Topic
 
 ***
 
-### [SAP API Business Hub](https://github.com/SAPAPIBusinessHub)
-![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | Discover Integrations and Extensions on [SAP API Business Hub](https://api.sap.com) |
+### [SAP Business Accelerator Hub](https://github.com/SAPAPIBusinessHub)
+![SAP Business Accelerator Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | Discover Integrations and Extensions on [SAP Business Accelerator Hub](https://api.sap.com) |
 
 Recipe|Description|Topic
 ---|---|---
