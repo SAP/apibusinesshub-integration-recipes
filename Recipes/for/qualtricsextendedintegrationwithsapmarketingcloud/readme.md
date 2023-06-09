@@ -13,7 +13,9 @@ This package enables you to do the following:
 * Create Transaction-Based Survey Link and send it to SAP Marketing Cloud within a Trigger-Interaction ('Survey Link Created).
 
 [Download the reuseable integration package](SAPAribaIntegrationwithThird-PartyforAnalyticalReporting.zip)\
-[View package on the SAP Business Accelerator Hub](https://api.sap.com/package/QualtricsextendedIntegrationwithSAPMarketingCloud/overview)
+[View package on the SAP Business Accelerator Hub](https://api.sap.com/package/QualtricsextendedIntegrationwithSAPMarketingCloud/overview)\
+[View documentation](Marketing_Qualtrics_API_Business_Hub_Doku.pdf)\
+[View high level effort](effort.md)
 
 
 ## Integration Flows
@@ -27,3 +29,12 @@ Triggers the IFlow "Transaction-related Survey Link Creation" asynchronously.\
 Creates Contacts, Transactions and transaction-based survey links in Qualtrics.\
 [View on SAP Business Accelerator Hub](https://api.sap.com/integrationflow/Personal_Survey_Link_Creation)
 ![Transaction-related Survey Link Creation](transaction-related-survey-link-creation.png)
+
+## Value Mappings
+### Value Mapping for Qualtrics and SAP Marketing Integration.
+[View on SAP Business Accelerator Hub](https://api.sap.com/valuemapping/Value_Mapping_MKT_Qualtrics)
+![input-image](Value_Mapping_for_Qualtrics_and_SAP_Marketing_Integration_Contacts.png)\
+![input-image](Value_Mapping_for_Qualtrics_and_SAP_Marketing_Integration_Contacts1.png)\
+![input-image](Value_Mapping_for_Qualtrics_and_SAP_Marketing_IntegrationMKT.png)\
+![input-image](Value_Mapping_for_Qualtrics_and_SAP_Marketing_Integration_MKT1.png)\
+

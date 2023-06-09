@@ -3,4 +3,4 @@
 Capability - Skill Level | T-Shirt Size
 --- | ---
 [SAP Cloud Integration Professional Skills](../Application_Skill_Level_Definition.md#cloud-integration---professional-skills) | M
-[SAP Emarsys - Basic Skills](../Application_Skill_Level_Definition.md#third-party---basic-skills) | S
+[SAP Emarsys - Advanced Skills](../Application_Skill_Level_Definition.md#sap-emarsys---advanced-skills) | M
