@@ -12,7 +12,7 @@ This package enables you to do the following:
 * Send Customers and Transactions from SAP Marketing Cloud to Qualtrics.
 * Create Transaction-Based Survey Link and send it to SAP Marketing Cloud within a Trigger-Interaction ('Survey Link Created).
 
-[Download the reuseable integration package](SAPAribaIntegrationwithThird-PartyforAnalyticalReporting.zip)\
+[Download the reuseable integration package](QualtricsTransaction-BasedSurveyIntegrationwithSAPMarketingCloud.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/QualtricsextendedIntegrationwithSAPMarketingCloud/overview)\
 [View documentation](Marketing_Qualtrics_API_Business_Hub_Doku.pdf)\
 [View high level effort](effort.md)

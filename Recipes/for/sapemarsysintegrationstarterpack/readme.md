@@ -14,7 +14,7 @@ This integration flow allows you to connect to the SAP Emarsys APIs
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
-[Download the integration package](SAPEmarsysIntegration.zip)\
+[Download the integration package](SAPEmarsysIntegrationwithSAPEmarsysAPIs.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/SAPEmarsysIntegration)\
 [View documentation](EmarsysStarterPack_SampleIntegrationforContactsReplication.pdf)\
 [View high level effort](effort.md)
