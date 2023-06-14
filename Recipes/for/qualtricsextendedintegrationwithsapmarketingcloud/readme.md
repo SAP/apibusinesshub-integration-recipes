@@ -14,7 +14,7 @@ This package enables you to do the following:
 
 [Download the reuseable integration package](QualtricsTransaction-BasedSurveyIntegrationwithSAPMarketingCloud.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/QualtricsextendedIntegrationwithSAPMarketingCloud/overview)\
-[View documentation](Marketing_Qualtrics_API Business Hub Doku.pdf)\
+[View documentation](Marketing_Qualtrics_API%20%Business%20%Hub%20%Doku.pdf)\
 [View high level effort](effort.md)
 
 
