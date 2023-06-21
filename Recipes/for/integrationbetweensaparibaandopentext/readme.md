@@ -2,7 +2,7 @@
 
 \| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20Integration%20between%20SAP%20Ariba%20and%20OpenText) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20Integration%20between%20SAP%20Ariba%20and%20OpenText)\| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20Integration%20between%20SAP%20Ariba%20and%20OpenText) \| 
 
- ![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP API Business Hub](https://api.sap.com/allcommunity) | 
+ ![SAP Business Accelerator Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Business Accelerator Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
 This integration package provides an integration between SAP Ariba and the Third Party system OpenText for replicating purchase requisition, purchase orders and sourcing projects.
@@ -10,7 +10,7 @@ This integration package provides an integration between SAP Ariba and the Third
 <p>By using the Ariba APIs purchase requisition, purchase orders as well as sourcing projects are retrieved and replicated to a specific folder in the document management system OpenText.</p>
 
 [Download the integration package](IntegrationbetweenSAPAribaandOpenText.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/IntegrationbetweenSAPAribaandOpenText)\
+[View package on the SAP Business Accelerator Hub](https://api.sap.com/package/IntegrationbetweenSAPAribaandOpenText)\
 [View documentation](Documentation_IntegrationbetweenSAPAribaandOpenText.pdf)\
 [View high level effort](effort.md)
 ## Integration flows

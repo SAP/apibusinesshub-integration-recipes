@@ -2,7 +2,7 @@
 
 \| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20Integration%20with%20Stored%20Value%20Solutions%20(SVS)%20for%20eGiftCard) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20Integration%20with%20Stored%20Value%20Solutions%20(SVS)%20for%20eGiftCard)\| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20Integration%20with%20Stored%20Value%20Solutions%20(SVS)%20for%20eGiftCard) \| 
 
- ![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP API Business Hub](https://api.sap.com/allcommunity) | 
+ ![SAP Business Accelerator Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Business Accelerator Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
 This package provides iFlows for creating eGiftcard from stored value solutions (SVS).
@@ -16,7 +16,7 @@ This package provides iFlows for creating eGiftcard from stored value solutions 
 </ol>
 
 [Download the integration package](IntegrationwithStoredValueSolutionsforeGiftCard.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/IntegrationwithStoredValueSolutionsSVSforeGiftCard)\
+[View package on the SAP Business Accelerator Hub](https://api.sap.com/package/IntegrationwithStoredValueSolutionsSVSforeGiftCard)\
 [Configuration Guideline for First ActiveKey Integration Flow](ConfigurationGuidelineforFirstActiveKeyIflow.pdf)\
 [Configuration Guideline for Refresh Active Key Integration Flow](ConfigurationGuidelineforRefreshActiveKeyIflow.pdf)\
 [Configuration Guideline for Requesting eGiftCard Integration Flow](ConfigurationGuidelineforRequestingeGiftCardIflow.pdf)\

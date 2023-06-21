@@ -2,7 +2,7 @@
 
 \| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20SAP%20ERP%20Master%20Data%20Integration%20with%20SAP%20S/4HANA%20Cloud) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20SAP%20ERP%20Master%20Data%20Integration%20with%20SAP%20S/4HANA%20Cloud)\| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20SAP%20ERP%20Master%20Data%20Integration%20with%20SAP%20S/4HANA%20Cloud) \| 
 
- ![SAP API Business Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP API Business Hub](https://api.sap.com/allcommunity) | 
+ ![SAP Business Accelerator Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Business Accelerator Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
 This package enables creation or change of master data in SAP S/4HANA Cloud from SAP ERP.
@@ -15,7 +15,7 @@ This package enables creation or change of master data in SAP S/4HANA Cloud from
 </ul>
 
 [Download the integration package](SAPERPMasterDataIntegrationwithSAPS4HANACloud.zip)\
-[View package on the SAP API Business Hub](https://api.sap.com/package/SAPERPMasterDataIntegrationWithSAPS4HANACloud)\
+[View package on the SAP Business Accelerator Hub](https://api.sap.com/package/SAPERPMasterDataIntegrationWithSAPS4HANACloud)\
 [View documentation for master data integration](CreateOrUpdateCustomerMasterDataFromSAPERPtoSAPS4HANACloud.pdf)\
 [View documentation for equipment data integration](CreateOrChangeEquipmentFromSAPERPtoS4HANACloud.pdf)\
 [View high level effort](effort.md)
