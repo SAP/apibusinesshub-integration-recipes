@@ -21,6 +21,15 @@ class FetchServiceTest extends Specification {
 
         then:
         "PRODUCT" == result.get(PFXConstants.FIELD_SKU).textValue()
+        null == result.get(PFXConstants.FIELD_VERSION)
+
+        when:
+        result = new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).
+                get(null, PFXConstants.FIELD_SKU, "PRODUCT", true, false, 0, 500)
+
+        then:
+        "PRODUCT" == result.get(PFXConstants.FIELD_SKU).textValue()
+        "0" == result.get(PFXConstants.FIELD_VERSION).textValue()
 
         when:
         result = new FetchService(pfxClient, PFXTypeCode.QUOTE, null, null).
@@ -51,7 +60,7 @@ class FetchServiceTest extends Specification {
         def result = new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetchMetadata(null, 0L, 100)
 
         then:
-        "attribute1" == result.get(PFXConstants.FIELD_FIELDNAME).textValue()
+        "attribute1" == result.getAt(0).get(PFXConstants.FIELD_FIELDNAME).textValue()
 
     }
 
@@ -60,33 +69,33 @@ class FetchServiceTest extends Specification {
         def request = new ObjectMapper().readTree(FetchServiceTest.class.getResourceAsStream("/fetch-product-request.json"))
 
         when:
-        def result = new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, request.toString())
+        def result = new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, true, request.toString())
 
         then:
-        "PRODUCT" == result.get(PFXConstants.FIELD_SKU).textValue()
+        "PRODUCT" == result.getAt(0).get(PFXConstants.FIELD_SKU).textValue()
 
         when:
-        result = new FetchService(dummyClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, request.toString())
+        result = new FetchService(dummyClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, true, request.toString())
 
         then:
         result.isObject()
         result.isEmpty()
 
         when:
-        new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, "xxx")
+        new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, false, "xxx")
 
         then:
         thrown(RequestValidationException.class)
 
         when:
-        new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, "[]")
+        new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, false, "[]")
 
         then:
         thrown(RequestValidationException.class)
 
 
         when:
-        new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, null)
+        new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, false, null)
 
         then:
         thrown(RequestValidationException.class)

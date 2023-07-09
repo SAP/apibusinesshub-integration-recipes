@@ -34,6 +34,9 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
     private final String uniqueId;
     private final boolean convertValueToString;
 
+
+    private static final String TOTAL_ROWS = "totalRows";
+
     public GenericFetcher(PFXOperationClient pfxClient, String typedId,
                           String secondaryKey, boolean convertValueToString) {
         this.pfxClient = pfxClient;
@@ -137,6 +140,29 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
     }
 
     @Override
+    public int fetchCount(ObjectNode request) {
+        JsonNode sortByNode = request.get("sortBy");
+        List<String> sortBy = getArrayNodeFields(sortByNode);
+
+        JsonNode resultFieldsNode = request.get("resultFields");
+        List<String> resultFields = getArrayNodeFields(resultFieldsNode);
+
+        validateRequest(request, resultFields, sortBy);
+
+        RequestUtil.addAdvancedCriteria(((ObjectNode) request.get(FIELD_DATA)));
+        request.put("startRow", 0).put("endRow", 1);
+
+        JsonNode node = pfxClient.doPostRaw(apiPath, request);
+        if (JsonUtil.isObjectNode(node.get("response")) &&
+                node.get("response").get(TOTAL_ROWS) != null && node.get("response").get(TOTAL_ROWS).isInt()){
+            return node.get("response").get(TOTAL_ROWS).intValue();
+        } else {
+            return 0;
+        }
+
+    }
+
+    @Override
     public List<ObjectNode> fetch(ObjectNode request, Long startRow, int pageSize, boolean validate, boolean formatted) {
         JsonNode sortByNode = request.get("sortBy");
         List<String> sortBy = getArrayNodeFields(sortByNode);
@@ -147,9 +173,11 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
         validateRequest(request, resultFields, sortBy);
 
         RequestUtil.addAdvancedCriteria(((ObjectNode) request.get(FIELD_DATA)));
+
         if (formatted) {
             return fetch((ObjectNode) request.get(FIELD_DATA), sortBy, resultFields, startRow, pageSize, validate, true);
         } else {
+            request.put("startRow", startRow).put("endRow", pageSize + startRow);
             return fetchRaw(request, getApiPath());
         }
     }

@@ -15,6 +15,12 @@ public abstract class AbstractJsonRequestService extends AbstractService {
 
     }
 
+    /**
+     * accepting JSON payload only
+     * if empty request, must supply empty JSON {}
+     * @param input
+     * @return
+     */
     @Override
     public JsonNode execute(Object input) {
         if (input == null) {

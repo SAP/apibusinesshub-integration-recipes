@@ -2,6 +2,7 @@ package net.pricefx.adapter.sap.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
@@ -12,11 +13,7 @@ import net.pricefx.connector.common.operation.GenericFetcher;
 import net.pricefx.connector.common.operation.GenericMetadataFetcher;
 import net.pricefx.connector.common.operation.ManualPriceListFetcher;
 import net.pricefx.connector.common.operation.QuoteFetcher;
-import net.pricefx.connector.common.util.Constants;
-import net.pricefx.connector.common.util.IPFXExtensionType;
-import net.pricefx.connector.common.util.JsonUtil;
-import net.pricefx.connector.common.util.PFXTypeCode;
-import net.pricefx.connector.common.util.RequestUtil;
+import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.RequestValidationException;
 import net.pricefx.pckg.client.okhttp.PfxCommonService;
 import org.apache.commons.lang3.StringUtils;
@@ -45,7 +42,7 @@ public class FetchService {
         this.uniqueKey = uniqueKey;
     }
 
-    public JsonNode fetch(String token, long startRow, int pageSize, boolean validate, Object input) {
+    public JsonNode fetch(String token, long startRow, int pageSize, boolean validate, boolean formatted, Object input) {
         if (!StringUtils.isEmpty(token)) {
             pfxClient.updateOAuthToken(token);
         }
@@ -59,21 +56,46 @@ public class FetchService {
         switch (typeCode) {
             case MANUALPRICELIST:
                 results = new ManualPriceListFetcher(pfxClient, false).
-                        fetch((ObjectNode) request, startRow, pageSize, validate, true);
+                        fetch((ObjectNode) request, startRow, pageSize, validate, formatted);
                 break;
             default:
                 results = new GenericFetcher(pfxClient, typeCode, extensionType, uniqueKey, false).
-                        fetch((ObjectNode) request, startRow, pageSize, validate, true);
+                        fetch((ObjectNode) request, startRow, pageSize, validate, formatted);
                 break;
         }
-        return convertResult(results);
+        return convertFetchResults(results);
     }
 
-    private JsonNode convertResult(Iterable<ObjectNode> results) {
+    public JsonNode fetchCount(String token,  Object input) {
+        if (!StringUtils.isEmpty(token)) {
+            pfxClient.updateOAuthToken(token);
+        }
+
+        JsonNode request = convertRequestToJson(input);
+        if (!JsonUtil.isObjectNode(request)) {
+            throw new RequestValidationException("Input message must be a Json Object");
+        }
+
+        int result = new GenericFetcher(pfxClient, typeCode, extensionType, uniqueKey, false).fetchCount((ObjectNode) request);
+        return new IntNode(result);
+
+    }
+
+    private JsonNode convertGetResults(Iterable<ObjectNode> results) {
         if (Iterables.isEmpty(results)) {
             return new ObjectNode(JsonNodeFactory.instance);
         } else if (Iterables.size(results) == 1) {
             return Iterables.get(results, 0);
+        } else {
+            ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
+            results.forEach(arrayNode::add);
+            return arrayNode;
+        }
+    }
+
+    private JsonNode convertFetchResults(Iterable<ObjectNode> results) {
+        if (Iterables.isEmpty(results)) {
+            return new ObjectNode(JsonNodeFactory.instance);
         } else {
             ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
             results.forEach(arrayNode::add);
@@ -133,7 +155,7 @@ public class FetchService {
                 break;
         }
 
-        return convertResult(results);
+        return convertGetResults(results);
 
     }
 
@@ -144,7 +166,7 @@ public class FetchService {
 
         List<ObjectNode> results = new GenericMetadataFetcher(pfxClient, typeCode, extensionType).
                 fetch(startRow, pageSize, uniqueKey);
-        return convertResult(results);
+        return convertFetchResults(results);
     }
 
 }

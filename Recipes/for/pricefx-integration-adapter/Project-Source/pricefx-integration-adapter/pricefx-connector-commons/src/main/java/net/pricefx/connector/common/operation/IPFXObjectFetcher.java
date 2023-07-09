@@ -12,6 +12,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.List;
 
 public interface IPFXObjectFetcher {
+    int fetchCount(ObjectNode request);
 
     List<ObjectNode> fetch(ObjectNode advancedCriteria, List<String> sortBy, List<String> valueFields, Long startRow, int pageSize, boolean validate, boolean formatted);
 

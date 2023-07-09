@@ -27,7 +27,7 @@ public class GetOperation {
         this.secondaryId = secondaryId;
     }
 
-    public JsonNode get(String token, long pageNumber, int pageSize) {
+    public JsonNode get(String token, long pageNumber, int pageSize, boolean formatted) {
         if (StringUtils.isEmpty(uniqueId)) {
             throw new RequestValidationException("Unique ID property is mandatory");
         }
@@ -35,14 +35,14 @@ public class GetOperation {
         JsonNode node;
         switch (typeCode) {
             case QUOTE:
-                node = new FetchService(pfxClient, typeCode, extensionType, uniqueId).get(token, typeCode.getIdentifierFieldNames()[0], uniqueId, true, true, pageNumber, pageSize);
+                node = new FetchService(pfxClient, typeCode, extensionType, uniqueId).get(token, typeCode.getIdentifierFieldNames()[0], uniqueId, true, formatted, pageNumber, pageSize);
                 break;
             case LOOKUPTABLE:
                 if (((PFXLookupTableType) extensionType).getLookupTableType().isSimple() ||
                         ((PFXLookupTableType) extensionType).getLookupTableType() == PFXLookupTableType.LookupTableType.RANGE ||
                         ((PFXLookupTableType) extensionType).getLookupTableType() == PFXLookupTableType.LookupTableType.MATRIX) {
                     node = new FetchService(pfxClient, typeCode, extensionType, uniqueId).get(token,
-                            ((PFXLookupTableType) extensionType).getLookupTableType().getUniqueKey(), uniqueId, false, true, pageNumber, pageSize);
+                            ((PFXLookupTableType) extensionType).getLookupTableType().getUniqueKey(), uniqueId, false, formatted, pageNumber, pageSize);
                 } else {
                     throw new UnsupportedOperationException("GET operation is not supported for multiple Keys Matrix PP");
                 }
@@ -50,7 +50,7 @@ public class GetOperation {
             case PRODUCTIMAGE:
                 throw new UnsupportedOperationException("Cannot get Product image from Adapter");
             default:
-                node = new FetchService(pfxClient, typeCode, extensionType, secondaryId).get(token, typeCode.getIdentifierFieldNames()[0], uniqueId, false, true, pageNumber, pageSize);
+                node = new FetchService(pfxClient, typeCode, extensionType, secondaryId).get(token, typeCode.getIdentifierFieldNames()[0], uniqueId, false, formatted, pageNumber, pageSize);
         }
 
         return ResponseUtil.formatResponse(node);

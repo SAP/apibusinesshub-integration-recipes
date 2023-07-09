@@ -1,14 +1,10 @@
 package net.pricefx.adapter.sap.component;
 
 
-import com.google.common.collect.Lists;
 import org.apache.camel.Processor;
 import org.apache.camel.impl.DefaultEndpoint;
 import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
 
 @UriEndpoint(scheme = "pfx-sap-general", syntax = "", title = "")
 public class Endpoint extends DefaultEndpoint {
@@ -43,6 +39,9 @@ public class Endpoint extends DefaultEndpoint {
 
     @UriParam
     private String fetchTargetType;
+
+    @UriParam
+    private String fetchCountTargetType;
 
     @UriParam
     private String executeTargetType;
@@ -81,6 +80,10 @@ public class Endpoint extends DefaultEndpoint {
     private String deleteByKeyTargetType;
 
     @UriParam
+    private String flushTargetType;
+
+
+    @UriParam
     private String securityMaterial;
 
     @UriParam
@@ -102,7 +105,7 @@ public class Endpoint extends DefaultEndpoint {
         return pricefxHost;
     }
 
-    public void setPricefxHost(String pricefxHost){
+    public void setPricefxHost(String pricefxHost) {
         this.pricefxHost = pricefxHost;
     }
 
@@ -117,15 +120,6 @@ public class Endpoint extends DefaultEndpoint {
     public void setOperationType(String operationType) {
         this.operationType = operationType;
     }
-
-    public String getTargetType() {
-        List<String> list = Lists.newArrayList(statusTargetType, metadataTargetType, fetchTargetType, deleteTargetType, updateTargetType,
-                createTargetType, truncateTargetType, bulkloadTargetType, uploadTargetType, refreshTargetType, upsertTargetType,
-                getTargetType, executeTargetType, deleteByKeyTargetType);
-
-        return list.stream().filter(item -> !StringUtils.isEmpty(item)).findFirst().orElse(null);
-    }
-
 
     public Producer createProducer() {
         return new Producer(this);
@@ -316,5 +310,21 @@ public class Endpoint extends DefaultEndpoint {
 
     public void setShowSystemFields(boolean showSystemFields) {
         this.showSystemFields = showSystemFields;
+    }
+
+    public String getFlushTargetType() {
+        return flushTargetType;
+    }
+
+    public void setFlushTargetType(String flushTargetType) {
+        this.flushTargetType = flushTargetType;
+    }
+
+    public String getFetchCountTargetType() {
+        return fetchCountTargetType;
+    }
+
+    public void setFetchCountTargetType(String fetchCountTargetType) {
+        this.fetchCountTargetType = fetchCountTargetType;
     }
 }

@@ -6,6 +6,10 @@
         "fieldName": "sku",
         "operator": "startsWith",
         "value": "PRODUCT"
+      },
+      {
+        "fieldName": "sku",
+        "operator": "notEmpty"
       }
     ]
   },

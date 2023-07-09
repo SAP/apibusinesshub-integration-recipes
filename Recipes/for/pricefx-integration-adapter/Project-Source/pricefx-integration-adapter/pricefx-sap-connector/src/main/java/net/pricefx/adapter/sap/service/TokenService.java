@@ -32,6 +32,20 @@ public class TokenService {
 
     }
 
+    public ObjectNode getJwt() {
+
+        try {
+            pfxClient.refreshJwtToken();
+            String results = pfxClient.getLatestJwtToken();
+            return new ObjectNode(JsonNodeFactory.instance)
+                    .put(ACCESS_TOKEN, results);
+
+        } catch (Exception e) {
+            throw new ConnectorException("Cannot get JWT Token:" + e.getMessage());
+        }
+
+    }
+
     public ObjectNode refresh(String token, String refreshToken) {
         if (!StringUtils.isEmpty(token)) {
             pfxClient.updateOAuthToken(token);
