@@ -82,6 +82,16 @@
                 </AttributeReference>
 
                 <AttributeReference>
+                    <ReferenceName>flushTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>FLUSH</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
                     <ReferenceName>executeTargetType</ReferenceName>
                     <AndCondition>
                         <EditCondition>
@@ -127,6 +137,16 @@
                         <EditCondition>
                             <AttributeName>operationType</AttributeName>
                             <AttributeValue>FETCH</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>fetchCountTargetType</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>FETCH_COUNT</AttributeValue>
                         </EditCondition>
                     </AndCondition>
                 </AttributeReference>
@@ -189,18 +209,110 @@
 
                 <AttributeReference>
                     <ReferenceName>showSystemFields</ReferenceName>
-                    <AndCondition>
-                        <EditCondition>
-                            <AttributeName>operationType</AttributeName>
-                            <AttributeValue>UPSERT</AttributeValue>
-                        </EditCondition>
-                        <NotCondition>
+                    <OrCondition>
+                        <AndCondition>
                             <EditCondition>
-                                <AttributeName>upsertTargetType</AttributeName>
-                                <AttributeValue>USER</AttributeValue>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>FETCH</AttributeValue>
                             </EditCondition>
-                        </NotCondition>
-                    </AndCondition>
+                            <OrCondition>
+
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>PRODUCT</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMER</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>LOOKUPTABLE</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>PRICERECORD</AttributeValue>
+                                </EditCondition>
+
+                            </OrCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>UPSERT</AttributeValue>
+                            </EditCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>upsertTargetType</AttributeName>
+                                    <AttributeValue>PRODUCT</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>upsertTargetType</AttributeName>
+                                    <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>upsertTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMER</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>upsertTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>upsertTargetType</AttributeName>
+                                    <AttributeValue>LOOKUPTABLE</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>upsertTargetType</AttributeName>
+                                    <AttributeValue>PRICERECORD</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>GET</AttributeValue>
+                            </EditCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>PRODUCT</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMER</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>LOOKUPTABLE</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>PRICERECORD</AttributeValue>
+                                </EditCondition>
+
+
+                            </OrCondition>
+
+                        </AndCondition>
+                    </OrCondition>
                 </AttributeReference>
 
                 <AttributeReference>
@@ -235,157 +347,323 @@
 
                 <AttributeReference>
                     <ReferenceName>extensionName</ReferenceName>
+
                     <OrCondition>
-                        <EditCondition>
-                            <AttributeName>deleteTargetType</AttributeName>
-                            <AttributeValue>PRODUCTEXTENSION</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>deleteTargetType</AttributeName>
-                            <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>deleteTargetType</AttributeName>
-                            <AttributeValue>LOOKUPTABLE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>fetchTargetType</AttributeName>
-                            <AttributeValue>PRODUCTEXTENSION</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>fetchTargetType</AttributeName>
-                            <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>fetchTargetType</AttributeName>
-                            <AttributeValue>LOOKUPTABLE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>fetchTargetType</AttributeName>
-                            <AttributeValue>DATAFEED</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>fetchTargetType</AttributeName>
-                            <AttributeValue>DATAMART</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>fetchTargetType</AttributeName>
-                            <AttributeValue>DATASOURCE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>upsertTargetType</AttributeName>
-                            <AttributeValue>PRODUCTEXTENSION</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>upsertTargetType</AttributeName>
-                            <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>upsertTargetType</AttributeName>
-                            <AttributeValue>LOOKUPTABLE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>metadataTargetType</AttributeName>
-                            <AttributeValue>PRODUCTEXTENSION</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>refreshTargetType</AttributeName>
-                            <AttributeValue>DATAMART</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>metadataTargetType</AttributeName>
-                            <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>metadataTargetType</AttributeName>
-                            <AttributeValue>LOOKUPTABLE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>getTargetType</AttributeName>
-                            <AttributeValue>PRODUCTEXTENSION</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>getTargetType</AttributeName>
-                            <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>getTargetType</AttributeName>
-                            <AttributeValue>LOOKUPTABLE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>bulkloadTargetType</AttributeName>
-                            <AttributeValue>PRODUCTEXTENSION</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>bulkloadTargetType</AttributeName>
-                            <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>bulkloadTargetType</AttributeName>
-                            <AttributeValue>LOOKUPTABLE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>bulkloadTargetType</AttributeName>
-                            <AttributeValue>DATAFEED</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>uploadTargetType</AttributeName>
-                            <AttributeValue>DATAFEED</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>uploadTargetType</AttributeName>
-                            <AttributeValue>DATASOURCE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>truncateTargetType</AttributeName>
-                            <AttributeValue>DATASOURCE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>truncateTargetType</AttributeName>
-                            <AttributeValue>DATAFEED</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>truncateTargetType</AttributeName>
-                            <AttributeValue>DATAMART</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>executeTargetType</AttributeName>
-                            <AttributeValue>FORMULA</AttributeValue>
-                        </EditCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>GET</AttributeValue>
+                            </EditCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>LOOKUPTABLE</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>UPSERT</AttributeValue>
+                            </EditCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>upsertTargetType</AttributeName>
+                                    <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>upsertTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>upsertTargetType</AttributeName>
+                                    <AttributeValue>LOOKUPTABLE</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>FETCH</AttributeValue>
+                            </EditCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>LOOKUPTABLE</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>DATAFEED</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>DATAMART</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>DATASOURCE</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>FETCH_COUNT</AttributeValue>
+                            </EditCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchCountTargetType</AttributeName>
+                                    <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchCountTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchCountTargetType</AttributeName>
+                                    <AttributeValue>LOOKUPTABLE</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchCountTargetType</AttributeName>
+                                    <AttributeValue>DATAFEED</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchCountTargetType</AttributeName>
+                                    <AttributeValue>DATAMART</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchCountTargetType</AttributeName>
+                                    <AttributeValue>DATASOURCE</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>DELETE</AttributeValue>
+                            </EditCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>deleteTargetType</AttributeName>
+                                    <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>deleteTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>deleteTargetType</AttributeName>
+                                    <AttributeValue>LOOKUPTABLE</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>REFRESH</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>refreshTargetType</AttributeName>
+                                <AttributeValue>DATAMART</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>UPLOAD</AttributeValue>
+                            </EditCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>uploadTargetType</AttributeName>
+                                    <AttributeValue>DATAFEED</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>uploadTargetType</AttributeName>
+                                    <AttributeValue>DATASOURCE</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>METADATA</AttributeValue>
+                            </EditCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>metadataTargetType</AttributeName>
+                                    <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                                </EditCondition>
+
+                                <EditCondition>
+                                    <AttributeName>metadataTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>metadataTargetType</AttributeName>
+                                    <AttributeValue>LOOKUPTABLE</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>BULKLOAD</AttributeValue>
+                            </EditCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>bulkloadTargetType</AttributeName>
+                                    <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>bulkloadTargetType</AttributeName>
+                                    <AttributeValue>CUSTOMEREXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>bulkloadTargetType</AttributeName>
+                                    <AttributeValue>LOOKUPTABLE</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>bulkloadTargetType</AttributeName>
+                                    <AttributeValue>DATAFEED</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>FLUSH</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>TRUNCATE</AttributeValue>
+                            </EditCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>truncateTargetType</AttributeName>
+                                    <AttributeValue>DATASOURCE</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>truncateTargetType</AttributeName>
+                                    <AttributeValue>DATAFEED</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>truncateTargetType</AttributeName>
+                                    <AttributeValue>DATAMART</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>EXECUTE</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>executeTargetType</AttributeName>
+                                <AttributeValue>FORMULA</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
                     </OrCondition>
                 </AttributeReference>
 
                 <AttributeReference>
                     <ReferenceName>targetDate</ReferenceName>
                     <OrCondition>
-                        <EditCondition>
-                            <AttributeName>bulkloadTargetType</AttributeName>
-                            <AttributeValue>LOOKUPTABLE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>upsertTargetType</AttributeName>
-                            <AttributeValue>LOOKUPTABLE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>getTargetType</AttributeName>
-                            <AttributeValue>LOOKUPTABLE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>metadataTargetType</AttributeName>
-                            <AttributeValue>LOOKUPTABLE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>fetchTargetType</AttributeName>
-                            <AttributeValue>LOOKUPTABLE</AttributeValue>
-                        </EditCondition>
-                        <EditCondition>
-                            <AttributeName>deleteTargetType</AttributeName>
-                            <AttributeValue>LOOKUPTABLE</AttributeValue>
-                        </EditCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>BULKLOAD</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>bulkloadTargetType</AttributeName>
+                                <AttributeValue>LOOKUPTABLE</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>UPSERT</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>upsertTargetType</AttributeName>
+                                <AttributeValue>LOOKUPTABLE</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>GET</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>getTargetType</AttributeName>
+                                <AttributeValue>LOOKUPTABLE</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>METADATA</AttributeValue>
+                            </EditCondition>
+
+                            <EditCondition>
+                                <AttributeName>metadataTargetType</AttributeName>
+                                <AttributeValue>LOOKUPTABLE</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>FETCH</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>fetchTargetType</AttributeName>
+                                <AttributeValue>LOOKUPTABLE</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>FETCH_COUNT</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>fetchCountTargetType</AttributeName>
+                                <AttributeValue>LOOKUPTABLE</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>DELETE</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>deleteTargetType</AttributeName>
+                                <AttributeValue>LOOKUPTABLE</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+
                     </OrCondition>
                 </AttributeReference>
-
-
             </AttributeGroup>
         </Tab>
         <Tab id="configuration">
@@ -480,7 +758,7 @@
         <Length></Length>
         <isparameterized>true</isparameterized>
         <GuiLabels guid="7bd846c8-0899-418f-a9d1-e1bd63aa59ec">
-            <Label language="EN">Show systems fields (not in standard schema) </Label>
+            <Label language="EN">Show systems fields (not in standard schema)</Label>
         </GuiLabels>
     </AttributeMetadata>
 
@@ -586,6 +864,12 @@
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
+                <Value>FLUSH</Value>
+                <GuiLabels guid="52a24c70-219d-4dd9-baa8-0efbfdaf5169">
+                    <Label language="EN">Flush</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
                 <Value>REFRESH</Value>
                 <GuiLabels guid="6e375f7f-e75b-4069-91c1-df47706fb5b2">
                     <Label language="EN">Refresh</Label>
@@ -595,6 +879,12 @@
                 <Value>FETCH</Value>
                 <GuiLabels guid="942405c9-8c16-437a-bad3-58eaec872721">
                     <Label language="EN">Fetch</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>FETCH_COUNT</Value>
+                <GuiLabels guid="fefdb720-129f-4584-9cdc-32d748bd9ac8">
+                    <Label language="EN">Fetch Count</Label>
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
@@ -648,6 +938,75 @@
                 </GuiLabels>
             </FixedValue>
         </FixedValues>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>fetchCountTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="13554a8e-ec5a-4581-b126-f56538d837a9">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+
+        <FixedValues>
+            <FixedValue>
+                <Value>PRODUCT</Value>
+                <GuiLabels guid="2744c84e-0fd0-47cf-9218-6ad09f78f9f6">
+                    <Label language="EN">Product</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMER</Value>
+                <GuiLabels guid="83b54fdf-e18c-411a-9628-1b5c3a6d9898">
+                    <Label language="EN">Customer</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRODUCTEXTENSION</Value>
+                <GuiLabels guid="e514010c-f6aa-46c9-9fc4-4fc4a17d88ae">
+                    <Label language="EN">Product Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CUSTOMEREXTENSION</Value>
+                <GuiLabels guid="f0735643-74f5-40fe-adca-c7e77093a8c7">
+                    <Label language="EN">Customer Extension</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>LOOKUPTABLE</Value>
+                <GuiLabels guid="dc7379f9-5702-4084-821e-9778630697f6">
+                    <Label language="EN">Price Parameter</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATAFEED</Value>
+                <GuiLabels guid="2611ce14-37d6-4a81-8e89-b7c05b001529">
+                    <Label language="EN">Data Feed</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATASOURCE</Value>
+                <GuiLabels guid="4f248da1-e08d-4bf8-bb8c-f16ef48c67a1">
+                    <Label language="EN">Data Source</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>DATAMART</Value>
+                <GuiLabels guid="43f50810-9118-494f-8f18-ea90dc6fa0a5">
+                    <Label language="EN">Datamart</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PRICERECORD</Value>
+                <GuiLabels guid="b6eedc7c-9a89-4ff9-af5d-b3ed2271a9aa">
+                    <Label language="EN">Price Record</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+
     </AttributeMetadata>
 
 
@@ -989,6 +1348,27 @@
                 <Value>TOKEN</Value>
                 <GuiLabels guid="3fde4ed4-a07a-4128-ada3-21330afb8762">
                     <Label language="EN">Token</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>flushTargetType</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>DATASOURCE</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="fb392bf6-7460-4a7f-877e-2b3a4d6276e2">
+            <Label language="EN">Target</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>DATASOURCE</Value>
+                <GuiLabels guid="bd04f6cf-edd1-49b9-a3a3-f4a4c600c335">
+                    <Label language="EN">Datasource</Label>
                 </GuiLabels>
             </FixedValue>
         </FixedValues>

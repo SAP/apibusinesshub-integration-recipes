@@ -4,7 +4,6 @@ import com.sap.it.api.exception.InvalidContextException
 import com.sap.it.api.securestore.exception.SecureStoreException
 import net.pricefx.adapter.sap.operation.CredentialsOperation
 import net.pricefx.connector.common.connection.PFXOperationClient
-import net.pricefx.connector.common.util.ConnectionUtil
 
 class MockProducer extends Producer {
     private PFXOperationClient pfxOperationClient
@@ -21,12 +20,11 @@ class MockProducer extends Producer {
 
     @Override
     protected CredentialsOperation createCredentialsOperation() throws SecureStoreException, MalformedURLException, InvalidContextException {
-        return new CredentialsOperation("token", "partition","app.pricefx.eu"){
+        return new CredentialsOperation("token", "app.pricefx.eu"){
             @Override
-            protected void init(String securityMaterial, String host, String partition){
-                setJwtToken(securityMaterial)
+            protected void init(String securityMaterial, String host){
+
                 setPricefxHost(host)
-                setClientId(partition)
             }
         }
     }

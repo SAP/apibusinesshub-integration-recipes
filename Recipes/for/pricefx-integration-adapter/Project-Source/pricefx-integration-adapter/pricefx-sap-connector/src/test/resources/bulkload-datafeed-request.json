@@ -1,0 +1,19 @@
+{
+  "header": [
+    "attribute1",
+    "attribute2",
+    "attribute3"
+  ],
+  "data": [
+    [
+      "PRODUCT9",
+      "PRODUCT9",
+      "m"
+    ],
+    [
+      "PRODUCT8",
+      "PRODUCT8",
+      "m"
+    ]
+  ]
+}

@@ -9,6 +9,7 @@ import com.sap.it.api.securestore.UserCredential;
 import com.sap.it.api.securestore.exception.SecureStoreException;
 import net.pricefx.connector.common.util.ConnectionUtil;
 import net.pricefx.connector.common.validation.ConnectorException;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.MalformedURLException;
@@ -21,13 +22,16 @@ public class CredentialsOperation {
     private ConnectionUtil.Connection connection;
 
     private String jwtToken;
-    private String clientId;
+    private String userId;
 
-    public CredentialsOperation(String securityMaterial, String host, String partition) throws InvalidContextException, SecureStoreException, MalformedURLException {
-        init(securityMaterial, host, partition);
+    private boolean jwt = false;
+
+
+    public CredentialsOperation(String securityMaterial, String host) throws InvalidContextException, SecureStoreException, MalformedURLException {
+        init(securityMaterial, host);
     }
 
-    protected void init(String securityMaterial, String host, String partition) throws InvalidContextException, SecureStoreException, MalformedURLException {
+    protected void init(String securityMaterial, String host) throws InvalidContextException, SecureStoreException, MalformedURLException {
         SecureStoreService secureStoreService = ITApiFactory.getService(SecureStoreService.class, null);
         UserCredential credential = secureStoreService.getUserCredential(securityMaterial);
 
@@ -35,34 +39,41 @@ public class CredentialsOperation {
             throw new ConnectorException("Security Material - " + securityMaterial + "not found.");
         }
 
-        clientId = credential.getCredentialProperties().get("user");
-        if (StringUtils.isEmpty(clientId) || "none".equalsIgnoreCase(clientId)) {
-            jwtToken = new String(credential.getPassword());
-            clientId = partition;
-        } else {
-            connection = new ConnectionUtil.Connection(new String(credential.getPassword()));
+        userId = credential.getCredentialProperties().get("user");
+
+        String kind = credential.getCredentialProperties().get("sec:credential.kind");
+
+        if ("default".equalsIgnoreCase(kind)) {
+
+            if (!ArrayUtils.isEmpty(credential.getPassword())) {
+                jwtToken = new String(credential.getPassword());
+            }
+
+            jwt = true;
+            credential = secureStoreService.getUserCredential(userId);
+            if (credential == null) {
+                throw new ConnectorException("Security Material - " + userId + "not found.");
+            }
+
         }
 
+        connection = new ConnectionUtil.Connection(new String(credential.getPassword()));
 
         String tokenUrl = credential.getCredentialProperties().get("sec:server.url");
 
-        if (StringUtils.isEmpty(host)){
+        if (StringUtils.isEmpty(host)) {
             this.pricefxHost = ConnectionUtil.getHost(tokenUrl);
         } else {
             this.pricefxHost = host;
         }
     }
 
-    public String getUsername() {
-        return connection.getUsername();
-    }
-
     public String getPartition() {
         if (connection == null || StringUtils.isEmpty(connection.getPartition())) {
-            return clientId;
-        }else{
-            return connection.getPartition();
+            throw new ConnectorException("Pricefx Partition is missing.");
         }
+
+        return connection.getPartition();
 
     }
 
@@ -70,12 +81,12 @@ public class CredentialsOperation {
         return pricefxHost;
     }
 
-    public String getClientId() {
-        return clientId;
+    public String getUserId() {
+        return userId;
     }
 
     public ObjectNode buildTokenRequest() {
-        if (connection == null){
+        if (connection == null) {
             throw new ConnectorException("Connection is not OAuth");
         }
 
@@ -91,7 +102,7 @@ public class CredentialsOperation {
     }
 
     public boolean isJwt() {
-        return (connection == null);
+        return jwt;
     }
 
     public void setPricefxHost(String pricefxHost) {
@@ -100,9 +111,20 @@ public class CredentialsOperation {
 
     public void setJwtToken(String jwtToken) {
         this.jwtToken = jwtToken;
+
+        if (!StringUtils.isEmpty(jwtToken)) {
+            SecureStoreService secureStoreService = null;
+            try {
+                secureStoreService = ITApiFactory.getService(SecureStoreService.class, null);
+                UserCredential credential = secureStoreService.getUserCredential("test-jwt");
+                credential.getCredentialProperties().put("password", jwtToken);
+            } catch (InvalidContextException e) {
+                throw new RuntimeException(e);
+            } catch (SecureStoreException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
 }
