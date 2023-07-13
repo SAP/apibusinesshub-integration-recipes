@@ -11,7 +11,7 @@ This integration package provides integration flows to replicate employee data f
 <p>&nbsp;</p>
 <p>NOTE: While the standard content (<a href="https://api.sap.com/package/SAPSuccessFactorsEmployeeCentralintegrationwithSAPCommissions/integrationflow" rel="nofollow">https://api.sap.com/package/SAPSuccessFactorsEmployeeCentralintegrationwithSAPCommissions/integrationflow</a>) contains file-based Integration flows, this integration package provides Integration based on APIs and/or Event-Driven Integration.</p>
 
-[Download the integration package](SuccessFactorsECIntegrationwithCommission.zip)\
+[Download the integration package](SAPSuccessFactorsEmployeeCentralIntegrationwithSAPCommissions.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/SuccessFactorsECIntegrationwithCommission)\
 [View documentation](SuccessFactors_EmployeeCentral_Commission_Integration.pdf)\
 [View high level effort](effort.md)
