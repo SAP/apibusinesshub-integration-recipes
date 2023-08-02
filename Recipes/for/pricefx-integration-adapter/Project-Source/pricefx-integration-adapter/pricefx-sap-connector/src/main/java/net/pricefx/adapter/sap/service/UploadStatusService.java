@@ -21,7 +21,7 @@ public class UploadStatusService extends AbstractService {
     }
 
     @Override
-    protected JsonNode execute(Object input) {
+    public JsonNode execute(Object input) {
         return new UploadStatusChecker(getPfxClient(), ImmutableMap.of(UNIQUE_KEY, uniqueId)).execute(null);
     }
 }

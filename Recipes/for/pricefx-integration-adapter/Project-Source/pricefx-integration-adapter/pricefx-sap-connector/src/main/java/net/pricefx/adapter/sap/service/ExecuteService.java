@@ -22,7 +22,7 @@ public class ExecuteService extends AbstractService {
     }
 
     @Override
-    protected JsonNode execute(Object input) {
+    public JsonNode execute(Object input) {
         Map<String, String> parameters = new HashMap<>();
         parameters.put(UNIQUE_KEY, uniqueId);
 

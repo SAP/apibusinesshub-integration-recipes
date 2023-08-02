@@ -32,7 +32,7 @@ public class FileUploadService extends AbstractService {
     }
 
     @Override
-    protected JsonNode execute(Object input) {
+    public JsonNode execute(Object input) {
         byte[] data;
         try {
             byte[] bytes = ByteStreams.toByteArray((ByteArrayInputStream) input);

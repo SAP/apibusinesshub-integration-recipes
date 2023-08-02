@@ -14,7 +14,7 @@ public class ActionService extends AbstractService {
     }
 
     @Override
-    protected JsonNode execute(Object input) {
+    public JsonNode execute(Object input) {
         return new GenericActioner(getPfxClient(), path).action();
     }
 }

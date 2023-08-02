@@ -14,13 +14,13 @@ class PingServiceTest extends Specification {
 
     def "ping"() {
         when:
-        def result = new PingService(pfxClient).execute(null, null)
+        def result = new PingService(pfxClient).execute(null)
 
         then:
         "true" == result.get(PFXConstants.FIELD_VALUE).textValue()
 
         when:
-        result = new PingService(failedClient).execute(null, null)
+        result = new PingService(failedClient).execute(null)
 
         then:
         "true" != result.get(PFXConstants.FIELD_VALUE).textValue()

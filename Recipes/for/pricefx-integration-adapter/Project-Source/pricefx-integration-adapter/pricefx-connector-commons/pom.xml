@@ -11,14 +11,14 @@
     <name>pricefx-connector-commons</name>
 
     <properties>
-        <pricefx-pckg.version>3.17.1</pricefx-pckg.version>
+        <pricefx-pckg.version>3.24.0</pricefx-pckg.version>
         <packaging.type>jar</packaging.type>
 
         <junit.version>4.12</junit.version>
 
         <spock.version>2.0-M2-groovy-3.0</spock.version>
         <smartgwt.version>2.4</smartgwt.version>
-        <guava.version>31.1-jre</guava.version>
+        <guava.version>32.1.1-jre</guava.version>
 
         <!-- maven and jdk -->
         <surefire.version>2.22.2</surefire.version>
@@ -221,13 +221,13 @@
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
-            <version>1.28.4</version>
+            <version>1.28.5</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>1.22</version>
+            <version>1.23.0</version>
         </dependency>
 
 

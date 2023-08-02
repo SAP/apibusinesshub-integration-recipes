@@ -26,18 +26,18 @@ public class ExecuteOperation {
         this.typeCode = typeCode;
     }
 
-    public JsonNode execute(String token, Object input) {
+    public JsonNode execute(Object input) {
         CustomOperation operation = CustomOperation.validValueOf(targetType);
 
         if (typeCode == null) {
-            return new ExecuteService(pfxClient, operation, uniqueId).execute(token, null);
+            return new ExecuteService(pfxClient, operation, uniqueId).execute(null);
         }
 
         switch (typeCode) {
             case FORMULA:
-                return new ExecuteJsonRequestService(pfxClient, EXECUTE_FORMULA, targetName).execute(token, input);
+                return new ExecuteJsonRequestService(pfxClient, EXECUTE_FORMULA, targetName).execute(input);
             default:
-                return new ExecuteService(pfxClient, operation, uniqueId).execute(token, null);
+                return new ExecuteService(pfxClient, operation, uniqueId).execute(null);
 
         }
 

@@ -26,14 +26,14 @@ public class DeleteOperation {
         this.byKey = byKey;
     }
 
-    public JsonNode delete(String token, Object input) {
+    public JsonNode delete(Object input) {
 
         switch (typeCode) {
             case PRODUCTIMAGE:
                 return new ActionService(pfxClient, createPath(PFXOperation.PRODUCT_IMAGE_DELETE.getOperation(), uniqueId)).
-                        execute(token, null);
+                        execute(null);
             default:
-                return new DeleteService(pfxClient, typeCode, extensionType, byKey).execute(token, input);
+                return new DeleteService(pfxClient, typeCode, extensionType, byKey).execute(input);
         }
 
 

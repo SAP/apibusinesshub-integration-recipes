@@ -39,38 +39,32 @@ public class CredentialsOperation {
             throw new ConnectorException("Security Material - " + securityMaterial + "not found.");
         }
 
-        userId = credential.getCredentialProperties().get("user");
-
         String kind = credential.getCredentialProperties().get("sec:credential.kind");
-
-        if ("default".equalsIgnoreCase(kind)) {
-
-            if (!ArrayUtils.isEmpty(credential.getPassword())) {
-                jwtToken = new String(credential.getPassword());
-            }
-
+        String base64;
+        if ("secure_param".equalsIgnoreCase(kind) && !ArrayUtils.isEmpty(credential.getPassword())) {
+            //JWT
             jwt = true;
-            credential = secureStoreService.getUserCredential(userId);
-            if (credential == null) {
-                throw new ConnectorException("Security Material - " + userId + "not found.");
-            }
+            pricefxHost = host;
+            base64 = new String(credential.getPassword());
+        } else if (kind.startsWith("oauth2")) {
+            //OAUTH
+            userId = credential.getCredentialProperties().get("user");
 
-        }
+            String tokenUrl = credential.getCredentialProperties().get("sec:server.url");
+            pricefxHost = ConnectionUtil.getHost(tokenUrl);
 
-        connection = new ConnectionUtil.Connection(new String(credential.getPassword()));
-
-        String tokenUrl = credential.getCredentialProperties().get("sec:server.url");
-
-        if (StringUtils.isEmpty(host)) {
-            this.pricefxHost = ConnectionUtil.getHost(tokenUrl);
+            base64 = new String(credential.getPassword());
         } else {
-            this.pricefxHost = host;
+            //not JWT and not OAuth
+            throw new ConnectorException("OAuth security material or security parameter is required");
         }
+
+        connection = new ConnectionUtil.Connection(base64);
     }
 
     public String getPartition() {
         if (connection == null || StringUtils.isEmpty(connection.getPartition())) {
-            throw new ConnectorException("Pricefx Partition is missing.");
+            throw new ConnectorException("Incorrect Connection configuration!");
         }
 
         return connection.getPartition();
@@ -87,7 +81,7 @@ public class CredentialsOperation {
 
     public ObjectNode buildTokenRequest() {
         if (connection == null) {
-            throw new ConnectorException("Connection is not OAuth");
+            throw new ConnectorException("Incorrect Connection configuration!");
         }
 
         ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
@@ -111,20 +105,17 @@ public class CredentialsOperation {
 
     public void setJwtToken(String jwtToken) {
         this.jwtToken = jwtToken;
-
-        if (!StringUtils.isEmpty(jwtToken)) {
-            SecureStoreService secureStoreService = null;
-            try {
-                secureStoreService = ITApiFactory.getService(SecureStoreService.class, null);
-                UserCredential credential = secureStoreService.getUserCredential("test-jwt");
-                credential.getCredentialProperties().put("password", jwtToken);
-            } catch (InvalidContextException e) {
-                throw new RuntimeException(e);
-            } catch (SecureStoreException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
     }
 
+    public ConnectionUtil.Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(ConnectionUtil.Connection connection) {
+        this.connection = connection;
+    }
+
+    public void setJwt(boolean jwt) {
+        this.jwt = jwt;
+    }
 }

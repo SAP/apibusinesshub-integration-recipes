@@ -22,15 +22,15 @@ public class StatusOperation {
         this.uniqueId = uniqueId;
     }
 
-    public JsonNode get(String token) {
+    public JsonNode get() {
         JsonNode node;
         switch (typeCode) {
             case DATAFILE:
-                node = new UploadStatusService(pfxClient, uniqueId).execute(token, null);
+                node = new UploadStatusService(pfxClient, uniqueId).execute(null);
                 break;
             case PRODUCTIMAGE:
                 node = new ActionService(pfxClient, createPath(PFXOperation.PRODUCT_IMAGE_EXIST.getOperation(), uniqueId)).
-                        execute(token, null);
+                        execute(null);
                 break;
 
             default:

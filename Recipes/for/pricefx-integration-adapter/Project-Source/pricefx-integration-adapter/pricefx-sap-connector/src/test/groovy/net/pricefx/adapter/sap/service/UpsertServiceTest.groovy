@@ -19,26 +19,26 @@ class UpsertServiceTest extends Specification {
         def original = request.deepCopy()
 
         when:
-        def result = new UpsertService(pfxClient, PFXTypeCode.PRODUCT, null, false, false, false).execute(null, request.toString())
+        def result = new UpsertService(pfxClient, PFXTypeCode.PRODUCT, null, false, false, false).execute(request.toString())
 
         then:
         original.size() == result.size()
 
         when:
-        result = new UpsertService(pfxClient, PFXTypeCode.PRODUCT, null, true, false, false).execute(null, request.toString())
+        result = new UpsertService(pfxClient, PFXTypeCode.PRODUCT, null, true, false, false).execute(request.toString())
 
         then:
         original.size() + "" == result.textValue()
 
         when:
         ((ArrayNode) request).remove(1)
-        result = new UpsertService(pfxClient, PFXTypeCode.PRODUCT, null, false, false, false).execute(null, request.toString())
+        result = new UpsertService(pfxClient, PFXTypeCode.PRODUCT, null, false, false, false).execute(request.toString())
 
         then:
         result.isObject()
 
         when:
-        result = new UpsertService(dummyClient, PFXTypeCode.PRODUCT, null, false, false, false).execute(null, request.toString())
+        result = new UpsertService(dummyClient, PFXTypeCode.PRODUCT, null, false, false, false).execute(request.toString())
 
         then:
         result.isObject()

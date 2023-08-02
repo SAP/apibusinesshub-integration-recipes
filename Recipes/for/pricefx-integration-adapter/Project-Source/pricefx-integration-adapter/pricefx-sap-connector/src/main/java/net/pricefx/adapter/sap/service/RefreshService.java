@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import net.pricefx.connector.common.connection.PFXOperationClient;
 import net.pricefx.connector.common.operation.PADataRefresher;
 import net.pricefx.connector.common.util.PFXTypeCode;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,11 +29,7 @@ public class RefreshService {
 
     }
 
-    public JsonNode refresh(String token) {
-        if (!StringUtils.isEmpty(token)) {
-            pfxClient.updateOAuthToken(token);
-        }
-
+    public JsonNode refresh() {
         switch (typeCode) {
             case DATAMART:
                 return new PADataRefresher(pfxClient, parameters).execute(null);

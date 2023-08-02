@@ -12,7 +12,7 @@ class GetOperationTest extends Specification {
 
     def "get"() {
         when:
-        def result = new GetOperation(pfxClient, PFXTypeCode.PRODUCT, "TEST", null, (IPFXExtensionType) null).get(null, 0, Constants.MAX_RECORDS, true)
+        def result = new GetOperation(pfxClient, PFXTypeCode.PRODUCT, "TEST", null, (IPFXExtensionType) null).get(0, Constants.MAX_RECORDS, true)
 
         then:
         "TEST" == result.get(PFXConstants.FIELD_SKU).textValue()
@@ -20,28 +20,28 @@ class GetOperationTest extends Specification {
 
 
         when:
-        result = new GetOperation(pfxClient, PFXTypeCode.PRODUCT, "TEST", null, (IPFXExtensionType) null).get(null, 0, Constants.MAX_RECORDS, false)
+        result = new GetOperation(pfxClient, PFXTypeCode.PRODUCT, "TEST", null, (IPFXExtensionType) null).get(0, Constants.MAX_RECORDS, false)
 
         then:
         "TEST" == result.get(PFXConstants.FIELD_SKU).textValue()
         "0" == result.get(PFXConstants.FIELD_VERSION).textValue()
 
         when:
-        result = new GetOperation(pfxClient, PFXTypeCode.QUOTE, "TEST", null, (IPFXExtensionType) null).get(null, 0, Constants.MAX_RECORDS, true)
+        result = new GetOperation(pfxClient, PFXTypeCode.QUOTE, "TEST", null, (IPFXExtensionType) null).get(0, Constants.MAX_RECORDS, true)
 
         then:
         "TEST" == result.get(PFXConstants.FIELD_UNIQUENAME).textValue()
 
 
         when:
-        new GetOperation(pfxClient, PFXTypeCode.PRODUCTIMAGE, "TEST", null, (IPFXExtensionType) null).get(null, 0, Constants.MAX_RECORDS, true)
+        new GetOperation(pfxClient, PFXTypeCode.PRODUCTIMAGE, "TEST", null, (IPFXExtensionType) null).get(0, Constants.MAX_RECORDS, true)
 
         then:
         thrown(UnsupportedOperationException.class)
 
         when:
         def matrix = PFXLookupTableType.valueOf(PFXLookupTableType.LookupTableType.MATRIX.name(), PFXLookupTableType.LookupTableType.MATRIX2.name())
-        new GetOperation(pfxClient, PFXTypeCode.LOOKUPTABLE, "TEST", null, matrix).get(null, 0, Constants.MAX_RECORDS, true)
+        new GetOperation(pfxClient, PFXTypeCode.LOOKUPTABLE, "TEST", null, matrix).get(0, Constants.MAX_RECORDS, true)
 
         then:
         thrown(UnsupportedOperationException.class)
@@ -49,7 +49,7 @@ class GetOperationTest extends Specification {
         when:
         matrix = PFXLookupTableType.valueOf(PFXLookupTableType.LookupTableType.MATRIX.name(), PFXLookupTableType.LookupTableType.MATRIX.name())
         matrix.withTable("MatrixTable")
-        result = new GetOperation(pfxClient, PFXTypeCode.LOOKUPTABLE, "TEST", null, matrix).get(null, 0, Constants.MAX_RECORDS, true)
+        result = new GetOperation(pfxClient, PFXTypeCode.LOOKUPTABLE, "TEST", null, matrix).get(0, Constants.MAX_RECORDS, true)
 
         then:
         "TEST" == result.get(PFXConstants.FIELD_NAME).textValue()
