@@ -9,7 +9,8 @@
 
 [Download the integration package](SAPERPorSAPS4HANAIntegrationwithSAPSuccessFactorsEmployeeCentralBankKey.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/SAPERPorSAPS4HANAIntegrationwithSAPSuccessFactorsEmployeeCentralBankKey)\
-[View documentation](SAPERPorSAPS4HANAIntegrationwithSAPSuccessFactorsEmployeeCentralBankKey.pdf)
+[View documentation](ConfigGuide_BankKeysReplicationfromS4HANAtoSFECandSAPECP.pdf)\
+[View ABAP report code](ABAP_Report_zhcmsfsfp_bankkeysreplication.pdf)
  ## Integration flows
 ### Replicate Bank Keys from SAP ERP or SAP S4HANA to SAP SuccessFactors Employee Central
 This Integration flow replicates the Bank Keys from SAP ERP or SAP S/4HANA to SAP SuccessFactors Employee Central \
