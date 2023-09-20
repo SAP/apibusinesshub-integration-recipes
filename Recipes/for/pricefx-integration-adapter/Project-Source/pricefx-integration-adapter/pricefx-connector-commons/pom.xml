@@ -18,7 +18,7 @@
 
         <spock.version>2.0-M2-groovy-3.0</spock.version>
         <smartgwt.version>2.4</smartgwt.version>
-        <guava.version>31.1-jre</guava.version>
+        <guava.version>32.0.0-jre</guava.version>
 
         <!-- maven and jdk -->
         <surefire.version>2.22.2</surefire.version>
