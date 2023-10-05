@@ -683,9 +683,6 @@
                 <AttributeReference>
                     <ReferenceName>pricefxHost</ReferenceName>
                 </AttributeReference>
-                <AttributeReference>
-                    <ReferenceName>partition</ReferenceName>
-                </AttributeReference>
             </AttributeGroup>
         </Tab>
     </Variant>
@@ -711,18 +708,6 @@
         <isparameterized>true</isparameterized>
         <GuiLabels guid="4dc09f00-3ce3-4378-8d39-95a6fdbed44a">
             <Label language="EN">Pricefx Host</Label>
-        </GuiLabels>
-    </AttributeMetadata>
-
-    <AttributeMetadata>
-        <Name>partition</Name>
-        <Usage>false</Usage>
-        <DataType>xsd:string</DataType>
-        <Default></Default>
-        <Length></Length>
-        <isparameterized>true</isparameterized>
-        <GuiLabels guid="db5f02c1-44ad-4810-8e41-7501169fb18c">
-            <Label language="EN">Pricefx Partition</Label>
         </GuiLabels>
     </AttributeMetadata>
 
@@ -1684,6 +1669,12 @@
                 <Value>QUOTE_COPY</Value>
                 <GuiLabels guid="162287ba-3d6c-42ae-8bd2-8704b27ff029">
                     <Label language="EN">Copy Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CONVERT_DEAL</Value>
+                <GuiLabels guid="5b21d696-f1ad-4f43-bbd7-1a82b7b359b1">
+                    <Label language="EN">Convert to deal</Label>
                 </GuiLabels>
             </FixedValue>
             <FixedValue>

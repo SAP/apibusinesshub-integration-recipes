@@ -15,7 +15,7 @@ public class PingService extends AbstractService {
     }
 
     @Override
-    protected JsonNode execute(Object input) {
+    public JsonNode execute(Object input) {
         ObjectNode node = new ObjectNode(JsonNodeFactory.instance);
         try {
             getPfxClient().testConnection();

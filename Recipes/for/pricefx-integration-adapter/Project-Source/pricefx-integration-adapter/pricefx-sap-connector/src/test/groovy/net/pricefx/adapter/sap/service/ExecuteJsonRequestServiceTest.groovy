@@ -14,14 +14,14 @@ class ExecuteJsonRequestServiceTest extends Specification {
 
     def "execute"() {
         when:
-        def result = new ExecuteJsonRequestService(pfxClient, CustomOperation.EXECUTE_FORMULA, "Test").execute(null,
+        def result = new ExecuteJsonRequestService(pfxClient, CustomOperation.EXECUTE_FORMULA, "Test").execute(
                 new ObjectNode(JsonNodeFactory.instance).put("name", "test").toString())
 
         then:
         "test" == result.get("resultObject").get("name").textValue()
 
         when:
-        new ExecuteService(pfxClient, CustomOperation.METADATA, "P-1").execute(null, null)
+        new ExecuteService(pfxClient, CustomOperation.METADATA, "P-1").execute(null)
 
         then:
         thrown(UnsupportedOperationException.class)

@@ -14,13 +14,13 @@ class ExecuteServiceTest extends Specification {
 
     def "execute"() {
         when:
-        def result = new ExecuteService(pfxClient, CustomOperation.QUOTE_SUBMIT, "P-1").execute(null, null)
+        def result = new ExecuteService(pfxClient, CustomOperation.QUOTE_SUBMIT, "P-1").execute(null)
 
         then:
         "true" == result.get(PFXConstants.FIELD_VALUE).textValue()
 
         when:
-        new ExecuteService(pfxClient, CustomOperation.METADATA, "P-1").execute(null, null)
+        new ExecuteService(pfxClient, CustomOperation.METADATA, "P-1").execute(null)
 
         then:
         thrown(UnsupportedOperationException.class)

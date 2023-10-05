@@ -17,7 +17,7 @@ class FetchServiceTest extends Specification {
     def "get"() {
         when:
         def result = new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).
-                get(null, PFXConstants.FIELD_SKU, "PRODUCT", true, true, 0, 500)
+                get(PFXConstants.FIELD_SKU, "PRODUCT", true, true, 0, 500)
 
         then:
         "PRODUCT" == result.get(PFXConstants.FIELD_SKU).textValue()
@@ -25,7 +25,7 @@ class FetchServiceTest extends Specification {
 
         when:
         result = new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).
-                get(null, PFXConstants.FIELD_SKU, "PRODUCT", true, false, 0, 500)
+                get(PFXConstants.FIELD_SKU, "PRODUCT", true, false, 0, 500)
 
         then:
         "PRODUCT" == result.get(PFXConstants.FIELD_SKU).textValue()
@@ -33,21 +33,21 @@ class FetchServiceTest extends Specification {
 
         when:
         result = new FetchService(pfxClient, PFXTypeCode.QUOTE, null, null).
-                get(null, PFXConstants.FIELD_UNIQUENAME, "P-1", true, true, 0, 500)
+                get(PFXConstants.FIELD_UNIQUENAME, "P-1", true, true, 0, 500)
 
         then:
         "P-1" == result.get(PFXConstants.FIELD_UNIQUENAME).textValue()
 
         when:
         result = new FetchService(pfxClient, PFXTypeCode.TYPEDID, null, null).
-                get(null, PFXConstants.FIELD_SKU, "1.P", true, true, 0, 500)
+                get(PFXConstants.FIELD_SKU, "1.P", true, true, 0, 500)
 
         then:
         "1" == result.get(PFXConstants.FIELD_SKU).textValue()
 
         when:
         result = new FetchService(pfxClient, PFXTypeCode.TYPEDID, null, null).
-                get(null, PFXConstants.FIELD_UNIQUENAME, "1.DMF", true, true, 0, 500)
+                get(PFXConstants.FIELD_UNIQUENAME, "1.DMF", true, true, 0, 500)
 
         then:
         "1" == result.get(PFXConstants.FIELD_UNIQUENAME).textValue()
@@ -57,7 +57,7 @@ class FetchServiceTest extends Specification {
 
     def "fetchMetadata"() {
         when:
-        def result = new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetchMetadata(null, 0L, 100)
+        def result = new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetchMetadata(0L, 100)
 
         then:
         "attribute1" == result.getAt(0).get(PFXConstants.FIELD_FIELDNAME).textValue()
@@ -69,33 +69,33 @@ class FetchServiceTest extends Specification {
         def request = new ObjectMapper().readTree(FetchServiceTest.class.getResourceAsStream("/fetch-product-request.json"))
 
         when:
-        def result = new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, true, request.toString())
+        def result = new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(0L, 100, true, true, request.toString())
 
         then:
         "PRODUCT" == result.getAt(0).get(PFXConstants.FIELD_SKU).textValue()
 
         when:
-        result = new FetchService(dummyClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, true, request.toString())
+        result = new FetchService(dummyClient, PFXTypeCode.PRODUCT, null, null).fetch(0L, 100, true, true, request.toString())
 
         then:
         result.isObject()
         result.isEmpty()
 
         when:
-        new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, false, "xxx")
+        new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(0L, 100, true, false, "xxx")
 
         then:
         thrown(RequestValidationException.class)
 
         when:
-        new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, false, "[]")
+        new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(0L, 100, true, false, "[]")
 
         then:
         thrown(RequestValidationException.class)
 
 
         when:
-        new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(null, 0L, 100, true, false, null)
+        new FetchService(pfxClient, PFXTypeCode.PRODUCT, null, null).fetch(0L, 100, true, false, null)
 
         then:
         thrown(RequestValidationException.class)

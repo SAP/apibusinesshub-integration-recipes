@@ -42,11 +42,7 @@ public class FetchService {
         this.uniqueKey = uniqueKey;
     }
 
-    public JsonNode fetch(String token, long startRow, int pageSize, boolean validate, boolean formatted, Object input) {
-        if (!StringUtils.isEmpty(token)) {
-            pfxClient.updateOAuthToken(token);
-        }
-
+    public JsonNode fetch(long startRow, int pageSize, boolean validate, boolean formatted, Object input) {
         JsonNode request = convertRequestToJson(input);
         if (!JsonUtil.isObjectNode(request)) {
             throw new RequestValidationException("Input message must be a Json Object");
@@ -66,11 +62,7 @@ public class FetchService {
         return convertFetchResults(results);
     }
 
-    public JsonNode fetchCount(String token,  Object input) {
-        if (!StringUtils.isEmpty(token)) {
-            pfxClient.updateOAuthToken(token);
-        }
-
+    public JsonNode fetchCount(Object input) {
         JsonNode request = convertRequestToJson(input);
         if (!JsonUtil.isObjectNode(request)) {
             throw new RequestValidationException("Input message must be a Json Object");
@@ -103,15 +95,12 @@ public class FetchService {
         }
     }
 
-    public JsonNode get(String token, String key, String value, boolean fullResult, boolean formatted) {
-        return get(token, key, value, fullResult, formatted, 0L, Constants.MAX_RECORDS);
+    public JsonNode get(String key, String value, boolean fullResult, boolean formatted) {
+        return get(key, value, fullResult, formatted, 0L, Constants.MAX_RECORDS);
     }
 
-    public JsonNode get(String token, String key, String value, boolean fullResult, boolean formatted, long startRow, int pageSize) {
+    public JsonNode get(String key, String value, boolean fullResult, boolean formatted, long startRow, int pageSize) {
         Iterable<ObjectNode> results;
-        if (!StringUtils.isEmpty(token)) {
-            pfxClient.updateOAuthToken(token);
-        }
 
         PFXTypeCode pfxTypeCode = this.typeCode;
         ObjectNode criterion;
@@ -159,11 +148,7 @@ public class FetchService {
 
     }
 
-    public JsonNode fetchMetadata(String token, long startRow, int pageSize) {
-        if (!StringUtils.isEmpty(token)) {
-            pfxClient.updateOAuthToken(token);
-        }
-
+    public JsonNode fetchMetadata(long startRow, int pageSize) {
         List<ObjectNode> results = new GenericMetadataFetcher(pfxClient, typeCode, extensionType).
                 fetch(startRow, pageSize, uniqueKey);
         return convertFetchResults(results);

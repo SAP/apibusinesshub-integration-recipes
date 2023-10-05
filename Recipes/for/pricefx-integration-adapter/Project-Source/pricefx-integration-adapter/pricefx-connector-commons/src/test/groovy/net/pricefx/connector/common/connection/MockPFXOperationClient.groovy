@@ -83,6 +83,7 @@ class MockPFXOperationClient extends PFXOperationClient {
             case WITHDRAW_WORKFLOW:
                 return new ObjectNode(JsonNodeFactory.instance).set("workflow",
                         new ObjectNode(JsonNodeFactory.instance).put("workflowStatus", "WITHDRAWN"))
+            case CONVERT_QUOTE:
             case COPY_QUOTE:
             case REVISE_QUOTE:
             case SAVE_QUOTE:

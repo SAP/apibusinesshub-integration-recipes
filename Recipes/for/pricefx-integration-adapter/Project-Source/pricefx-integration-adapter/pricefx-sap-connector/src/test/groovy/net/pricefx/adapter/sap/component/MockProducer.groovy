@@ -20,9 +20,9 @@ class MockProducer extends Producer {
 
     @Override
     protected CredentialsOperation createCredentialsOperation() throws SecureStoreException, MalformedURLException, InvalidContextException {
-        return new CredentialsOperation("token", "app.pricefx.eu"){
+        return new CredentialsOperation("token", "app.pricefx.eu") {
             @Override
-            protected void init(String securityMaterial, String host){
+            protected void init(String securityMaterial, String host) {
 
                 setPricefxHost(host)
             }

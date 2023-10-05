@@ -60,6 +60,7 @@ public enum PFXOperation {
     ADD_LINEITEM_QUOTE("quotemanager.addproducts"),
     REVISE_QUOTE("quotemanager.createnewrevision"),
     COPY_QUOTE("quotemanager.copy"),
+    CONVERT_QUOTE("quotemanager.convert"),
 
     //PP table
     LOOKUPTABLE_VALUES_INTEGRATE("lookuptablemanager.integrate"), //Upsert

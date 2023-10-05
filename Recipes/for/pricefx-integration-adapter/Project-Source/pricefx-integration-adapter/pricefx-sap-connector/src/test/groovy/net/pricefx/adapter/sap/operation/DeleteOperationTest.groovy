@@ -19,13 +19,13 @@ class DeleteOperationTest extends Specification {
         def input = original.toString()
 
         when:
-        def result = new DeleteOperation(pfxClient, PFXTypeCode.PRODUCT, null, null, false).delete(null, input)
+        def result = new DeleteOperation(pfxClient, PFXTypeCode.PRODUCT, null, null, false).delete(input)
 
         then:
         "1" == result.textValue()
 
         when:
-        result = new DeleteOperation(pfxClient, PFXTypeCode.PRODUCTIMAGE, "TEST", null, false).delete(null, input)
+        result = new DeleteOperation(pfxClient, PFXTypeCode.PRODUCTIMAGE, "TEST", null, false).delete(input)
 
         then:
         "1" == result.get(0).get(PFXConstants.FIELD_VALUE).textValue()

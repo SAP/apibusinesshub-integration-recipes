@@ -25,6 +25,7 @@ public class UpsertService extends AbstractJsonRequestService {
     private final boolean replaceNullWithEmpty;
 
     private final boolean showSystemFields;
+
     public UpsertService(PFXOperationClient pfxClient, PFXTypeCode typeCode, IPFXExtensionType extensionType, boolean simpleResult,
                          boolean showSystemFields, boolean replaceNullWithEmpty) {
         super(pfxClient);

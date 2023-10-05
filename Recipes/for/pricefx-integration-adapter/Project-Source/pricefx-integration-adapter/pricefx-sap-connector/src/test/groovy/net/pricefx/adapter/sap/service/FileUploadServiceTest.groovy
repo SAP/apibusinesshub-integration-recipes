@@ -20,7 +20,7 @@ class FileUploadServiceTest extends Specification {
         def input = new ByteArrayInputStream(bytes)
 
         when:
-        def result = new FileUploadService(pfxClient, PFXTypeCode.PRODUCTIMAGE, null, "TEST").execute(null, input)
+        def result = new FileUploadService(pfxClient, PFXTypeCode.PRODUCTIMAGE, null, "TEST").execute(input)
 
         then:
         "1000" == result.get(PFXConstants.FIELD_VALUE).textValue()
@@ -29,19 +29,19 @@ class FileUploadServiceTest extends Specification {
         byte[] tails = [13, 10, 45, 45]
         bytes = ByteArrayUtil.join(bytes, tails)
         input = new ByteArrayInputStream(bytes)
-        result = new FileUploadService(pfxClient, PFXTypeCode.PRODUCTIMAGE, null, "TEST").execute(null, input)
+        result = new FileUploadService(pfxClient, PFXTypeCode.PRODUCTIMAGE, null, "TEST").execute(input)
 
         then:
         "1000" == result.get(PFXConstants.FIELD_VALUE).textValue()
 
         when:
-        new FileUploadService(pfxClient, PFXTypeCode.PRODUCTIMAGE, null, "TEST").execute(null, null)
+        new FileUploadService(pfxClient, PFXTypeCode.PRODUCTIMAGE, null, "TEST").execute(null)
 
         then:
         thrown(RequestValidationException.class)
 
         when:
-        new FileUploadService(pfxClient, PFXTypeCode.PRODUCT, null, "TEST").execute(null, input)
+        new FileUploadService(pfxClient, PFXTypeCode.PRODUCT, null, "TEST").execute(input)
 
         then:
         thrown(UnsupportedOperationException.class)
@@ -49,7 +49,7 @@ class FileUploadServiceTest extends Specification {
         when:
         bytes = ByteStreams.toByteArray(FileUploadServiceTest.class.getResourceAsStream("/delete-product-request.json"))
         input = new ByteArrayInputStream(bytes)
-        new FileUploadService(pfxClient, PFXTypeCode.PRODUCTIMAGE, null, "TEST").execute(null, input)
+        new FileUploadService(pfxClient, PFXTypeCode.PRODUCTIMAGE, null, "TEST").execute(input)
 
         then:
         thrown(RequestValidationException.class)

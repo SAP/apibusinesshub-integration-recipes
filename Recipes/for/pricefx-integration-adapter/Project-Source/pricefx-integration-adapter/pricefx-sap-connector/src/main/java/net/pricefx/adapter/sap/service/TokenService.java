@@ -8,9 +8,10 @@ import net.pricefx.connector.common.util.PFXOperation;
 import net.pricefx.connector.common.validation.ConnectorException;
 import org.apache.commons.lang3.StringUtils;
 
+import static net.pricefx.adapter.sap.util.Constants.ACCESS_TOKEN;
+
 
 public class TokenService {
-    private static final String ACCESS_TOKEN = "access-token";
     private static final String REFRESH_TOKEN = "refresh-token";
 
     private final PFXOperationClient pfxClient;
@@ -37,9 +38,7 @@ public class TokenService {
         try {
             pfxClient.refreshJwtToken();
             String results = pfxClient.getLatestJwtToken();
-            return new ObjectNode(JsonNodeFactory.instance)
-                    .put(ACCESS_TOKEN, results);
-
+            return new ObjectNode(JsonNodeFactory.instance).put(ACCESS_TOKEN, results);
         } catch (Exception e) {
             throw new ConnectorException("Cannot get JWT Token:" + e.getMessage());
         }

@@ -6,6 +6,7 @@ import com.sap.it.api.exception.InvalidContextException;
 import com.sap.it.api.securestore.exception.SecureStoreException;
 import net.pricefx.adapter.sap.operation.*;
 import net.pricefx.adapter.sap.service.*;
+import net.pricefx.adapter.sap.util.StringUtil;
 import net.pricefx.adapter.sap.util.SupportedOperation;
 import net.pricefx.connector.common.connection.PFXOperationClient;
 import net.pricefx.connector.common.operation.DataloadRunner;
@@ -19,6 +20,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.net.MalformedURLException;
 
 import static net.pricefx.adapter.sap.util.Constants.*;
+import static net.pricefx.connector.common.util.Constants.DEFAULT_TIMEOUT;
+import static net.pricefx.connector.common.util.Constants.MAX_RECORDS;
 import static net.pricefx.connector.common.util.PFXTypeCode.TOKEN;
 import static net.pricefx.connector.common.validation.ConnectorException.ErrorType.CONNECTION_ERROR;
 
@@ -94,31 +97,28 @@ public class Producer extends DefaultProducer {
     }
 
     public void process(final Exchange exchange) throws Exception {
-        PFXOperationClient pfxClient;
-        CredentialsOperation credentialsOperation = createCredentialsOperation();
-
-        String token = getProperty(exchange.getProperty(ACCESS_TOKEN));
-        pfxClient = createPfxClient(credentialsOperation);
-
-        Object input = exchange.getIn().getBody();
-
         String apiPath = getProperty(exchange.getProperty(API_PATH));
-
         String uniqueId = getProperty(exchange.getProperty(UNIQUE_ID));
         String secondaryId = getProperty(exchange.getProperty(SECONDARY_ID));
+        Object input = exchange.getIn().getBody();
+
+        CredentialsOperation credentialsOperation = createCredentialsOperation();
+        String token = getProperty(exchange.getProperty(ACCESS_TOKEN));
+        if (credentialsOperation.isJwt()) {
+            credentialsOperation.setJwtToken(token);
+        }
+        PFXOperationClient pfxClient = createPfxClient(credentialsOperation);
+
+        if (!StringUtils.isEmpty(token) && !credentialsOperation.isJwt()) {
+            pfxClient.updateOAuthToken(token);
+        }
+
+
         PFXTypeCode typeCode = getTargetType();
 
-        validateTargetDate(typeCode);
+        validateTargetDate(typeCode, exchange);
 
-        IPFXExtensionType extensionType = null;
-        if (typeCode != null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE)) {
-
-            if (!credentialsOperation.isJwt()) {
-                pfxClient.updateOAuthToken(token);
-            }
-
-            extensionType = pfxClient.createExtensionType(typeCode, ((Endpoint) getEndpoint()).getExtensionName(), ((Endpoint) getEndpoint()).getTargetDate());
-        }
+        IPFXExtensionType extensionType = getPFXExtensionType(pfxClient, typeCode, exchange);
 
         JsonNode node;
         switch (SupportedOperation.valueOf(((Endpoint) getEndpoint()).getOperationType())) {
@@ -126,65 +126,66 @@ public class Producer extends DefaultProducer {
                 node = new FetchService(
                         pfxClient, typeCode,
                         extensionType,
-                        StringUtils.isEmpty(uniqueId) ? ((Endpoint) getEndpoint()).getExtensionName() : uniqueId).
-                        fetchCount(token, input);
+                        StringUtils.isEmpty(uniqueId) ? getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()) : uniqueId).
+                        fetchCount(input);
                 break;
             case FLUSH:
                 node = new DataloadService(pfxClient, typeCode, DataloadRunner.DataloadType.DS_FLUSH,
-                        ((Endpoint) getEndpoint()).getExtensionName()).
-                        execute(token, input);
+                        getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName())).
+                        execute(input);
                 break;
             case REFRESH:
                 String incLoadDate = getProperty(exchange.getProperty(INC_LOAD_DATE));
-                node = refresh(pfxClient, typeCode, uniqueId, incLoadDate, token);
+                node = refresh(pfxClient, typeCode, uniqueId, incLoadDate, exchange);
                 break;
             case TRUNCATE:
                 node = new DataloadService(pfxClient, typeCode, DataloadRunner.DataloadType.TRUNCATE,
-                        ((Endpoint) getEndpoint()).getExtensionName()).execute(token, input);
+                        getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName())).execute(input);
                 break;
             case BULKLOAD:
                 node = new BulkLoadService(pfxClient, typeCode, extensionType,
-                        ((Endpoint) getEndpoint()).getExtensionName(),
-                        ((Endpoint) getEndpoint()).isValidation()).execute(token, input);
+                        getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()),
+                        ((Endpoint) getEndpoint()).isValidation()).execute(input);
                 break;
             case EXECUTE:
-                node = new ExecuteOperation(pfxClient, ((Endpoint) getEndpoint()).getExecuteTargetType(), uniqueId, ((Endpoint) getEndpoint()).getExtensionName(), typeCode).execute(token, input);
+                node = new ExecuteOperation(pfxClient, ((Endpoint) getEndpoint()).getExecuteTargetType(), uniqueId, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()), typeCode).execute(input);
                 break;
             case STATUS:
-                node = new StatusOperation(pfxClient, typeCode, uniqueId).get(token);
+                node = new StatusOperation(pfxClient, typeCode, uniqueId).get();
                 break;
             case PING:
-                node = new PingService(pfxClient).execute(token, null);
+                node = new PingService(pfxClient).execute(null);
                 break;
             case CREATE:
-                node = new CreateService(pfxClient, typeCode).execute(token, input);
+                node = new CreateService(pfxClient, typeCode).execute(input);
                 break;
             case UPDATE:
-                node = new UpdateService(pfxClient, typeCode, uniqueId).execute(token, input);
+                node = new UpdateService(pfxClient, typeCode, uniqueId).execute(input);
                 break;
             case UPSERT:
                 node = new UpsertService(pfxClient, typeCode, extensionType,
                         ((Endpoint) getEndpoint()).isSimpleResult(),
                         ((Endpoint) getEndpoint()).isShowSystemFields(),
-                        ((Endpoint) getEndpoint()).isReplaceNullWithEmpty()).execute(token, input);
+                        ((Endpoint) getEndpoint()).isReplaceNullWithEmpty()).execute(input);
                 break;
             case DELETE:
-                node = new DeleteOperation(pfxClient, typeCode, uniqueId, extensionType, false).delete(token, input);
+                node = new DeleteOperation(pfxClient, typeCode, uniqueId, extensionType, false).delete(input);
                 break;
             case DELETE_BY_KEY:
-                node = new DeleteOperation(pfxClient, typeCode, uniqueId, extensionType, true).delete(token, input);
+                node = new DeleteOperation(pfxClient, typeCode, uniqueId, extensionType, true).delete(input);
                 break;
             case UPLOAD:
-                node = new FileUploadService(pfxClient, typeCode, ((Endpoint) getEndpoint()).getExtensionName(), uniqueId).execute(token, input);
+                node = new FileUploadService(pfxClient, typeCode, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()), uniqueId).
+                        execute(input);
                 break;
             case POST:
-                node = new PostService(pfxClient, apiPath).execute(token, input);
+                node = new PostService(pfxClient, apiPath).execute(input);
                 break;
             case METADATA:
                 int pageSize = RequestUtil.getPageSize(getProperty(exchange.getProperty(PAGE_SIZE)), MAX_FETCH_RECORDS);
                 long startRow = RequestUtil.getStartRow(getProperty(exchange.getProperty(PAGE_NUMBER)), pageSize);
                 node = new FetchService(pfxClient, typeCode, extensionType, uniqueId).
-                        fetchMetadata(token, startRow, pageSize);
+                        fetchMetadata(startRow, pageSize);
                 break;
             case FETCH:
                 pageSize = RequestUtil.getPageSize(getProperty(exchange.getProperty(PAGE_SIZE)), MAX_FETCH_RECORDS);
@@ -192,22 +193,21 @@ public class Producer extends DefaultProducer {
                 node = new FetchService(
                         pfxClient, typeCode,
                         extensionType,
-                        StringUtils.isEmpty(uniqueId) ? ((Endpoint) getEndpoint()).getExtensionName() : uniqueId).
-                        fetch(token, startRow, pageSize, true, !((Endpoint) getEndpoint()).isShowSystemFields(), input);
+                        StringUtils.isEmpty(uniqueId) ? getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()) : uniqueId).
+                        fetch(startRow, pageSize, true, !((Endpoint) getEndpoint()).isShowSystemFields(), input);
                 break;
             case GET:
                 pageSize = RequestUtil.getPageSize(getProperty(exchange.getProperty(PAGE_SIZE)), MAX_FETCH_RECORDS);
                 startRow = RequestUtil.getStartRow(getProperty(exchange.getProperty(PAGE_NUMBER)), pageSize);
-                if (typeCode == TOKEN) {
-                    if (credentialsOperation.isJwt()) {
-                        node = new TokenService(pfxClient).getJwt();
-                        credentialsOperation.setJwtToken(node.get("access-token").textValue());
-                    } else {
-                        node = new TokenService(pfxClient).get(credentialsOperation.buildTokenRequest());
-                    }
+
+                if (typeCode != TOKEN) {
+                    node = new GetOperation(pfxClient, typeCode, uniqueId, secondaryId, extensionType).get(startRow, pageSize, !((Endpoint) getEndpoint()).isShowSystemFields());
+                } else if (credentialsOperation.isJwt()) {
+                    node = new TokenService(pfxClient).getJwt();
                 } else {
-                    node = new GetOperation(pfxClient, typeCode, uniqueId, secondaryId, extensionType).get(token, startRow, pageSize, !((Endpoint) getEndpoint()).isShowSystemFields());
+                    node = new TokenService(pfxClient).get(credentialsOperation.buildTokenRequest());
                 }
+
                 break;
             default:
                 throw new UnsupportedOperationException("operation not supported: " +
@@ -222,27 +222,40 @@ public class Producer extends DefaultProducer {
                 ((Endpoint) getEndpoint()).getPricefxHost());
     }
 
+    public static PfxClientBuilder getPFXClientBuilder(String partitionName, String url, String token) {
+
+        PfxClientBuilder builder = (PfxClientBuilder) new PfxClientBuilder(url, partitionName)
+                .jwtCredentials(token)
+                .chunkSize(MAX_RECORDS)
+                .maxRetry(3)
+                .timeout(DEFAULT_TIMEOUT);
+
+        builder.insecure();
+        return builder;
+    }
+
     protected PFXOperationClient createPfxClient(CredentialsOperation credentialsOperation) {
 
         PFXOperationClient pfxClient;
         try {
             PfxClientBuilder builder;
             if (credentialsOperation.isJwt() && !StringUtils.isEmpty(credentialsOperation.getJwtToken())) {
-                builder = ConnectionUtil.getPFXClientBuilder(credentialsOperation.getPartition(),
-                        credentialsOperation.getPricefxHost(), null, null, credentialsOperation.getJwtToken());
+                //JWT
+                builder = getPFXClientBuilder(credentialsOperation.getPartition(),
+                        credentialsOperation.getPricefxHost(), credentialsOperation.getJwtToken());
 
             } else if (credentialsOperation.isJwt() && StringUtils.isEmpty(credentialsOperation.getJwtToken())) {
+                //Get JWT Token
                 ObjectNode node = credentialsOperation.buildTokenRequest();
                 builder = ConnectionUtil.getPFXClientBuilder(credentialsOperation.getPartition(),
                         credentialsOperation.getPricefxHost(), node.get("username").textValue(),
                         node.get("password").textValue(), null);
 
             } else {
-
+                //OAuth
                 builder = ConnectionUtil.getPFXClientBuilder(credentialsOperation.getPartition(),
                         credentialsOperation.getPricefxHost(),
                         credentialsOperation.getUserId());
-
             }
             pfxClient = (PFXOperationClient) builder.build();
 
@@ -258,20 +271,44 @@ public class Producer extends DefaultProducer {
         return (property == null) ? null : property.toString();
     }
 
-    private void validateTargetDate(PFXTypeCode typeCode) {
+    private String getDynamicValue(Exchange exchange, String expression) {
+        String propertyName = StringUtil.getPropertyNameFromExpression(expression);
+        if (StringUtils.isEmpty(propertyName)) {
+            String headerName = StringUtil.getHeaderNameFromExpression(expression);
+            if (!StringUtils.isEmpty(headerName)) {
+                return getProperty(exchange.getIn().getHeader(headerName));
+            }
+        } else {
+            return getProperty(exchange.getProperty(propertyName));
+        }
 
-        if (DateUtil.getDate(((Endpoint) getEndpoint()).getTargetDate()) == null && typeCode == PFXTypeCode.LOOKUPTABLE) {
+        return expression;
+
+    }
+
+    private void validateTargetDate(PFXTypeCode typeCode, Exchange exchange) {
+
+        if (DateUtil.getDate(getDynamicValue(exchange, ((Endpoint) getEndpoint()).getTargetDate())) == null && typeCode == PFXTypeCode.LOOKUPTABLE) {
             throw new ConnectorException("Invalid Target Date");
         }
 
     }
 
-    private JsonNode refresh(PFXOperationClient pfxClient, PFXTypeCode typeCode, String uniqueId, String incLoadDate, String token) {
+    private JsonNode refresh(PFXOperationClient pfxClient, PFXTypeCode typeCode, String uniqueId, String incLoadDate, Exchange exchange) {
         if (typeCode == TOKEN) {
-            return new RefreshService(pfxClient, typeCode, uniqueId, incLoadDate).refresh(token);
+            return new RefreshService(pfxClient, typeCode, uniqueId, incLoadDate).refresh();
         } else {
-            return new RefreshService(pfxClient, typeCode, ((Endpoint) getEndpoint()).getExtensionName(), incLoadDate).refresh(token);
+            return new RefreshService(pfxClient, typeCode, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()), incLoadDate).refresh();
         }
+    }
+
+    private IPFXExtensionType getPFXExtensionType(PFXOperationClient pfxClient, PFXTypeCode typeCode, Exchange exchange) {
+        if (typeCode != null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE)) {
+            return pfxClient.createExtensionType(typeCode, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()),
+                    getDynamicValue(exchange, ((Endpoint) getEndpoint()).getTargetDate()));
+        }
+
+        return null;
     }
 
 }

@@ -89,9 +89,6 @@ public class Endpoint extends DefaultEndpoint {
     @UriParam
     private String pricefxHost;
 
-    @UriParam
-    private String partition;
-
 
     public Endpoint(final String endpointUri, final Component component) {
         super(endpointUri, component);
@@ -294,14 +291,6 @@ public class Endpoint extends DefaultEndpoint {
 
     public void setReplaceNullWithEmpty(boolean replaceNullWithEmpty) {
         this.replaceNullWithEmpty = replaceNullWithEmpty;
-    }
-
-    public String getPartition() {
-        return partition;
-    }
-
-    public void setPartition(String partition) {
-        this.partition = partition;
     }
 
     public boolean isShowSystemFields() {

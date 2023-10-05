@@ -12,7 +12,8 @@ public enum CustomOperation {
     PA_DATA_TRUNCATE("Truncate Data"), PA_DATA_UPLOAD("Upload Data"),
     PA_CALCULATION("Run Dataload Calculation"),
     QUOTE_SUBMIT("Submit Quote"), QUOTE_WITHDRAW("Withdraw quote"), TYPEDID_GET("Get by TypedId"),
-    QUOTE_COPY("Create duplicate"), QUOTE_REVISION("Create Revision"),
+    QUOTE_COPY("Create duplicate"), QUOTE_REVISION("Create Revision"), CONVERT_DEAL("Convert to deal"),
+
     USER_ACCESS_OPERATION("User Access Operation"),
     EXECUTE_FORMULA("Execute Formula"),
     GET_TOKEN("Get Token"), LOGOUT("Log out"),
@@ -37,7 +38,7 @@ public enum CustomOperation {
     }
 
     public boolean isQuoteOperation() {
-        return (this == QUOTE_COPY || this == QUOTE_SUBMIT || this == QUOTE_WITHDRAW || this == QUOTE_REVISION);
+        return (this == QUOTE_COPY || this == CONVERT_DEAL || this == QUOTE_SUBMIT || this == QUOTE_WITHDRAW || this == QUOTE_REVISION);
     }
 
 }

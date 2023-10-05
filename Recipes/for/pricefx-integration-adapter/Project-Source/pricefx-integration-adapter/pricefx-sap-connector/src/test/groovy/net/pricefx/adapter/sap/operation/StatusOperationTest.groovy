@@ -14,19 +14,19 @@ class StatusOperationTest extends Specification {
 
     def "get"() {
         when:
-        def result = new StatusOperation(pfxClient, PFXTypeCode.PRODUCTIMAGE, "TEST").get(null)
+        def result = new StatusOperation(pfxClient, PFXTypeCode.PRODUCTIMAGE, "TEST").get()
 
         then:
         "true" == result.get(PFXConstants.FIELD_VALUE).textValue()
 
         when:
-        result = new StatusOperation(dummyClient, PFXTypeCode.PRODUCTIMAGE, "TEST").get(null)
+        result = new StatusOperation(dummyClient, PFXTypeCode.PRODUCTIMAGE, "TEST").get()
 
         then:
         "false" == result.get(PFXConstants.FIELD_VALUE).textValue()
 
         when:
-        new StatusOperation(pfxClient, PFXTypeCode.PRODUCT, "TEST").get(null)
+        new StatusOperation(pfxClient, PFXTypeCode.PRODUCT, "TEST").get()
 
         then:
         thrown(UnsupportedOperationException.class)

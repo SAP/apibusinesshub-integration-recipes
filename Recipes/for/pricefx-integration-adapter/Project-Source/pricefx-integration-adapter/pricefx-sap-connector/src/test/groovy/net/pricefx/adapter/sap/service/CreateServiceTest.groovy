@@ -18,15 +18,13 @@ class CreateServiceTest extends Specification {
         def request = new ObjectMapper().readTree(CreateServiceTest.class.getResourceAsStream(CREATE_REQUEST))
 
         when:
-        def result = new CreateService(pfxClient, PFXTypeCode.QUOTE).execute(null,
-                request.toString())
+        def result = new CreateService(pfxClient, PFXTypeCode.QUOTE).execute(request.toString())
 
         then:
         "TEST" == result.get(PFXConstants.FIELD_UNIQUENAME).textValue()
 
         when:
-        new CreateService(pfxClient, PFXTypeCode.PRODUCTIMAGE).execute(null,
-                "{}")
+        new CreateService(pfxClient, PFXTypeCode.PRODUCTIMAGE).execute("{}")
 
         then:
         thrown(UnsupportedOperationException.class)
