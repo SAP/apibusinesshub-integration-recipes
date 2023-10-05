@@ -348,7 +348,7 @@
     <dependency>
       <groupId>net.pricefx</groupId>
       <artifactId>pricefx-pckg</artifactId>
-      <version>3.24.0</version>
+      <version>3.25.1</version>
       <licenses>
         <license>
           <name>The Apache Software License, Version 2.0</name>
@@ -699,7 +699,6 @@
         <license>
           <name>BSD</name>
           <url>http://asm.ow2.org/license.html</url>
-          <file>bsd - license.html</file>
         </license>
       </licenses>
     </dependency>
@@ -712,7 +711,6 @@
           <name>MIT License</name>
           <url>http://www.opensource.org/licenses/mit-license.php</url>
           <distribution>repo</distribution>
-          <file>mit license - mit-license.html</file>
         </license>
       </licenses>
     </dependency>
@@ -725,7 +723,6 @@
           <name>MIT License</name>
           <url>http://www.opensource.org/licenses/mit-license.php</url>
           <distribution>repo</distribution>
-          <file>mit license - mit-license.html</file>
         </license>
       </licenses>
     </dependency>
@@ -738,7 +735,6 @@
           <name>MIT License</name>
           <url>http://www.opensource.org/licenses/mit-license.php</url>
           <distribution>repo</distribution>
-          <file>mit license - mit-license.html</file>
         </license>
       </licenses>
     </dependency>

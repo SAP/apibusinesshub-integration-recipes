@@ -1672,6 +1672,12 @@
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
+                <Value>CONVERT_DEAL</Value>
+                <GuiLabels guid="5b21d696-f1ad-4f43-bbd7-1a82b7b359b1">
+                    <Label language="EN">Convert to deal</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
                 <Value>FORMULA</Value>
                 <GuiLabels guid="b00ef621-9323-4e88-8828-7e29f30046e8">
                     <Label language="EN">Formula</Label>

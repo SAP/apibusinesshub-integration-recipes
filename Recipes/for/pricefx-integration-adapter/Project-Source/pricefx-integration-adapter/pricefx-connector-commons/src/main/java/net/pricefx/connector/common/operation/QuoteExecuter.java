@@ -47,6 +47,8 @@ public class QuoteExecuter extends AbstractGenericExecuter {
         String uniqueName = getParameters().get(UNIQUE_KEY);
 
         switch (customOperation) {
+            case CONVERT_DEAL:
+                return createPath(CONVERT_QUOTE.getOperation(), uniqueName);
             case QUOTE_COPY:
                 return createPath(COPY_QUOTE.getOperation(), uniqueName);
             case QUOTE_REVISION:
@@ -80,6 +82,7 @@ public class QuoteExecuter extends AbstractGenericExecuter {
             case QUOTE_COPY:
             case QUOTE_REVISION:
             case QUOTE_WITHDRAW:
+            case CONVERT_DEAL:
                 return new ObjectNode(JsonNodeFactory.instance);
             default:
                 return null;
@@ -98,6 +101,7 @@ public class QuoteExecuter extends AbstractGenericExecuter {
                     return (WITHDRAWN == PFXConstants.WorkflowStatus.valueOf(JsonUtil.getValueAsText(firstResult.get("workflow").get(FIELD_WORKFLOWSTATUS))));
                 case QUOTE_COPY:
                 case QUOTE_REVISION:
+                case CONVERT_DEAL:
                     return !StringUtils.isEmpty(JsonUtil.getValueAsText(firstResult.get(FIELD_UNIQUENAME)));
                 case QUOTE_SUBMIT:
                     return (SUBMITTED == PFXConstants.WorkflowStatus.valueOf(JsonUtil.getValueAsText(firstResult.get(FIELD_WORKFLOWSTATUS))));

@@ -11,7 +11,7 @@
     <name>pricefx-connector-commons</name>
 
     <properties>
-        <pricefx-pckg.version>3.24.0</pricefx-pckg.version>
+        <pricefx-pckg.version>3.25.1</pricefx-pckg.version>
         <packaging.type>jar</packaging.type>
 
         <junit.version>4.12</junit.version>
