@@ -17,7 +17,7 @@ The package contains the following Integration Flows:
 - Send price Information from SAP S/4HANA to SAP Analytics Cloud marketing planning
 - Write to SAP Integrated Business Planning (IBP) for demand with oData
 
-[Download the integration package](Package.zip)\
+[Download the integration package](IntegrationbetweenSAPIntegratedBusinessPlanningfordemandandSAPAnalyticsCloud.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/IntegrationbetweenSAPIntegratedBusinessPlanningfordemandandSAPAnalyticsCloud/overview)\
 [View documentation - Send SAP Analytics Cloud Marketing model drivers to IBP for Demand](SendSAPAnalyticsCloudMarketingmodeldriverstoIBPforDemand.pdf)\
 [View documentation - Send SAP Analytics Cloud Sales model drivers to IBP for Demand](SendSAPAnalyticsCloudSalesmodeldriverstoIBPforDemand.pdf)\

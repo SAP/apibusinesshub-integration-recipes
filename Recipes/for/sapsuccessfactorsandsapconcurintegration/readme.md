@@ -8,7 +8,7 @@
 
 <p>This package provides a way to integrate employees from SAP SuccessFactors to SAP Concur via SFTP.<br>The integration uses the employee file structure for 305 and 350 and also encrypts the payload</p>
 
-[Download the integration package](SAPSuccessFactorsandSAPConcurIntegration.zip)\
+[Download the integration package](SAPSuccessFactorsEmployeeCentralIntegrationwithSAPConcur.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/SAPSuccessFactorsandSAPConcurIntegration)\
 [View documentation](ConfigurationGuide.pdf)
 
