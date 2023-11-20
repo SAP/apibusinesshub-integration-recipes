@@ -683,6 +683,9 @@
                 <AttributeReference>
                     <ReferenceName>pricefxHost</ReferenceName>
                 </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>retryLoginFailure</ReferenceName>
+                </AttributeReference>
             </AttributeGroup>
         </Tab>
     </Variant>
@@ -708,6 +711,18 @@
         <isparameterized>true</isparameterized>
         <GuiLabels guid="4dc09f00-3ce3-4378-8d39-95a6fdbed44a">
             <Label language="EN">Pricefx Host</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>retryLoginFailure</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default>false</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="4dc09f00-3ce3-4378-8d39-95a6fdbed44a">
+            <Label language="EN">Retry Login Failure (Use only when you have a token flow running successfully)</Label>
         </GuiLabels>
     </AttributeMetadata>
 

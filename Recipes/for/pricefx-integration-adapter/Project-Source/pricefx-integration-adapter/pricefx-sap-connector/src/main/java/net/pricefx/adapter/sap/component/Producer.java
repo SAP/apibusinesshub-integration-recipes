@@ -1,6 +1,7 @@
 package net.pricefx.adapter.sap.component;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sap.it.api.exception.InvalidContextException;
 import com.sap.it.api.securestore.exception.SecureStoreException;
@@ -17,6 +18,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.impl.DefaultProducer;
 import org.apache.commons.lang3.StringUtils;
 
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 
 import static net.pricefx.adapter.sap.util.Constants.*;
@@ -96,23 +98,11 @@ public class Producer extends DefaultProducer {
         return PFXTypeCode.validValueOf(targetType);
     }
 
-    public void process(final Exchange exchange) throws Exception {
+    public void process(PFXOperationClient pfxClient, final Exchange exchange) {
         String apiPath = getProperty(exchange.getProperty(API_PATH));
         String uniqueId = getProperty(exchange.getProperty(UNIQUE_ID));
         String secondaryId = getProperty(exchange.getProperty(SECONDARY_ID));
         Object input = exchange.getIn().getBody();
-
-        CredentialsOperation credentialsOperation = createCredentialsOperation();
-        String token = getProperty(exchange.getProperty(ACCESS_TOKEN));
-        if (credentialsOperation.isJwt()) {
-            credentialsOperation.setJwtToken(token);
-        }
-        PFXOperationClient pfxClient = createPfxClient(credentialsOperation);
-
-        if (!StringUtils.isEmpty(token) && !credentialsOperation.isJwt()) {
-            pfxClient.updateOAuthToken(token);
-        }
-
 
         PFXTypeCode typeCode = getTargetType();
 
@@ -120,7 +110,7 @@ public class Producer extends DefaultProducer {
 
         IPFXExtensionType extensionType = getPFXExtensionType(pfxClient, typeCode, exchange);
 
-        JsonNode node;
+        JsonNode node = new ObjectNode(JsonNodeFactory.instance);
         switch (SupportedOperation.valueOf(((Endpoint) getEndpoint()).getOperationType())) {
             case FETCH_COUNT:
                 node = new FetchService(
@@ -202,10 +192,6 @@ public class Producer extends DefaultProducer {
 
                 if (typeCode != TOKEN) {
                     node = new GetOperation(pfxClient, typeCode, uniqueId, secondaryId, extensionType).get(startRow, pageSize, !((Endpoint) getEndpoint()).isShowSystemFields());
-                } else if (credentialsOperation.isJwt()) {
-                    node = new TokenService(pfxClient).getJwt();
-                } else {
-                    node = new TokenService(pfxClient).get(credentialsOperation.buildTokenRequest());
                 }
 
                 break;
@@ -215,6 +201,62 @@ public class Producer extends DefaultProducer {
         }
 
         exchange.getMessage().setBody(node.toString());
+
+    }
+
+    public void process(final Exchange exchange) throws Exception {
+
+        CredentialsOperation credentialsOperation = createCredentialsOperation();
+        String token = getProperty(exchange.getProperty(ACCESS_TOKEN));
+        if (credentialsOperation.isJwt()) {
+            credentialsOperation.setJwtToken(token);
+        }
+        PFXOperationClient pfxClient = createPfxClient(credentialsOperation);
+
+        if (!StringUtils.isEmpty(token) && !credentialsOperation.isJwt()) {
+            pfxClient.updateOAuthToken(token);
+        }
+
+        PFXTypeCode typeCode = getTargetType();
+
+        boolean isTokenOperation = false;
+        switch (SupportedOperation.valueOf(((Endpoint) getEndpoint()).getOperationType())) {
+            case GET:
+
+                if (typeCode == TOKEN && credentialsOperation.isJwt()) {
+                    JsonNode node = new TokenService(pfxClient).getJwt();
+                    exchange.getMessage().setBody(node.toString());
+                    isTokenOperation = true;
+                } else if (typeCode == TOKEN) {
+                    JsonNode node = new TokenService(pfxClient).get(credentialsOperation.buildTokenRequest());
+                    exchange.getMessage().setBody(node.toString());
+                    isTokenOperation = true;
+                }
+            default:
+                break;
+        }
+        if (!isTokenOperation){
+            try {
+                process(pfxClient, exchange);
+            }catch(ConnectorException ex){
+                if (ex.getStatusCode() == HttpURLConnection.HTTP_UNAUTHORIZED && ((Endpoint) getEndpoint()).isRetryLoginFailure()){
+                    //modify it to support basic auth
+                    PfxClientBuilder builder =  ConnectionUtil.getPFXClientBuilder(credentialsOperation.getConnection().getPartition(),
+                            credentialsOperation.getPricefxHost(),
+                            credentialsOperation.getConnection().getUsername(),
+                            credentialsOperation.getConnection().getPassword());
+
+                    pfxClient = (PFXOperationClient) builder.build();
+                    process(pfxClient, exchange);
+                } else {
+                    throw ex;
+                }
+            } catch(Exception ex){
+                throw ex;
+            }
+        }
+
+
     }
 
     protected CredentialsOperation createCredentialsOperation() throws SecureStoreException, MalformedURLException, InvalidContextException {
