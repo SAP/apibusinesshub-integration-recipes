@@ -45,6 +45,19 @@ public class ConnectionUtil {
         return builder;
     }
 
+    public static PfxClientBuilder getPFXClientBuilder(String partitionName, String url, String user, String password) {
+
+        PfxClientBuilder builder = (PfxClientBuilder) new PfxClientBuilder(url, partitionName)
+                .credentials(user, password)
+                .debug(BASIC)
+                .chunkSize(MAX_RECORDS)
+                .maxRetry(3)
+                .timeout(DEFAULT_TIMEOUT);
+
+        builder.insecure();
+        return builder;
+    }
+
 
     public static Function<Exception, RuntimeException> createExceptionMapper(String sourceObject) {
         return createExceptionMapper(sourceObject, "Unable to execute " + sourceObject);
