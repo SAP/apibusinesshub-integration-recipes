@@ -148,8 +148,6 @@ Recipe|Description|Author
 [SAP Business Network Integration with Non-SAP ERP](for/sapbusinessnetworkintegrationwithnonsaperp)| Baseline template to support the Purchase Order, Invoice and other transactional documents with the SAP Business Network|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Third Party Invoice Status Integration with SAP Ariba network](for/thirdpartyinvoicestatusintegrationwiththearibanetwork) | Invoice status handling from any Invoice system to SAP Ariba Network based on cXML | [SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 
-
-
 ***
 
 ### SAP BTP
@@ -209,6 +207,8 @@ Recipe|Description|Author
 [SAP Emarsys Integration - Starter Pack](sapemarsysintegrationstarterpack)|This integration flow allows you to connect to the SAP Emarsys APIs|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Emarsys Integration with SAP Qualtrics](sapemarsysintegrationwithqualtrics)|Create personalized survey links and send them with a triggered email from SAP Emarsys. Receive survey response data (NPS Score) in SAP Emarsys|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 
+***
+
 ### SAP ERP
 Recipe|Description|Author
 ---|---|---
@@ -251,7 +251,6 @@ Recipe|Description|Author
 [SAP SuccessFactors Employee Central Payroll Integration with SAP S_4HANA or SAP ERP](for/sapsuccessfactorsemployeecentralpayrollintegrationwithsaps4hanaorsaperp)| Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Retail Integration with SAP Point-of-Sale](for/sapretailintegrationwithsappos) |Outbound/Inbound integration between SAP Retail Solution and SAP POS (Point-of-Sale) |[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 
-
 ***
 
 ### SAP S4HANA Cloud
@@ -283,8 +282,6 @@ Recipe|Description|Author
 ### SAP SuccessFactors Employee Central
 Recipe|Description|Author
 ---|---|---
-
-
 [Employee Integration between SAP SuccessFactors and SAP Concur Integration](for/sapsuccessfactorsandsapconcurintegration)| This package contains the employee integration between SAP SuccessFactors and SAP Concur via SFTP servers.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Analytics Cloud Integration with SAP SuccessFactors Position Write Back Outbound Flow](for/sapanalyticscloudintegrationwithsapsuccessfactorspositionwritebackoutboundflow) |The integration is designed to extract the Planned positions from the SAP SAC via API mechanism and Invoke the SuccessFactors Employee Central using  to Create the Position|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP ERP or SAP S/4HANA Integration with SAP SuccessFactors Employee Central](for/saperporsaps4hanaintegrationwithsapsuccessfactorsemployeecentralbankkey)|Replicate Bank Key data from SAP ERP or SAP S/4HANA to SAP SuccessFactors Employee Central|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
@@ -299,6 +296,8 @@ Recipe|Description|Author
 ***
 
 ### SAP SuccessFactors Incentive Management
+Recipe|Description|Author
+---|---|---
 [SAP SuccessFactors Employee Central Integration with SAP Commissions](successfactorsecintegrationwithcommission)|This integration package provides integration flows to replicate employee data from SAP SuccessFactors Employee Central to SAP Commissions.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 
 ***
