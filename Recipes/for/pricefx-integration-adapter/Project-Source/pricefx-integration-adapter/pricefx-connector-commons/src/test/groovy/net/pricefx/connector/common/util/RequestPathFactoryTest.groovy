@@ -96,9 +96,16 @@ class RequestPathFactoryTest extends Specification {
 
         when:
 
-        result = RequestPathFactory.buildUpdatePath(PFXTypeCode.PRODUCT, request)
+        result = RequestPathFactory.buildUpdatePath(PFXTypeCode.ROLE, request)
 
         then:
-        createPath(PFXOperation.UPDATE.getOperation(), PFXTypeCode.PRODUCT.getTypeCode()) == result
+        createPath(PFXOperation.UPDATE.getOperation(), PFXTypeCode.ROLE.getTypeCode()) == result
+
+        when:
+
+        RequestPathFactory.buildUpdatePath(PFXTypeCode.PRODUCT, request)
+
+        then:
+        thrown(UnsupportedOperationException.class)
     }
 }

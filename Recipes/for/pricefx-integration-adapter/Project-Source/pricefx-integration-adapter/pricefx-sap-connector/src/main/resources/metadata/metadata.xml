@@ -766,7 +766,7 @@
         <Name>simpleResult</Name>
         <Usage>false</Usage>
         <DataType>xsd:boolean</DataType>
-        <Default>false</Default>
+        <Default>true</Default>
         <Length></Length>
         <isparameterized>true</isparameterized>
         <GuiLabels guid="81baa89b-1f34-4d34-8873-9332ab616594">
