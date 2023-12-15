@@ -10,7 +10,7 @@ Replicate supplier related data between SAP Integrated Business Planning (SAP IB
 <p>These iFlows help to exchange data between SAP Integrated Business Planning and SAP Business Networks from a Supplier prespective.</p>
 <p>The flows can either be triggered via an REST API or via Timer-based Iflow.</p>
 
-[Download the integration package](AribaSupplierIntegration.zip)\
+[Download the integration package](SupplierIntegrationbetweenSAPIntegratedBusinessPlanningandSAPBusinessNetworks.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/AribaSupplierIntegration)\
 [View documentation](ConfigurationGuide_AribaSupplierIntegration.pdf)\
 [View high level effort](effort.md)
