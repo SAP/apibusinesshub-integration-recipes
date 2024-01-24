@@ -116,15 +116,16 @@ Knowledge about the dependencies of the interfaces and their objects  <br>
 Having a strong technical and functional/business related knowledge
 
 ## SAP Emarsys - Basic Skills
-Able to configure and set up the standard APIs<br>
-Able to set up the authentication method (OAuth)
+Knowledge to set up the standard API and standard authentication. <br>
+Basic knowledge about SAP Emarsys product.
 
 ## SAP Emarsys - Advanced Skills
-Able to operate inside the system and to perform customizing tasks, for example, to create custom fields  <br>
+Ability to enhance standard API with custom fields/custom logic. <br>
+Basic functional/business related knowledge related to the business processes within SAP Emarsys.
 
 ## SAP Emarsys - Professional Skills
-Knowledge about the dependencies of the interfaces and their objects  <br>
-Having a strong technical and functional/business related knowledge
+Ability to implement access to relational data for personalization and segmentation <br>
+Strong functional/business related knowledge related to the business processes within SAP Emarsys.
 
 ## SAP Cloud Identity Access Governance Integration - Advanced Skills
 Ability to enhance  Hire2Retire integration flows with minor changes e.g., Message Mapping additional Employee Attributes sent from SAP S/4HANA. <br>
@@ -139,6 +140,41 @@ Basic knowledge about dependencies between different SAP Systems and the user ro
 Knowledge about the interaction between SAP Identity Management and SAP Cloud Identity Services – Identity Provisioning (IPS) and the surrounding SAP Cloud systems, e.g. SAP Fieldglass, SAP ARIBA, SAP Sales Cloud. <br>
 Ability to set up completely new interfaces/APIs based on customer specific requirements and to connect with different SAP systems <br>
 Functional knowledge and ability to understand the dependencies between different SAP Systems and the user roles.
+
+## SAP Private Link Service - Basic Skills
+Knowledge to set up the standard API and standard authentication. <br>
+Basic knowledge about SAP Private Link Service product.
+<!--  Commented out as we currently only need Basic Skills, we will validate the advanced and professional skills
+
+## SAP Private Link Service - Advanced Skills
+Ability to enhance standard API with custom fields/custom logic. <br>
+Basic functional/business related knowledge related to the business processes within SAP Private Link Service and the possibilites to extend SAP Private Link Services with different Third party providers.
+
+## SAP Private Link Service - Professional Skills
+Strong functional/business related knowledge related to the business processes within SAP Private Link Service and the possibilites to extend SAP Private Link Services with different Third party providers.
+Strong knowledge about the technical possibilites of the SAP Private Link Service product, their business processes and APIs.
+-->
+
+## SAP Business Technology Platform - Developer - Basic Skills
+Able to set up standard developments in the different capabilities of the SAP Business Technology Platform (BTP).
+
+## SAP Business Technology Platform - Developer - Advanced Skills
+Able to implement basic developments and enhance standard developments in the different capabilities of the SAP Business Technology Platform (BTP).
+
+## SAP Business Technology Platform - Developer - Professional Skills
+Able to implement complex developments in the different capabilities of the SAP Business Technology Platform (BTP).
+
+## SAP Integrated Business Planning (IBP) - Basic Skills
+
+## SAP Integrated Business Planning (IBP) - Advanced Skills
+
+## SAP Integrated Business Planning (IBP) - Professional Skills
+
+## SAP Analytics Cloud - Basic Skills
+
+## SAP Analytics Cloud - Advanced Skills
+
+## SAP Analytics Cloud - Professional Skills
 
 
 ## Third Party - Basic Skills

@@ -21,6 +21,7 @@
 * [SAP Emarsys](#sap-emarsys)
 * [SAP ERP](#sap-erp)
 * [SAP Fieldglass](#sap-fieldglass)
+* [SAP Integrated Business Planning](#sap-integrated-business-planning)
 * [SAP S/4HANA](#sap-s4hana)
 * [SAP S/4HANA Cloud](#sap-s4hana-cloud)
 * [SAP Sales Cloud](#sap-sales-cloud)
@@ -133,13 +134,14 @@ Recipe|Description|Author
 Recipe|Description|Author
 ---|---|---
 [SAP Analytics Cloud Integration with SAP SuccessFactors Position Write Back Outbound Flow](for/sapanalyticscloudintegrationwithsapsuccessfactorspositionwritebackoutboundflow)| Integration between SAP Analytics Cloud HXM Planning and SAP SuccessFactors Positions. |[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Integration between SAP Integrated Business Planning for demand and SAP Analytics Cloud](for/integrationbetweensapintegratedbusinessplanningfordemandandsapanalyticscloud)|Send baseline quantities from SAP Integrated Business Planning (IBP) for demand to SAP Analytics Cloud sales and marketing planning. Send back drivers from SAP Analytics Cloud models to SAP Integrated Business Planning for demand.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 
 ***
 
 ### SAP Ariba or SAP Business Network
 Recipe|Description|Author
 ---|---|---
-[Contract Line Item Document (CLID) Integration with Third Party System](contractlineitemdocumentclidintegrationwiththirdpartysystem)|This package provides an automated way to replicate documents from SAP Ariba to any Third Party system using SAP Business Technology Platform Integration Suite and SAP Build Process Automation.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Contract Line Item Document (CLID) Integration with Third Party System](for/contractlineitemdocumentclidintegrationwiththirdpartysystem)|This package provides an automated way to replicate documents from SAP Ariba to any Third Party system using SAP Business Technology Platform Integration Suite and SAP Build Process Automation.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Integration between SAP Ariba and OpenText](for/integrationbetweensaparibaandopentext)| This integration package provides an integration between SAP Ariba and the Third Party system OpenText for replicating purchase requisition, purchase orders and sourcing projects.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Ariba Integration Tookit](for/saparibaintegrationtoolkit)|Integration of SAP Ariba Buying and Sourcing solutions with third party systems |[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Ariba Integration with SAP Ariba APIs](for/saparibaintegrationwithsaparibaapis)| This integration flow allows you to connect an Ariba system to the SAP Ariba APIs.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
@@ -147,6 +149,8 @@ Recipe|Description|Author
 [SAP Ariba Integration with Third-Party for Vendor And Questionnaires](for/saparibaintegrationwiththirdpartyforvendorandquestionnaires)| Ariba APIs for Vendor and Questionnaires with CSV Output for integrating with Third Party |[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Business Network Integration with Non-SAP ERP](for/sapbusinessnetworkintegrationwithnonsaperp)| Baseline template to support the Purchase Order, Invoice and other transactional documents with the SAP Business Network|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Third Party Invoice Status Integration with SAP Ariba network](for/thirdpartyinvoicestatusintegrationwiththearibanetwork) | Invoice status handling from any Invoice system to SAP Ariba Network based on cXML | [SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Supplier Integration between SAP Integrated Business Planning and SAP Business Networks](for/aribasupplierintegration)|Replicate supplier related data between SAP Integrated Business Planning (SAP IBP) and SAP Business Networks. These iFlows help to exchange data between SAP Integrated Business Planning and SAP Business Networks from a Supplier prespective. The flows can either be triggered via an REST API or via Timer-based Iflow.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+
 
 ***
 
@@ -228,6 +232,12 @@ Recipe|Description|Author
 [SAP Fieldglass User Integration with SAP Concur](for/sapfieldglassuserintegrationwithsapconcur) | Transfer new hires from SAP Fieldglass to SAP Concur and synch their expenses with SAP Fieldglass.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 
 ***
+
+### SAP Integrated Business Planning
+Recipe|Description|Author
+---|---|---
+[Integration between SAP Integrated Business Planning for demand and SAP Analytics Cloud](for/integrationbetweensapintegratedbusinessplanningfordemandandsapanalyticscloud)|Send baseline quantities from SAP Integrated Business Planning (IBP) for demand to SAP Analytics Cloud sales and marketing planning. Send back drivers from SAP Analytics Cloud models to SAP Integrated Business Planning for demand.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Supplier Integration between SAP Integrated Business Planning and SAP Business Networks](for/aribasupplierintegration)|Replicate supplier related data between SAP Integrated Business Planning (SAP IBP) and SAP Business Networks. These iFlows help to exchange data between SAP Integrated Business Planning and SAP Business Networks from a Supplier prespective. The flows can either be triggered via an REST API or via Timer-based Iflow.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 
 ### SAP Point of Sale
 Recipe|Description|Author

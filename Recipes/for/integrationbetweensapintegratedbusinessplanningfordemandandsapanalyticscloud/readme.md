@@ -24,7 +24,8 @@ The package contains the following Integration Flows:
 [View documentation - Send SAP IBP baseline to SAC Sales Model](SendSAPIBPbaselinetoSACSalesModel.pdf)\
 [View documentation - Send SAP IBP for Demand baseline to Analytics Cloud Marketing model](SendSAPIBPforDemandbaselinetoAnalyticsCloudMarketingmodel.pdf)\
 [View documentation - Send SAP S4HANA Prices to SAP Analytics Cloud Sales model](SendSAPS4HANAPricestoSAPAnalyticsCloudSalesmodel.pdf)\
-[View documentation - Write into IBP with oData](WriteintoIBPwithoData.pdf)
+[View documentation - Write into IBP with oData](WriteintoIBPwithoData.pdf)\
+[View high level effort](effort.md)
 
 ## Integration Flows
 
