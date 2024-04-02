@@ -16,6 +16,9 @@ The package contains the following Integration Flows:
 - Send drivers from SAP Analytics Cloud marketing planning to SAP Integrated Business Planning (IBP) for demand
 - Send price Information from SAP S/4HANA to SAP Analytics Cloud marketing planning
 - Write to SAP Integrated Business Planning (IBP) for demand with oData
+- Send CNR Prices and Quantities from SAP Analytics Cloud to SAP IBP for Demand
+- Send SAP IBP for Demand impacts to SAP Analytics Cloud CNR model
+- Send SAP S4HANA actuals to SAP IBP for Demand
 
 [Download the integration package](IntegrationbetweenSAPIntegratedBusinessPlanningfordemandandSAPAnalyticsCloud.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/IntegrationbetweenSAPIntegratedBusinessPlanningfordemandandSAPAnalyticsCloud/overview)\
@@ -25,6 +28,9 @@ The package contains the following Integration Flows:
 [View documentation - Send SAP IBP for Demand baseline to Analytics Cloud Marketing model](SendSAPIBPforDemandbaselinetoAnalyticsCloudMarketingmodel.pdf)\
 [View documentation - Send SAP S4HANA Prices to SAP Analytics Cloud Sales model](SendSAPS4HANAPricestoSAPAnalyticsCloudSalesmodel.pdf)\
 [View documentation - Write into IBP with oData](WriteintoIBPwithoData.pdf)\
+[View documentation - Send CNR Prices and Quantities from SAP Analytics Cloud to SAP IBP for Demand](SendCNRpricesandquantitiesfromSAPAnalyticsCloudtoSAPIBPfordemand.pdf)\
+[View documentation - Send SAP IBP for Demand impacts to SAP Analytics Cloud CNR model](SendCNRimpactsfromSAPIBPfordemandtoSAPAnalyticsCloud.pdf)\
+[View documentation - Send SAP S4HANA actuals to SAP IBP for Demand](CommercialPlanningSendS4HANAActualstoIBPforDemand.pdf)\
 [View high level effort](effort.md)
 
 ## Integration Flows
@@ -60,6 +66,22 @@ Interface to write to SAP Integrated Business Planning (IBP) for demand with oDa
 [View on SAP Business Accelerator Hub](https://api.sap.com/integrationflow/Write_to_SAP_IBP_for_Demand_using_oData)\
 ![Write to SAP IBP for Demand using oData](write_to_SAP_IBP_for_Demand_using_oData1.png)\
 ![Write to SAP IBP for Demand using oData](write_to_SAP_IBP_for_Demand_using_oData2.png)
+
+### Send CNR Prices and Quantities from SAP Analytics Cloud to SAP IBP for Demand
+Interface to send Consensus Net Revenue Prices and Quantities from SAP Analytics Cloud Marketing planning to SAP Integrated Business Planning (IBP) for demand\
+[View on SAP Business Accelerator Hub](https://api.sap.com/integrationflow/Send_CNR_Prices_and_Quantities_from_SAP_Analytics_Cloud_to_IBP_for_Demand)\
+![Send CNR Prices and Quantities from SAP Analytics Cloud to SAP IBP for Demand](send_CNR_Prices_and_Quantities_from_SAP_Analytics_Cloud_to_IBP_for_Demand.png)
+
+### Send SAP IBP for Demand impacts to SAP Analytics Cloud CNR model
+Interface to send IBP for Demand impacts to SAP Analytics Cloud Consensus Net Revenue model\
+[View on SAP Business Accelerator Hub](https://api.sap.com/integrationflow/Send_IBP_for_Demand_impacts_to_SAP_Analytics_Cloud_CNR_model)\
+![Send SAP IBP for Demand impacts to SAP Analytics Cloud CNR model](send_IBP_for_Demand_impacts_to_SAP_Analytics_Cloud_CNR_model.png)
+
+### Send SAP S4HANA actuals to SAP IBP for Demand
+Interface to send actuals from SAP S/4HANA to IBP for Demand\
+[View on SAP Business Accelerator Hub](https://api.sap.com/integrationflow/Send_S4_actuals_to_IBP_for_Demand)\
+![Send SAP S4HANA actuals to SAP IBP for Demand](send_S4_actuals_to_IBP_for_Demand.png)
+
 
 
 
