@@ -13,7 +13,7 @@ Sample to showcase connectivity to Azure Blob Storage using SAP Private Link Ser
 ## Architecture
  ![input-image](Architecture.png)
 
-[Download the integration package](PrivateLinkProxy.zip)\
+[Download the integration package](AzureBlobConnectivityusingSAPPrivateLinkService.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/PrivateLinkProxy)\
 [View documentation](ConfigurationGuide-AzureBlobConnectivityusingPrivateLinkService.pdf)\
 [View high level effort](effort.md)

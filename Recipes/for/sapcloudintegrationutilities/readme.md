@@ -13,7 +13,7 @@ This package provides content for handling specific operational topics related t
  <li>Notification for scenarios where no file has been picked up with an SFTP/FTP Sender Adapter.</li>
 </ul>
 
-[Download the integration package](SAPCloudIntegrationUtilities.zip)\
+[Download the integration package](SAPIntegrationSuiteCloudIntegrationUtilities.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/SAPCloudIntegrationUtilities)\
 [View documentation - Notify SFTP File Pick up failure](NotifySFTPFilePickupfailure.pdf)\
 [View documentation - Alert Notification for expiring certificates on Cloud Integration](AlertNotificationforexpiringcertificatesontheSAPCloudIntegration.pdf)\

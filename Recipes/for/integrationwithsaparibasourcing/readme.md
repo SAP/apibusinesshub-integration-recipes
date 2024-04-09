@@ -11,7 +11,7 @@ This package offers integration flows designed for extracting and extending SAP 
 <p>Utilizing the powerful capabilities of both SAP Integration Suite and SAP Ariba APIs, it facilitates the efficient download of Sourcing Events, providing a robust solution for enhancing your SAP Ariba ecosystem.</p>
 <p>&nbsp;</p>
 
-[Download the integration package](IntegrationwithSAPAribaSourcing.zip)\
+[Download the integration package](SAPAribaSourcingIntegrationwithThirdPartySystem.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/IntegrationwithSAPAribaSourcing)\
 [View documentation](https://community.sap.com/t5/spend-management-blogs-by-sap/sap-ariba-extensibility-download-sourcing-events-using-sap-integration/ba-p/13577290)\
 [View high level effort](effort.md)
