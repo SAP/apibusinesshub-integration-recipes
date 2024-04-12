@@ -4,4 +4,4 @@ Capability - Skill Level | T-Shirt Size
 --- | ---
 [Cloud Integration - Advanced Skills](../Application_Skill_Level_Definition.md#cloud-integration---advanced-skills) | M
 [SAP Analytics Cloud - Advanced Skills](../Application_Skill_Level_Definition.md#sap-analytics-cloud---advanced-skills) | M
-[SAP IBP for Demand - Advanced Skills](../Application_Skill_Level_Definition.md#sap-integrated-business-planning-ibp---advanced-skills) | M
+[SAP IBP for demand - Advanced Skills](../Application_Skill_Level_Definition.md#sap-integrated-business-planning-ibp---advanced-skills) | M
