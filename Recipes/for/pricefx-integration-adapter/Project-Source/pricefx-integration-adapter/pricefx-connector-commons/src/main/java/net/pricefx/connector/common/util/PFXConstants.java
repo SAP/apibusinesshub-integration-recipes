@@ -49,6 +49,7 @@ public class PFXConstants {
 
     public static final int MAX_ATTRIBUTES = 30;
     public static final int MAX_EXT_ATTRIBUTES = 50;
+    public static final int MAX_PAYOUT_ATTRIBUTES = 100;
 
     public static final String ATTRIBUTE_EXT_PREFIX = "attributeExtension___";
 

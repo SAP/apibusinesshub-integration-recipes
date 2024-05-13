@@ -31,6 +31,8 @@ public enum PFXTypeCode {
 
     FORMULA("F", new String[]{FIELD_UNIQUENAME, FIELD_VALIDAFTER}),
 
+    PAYOUT("PYR", "PAYOUT", new String[]{FIELD_ID}, "PYRAM"),
+
     //default key of lookup tables is name, override it in net.pricefx.connector.common.operation if keys are different.
     LOOKUPTABLE("LT", "PRICE PARAMETER", new String[]{PFXConstants.FIELD_NAME}, "MLTVM"),
     LOOKUPTABLEITEM("LTV", new String[]{PFXConstants.FIELD_NAME}),

@@ -79,6 +79,9 @@ public enum PFXJsonSchema {
     QUOTE_UPDATE_REQUEST("/schemas/update-quote-input-schema.json", "/schemas/validation/update-quote-input-schema-validation.json"),
 
 
+    //PAYOUT
+    PAYOUT_FETCH_RESPONSE("/schemas/fetch-payout-output-schema.json"),
+
     //PA DATA
     DATALOAD_FETCH_RESPONSE("/schemas/fetch-dataload-output-schema.json"),
     DATAFEED_FETCH_RESPONSE("/schemas/fetch-datafeed-output-schema.json"),
@@ -175,6 +178,8 @@ public enum PFXJsonSchema {
     public static PFXJsonSchema getFetchResponseSchema(PFXTypeCode pfxTypeCode, IPFXExtensionType extensionType) {
         if (pfxTypeCode != null) {
             switch (pfxTypeCode) {
+                case PAYOUT:
+                    return PAYOUT_FETCH_RESPONSE;
                 case PRICERECORD:
                     return PRICERECORD_FETCH_RESPONSE;
                 case MANUALPRICELIST:

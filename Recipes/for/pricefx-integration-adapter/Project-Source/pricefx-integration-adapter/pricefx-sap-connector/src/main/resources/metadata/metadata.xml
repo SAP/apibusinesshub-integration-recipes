@@ -241,6 +241,10 @@
                                     <AttributeName>fetchTargetType</AttributeName>
                                     <AttributeValue>PRICERECORD</AttributeValue>
                                 </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>PAYOUT</AttributeValue>
+                                </EditCondition>
 
                             </OrCondition>
                         </AndCondition>
@@ -277,6 +281,7 @@
                             </OrCondition>
 
                         </AndCondition>
+
                         <AndCondition>
                             <EditCondition>
                                 <AttributeName>operationType</AttributeName>
@@ -306,6 +311,10 @@
                                 <EditCondition>
                                     <AttributeName>getTargetType</AttributeName>
                                     <AttributeValue>PRICERECORD</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>TYPEDID</AttributeValue>
                                 </EditCondition>
 
 
@@ -1099,6 +1108,12 @@
                     <Label language="EN">Price Record</Label>
                 </GuiLabels>
             </FixedValue>
+            <FixedValue>
+                <Value>PAYOUT</Value>
+                <GuiLabels guid="b5d498fc-cd27-4487-b7ed-d348198b1ad9">
+                    <Label language="EN">Payout</Label>
+                </GuiLabels>
+            </FixedValue>
         </FixedValues>
     </AttributeMetadata>
 
@@ -1265,6 +1280,7 @@
                     <Label language="EN">Quote</Label>
                 </GuiLabels>
             </FixedValue>
+
         </FixedValues>
 
     </AttributeMetadata>
@@ -1624,6 +1640,12 @@
                 <Value>PRICERECORD</Value>
                 <GuiLabels guid="2cb64e3b-b398-4781-b626-da56d57a0e8c">
                     <Label language="EN">Price Record</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>PAYOUT</Value>
+                <GuiLabels guid="4c5af4e5-9828-4ded-8328-cb30d2f9ec55">
+                    <Label language="EN">Payout</Label>
                 </GuiLabels>
             </FixedValue>
         </FixedValues>

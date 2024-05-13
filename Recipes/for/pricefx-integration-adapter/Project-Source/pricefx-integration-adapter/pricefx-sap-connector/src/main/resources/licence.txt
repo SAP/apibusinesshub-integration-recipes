@@ -249,7 +249,6 @@
           <name>CDDL+GPL License</name>
           <url>http://glassfish.java.net/public/CDDL+GPL_1_1.html</url>
           <distribution>repo</distribution>
-          <file>cddl+gpl license - cddl+gpl_1_1.html</file>
         </license>
       </licenses>
     </dependency>
@@ -262,7 +261,6 @@
           <name>CDDL+GPL License</name>
           <url>http://glassfish.java.net/public/CDDL+GPL_1_1.html</url>
           <distribution>repo</distribution>
-          <file>cddl+gpl license - cddl+gpl_1_1.html</file>
         </license>
       </licenses>
     </dependency>
