@@ -89,7 +89,10 @@ Ability to follow technical documentation and implement simple integrations.
 ## Qualtrics - Advanced Skills
 Expertise in developing custom Qualtrics integrations using APIs, webhooks, and other integration tools.
 
+<!--  Commented out as currently professional skills are not required
+
 ## Qualtrics - Professional Skills
+-->
 
 ## SAP Sales and Service Cloud - Basic Skills
 Able to configure standard communication systems as well as communication systems  <br>
@@ -164,6 +167,24 @@ Able to implement basic developments and enhance standard developments in the di
 ## SAP Business Technology Platform - Developer - Professional Skills
 Able to implement complex developments in the different capabilities of the SAP Business Technology Platform (BTP).
 
+## SAP Cloud Application Lifecycle Management - Basic Skills
+Basic configuration and usage knowledge about SAP Cloud ALM and the provided interfaces and API’s
+
+## SAP Cloud Application Lifecycle Management - Advanced Skills
+Advanced configuration and usage knowledge about the SAP Cloud ALM and the provided interfaces and API’s. Practical experience in implementing use cases via API-Integrations. Experience in the setup of SAP BTP Cockpit and SAP Cloud ALM Service Keys
+
+## SAP Cloud Application Lifecycle Management - Professional Skills
+Professional configuration and usage knowledge about the SAP Cloud ALM and the provided interfaces and API’s. Deep Practical experience in implementing use cases via API-Integrations & the setup of SAP BTP Cockpit and SAP Cloud ALM Service Keys
+
+## SAP Signavio - Basic Skills
+Basic configuration and usage knowledge about the SAP Signavio Process Transformation Suite and the product components: Process Governance, Collaboration Hub & Process Manager. 
+
+## SAP Signavio - Advanced Skills
+Advanced configuration and usage knowledge about the SAP Signavio Process Transformation Suite and the product components: Process Governance, Collaboration Hub & Process Manager with advanced knowledge in the topics of: Configuration and setup of Approval Workflows with Script Tasks.![image]
+
+## SAP Signavio - Professional Skills
+Professional knowledge about the configuration and usage of the SAP Signavio Process Transformation Suite and the product components: Process Governance, Collaboration Hub & Process Manager. Proper knowledge about dependencies between different interfaces and the objects and how to deploy them
+
 ## SAP Integrated Business Planning (IBP) - Basic Skills
 
 ## SAP Integrated Business Planning (IBP) - Advanced Skills
@@ -171,11 +192,13 @@ Able to implement complex developments in the different capabilities of the SAP 
 ## SAP Integrated Business Planning (IBP) - Professional Skills
 
 ## SAP Analytics Cloud - Basic Skills
+Basic configuration and usage knowledge for building and setting up standard analytical models.
 
 ## SAP Analytics Cloud - Advanced Skills
+Advanced configuration and usage knowledge in regards of connecting various SAP and Non-SAP systems without any further enhancements.
 
 ## SAP Analytics Cloud - Professional Skills
-
+Professional configuration and usage knowledge for being able to createn and enhance connections to SAP and Non-SAP systems as well as to be able build own analytical models.
 
 ## Third Party - Basic Skills
 Able to set up standard interfaces and authentication methods
