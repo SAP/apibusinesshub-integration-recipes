@@ -231,7 +231,7 @@ Recipe|Description|Author
 ### SAP Event Mesh
 Recipe|Description|Author
 ---|---|---
-[Replay Messages from Queues via SAP Event Mesh] (for/replaymessagesfromqueuesviasapeventmesh)|This package provides a replay mechanism for SAP Event Mesh messages.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Replay Messages from Queues via SAP Event Mesh](for/replaymessagesfromqueuesviasapeventmesh)|This package provides a replay mechanism for SAP Event Mesh messages.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
  
 ***
 
