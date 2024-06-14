@@ -7,7 +7,11 @@
 
 This integration package provides integration flow which allows you to read and send employee data from SAP SuccessFactors Employee Central to the Fidelity sever.
 
-<p>Fidelity is a 3rd party solution that manages employee deductions and loans. This integration flow fetches employee details from SAP SuccessFactors Employee Central and based on the events/data changes, determines the records to be sent to Fidelity system. The employee mini master file is hence generated keeping the fixed field lengths intact. The file is then sent to the Fidelity SFTP server.</p>
+
+<p>Fidelity is a 3rd party solution that manages employee deductions and loans. This integration flow fetches employee details from SAP SuccessFactors Employee Central and based on the events/data changes, determines the records to be sent to Fidelity system. The employee mini master file is hence generated keeping the fixed field lengths intact. The file is then sent to the Fidelity SFTP server.
+
+The content originates from the SAP community; Fidelity did not participate in its publication.
+</p>
 
 [Download the integration package](SAPSuccessFactorsEmployeeCentralIntegrationwithFidelity.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/SAPSuccessFactorsEmployeeCentralIntegrationwithFidelity)\
@@ -17,3 +21,9 @@ This integration package provides integration flow which allows you to read and 
 ### Send Employee Information to Fidelity SFTP Server 
 Replicate employee information from SAP SuccessFactors Employee Central to Fidelity SFTP server. \
  ![input-image](Send_Employee_Information_to_Fidelity_SFTP_Server.png)
+### Value Mappings
+Value Mapping for artifact - Send Employee Information to Fidelity SFTP Server.\
+![input-image](ValueMapping_SFEC_To_Fidelity1.png)
+![input-image](ValueMapping_SFEC_To_Fidelity2.png)
+
+
