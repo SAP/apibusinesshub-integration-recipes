@@ -152,6 +152,8 @@ public class JsonSchemaUtil {
 
         if (pfxTypeCode != null) {
             switch (pfxTypeCode) {
+                case PAYOUT:
+                    return MAX_PAYOUT_ATTRIBUTES;
                 case PRODUCT:
                 case CUSTOMER:
                 case PRICERECORD:

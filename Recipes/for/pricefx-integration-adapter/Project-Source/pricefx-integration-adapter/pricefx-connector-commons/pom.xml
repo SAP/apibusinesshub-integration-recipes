@@ -11,7 +11,7 @@
     <name>pricefx-connector-commons</name>
 
     <properties>
-        <pricefx-pckg.version>3.25.1</pricefx-pckg.version>
+        <pricefx-pckg.version>3.26.1</pricefx-pckg.version>
         <packaging.type>jar</packaging.type>
 
         <junit.version>4.12</junit.version>
@@ -228,6 +228,23 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
             <version>1.23.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.17.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.17.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.1</version>
         </dependency>
 
 

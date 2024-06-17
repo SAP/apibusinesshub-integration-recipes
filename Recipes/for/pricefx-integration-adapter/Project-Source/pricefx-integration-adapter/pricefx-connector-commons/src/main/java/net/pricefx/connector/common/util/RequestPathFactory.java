@@ -60,13 +60,15 @@ public class RequestPathFactory {
             return createPath(LOOKUPTABLE_VALUES_BULK_LOAD.getOperation(), ((PFXLookupTableType) extensionType).getLookupValueTypeCode());
         } else if (typeCode == PFXTypeCode.DATASOURCE || typeCode == PFXTypeCode.DATAFEED) {
             return createPath(PA_BULK_LOAD.getOperation(), typeCode.getFullTargetName(tableName));
+        } else if (typeCode!= null && typeCode.isExtension()){
+            return createPath(BULK_LOAD.getOperation(), ((PFXExtensionType) extensionType).getName());
         } else {
             return createPath(BULK_LOAD.getOperation(), typeCode.getTypeCode());
         }
     }
 
     public static String buildDeletePath(IPFXExtensionType extensionType, PFXTypeCode typeCode) {
-        if (typeCode.isExtension()) {
+        if (typeCode!= null && typeCode.isExtension()) {
             return createPath(DELETE.getOperation(), ((PFXExtensionType) extensionType).getName(), BATCH.getOperation(), FORCEFILTER.getOperation());
         } else if (typeCode == PFXTypeCode.LOOKUPTABLE) {
             return createPath(LOOKUPTABLE_DELETE.getOperation(), extensionType.getTable(), BATCH.getOperation());
@@ -85,11 +87,16 @@ public class RequestPathFactory {
             return SAVE_QUOTE.getOperation();
         }
 
-        return createPath(UPDATE.getOperation(), typeCode.getTypeCode());
+        if (typeCode == PFXTypeCode.ROLE || typeCode == PFXTypeCode.BUSINESSROLE || typeCode == PFXTypeCode.USERGROUP || typeCode == PFXTypeCode.QUOTE) {
+            return createPath(UPDATE.getOperation(), typeCode.getTypeCode());
+        }
+
+        throw new UnsupportedOperationException("Update operation not supported for " + typeCode);
+
     }
 
     public static String buildUpsertPath(IPFXExtensionType extensionType, PFXTypeCode typeCode) {
-        if (typeCode.isExtension()) {
+        if (typeCode != null && typeCode.isExtension()) {
             return createPath(INTEGRATE.getOperation(), ((PFXExtensionType) extensionType).getName());
         } else if (typeCode == PFXTypeCode.LOOKUPTABLE) {
             return createPath(LOOKUPTABLE_VALUES_INTEGRATE.getOperation(), extensionType.getTable());
