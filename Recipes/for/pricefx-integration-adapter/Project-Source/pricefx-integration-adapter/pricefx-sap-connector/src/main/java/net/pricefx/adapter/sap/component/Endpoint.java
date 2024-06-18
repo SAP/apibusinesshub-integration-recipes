@@ -89,6 +89,8 @@ public class Endpoint extends DefaultEndpoint {
     @UriParam
     private String pricefxHost;
 
+    @UriParam
+    private boolean retryLoginFailure;
 
     public Endpoint(final String endpointUri, final Component component) {
         super(endpointUri, component);
@@ -315,5 +317,13 @@ public class Endpoint extends DefaultEndpoint {
 
     public void setFetchCountTargetType(String fetchCountTargetType) {
         this.fetchCountTargetType = fetchCountTargetType;
+    }
+
+    public boolean isRetryLoginFailure() {
+        return retryLoginFailure;
+    }
+
+    public void setRetryLoginFailure(boolean retryLoginFailure) {
+        this.retryLoginFailure = retryLoginFailure;
     }
 }

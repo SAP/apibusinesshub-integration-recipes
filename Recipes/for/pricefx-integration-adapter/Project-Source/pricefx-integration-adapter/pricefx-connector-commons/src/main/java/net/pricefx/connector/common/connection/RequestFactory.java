@@ -100,13 +100,19 @@ public class RequestFactory {
             for (JsonNode node : request.get(FIELD_DATA)) {
                 ((ArrayNode) node).add(extensionType.getTable());
             }
+
+            if (((PFXLookupTableType) extensionType).getLookupTableType().isMatrix()) {
+                ObjectNode options = new ObjectNode(JsonNodeFactory.instance);
+                addJoinFieldsOptions(options, extensionType, false);
+                request.set(OPTIONS, options);
+            }
         } else if (typeCode.isExtension()) {
             ((ArrayNode) request.get(HEADER)).add(FIELD_NAME);
             request.get(FIELD_DATA).forEach((JsonNode row) -> ((ArrayNode) row).add(extensionType.getTable()));
 
             ObjectNode options = new ObjectNode(JsonNodeFactory.instance);
             addJoinFieldsLengthOptions(options, extensionType);
-            addJoinFieldsOptions(options, extensionType);
+            addJoinFieldsOptions(options, extensionType, true);
             request.set(OPTIONS, options);
 
         } else if (typeCode == PFXTypeCode.DATASOURCE) {
@@ -139,12 +145,12 @@ public class RequestFactory {
         }
     }
 
-    private static void addJoinFieldsOptions(ObjectNode options, IPFXExtensionType extensionType) {
+    private static void addJoinFieldsOptions(ObjectNode options, IPFXExtensionType extensionType, boolean addName) {
 
         if (!CollectionUtils.isEmpty(extensionType.getBusinessKeys())) {
             ArrayNode businessKeys = new ArrayNode(JsonNodeFactory.instance);
             extensionType.getBusinessKeys().forEach(businessKeys::add);
-            businessKeys.add(FIELD_NAME);
+            if (addName) businessKeys.add(FIELD_NAME);
             options.set("joinFields", businessKeys);
         }
     }

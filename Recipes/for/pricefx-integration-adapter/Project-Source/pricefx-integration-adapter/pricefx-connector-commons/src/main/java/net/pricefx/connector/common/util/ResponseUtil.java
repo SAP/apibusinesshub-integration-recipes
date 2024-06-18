@@ -189,13 +189,20 @@ public class ResponseUtil {
     }
 
     public static void preformatResponse(PFXTypeCode typeCode, ObjectNode result) {
-        if (typeCode == PFXTypeCode.MANUALPRICELIST && !StringUtils.isEmpty(
+        if (typeCode == PFXTypeCode.MANUALPRICELIST || typeCode == PFXTypeCode.PAYOUT) {
+            appendId(typeCode, result);
+        }
+    }
+
+    public static void appendId(PFXTypeCode typeCode, ObjectNode result) {
+        if (!StringUtils.isEmpty(
                 JsonUtil.getValueAsText(result.get(FIELD_TYPEDID))) &&
-                JsonUtil.getValueAsText(result.get(FIELD_TYPEDID)).endsWith("." + MANUALPRICELIST.getTypeCode())) {
+                JsonUtil.getValueAsText(result.get(FIELD_TYPEDID)).endsWith("." + typeCode.getTypeCode())) {
             result.put(FIELD_ID,
                     Long.parseLong(
-                            JsonUtil.getValueAsText(result.get(FIELD_TYPEDID)).replace("." + MANUALPRICELIST.getTypeCode(), "")));
+                            JsonUtil.getValueAsText(result.get(FIELD_TYPEDID)).replace("." + typeCode.getTypeCode(), "")));
         }
+
     }
 
     public static void postformatResponse(PFXTypeCode typeCode, ObjectNode result, boolean convertValueToString) {

@@ -32,7 +32,11 @@ public class PFXExtensionType implements IPFXExtensionType {
         switch (typeCode) {
             case PRODUCTEXTENSION:
             case CUSTOMEREXTENSION:
-                return typeCode.getTypeCode() + attributes;
+                if (attributes == 0){
+                    return typeCode.getTypeCode();
+                } else {
+                    return typeCode.getTypeCode() + attributes;
+                }
             default:
                 return typeCode.getTypeCode();
 
