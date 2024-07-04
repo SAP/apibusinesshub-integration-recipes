@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import net.pricefx.connector.common.connection.PFXOperationClient;
+import net.pricefx.connector.common.connection.RequestFactory;
 import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.RequestValidationException;
 import org.apache.commons.collections4.CollectionUtils;
@@ -95,26 +96,13 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
         }
     }
 
-    public List<ObjectNode> fetch(boolean formatted) {
-        Iterable<ObjectNode> fetched = pfxClient.doAction(apiPath);
-        if (IterableUtils.isEmpty(fetched)) {
-            return new ArrayList<>();
-        }
-
-        if (formatted) {
-            return ResponseUtil.formatResponse(typeCode, fetched, convertValueToString);
-        } else {
-            return ImmutableList.copyOf(fetched);
-        }
-
-    }
 
     @Override
     public List<ObjectNode> fetch(ObjectNode advancedCriteria, List<String> sortBy, List<String> valueFields, Long startRow, int pageSize, boolean validate, boolean formatted) {
         Iterable<ObjectNode> fetched = fetch(advancedCriteria, sortBy, valueFields, startRow, pageSize, validate);
 
         if (formatted) {
-            return ResponseUtil.formatResponse(typeCode, fetched, convertValueToString);
+            return ResponseUtil.formatResponse(typeCode, extensionType, fetched, convertValueToString);
         } else {
             return ImmutableList.copyOf(fetched);
         }
@@ -149,13 +137,15 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
 
         validateRequest(request, resultFields, sortBy);
 
-        RequestUtil.addAdvancedCriteria(((ObjectNode) request.get(FIELD_DATA)));
-        request.put("startRow", 0).put("endRow", 1);
+        ObjectNode dataRequest = RequestFactory.buildFetchDataRequest(((ObjectNode) request.get(FIELD_DATA)), typeCode, extensionType);
+        RequestUtil.addAdvancedCriteria(dataRequest);
+        request.put(FIELD_STARTROW, 0).put(FIELD_ENDROW, 1);
+        request.set(FIELD_DATA, dataRequest);
 
         JsonNode node = pfxClient.doPostRaw(apiPath, request);
-        if (JsonUtil.isObjectNode(node.get("response")) &&
-                node.get("response").get(TOTAL_ROWS) != null && node.get("response").get(TOTAL_ROWS).isInt()){
-            return node.get("response").get(TOTAL_ROWS).intValue();
+        if (JsonUtil.isObjectNode(node.get(FIELD_RESPONSE)) &&
+                node.get(FIELD_RESPONSE).get(TOTAL_ROWS) != null && node.get(FIELD_RESPONSE).get(TOTAL_ROWS).isInt()) {
+            return node.get(FIELD_RESPONSE).get(TOTAL_ROWS).intValue();
         } else {
             return 0;
         }
@@ -172,12 +162,14 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
 
         validateRequest(request, resultFields, sortBy);
 
-        RequestUtil.addAdvancedCriteria(((ObjectNode) request.get(FIELD_DATA)));
+        ObjectNode dataRequest = RequestFactory.buildFetchDataRequest(((ObjectNode) request.get(FIELD_DATA)), typeCode, extensionType);
+        RequestUtil.addAdvancedCriteria(dataRequest);
+        request.set(FIELD_DATA, dataRequest);
 
         if (formatted) {
             return fetch((ObjectNode) request.get(FIELD_DATA), sortBy, resultFields, startRow, pageSize, validate, true);
         } else {
-            request.put("startRow", startRow).put("endRow", pageSize + startRow);
+            request.put(FIELD_STARTROW, startRow).put(FIELD_ENDROW, pageSize + startRow);
             return fetchRaw(request, getApiPath());
         }
     }

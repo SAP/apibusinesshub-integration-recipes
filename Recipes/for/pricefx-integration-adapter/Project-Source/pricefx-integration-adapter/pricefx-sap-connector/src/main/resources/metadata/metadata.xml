@@ -122,6 +122,16 @@
                 </AttributeReference>
 
                 <AttributeReference>
+                    <ReferenceName>postPath</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>POST</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
                     <ReferenceName>validation</ReferenceName>
                     <AndCondition>
                         <EditCondition>
@@ -792,6 +802,18 @@
         <isparameterized>true</isparameterized>
         <GuiLabels guid="113a61c0-fb36-4dee-b27c-1cf5fd28202b">
             <Label language="EN">Replace Null Key with Empty String</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>postPath</Name>
+        <Usage></Usage>
+        <DataType>xsd:string</DataType>
+        <Default>true</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="e1a108de-6720-4702-8431-eb2a9a7bdfa6">
+            <Label language="EN">Pricefx API Path</Label>
         </GuiLabels>
     </AttributeMetadata>
 

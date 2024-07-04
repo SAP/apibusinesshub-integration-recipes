@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.smartgwt.client.types.OperatorId;
 import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.RequestValidationException;
@@ -15,8 +16,9 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.smartgwt.client.types.OperatorId.AND;
@@ -74,63 +76,93 @@ public class RequestFactory {
         }
     }
 
+    public static void validateBulkLoadRequest(PFXTypeCode typeCode, IPFXExtensionType extensionType) {
+        if (typeCode != null) {
+
+            switch (typeCode) {
+                case CUSTOMEREXTENSION:
+                case PRODUCTEXTENSION:
+                case LOOKUPTABLE:
+                    if (extensionType == null || StringUtils.isEmpty(extensionType.getTable()) ||
+                            (typeCode == LOOKUPTABLE && (((PFXLookupTableType) extensionType).getLookupTableType()) == null)) {
+                        throw new RequestValidationException("Table is not identified");
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     public static ObjectNode buildBulkLoadRequest(PFXTypeCode typeCode, ObjectNode request, IPFXExtensionType extensionType) {
+        validateBulkLoadRequest(typeCode, extensionType);
 
-        if (typeCode == LOOKUPTABLE && !StringUtils.isEmpty(extensionType.getTable())) {
-            if (((PFXLookupTableType) extensionType).getLookupTableType() == PFXLookupTableType.LookupTableType.RANGE) {
+        Set<String> idFields = new HashSet<>();
 
-                if (JsonUtil.getStringArray(request.get(HEADER)).contains(FIELD_NAME)) {
-                    throw new RequestValidationException("field NAME should not exist in input message.");
-                }
+        if (typeCode != null) {
+            idFields = Sets.newHashSet(typeCode.getIdentifierFieldNames());
+            switch (typeCode) {
+                case CUSTOMEREXTENSION:
+                case PRODUCTEXTENSION:
+                    idFields = extensionType.getBusinessKeys();
+                    ((ArrayNode) request.get(HEADER)).add(FIELD_NAME);
+                    request.get(FIELD_DATA).forEach((JsonNode row) -> ((ArrayNode) row).add(extensionType.getTable()));
 
-                List<JsonNode> headers = ImmutableList.copyOf(request.get(HEADER).iterator());
-                int lowerPos = Iterables.indexOf(headers, u -> LOWERBOUND.equals(u.textValue()));
-                int upperPos = Iterables.indexOf(headers, u -> UPPERBOUND.equals(u.textValue()));
+                    ObjectNode options = addJoinFieldsOptions(idFields, true);
+                    addJoinFieldsLengthOptions(options, extensionType);
+                    request.set(OPTIONS, options);
+                    return request;
+                case DATASOURCE:
+                    request.set(OPTIONS, new ObjectNode(JsonNodeFactory.instance).put("direct2ds", true));
+                    return request;
+                case LOOKUPTABLE:
+                    idFields = extensionType.getBusinessKeys();
 
-                ((ArrayNode) request.get(HEADER)).add(FIELD_NAME);
+                    //add lookup table id
+                    ((ArrayNode) request.get(HEADER)).add("lookupTable");
+                    request.get(FIELD_DATA).forEach((JsonNode row) -> ((ArrayNode) row).add(extensionType.getTable()));
 
-                for (JsonNode node : request.get(FIELD_DATA)) {
-                    ((ArrayNode) node).add(JsonUtil.getValueAsText(node.get(lowerPos)) + "-" +
-                            JsonUtil.getValueAsText(node.get(upperPos)));
-                }
+                    switch (((PFXLookupTableType) extensionType).getLookupTableType()) {
+                        case RANGE:
+                            if (JsonUtil.getStringArray(request.get(HEADER)).contains(FIELD_NAME)) {
+                                throw new RequestValidationException("field NAME should not exist in input message.");
+                            }
+
+                            List<JsonNode> headers = ImmutableList.copyOf(request.get(HEADER).iterator());
+                            int lowerPos = Iterables.indexOf(headers, u -> LOWERBOUND.equals(u.textValue()));
+                            int upperPos = Iterables.indexOf(headers, u -> UPPERBOUND.equals(u.textValue()));
+
+                            ((ArrayNode) request.get(HEADER)).add(FIELD_NAME);
+                            request.get(FIELD_DATA).forEach((JsonNode node) -> ((ArrayNode) node).add(JsonUtil.getValueAsText(node.get(lowerPos)) + "-" +
+                                    JsonUtil.getValueAsText(node.get(upperPos))));
+                            break;
+                        case MATRIX:
+                        case MATRIX2:
+                        case MATRIX3:
+                        case MATRIX4:
+                        case MATRIX5:
+                        case MATRIX6:
+                            request.set(OPTIONS, addJoinFieldsOptions(idFields, false));
+                            break;
+                        default:
+                            break;
+                    }
+                    return request;
+                default:
+                    break;
+
             }
-
-            //add lookup table id
-            ((ArrayNode) request.get(HEADER)).add("lookupTable");
-            for (JsonNode node : request.get(FIELD_DATA)) {
-                ((ArrayNode) node).add(extensionType.getTable());
-            }
-
-            if (((PFXLookupTableType) extensionType).getLookupTableType().isMatrix()) {
-                ObjectNode options = new ObjectNode(JsonNodeFactory.instance);
-                addJoinFieldsOptions(options, extensionType, false);
-                request.set(OPTIONS, options);
-            }
-        } else if (typeCode.isExtension()) {
-            ((ArrayNode) request.get(HEADER)).add(FIELD_NAME);
-            request.get(FIELD_DATA).forEach((JsonNode row) -> ((ArrayNode) row).add(extensionType.getTable()));
-
-            ObjectNode options = new ObjectNode(JsonNodeFactory.instance);
-            addJoinFieldsLengthOptions(options, extensionType);
-            addJoinFieldsOptions(options, extensionType, true);
-            request.set(OPTIONS, options);
-
-        } else if (typeCode == PFXTypeCode.DATASOURCE) {
-            request.set(OPTIONS, new ObjectNode(JsonNodeFactory.instance).put("direct2ds", true));
-        } else  {
-
-            ObjectNode options = new ObjectNode(JsonNodeFactory.instance);
-            ArrayNode businessKeys = new ArrayNode(JsonNodeFactory.instance);
-            Arrays.asList(typeCode.getIdentifierFieldNames()).forEach(businessKeys::add);
-            options.set("joinFields", businessKeys);
-            request.set(OPTIONS, options);
-
         }
 
+        request.set(OPTIONS, addJoinFieldsOptions(idFields, false));
         return request;
     }
 
     private static void addJoinFieldsLengthOptions(ObjectNode options, IPFXExtensionType extensionType) {
+        if (extensionType == null || options == null || options.isNull()) {
+            return;
+        }
+
         if (extensionType.getBusinessKeys() != null && extensionType.getBusinessKeys().size() >= MAX_KEYS) {
             int maxLength = MAX_HEADER_LENGTH / (extensionType.getBusinessKeys().size() + 1);
 
@@ -145,15 +177,18 @@ public class RequestFactory {
         }
     }
 
-    private static void addJoinFieldsOptions(ObjectNode options, IPFXExtensionType extensionType, boolean addName) {
+    private static ObjectNode addJoinFieldsOptions(Set<String> idFields, boolean addName) {
+        ObjectNode options = new ObjectNode(JsonNodeFactory.instance);
 
-        if (!CollectionUtils.isEmpty(extensionType.getBusinessKeys())) {
-            ArrayNode businessKeys = new ArrayNode(JsonNodeFactory.instance);
-            extensionType.getBusinessKeys().forEach(businessKeys::add);
+        if (!CollectionUtils.isEmpty(idFields)) {
+            ArrayNode businessKeys = JsonUtil.createArrayNodeFromStrings(idFields);
             if (addName) businessKeys.add(FIELD_NAME);
             options.set("joinFields", businessKeys);
         }
+        return options;
+
     }
+
 
     public static ObjectNode buildCreateRequest(PFXTypeCode typeCode, JsonNode request) {
         if (typeCode == QUOTE) {
@@ -214,6 +249,25 @@ public class RequestFactory {
         }
     }
 
+    public static ObjectNode buildFetchDataRequest(ObjectNode dataRequest, PFXTypeCode typeCode, IPFXExtensionType extensionType){
+
+        if (typeCode == PFXTypeCode.CONDITION_RECORD) {
+            ObjectNode criterion = buildSimpleCriterion(FIELD_CONDITIONRECRODSETID, EQUALS.getValue(),
+                    ((PFXConditionRecordType) extensionType).getTableId() + "");
+            ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
+            arrayNode.add(criterion);
+            arrayNode.add(dataRequest);
+
+            ObjectNode newDataRequest = new ObjectNode(JsonNodeFactory.instance);
+            newDataRequest.set(FIELD_CRITERIA, arrayNode);
+            newDataRequest.put("operator", AND.getValue());
+
+            return newDataRequest;
+        } else {
+            return dataRequest;
+        }
+
+    }
     public static ObjectNode buildFetchMetadataRequest(PFXTypeCode typeCode, IPFXExtensionType extensionType, String uniqueKey) {
 
         ObjectNode criterion = null;
@@ -227,6 +281,9 @@ public class RequestFactory {
             criterion = buildSimpleCriterion(FIELD_PLI_PRICELISTID, EQUALS.getValue(), uniqueKey);
         } else if (!StringUtils.isEmpty(uniqueKey) && typeCode == PFXTypeCode.ROLE) {
             criterion = buildSimpleCriterion("module", EQUALS.getValue(), uniqueKey);
+        } else if (typeCode == PFXTypeCode.CONDITION_RECORD) {
+            criterion = buildSimpleCriterion(FIELD_CONDITIONRECRODSETID, EQUALS.getValue(),
+                    ((PFXConditionRecordType) extensionType).getTableId()+"");
         } else if (extensionType != null && extensionType.getTypeCode() != null && !StringUtils.isEmpty(extensionType.getTable())) {
             if (typeCode == LOOKUPTABLE) {
                 criterion = buildSimpleCriterion("lookupTableId", EQUALS.getValue(), extensionType.getTable());

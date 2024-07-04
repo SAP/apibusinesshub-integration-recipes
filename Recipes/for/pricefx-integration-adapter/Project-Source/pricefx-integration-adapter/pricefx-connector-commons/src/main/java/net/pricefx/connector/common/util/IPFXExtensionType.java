@@ -17,5 +17,7 @@ public interface IPFXExtensionType {
 
     IPFXExtensionType withTable(String table);
 
+    String getTypeCodeSuffix();
+
 
 }

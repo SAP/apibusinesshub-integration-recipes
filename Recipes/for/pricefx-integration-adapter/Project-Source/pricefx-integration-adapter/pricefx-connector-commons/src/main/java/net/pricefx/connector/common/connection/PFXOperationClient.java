@@ -53,7 +53,7 @@ public class PFXOperationClient extends AuthV2EnabledPfxClient implements IPFXCo
     }
 
     @Override
-    public JsonNode doPostRaw(String apiPath, ObjectNode request) {
+    public JsonNode doPostRaw(String apiPath, Object request) {
         try {
             return super.postRetry(apiPath, request);
         } catch (IOException e) {

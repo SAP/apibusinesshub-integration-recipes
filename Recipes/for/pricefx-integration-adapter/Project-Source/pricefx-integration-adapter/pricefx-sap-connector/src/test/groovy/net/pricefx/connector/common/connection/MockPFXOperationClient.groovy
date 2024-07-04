@@ -5,11 +5,9 @@ import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.google.common.collect.ImmutableList
-import net.pricefx.connector.common.util.JsonUtil
-import net.pricefx.connector.common.util.PFXConstants
-import net.pricefx.connector.common.util.PFXOperation
-import net.pricefx.connector.common.util.PFXTypeCode
+import net.pricefx.connector.common.util.*
 import net.pricefx.pckg.client.okhttp.FileUploadProvider
+import org.apache.commons.lang3.time.DateUtils
 
 import java.util.function.Function
 
@@ -64,6 +62,8 @@ class MockPFXOperationClient extends PFXOperationClient {
     @Override
     JsonNode doPost(String apiPath, ObjectNode request) {
         switch (findPFXOperation(apiPath)) {
+            case UPDATE:
+                return request
             case EXECUTE_FORMULA:
                 return JsonUtil.createArrayNode(
                         new ObjectNode(JsonNodeFactory.instance).put("resultName", "finalResult").set("result", request))
@@ -72,7 +72,7 @@ class MockPFXOperationClient extends PFXOperationClient {
                 return new ArrayNode(JsonNodeFactory.instance).add(new ObjectNode(JsonNodeFactory.instance)
                         .put(PFXConstants.FIELD_UNIQUENAME,
                                 "TEST")
-                        .put("version", "0"))
+                        .put("version", 0))
 
 
             case LOOKUPTABLE_FETCH:
@@ -118,7 +118,7 @@ class MockPFXOperationClient extends PFXOperationClient {
             case PFXOperation.FETCH_QUOTE:
                 return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_UNIQUENAME,
                         apiPath.split("/")[1])
-                        .put("version", "0"))
+                        .put("version", 0))
             case PFXOperation.CUSTOMEREXTENSION_LIST:
                 return ImmutableList.of(
                         JsonUtil.FACTORY.objectNode().put(FIELD_VALUE, "{\n    \"Customer_Details\":{\n        \"label\":\"Customer Details\", \n        \"userGroupEdit\":null, \n        \"userGroupViewDetails\":null, \n        \"allowSearch\":false, \n        \"allowPASearch\":false, \n        \"businessKey\":[\n            \"customerId\"\n        ], \n        \"numberOfAttributes\":3\n    }\n}"))
@@ -150,22 +150,26 @@ class MockPFXOperationClient extends PFXOperationClient {
                     if (advancedCriteria != null && advancedCriteria.get("criteria") != null) {
                         return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_UNIQUENAME,
                                 advancedCriteria.get("criteria").get(0).get(FIELD_VALUE).textValue())
-                                .put("version", "0"))
+                                .put("version", 0))
                     } else {
                         return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_UNIQUENAME,
                                 "TEST")
-                                .put("version", "0"))
+                                .put("version", 0))
                     }
                 case PFXTypeCode.PRODUCT:
                     return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_SKU,
                             advancedCriteria.get("criteria").get(0).get(FIELD_VALUE).textValue())
-                            .put("version", "0"))
+                            .put("version", 0))
                 case PFXTypeCode.LOOKUPTABLE:
                     return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance)
                             .put("type", "SIMPLE")
                             .put("valueType", "STRING").put(PFXConstants.FIELD_NAME,
                             advancedCriteria.get("criteria").get(0).get(FIELD_VALUE).textValue())
-                            .put("version", "0"))
+                            .put("version", 0))
+                case PFXTypeCode.ADVANCED_CONFIG:
+                    String twoHourAgo = DateUtil.getFormattedDateTime(DateUtils.addHours(new Date(), -2))
+                    return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_TYPEDID, "1.AP")
+                            .put("version", 0).put(FIELD_VALUE, twoHourAgo))
                 default:
                     return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put("partition", "test"))
             }

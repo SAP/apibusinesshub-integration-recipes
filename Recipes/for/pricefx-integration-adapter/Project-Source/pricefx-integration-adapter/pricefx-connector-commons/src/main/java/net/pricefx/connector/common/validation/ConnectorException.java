@@ -15,9 +15,9 @@ public class ConnectorException extends RuntimeException {
 
     public ConnectorException(String message, Exception e) {
         super(message, e);
-        if (e instanceof PfxClientException && e != null && ((PfxClientException) e).getHttpStatus() == 401){
+        if (e instanceof PfxClientException && ((PfxClientException) e).getHttpStatus() == 401) {
             this.errorType = ErrorType.LOGIN_FAILURE;
-        }else {
+        } else {
             this.errorType = ErrorType.HTTP_INTERNAL_ERROR;
         }
     }

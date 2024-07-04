@@ -57,7 +57,7 @@ public class QuoteFetcher extends GenericFetcher {
                 JsonUtil.getValueAsText(quote.get(FIELD_UNIQUENAME)))), 0);
 
         if (detailedQuote != null) {
-            ResponseUtil.formatResponse(PFXTypeCode.QUOTE, detailedQuote, isConvertValueToString());
+            ResponseUtil.formatResponse(PFXTypeCode.QUOTE, null, detailedQuote, isConvertValueToString());
         }
         return detailedQuote;
 

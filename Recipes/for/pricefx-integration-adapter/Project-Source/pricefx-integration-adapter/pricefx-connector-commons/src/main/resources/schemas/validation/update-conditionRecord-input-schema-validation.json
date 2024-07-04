@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "ConditionRecordUpdateRequest",
+  "type": "array",
+  "default": [],
+  "items": {
+    "type": "object",
+    "required": [
+      "id"
+    ],
+    "properties": {
+      "id": {
+
+      },
+      "conditionRecordSetId": {
+        "type": "number"
+      },
+      "priceUnit": {
+        "type": "string"
+      },
+      "validTo": {
+        "type": "string"
+      },
+      "validFrom": {
+        "type": "string"
+      },
+      "conditionValue": {
+        "type": "number"
+      },
+      "unitOfMeasure": {
+        "type": "string"
+      },
+      "currency": {
+        "type": "string"
+      },
+      "integrationStatus": {
+
+      },
+      "lastUpdateDate": {
+        "type": "string"
+      },
+      "createDate": {
+        "type": "string"
+      }
+    }
+  }
+}

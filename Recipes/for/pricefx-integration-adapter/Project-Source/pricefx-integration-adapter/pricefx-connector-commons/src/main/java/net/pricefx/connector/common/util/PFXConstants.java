@@ -23,6 +23,8 @@ public class PFXConstants {
     public static final String FIELD_USER_LOGINNAME = "loginName";
     public static final String FIELD_CUSTOMER_ID = "customerId";
     public static final String FIELD_PLI_PRICELISTID = "pricelistId";
+
+    public static final String FIELD_CONDITIONRECRODSETID = "conditionRecordSetId";
     public static final String FIELD_PGI_PRICEGRIDID = "priceGridId";
     public static final String FIELD_SKU = "sku";
     public static final String FIELD_STARTROW = "startRow";
@@ -43,6 +45,7 @@ public class PFXConstants {
     public static final String FIELD_OUTPUTS = "outputs";
     public static final String FIELD_VALUEOBJECT = "valueObject";
     public static final String FIELD_DATA = "data";
+    public static final String FIELD_RESPONSE = "response";
     public static final String FIELD_WORKFLOWSTATUS = "workflowStatus";
     public static final String FIELD_TARGETNAME = "targetName";
     public static final String FIELD_SOURCENAME = "sourceName";

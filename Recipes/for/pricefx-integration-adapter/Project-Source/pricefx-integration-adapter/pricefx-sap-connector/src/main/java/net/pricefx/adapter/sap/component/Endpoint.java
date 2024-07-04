@@ -92,6 +92,9 @@ public class Endpoint extends DefaultEndpoint {
     @UriParam
     private boolean retryLoginFailure;
 
+    @UriParam
+    private String postPath;
+
     public Endpoint(final String endpointUri, final Component component) {
         super(endpointUri, component);
     }
@@ -325,5 +328,13 @@ public class Endpoint extends DefaultEndpoint {
 
     public void setRetryLoginFailure(boolean retryLoginFailure) {
         this.retryLoginFailure = retryLoginFailure;
+    }
+
+    public String getPostPath() {
+        return postPath;
+    }
+
+    public void setPostPath(String postPath) {
+        this.postPath = postPath;
     }
 }

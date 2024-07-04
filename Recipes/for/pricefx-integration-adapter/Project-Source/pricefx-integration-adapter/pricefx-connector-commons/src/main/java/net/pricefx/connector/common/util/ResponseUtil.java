@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.*;
 
 import static net.pricefx.connector.common.util.PFXConstants.*;
-import static net.pricefx.connector.common.util.PFXTypeCode.MANUALPRICELIST;
 
 public class ResponseUtil {
     private static final String RESULT_OBJECT = "resultObject";
@@ -162,14 +161,14 @@ public class ResponseUtil {
         node.remove(LOOKUP_SYSTEM_FIELDS);
     }
 
-    public static List<ObjectNode> formatResponse(PFXTypeCode typeCode, Iterable<ObjectNode> results, boolean convertValueToString) {
+    public static List<ObjectNode> formatResponse(PFXTypeCode typeCode, IPFXExtensionType extensionType, Iterable<ObjectNode> results, boolean convertValueToString) {
         if (results == null) {
             return Collections.emptyList();
         }
 
         List<ObjectNode> list = new ArrayList<>();
         results.forEach((ObjectNode node) -> {
-            formatResponse(typeCode, node, convertValueToString);
+            formatResponse(typeCode, extensionType, node, convertValueToString);
             list.add(node);
         });
         return list;
@@ -188,19 +187,24 @@ public class ResponseUtil {
         }
     }
 
-    public static void preformatResponse(PFXTypeCode typeCode, ObjectNode result) {
-        if (typeCode == PFXTypeCode.MANUALPRICELIST || typeCode == PFXTypeCode.PAYOUT) {
-            appendId(typeCode, result);
+    public static void preformatResponse(PFXTypeCode typeCode, IPFXExtensionType extensionType, ObjectNode result) {
+        if (typeCode == PFXTypeCode.MANUALPRICELIST || typeCode == PFXTypeCode.PAYOUT || typeCode == PFXTypeCode.CONDITION_RECORD) {
+            appendId(typeCode, extensionType, result);
         }
     }
 
-    public static void appendId(PFXTypeCode typeCode, ObjectNode result) {
+    private static void appendId(PFXTypeCode typeCode, IPFXExtensionType extensionType, ObjectNode result) {
+        String suffix = typeCode.getTypeCode();
+        if (extensionType != null ){
+            suffix = extensionType.getTypeCodeSuffix();
+        }
+
         if (!StringUtils.isEmpty(
                 JsonUtil.getValueAsText(result.get(FIELD_TYPEDID))) &&
-                JsonUtil.getValueAsText(result.get(FIELD_TYPEDID)).endsWith("." + typeCode.getTypeCode())) {
+                JsonUtil.getValueAsText(result.get(FIELD_TYPEDID)).endsWith("." + suffix)) {
             result.put(FIELD_ID,
                     Long.parseLong(
-                            JsonUtil.getValueAsText(result.get(FIELD_TYPEDID)).replace("." + typeCode.getTypeCode(), "")));
+                            JsonUtil.getValueAsText(result.get(FIELD_TYPEDID)).replace("." + suffix, "")));
         }
 
     }
@@ -228,8 +232,8 @@ public class ResponseUtil {
         }
     }
 
-    public static void formatResponse(PFXTypeCode typeCode, ObjectNode result, boolean convertValueToString) {
-        preformatResponse(typeCode, result);
+    public static void formatResponse(PFXTypeCode typeCode, IPFXExtensionType extensionType, ObjectNode result, boolean convertValueToString) {
+        preformatResponse(typeCode, extensionType, result);
 
         formatResponse(result);
 

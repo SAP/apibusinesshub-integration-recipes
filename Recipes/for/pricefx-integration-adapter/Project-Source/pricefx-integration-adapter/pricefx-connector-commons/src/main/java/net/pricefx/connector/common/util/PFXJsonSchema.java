@@ -78,6 +78,9 @@ public enum PFXJsonSchema {
     QUOTE_UPSERT_REQUEST("/schemas/upsert-quote-input-schema.json", "/schemas/validation/upsert-quote-input-schema-validation.json"),
     QUOTE_UPDATE_REQUEST("/schemas/update-quote-input-schema.json", "/schemas/validation/update-quote-input-schema-validation.json"),
 
+    //CONDITION RECORD
+    CONDITION_RECORD_FETCH_RESPONSE("/schemas/fetch-conditionRecord-output-schema.json"),
+    CONDITION_RECORD_UPDATE_REQUEST("/schemas/update-conditionRecord-input-schema.json", "/schemas/validation/update-conditionRecord-input-schema-validation.json"),
 
     //PAYOUT
     PAYOUT_FETCH_RESPONSE("/schemas/fetch-payout-output-schema.json"),
@@ -113,6 +116,8 @@ public enum PFXJsonSchema {
     public static PFXJsonSchema getUpsertRequestSchema(PFXTypeCode pfxTypeCode, IPFXExtensionType extensionType) {
         if (pfxTypeCode != null) {
             switch (pfxTypeCode) {
+                case CONDITION_RECORD:
+                    return CONDITION_RECORD_UPDATE_REQUEST;
                 case PRICERECORD:
                     return PRICERECORD_UPSERT_REQUEST;
                 case QUOTE:
@@ -178,6 +183,8 @@ public enum PFXJsonSchema {
     public static PFXJsonSchema getFetchResponseSchema(PFXTypeCode pfxTypeCode, IPFXExtensionType extensionType) {
         if (pfxTypeCode != null) {
             switch (pfxTypeCode) {
+                case CONDITION_RECORD:
+                    return CONDITION_RECORD_FETCH_RESPONSE;
                 case PAYOUT:
                     return PAYOUT_FETCH_RESPONSE;
                 case PRICERECORD:

@@ -93,7 +93,7 @@ public class QuoteCreator implements IPFXObjectUpsertor, ICalculableObjectUpsert
         }
 
         if (lineItems == null || lineItems.size() == 0) {
-            ResponseUtil.formatResponse(QUOTE, (ObjectNode) quote, convertValueToString);
+            ResponseUtil.formatResponse(QUOTE, null, (ObjectNode) quote, convertValueToString);
             return ImmutableList.of(quote);
         }
 
@@ -118,7 +118,7 @@ public class QuoteCreator implements IPFXObjectUpsertor, ICalculableObjectUpsert
 
         quote = pfxClient.action(createPath(FETCH_QUOTE.getOperation(), uniqueName));
 
-        ResponseUtil.formatResponse(QUOTE, (ObjectNode) quote, convertValueToString);
+        ResponseUtil.formatResponse(QUOTE, null, (ObjectNode) quote, convertValueToString);
         return ImmutableList.of(quote);
     }
 

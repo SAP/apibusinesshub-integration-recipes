@@ -20,7 +20,7 @@ public class ManualPriceListFetcher extends GenericFetcher {
         List<ObjectNode> results = super.fetch(advancedCriteria, sortBy, valueFields, startRow, pageSize, validate, false);
 
         if (formatted) {
-            ResponseUtil.formatResponse(MANUALPRICELIST, results, false);
+            ResponseUtil.formatResponse(MANUALPRICELIST, null, results, false);
         }
 
         return results;

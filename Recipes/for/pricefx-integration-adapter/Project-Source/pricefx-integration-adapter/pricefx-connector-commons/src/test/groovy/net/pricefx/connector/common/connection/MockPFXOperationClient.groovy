@@ -37,22 +37,52 @@ class MockPFXOperationClient extends PFXOperationClient {
 
     @Override
     ArrayNode doPostBatch(String apiPath, ArrayNode request) {
+        try{
+            ArrayNode response = new ArrayNode(JsonNodeFactory.instance);
+            if (request.get(0).get(FIELD_TYPEDID).textValue().contains(PFXTypeCode.CONDITION_RECORD.getTypeCode())){
+                if (request.size() == 3) {
+                    for (JsonNode node : request) {
+                        ObjectNode objectNode = new ObjectNode(JsonNodeFactory.instance);
+                        objectNode.set(FIELD_RESPONSE, node)
+                        response.add(objectNode)
+                    }
+                } else {
+                    for (int i =0; i< request.size(); i++) {
+                        JsonNode node = request.get(i)
+                        ObjectNode responseNode = new ObjectNode(JsonNodeFactory.instance)
+                        responseNode.set(FIELD_RESPONSE, node)
+
+                        if (i % 2 != 0) {
+                            ObjectNode errorMsg = new ObjectNode(JsonNodeFactory.instance)
+                            errorMsg.put("errorMessage", "version conflicted")
+                            ObjectNode objectNode = new ObjectNode(JsonNodeFactory.instance)
+                            objectNode.set("errors", new ObjectNode(JsonNodeFactory.instance).set(FIELD_VERSION,errorMsg))
+                            responseNode.set(FIELD_RESPONSE, objectNode)
+                        }
+                        response.add(responseNode)
+                    }
+                }
+            }
+            return response
+        } catch(Exception ex){}
+
         return request
     }
 
     @Override
-    JsonNode doPostRaw(String apiPath, ObjectNode request) {
+    JsonNode doPostRaw(String apiPath, Object request) {
         ObjectNode responseNode = new ObjectNode(JsonNodeFactory.instance)
 
 
         switch (findPFXOperation(apiPath)) {
             case FETCH:
                 responseNode.set(FIELD_DATA, JsonUtil.createArrayNode(new ObjectNode(JsonNodeFactory.instance).
-                        put(PFXConstants.FIELD_TYPEDID, "1." + PFXTypeCode.MANUALPRICELIST.getTypeCode()).
+                        put(FIELD_TYPEDID, "1." + PFXTypeCode.MANUALPRICELIST.getTypeCode()).
                         put(FIELD_UNIQUENAME, "test")))
 
                 break
             default:
+                responseNode.put("totalRows", 1)
                 responseNode.set(FIELD_DATA, JsonUtil.createArrayNode(new ObjectNode(JsonNodeFactory.instance).
                         put(FIELD_UNIQUENAME, "test")))
                 break
@@ -60,7 +90,7 @@ class MockPFXOperationClient extends PFXOperationClient {
 
         }
 
-        return new ObjectNode(JsonNodeFactory.instance).set("response", responseNode)
+        return new ObjectNode(JsonNodeFactory.instance).set(FIELD_RESPONSE, responseNode)
 
     }
 
@@ -87,40 +117,47 @@ class MockPFXOperationClient extends PFXOperationClient {
             case COPY_QUOTE:
             case REVISE_QUOTE:
             case SAVE_QUOTE:
-                return new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_UNIQUENAME,
+                return new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME,
                         "P-1000")
                         .put("version", "0")
                         .set(FIELD_INPUTS, JsonUtil.createArrayNode(new ObjectNode(JsonNodeFactory.instance)
                                 .put(FIELD_NAME, "Qty").put(FIELD_VALUE, 1000)))
             case LOOKUPTABLE_FETCH:
                 def dataNode = new ArrayNode(JsonNodeFactory.instance)
-                String tableName = request.get(PFXConstants.FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue()
+                String tableName = request.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue()
                 if (tableName == "RangeParameters") {
                     dataNode.add(new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME, "RangeParameters")
-                            .put(PFXConstants.FIELD_TYPE, "RANGE").put(PFXConstants.FIELD_VALUETYPE, "NUMBER").put(PFXConstants.FIELD_ID, 1))
+                            .put(FIELD_TYPE, "RANGE").put(FIELD_VALUETYPE, "NUMBER").put(FIELD_ID, 1))
                 } else if (tableName == "MatrixParameters") {
                     dataNode.add(new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME, "MatrixParameters")
-                            .put(PFXConstants.FIELD_TYPE, "MATRIX").put(PFXConstants.FIELD_VALUETYPE, "MATRIX2").put(PFXConstants.FIELD_ID, 2))
+                            .put(FIELD_TYPE, "MATRIX").put(FIELD_VALUETYPE, "MATRIX2").put(FIELD_ID, 2))
                 } else if (tableName == "MatrixSingleParameters") {
                     dataNode.add(new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME, "MatrixSingleParameters")
-                            .put(PFXConstants.FIELD_TYPE, "MATRIX").put(PFXConstants.FIELD_VALUETYPE, "MATRIX").put(PFXConstants.FIELD_ID, 3))
+                            .put(FIELD_TYPE, "MATRIX").put(FIELD_VALUETYPE, "MATRIX").put(FIELD_ID, 3))
                 }
                 return dataNode
 
             case FETCH:
-                if ("fetch/U".equals(apiPath)) {
-                    if ("DUMMY".equals(request.get(PFXConstants.FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue())) {
+                if ("fetch/CRCS".equals(apiPath)) {
+                    return JsonUtil.createArrayNode(
+                            new ObjectNode(JsonNodeFactory.instance)
+                                    .put(FIELD_ID, 1)
+                                    .put(FIELD_TYPEDID, "1.CRCS")
+                                    .put(FIELD_UNIQUENAME, request.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue())
+                                    .put("keySize", 4))
+                } else if ("fetch/U".equals(apiPath)) {
+                    if ("DUMMY".equals(request.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue())) {
                         return new ArrayNode(JsonNodeFactory.instance)
-                    } else if ("DUMMY_NO_ID".equals(request.get(PFXConstants.FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue())) {
+                    } else if ("DUMMY_NO_ID".equals(request.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue())) {
                         return JsonUtil.createArrayNode(new ObjectNode(JsonNodeFactory.instance).
-                                put(FIELD_USER_LOGINNAME, request.get(PFXConstants.FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue()))
+                                put(FIELD_USER_LOGINNAME, request.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue()))
                     } else {
                         return JsonUtil.createArrayNode(new ObjectNode(JsonNodeFactory.instance).
-                                put(PFXConstants.FIELD_TYPEDID, "1." + PFXTypeCode.USER.getTypeCode()).
-                                put(FIELD_USER_LOGINNAME, request.get(PFXConstants.FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue()))
+                                put(FIELD_TYPEDID, "1." + PFXTypeCode.USER.getTypeCode()).
+                                put(FIELD_USER_LOGINNAME, request.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue()))
                     }
                 } else if ("fetch/F".equals(apiPath)) {
-                    if (request.get("criteria").get(0).get("value").textValue() == "DUMMY") {
+                    if (request.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue() == "DUMMY") {
                         return new ArrayNode(JsonNodeFactory.instance)
                     }
                     return JsonUtil.createArrayNode(new ObjectNode(JsonNodeFactory.instance).
@@ -160,11 +197,11 @@ class MockPFXOperationClient extends PFXOperationClient {
 
             case GET_FCS:
                 return ImmutableList.of(
-                        new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_TYPEDID, "1.DMF").set("fields",
+                        new ObjectNode(JsonNodeFactory.instance).put(FIELD_TYPEDID, "1.DMF").set("fields",
                                 JsonUtil.createArrayNode(
-                                        new ObjectNode(JsonNodeFactory.instance).put("name", "type").put("numeric", false).put("key", false),
-                                        new ObjectNode(JsonNodeFactory.instance).put("name", "sku").put("numeric", false).put("key", true),
-                                        new ObjectNode(JsonNodeFactory.instance).put("name", "label").put("numeric", false).put("key", false))))
+                                        new ObjectNode(JsonNodeFactory.instance).put(FIELD_NAME, "type").put("numeric", false).put("key", false),
+                                        new ObjectNode(JsonNodeFactory.instance).put(FIELD_NAME, "sku").put("numeric", false).put("key", true),
+                                        new ObjectNode(JsonNodeFactory.instance).put(FIELD_NAME, "label").put("numeric", false).put("key", false))))
 
 
             case FILE_UPLOAD_SLOT:
@@ -207,8 +244,8 @@ class MockPFXOperationClient extends PFXOperationClient {
                     workflowStatus == PFXConstants.WorkflowStatus.WITHHDRAWN
                 }
 
-                ObjectNode objectNode = new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_UNIQUENAME, uniqueName)
-                        .put(PFXConstants.FIELD_WORKFLOWSTATUS, workflowStatus.name())
+                ObjectNode objectNode = new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME, uniqueName)
+                        .put(FIELD_WORKFLOWSTATUS, workflowStatus.name())
                         .put("version", "0").put(FIELD_TYPEDID, uniqueName.replaceAll("P-", "") + ".Q")
 
                 ArrayNode inputNode = JsonUtil.createArrayNode(new ObjectNode(JsonNodeFactory.instance).put(FIELD_NAME, "Qty").put(FIELD_VALUE, 1000))
@@ -239,9 +276,9 @@ class MockPFXOperationClient extends PFXOperationClient {
             return ImmutableList.of(
                     new ObjectNode(JsonNodeFactory.instance).set("fields",
                             JsonUtil.createArrayNode(
-                                    new ObjectNode(JsonNodeFactory.instance).put("name", "type"),
-                                    new ObjectNode(JsonNodeFactory.instance).put("name", "sku"),
-                                    new ObjectNode(JsonNodeFactory.instance).put("name", "label"))))
+                                    new ObjectNode(JsonNodeFactory.instance).put(FIELD_NAME, "type"),
+                                    new ObjectNode(JsonNodeFactory.instance).put(FIELD_NAME, "sku"),
+                                    new ObjectNode(JsonNodeFactory.instance).put(FIELD_NAME, "label"))))
 
         } else if (apiPath.contains(PFXTypeCode.PRODUCT.getMetadataTypeCode())) {
             return ImmutableList.of(
@@ -253,32 +290,48 @@ class MockPFXOperationClient extends PFXOperationClient {
             return ImmutableList.of(
                     new ObjectNode(JsonNodeFactory.instance).put(FIELD_FIELDNAME, ATTRIBUTE_EXT_PREFIX + "ProjectName")
                             .put(FIELD_LABEL, "ProjectName"))
-        } else if (apiPath.contains(PFXTypeCode.ROLE.getMetadataTypeCode())) {
+        } else if (apiPath.contains(PFXTypeCode.ROLE.getMetadataTypeCode()) && typeCode == PFXTypeCode.ROLE) {
             return ImmutableList.of(
                     new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME, "ADMIN")
                             .put(FIELD_LABEL, "Administration").put("module", "ADMIN"))
         } else {
             switch (typeCode) {
+                case PFXTypeCode.CONDITION_RECORD:
+                    if (!apiPath.contains(PFXTypeCode.CONDITION_RECORD.getMetadataTypeCode())) {
+                        return ImmutableList.of(
+                                new ObjectNode(JsonNodeFactory.instance).put(FIELD_TYPEDID, "1.CRCI4").put(FIELD_VERSION, 1),
+                                new ObjectNode(JsonNodeFactory.instance).put(FIELD_TYPEDID, "2.CRCI4").put(FIELD_VERSION, 2),
+                                new ObjectNode(JsonNodeFactory.instance).put(FIELD_TYPEDID, "3.CRCI4").put(FIELD_VERSION, 3))
+                    }
+                    break
                 case PFXTypeCode.ROLE:
-                    return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_UNIQUENAME,
-                            advancedCriteria.get("criteria").get(0).get(FIELD_VALUE).get(0).textValue())
-                            .put("module", advancedCriteria.get("criteria").get(0).get(FIELD_VALUE).get(0).textValue())
-                            .put("label", advancedCriteria.get("criteria").get(0).get(FIELD_VALUE).get(0).textValue()))
+
+                    return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME,
+                            advancedCriteria.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).get(0).textValue())
+                            .put("module", advancedCriteria.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).get(0).textValue())
+                            .put(FIELD_LABEL, advancedCriteria.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).get(0).textValue()))
 
                 case PFXTypeCode.QUOTE:
-                    return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_UNIQUENAME,
-                            advancedCriteria.get("criteria").get(0).get(FIELD_VALUE).textValue())
-                            .put("typedId", "1000.Q")
-                            .put("version", "0"))
+                    if (!apiPath.contains(PFXTypeCode.QUOTE.getMetadataTypeCode())) {
+                        return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME,
+                                advancedCriteria.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue())
+                                .put(FIELD_TYPEDID, "1000.Q")
+                                .put(FIELD_VERSION, "0"))
+                    }
+                    break
                 case PFXTypeCode.PRODUCT:
-                    return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_SKU,
-                            advancedCriteria.get("criteria").get(0).get(FIELD_VALUE).textValue())
-                            .put("version", "0"))
+                    if (!apiPath.contains(PFXTypeCode.PRODUCT.getMetadataTypeCode())) {
+                        return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(FIELD_SKU,
+                                advancedCriteria.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue())
+                                .put(FIELD_VERSION, "0"))
+                    }
+                    break
                 default:
                     return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance)
-                            .put(FIELD_UNIQUENAME, "test").put("typedId", "1." + typeCode.getTypeCode()))
+                            .put(FIELD_UNIQUENAME, "test").put(FIELD_TYPEDID, "1." + typeCode.getTypeCode()))
             }
         }
+        return null
 
 
     }

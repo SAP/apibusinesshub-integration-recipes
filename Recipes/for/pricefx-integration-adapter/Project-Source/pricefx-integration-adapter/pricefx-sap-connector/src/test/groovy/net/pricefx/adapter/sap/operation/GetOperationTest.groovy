@@ -8,7 +8,6 @@ import spock.lang.Specification
 class GetOperationTest extends Specification {
     def builder = ConnectionUtil.getPFXClientBuilder("test", "https://dummy.com", "abcdefg")
     def pfxClient = new MockPFXOperationClient(builder)
-    def failedClient = new MockFailedPFXOperationClient(builder)
 
     def "get"() {
         when:
@@ -24,7 +23,7 @@ class GetOperationTest extends Specification {
 
         then:
         "TEST" == result.get(PFXConstants.FIELD_SKU).textValue()
-        "0" == result.get(PFXConstants.FIELD_VERSION).textValue()
+        0 == result.get(PFXConstants.FIELD_VERSION).intValue()
 
         when:
         result = new GetOperation(pfxClient, PFXTypeCode.QUOTE, "TEST", null, (IPFXExtensionType) null).get(0, Constants.MAX_RECORDS, true)

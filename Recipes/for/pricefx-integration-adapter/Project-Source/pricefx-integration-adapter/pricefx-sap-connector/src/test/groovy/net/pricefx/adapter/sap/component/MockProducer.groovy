@@ -1,9 +1,12 @@
 package net.pricefx.adapter.sap.component
 
+import com.fasterxml.jackson.databind.node.JsonNodeFactory
+import com.fasterxml.jackson.databind.node.ObjectNode
 import com.sap.it.api.exception.InvalidContextException
 import com.sap.it.api.securestore.exception.SecureStoreException
 import net.pricefx.adapter.sap.operation.CredentialsOperation
 import net.pricefx.connector.common.connection.PFXOperationClient
+import net.pricefx.connector.common.util.PFXTypeCode
 
 class MockProducer extends Producer {
     private PFXOperationClient pfxOperationClient
@@ -14,17 +17,27 @@ class MockProducer extends Producer {
     }
 
     @Override
-    protected PFXOperationClient createPfxClient(CredentialsOperation credentialsOperation) {
+    PFXOperationClient createPfxClient(CredentialsOperation credentialsOperation, PFXTypeCode typeCode, boolean basicOnly) {
         return pfxOperationClient
     }
 
     @Override
     protected CredentialsOperation createCredentialsOperation() throws SecureStoreException, MalformedURLException, InvalidContextException {
-        return new CredentialsOperation("token", "app.pricefx.eu") {
+        return new CredentialsOperation("token", "https://app.pricefx.eu") {
             @Override
             protected void init(String securityMaterial, String host) {
 
                 setPricefxHost(host)
+            }
+
+            @Override
+            ObjectNode buildTokenRequest() {
+
+                ObjectNode node = new ObjectNode(JsonNodeFactory.instance)
+                node.put("username", "dummyUser")
+                node.put("partition", "dummyPartition")
+                node.put("password", "dummyPw")
+                return node
             }
         }
     }

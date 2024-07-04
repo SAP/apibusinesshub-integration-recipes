@@ -2,6 +2,7 @@ package net.pricefx.adapter.sap.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import net.pricefx.connector.common.connection.PFXOperationClient;
+import net.pricefx.connector.common.operation.AdvancedConfigurationUpsertor;
 import net.pricefx.connector.common.operation.QuoteUpdater;
 import net.pricefx.connector.common.operation.UserAccessUpdater;
 import net.pricefx.connector.common.util.PFXTypeCode;
@@ -24,6 +25,9 @@ public class UpdateService extends AbstractJsonRequestService {
 
         JsonNode node;
         switch (typeCode) {
+            case ADVANCED_CONFIG:
+                node = new AdvancedConfigurationUpsertor(getPfxClient()).upsert(request, true, false, false, false,false).get(0);
+                break;
             case QUOTE:
                 node = new QuoteUpdater(getPfxClient(), null).upsert(request, true, false, false, false, false).get(0);
                 break;

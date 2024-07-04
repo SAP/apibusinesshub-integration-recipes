@@ -3,7 +3,6 @@ package net.pricefx.connector.common.connection;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -52,7 +51,7 @@ public interface IPFXConnection {
 
     Iterable<ObjectNode> doAction(String apiPath);
 
-    JsonNode doPostRaw(String apiPath, ObjectNode request) throws IOException;
+    JsonNode doPostRaw(String apiPath, Object request) throws IOException;
 
     ObjectNode post(String apiPath, Object body, Function<Exception, RuntimeException> exceptionFunction);
 
@@ -80,7 +79,11 @@ public interface IPFXConnection {
             extensionType = getLookupTableType(tableName, validAfter);
         }
 
-        if (extensionType == null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE)) {
+        if (extensionType == null && typeCode == PFXTypeCode.CONDITION_RECORD) {
+            extensionType = getConditionRecordType(typeCode, tableName);
+        }
+
+        if (extensionType == null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE || typeCode == PFXTypeCode.CONDITION_RECORD)) {
             throw new ConnectorException(TABLE_NOT_FOUND);
         }
 
@@ -101,6 +104,25 @@ public interface IPFXConnection {
                                 withBusinessKeys(JsonUtil.getStringArray(fieldNode.get("businessKey"))).withTable(tableName);
                     }
                 }
+
+            } catch (Exception ex) {
+                throw new ConnectorException("Failed to read " + typeCode, ex);
+            }
+        }
+
+        return null;
+    }
+
+    default IPFXExtensionType getConditionRecordType(PFXTypeCode typeCode, String tableName) {
+        if (typeCode == PFXTypeCode.CONDITION_RECORD && !StringUtils.isEmpty(tableName)) {
+            try {
+                ObjectNode node = getConditionRecordTable(tableName);
+
+                if (node != null) {
+                    return JsonUtil.getConditionRecordType(node);
+                }
+
+                return null;
 
             } catch (Exception ex) {
                 throw new ConnectorException("Failed to read " + typeCode, ex);
@@ -134,6 +156,22 @@ public interface IPFXConnection {
         return Iterables.get(results, 0);
     }
 
+    default ObjectNode getTableDetails(String apiPath, ObjectNode request) {
+
+        JsonNode result = doPost(apiPath, request);
+        result = getFirstDataNode(result);
+        if (JsonUtil.isObjectNode(result)) {
+            return (ObjectNode) result;
+        }
+        return null;
+    }
+
+    default ObjectNode getConditionRecordTable(String tableName) {
+        if (StringUtils.isEmpty(tableName)) return null;
+        ObjectNode request = createSimpleFetchRequest(PfxCommonService.buildSimpleCriterion(FIELD_UNIQUENAME, EQUALS.getValue(), tableName));
+        return getTableDetails(createPath(PFXOperation.getFetchOperation(PFXTypeCode.CONDITION_RECORD_SET).getOperation(), PFXTypeCode.CONDITION_RECORD_SET.getTypeCode()), request);
+    }
+
     default ObjectNode getLookupTable(String tableName, String validAfter) {
         if (StringUtils.isEmpty(tableName) || StringUtils.isEmpty(validAfter)) return null;
 
@@ -143,12 +181,7 @@ public interface IPFXConnection {
         criterions.add(PfxCommonService.buildSimpleCriterion(STATUS, EQUALS.getValue(), PFXConstants.EntityStatus.ACTIVE.name()));
         ObjectNode request = createSimpleFetchRequest(AND.getValue(), criterions);
 
-        JsonNode result = doPost(LOOKUPTABLE_FETCH.getOperation(), request);
-        result = getFirstDataNode(result);
-        if (JsonUtil.isObjectNode(result)){
-            return (ObjectNode) result;
-        }
-        return null;
+        return getTableDetails(LOOKUPTABLE_FETCH.getOperation(), request);
     }
 
     default Iterable<ObjectNode> doFetchMetadata(PFXTypeCode typeCode, IPFXExtensionType extensionType, String uniqueKey) {
@@ -236,8 +269,7 @@ public interface IPFXConnection {
 
     default void validateUserRoles(List<String> userRoles, PFXTypeCode typeCode) {
         if (!CollectionUtils.isEmpty(userRoles)) {
-            ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
-            userRoles.forEach(arrayNode::add);
+            ArrayNode arrayNode = JsonUtil.createArrayNodeFromStrings(userRoles);
             ObjectNode advancedCriteria = RequestUtil.createSimpleFetchRequest(JsonUtil.buildObjectNode(Pair.of(FIELD_VALUE, arrayNode)).put(FIELD_FIELDNAME, FIELD_UNIQUENAME)
                     .put(RequestUtil.OPERATOR, OperatorId.IN_SET.getValue()));
 
@@ -262,10 +294,17 @@ public interface IPFXConnection {
         batches.forEach((JsonNode obj) -> {
             if (JsonUtil.isObjectNode(obj)) {
                 JsonNode result = JsonUtil.getFirstDataNode(JsonUtil.getData(obj));
-                if (!JsonUtil.isObjectNode(result)) {
-                    result = obj;
+
+                if (JsonUtil.isObjectNode(result)) {
+                    nodes.add(result);
+                } else {
+                    JsonNode error = JsonUtil.getResponse(obj);
+                    if (JsonUtil.isObjectNode(error)) {
+                        nodes.add(error);
+                    }else {
+                        nodes.add(obj);
+                    }
                 }
-                nodes.add(result);
             }
         });
 

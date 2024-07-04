@@ -14,6 +14,7 @@ import net.pricefx.connector.common.operation.DataloadRunner;
 import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.ConnectorException;
 import net.pricefx.pckg.client.okhttp.PfxClientBuilder;
+import net.pricefx.pckg.processing.ProcessingException;
 import org.apache.camel.Exchange;
 import org.apache.camel.impl.DefaultProducer;
 import org.apache.commons.lang3.StringUtils;
@@ -22,6 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 
 import static net.pricefx.adapter.sap.util.Constants.*;
+import static net.pricefx.adapter.sap.util.SupportedOperation.GET;
 import static net.pricefx.connector.common.util.Constants.DEFAULT_TIMEOUT;
 import static net.pricefx.connector.common.util.Constants.MAX_RECORDS;
 import static net.pricefx.connector.common.util.PFXTypeCode.TOKEN;
@@ -99,7 +101,6 @@ public class Producer extends DefaultProducer {
     }
 
     public void process(PFXOperationClient pfxClient, final Exchange exchange) {
-        String apiPath = getProperty(exchange.getProperty(API_PATH));
         String uniqueId = getProperty(exchange.getProperty(UNIQUE_ID));
         String secondaryId = getProperty(exchange.getProperty(SECONDARY_ID));
         Object input = exchange.getIn().getBody();
@@ -169,7 +170,7 @@ public class Producer extends DefaultProducer {
                         execute(input);
                 break;
             case POST:
-                node = new PostService(pfxClient, apiPath).execute(input);
+                node = new PostService(pfxClient, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getPostPath())).execute(input);
                 break;
             case METADATA:
                 int pageSize = RequestUtil.getPageSize(getProperty(exchange.getProperty(PAGE_SIZE)), MAX_FETCH_RECORDS);
@@ -205,58 +206,66 @@ public class Producer extends DefaultProducer {
     }
 
     public void process(final Exchange exchange) throws Exception {
-
         CredentialsOperation credentialsOperation = createCredentialsOperation();
+        PFXTypeCode typeCode = getTargetType();
+
         String token = getProperty(exchange.getProperty(ACCESS_TOKEN));
         if (credentialsOperation.isJwt()) {
             credentialsOperation.setJwtToken(token);
         }
-        PFXOperationClient pfxClient = createPfxClient(credentialsOperation);
+
+        PFXOperationClient pfxClient = createPfxClient(credentialsOperation, typeCode, false);
 
         if (!StringUtils.isEmpty(token) && !credentialsOperation.isJwt()) {
             pfxClient.updateOAuthToken(token);
         }
 
-        PFXTypeCode typeCode = getTargetType();
+        if (typeCode == TOKEN && GET == SupportedOperation.valueOf(((Endpoint) getEndpoint()).getOperationType())) {
+            JsonNode node;
+            if (credentialsOperation.isJwt()) {
+                node = new TokenService(pfxClient).getJwt(credentialsOperation);
+            } else {
+                node = new TokenService(pfxClient).get(credentialsOperation.buildTokenRequest());
 
-        boolean isTokenOperation = false;
-        switch (SupportedOperation.valueOf(((Endpoint) getEndpoint()).getOperationType())) {
-            case GET:
-
-                if (typeCode == TOKEN && credentialsOperation.isJwt()) {
-                    JsonNode node = new TokenService(pfxClient).getJwt();
-                    exchange.getMessage().setBody(node.toString());
-                    isTokenOperation = true;
-                } else if (typeCode == TOKEN) {
-                    JsonNode node = new TokenService(pfxClient).get(credentialsOperation.buildTokenRequest());
-                    exchange.getMessage().setBody(node.toString());
-                    isTokenOperation = true;
-                }
-            default:
-                break;
+            }
+            exchange.getMessage().setBody(node.toString());
+            return;
         }
-        if (!isTokenOperation){
-            try {
-                process(pfxClient, exchange);
-            }catch(ConnectorException ex){
-                if (ex.getStatusCode() == HttpURLConnection.HTTP_UNAUTHORIZED && ((Endpoint) getEndpoint()).isRetryLoginFailure()){
-                    //modify it to support basic auth
-                    PfxClientBuilder builder =  ConnectionUtil.getPFXClientBuilder(credentialsOperation.getConnection().getPartition(),
-                            credentialsOperation.getPricefxHost(),
-                            credentialsOperation.getConnection().getUsername(),
-                            credentialsOperation.getConnection().getPassword());
 
-                    pfxClient = (PFXOperationClient) builder.build();
-                    process(pfxClient, exchange);
-                } else {
-                    throw ex;
-                }
-            } catch(Exception ex){
+        try {
+            process(pfxClient, exchange);
+        }catch(ConnectorException | ProcessingException ex){
+            PFXOperationClient basicAuthClient;
+            try {
+                basicAuthClient = createPfxClient(credentialsOperation, typeCode, true);
+            }catch(Exception e){
+                throw ex;
+            }
+
+            if (isRetry(ex, basicAuthClient, ((Endpoint) getEndpoint()).isRetryLoginFailure(), token)) {
+                process(basicAuthClient, exchange);
+            } else {
                 throw ex;
             }
         }
 
+    }
+    private static boolean isRetry(Exception ex, PFXOperationClient pfxClient, boolean isRetry, String token){
+        if (!isRetry){
+            return false;
+        }
 
+        if ((ex.getCause() != null && ex.getCause().getMessage() != null &&
+                ex.getCause().getMessage().contains(HttpURLConnection.HTTP_UNAUTHORIZED+"")) ||
+                ((ConnectorException) ex).getStatusCode() == HttpURLConnection.HTTP_UNAUTHORIZED){
+            if (TokenService.isTokenRetryAllowanceExpired(pfxClient) || StringUtils.isEmpty(token)){
+                throw new ConnectorException("Attempting to retry, however token does not exist or is updated outside allowed timeframe. please refresh token immediately");
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     protected CredentialsOperation createCredentialsOperation() throws SecureStoreException, MalformedURLException, InvalidContextException {
@@ -276,23 +285,28 @@ public class Producer extends DefaultProducer {
         return builder;
     }
 
-    protected PFXOperationClient createPfxClient(CredentialsOperation credentialsOperation) {
+    public PFXOperationClient createPfxClient(CredentialsOperation credentialsOperation, PFXTypeCode typeCode, boolean basicOnly) {
 
         PFXOperationClient pfxClient;
         try {
             PfxClientBuilder builder;
-            if (credentialsOperation.isJwt() && !StringUtils.isEmpty(credentialsOperation.getJwtToken())) {
+            if (basicOnly){
+                //Basic
+                builder =  (PfxClientBuilder) ConnectionUtil.getPFXClientBuilder(credentialsOperation.getConnection().getPartition(),
+                        credentialsOperation.getPricefxHost(),
+                        credentialsOperation.getConnection().getUsername(),
+                        credentialsOperation.getConnection().getPassword()).withBasicAuthOnly(true);
+            } else if (credentialsOperation.isJwt() && !StringUtils.isEmpty(credentialsOperation.getJwtToken())) {
                 //JWT
                 builder = getPFXClientBuilder(credentialsOperation.getPartition(),
                         credentialsOperation.getPricefxHost(), credentialsOperation.getJwtToken());
 
-            } else if (credentialsOperation.isJwt() && StringUtils.isEmpty(credentialsOperation.getJwtToken())) {
+            } else if (typeCode == TOKEN && credentialsOperation.isJwt() && StringUtils.isEmpty(credentialsOperation.getJwtToken())) {
                 //Get JWT Token
                 ObjectNode node = credentialsOperation.buildTokenRequest();
                 builder = ConnectionUtil.getPFXClientBuilder(credentialsOperation.getPartition(),
                         credentialsOperation.getPricefxHost(), node.get("username").textValue(),
                         node.get("password").textValue(), null);
-
             } else {
                 //OAuth
                 builder = ConnectionUtil.getPFXClientBuilder(credentialsOperation.getPartition(),
@@ -338,7 +352,7 @@ public class Producer extends DefaultProducer {
 
     private JsonNode refresh(PFXOperationClient pfxClient, PFXTypeCode typeCode, String uniqueId, String incLoadDate, Exchange exchange) {
         if (typeCode == TOKEN) {
-            return new RefreshService(pfxClient, typeCode, uniqueId, incLoadDate).refresh();
+            return new RefreshService(pfxClient,  typeCode, uniqueId, incLoadDate).refresh();
         } else {
             return new RefreshService(pfxClient, typeCode, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()), incLoadDate).refresh();
         }
