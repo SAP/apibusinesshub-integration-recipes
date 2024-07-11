@@ -13,17 +13,14 @@ This package contains 2 iflows:
 * Posting of Payroll data.
 
 [Download the reusable integration package](SAPSuccessFactorsEmployeeCentralPayrollIntegrationwithSAPS_4HANAorSAPERP.zip)\
-[View package on the SAP Business Accelerator Hub](https://api.sap.com/package/SAPSuccessFactorsEmployeeCentralPayrollIntegrationwithSAPS4HANAorSAPERP/overview)\
 [View documentation](ConfigGuide_PayrollPostingFromSAPSucccessfactorsEmployeeCentralPayrolltoS4HANAorSAPERP.pdf)
 
 ## Integration flows
 
 ### Prechecks for Payroll Posting
 Integration Flow to perform Pre-checks before actual G/L Posting\
-[View on SAP Business Accelerator Hub](https://api.sap.com/integrationflow/Prechecks_for_Payroll_Posting)
 ![Prechecks for Payroll Posting](prechecks-for-payroll-posting.png)
 
 ### Replicate Payroll Data
 This Integration flow for Payroll Posting from Employee Central Payroll to S4HANA system.\
-[View on SAP Business Accelerator Hub](https://api.sap.com/integrationflow/Replicate_Payroll_Data)
 ![Replicate Payroll Data](replicate-payroll-data.png)
