@@ -5,7 +5,7 @@
  ![SAP Business Accelerator Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Business Accelerator Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
-This package provides integration content to connect TMForum APIs to SAP Billing and Revenue Innovation Management (BRIM).
+This package provides integration content to connect TM Forum APIs to SAP Billing and Revenue Innovation Management (BRIM).
 
 <p>This integration package contains four distinct artifacts, including two template Integration Flows. These are specifically crafted to enable smooth inbound communication between the telecommunications system and the SAP S/4HANA BRIM system:</p>
 <ol>
@@ -15,7 +15,7 @@ This package provides integration content to connect TMForum APIs to SAP Billing
  <li>Value Mapping for TM Forum Integration for Account Management</li>
 </ol>
 
-[Download the integration package](TMForumtoBRIMImplementationTemplates.zip)\
+[Download the integration package](IntegrationbetweenTMForumandSAPS_4HANABRIM.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/TMForumtoBRIMImplementationTemplates)\
 [View documentation](ConfigGuide_tmforumtobrimimplementationtemplates.pdf)\
 [View high level effort](effort.md)
