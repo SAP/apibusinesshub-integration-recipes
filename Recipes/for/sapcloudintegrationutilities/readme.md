@@ -29,4 +29,5 @@ This integration flow notifies via a mail distribution list when keystore entrie
  ![input-image](Mail_Notification_for_expiring_keystore_entries.png)
  ### Upload Value Mapping Entries based on JSON or XML Input 
 This integration flow enabled the upload of either a JSON/XML payload to a specific Value Mapping in Cloud Integration.\
- ![input-image](UploadValueMappingEntriesbasedonJSONorXMLInput.jpg)
+ ![input-image](Upload_payload_based_entries_to_a_specific_Value_Mapping.png)\
+ ![input-image](Upload_payload_based_entries_to_a_specific_Value_Mapping1.png)
