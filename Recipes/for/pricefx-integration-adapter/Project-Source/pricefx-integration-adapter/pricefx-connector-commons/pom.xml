@@ -11,7 +11,7 @@
     <name>pricefx-connector-commons</name>
 
     <properties>
-        <pricefx-pckg.version>3.30.0</pricefx-pckg.version>
+        <pricefx-pckg.version>3.30.1</pricefx-pckg.version>
         <packaging.type>jar</packaging.type>
 
         <junit.version>4.12</junit.version>
@@ -19,7 +19,7 @@
         <spock.version>2.0-M2-groovy-3.0</spock.version>
         <smartgwt.version>2.4</smartgwt.version>
 
-        <guava.version>33.2.0-jre</guava.version>
+        <guava.version>33.2.1-jre</guava.version>
 
         <!-- maven and jdk -->
         <surefire.version>2.22.2</surefire.version>
@@ -278,12 +278,7 @@
             <artifactId>okhttp</artifactId>
             <version>3.14.9</version>
         </dependency>
-        <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>mockwebserver</artifactId>
-            <version>3.14.9</version>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>logging-interceptor</artifactId>
@@ -317,6 +312,12 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>3.3.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>mockwebserver</artifactId>
+            <version>3.14.9</version>
             <scope>test</scope>
         </dependency>
 

@@ -255,7 +255,10 @@
                                     <AttributeName>fetchTargetType</AttributeName>
                                     <AttributeValue>PAYOUT</AttributeValue>
                                 </EditCondition>
-
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>CONDITION_RECORD</AttributeValue>
+                                </EditCondition>
                             </OrCondition>
                         </AndCondition>
                         <AndCondition>
@@ -298,6 +301,10 @@
                                 <AttributeValue>GET</AttributeValue>
                             </EditCondition>
                             <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>CONDITION_RECORD</AttributeValue>
+                                </EditCondition>
                                 <EditCondition>
                                     <AttributeName>getTargetType</AttributeName>
                                     <AttributeValue>PRODUCT</AttributeValue>
@@ -411,6 +418,19 @@
                         <AndCondition>
                             <EditCondition>
                                 <AttributeName>operationType</AttributeName>
+                                <AttributeValue>UPDATE</AttributeValue>
+                            </EditCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>updateTargetType</AttributeName>
+                                    <AttributeValue>CONDITION_RECORD</AttributeValue>
+                                </EditCondition>
+
+                            </OrCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
                                 <AttributeValue>FETCH</AttributeValue>
                             </EditCondition>
                             <OrCondition>
@@ -437,6 +457,10 @@
                                 <EditCondition>
                                     <AttributeName>fetchTargetType</AttributeName>
                                     <AttributeValue>DATASOURCE</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>CONDITION_RECORD</AttributeValue>
                                 </EditCondition>
                             </OrCondition>
                         </AndCondition>
@@ -470,6 +494,10 @@
                                 <EditCondition>
                                     <AttributeName>fetchCountTargetType</AttributeName>
                                     <AttributeValue>DATASOURCE</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchCountTargetType</AttributeName>
+                                    <AttributeValue>CONDITION_RECORD</AttributeValue>
                                 </EditCondition>
                             </OrCondition>
                         </AndCondition>
@@ -529,6 +557,10 @@
                                 <EditCondition>
                                     <AttributeName>metadataTargetType</AttributeName>
                                     <AttributeValue>PRODUCTEXTENSION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>metadataTargetType</AttributeName>
+                                    <AttributeValue>CONDITION_RECORD</AttributeValue>
                                 </EditCondition>
 
                                 <EditCondition>
@@ -809,7 +841,6 @@
         <Name>postPath</Name>
         <Usage></Usage>
         <DataType>xsd:string</DataType>
-        <Default>true</Default>
         <Length></Length>
         <isparameterized>true</isparameterized>
         <GuiLabels guid="e1a108de-6720-4702-8431-eb2a9a7bdfa6">
@@ -942,6 +973,12 @@
                     <Label language="EN">Test Connection</Label>
                 </GuiLabels>
             </FixedValue>
+            <FixedValue>
+                <Value>POST</Value>
+                <GuiLabels guid="0fb502ef-b956-4136-a6aa-8fad38265c47">
+                    <Label language="EN">Post</Label>
+                </GuiLabels>
+            </FixedValue>
         </FixedValues>
     </AttributeMetadata>
 
@@ -1036,6 +1073,12 @@
                     <Label language="EN">Price Record</Label>
                 </GuiLabels>
             </FixedValue>
+            <FixedValue>
+                <Value>CONDITION_RECORD</Value>
+                <GuiLabels guid="86b078d6-908a-453f-9ac2-662b5201870f">
+                    <Label language="EN">Condition Record</Label>
+                </GuiLabels>
+            </FixedValue>
         </FixedValues>
 
     </AttributeMetadata>
@@ -1104,6 +1147,12 @@
                 <Value>PRICELISTITEM</Value>
                 <GuiLabels guid="2523c591-feb0-43a3-9ef3-6c8a8ef36050">
                     <Label language="EN">Price List Item</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CONDITION_RECORD</Value>
+                <GuiLabels guid="734a1f49-1ea7-4725-883c-dd7ffda8ac3a">
+                    <Label language="EN">Condition Record</Label>
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
@@ -1300,6 +1349,12 @@
                 <Value>QUOTE</Value>
                 <GuiLabels guid="c3067897-3f0e-4b27-b1a4-50e5a5347996">
                     <Label language="EN">Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CONDITION_RECORD</Value>
+                <GuiLabels guid="8ce3c6b9-16aa-4f78-98da-90a11cc17331">
+                    <Label language="EN">Condition Record</Label>
                 </GuiLabels>
             </FixedValue>
 
@@ -1626,6 +1681,12 @@
                 <Value>PRICELISTITEM</Value>
                 <GuiLabels guid="c6c5c029-6c21-4bba-beda-c257b21c4e5b">
                     <Label language="EN">Price List Item</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CONDITION_RECORD</Value>
+                <GuiLabels guid="965be3ec-83d9-44b4-800d-da7012c8749b">
+                    <Label language="EN">Condition Record</Label>
                 </GuiLabels>
             </FixedValue>
             <FixedValue>

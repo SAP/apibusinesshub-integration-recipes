@@ -244,7 +244,7 @@ public enum PFXJsonSchema {
                     }
                     break;
                 default:
-                    break;
+                    return POST_RESPONSE;
             }
         }
         return null;

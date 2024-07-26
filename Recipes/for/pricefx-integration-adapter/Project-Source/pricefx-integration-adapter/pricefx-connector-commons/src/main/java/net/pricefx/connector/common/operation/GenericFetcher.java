@@ -135,7 +135,7 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
         JsonNode resultFieldsNode = request.get("resultFields");
         List<String> resultFields = getArrayNodeFields(resultFieldsNode);
 
-        validateRequest(request, resultFields, sortBy);
+        validateRequest(request, true, resultFields, sortBy);
 
         ObjectNode dataRequest = RequestFactory.buildFetchDataRequest(((ObjectNode) request.get(FIELD_DATA)), typeCode, extensionType);
         RequestUtil.addAdvancedCriteria(dataRequest);
@@ -160,7 +160,8 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
         JsonNode resultFieldsNode = request.get("resultFields");
         List<String> resultFields = getArrayNodeFields(resultFieldsNode);
 
-        validateRequest(request, resultFields, sortBy);
+
+        validateRequest(request, validate, resultFields, sortBy);
 
         ObjectNode dataRequest = RequestFactory.buildFetchDataRequest(((ObjectNode) request.get(FIELD_DATA)), typeCode, extensionType);
         RequestUtil.addAdvancedCriteria(dataRequest);
@@ -182,31 +183,33 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
         return results;
     }
 
-    private void validateRequest(ObjectNode request, List<String> resultFields, List<String> sortBy) {
+    private void validateRequest(ObjectNode request, boolean validate, List<String> resultFields, List<String> sortBy) {
         this.validateCriteria(request.get(FIELD_DATA), false, PFXJsonSchema.FILTER_REQUEST);
 
         if (CollectionUtils.isEmpty(sortBy)) {
             throw new RequestValidationException("Sort By is mandatory");
         }
 
-        JsonNode schemaNode = loadSchema(PFXJsonSchema.getFetchResponseSchema(typeCode, extensionType), typeCode, extensionType, new ArrayList<>(),
-                true, true, false);
+        if (validate) {
+            JsonNode schemaNode = loadSchema(PFXJsonSchema.getFetchResponseSchema(typeCode, extensionType), typeCode, extensionType, new ArrayList<>(),
+                    true, true, false);
 
-        final List<String> fields = new ArrayList<>();
-        if (PFXTypeCode.isDataCollectionTypeCodes(typeCode) && !StringUtils.isEmpty(uniqueId)) {
-            ObjectNode tableDefinition = Iterables.get(pfxClient.doFetch(typeCode,
-                    createPath(GET_FCS.getOperation(), typeCode.getTypeCode()),
-                    RequestUtil.createSimpleFetchRequest(buildSimpleCriterion(FIELD_UNIQUENAME, EQUALS.getValue(), uniqueId)),
-                    ImmutableList.of(FIELD_UNIQUENAME), Collections.emptyList(), 0L, MAX_RECORDS), 0);
+            final List<String> fields = new ArrayList<>();
+            if (PFXTypeCode.isDataCollectionTypeCodes(typeCode) && !StringUtils.isEmpty(uniqueId)) {
+                ObjectNode tableDefinition = Iterables.get(pfxClient.doFetch(typeCode,
+                        createPath(GET_FCS.getOperation(), typeCode.getTypeCode()),
+                        RequestUtil.createSimpleFetchRequest(buildSimpleCriterion(FIELD_UNIQUENAME, EQUALS.getValue(), uniqueId)),
+                        ImmutableList.of(FIELD_UNIQUENAME), Collections.emptyList(), 0L, MAX_RECORDS), 0);
 
-            tableDefinition.get("fields").forEach(field -> fields.add(field.get(FIELD_NAME).textValue()));
-        } else {
-            fields.addAll(JsonSchemaUtil.getFields(schemaNode));
-        }
+                tableDefinition.get("fields").forEach(field -> fields.add(field.get(FIELD_NAME).textValue()));
+            } else {
+                fields.addAll(JsonSchemaUtil.getFields(schemaNode));
+            }
 
-        if ((resultFields != null && !fields.containsAll(resultFields)) ||
-                !fields.containsAll(sortBy)) {
-            throw new RequestValidationException("Contains fields which do not exist in the target table");
+            if ((resultFields != null && !fields.containsAll(resultFields)) ||
+                    !fields.containsAll(sortBy)) {
+                throw new RequestValidationException("Contains fields which do not exist in the target table");
+            }
         }
     }
 

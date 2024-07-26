@@ -25,7 +25,7 @@ public enum PFXTypeCode {
     DATAFILE("DATAFILE", new String[]{"DATAFILE"}),
 
     //real PFX type
-    CONDITION_RECORD("CRCI", "Condition Records", new String[]{FIELD_CONDITIONRECRODSETID}, "CRCIM"),
+    CONDITION_RECORD("CRCI", "Condition Records", new String[]{FIELD_ID}, "CRCIM"),
     CONDITION_RECORD_SET("CRCS", new String[]{FIELD_UNIQUENAME}),
 
     ADVANCED_CONFIG("AP", new String[]{FIELD_UNIQUENAME}),
