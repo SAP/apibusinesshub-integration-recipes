@@ -11,12 +11,14 @@ This package provides content for handling specific operational topics related t
 <ul>
  <li>Notification for certificates for which the expiration date has exceeded a predefined threshold.</li>
  <li>Notification for scenarios where no file has been picked up with an SFTP/FTP Sender Adapter.</li>
+ <li>Upload Value Mapping Entries based on JSON or XML Input</li> 
 </ul>
 
 [Download the integration package](SAPIntegrationSuiteCloudIntegrationUtilities.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/SAPCloudIntegrationUtilities)\
 [View documentation - Notify SFTP File Pick up failure](NotifySFTPFilePickupfailure.pdf)\
 [View documentation - Alert Notification for expiring certificates on Cloud Integration](AlertNotificationforexpiringcertificatesontheSAPCloudIntegration.pdf)\
+[View documentation - Upload Value Mapping Entries based on JSON or XML Input](UploadValueMappingEntriesbasedonJSONorXMLInput.pdf)\
 [View high level effort](effort.md)
 ## Integration flows
 ### Notify SFTP File Pick up failure 
@@ -25,3 +27,7 @@ It provides a notification via email if no file has been picked up from the SFTP
 ### Mail Notification for expiring keystore entries 
 This integration flow notifies via a mail distribution list when keystore entries (e.g. certificate) reach a predefined expiration limit (in days). \
  ![input-image](Mail_Notification_for_expiring_keystore_entries.png)
+ ### Upload Value Mapping Entries based on JSON or XML Input 
+This integration flow enabled the upload of either a JSON/XML payload to a specific Value Mapping in Cloud Integration.\
+ ![input-image](Upload_payload_based_entries_to_a_specific_Value_Mapping.png)\
+ ![input-image](Upload_payload_based_entries_to_a_specific_Value_Mapping1.png)
