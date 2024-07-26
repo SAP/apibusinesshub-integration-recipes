@@ -303,10 +303,6 @@
                             <OrCondition>
                                 <EditCondition>
                                     <AttributeName>getTargetType</AttributeName>
-                                    <AttributeValue>CONDITION_RECORD</AttributeValue>
-                                </EditCondition>
-                                <EditCondition>
-                                    <AttributeName>getTargetType</AttributeName>
                                     <AttributeValue>PRODUCT</AttributeValue>
                                 </EditCondition>
                                 <EditCondition>

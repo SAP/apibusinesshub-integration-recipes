@@ -148,6 +148,7 @@
         <license>
           <name>SAP DEVELOPER LICENSE AGREEMENT</name>
           <url>https://tools.hana.ondemand.com/developer-license-3.0.0.txt</url>
+          <file>sap developer license agreement - developer-license-3.0.0.txt</file>
         </license>
       </licenses>
     </dependency>
@@ -159,6 +160,7 @@
         <license>
           <name>SAP DEVELOPER LICENSE AGREEMENT</name>
           <url>https://tools.hana.ondemand.com/developer-license-3.0.0.txt</url>
+          <file>sap developer license agreement - developer-license-3.0.0.txt</file>
         </license>
       </licenses>
     </dependency>
