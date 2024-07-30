@@ -1,0 +1,14 @@
+{
+  "sortBy": [
+    "key1"
+  ],
+  "data": {
+    "criteria": [
+      {
+        "fieldName": "key8",
+        "operator": "notNull"
+      }
+    ],
+    "operator": "and"
+  }
+}

@@ -1,7 +1,7 @@
 package net.pricefx.adapter.sap.component
 
-
-import net.pricefx.connector.common.connection.MockFailedPFXOperationClient
+import com.fasterxml.jackson.databind.ObjectMapper
+import net.pricefx.adapter.sap.util.Constants
 import net.pricefx.connector.common.connection.MockPFXOperationClient
 import net.pricefx.connector.common.util.ConnectionUtil
 import net.pricefx.connector.common.util.PFXTypeCode
@@ -15,7 +15,6 @@ import spock.lang.Specification
 class ProducerTest extends Specification {
     def builder = ConnectionUtil.getPFXClientBuilder("test", "https://dummy.com", "abcdefg")
     def pfxClient = new MockPFXOperationClient(builder)
-    def failedClient = new MockFailedPFXOperationClient(builder)
 
     def "process"() {
         given:
@@ -46,6 +45,15 @@ class ProducerTest extends Specification {
 
         then:
         thrown(IllegalArgumentException.class)
+
+        when:
+        endpoint.setGetTargetType(PFXTypeCode.TOKEN.name())
+        endpoint.setOperationType("GET")
+        new MockProducer(endpoint, pfxClient).process(exchange)
+
+        then:
+        "dummy-access-token" == new ObjectMapper().readTree(exchange.getMessage().getBody(String.class))
+                .get(Constants.ACCESS_TOKEN).textValue()
 
 
     }

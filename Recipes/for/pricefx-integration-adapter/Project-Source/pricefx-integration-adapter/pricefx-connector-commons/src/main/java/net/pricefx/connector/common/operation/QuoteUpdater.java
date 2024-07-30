@@ -67,7 +67,7 @@ public class QuoteUpdater implements IPFXObjectUpsertor, ICalculableObjectUpsert
 
         doUpdate(request, save);
         quote = pfxClient.action(createPath(FETCH_QUOTE.getOperation(), uniqueName));
-        ResponseUtil.formatResponse(QUOTE, (ObjectNode) quote, convertValueToString);
+        ResponseUtil.formatResponse(QUOTE, null, (ObjectNode) quote, convertValueToString);
         return ImmutableList.of(quote);
 
     }

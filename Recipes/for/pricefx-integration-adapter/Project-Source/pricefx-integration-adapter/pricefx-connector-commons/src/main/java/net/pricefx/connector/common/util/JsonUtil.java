@@ -62,7 +62,7 @@ public class JsonUtil {
     public static JsonNode getData(JsonNode node) {
 
         if (node != null && !node.isMissingNode() && !node.isNull()) {
-            node = node.get("response");
+            node = node.get(FIELD_RESPONSE);
         }
 
         if (node != null && !node.isMissingNode() && !node.isNull()) {
@@ -133,6 +133,25 @@ public class JsonUtil {
     public static PFXLookupTableType getPFXLookupTableType(ObjectNode node) {
         return PFXLookupTableType.valueOf(getValueAsText(node.get(FIELD_TYPE)),
                 getValueAsText(node.get(FIELD_VALUETYPE)));
+    }
+
+    public static PFXConditionRecordType getConditionRecordType(ObjectNode node) {
+        Number number = getNumericValue(node.get("keySize"));
+        int keys = 0;
+        if (number != null) {
+            keys = number.intValue();
+        }
+
+        number = getNumericValue(node.get(FIELD_ID));
+        int tableId = 0;
+        if (number != null) {
+            tableId = number.intValue();
+        }
+
+        return new PFXConditionRecordType(keys).withTableId(tableId).withTable(
+                getValueAsText(node.get(FIELD_UNIQUENAME)));
+
+
     }
 
     /**
@@ -312,8 +331,48 @@ public class JsonUtil {
 
     public static ArrayNode createArrayNode(JsonNode... nodes) {
         ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
-        Arrays.stream(nodes).forEach(arrayNode::add);
+        if (nodes != null) {
+            Arrays.stream(nodes).forEach(arrayNode::add);
+        }
         return arrayNode;
+    }
+
+    public static JsonNode getResponse(JsonNode node){
+        if (node != null && !node.isMissingNode() && !node.isNull()) {
+            node = node.get(FIELD_RESPONSE);
+        }
+
+        if (node != null && !node.isMissingNode() && !node.isNull()) {
+            return node;
+        }
+
+        return MissingNode.getInstance();
 
     }
+
+    public static ArrayNode createArrayNodeFromStrings(List<String> list){
+        ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
+        if (!CollectionUtils.isEmpty(list)) {
+            list.forEach(arrayNode::add);
+        }
+        return arrayNode;
+    }
+
+    public static ArrayNode createArrayNodeFromStrings(Set<String> list){
+        ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
+        if (!CollectionUtils.isEmpty(list)) {
+            list.forEach(arrayNode::add);
+        }
+        return arrayNode;
+    }
+
+    public static ArrayNode createArrayNode(List<JsonNode> nodes){
+        ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
+        if (!CollectionUtils.isEmpty(nodes)) {
+            nodes.forEach(arrayNode::add);
+        }
+        return arrayNode;
+    }
+
+
 }

@@ -9,6 +9,7 @@ import okhttp3.Protocol;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
+import java.util.Optional;
 
 public class PfxClientBuilder extends PfxClient.Builder {
     private String appKey = null;
@@ -46,10 +47,13 @@ public class PfxClientBuilder extends PfxClient.Builder {
             this.mapper = new ObjectMapper();
         }
 
-        PfxSession pfxSession = new PfxSession();
+        PfxSession pfxSession = Optional.ofNullable(this.pfxSession).orElse(new PfxSession());
         this.builder.cookieJar(pfxSession);
-        this.builder.networkInterceptors().removeIf(PfxSession.class::isInstance);
+        this.builder.networkInterceptors().removeIf((x) -> x instanceof PfxSession);
         this.builder.networkInterceptors().add(0, pfxSession);
+        Optional.ofNullable(this.interceptor).ifPresent((i) -> {
+            this.builder.addInterceptor(i);
+        });
         if (this.authenticator == null) {
             this.authenticator(this.getDefaultAuthenticator());
         }
@@ -57,12 +61,16 @@ public class PfxClientBuilder extends PfxClient.Builder {
         if (!this.preemptiveAuthentication && !this.authenticator.isJwt()) {
             this.builder.authenticator(this.authenticator);
         } else {
-            this.builder.networkInterceptors().removeIf(Authenticator.class::isInstance);
+            this.builder.networkInterceptors().removeIf((x) -> x instanceof Authenticator);
             this.builder.networkInterceptors().add(0, this.authenticator);
         }
 
         this.builder.protocols(Collections.singletonList(Protocol.HTTP_1_1));
         return new PFXOperationClient(this, keepConnectionAlive);
     }
+
+
+
+
 
 }

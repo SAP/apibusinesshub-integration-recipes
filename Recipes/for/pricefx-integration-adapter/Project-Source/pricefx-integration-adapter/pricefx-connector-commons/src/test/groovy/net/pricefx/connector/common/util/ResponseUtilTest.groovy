@@ -81,7 +81,7 @@ class ResponseUtilTest extends Specification {
 
         when:
         list.forEach {
-            item -> ResponseUtil.formatResponse(PFXTypeCode.PRODUCT, item, false)
+            item -> ResponseUtil.formatResponse(PFXTypeCode.PRODUCT, null, item, false)
         }
 
         then:
@@ -94,6 +94,8 @@ class ResponseUtilTest extends Specification {
 
     def "formatResponse - Lookup"() {
         given:
+        PFXLookupTableType dummy = PFXLookupTableType.valueOf(PFXLookupTableType.LookupTableType.MATRIX.name(), PFXLookupTableType.LookupTableType.MATRIX.name()).withTable("1234")
+
         JsonNode node = new ObjectNode(JsonNodeFactory.instance)
                 .put(PFXConstants.FIELD_NAME, "test1")
                 .put(PFXConstants.FIELD_RAWVALUE, "10")
@@ -132,14 +134,14 @@ class ResponseUtilTest extends Specification {
         node5.remove(PFXConstants.FIELD_RAWVALUE)
 
         when:
-        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE, node5, false)
+        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE, dummy, node5, false)
 
         then:
         2 == node5.fieldNames().size()
         10 == node5.get(PFXConstants.FIELD_VALUE).intValue()
 
         when:
-        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE, node, false)
+        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE, dummy, node, false)
 
         then:
         2 == node.fieldNames().size()
@@ -147,7 +149,7 @@ class ResponseUtilTest extends Specification {
         "10" == node.get(PFXConstants.FIELD_VALUE).textValue()
 
         when:
-        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE, node2, false)
+        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE,dummy,  node2, false)
 
         then:
         3 == node2.fieldNames().size()
@@ -156,7 +158,7 @@ class ResponseUtilTest extends Specification {
         "test" == node2.get("attribute2").textValue()
 
         when:
-        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE, node3, false)
+        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE,dummy,  node3, false)
 
         then:
         2 == node3.fieldNames().size()
@@ -165,7 +167,7 @@ class ResponseUtilTest extends Specification {
         "test" == node3.get("attribute2").textValue()
 
         when:
-        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE, node4, false)
+        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE,dummy,  node4, false)
 
         then:
         3 == node4.fieldNames().size()
@@ -220,7 +222,7 @@ class ResponseUtilTest extends Specification {
         node.set(PFXConstants.FIELD_OUTPUTS, lineItemOutputArray.deepCopy())
 
         when:
-        ResponseUtil.formatResponse(PFXTypeCode.QUOTE, node, true)
+        ResponseUtil.formatResponse(PFXTypeCode.QUOTE, null,node, true)
 
         then:
         !node.get(PFXConstants.FIELD_LINEITEMS).get(0).get(PFXConstants.FIELD_INPUTS).get(0).get("param")
@@ -264,7 +266,7 @@ class ResponseUtilTest extends Specification {
         node.put(PFXConstants.FIELD_LINEITEMS, "abc")
         node.put(PFXConstants.FIELD_INPUTS, "abc")
         node.put(PFXConstants.FIELD_UNIQUENAME, "abcde")
-        ResponseUtil.formatResponse(PFXTypeCode.QUOTE, node, false)
+        ResponseUtil.formatResponse(PFXTypeCode.QUOTE, null, node, false)
 
         then:
         "abc" == node.get(PFXConstants.FIELD_LINEITEMS).textValue()
@@ -287,7 +289,7 @@ class ResponseUtilTest extends Specification {
         node.set("fields", fields)
 
         when:
-        ResponseUtil.formatResponse(PFXTypeCode.DATAFEED, node, false)
+        ResponseUtil.formatResponse(PFXTypeCode.DATAFEED, null,node, false)
 
         then:
         "def" == node.get("abc").textValue()
@@ -298,7 +300,7 @@ class ResponseUtilTest extends Specification {
                 .put("fields", "abc")
                 .put("abc", "def")
 
-        ResponseUtil.formatResponse(PFXTypeCode.DATAFEED, node, false)
+        ResponseUtil.formatResponse(PFXTypeCode.DATAFEED, null, node, false)
 
         then:
         "def" == node.get("abc").textValue()

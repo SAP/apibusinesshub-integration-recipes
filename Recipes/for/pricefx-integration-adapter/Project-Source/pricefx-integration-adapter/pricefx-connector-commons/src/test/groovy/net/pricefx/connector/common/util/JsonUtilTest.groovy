@@ -1,10 +1,13 @@
 package net.pricefx.connector.common.util
 
-
+import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.*
+import com.google.common.collect.ImmutableList
 import net.pricefx.connector.common.validation.ConnectorException
 import net.pricefx.connector.common.validation.RequestValidationException
 import spock.lang.Specification
+
+import static net.pricefx.connector.common.util.PFXConstants.FIELD_RESPONSE
 
 class JsonUtilTest extends Specification {
 
@@ -16,7 +19,7 @@ class JsonUtilTest extends Specification {
         result.isMissingNode()
 
         when:
-        result = JsonUtil.getData(new ObjectNode(JsonNodeFactory.instance).set("response",
+        result = JsonUtil.getData(new ObjectNode(JsonNodeFactory.instance).set(FIELD_RESPONSE,
                 new ObjectNode(JsonNodeFactory.instance).set(PFXConstants.FIELD_DATA,
                         new ArrayNode(JsonNodeFactory.instance))))
 
@@ -24,7 +27,7 @@ class JsonUtilTest extends Specification {
         result.isArray()
 
         when:
-        result = JsonUtil.getData(new ObjectNode(JsonNodeFactory.instance).set("response",
+        result = JsonUtil.getData(new ObjectNode(JsonNodeFactory.instance).set(FIELD_RESPONSE,
                 new NullNode()))
 
         then:
@@ -340,5 +343,94 @@ class JsonUtilTest extends Specification {
         [b: 2] == result
     }
 
+    def "createArrayNodeFromStrings" () {
+        given:
+        List<String> strings = new ArrayList<>()
+        strings.add("a")
+        strings.add("b")
+        strings.add("c")
+
+        when:
+        ArrayNode node = JsonUtil.createArrayNodeFromStrings(strings)
+
+        then:
+        "a" == node.get(0).textValue()
+        "b" == node.get(1).textValue()
+        "c" == node.get(2).textValue()
+        3 == node.size()
+
+        when:
+        node = JsonUtil.createArrayNodeFromStrings((List)null)
+
+        then:
+        0 == node.size()
+    }
+
+    def "createArrayNodeFromStrings - set" () {
+        given:
+        Set<String> strings = new HashSet<>()
+        strings.add("a")
+        strings.add("b")
+        strings.add("c")
+
+        when:
+        ArrayNode node = JsonUtil.createArrayNodeFromStrings(strings)
+
+        then:
+        "a" == node.get(0).textValue()
+        "b" == node.get(1).textValue()
+        "c" == node.get(2).textValue()
+        3 == node.size()
+
+        when:
+        node = JsonUtil.createArrayNodeFromStrings((Set) null)
+
+        then:
+        0 == node.size()
+    }
+
+    def "createArrayNode" () {
+        given:
+        ObjectNode node1 = new ObjectNode(JsonNodeFactory.instance).put("id","a")
+        ObjectNode node2 = new ObjectNode(JsonNodeFactory.instance).put("id","b")
+        ObjectNode node3 = new ObjectNode(JsonNodeFactory.instance).put("id","c")
+
+        when:
+        ArrayNode node = JsonUtil.createArrayNode(node1, node2, node3)
+
+        then:
+        "a" == node.get(0).get("id").textValue()
+        "b" == node.get(1).get("id").textValue()
+        "c" == node.get(2).get("id").textValue()
+        3 == node.size()
+
+        when:
+        node = JsonUtil.createArrayNode((JsonNode) null)
+
+        then:
+        0 == node.size()
+    }
+
+    def "createArrayNode - list" () {
+        given:
+        ObjectNode node1 = new ObjectNode(JsonNodeFactory.instance).put("id","a")
+        ObjectNode node2 = new ObjectNode(JsonNodeFactory.instance).put("id","b")
+        ObjectNode node3 = new ObjectNode(JsonNodeFactory.instance).put("id","c")
+
+        when:
+        ArrayNode node = JsonUtil.createArrayNode(ImmutableList.of(node1,node2,node3))
+
+        then:
+        "a" == node.get(0).get("id").textValue()
+        "b" == node.get(1).get("id").textValue()
+        "c" == node.get(2).get("id").textValue()
+        3 == node.size()
+
+        when:
+        node = JsonUtil.createArrayNode((List) null)
+
+        then:
+        0 == node.size()
+    }
 
 }

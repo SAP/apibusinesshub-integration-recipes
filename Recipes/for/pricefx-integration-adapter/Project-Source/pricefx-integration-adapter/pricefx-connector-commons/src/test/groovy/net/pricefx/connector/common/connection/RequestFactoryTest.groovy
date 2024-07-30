@@ -51,13 +51,25 @@ class RequestFactoryTest extends Specification {
 
         when:
         result = RequestFactory.buildBulkLoadRequest(PFXTypeCode.PRODUCTEXTENSION, request,
-                new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION).withBusinessKeys([PFXConstants.FIELD_SKU]).withTable("TEST"))
+                new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION)
+                        .withBusinessKeys([PFXConstants.FIELD_SKU, PFXConstants.FIELD_LABEL, PFXConstants.FIELD_LINEID,PFXConstants.FIELD_CUSTOMER_ID])
+                        .withTable("TEST"))
 
         then:
         PFXConstants.FIELD_NAME == result.get("header").last()?.textValue()
         "TEST" == result.get(PFXConstants.FIELD_DATA).get(0).last()?.textValue()
         "TEST" == result.get(PFXConstants.FIELD_DATA).get(1).last()?.textValue()
-        PFXConstants.FIELD_SKU == result.get("options").get("joinFields").get(0).textValue()
+
+        "TEST" == result.get(PFXConstants.FIELD_DATA).get(0).first()?.textValue()
+        "TEST2" == result.get(PFXConstants.FIELD_DATA).get(1).first()?.textValue()
+
+        PFXConstants.FIELD_CUSTOMER_ID == result.get("options").get("joinFields").get(0).textValue()
+        5 == result.get("options").get("joinFields").size()
+
+        PFXConstants.FIELD_NAME == result.get("options").get("maxJoinFieldsLengths").get(0).get("joinField").textValue()
+        204 == result.get("options").get("maxJoinFieldsLengths").get(0).get("maxLength").intValue()
+        PFXConstants.FIELD_CUSTOMER_ID == result.get("options").get("maxJoinFieldsLengths").get(1).get("joinField").textValue()
+        5 == result.get("options").get("maxJoinFieldsLengths").size()
 
         when:
         result = RequestFactory.buildBulkLoadRequest(PFXTypeCode.LOOKUPTABLE, request,
@@ -80,12 +92,14 @@ class RequestFactoryTest extends Specification {
                 PFXLookupTableType.valueOf(PFXLookupTableType.LookupTableType.RANGE.name(), PFXLookupTableType.LookupTableType.RANGE.name()).withTable("TEST"))
 
         then:
-        "lookupTable" == result.get("header").last()?.textValue()
-        "TEST" == result.get(PFXConstants.FIELD_DATA).get(0).last()?.textValue()
-        "TEST" == result.get(PFXConstants.FIELD_DATA).get(1).last()?.textValue()
+        "name" == result.get("header").last()?.textValue()
+        "lookupTable" == result.get("header").get(3)?.textValue()
 
-        "1-2" == result.get(PFXConstants.FIELD_DATA).get(0).get(3)?.textValue()
-        "3-4" == result.get(PFXConstants.FIELD_DATA).get(1).get(3)?.textValue()
+        "TEST" == result.get(PFXConstants.FIELD_DATA).get(0).get(3)?.textValue()
+        "TEST" == result.get(PFXConstants.FIELD_DATA).get(1).get(3)?.textValue()
+
+        "1-2" == result.get(PFXConstants.FIELD_DATA).get(0).last()?.textValue()
+        "3-4" == result.get(PFXConstants.FIELD_DATA).get(1).last()?.textValue()
 
 
         when:

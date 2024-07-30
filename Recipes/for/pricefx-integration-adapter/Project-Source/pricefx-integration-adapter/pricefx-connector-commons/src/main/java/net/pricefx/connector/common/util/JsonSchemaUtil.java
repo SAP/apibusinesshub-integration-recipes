@@ -19,8 +19,7 @@ import java.util.Map;
 
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXJsonSchema.POST_REQUEST;
-import static net.pricefx.connector.common.util.PFXTypeCode.LOOKUPTABLE;
-import static net.pricefx.connector.common.util.PFXTypeCode.QUOTE;
+import static net.pricefx.connector.common.util.PFXTypeCode.*;
 
 public class JsonSchemaUtil {
     public static final String ITEMS = "items";
@@ -113,7 +112,7 @@ public class JsonSchemaUtil {
             }
         } else {
             //generic upsert (array)
-            if (pfxTypeCode == LOOKUPTABLE) {
+            if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode == CONDITION_RECORD) {
                 int additionalKeys = getAdditionalKeys(pfxTypeCode, extensionType, showAdditionalKeys);
                 addSchemaAttributes(schema, "key", additionalKeys, withType);
             }
@@ -126,9 +125,14 @@ public class JsonSchemaUtil {
 
 
     private static int getAdditionalKeys(PFXTypeCode pfxTypeCode, IPFXExtensionType extensionType, boolean showAdditionalKeys) {
-        if (pfxTypeCode == LOOKUPTABLE && extensionType != null && showAdditionalKeys) {
+        if (extensionType == null || !showAdditionalKeys) {
+            return 0;
+        }
+
+        if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode == CONDITION_RECORD) {
             return extensionType.getAdditionalKeys();
         }
+
         return 0;
     }
 
@@ -155,6 +159,7 @@ public class JsonSchemaUtil {
                 case PAYOUT:
                     return MAX_PAYOUT_ATTRIBUTES;
                 case PRODUCT:
+                case CONDITION_RECORD:
                 case CUSTOMER:
                 case PRICERECORD:
                     return MAX_ATTRIBUTES;

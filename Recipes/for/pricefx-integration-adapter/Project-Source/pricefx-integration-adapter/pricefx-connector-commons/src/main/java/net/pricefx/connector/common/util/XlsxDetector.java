@@ -8,7 +8,6 @@ import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.tika.detect.Detector;
-import org.apache.tika.io.CloseShieldInputStream;
 import org.apache.tika.io.LookaheadInputStream;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MediaType;
@@ -58,8 +57,8 @@ public class XlsxDetector implements Detector {
     }
 
     private static String detect(InputStream is) {
-        try (ZipArchiveInputStream zipArchiveInputStream = new ZipArchiveInputStream(new CloseShieldInputStream(is))) {
-            ZipArchiveEntry zae = zipArchiveInputStream.getNextZipEntry();
+        try (ZipArchiveInputStream zipArchiveInputStream = new ZipArchiveInputStream(is)) {
+            ZipArchiveEntry zae = zipArchiveInputStream.getNextEntry();
             if (zae != null && "[Content_Types].xml".equals(zae.getName())) {
                 return parseOOXMLContentTypes(zipArchiveInputStream);
             }

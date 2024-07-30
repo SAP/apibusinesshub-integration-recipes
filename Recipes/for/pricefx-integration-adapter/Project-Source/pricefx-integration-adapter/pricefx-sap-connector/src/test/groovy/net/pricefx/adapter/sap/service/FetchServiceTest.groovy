@@ -29,7 +29,7 @@ class FetchServiceTest extends Specification {
 
         then:
         "PRODUCT" == result.get(PFXConstants.FIELD_SKU).textValue()
-        "0" == result.get(PFXConstants.FIELD_VERSION).textValue()
+        0 == result.get(PFXConstants.FIELD_VERSION).intValue()
 
         when:
         result = new FetchService(pfxClient, PFXTypeCode.QUOTE, null, null).

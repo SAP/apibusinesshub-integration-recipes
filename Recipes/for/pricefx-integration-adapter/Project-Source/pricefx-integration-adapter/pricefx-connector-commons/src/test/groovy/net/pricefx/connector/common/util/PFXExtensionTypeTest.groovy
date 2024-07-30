@@ -5,19 +5,19 @@ import spock.lang.Specification
 
 class PFXExtensionTypeTest extends Specification {
 
-    def "getName"() {
+    def "getTypeCodeSuffix"() {
 
         when:
-        def typeCode = new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION).withAttributes(6)
+        def type = new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION).withAttributes(6)
 
         then:
-        "PX6" == typeCode.getName()
+        "PX6" == type.getTypeCodeSuffix()
 
         when:
-        typeCode = new PFXExtensionType(PFXTypeCode.DATAMART)
+        type = new PFXExtensionType(PFXTypeCode.DATAMART)
 
         then:
-        PFXTypeCode.DATAMART.getTypeCode() == typeCode.getName()
+        PFXTypeCode.DATAMART.getTypeCode() == type.getTypeCodeSuffix()
 
     }
 
