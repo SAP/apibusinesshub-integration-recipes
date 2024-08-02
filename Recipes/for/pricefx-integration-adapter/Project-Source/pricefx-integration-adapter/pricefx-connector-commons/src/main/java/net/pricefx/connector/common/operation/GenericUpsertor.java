@@ -64,33 +64,29 @@ public class GenericUpsertor implements IPFXObjectUpsertor {
             validateRequest(request, replaceNullKey);
         }
 
-        if (!request.isArray()) {
-            request = JsonUtil.createArrayNode(request);
-        }
-
         ArrayNode upsertRequest = RequestFactory.buildUpsertRequest(typeCode, extensionType, request);
 
         if (request == null) {
             return Collections.emptyList();
-        } else {
-            List<JsonNode> results = doUpsert(upsertRequest);
-            if (isSimple) {
-                return ImmutableList.of(new TextNode(results.size() + ""));
-            } else {
-                results.forEach(result -> {
-                    if (JsonUtil.isObjectNode(result)) {
-                        if (showSystemFields){
-                            ResponseUtil.preformatResponse(typeCode, (ObjectNode) result);
-                            ResponseUtil.postformatResponse(typeCode, (ObjectNode) result, convertValueToString);
-                        } else {
-                            ResponseUtil.formatResponse(typeCode, (ObjectNode) result, convertValueToString);
-                        }
-                    }
-                });
-                return results;
-            }
-
         }
+
+        List<JsonNode> results = doUpsert(upsertRequest);
+        if (isSimple) {
+            return ImmutableList.of(new TextNode(results.size() + ""));
+        }
+
+        results.forEach(result -> {
+            if (JsonUtil.isObjectNode(result)) {
+                if (showSystemFields) {
+                    ResponseUtil.preformatResponse(typeCode, extensionType, (ObjectNode) result);
+                    ResponseUtil.postformatResponse(typeCode, (ObjectNode) result, convertValueToString);
+                } else {
+                    ResponseUtil.formatResponse(typeCode, extensionType, (ObjectNode) result, convertValueToString);
+                }
+            }
+        });
+        return results;
+
     }
 
     protected void validateRequest(JsonNode inputNode, boolean replaceNullKey) {

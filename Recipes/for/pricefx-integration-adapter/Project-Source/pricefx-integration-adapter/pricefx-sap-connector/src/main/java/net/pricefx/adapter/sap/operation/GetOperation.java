@@ -5,6 +5,7 @@ import net.pricefx.adapter.sap.service.FetchService;
 import net.pricefx.adapter.sap.util.ResponseUtil;
 import net.pricefx.connector.common.connection.PFXOperationClient;
 import net.pricefx.connector.common.util.IPFXExtensionType;
+import net.pricefx.connector.common.util.PFXConditionRecordType;
 import net.pricefx.connector.common.util.PFXLookupTableType;
 import net.pricefx.connector.common.util.PFXTypeCode;
 import net.pricefx.connector.common.validation.RequestValidationException;
@@ -22,12 +23,17 @@ public class GetOperation {
     public GetOperation(PFXOperationClient pfxClient, PFXTypeCode typeCode, String uniqueId, String secondaryId, IPFXExtensionType extensionType) {
         this.typeCode = typeCode;
         this.pfxClient = pfxClient;
-        this.uniqueId = uniqueId;
+        if (typeCode == PFXTypeCode.CONDITION_RECORD){
+            this.uniqueId = Integer.toString(((PFXConditionRecordType) extensionType).getTableId());
+        } else {
+            this.uniqueId = uniqueId;
+        }
         this.extensionType = extensionType;
         this.secondaryId = secondaryId;
     }
 
     public JsonNode get(long pageNumber, int pageSize, boolean formatted) {
+
         if (StringUtils.isEmpty(uniqueId)) {
             throw new RequestValidationException("Unique ID property is mandatory");
         }

@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 import static net.pricefx.connector.common.util.PFXConstants.*;
 
+
 public enum PFXTypeCode {
 
     //not real type in PFX
@@ -23,29 +24,31 @@ public enum PFXTypeCode {
     PRODUCTIMAGE("PRODUCTIMAGE", new String[]{"PRODUCTIMAGE"}),
     DATAFILE("DATAFILE", new String[]{"DATAFILE"}),
 
-
     //real PFX type
-    ADVANCED_CONFIG("AP", new String[]{FIELD_UNIQUENAME} ),
-    CUSTOMER("C", new String[]{PFXConstants.FIELD_CUSTOMER_ID}, "CAM"),
-    CUSTOMEREXTENSION("CX", "CUSTOMER EXTENSION", new String[]{PFXConstants.FIELD_CUSTOMER_ID}, "CXAM"),
+    CONDITION_RECORD("CRCI", "Condition Records", new String[]{FIELD_ID}, "CRCIM"),
+    CONDITION_RECORD_SET("CRCS", new String[]{FIELD_UNIQUENAME}),
+
+    ADVANCED_CONFIG("AP", new String[]{FIELD_UNIQUENAME}),
+    CUSTOMER("C", new String[]{FIELD_CUSTOMER_ID}, "CAM"),
+    CUSTOMEREXTENSION("CX", "CUSTOMER EXTENSION", new String[]{FIELD_CUSTOMER_ID}, "CXAM"),
 
     FORMULA("F", new String[]{FIELD_UNIQUENAME, FIELD_VALIDAFTER}),
 
     PAYOUT("PYR", "PAYOUT", new String[]{FIELD_ID}, "PYRAM"),
 
     //default key of lookup tables is name, override it in net.pricefx.connector.common.operation if keys are different.
-    LOOKUPTABLE("LT", "PRICE PARAMETER", new String[]{PFXConstants.FIELD_NAME}, "MLTVM"),
-    LOOKUPTABLEITEM("LTV", new String[]{PFXConstants.FIELD_NAME}),
-    MATRIXLOOKUPTABLEITEM("MLTV", "PRICE PARAMETER ITEM", new String[]{PFXConstants.FIELD_NAME}, "MLTVM"),
+    LOOKUPTABLE("LT", "PRICE PARAMETER", new String[]{FIELD_NAME}, "MLTVM"),
+    LOOKUPTABLEITEM("LTV", new String[]{FIELD_NAME}),
+    MATRIXLOOKUPTABLEITEM("MLTV", "PRICE PARAMETER ITEM", new String[]{FIELD_NAME}, "MLTVM"),
 
     PRICERECORD("PR", "PRICE RECORD", new String[]{"sourceId", FIELD_LINEID}, "PRAM", null, new String[]{FIELD_VALIDAFTER}),
 
-    PRODUCT("P", new String[]{PFXConstants.FIELD_SKU}, "PAM"),
-    PRODUCTEXTENSION("PX", "PRODUCT EXTENSION", new String[]{PFXConstants.FIELD_SKU}, "PXAM"),
+    PRODUCT("P", new String[]{FIELD_SKU}, "PAM"),
+    PRODUCTEXTENSION("PX", "PRODUCT EXTENSION", new String[]{FIELD_SKU}, "PXAM"),
 
     QUOTE("Q", "QUOTE", new String[]{FIELD_UNIQUENAME}, "QAM", new QuoteRequestValidator(), null),
 
-    DATALOAD("DMDL", new String[]{PFXConstants.FIELD_TYPEDID}),
+    DATALOAD("DMDL", new String[]{FIELD_TYPEDID}),
 
     MANUALPRICELIST("MPL", new String[]{FIELD_ID}),
     MANUALPRICELISTITEM("MPLI", "MANUAL PRICELIST ITEM", new String[]{FIELD_PLI_PRICELISTID}, "MPLAM"),
@@ -62,7 +65,7 @@ public enum PFXTypeCode {
     REBATETYPE("RBT", new String[]{FIELD_UNIQUENAME}),
     REBATERECORD("RR", new String[]{FIELD_UNIQUENAME}),
 
-    USER("U", "USER", new String[]{PFXConstants.FIELD_USER_LOGINNAME}, null, null, new String[]{"email"}),
+    USER("U", "USER", new String[]{FIELD_USER_LOGINNAME}, null, null, new String[]{"email"}),
 
     USERGROUP("UG", "USER GROUP", new String[]{FIELD_UNIQUENAME}, "UG"),
     ROLE("R", "ROLE", new String[]{FIELD_UNIQUENAME}, "R"),
@@ -230,7 +233,7 @@ public enum PFXTypeCode {
 
     public String[] getIdentifierFieldNames(String subType) {
         if (this == LOOKUPTABLE && PFXLookupTableType.LookupTableType.RANGE.name().equalsIgnoreCase(subType)) {
-            return new String[]{PFXConstants.FIELD_VALUE};
+            return new String[]{FIELD_VALUE};
         }
         return identifierFieldNames;
     }

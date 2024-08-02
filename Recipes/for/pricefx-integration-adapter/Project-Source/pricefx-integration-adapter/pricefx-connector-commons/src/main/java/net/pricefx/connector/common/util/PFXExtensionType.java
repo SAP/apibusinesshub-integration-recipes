@@ -28,21 +28,6 @@ public class PFXExtensionType implements IPFXExtensionType {
         return this;
     }
 
-    public String getName() {
-        switch (typeCode) {
-            case PRODUCTEXTENSION:
-            case CUSTOMEREXTENSION:
-                if (attributes == 0){
-                    return typeCode.getTypeCode();
-                } else {
-                    return typeCode.getTypeCode() + attributes;
-                }
-            default:
-                return typeCode.getTypeCode();
-
-        }
-    }
-
     @Override
     public int getAdditionalAttributes() {
         return attributes;
@@ -85,5 +70,21 @@ public class PFXExtensionType implements IPFXExtensionType {
     public PFXExtensionType withBusinessKeys(List<String> businessKeys) {
         this.businessKeys.addAll(businessKeys);
         return this;
+    }
+
+    @Override
+    public String getTypeCodeSuffix() {
+        switch (typeCode) {
+            case PRODUCTEXTENSION:
+            case CUSTOMEREXTENSION:
+                if (attributes == 0){
+                    return typeCode.getTypeCode();
+                } else {
+                    return typeCode.getTypeCode() + attributes;
+                }
+            default:
+                return typeCode.getTypeCode();
+
+        }
     }
 }

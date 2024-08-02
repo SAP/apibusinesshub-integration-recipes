@@ -1,16 +1,19 @@
 package net.pricefx.connector.common.connection
 
-
+import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.databind.node.TextNode
-import net.pricefx.connector.common.util.PFXConstants
-import net.pricefx.connector.common.util.PFXExtensionType
-import net.pricefx.connector.common.util.PFXLookupTableType
-import net.pricefx.connector.common.util.PFXTypeCode
+import net.pricefx.connector.common.util.*
 import net.pricefx.connector.common.validation.ConnectorException
 import net.pricefx.connector.common.validation.RequestValidationException
+import net.pricefx.pckg.client.okhttp.PfxCommonService
 import spock.lang.Specification
 
+import static com.smartgwt.client.types.OperatorId.EQUALS
+import static net.pricefx.connector.common.util.ConnectionUtil.createPath
 import static net.pricefx.connector.common.util.PFXConstants.FIELD_TYPEDID
+import static net.pricefx.connector.common.util.PFXConstants.FIELD_UNIQUENAME
+import static net.pricefx.connector.common.util.PFXConstants.MAX_ATTRIBUTES
+import static net.pricefx.connector.common.util.RequestUtil.createSimpleFetchRequest
 
 class IPFXConnectionTest extends Specification {
     def pfxClient = new MockPFXOperationClient()
@@ -139,6 +142,29 @@ class IPFXConnectionTest extends Specification {
         null == result
     }
 
+    def "getConditionRecordType"() {
+        when:
+        def result = pfxClient.getConditionRecordType(PFXTypeCode.CONDITION_RECORD, "Condition006")
+
+        then:
+        result instanceof PFXConditionRecordType
+        "Condition006" == ((PFXConditionRecordType) result).getTable()
+        PFXTypeCode.CONDITION_RECORD.getTypeCode() + "4" == ((PFXConditionRecordType) result).getTypeCodeSuffix()
+        4 == ((PFXConditionRecordType) result).getAdditionalKeys()
+        MAX_ATTRIBUTES == ((PFXConditionRecordType) result).getAdditionalAttributes()
+
+    }
+
+
+    def "getConditionRecordTable"() {
+        when:
+        def result = pfxClient.getConditionRecordTable("Condition006")
+
+        then:
+        "Condition006" == result.get(PFXConstants.FIELD_UNIQUENAME).textValue()
+        1 == result.get(PFXConstants.FIELD_ID).numberValue()
+    }
+
     def "getDataload"() {
 
         when:
@@ -159,20 +185,27 @@ class IPFXConnectionTest extends Specification {
         "2" == result.getTable()
 
         when:
-        result = pfxClient.createExtensionType(PFXTypeCode.CUSTOMEREXTENSION, "Customer_Details", "2020-01-01")
+        result = pfxClient.createExtensionType(PFXTypeCode.CUSTOMEREXTENSION, "Customer_Details", "")
 
         then:
         result instanceof PFXExtensionType
         "Customer_Details" == result.getTable()
 
         when:
-        result = pfxClient.createExtensionType(PFXTypeCode.CUSTOMEREXTENSION, "", "2020-01-01")
+        result = pfxClient.createExtensionType(PFXTypeCode.CUSTOMEREXTENSION, "", "")
 
         then:
         null == result
 
         when:
-        pfxClient.createExtensionType(PFXTypeCode.CUSTOMEREXTENSION, "DUMMY", "2020-01-01")
+        result = pfxClient.createExtensionType(PFXTypeCode.CONDITION_RECORD, "Condition006", "")
+
+        then:
+        result instanceof PFXConditionRecordType
+        "Condition006" == result.getTable()
+
+        when:
+        pfxClient.createExtensionType(PFXTypeCode.CUSTOMEREXTENSION, "DUMMY", "")
 
         then:
         thrown(ConnectorException.class)
@@ -192,6 +225,18 @@ class IPFXConnectionTest extends Specification {
         then:
         result.get(PFXConstants.FIELD_VALUE).textValue().contains("Customer_Details")
 
+    }
+
+    def "getTableDetails" () {
+        given:
+        ObjectNode request = createSimpleFetchRequest(PfxCommonService.buildSimpleCriterion(FIELD_UNIQUENAME, EQUALS.getValue(), "Condition006"));
+
+        when:
+        def result = pfxClient.getTableDetails(createPath(PFXOperation.getFetchOperation(PFXTypeCode.CONDITION_RECORD_SET).getOperation(), PFXTypeCode.CONDITION_RECORD_SET.getTypeCode()), request);
+
+        then:
+        "Condition006" == result.get(PFXConstants.FIELD_UNIQUENAME).textValue()
+        1 == result.get(PFXConstants.FIELD_ID).numberValue()
 
     }
 

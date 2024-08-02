@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "ConditionRecordResponse",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number"
+    },
+    "conditionRecordSetId": {
+      "type": "number"
+    },
+    "priceUnit": {
+      "type": "string"
+    },
+    "validTo": {
+      "type": "string"
+    },
+    "validFrom": {
+      "type": "string"
+    },
+    "conditionValue": {
+      "type": "number"
+    },
+    "unitOfMeasure": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "integrationStatus": {
+      "type": "number"
+    },
+    "lastUpdateDate": {
+      "type": "string"
+    },
+    "createDate": {
+      "type": "string"
+    }
+  }
+}

@@ -34,8 +34,7 @@ public class AuthV2EnabledPfxClient extends PfxClient {
     public String getToken() {
         if (authenticator instanceof AuthV2) {
             return ((AuthV2) authenticator).getToken();
-        }
-        else {
+        } else {
             return super.getToken();
         }
 

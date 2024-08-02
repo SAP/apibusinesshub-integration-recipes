@@ -86,6 +86,11 @@ public class PFXLookupTableType implements IPFXExtensionType {
         return this;
     }
 
+    @Override
+    public String getTypeCodeSuffix() {
+        return getTypeCode().getTypeCode();
+    }
+
     public PFXJsonSchema getFetchResponseSchema() {
         return getLookupTableType().getFetchResponseSchema();
     }

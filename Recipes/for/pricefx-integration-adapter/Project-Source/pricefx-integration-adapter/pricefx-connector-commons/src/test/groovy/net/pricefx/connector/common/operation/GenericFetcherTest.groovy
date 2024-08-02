@@ -202,7 +202,6 @@ class GenericFetcherTest extends Specification {
         then:
         "test" == result.get(0).get(PFXConstants.FIELD_SKU).textValue()
 
-
         when:
         ((ArrayNode) request.get("sortBy")).add("type")
         new GenericFetcher(pfxClient,
@@ -236,7 +235,6 @@ class GenericFetcherTest extends Specification {
         given:
         def request = new ObjectMapper().readTree(GenericFetcherTest.class.getResourceAsStream(requestFile))
 
-
         when:
         def results = new GenericFetcher(pfxClient,
                 PFXTypeCode.DATAFEED, null, "1.DMF", false).
@@ -245,6 +243,21 @@ class GenericFetcherTest extends Specification {
         then:
         1 == results.size()
         "1.MPL" == results.get(0).get(PFXConstants.FIELD_TYPEDID).textValue()
+
+    }
+
+    def "fetchCount" () {
+
+        given:
+        def request = new ObjectMapper().readTree(GenericFetcherTest.class.getResourceAsStream(requestFile))
+
+        when:
+        def results = new GenericFetcher(pfxClient,
+                PFXTypeCode.DATAFEED, null, "1.DMF", false).
+                fetchCount(request.deepCopy())
+
+        then:
+        1 == results
 
     }
 
