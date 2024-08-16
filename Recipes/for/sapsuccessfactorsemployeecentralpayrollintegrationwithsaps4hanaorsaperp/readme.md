@@ -6,7 +6,7 @@
 ----|----|
 
 :warning: :warning: \
-DISCLAIMER: The package content was removed from GitHub. The integration supported by SAP is API to API integration. The code delivered here was transfer through integration flows. For more information about the payroll results transfer to accounting, see [SAP Note 2907385](https://me.sap.com/notes/2907385). \
+DISCLAIMER: The package content was removed from GitHub. The integration flow approach is unsupported in future releases and we ask you to adopt the SAP Note below as soon as possible. The integration supported by SAP is API to API integration. For more information about the payroll results transfer to accounting, see [SAP Note 2907385](https://me.sap.com/notes/2907385). \
 :warning::warning:
 
 Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.
