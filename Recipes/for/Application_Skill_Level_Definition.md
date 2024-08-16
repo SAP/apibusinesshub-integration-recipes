@@ -236,3 +236,10 @@ Proficiency in customizing integration scenarios, including creating and modifyi
 
 ## Integration Advisor - Professional Skills
 Mastery in developing complex integration scenarios using Integration Advisor, leveraging advanced features such as scripting and custom logic.
+
+## SAP Integration Suite Advanced Event Mesh - Basic Skills
+
+## SAP Integration Suite Advanced Event Mesh - Advanced Skills
+
+## SAP Integration Suite Advanced Event Mesh - Professional Skills
+
