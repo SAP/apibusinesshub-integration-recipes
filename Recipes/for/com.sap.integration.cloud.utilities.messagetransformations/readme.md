@@ -47,10 +47,10 @@ Remove the prefix of the given namespace from an incoming XML message \
 Transforming plain text messages to XML where there is a separator and no headers. \
  ![input-image](SimplePlain2XML_TC4.png)
 ### MessageTransformBean - SimplePlain2XML - TC5 
-Transforming plain text messages to XML where MS(better description required) \
+Transforming plain text messages to XML where there is a separator and with headers.\
  ![input-image](SimplePlain2XML_TC5.png)
 ### MessageTransformBean - StructurePlainToXML - TC7 
-Transforming structure plain text messages to XML MS(better explanation) \
+Transforming structure plain text messages to XML FFL, Single Object \
  ![input-image](StructurePlain2XML_TC7.png)
 ### MessageTransformBean - StructurePlainToXML - TC3 
 Transforming structure plain text messages to XML FFL with a separator, without headers \

@@ -16,7 +16,7 @@ This package contains multiple iflows designed to extract and send Cloud Integra
 
 
 [Download the integration package](IntegrationSuiteAlertingFrameworkusingSAPBTPAlertNotificationService.zip)\
-[View package on the SAP Business Accelerator Hub](https://api.sap.com/package/IntegrationSuiteAlertingFrameworkusingSAPBTPAlertNotificationService/overview)\
+[View package on the SAP Business Accelerator Hub](https://api.sap.com/package/IntegrationSuiteAlertingFrameworkusingAlertNotificationService/overview)\
 [View documentation](BTPAlertingFrameworkDocumentation.pdf)\
 [View high level effort estimate](effort.md)
 
