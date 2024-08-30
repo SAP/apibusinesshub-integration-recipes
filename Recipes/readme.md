@@ -24,7 +24,7 @@
 * [SAP ERP](#sap-erp)
 * [SAP Event Mesh](#sap-event-mesh)
 * [SAP Fieldglass](#sap-fieldglass)
-* [SAP Global Trade Services (GTS)](#sap-gts]
+* [SAP Global Trade Services](#sap-gts]
 * [SAP Integrated Business Planning](#sap-integrated-business-planning)
 * [SAP S/4HANA](#sap-s4hana)
 * [SAP S/4HANA Cloud](#sap-s4hana-cloud)
