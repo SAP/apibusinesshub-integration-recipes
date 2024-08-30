@@ -3,6 +3,7 @@
 
 ## Topics
 * [Amazon](#amazon-web-services)
+* [B2B Integration Factory](#B2B-integrtion-factory)
 * [CICD](#cicd)
 * [Database Connectivity](#amazon-developer-connectivity)
 * [How to Guides](#how-to-guide)
@@ -14,6 +15,7 @@
 * [SAP Analytics Cloud](#sap-analytics-cloud)
 * [SAP Ariba or SAP Business Network](#sap-ariba-or-sap-business-network)
 * [SAP BTP](#sap-btp)
+* [SAP Cloud ALM](#sap-cloud-alm)
 * [SAP Cloud Identity Access Governance](#sap-cloud-identity-access-governance)
 * [SAP Concur](#sap-concur)
 * [SAP Customer Experience](#sap-customer-experience)
@@ -22,11 +24,13 @@
 * [SAP ERP](#sap-erp)
 * [SAP Event Mesh](#sap-event-mesh)
 * [SAP Fieldglass](#sap-fieldglass)
+* [SAP Global Trade Services (GTS)](#sap-gts]
 * [SAP Integrated Business Planning](#sap-integrated-business-planning)
 * [SAP S/4HANA](#sap-s4hana)
 * [SAP S/4HANA Cloud](#sap-s4hana-cloud)
 * [SAP Sales Cloud](#sap-sales-cloud)
 * [SAP Service Cloud](#sap-service-cloud)
+* [SAP Signvio](#sap-signavio)
 * [SAP SuccessFactors Employee Central](#sap-successfactors-employee-central)
 * [SAP SuccessFactors Incentive Management](#sap-successfactors-incentive-management)
 * [SAP SuccessFactors Recruiting](#sap-successfactors-recruiting)
@@ -42,6 +46,18 @@ Recipe|Description|Author
 [Amazon Seller Marketplace Integration with Third Party](for/amazonsellermarketplaceintegrationwiththirdparty)|File based integration for sending Sales Transaction data from Amazon Seller Marketplace to Third Party (SAP Vistex template)  | [SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Connect to Amazon DynamoDB](for/ConnectToAWSDynmoDB)|SAP CPI needs to make a rest call to DynamoDB endpoint.|[Sunny Kapoor](author.md#sunny-kapoor)|
 [Generate AWS4-HMAC-SHA256 Signature](for/GenerateAWS4_HMAC_SHA256)| A reusable recipe to generate an AWS specific AWS4-HMAC-SHA256 signature and pass it as a HTTP Authorization header.|[Sunny Kapoor](author.md#sunny-kapoor)|
+
+***
+
+### B2B Integration Factory
+Recipe|Description|Author
+---|---|---
+[B2B Integration Factory - Cloud Integration - Trading Partner Management (TPM)](for/b2bintegrationfactorycloudintegrationtradingpartnermanagement)|The B2B Integration Factory - Integration packages offer additional features that are currently not yet supported by the B2B Capabilities @ SAP Integration Suite and the standard integration package "Cloud Integration - Trading Partner Management V2".|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[B2B Integration Factory - Communication Receiver Flows (Custom)](for/b2bintegrationfactorycommunicationreceiverflowscustom)| This integration package should cover all custom communication receiver flows, connectable via ProcessDirect at the receiver step of a TPA --> Business Transaction Activity.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[B2B Integration Factory - Communication Sender Flows](for/b2bintegrationfactorycommunicationsenderflows)|This package includes all MS3-related sender communication flows for TPM B2B, provided by SAP. These sender flows connect to Step 1b: 'Sender Interchange Header Extraction Flow'.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[B2B Integration Factory - Extended Interchange Processing Flows](for/b2bintegrationfactoryextendedinterchangeprocessingflows)|This package provides all the flows and scripts which are necessary for fulfilling all the requirements that are not supported by the standard yet.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[B2B Integration Factory - Interchange Extraction Flows](for/b2bintegrationfactoryinterchangeextractionflows)|This package includes all additional integration flows for extracting the relevant parameters and key fields from the headers according to the rules of the different type systems.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[B2B Integration Factory - Pre and Post-Processing Flows (Custom)](for/b2bintegrationfactorypreandpostprocessingflowscustom)| This package provides all the custom iflows which are necessary for the required pre-/post-processing in the prepackaged TPAs.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 
 ***
 
@@ -160,7 +176,10 @@ Recipe|Description|Author
 Recipe|Description|Author
 ---|---|---
 [Azure Blob Connectivity using SAP Private Link Service](for/privatelinkproxy)| Sample to showcase connectivity to Azure Blob Storage using SAP Private Link Service with Application Router as a Proxy|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Enabling Exactly Once in Order via Cloud Integration](for/enablingexactlyonceinorderviacloudintegration)|Enables Exactly Once in Order (EOIO) processing with SAP Integration Suite, Advanced Event Mesh (AEM) utilizing partitioned Queues using the "Advanced Event Mesh Adapter for SAP Integration Suite" based on a blog. |[SAP Business Accelerator Hub](author.md#sap-api-business-hub)|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Integration Suite Alerting Framework using SAP BTP Alert Notification Service](for/integrationsuitealertingframeworkusingalertnotificationservice)|Contains multiple iflows designed to extract and send Cloud Integration Events to SAP BTP Alert Notification Service
 [Integration with Stored Value Solutions (SVS) for eGiftCard](for/integrationwithstoredvaluesolutionssvsforegiftcard)| This package provides iFlows for creating eGiftcard from stored value solutions (SVS).|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Message Transformation Utilities](for/com.sap.integration.cloud.utilities.messagetransformations)| This package contains artifacts that help transform message payloads between various formats, such as XML, plain text, CSV, and JSON. The overall aim is to deliver various functionalities that once existed in SAP Process Orchestration as Adapter Modules. | [SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Ariba Integration with SAP Ariba APIs](for/saparibaintegrationwithsaparibaapis)| This integration flow allows you to connect an Ariba system to the SAP Ariba APIs.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Cloud Identity Services Integration with SAP Sales Cloud and SAP Fieldglass](for/sapipsintegration)|SAP Cloud Identity Services Identity Provisioning triggers the replication of user roles to SAP Sales Cloud and SAP Fieldglass. The user roles are mapped from the associated business units of the user in Identity Provisioning Service.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Cloud Integration with Alert Notification service for SAP BTP: JMS Service](for/sapcloudintegrationwithalertnotificationserviceforsapbtp)| Integrate SAP Alert Notification service for SAP BTP with Cloud Integration to get exhausted JMS resources.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
@@ -168,6 +187,13 @@ Recipe|Description|Author
 [SAP Emarsys Integration - Starter Pack](sapemarsysintegrationstarterpack)|This integration flow allows you to connect to the SAP Emarsys APIs|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Integration Suite Cloud Integration Utilities](for/sapcloudintegrationutilities)| This package offers integration flows designed for extracting and extending SAP Ariba Sourcing documents, seamlessly integrating with SAP Ariba Extensibility.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 
+
+***
+
+### SAP Cloud ALM
+Recipe|Description|Author
+---|---|---
+[SAP Signavio Integration with SAP Cloud ALM](sapsignaviointegrationwithsapcloudalm) | Import business processes between SAP Signavio and SAP Cloud ALM.| [SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 
 ***
 
@@ -245,6 +271,13 @@ Recipe|Description|Author
 
 ***
 
+### SAP Global Trade Services
+Recipe|Description|Author
+---|---|---
+[Reguvis Fachmedien Integration with SAP GTS](for/bundesanzeigerintegrationwithsaps4hanagtsonpremise)|Reguvis Fachmedien Integration with SAP GTS provides an Integration with SLP sanction list of Reguvis Fachmedien to SAP GTS (Global Trade Services) System in order to replicate blocked Business Partners|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+
+***
+
 ### SAP Integrated Business Planning
 Recipe|Description|Author
 ---|---|---
@@ -261,7 +294,7 @@ Recipe|Description|Author
 ### SAP S4HANA
 Recipe|Description|Author
 ---|---|---
-[Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise](for/bundesanzeigerintegrationwithsaps4hanagtsonpremise)|Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise provides an Integration with SLP sanction list of the Bundesanzeiger to SAP S/4HANA GTS (Global Trade System) System in order to replicate blocked Business Partners|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Integration between TM Form and SAP S/4HANA BRIM](tmforumtobrimimplementationtemplates) | This package provides integration content to connect TM Forum APIs to SAP Billing and Revenue Innovation Management (BRIM).|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Replicate vendor and vendor group from SAP S/4HANA to SAP Concur](for/replicatevendorandvendorgroupfromsaps4hanatosapconcur)|This package is used to replicate vendor and vendor group information from SAP S/4HANA to SAP Concur system by requesting valid supplier information from SAP S/4HANA and then updating the vendor information and vendor group information in SAP Concur.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP ERP or SAP S/4HANA Integration with SAP SuccessFactors Employee Central](for/saperporsaps4hanaintegrationwithsapsuccessfactorsemployeecentralbankkey)|Replicate Bank Key data from SAP ERP or SAP S/4HANA to SAP SuccessFactors Employee Central|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Document Compliance with Third Party - eDocuments](for/saps4hanaintegrationwiththirdpartyedocuments)| Exchange electronic invoices with the tax authorities for Chile, Colombia and Mexico, available for SAP S/4HANA, and SAP ERP (available as of SAP ERP 6.0 EHP5)|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
@@ -272,6 +305,7 @@ Recipe|Description|Author
 [SAP S/4HANA - Service Order Replication with SAP Marketing Cloud](for/s4hanaserviceorderintegrationwithsapmarketingcloud)| Send Service Orders from SAP S/4HANA OnPremise to SAP Marketing Cloud|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP SuccessFactors Employee Central Payroll Integration with SAP S_4HANA or SAP ERP](for/sapsuccessfactorsemployeecentralpayrollintegrationwithsaps4hanaorsaperp)| Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Retail Integration with SAP Point-of-Sale](for/sapretailintegrationwithsappos) |Outbound/Inbound integration between SAP Retail Solution and SAP POS (Point-of-Sale) |[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+
 
 ***
 
@@ -298,6 +332,13 @@ Recipe|Description|Author
 ---|---|---
 [SAP Customer Data Cloud Integration with SAP Service Cloud for Replicating Customer Details](for/sapcustomerdatacloudintegrationwithsapservicecloudreplicatecustomerdetails)|This package supports replication of Customer data of SAP Customer Data Cloud to SAP Service Cloud.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Service Cloud Integration with ServiceNow](for/sapservicecloudintegrationwithservicenow)|This package supports integration between SAP Service Cloud and ServiceNow in respect of ticket data replication.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+
+***
+
+### SAP Signavio
+Recipe|Description|Author
+---|---|---
+[SAP Signavio Integration with SAP Cloud ALM](sapsignaviointegrationwithsapcloudalm) | Import business processes between SAP Signavio and SAP Cloud ALM.| [SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 
 ***
 
@@ -345,17 +386,24 @@ Recipe|Description|Author
 Recipe|Description|Author
 ---|---|---
 [Azure Blob Connectivity using SAP Private Link Service](for/privatelinkproxy)| Sample to showcase connectivity to Azure Blob Storage using SAP Private Link Service with Application Router as a Proxy|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
-[Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise](for/bundesanzeigerintegrationwithsaps4hanagtsonpremise)|Bundesanzeiger Integration with SAP S/4HANA GTS OnPremise provides an Integration with SLP sanction list of the Bundesanzeiger to SAP S/4HANA GTS (Global Trade System) System in order to replicate blocked Business Partners|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
-[Contract Line Item Document (CLID) Integration with Third Party System](contractlineitemdocumentclidintegrationwiththirdpartysystem)|This package provides an automated way to replicate documents from SAP Ariba to any Third Party system using SAP Business Technology Platform Integration Suite and SAP Build Process Automation.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[B2B Integration Factory - Cloud Integration - Trading Partner Management (TPM)](for/b2bintegrationfactorycloudintegrationtradingpartnermanagement)|The B2B Integration Factory - Integration packages offer additional features that are currently not yet supported by the B2B Capabilities @ SAP Integration Suite and the standard integration package "Cloud Integration - Trading Partner Management V2".|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[B2B Integration Factory - Communication Receiver Flows (Custom)](for/b2bintegrationfactorycommunicationreceiverflowscustom)| This integration package should cover all custom communication receiver flows, connectable via ProcessDirect at the receiver step of a TPA --> Business Transaction Activity.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[B2B Integration Factory - Communication Sender Flows](for/b2bintegrationfactorycommunicationsenderflows)|This package includes all MS3-related sender communication flows for TPM B2B, provided by SAP. These sender flows connect to Step 1b: 'Sender Interchange Header Extraction Flow'.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[B2B Integration Factory - Extended Interchange Processing Flows](for/b2bintegrationfactoryextendedinterchangeprocessingflows)|This package provides all the flows and scripts which are necessary for fulfilling all the requirements that are not supported by the standard yet.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[B2B Integration Factory - Interchange Extraction Flows](for/b2bintegrationfactoryinterchangeextractionflows)|This package includes all additional integration flows for extracting the relevant parameters and key fields from the headers according to the rules of the different type systems.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[B2B Integration Factory - Pre and Post-Processing Flows (Custom)](for/b2bintegrationfactorypreandpostprocessingflowscustom)| This package provides all the custom iflows which are necessary for the required pre-/post-processing in the prepackaged TPAs.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Contract Line Item Document (CLID) Integration with Third Party System](for/contractlineitemdocumentclidintegrationwiththirdpartysystem)|This package provides an automated way to replicate documents from SAP Ariba to any Third Party system using SAP Business Technology Platform Integration Suite and SAP Build Process Automation.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Email Integration with S/4HANA Cloud Custom Business Object](for/emailintegrationwiths4hanacloudcustombusinessobject)|Email based integration to create/modify/delete data in a CBO in S/4HANA Cloud. Create, modify or delete data in an SAP S/4HANA custom business object through a comma separated value file that is attached to an email.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Integration between SAP Ariba and OpenText](for/integrationbetweensaparibaandopentext)| This integration package provides an integration between SAP Ariba and the Third Party system OpenText for replicating purchase requisition, purchase orders and sourcing projects.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Integration between SAP Concur and OpenText](for/integrationbetweensapconcurandopentext)| This integration package provides an integration between SAP Concur and the Third Party system OpenText for replicating travel requests.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Integration between SAP Fieldglass and OpenText](for/integrationbetweensapfieldglassandopentext)| This integration package provides an integration between SAP Fieldglass and the Third Party system OpenText for replicating Fieldglass specific data, e.g. purchase orders.| [SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Integration with Stored Value Solutions (SVS) for eGiftCard](for/integrationwithstoredvaluesolutionssvsforegiftcard)| This package provides iFlows for creating eGiftcard from stored value solutions (SVS).|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Message Transformation Utilities](for/com.sap.integration.cloud.utilities.messagetransformations)| This package contains artifacts that help transform message payloads between various formats, such as XML, plain text, CSV, and JSON. The overall aim is to deliver various functionalities that once existed in SAP Process Orchestration as Adapter Modules. | [SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Microsoft Dynamics CRM Integration with SAP S/4HANA Cloud and SAP ERP](for/crmintegrationwithsaps4hanacloudandsaperp)| This package enables creation or change of Customer master and sales data between Microsoft Dynamics CRM, SAP S/4HANA Cloud and SAP ERP.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Replay Messages from Queues via SAP Event Mesh](for/replaymessagesfromqueuesviasapeventmesh)|This package provides a replay mechanism for SAP Event Mesh messages.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub) 
 [SAP Ariba Integration Tookit](for/saparibaintegrationtoolkit)|Integration of SAP Ariba Buying and Sourcing solutions with third party systems |[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
-[ SAP Ariba Integration with Third-Party for Analytical Reporting](for/saparibaanalyticalreportingintegrationwiththirdparty)| Consumption of Ariba APIs (Job Submission API and Job Results API) for Analytical Reporting ( Standard/Custom Templates) with CSV Output for integrating with Third Party  |[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Reguvis Fachmedien Integration with SAP GTS OnPremise](for/bundesanzeigerintegrationwithsaps4hanagtsonpremise)|Reguvis Fachmedien Integration with SAP GTS  provides an Integration with SLP sanction list of Reguvis Fachmedien to SAP GTS (Global Trade Services) System in order to replicate blocked Business Partners|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[SAP Ariba Integration with Third-Party for Analytical Reporting](for/saparibaanalyticalreportingintegrationwiththirdparty)| Consumption of Ariba APIs (Job Submission API and Job Results API) for Analytical Reporting ( Standard/Custom Templates) with CSV Output for integrating with Third Party  |[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Ariba Integration with Third-Party for Vendor And Questionnaires](for/saparibaintegrationwiththirdpartyforvendorandquestionnaires)| Ariba APIs for Vendor and Questionnaires with CSV Output for integrating with Third Party| [SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Ariba Sourcing Integration with Third-Party System](for/integrationwithsaparibasourcing)|This package offers integration flows designed for extracting and extending SAP Ariba Sourcing documents, seamlessly integrating with SAP Ariba Extensibility.| [SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP Business Network Integration with Non-SAP ERP](for/sapbusinessnetworkintegrationwithnonsaperp)| Baseline template to support the Purchase Order, Invoice and other transactional documents with the SAP Business Network|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
@@ -365,8 +413,10 @@ Recipe|Description|Author
 [SAP Service Cloud Integration with ServiceNow](for/sapservicecloudintegrationwithservicenow)|This package supports integration between SAP Service Cloud and ServiceNow in respect of ticket data replication.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP SuccessFactors Integration with Third Party - Employee Job Delta Change](for/sapsuccessfactorsintegrationwiththirdpartyempjobdeltachange)| Sync only delta changes (create, update and delete) via ODATA API for EmpJob Effective-Dated Entity to Third Party.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP SuccessFactors Employee Central Integration with Fidelity](for/sapsuccessfactorsemployeecentralintegrationwithfidelity)| This integration package provides integration flow which allows you to read and send employee data from SAP SuccessFactors Employee Central to the Fidelity sever.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
-[SAP SuccessFactors Employee Central with Third-Party Payroll Vendor](for/sapsuccessfactorsemployeecentralwiththirdpartypayrollvendor)| Integration of business processes in SAP SuccessFactors Employee Central system with Third Party Payroll Vendor; support for delta based integration with seperate files required for HIRE/REHIRE, Daily Changes and TERMINATION|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[SAP SuccessFactors Employee Central with Third-Party Payroll Vendor](for/sapsuccessfactorsemployeecentralwiththirdpartypayrollvendor)| Integration of business processes in SAP SuccessFactors Employee Central system with Third Party Payroll Vendor; support for delta based integration with separate files required for HIRE/REHIRE, Daily Changes and TERMINATION|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP SuccessFactors Employee Central Integration with Workday](for/sapsuccessfactorsemployeecentralintegrationwithworkday)| Replicate employee master data from Workday to SAP SuccessFactors Employee Central.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP SuccessFactors Recruiting Management Integration with Saudi Arabias Ministry of Interior](for/sapsuccessfactorsrecruitingmanagementintegrationwiththirdpartyassessmentvendormoi)| Package that contains an iFlow that integrates SAP SuccessFactors and the Saudi Arabias Ministry of Interior.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Third Party Invoice Status Integration with SAP Ariba network](for/thirdpartyinvoicestatusintegrationwiththearibanetwork) | Invoice status handling from any Invoice system to SAP Ariba Network based on cXML | [SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Ticketmaster Journal Entry Integration with SAP S/4HANA Cloud](for/ticketmasterjournalentryintegrationwithsaps4hanacloud)|Create Journal Entries from ticket sales originating from Ticketmaster Archtics and Host.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Integration between TM Form and SAP S/4HANA BRIM](for/tmforumtobrimimplementationtemplates) | This package provides integration content to connect TM Forum APIs to SAP Billing and Revenue Innovation Management (BRIM).|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+
