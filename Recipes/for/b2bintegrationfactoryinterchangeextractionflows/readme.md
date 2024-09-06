@@ -5,7 +5,19 @@
  ![SAP Business Accelerator Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Business Accelerator Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
-This package includes all additional integration flows for extracting the relevant parameters and key fields from the headers according to the rules of the different type systems.
+Providing additional integration flows for extracting the relevant parameters and key fields from the headers according to the rules of the different type systems.
+
+<p>It provides the relevant extraction logic as well as the extraction value mapping for the following type systems:</p>
+<ul>
+ <li>Custom CSV</li>
+ <li>Flat File based Type Systems</li>
+ <li>XML based Type Systems</li>
+ <li>GS1XML</li>
+ <li>SAP-IDOC&nbsp;</li>
+ <li>SAP-SOAP</li>
+</ul>
+<p>Furthermore, you'll find a template that you can use to create your own Interchange Extraction flow.</p>
+<p>&nbsp;</p>
 
 [Download the integration package](B2BIntegrationFactoryInterchangeExtractionFlows.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/B2BIntegrationFactoryInterchangeExtractionFlows)\

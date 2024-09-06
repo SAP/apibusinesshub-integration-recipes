@@ -5,10 +5,11 @@
  ![SAP Business Accelerator Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Business Accelerator Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
-This package includes all MS3-related sender communication flows for TPM B2B, provided by SAP. These sender flows connect to Step 1b: 'Sender Interchange Header Extraction Flow'.
+This integration package provides additional sender communication flows, such as picking up the messages via an SFTP server. Those integration flows are connected via a ProcessDirect Adapter calling the custom integration flow "Step 1b - Sender Interchange Header Extraction Flow".
 
-<p>This integration package provides all MS3 related sender communication flows for the TPM B2B communication, which are provided by SAP.</p>
-<p>These sender communication flows are connected to the Step 1b "Step 1b - Sender Interchange Header Extraction Flow".&nbsp;</p>
+<p>It also includes an integration flow called "Step 1a - B2B Simulation Sender," which is necessary if you want to perform an end-to-end simulation via an API tool where you would like to see the result (target interchange/message payloads) in the HTTP response. </p>
+
+<p>Furthermore, you'll find a template that you can use to create your own communication sender flow.</p>
 
 [Download the integration package](B2BIntegrationFactoryCommunicationSenderFlows.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/B2BIntegrationFactoryCommunicationSenderFlows)\

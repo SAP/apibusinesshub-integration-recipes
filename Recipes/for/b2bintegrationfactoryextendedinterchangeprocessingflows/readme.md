@@ -5,9 +5,15 @@
  ![SAP Business Accelerator Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Business Accelerator Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
-This package provides all the flows and scripts which are necessary for fulfilling all the requirements that are not supported by the standard yet.
+This package provides flows and scripts to fulfil additional requirements that are not supported by the standard yet.
 
-<p>This package provides all the flows and scripts which are necessary for fulfilling all the requirements that are not supported by the standard yet.</p>
+<p>It provides additional flows that can be called via ProcessDirect from the main package "B2B Integration Factory - Cloud Integration - Trading Partner Management" flows.&nbsp;</p>
+<p>It covers:</p>
+<ul>
+ <li>Extracted Key Value Change - UN-EDIFACT</li>
+ <li>Functional Acknowledgement Interchange Modification - UN-EDIFACT</li>
+ <li>Interchange Modification - UN-EDIFACT&nbsp;</li>
+</ul>
 
 [Download the integration package](B2BIntegrationFactoryExtendedInterchangeProcessingFlows.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/B2BIntegrationFactoryExtendedInterchangeProcessingFlows)\

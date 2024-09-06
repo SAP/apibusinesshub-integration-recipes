@@ -1,11 +1,11 @@
-# B2B Integration Factory - Pre and Post-Processing Flows (Custom) 
+# B2B Integration Factory - Pre and Post-Processing Flows - Custom 
 
-\| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20[B2B%20Integration%20Factory]%20Pre%20and%20Post-Processing%20Flows%20(Custom)) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20[B2B%20Integration%20Factory]%20Pre%20and%20Post-Processing%20Flows%20(Custom))\| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20[B2B%20Integration%20Factory]%20Pre%20and%20Post-Processing%20Flows%20(Custom)) \| 
+\| [Recipes by Topic](../../readme.md ) \| [Recipes by Author](../../author.md ) \| [Request Enhancement](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,enhancement&template=recipe-request.md&title=Improve%20[B2B%20Integration%20Factory]%20Pre%20and%20Post-Processing%20Flows%20-%20Custom) \| [Report a bug](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,bug&template=bug_report.md&title=Issue%20with%20[B2B%20Integration%20Factory]%20Pre%20and%20Post-Processing%20Flows%20-%20Custom)\| [Fix documentation](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Fix,documentation&template=bug_report.md&title=Docu%20fix%20[B2B%20Integration%20Factory]%20Pre%20and%20Post-Processing%20Flows%20-%20Custom) \| 
 
  ![SAP Business Accelerator Hub](https://github.com/SAPAPIBusinessHub.png?size=50 ) | [SAP Business Accelerator Hub](https://api.sap.com/allcommunity) | 
  ----|----| 
 
-This package provides all the custom iflows which are necessary for the required pre-/post-processing in the prepackaged TPAs.
+This package provides custom iflows, which are necessary for the required pre-/post-processing in the prepackaged TPAs.
 
 <p>In the Pre-Processing Flow, data can be manipulated, validated, or transformed before it enters the main data processing flow. This upfront manipulation can be useful for data cleansing, format standardization, or other necessary adjustments.</p>
 <p>The Post-Processing Flow, on the other hand, takes effect after the main process. It might involve activities such as logging, notification, error handling, or additional formatting.</p>
