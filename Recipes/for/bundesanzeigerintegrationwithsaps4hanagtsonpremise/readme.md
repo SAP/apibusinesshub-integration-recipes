@@ -17,7 +17,7 @@ This package enables consumption of the scenarios below:
 2. Send SanctionsLists to SAP GTS
 3. Trigger SanctionsLists processing in SAP GTS
 
-[Download the reuseable integration package](BundesanzeigerIntegrationwithSAPS4HANAGTSOnPremise.zip)\
+[Download the reuseable integration package](ReguvisFachmedienIntegrationwithSAPGTS.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/BundesanzeigerIntegrationwithSAPS4HANAGTSOnPremise/overview)\
 [View documentation](IntegrationBundesanzeigerandGTSviaCPI.pdf)\
 [View high level effort estimate](effort.md)
