@@ -30,3 +30,6 @@ This flow is responsible to modify the EDI Interchange payload before they are p
 ### UN-EDIFACT Functional Acknowledgement Interchange Modification 
 This Flow is responsible to modify the functional acknowledgement to fit the requirement of the specific partner \
  ![input-image](UN-EDIFACT_Functional_Acknowledgement_Interchange_Modification.png)
+### XML To CSV Syntax Conversion
+This flow is responsible to convert XML to CSV. \
+ ![input-image](XML_To_CSV_Syntax_Conversion.png)
