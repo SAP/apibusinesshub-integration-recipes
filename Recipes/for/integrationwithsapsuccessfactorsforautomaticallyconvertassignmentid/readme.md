@@ -11,7 +11,7 @@ It converts/updates SAP SuccessFactors Assignment ID of Users based a CSV input 
 
 [Download the integration package](IntegrationwithSAPSuccessFactorsforautomaticallyconvertAssignmentID.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/IntegrationwithSAPSuccessFactorsforautomaticallyconvertAssignmentID)\
-[View documentation](AssignmentIdExternalConversion.pdf)\
+[View documentation](AssignmentIdExternal-Conversion.pdf)\
 [View high level effort](effort.md)
 ## Integration flows
 ### Convert Assignment ID in SAP SuccessFactors via SFTP 
