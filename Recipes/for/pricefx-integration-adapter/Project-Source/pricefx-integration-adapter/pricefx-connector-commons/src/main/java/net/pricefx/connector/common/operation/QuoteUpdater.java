@@ -52,7 +52,7 @@ public class QuoteUpdater implements IPFXObjectUpsertor, ICalculableObjectUpsert
         List<Pair<String, String>> attributes = createMetadataFields(metadata);
 
         JsonNode schema = (initialSchema != null) ? initialSchema :
-                loadSchema(pfxJsonSchema, QUOTE, null, attributes, false, false, false);
+                JsonSchemaUtil.loadSchema(pfxJsonSchema, QUOTE, null, attributes, false, false, false, true);
         JsonValidationUtil.validatePayload(schema, request);
         validateExtraFields(schema, request);
 

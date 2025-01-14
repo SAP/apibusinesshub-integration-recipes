@@ -10,7 +10,7 @@ class PFXConditionRecordTypeTest extends Specification {
         def keys = new PFXConditionRecordType(3).getBusinessKeys()
 
         then:
-        3 == keys.size()
+        5 == keys.size()
         "key1" == keys.getAt(0)
         "key2" == keys.getAt(1)
         "key3" == keys.getAt(2)

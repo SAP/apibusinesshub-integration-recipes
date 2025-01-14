@@ -32,7 +32,6 @@ public class PFXConstants {
     public static final String FIELD_VALUE = "value";
     public static final String FIELD_FIELDNAME = "fieldName";
     public static final String FIELD_VERSION = "version";
-    public static final String FIELD_ATTRIBUTES = "attributes";
     public static final String FIELD_VALUETYPE = "valueType";
     public static final String FIELD_RAWVALUE = "rawValue";
     public static final String FIELD_LINEITEMS = "lineItems";
@@ -53,6 +52,7 @@ public class PFXConstants {
     public static final int MAX_ATTRIBUTES = 30;
     public static final int MAX_EXT_ATTRIBUTES = 50;
     public static final int MAX_PAYOUT_ATTRIBUTES = 100;
+    public static final int MAX_CONDITION_ATTRIBUTES = 100;
 
     public static final String ATTRIBUTE_EXT_PREFIX = "attributeExtension___";
 

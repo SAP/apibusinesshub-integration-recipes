@@ -29,21 +29,28 @@ import static net.pricefx.pckg.client.okhttp.PfxCommonService.buildSimpleCriteri
 public class AdvancedConfigurationUpsertor implements IPFXObjectUpsertor {
 
     private final PFXOperationClient pfxClient;
+
     public AdvancedConfigurationUpsertor(PFXOperationClient pfxClient) {
         this.pfxClient = pfxClient;
+    }
+
+    protected void validateRequest(JsonNode request) {
+        if (!JsonUtil.isObjectNode(request)) {
+            throw new RequestValidationException("Invalid upsert Advanced Config request");
+        }
+
+        String uniqueName = JsonUtil.getValueAsText(request.get(FIELD_UNIQUENAME));
+        if (StringUtils.isEmpty(uniqueName)) {
+            throw new RequestValidationException("Invalid upsert Advanced Config request. Missing uniqueName!");
+        }
     }
 
 
     @Override
     public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple, boolean showSystemFields) {
-        if (!JsonUtil.isObjectNode(request)){
-            throw new RequestValidationException("Invalid upsert Advanced Config request");
-        }
+        validateRequest(request);
 
         String uniqueName = JsonUtil.getValueAsText(request.get(FIELD_UNIQUENAME));
-        if (StringUtils.isEmpty(uniqueName)){
-            throw new RequestValidationException("Invalid upsert Advanced Config request. Missing uniqueName!");
-        }
 
         ObjectNode criterion = RequestUtil.createSimpleFetchRequest(buildSimpleCriterion(
                 FIELD_UNIQUENAME, OperatorId.EQUALS.getValue(), uniqueName));
@@ -55,10 +62,11 @@ public class AdvancedConfigurationUpsertor implements IPFXObjectUpsertor {
 
         String value = JsonUtil.getValueAsText(request.get(FIELD_VALUE));
 
-        if (CollectionUtils.isEmpty(advConfigs)){
+        if (CollectionUtils.isEmpty(advConfigs)) {
+            //add
             ObjectNode updateRequest = new ObjectNode(JsonNodeFactory.instance)
                     .put(FIELD_UNIQUENAME, uniqueName)
-                    .put(FIELD_VALUE,value);
+                    .put(FIELD_VALUE, value);
             JsonNode result = pfxClient.doPost(createPath(ADD.getOperation(), ADVANCED_CONFIG.getTypeCode()), updateRequest);
 
             List<JsonNode> list = new ArrayList<>();
@@ -77,13 +85,13 @@ public class AdvancedConfigurationUpsertor implements IPFXObjectUpsertor {
             String typedId = JsonUtil.getValueAsText(advConfig.get(FIELD_TYPEDID));
             Number number = JsonUtil.getNumericValue(advConfig.get(FIELD_VERSION));
 
-            if (StringUtils.isEmpty(typedId) || number == null){
+            if (StringUtils.isEmpty(typedId) || number == null) {
                 throw new ConnectorException("TypedID or version number not found in advanced config");
             }
 
             ObjectNode updateRequest = new ObjectNode(JsonNodeFactory.instance)
-                                            .put(FIELD_VERSION, number.intValue()).put(FIELD_TYPEDID, typedId)
-                                            .put(FIELD_VALUE,value);
+                    .put(FIELD_VERSION, number.intValue()).put(FIELD_TYPEDID, typedId)
+                    .put(FIELD_VALUE, value);
             JsonNode result = pfxClient.doPost(createPath(UPDATE.getOperation(), ADVANCED_CONFIG.getTypeCode()), updateRequest);
 
             List<JsonNode> list = new ArrayList<>();

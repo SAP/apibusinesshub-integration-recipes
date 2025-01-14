@@ -26,7 +26,7 @@ import static net.pricefx.adapter.sap.util.Constants.*;
 import static net.pricefx.adapter.sap.util.SupportedOperation.GET;
 import static net.pricefx.connector.common.util.Constants.DEFAULT_TIMEOUT;
 import static net.pricefx.connector.common.util.Constants.MAX_RECORDS;
-import static net.pricefx.connector.common.util.PFXTypeCode.TOKEN;
+import static net.pricefx.connector.common.util.PFXTypeCode.*;
 import static net.pricefx.connector.common.validation.ConnectorException.ErrorType.CONNECTION_ERROR;
 
 
@@ -151,7 +151,12 @@ public class Producer extends DefaultProducer {
                 node = new CreateService(pfxClient, typeCode).execute(input);
                 break;
             case UPDATE:
-                node = new UpdateService(pfxClient, typeCode, extensionType, uniqueId).execute(input);
+                if (typeCode == CONDITION_RECORD) {
+                    node = new ConditionRecordUpdateService(pfxClient, extensionType,
+                            getDynamicValue(exchange, ((Endpoint) getEndpoint()).getLastUpdateTimestamp())).execute(input);
+                } else {
+                    node = new UpdateService(pfxClient, typeCode, uniqueId).execute(input);
+                }
                 break;
             case UPSERT:
                 node = new UpsertService(pfxClient, typeCode, extensionType,
@@ -234,11 +239,11 @@ public class Producer extends DefaultProducer {
 
         try {
             process(pfxClient, exchange);
-        }catch(ConnectorException | ProcessingException ex){
+        } catch (ConnectorException | ProcessingException ex) {
             PFXOperationClient basicAuthClient;
             try {
                 basicAuthClient = createPfxClient(credentialsOperation, typeCode, true);
-            }catch(Exception e){
+            } catch (Exception e) {
                 throw ex;
             }
 
@@ -250,15 +255,16 @@ public class Producer extends DefaultProducer {
         }
 
     }
-    private static boolean isRetry(Exception ex, PFXOperationClient pfxClient, boolean isRetry, String token){
-        if (!isRetry){
+
+    private static boolean isRetry(Exception ex, PFXOperationClient pfxClient, boolean isRetry, String token) {
+        if (!isRetry) {
             return false;
         }
 
         if ((ex.getCause() != null && ex.getCause().getMessage() != null &&
-                ex.getCause().getMessage().contains(HttpURLConnection.HTTP_UNAUTHORIZED+"")) ||
-                (ex instanceof ConnectorException && ((ConnectorException) ex).getStatusCode() == HttpURLConnection.HTTP_UNAUTHORIZED)){
-            if (TokenService.isTokenRetryAllowanceExpired(pfxClient) || StringUtils.isEmpty(token)){
+                ex.getCause().getMessage().contains(HttpURLConnection.HTTP_UNAUTHORIZED + "")) ||
+                (ex instanceof ConnectorException && ((ConnectorException) ex).getStatusCode() == HttpURLConnection.HTTP_UNAUTHORIZED)) {
+            if (TokenService.isTokenRetryAllowanceExpired(pfxClient) || StringUtils.isEmpty(token)) {
                 throw new ConnectorException("Attempting to retry, however token does not exist or is updated outside allowed timeframe. please refresh token immediately");
             }
 
@@ -290,9 +296,9 @@ public class Producer extends DefaultProducer {
         PFXOperationClient pfxClient;
         try {
             PfxClientBuilder builder;
-            if (basicOnly){
+            if (basicOnly) {
                 //Basic
-                builder =  (PfxClientBuilder) ConnectionUtil.getPFXClientBuilder(credentialsOperation.getConnection().getPartition(),
+                builder = (PfxClientBuilder) ConnectionUtil.getPFXClientBuilder(credentialsOperation.getConnection().getPartition(),
                         credentialsOperation.getPricefxHost(),
                         credentialsOperation.getConnection().getUsername(),
                         credentialsOperation.getConnection().getPassword()).withBasicAuthOnly(true);
@@ -352,14 +358,14 @@ public class Producer extends DefaultProducer {
 
     private JsonNode refresh(PFXOperationClient pfxClient, PFXTypeCode typeCode, String uniqueId, String incLoadDate, Exchange exchange) {
         if (typeCode == TOKEN) {
-            return new RefreshService(pfxClient,  typeCode, uniqueId, incLoadDate).refresh();
+            return new RefreshService(pfxClient, typeCode, uniqueId, incLoadDate).refresh();
         } else {
             return new RefreshService(pfxClient, typeCode, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()), incLoadDate).refresh();
         }
     }
 
     private IPFXExtensionType getPFXExtensionType(PFXOperationClient pfxClient, PFXTypeCode typeCode, Exchange exchange) {
-        if (typeCode != null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE || typeCode == PFXTypeCode.CONDITION_RECORD)) {
+        if (typeCode != null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE || typeCode.isConditionRecord())) {
             return pfxClient.createExtensionType(typeCode, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()),
                     getDynamicValue(exchange, ((Endpoint) getEndpoint()).getTargetDate()));
         }

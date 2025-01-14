@@ -15,6 +15,10 @@ class GenericBulkLoaderTest extends Specification {
     def pfxClient = new MockPFXOperationClient()
     def requestFile = "/bulkload-request.json"
 
+    def requestFileConditionRecord = "/bulkload-conditionrecord-request.json"
+    def requestFileConditionRecordExtraFields = "/bulkload-conditionrecord-request-extrafields.json"
+    def requestFileConditionRecordMissingKeys = "/bulkload-conditionrecord-request-missingkeys.json"
+
     def "bulk load"() {
         given:
         def request = new ObjectMapper().readTree(GenericBulkLoaderTest.class.getResourceAsStream(requestFile))
@@ -29,7 +33,7 @@ class GenericBulkLoaderTest extends Specification {
 
     }
 
-    def "validateRequest"() {
+    def "validateRequest - Product"() {
 
         when:
         def data = new ArrayNode(JsonNodeFactory.instance)
@@ -104,16 +108,6 @@ class GenericBulkLoaderTest extends Specification {
         request.set("header", new ArrayNode(JsonNodeFactory.instance).add("sku").add("attribute2"))
 
         new GenericBulkLoader(pfxClient, PFXTypeCode.PRODUCT, null, null).validateRequest(request, true)
-
-        then:
-        thrown(RequestValidationException.class)
-
-
-        when:
-        request = new ObjectMapper().readTree(GenericBulkLoaderTest.class.getResourceAsStream(requestFile))
-
-        new GenericBulkLoader(pfxClient, PFXTypeCode.PRODUCTEXTENSION,
-                new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION).withTable("testTable"), null).withMaximumRecords(1).bulkLoad(request, true)
 
         then:
         thrown(RequestValidationException.class)
@@ -208,8 +202,58 @@ class GenericBulkLoaderTest extends Specification {
         thrown(RequestValidationException.class)
 
 
+    }
+
+    def "validateRequest - extensions"() {
+        given:
+        def ext = new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION).withBusinessKeys(["sku", "attribute1"]).withAttributes(6)
+                .withTable("dummy")
+
+        when:
+        def request = new ObjectMapper().readTree(GenericBulkLoaderTest.class.getResourceAsStream(requestFile))
+
+        new GenericBulkLoader(pfxClient, PFXTypeCode.PRODUCTEXTENSION,
+                new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION).withTable("testTable"), null).withMaximumRecords(1).bulkLoad(request, true)
+
+        then:
+        thrown(RequestValidationException.class)
+
         when:
         request = new ObjectNode(JsonNodeFactory.instance)
+        request.set(PFXConstants.FIELD_DATA, JsonUtil.createArrayNode(
+                new ArrayNode(JsonNodeFactory.instance).add("0001").add("").add("x")))
+        request.set("header", new ArrayNode(JsonNodeFactory.instance).add("sku").add("attribute1").add("attribute2"))
+
+        new GenericBulkLoader(pfxClient, PFXTypeCode.PRODUCTEXTENSION, ext, null).validateRequest(request, true)
+
+        then:
+        noExceptionThrown()
+
+        when:
+        request = new ObjectNode(JsonNodeFactory.instance)
+        request.set(PFXConstants.FIELD_DATA, JsonUtil.createArrayNode(
+                new ArrayNode(JsonNodeFactory.instance).add("0001").add((String) null).add("x")))
+        request.set("header", new ArrayNode(JsonNodeFactory.instance).add("sku").add("attribute1").add("attribute2"))
+
+        new GenericBulkLoader(pfxClient, PFXTypeCode.PRODUCTEXTENSION, ext, null).validateRequest(request, true)
+
+        then:
+        noExceptionThrown()
+
+        when:
+        ext = new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION)
+                .withBusinessKeys(ImmutableList.of("sku", "attribute1", "attribute2", "attribute3")).withAttributes(5)
+                .withTable("test")
+        request = new ObjectMapper().readTree(ClassUtil.getResourceAsStream("/bulkload-px-request.json"))
+        new GenericBulkLoader(pfxClient, PFXTypeCode.PRODUCTEXTENSION, ext, null).validateRequest(request, true)
+
+        then:
+        thrown(RequestValidationException.class)
+    }
+
+    def "validateRequest - lookup"() {
+        when:
+        def request = new ObjectNode(JsonNodeFactory.instance)
         request.set(PFXConstants.FIELD_DATA, JsonUtil.createArrayNode(
                 new ArrayNode(JsonNodeFactory.instance).add("0001").add(1).add("x")))
         request.set("header", new ArrayNode(JsonNodeFactory.instance).add(PFXConstants.FIELD_VALUE).add("lowerBound").add("upperBound"))
@@ -242,39 +286,30 @@ class GenericBulkLoaderTest extends Specification {
         then:
         thrown(RequestValidationException.class)
 
+    }
+
+    def "validateRequest - condition record"() {
+        given:
+        def ext = pfxClient.createExtensionType(PFXTypeCode.CONDITION_RECORD, "Condition006", "")
 
         when:
-        def ext = new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION).withBusinessKeys(["sku", "attribute1"]).withAttributes(6)
-                .withTable("dummy")
-
-        request = new ObjectNode(JsonNodeFactory.instance)
-        request.set(PFXConstants.FIELD_DATA, JsonUtil.createArrayNode(
-                new ArrayNode(JsonNodeFactory.instance).add("0001").add("").add("x")))
-        request.set("header", new ArrayNode(JsonNodeFactory.instance).add("sku").add("attribute1").add("attribute2"))
-
-        new GenericBulkLoader(pfxClient, PFXTypeCode.PRODUCTEXTENSION, ext, null).validateRequest(request, true)
+        def request = new ObjectMapper().readTree(GenericBulkLoaderTest.class.getResourceAsStream(requestFileConditionRecord))
+        new GenericBulkLoader(pfxClient, PFXTypeCode.CONDITION_RECORD_STAGING, ext, null).bulkLoad(request, true)
 
         then:
         noExceptionThrown()
 
         when:
-
-        request = new ObjectNode(JsonNodeFactory.instance)
-        request.set(PFXConstants.FIELD_DATA, JsonUtil.createArrayNode(
-                new ArrayNode(JsonNodeFactory.instance).add("0001").add((String) null).add("x")))
-        request.set("header", new ArrayNode(JsonNodeFactory.instance).add("sku").add("attribute1").add("attribute2"))
-
-        new GenericBulkLoader(pfxClient, PFXTypeCode.PRODUCTEXTENSION, ext, null).validateRequest(request, true)
+        request = new ObjectMapper().readTree(GenericBulkLoaderTest.class.getResourceAsStream(requestFileConditionRecordMissingKeys))
+        new GenericBulkLoader(pfxClient, PFXTypeCode.CONDITION_RECORD_STAGING, ext, null).bulkLoad(request, true)
 
         then:
-        noExceptionThrown()
+        thrown(RequestValidationException.class)
 
         when:
-        ext = new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION)
-                .withBusinessKeys(ImmutableList.of("sku", "attribute1", "attribute2", "attribute3")).withAttributes(5)
-                .withTable("test")
-        request = new ObjectMapper().readTree(ClassUtil.getResourceAsStream("/bulkload-px-request.json"))
-        new GenericBulkLoader(pfxClient, PFXTypeCode.PRODUCTEXTENSION, ext, null).validateRequest(request, true)
+        ext = pfxClient.createExtensionType(PFXTypeCode.CONDITION_RECORD, "Condition006", "")
+        request = new ObjectMapper().readTree(GenericBulkLoaderTest.class.getResourceAsStream(requestFileConditionRecordExtraFields))
+        new GenericBulkLoader(pfxClient, PFXTypeCode.CONDITION_RECORD_STAGING, ext, null).bulkLoad(request, true)
 
         then:
         thrown(RequestValidationException.class)

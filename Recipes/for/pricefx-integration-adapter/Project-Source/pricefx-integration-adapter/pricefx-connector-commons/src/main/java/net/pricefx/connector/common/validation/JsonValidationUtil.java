@@ -36,11 +36,11 @@ public class JsonValidationUtil {
     }
 
     public static void validatePayload(JsonNode schemaNode, JsonNode payload) {
-        if (payload == null){
+        if (payload == null) {
             payload = new ObjectNode(JsonNodeFactory.instance);
         }
 
-        if (JsonUtil.isObjectNode(schemaNode)){
+        if (JsonUtil.isObjectNode(schemaNode)) {
             ((ObjectNode) schemaNode).remove(FIELD_ID);
             ((ObjectNode) schemaNode).remove("$id");
         }
@@ -49,9 +49,8 @@ public class JsonValidationUtil {
         JsonSchema schema = factory.getSchema(schemaNode);
 
 
-
         Set<ValidationMessage> errors = schema.validate(payload);
-        if (!CollectionUtils.isEmpty(errors)){
+        if (!CollectionUtils.isEmpty(errors)) {
             Optional<ValidationMessage> msg = errors.stream().findFirst();
             if (msg.isPresent()) {
                 throw new RequestValidationException(SCHEMA_VALIDATION_ERROR, msg.get().getMessage());
@@ -59,7 +58,6 @@ public class JsonValidationUtil {
         }
 
     }
-
 
 
     public static void validateExtraFields(JsonNode propertiesNode, JsonNode inputNode) {

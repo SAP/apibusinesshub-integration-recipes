@@ -1,4 +1,4 @@
-package net.pricefx.connector.common.connection;
+package net.pricefx.connector.common.util;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -9,7 +9,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.smartgwt.client.types.OperatorId;
-import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.RequestValidationException;
 import net.pricefx.pckg.client.okhttp.PfxCommonService;
 import org.apache.commons.collections4.CollectionUtils;
@@ -102,6 +101,10 @@ public class RequestFactory {
         if (typeCode != null) {
             idFields = Sets.newHashSet(typeCode.getIdentifierFieldNames());
             switch (typeCode) {
+                case CONDITION_RECORD_STAGING:
+                    ((ArrayNode) request.get(HEADER)).add("conditionRecordSetName");
+                    request.get(FIELD_DATA).forEach((JsonNode row) -> ((ArrayNode) row).add(extensionType.getTable()));
+                    return request;
                 case CUSTOMEREXTENSION:
                 case PRODUCTEXTENSION:
                     idFields = extensionType.getBusinessKeys();
@@ -249,7 +252,7 @@ public class RequestFactory {
         }
     }
 
-    public static ObjectNode buildFetchDataRequest(ObjectNode dataRequest, PFXTypeCode typeCode, IPFXExtensionType extensionType){
+    public static ObjectNode buildFetchDataRequest(ObjectNode dataRequest, PFXTypeCode typeCode, IPFXExtensionType extensionType) {
 
         if (typeCode == PFXTypeCode.CONDITION_RECORD) {
             ObjectNode criterion = buildSimpleCriterion(FIELD_CONDITIONRECRODSETID, EQUALS.getValue(),
@@ -268,6 +271,7 @@ public class RequestFactory {
         }
 
     }
+
     public static ObjectNode buildFetchMetadataRequest(PFXTypeCode typeCode, IPFXExtensionType extensionType, String uniqueKey) {
 
         ObjectNode criterion = null;
@@ -281,9 +285,9 @@ public class RequestFactory {
             criterion = buildSimpleCriterion(FIELD_PLI_PRICELISTID, EQUALS.getValue(), uniqueKey);
         } else if (!StringUtils.isEmpty(uniqueKey) && typeCode == PFXTypeCode.ROLE) {
             criterion = buildSimpleCriterion("module", EQUALS.getValue(), uniqueKey);
-        } else if (typeCode == PFXTypeCode.CONDITION_RECORD) {
+        } else if (typeCode!= null && extensionType != null && typeCode.isConditionRecord()) {
             criterion = buildSimpleCriterion(FIELD_CONDITIONRECRODSETID, EQUALS.getValue(),
-                    ((PFXConditionRecordType) extensionType).getTableId()+"");
+                    ((PFXConditionRecordType) extensionType).getTableId() + "");
         } else if (extensionType != null && extensionType.getTypeCode() != null && !StringUtils.isEmpty(extensionType.getTable())) {
             if (typeCode == LOOKUPTABLE) {
                 criterion = buildSimpleCriterion("lookupTableId", EQUALS.getValue(), extensionType.getTable());

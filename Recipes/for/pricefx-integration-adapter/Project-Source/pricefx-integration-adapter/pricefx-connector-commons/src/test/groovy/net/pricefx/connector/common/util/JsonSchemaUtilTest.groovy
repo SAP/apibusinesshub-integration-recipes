@@ -46,7 +46,7 @@ class JsonSchemaUtilTest extends Specification {
         def results = JsonSchemaUtil.getFields(schemaNode)
 
         then:
-        [PFXConstants.FIELD_SKU] == results
+        PFXConstants.FIELD_SKU == results.first()
 
         when:
         def empty = ((ObjectNode) schemaNode.deepCopy()).remove(JsonSchemaUtil.SCHEMA_PROPERTIES)

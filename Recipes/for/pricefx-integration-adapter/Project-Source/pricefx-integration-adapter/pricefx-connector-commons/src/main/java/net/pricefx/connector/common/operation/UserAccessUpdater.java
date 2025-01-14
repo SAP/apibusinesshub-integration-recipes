@@ -5,11 +5,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
 import net.pricefx.connector.common.connection.PFXOperationClient;
-import net.pricefx.connector.common.connection.RequestFactory;
-import net.pricefx.connector.common.util.JsonUtil;
-import net.pricefx.connector.common.util.PFXJsonSchema;
-import net.pricefx.connector.common.util.PFXOperation;
-import net.pricefx.connector.common.util.PFXTypeCode;
+import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.ConnectorException;
 import net.pricefx.connector.common.validation.JsonValidationUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -42,7 +38,7 @@ public class UserAccessUpdater implements IPFXObjectUpsertor {
         this.typeCode = typeCode;
 
         this.schema = (schema != null) ? schema :
-                loadSchema(PFXJsonSchema.USER_ACCESS_REQUEST, typeCode, null, null, false, false, false);
+                JsonSchemaUtil.loadSchema(PFXJsonSchema.USER_ACCESS_REQUEST, typeCode, null, null, false, false, false, true);
 
     }
 

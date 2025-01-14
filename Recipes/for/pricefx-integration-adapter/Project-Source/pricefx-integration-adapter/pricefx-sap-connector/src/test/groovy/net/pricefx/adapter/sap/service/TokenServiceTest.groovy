@@ -13,7 +13,7 @@ class TokenServiceTest extends Specification {
     def builder = ConnectionUtil.getPFXClientBuilder("test", "https://dummy.com", "abcdefg")
     def pfxClient = new MockPFXOperationClient(builder)
 
-    def "get"(){
+    def "get"() {
         when:
         def result = new TokenService(pfxClient).get(new ObjectNode(JsonNodeFactory.instance))
 
@@ -22,7 +22,7 @@ class TokenServiceTest extends Specification {
 
     }
 
-    def "refresh"(){
+    def "refresh"() {
         when:
         def result = new TokenService(pfxClient).refresh("dummy-token", "refresh-dummy-token")
 

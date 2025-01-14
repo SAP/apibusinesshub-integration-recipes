@@ -12,16 +12,7 @@
       "id": {
         "type": "number"
       },
-      "conditionRecordSetId": {
-        "type": "number"
-      },
       "priceUnit": {
-        "type": "string"
-      },
-      "validTo": {
-        "type": "string"
-      },
-      "validFrom": {
         "type": "string"
       },
       "conditionValue": {
@@ -35,12 +26,6 @@
       },
       "integrationStatus": {
         "type": "number"
-      },
-      "lastUpdateDate": {
-        "type": "string"
-      },
-      "createDate": {
-        "type": "string"
       }
     }
   }

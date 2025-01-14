@@ -81,25 +81,25 @@ class PFXTypeCodeTest extends Specification {
         typeCode == PFXTypeCode.QUOTE
 
         when:
-        typeCode = PFXTypeCode.findByTypeCodeOrName("CX3",null)
+        typeCode = PFXTypeCode.findByTypeCodeOrName("CX3", null)
 
         then:
         typeCode == PFXTypeCode.CUSTOMEREXTENSION
 
         when:
-        typeCode = PFXTypeCode.findByTypeCodeOrName("PX3",null)
+        typeCode = PFXTypeCode.findByTypeCodeOrName("PX3", null)
 
         then:
         typeCode == PFXTypeCode.PRODUCTEXTENSION
 
         when:
-        typeCode = PFXTypeCode.findByTypeCodeOrName("x",null)
+        typeCode = PFXTypeCode.findByTypeCodeOrName("x", null)
 
         then:
         null == typeCode
 
         when:
-        typeCode = PFXTypeCode.findByTypeCodeOrName("x",PFXTypeCode.PRICERECORD)
+        typeCode = PFXTypeCode.findByTypeCodeOrName("x", PFXTypeCode.PRICERECORD)
 
         then:
         PFXTypeCode.PRICERECORD == typeCode

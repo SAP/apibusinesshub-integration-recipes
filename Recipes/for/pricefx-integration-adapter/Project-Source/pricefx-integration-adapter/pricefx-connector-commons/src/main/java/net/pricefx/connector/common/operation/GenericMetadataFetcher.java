@@ -3,10 +3,10 @@ package net.pricefx.connector.common.operation;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Lists;
 import net.pricefx.connector.common.connection.PFXOperationClient;
-import net.pricefx.connector.common.connection.RequestFactory;
 import net.pricefx.connector.common.util.IPFXExtensionType;
 import net.pricefx.connector.common.util.JsonUtil;
 import net.pricefx.connector.common.util.PFXTypeCode;
+import net.pricefx.connector.common.util.RequestFactory;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;

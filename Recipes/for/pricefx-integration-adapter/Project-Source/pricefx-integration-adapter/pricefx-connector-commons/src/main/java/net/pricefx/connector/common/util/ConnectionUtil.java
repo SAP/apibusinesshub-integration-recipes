@@ -18,6 +18,7 @@ import static net.pricefx.connector.common.validation.ConnectorException.ErrorTy
 
 public class ConnectionUtil {
     private static final String BASIC = "BASIC";
+
     private ConnectionUtil() {
     }
 

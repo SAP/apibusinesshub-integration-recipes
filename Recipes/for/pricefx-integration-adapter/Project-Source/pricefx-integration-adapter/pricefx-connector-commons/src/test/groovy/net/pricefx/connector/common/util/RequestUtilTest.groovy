@@ -17,6 +17,16 @@ import static net.pricefx.pckg.client.okhttp.PfxCommonService.buildSimpleCriteri
 class RequestUtilTest extends Specification {
     private ObjectMapper mapper = new ObjectMapper()
 
+    def "buildSimpleCriterion"() {
+        when:
+        def result = RequestUtil.buildSimpleCriterion(PFXConstants.FIELD_SKU, OperatorId.NOT_NULL.getValue())
+
+        then:
+        PFXConstants.FIELD_SKU == result.get(PFXConstants.FIELD_FIELDNAME).textValue()
+        OperatorId.NOT_NULL.getValue() == result.get("operator").textValue()
+    }
+
+
     def "getPageSize"() {
         when:
         def result = RequestUtil.getPageSize(null, Constants.MAX_RECORDS)

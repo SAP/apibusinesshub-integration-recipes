@@ -337,7 +337,7 @@ public class JsonUtil {
         return arrayNode;
     }
 
-    public static JsonNode getResponse(JsonNode node){
+    public static JsonNode getResponse(JsonNode node) {
         if (node != null && !node.isMissingNode() && !node.isNull()) {
             node = node.get(FIELD_RESPONSE);
         }
@@ -350,7 +350,7 @@ public class JsonUtil {
 
     }
 
-    public static ArrayNode createArrayNodeFromStrings(List<String> list){
+    public static ArrayNode createArrayNodeFromStrings(List<String> list) {
         ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
         if (!CollectionUtils.isEmpty(list)) {
             list.forEach(arrayNode::add);
@@ -358,7 +358,7 @@ public class JsonUtil {
         return arrayNode;
     }
 
-    public static ArrayNode createArrayNodeFromStrings(Set<String> list){
+    public static ArrayNode createArrayNodeFromStrings(Set<String> list) {
         ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
         if (!CollectionUtils.isEmpty(list)) {
             list.forEach(arrayNode::add);
@@ -366,7 +366,7 @@ public class JsonUtil {
         return arrayNode;
     }
 
-    public static ArrayNode createArrayNode(List<JsonNode> nodes){
+    public static ArrayNode createArrayNode(List<JsonNode> nodes) {
         ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
         if (!CollectionUtils.isEmpty(nodes)) {
             nodes.forEach(arrayNode::add);
