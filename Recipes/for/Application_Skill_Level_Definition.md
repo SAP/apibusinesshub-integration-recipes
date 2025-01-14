@@ -209,3 +209,37 @@ Able to operate inside the system and to perform customizing tasks
 ## Third Party - Professional Skills
 Having a strong technical and functional/business related knowledge to connect to the relevant interfaces
 
+## BTP Alert Notification Service - Basic Skills
+Understanding the primary use cases of the BTP Alert Notification Service, configuring and setting up basic alert notification scenarios, and performing initial monitoring and troubleshooting steps for alert notifications.
+
+## BTP Alert Notification Service - Advanced Skills
+Able to customize alert rules and notification channels to meet specific business requirements, integrating the service with other SAP BTP services and third-party applications, and performing in-depth troubleshooting and analysis of alert notification issues.
+
+## BTP Alert Notification Service - Professional Skills
+Professional skills encompass designing and implementing complex alerting scenarios with multiple conditions and integrations, automating and optimizing alert management processes, and applying best practices to enhance operational efficiency and support strategic business goals.
+
+## Trading Partner Management - Basic Skills
+Ability to configure and deploy standard Trading Partner Management interfaces within the SAP BTP Integration Suite.
+
+## Trading Partner Management - Advanced Skills
+Competence in customizing TPM interfaces, performing monitoring, troubleshooting, and handling dependencies between interfaces and business objects.
+
+## Trading Partner Management - Professional Skills
+Expertise in designing and implementing complex TPM solutions with custom scripting and logic.
+
+## Integration Advisor - Basic Skills
+Ability to use Integration Advisor for creating and deploying standard integration scenarios within the SAP BTP Integration Suite.
+
+
+## Integration Advisor - Advanced Skills
+Proficiency in customizing integration scenarios, including creating and modifying mappings and performing detailed monitoring and troubleshooting.
+
+## Integration Advisor - Professional Skills
+Mastery in developing complex integration scenarios using Integration Advisor, leveraging advanced features such as scripting and custom logic.
+
+## SAP Integration Suite Advanced Event Mesh - Basic Skills
+
+## SAP Integration Suite Advanced Event Mesh - Advanced Skills
+
+## SAP Integration Suite Advanced Event Mesh - Professional Skills
+

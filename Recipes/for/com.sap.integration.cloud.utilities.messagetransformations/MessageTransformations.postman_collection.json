@@ -1,0 +1,823 @@
+{
+	"info": {
+		"_postman_id": "2a3db353-c14b-4d27-b64c-189f846733dc",
+		"name": "MessageTransformations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16441104"
+	},
+	"item": [
+		{
+			"name": "MessageTranformBean",
+			"item": [
+				{
+					"name": "MTB - SimplePlain2XML - TC1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "Date  Mat       PO        GR1GR2GRP3GRP4AMT            CRDT\r\n202310FABCDX    01TEST123 4530450801000100000002825999010152023\r\n202310FABCDF    01TEST456 3530150801000100000014582444010152023\r\n202310FABCDA    01TEST789 5530250801000100000023264182710152023",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/SimplePlain2XML_TC1",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"SimplePlain2XML_TC1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - SimplePlain2XML - TC2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "202310FABCDX    01TEST123 4530450801000100000002825999010152023\r\n202310FABCDF    01TEST456 3530150801000100000014582444010152023\r\n202310FABCDA    01TEST789 5530250801000100000023264182710152023",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/SimplePlain2XML_TC2",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"SimplePlain2XML_TC2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - SimplePlain2XML - TC3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "202310FABCDX    01TEST123 4530450801000100000002825999010152023\r\n202310FABCDF    01TEST456 3530150801000100000014582444010152023\r\n202310FABCDA    01TEST789 5530250801000100000023264182710152023",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/SimplePlain2XML_TC3",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"SimplePlain2XML_TC3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - SimplePlain2XML - TC4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "Date,Mat,PO,GRP1,GRP2,GRP3,GRP4,AMT,CRDT\r\n\r\n202310,FABCDX    ,01TEST123 ,453,045,0801,0001,000000028259990,10152023\r\n202310,FABCDF    ,01TEST456 ,353,015,0801,0001,000000145824440,10152023\r\n202310,FABCDA    ,01TEST789 ,553,025,0801,0001,000000232641827,10152023",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/SimplePlain2XML_TC4",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"SimplePlain2XML_TC4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - SimplePlain2XML - TC5",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "19000001       50        CAMO                15022024  15022024  EUR               58076,87EUR               58076,87762100000  16/01/2024 - 15/02/2024       0039                                                                                       VCON003              0001                \r\n19000178       50        CAMO                15022024  15022024  EUR                6070,85EUR                6070,85762100000  16/01/2024 - 15/02/2024       0001                                                                                       VCON003              0178                \r\n19000131       50        CAMO                15022024  15022024  EUR                1049,49EUR                1049,49762110000  16/01/2024 - 15/02/2024       0001                                                                                       VCON004              0131                \r\n19000199       50        CAMO                15022024  15022024  EUR                 234,87EUR                 234,87762100000  16/01/2024 - 15/02/2024       0001                                                                                       VCON003              0199                \r\n19000201       50        CAMO                15022024  15022024  EUR                1040,19EUR                1040,19762100000  16/01/2024 - 15/02/2024       0001                                                                                       VCON003              0201                \r\n19000001       50        CAMO                15022024  15022024  EUR               51344,41EUR               51344,41762100000  16/01/2024 - 15/02/2024       0097                                                                                       VCON003              0001                \r\n19000001       50        CAMO                15022024  15022024  EUR                 742,29EUR                 742,29762100000  16/01/2024 - 15/02/2024       0199                                                                                       VCON003              0001                \r\n19000001       50        CAMO                15022024  15022024  EUR                1492,26EUR                1492,26762100000  16/01/2024 - 15/02/2024       0249                                                                                       VCON003              0001                \r\n19000001       50        CAMO                15022024  15022024  EUR                2052,98EUR                2052,98762100000  16/01/2024 - 15/02/2024       0252                                                                                       VCON003              0001                \r\n19000001       50        CAMO                15022024  15022024  EUR                2161,91EUR                2161,91762100000  16/01/2024 - 15/02/2024       0253                                                                                       VCON003              0001                \r\n19000001       50        CAMO                15022024  15022024  EUR               32700,30EUR               32700,30762100000  16/01/2024 - 15/02/2024       1013                                                                                       VCON003              0001                q",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/SimplePlain2XML_TC5",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"SimplePlain2XML_TC5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - SimpleXMLToPlain - TC1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<root>\r\n  <row>\r\n    <Date>202310</Date>\r\n    <Mat>FABCDX</Mat>\r\n    <PO>01TEST123</PO>\r\n    <GR1>453</GR1>\r\n    <GR2>045</GR2>\r\n    <GRP3>0801</GRP3>\r\n    <GRP4>0001</GRP4>\r\n    <AMT>000000028259990</AMT>\r\n    <CRDT>10152023</CRDT>\r\n  </row>\r\n  <row>\r\n    <Date>202310</Date>\r\n    <Mat>FABCDF</Mat>\r\n    <PO>01TEST456</PO>\r\n    <GR1>353</GR1>\r\n    <GR2>015</GR2>\r\n    <GRP3>0801</GRP3>\r\n    <GRP4>0001</GRP4>\r\n    <AMT>000000145824440</AMT>\r\n    <CRDT>10152023</CRDT>\r\n  </row>\r\n  <row>\r\n    <Date>202310</Date>\r\n    <Mat>FABCDA</Mat>\r\n    <PO>01TEST789</PO>\r\n    <GR1>553</GR1>\r\n    <GR2>025</GR2>\r\n    <GRP3>0801</GRP3>\r\n    <GRP4>0001</GRP4>\r\n    <AMT>000000232641827</AMT>\r\n    <CRDT>10152023</CRDT>\r\n  </row>\r\n</root>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/SimpleXMLToPlain_TC1",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"SimpleXMLToPlain_TC1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - SimpleXMLToPlain - TC2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<root>\r\n  <row>\r\n    <Date>202310</Date>\r\n    <Mat>FABCDX</Mat>\r\n    <PO>01TEST123</PO>\r\n    <GR1>453</GR1>\r\n    <GR2>045</GR2>\r\n    <GRP3>0801</GRP3>\r\n    <GRP4>0001</GRP4>\r\n    <AMT>000000028259990</AMT>\r\n    <CRDT>10152023</CRDT>\r\n  </row>\r\n  <row>\r\n    <Date>202310</Date>\r\n    <Mat>FABCDF</Mat>\r\n    <PO>01TEST456</PO>\r\n    <GR1>353</GR1>\r\n    <GR2>015</GR2>\r\n    <GRP3>0801</GRP3>\r\n    <GRP4>0001</GRP4>\r\n    <AMT>000000145824440</AMT>\r\n    <CRDT>10152023</CRDT>\r\n  </row>\r\n  <row>\r\n    <Date>202310</Date>\r\n    <Mat>FABCDA</Mat>\r\n    <PO>01TEST789</PO>\r\n    <GR1>553</GR1>\r\n    <GR2>025</GR2>\r\n    <GRP3>0801</GRP3>\r\n    <GRP4>0001</GRP4>\r\n    <AMT>000000232641827</AMT>\r\n    <CRDT>10152023</CRDT>\r\n  </row>\r\n</root>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/StructurePlainToXML_TC2",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"StructurePlainToXML_TC2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - SimpleXMLToPlain - TC3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<root>\r\n  <row>\r\n    <Date>202310</Date>\r\n    <Mat>FABCDX</Mat>\r\n    <PO>01TEST123</PO>\r\n    <GR1>453</GR1>\r\n    <GR2>045</GR2>\r\n    <GRP3>0801</GRP3>\r\n    <GRP4>0001</GRP4>\r\n    <AMT>000000028259990</AMT>\r\n    <CRDT>10152023</CRDT>\r\n  </row>\r\n  <row>\r\n    <Date>202310</Date>\r\n    <Mat>FABCDF</Mat>\r\n    <PO>01TEST456</PO>\r\n    <GR1>353</GR1>\r\n    <GR2>015</GR2>\r\n    <GRP3>0801</GRP3>\r\n    <GRP4>0001</GRP4>\r\n    <AMT>000000145824440</AMT>\r\n    <CRDT>10152023</CRDT>\r\n  </row>\r\n  <row>\r\n    <Date>202310</Date>\r\n    <Mat>FABCDA</Mat>\r\n    <PO>01TEST789</PO>\r\n    <GR1>553</GR1>\r\n    <GR2>025</GR2>\r\n    <GRP3>0801</GRP3>\r\n    <GRP4>0001</GRP4>\r\n    <AMT>000000232641827</AMT>\r\n    <CRDT>10152023</CRDT>\r\n  </row>\r\n</root>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/SimpleXMLToPlain_TC3",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"SimpleXMLToPlain_TC3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - StructurePlainToXML - TC1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "AA1234567890\r\nBBABCABC\r\nBBXYZXYZ\r\nCC12345",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/StructurePlainToXML_TC1",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"StructurePlainToXML_TC1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - StructurePlainToXML - TC2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "1234567890,AA\r\nBB,111,111\r\nBB,XYZ,XYZ\r\nCC,12345\r\n1234567890,AA\r\nBB,222,222\r\nBB,XYZ,XYZ\r\nCC,12345\r\n1234567890,AA\r\n1234567890,AA\r\nBB,222,222",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/StructurePlainToXML_TC2",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"StructurePlainToXML_TC2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - StructurePlainToXML - TC3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "1234567890,AA\r\nBB111111\r\nBBXYZXYZ\r\nCC,12345\r\n1234567890,AA\r\nBB222222\r\nBBXYZXYZ\r\nCC,12345\r\n1234567890,AA\r\n1234567890,AA\r\nBB222222",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/StructurePlainToXML_TC3",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"StructurePlainToXML_TC3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - StructurePlainToXML - TC4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "field-nameA,MyKey\r\nMyKey,field-nameB1,field-nameB2\r\nMyKey,field-nameC\r\n1234567890,AA\r\nBB,111,111\r\nBB,XYZ,XYZ\r\nCC,12345\r\n1234567890,AA\r\nBB,222,222\r\nBB,XYZ,XYZ\r\nCC,12345\r\n1234567890,AA\r\n1234567890,AA\r\nBB,222,222",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/StructurePlainToXML_TC4",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"StructurePlainToXML_TC4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - StructurePlainToXML - TC5",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "AA1234567890\r\nBBABCABC\r\nCC12345\r\nBBXYZXYZ\r\nAA1234567890\r\nBBABCABC\r\nBBXYZXYZ\r\nCC12345\r\nCC12345",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/StructurePlainToXML_TC5",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"StructurePlainToXML_TC5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - StructurePlainToXML - TC6",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "AA1234567890\r\nBBABCABC\r\nCC12345\r\nBBXYZXYZ\r\nAA1234567890\r\nBBABCABC\r\nBBXYZXYZ\r\nCC12345\r\nCC12345",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/StructurePlainToXML_TC6",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"StructurePlainToXML_TC6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - StructurePlainToXML - TC7",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "19000001       50        CAMO                15022024  15022024  EUR               58076,87EUR               58076,87762100000  16/01/2024 - 15/02/2024       0039                                                                                       VCON003              0001                \r\n19000178       50        CAMO                15022024  15022024  EUR                6070,85EUR                6070,85762100000  16/01/2024 - 15/02/2024       0001                                                                                       VCON003              0178                \r\n19000131       50        CAMO                15022024  15022024  EUR                1049,49EUR                1049,49762110000  16/01/2024 - 15/02/2024       0001                                                                                       VCON004              0131                \r\n19000199       50        CAMO                15022024  15022024  EUR                 234,87EUR                 234,87762100000  16/01/2024 - 15/02/2024       0001                                                                                       VCON003              0199                \r\n19000201       50        CAMO                15022024  15022024  EUR                1040,19EUR                1040,19762100000  16/01/2024 - 15/02/2024       0001                                                                                       VCON003              0201                \r\n19000001       50        CAMO                15022024  15022024  EUR               51344,41EUR               51344,41762100000  16/01/2024 - 15/02/2024       0097                                                                                       VCON003              0001                \r\n19000001       50        CAMO                15022024  15022024  EUR                 742,29EUR                 742,29762100000  16/01/2024 - 15/02/2024       0199                                                                                       VCON003              0001                \r\n19000001       50        CAMO                15022024  15022024  EUR                1492,26EUR                1492,26762100000  16/01/2024 - 15/02/2024       0249                                                                                       VCON003              0001                \r\n19000001       50        CAMO                15022024  15022024  EUR                2052,98EUR                2052,98762100000  16/01/2024 - 15/02/2024       0252                                                                                       VCON003              0001                \r\n19000001       50        CAMO                15022024  15022024  EUR                2161,91EUR                2161,91762100000  16/01/2024 - 15/02/2024       0253                                                                                       VCON003              0001                \r\n19000001       50        CAMO                15022024  15022024  EUR               32700,30EUR               32700,30762100000  16/01/2024 - 15/02/2024       1013                                                                                       VCON003              0001                ",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/StructurePlainToXML_TC7",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"StructurePlainToXML_TC7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - StructureXMLtoPlain - TC1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<ns1:root xmlns:ns1=\"http://xi.com/test\">\r\n  <MyRecordset>\r\n    <NameA>\r\n      <MyKey>AA</MyKey>\r\n      <field-nameA>1234567890</field-nameA>\r\n    </NameA>\r\n    <NameB>\r\n      <field-nameB1>ABC</field-nameB1>\r\n      <field-nameB2>ABC</field-nameB2>\r\n    </NameB>\r\n    <NameB>\r\n      <field-nameB1>XYZ</field-nameB1>\r\n      <field-nameB2>XYZ</field-nameB2>\r\n    </NameB>\r\n    <NameC>\r\n      <field-nameC>12345</field-nameC>\r\n    </NameC>\r\n  </MyRecordset>\r\n</ns1:root>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/StructureXMLtoPlain_TC1",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"StructureXMLtoPlain_TC1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - StructureXMLtoPlain - TC2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<ns1:root xmlns:ns1=\"http://xi.com/test\">\r\n  <MyRecordset>\r\n    <NameA>\r\n      <MyKey>AA</MyKey>\r\n      <field-nameA>1234567890</field-nameA>\r\n    </NameA>\r\n    <NameB>\r\n      <field-nameB1>ABC</field-nameB1>\r\n      <field-nameB2>ABC</field-nameB2>\r\n    </NameB>\r\n    <NameB>\r\n      <field-nameB1>XYZ</field-nameB1>\r\n      <field-nameB2>XYZ</field-nameB2>\r\n    </NameB>\r\n    <NameC>\r\n      <field-nameC>12345</field-nameC>\r\n    </NameC>\r\n  </MyRecordset>\r\n</ns1:root>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/StructureXMLtoPlain_TC1",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"StructureXMLtoPlain_TC1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MTB - StructureXMLtoPlain - TC3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<ns1:root xmlns:ns1=\"http://xi.com/test\">\r\n  <MyRecordset>\r\n    <NameA>\r\n      <MyKey>AA</MyKey>\r\n      <field-nameA>1234567890</field-nameA>\r\n    </NameA>\r\n    <NameB>\r\n      <field-nameB1>ABC</field-nameB1>\r\n      <field-nameB2>ABC</field-nameB2>\r\n    </NameB>\r\n    <NameB>\r\n      <field-nameB1>XYZ</field-nameB1>\r\n      <field-nameB2>XYZ</field-nameB2>\r\n    </NameB>\r\n    <NameC>\r\n      <field-nameC>12345</field-nameC>\r\n    </NameC>\r\n  </MyRecordset>\r\n</ns1:root>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/MTB/StructureXMLtoPlain_TC1",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"MTB",
+								"StructureXMLtoPlain_TC1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "XMLAnonymizerBean",
+			"item": [
+				{
+					"name": "XMLA - RemovePrefix",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<urn:MT_AMConversion_req xmlns:urn=\"http: //www.host.com/aoc\">\r\n    <customer>\r\n        <name>TestName</name>\r\n    </customer>\r\n    <document>\r\n        <number testAttr=\"Attrib2\">1000</number>\r\n    </document>\r\n    <customer2>\r\n        <name>TestName</name>\r\n    </customer2>\r\n    <address>TestAddress</address>\r\n    <status>OK</status>\r\n</urn:MT_AMConversion_req>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/XMLAnonymizer/RemovePrefix",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"XMLAnonymizer",
+								"RemovePrefix"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "XMLA - RenameNamespaces",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<urn:MT_AMConversion_req xmlns:urn=\"urn:XMLAnonymizer\" xmlns:p2=\"urn:SecondNamespace\">\r\n    <p2:customer>\r\n        <name>TestName</name>\r\n    </p2:customer>\r\n    <p3:document xmlns:p3=\"urn:ThirdNamespace\">\r\n        <p3:number testAttr=\"Attrib2\">1000</p3:number>\r\n    </p3:document>\r\n    <p2:customer2>\r\n        <name>TestName</name>\r\n    </p2:customer2>\r\n    <address>TestAddress</address>\r\n    <status>OK</status>\r\n</urn:MT_AMConversion_req>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/XMLAnonymizer/RenameNamespaces",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"XMLAnonymizer",
+								"RenameNamespaces"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "IDOC",
+			"item": [
+				{
+					"name": "ORDERS",
+					"item": [
+						{
+							"name": "IDOC - XML2Flat - ORDERS05",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<ORDERS05>\r\n <IDOC BEGIN=\"1\">\r\n  <EDI_DC40 SEGMENT=\"1\">\r\n   <TABNAM>EDI_DC40</TABNAM>\r\n   <MANDT>800</MANDT>\r\n   <DOCNUM>0000000000225645</DOCNUM>\r\n   <DOCREL>758</DOCREL>\r\n   <STATUS>30</STATUS>\r\n   <DIRECT>1</DIRECT>\r\n   <OUTMOD>2</OUTMOD>\r\n   <IDOCTYP>ORDERS05</IDOCTYP>\r\n   <MESTYP>ORDERS</MESTYP>\r\n   <STDMES>ORDERS</STDMES>\r\n   <SNDPOR>SAPT33</SNDPOR>\r\n   <SNDPRT>LS</SNDPRT>\r\n   <SNDPRN>T33CLNT800</SNDPRN>\r\n   <RCVPOR>PORT_RM</RCVPOR>\r\n   <RCVPRT>LS</RCVPRT>\r\n   <RCVPRN>CPI</RCVPRN>\r\n   <CREDAT>20240731</CREDAT>\r\n   <CRETIM>162035</CRETIM>\r\n  </EDI_DC40>\r\n  <E1EDK01 SEGMENT=\"1\">\r\n   <ACTION>000</ACTION>\r\n   <CURCY>EUR</CURCY>\r\n   <BSART>IIL4</BSART>\r\n   <BELNR>P8218007</BELNR>\r\n   <BRGEW>5</BRGEW>\r\n   <GEWEI>KG</GEWEI>\r\n   <ABLAD>IRGENDWO</ABLAD>\r\n   <VSART>02</VSART>\r\n   <VSART_BEZ>RISK/PENSION</VSART_BEZ>\r\n  </E1EDK01>\r\n  <E1EDK14 SEGMENT=\"1\">\r\n   <QUALF>008</QUALF>\r\n   <ORGID>1000</ORGID>\r\n  </E1EDK14>\r\n  <E1EDK14 SEGMENT=\"1\">\r\n   <QUALF>007</QUALF>\r\n   <ORGID>10</ORGID>\r\n  </E1EDK14>\r\n  <E1EDK14 SEGMENT=\"1\">\r\n   <QUALF>006</QUALF>\r\n   <ORGID>00</ORGID>\r\n  </E1EDK14>\r\n  <E1EDK03 SEGMENT=\"1\">\r\n   <IDDAT>011</IDDAT>\r\n   <DATUM>20201215</DATUM>\r\n  </E1EDK03>\r\n  <E1EDK04 SEGMENT=\"1\"/>\r\n  <E1EDK05 SEGMENT=\"1\"/>\r\n  <E1EDKA1 SEGMENT=\"1\">\r\n   <PARVW>WE</PARVW>\r\n   <PARTN>1460</PARTN>\r\n   <NAME1>RECIPIENT</NAME1>\r\n   <STRAS>1234 BT DRIVE</STRAS>\r\n   <ORT01>CAMBRIDGE</ORT01>\r\n   <PSTLZ>02138</PSTLZ>\r\n   <E1EDKA3 SEGMENT=\"1\">\r\n    <QUALP>001</QUALP>\r\n    <STDPN>LS_D44</STDPN>\r\n   </E1EDKA3>\r\n  </E1EDKA1>\r\n  <E1EDKA1 SEGMENT=\"1\">\r\n   <PARVW>AG</PARVW>\r\n   <PARTN>1460</PARTN>\r\n   <NAME1>BT NAME</NAME1>\r\n   <E1EDKA3 SEGMENT=\"1\">\r\n    <QUALP>001</QUALP>\r\n    <STDPN>LS_D44</STDPN>\r\n   </E1EDKA3>\r\n  </E1EDKA1>\r\n  <E1EDK02 SEGMENT=\"1\">\r\n   <QUALF>001</QUALF>\r\n   <BELNR>P8218007</BELNR>\r\n   <DATUM>20201215</DATUM>\r\n  </E1EDK02>\r\n  <E1EDK17 SEGMENT=\"1\"/>\r\n  <E1EDK18 SEGMENT=\"1\"/>\r\n  <E1EDK35 SEGMENT=\"1\"/>\r\n  <E1EDK36 SEGMENT=\"1\"/>\r\n  <E1EDKT1 SEGMENT=\"1\">\r\n   <E1EDKT2 SEGMENT=\"1\"/>\r\n  </E1EDKT1>\r\n  <E1EDP01 SEGMENT=\"1\">\r\n   <POSEX>1</POSEX>\r\n   <MENGE>1</MENGE>\r\n   <E1EDP02 SEGMENT=\"1\"/>\r\n   <E1CUREF SEGMENT=\"1\"/>\r\n   <E1ADDI1 SEGMENT=\"1\"/>\r\n   <E1EDP03 SEGMENT=\"1\"/>\r\n   <E1EDP04 SEGMENT=\"1\"/>\r\n   <E1EDP05 SEGMENT=\"1\">\r\n    <E1EDPS5 SEGMENT=\"1\"/>\r\n   </E1EDP05>\r\n   <E1EDP20 SEGMENT=\"1\"/>\r\n   <E1EDPA1 SEGMENT=\"1\">\r\n    <E1EDPA3 SEGMENT=\"1\"/>\r\n   </E1EDPA1>\r\n   <E1EDP19 SEGMENT=\"1\">\r\n    <QUALF>003</QUALF>\r\n    <IDTNR>M-12</IDTNR>\r\n   </E1EDP19>\r\n   <E1EDPAD SEGMENT=\"1\">\r\n    <E1TXTH1 SEGMENT=\"1\">\r\n     <E1TXTP1 SEGMENT=\"1\"/>\r\n    </E1TXTH1>\r\n   </E1EDPAD>\r\n   <E1EDP17 SEGMENT=\"1\"/>\r\n   <E1EDP18 SEGMENT=\"1\"/>\r\n   <E1EDP35 SEGMENT=\"1\"/>\r\n   <E1EDPT1 SEGMENT=\"1\">\r\n    <E1EDPT2 SEGMENT=\"1\"/>\r\n   </E1EDPT1>\r\n   <E1EDC01 SEGMENT=\"1\">\r\n    <E1EDC02 SEGMENT=\"1\"/>\r\n    <E1EDC03 SEGMENT=\"1\"/>\r\n    <E1EDC04 SEGMENT=\"1\"/>\r\n    <E1EDC05 SEGMENT=\"1\"/>\r\n    <E1EDC06 SEGMENT=\"1\"/>\r\n    <E1EDC07 SEGMENT=\"1\"/>\r\n    <E1EDCA1 SEGMENT=\"1\"/>\r\n    <E1EDC19 SEGMENT=\"1\"/>\r\n    <E1EDC17 SEGMENT=\"1\"/>\r\n    <E1EDC18 SEGMENT=\"1\"/>\r\n    <E1EDCT1 SEGMENT=\"1\">\r\n     <E1EDCT2 SEGMENT=\"1\"/>\r\n    </E1EDCT1>\r\n   </E1EDC01>\r\n  </E1EDP01>\r\n  <E1CUCFG SEGMENT=\"1\">\r\n   <E1CUINS SEGMENT=\"1\"/>\r\n   <E1CUPRT SEGMENT=\"1\"/>\r\n   <E1CUVAL SEGMENT=\"1\"/>\r\n   <E1CUBLB SEGMENT=\"1\"/>\r\n  </E1CUCFG>\r\n  <E1EDL37 SEGMENT=\"1\">\r\n   <E1EDL39 SEGMENT=\"1\"/>\r\n   <E1EDL38 SEGMENT=\"1\"/>\r\n   <E1EDL44 SEGMENT=\"1\"/>\r\n  </E1EDL37>\r\n  <E1EDS01 SEGMENT=\"1\"/>\r\n </IDOC>\r\n</ORDERS05>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{Host}}/http/IDOCFlatConvertor/TC2/XML2Flat",
+									"protocol": "https",
+									"host": [
+										"{{Host}}"
+									],
+									"path": [
+										"http",
+										"IDOCFlatConvertor",
+										"TC2",
+										"XML2Flat"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IDOC - Flat2XML - ORDERS05",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "EDI_DC40  8000000000000225645758 3012  ORDERS05                                                    ORDERS                                     ORDERSSAPT33    LS  T33CLNT800                                                                                           PORT_RM   LS  CPI                                                                                                  20240731162035                                                                                                                                    \r\nE2EDK01005                    800000000000022564500000100000001000 EUR                                                                        IIL4P8218007                                             5                 KG     IRGENDWO                     02RISK/PENSION                                                                                                                                                         \r\nE2EDK14                       8000000000000225645000002000000020081000                               \r\nE2EDK14                       80000000000002256450000030000000200710                                 \r\nE2EDK14                       80000000000002256450000040000000200600                                 \r\nE2EDK03                       80000000000002256450000050000000201120201215      \r\nE2EDK04001                    800000000000022564500000600000002                                                                                                           \r\nE2EDK05001                    800000000000022564500000700000002                                                                                                                                                                                         \r\nE2EDKA1003                    800000000000022564500000800000002WE 1460                              RECIPIENT                                                                                                                                   1234 BT DRIVE                                                                                            CAMBRIDGE                                   02138                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \r\nE2EDKA3                       800000000000022564500000900000803001LS_D44                                                                \r\nE2EDKA1003                    800000000000022564500001000000002AG 1460                              BT NAME                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       \r\nE2EDKA3                       800000000000022564500001100001003001LS_D44                                                                \r\nE2EDK02                       800000000000022564500001200000002001P8218007                                 20201215      \r\nE2EDK17                       800000000000022564500001300000002                                                                            \r\nE2EDK18                       800000000000022564500001400000002                                                                                         \r\nE2EDK35000                    800000000000022564500001500000002                                                                              \r\nE2EDK36000                    800000000000022564500001600000002                                                                                                                  \r\nE2EDKT1002                    800000000000022564500001700000002                                                                                         \r\nE2EDKT2001                    800000000000022564500001800001703                                                                        \r\nE2EDP01008                    8000000000000225645000019000000021          1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   \r\nE2EDP02001                    800000000000022564500002000001903                                                                                                                           \r\nE2CUREF                       800000000000022564500002100001903                    \r\nE2ADDI1001                    800000000000022564500002200001903                                                                                                                                                                                                                                                                          \r\nE2EDP03                       800000000000022564500002300001903                 \r\nE2EDP04001                    800000000000022564500002400001903                                                                                                           \r\nE2EDP05002                    800000000000022564500002500001903                                                                                                                                                                                                                                           \r\nE2EDPS5000                    800000000000022564500002600002504                              \r\nE2EDP20001                    800000000000022564500002700001903                                                             \r\nE2EDPA1003                    800000000000022564500002800001903                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   \r\nE2EDPA3                       800000000000022564500002900002804                                                                         \r\nE2EDP19002                    800000000000022564500003000001903003M-12                                                                                                                                                                                                                                           \r\nE2EDPAD001                    800000000000022564500003100001903                 \r\nE2TXTH1001                    800000000000022564500003200003104                                                                                                \r\nE2TXTP1                       800000000000022564500003300003205                                                                                                                                      \r\nE2EDP17001                    800000000000022564500003400001903                                                                              \r\nE2EDP18001                    800000000000022564500003500001903                                                                                         \r\nE2EDP35000                    800000000000022564500003600001903                                                                              \r\nE2EDPT1001                    800000000000022564500003700001903         \r\nE2EDPT2001                    800000000000022564500003800003704                                                                        \r\nE2EDC01                       800000000000022564500003900001903                                                                                                                                                                                                                                                                                                                                                           \r\nE2EDC02                       800000000000022564500004000003904                                                              \r\nE2EDC03                       800000000000022564500004100003904                 \r\nE2EDC04                       800000000000022564500004200003904                                                         \r\nE2EDC05                       800000000000022564500004300003904                                                                                                                                                                                                                    \r\nE2EDC06000                    800000000000022564500004400003904                                                                                     \r\nE2EDC07000                    800000000000022564500004500003904                                                                           \r\nE2EDCA1                       800000000000022564500004600003904                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           \r\nE2EDC19                       800000000000022564500004700003904                                                                                                            \r\nE2EDC17                       800000000000022564500004800003904                                                                            \r\nE2EDC18                       800000000000022564500004900003904                   \r\nE2EDCT1                       800000000000022564500005000003904       \r\nE2EDCT2                       800000000000022564500005100005005                                                                      \r\nE2CUCFG003                    800000000000022564500005200000002                                                                                                                                                                                                                                                                                                                                                                                                             \r\nE2CUINS002                    800000000000022564500005300005203                                                                                                                                                                                                                                   \r\nE2CUPRT002                    800000000000022564500005400005203                                                                                                                     \r\nE2CUVAL002                    800000000000022564500005500005203                                                                                                                                                                                                                                                                              \r\nE2CUBLB000                    800000000000022564500005600005203                                                                                                                                                                                                                                                          \r\nE2EDL37005                    800000000000022564500005700000002                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               \r\nE2EDL39000                    800000000000022564500005800005703                       \r\nE2EDL38                       800000000000022564500005900005703                                                                                                                                                                                    \r\nE2EDL44004                    800000000000022564500006000005703                                                                                                                                                                                                                                                                                                                                                                                              \r\nE2EDS01                       800000000000022564500006100000002                           \r\n",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{Host}}/http/IDOCFlatConvertor/TC1/Flat2XML",
+									"protocol": "https",
+									"host": [
+										"{{Host}}"
+									],
+									"path": [
+										"http",
+										"IDOCFlatConvertor",
+										"TC1",
+										"Flat2XML"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "INVOIC",
+					"item": [
+						{
+							"name": "IDOC - XML2Flat - INVOICE01",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<INVOIC01>\r\n\t<IDOC BEGIN=\"1\">\r\n\t\t<EDI_DC40 SEGMENT=\"1\">\r\n\t\t\t<TABNAM>EDI_DC40  </TABNAM>\r\n\t\t\t<MANDT>132</MANDT>\r\n\t\t\t<DOCNUM>4546546565456465</DOCNUM>\r\n\t\t\t<DOCREL>756 </DOCREL>\r\n\t\t\t<STATUS>30</STATUS>\r\n\t\t\t<DIRECT>1</DIRECT>\r\n\t\t\t<OUTMOD>2</OUTMOD>\r\n\t\t\t<EXPRSS/>\r\n\t\t\t<TEST/>\r\n\t\t\t<IDOCTYP>INVOIC01                      </IDOCTYP>\r\n\t\t\t<MESTYP>INVOIC</MESTYP>\r\n\t\t\t<STD>E</STD>\r\n\t\t\t<STDVRS>321321</STDVRS>\r\n\t\t\t<STDMES>INVOIC</STDMES>\r\n\t\t\t<SNDPOR>123123</SNDPOR>\r\n\t\t\t<SNDPRT>LS</SNDPRT>\r\n\t\t\t<SNDPRN>1231231231</SNDPRN>\r\n\t\t\t<RCVPOR>IS_BAB_INV</RCVPOR>\r\n\t\t\t<RCVPRT>KU</RCVPRT>\r\n\t\t\t<RCVPFC>RE</RCVPFC>\r\n\t\t\t<RCVPRN>1231312312</RCVPRN>\r\n\t\t\t<CREDAT>20240424</CREDAT>\r\n\t\t\t<CRETIM>180850</CRETIM>\r\n\t\t\t<ARCKEY>urn:sap.com:msgid=1231231231232131312312</ARCKEY>\r\n\t\t\t<SERIAL>1231231231233</SERIAL>\r\n\t\t</EDI_DC40>\r\n\t\t<E1EDK01 SEGMENT=\"1\">\r\n\t\t\t<CURCY>EUR</CURCY>\r\n\t\t\t<HWAER>EUR</HWAER>\r\n\t\t\t<WKURS>1.00000</WKURS>\r\n\t\t\t<ZTERM>rtyu</ZTERM>\r\n\t\t\t<KUNDEUINR>ewrtewtert</KUNDEUINR>\r\n\t\t\t<EIGENUINR>234234234</EIGENUINR>\r\n\t\t\t<BSART>444</BSART>\r\n\t\t\t<BELNR>2342342343</BELNR>\r\n\t\t\t<NTGEW>120.000</NTGEW>\r\n\t\t\t<BRGEW>130.000</BRGEW>\r\n\t\t\t<GEWEI>KGM</GEWEI>\r\n\t\t\t<FKART_RL>LR</FKART_RL>\r\n\t\t\t<RECIPNT_NO>0000590381</RECIPNT_NO>\r\n\t\t\t<FKTYP>L</FKTYP>\r\n\t\t</E1EDK01>\r\n\t\t<E1EDKA1 SEGMENT=\"1\">\r\n\t\t\t<PARVW>RS</PARVW>\r\n\t\t\t<PARTN>234234234234</PARTN>\r\n\t\t\t<NAME1>gdfgdrfgdfgdfg</NAME1>\r\n\t\t\t<STRAS>dfgdfgdfgdfg</STRAS>\r\n\t\t\t<ORT01>dgfdfgdfg</ORT01>\r\n\t\t\t<PSTLZ>423432</PSTLZ>\r\n\t\t\t<LAND1>ES</LAND1>\r\n\t\t\t<TELF1>342343242</TELF1>\r\n\t\t\t<TELFX>242342342</TELFX>\r\n\t\t\t<SPRAS>S</SPRAS>\r\n\t\t\t<REGIO>30</REGIO>\r\n\t\t\t<BNAME>234234</BNAME>\r\n\t\t\t<PAORG>10</PAORG>\r\n\t\t\t<ORGTX>234234234</ORGTX>\r\n\t\t</E1EDKA1>\r\n\t\t<E1EDKA1 SEGMENT=\"1\">\r\n\t\t\t<PARVW>AG</PARVW>\r\n\t\t\t<NAME1>2345234234</NAME1>\r\n\t\t\t<STRAS>efsgrg</STRAS>\r\n\t\t\t<ORT01>gregegerger</ORT01>\r\n\t\t\t<PSTLZ>432423</PSTLZ>\r\n\t\t\t<LAND1>ES</LAND1>\r\n\t\t\t<TELF1>324234243</TELF1>\r\n\t\t\t<TELFX>432423423</TELFX>\r\n\t\t\t<SPRAS>S</SPRAS>\r\n\t\t\t<REGIO>38</REGIO>\r\n\t\t\t<SPRAS_ISO>ES</SPRAS_ISO>\r\n\t\t</E1EDKA1>\r\n\t\t<E1EDKA1 SEGMENT=\"1\">\r\n\t\t\t<PARVW>RE</PARVW>\r\n\t\t\t<NAME1>fdgvgredsgdg</NAME1>\r\n\t\t\t<STRAS>rgdsgrdgdrg</STRAS>\r\n\t\t\t<ORT01>drgrdegdg</ORT01>\r\n\t\t\t<PSTLZ>34343</PSTLZ>\r\n\t\t\t<LAND1>ES</LAND1>\r\n\t\t\t<TELF1>235235235</TELF1>\r\n\t\t\t<TELF2>235235235</TELF2>\r\n\t\t\t<TELFX>235235235</TELFX>\r\n\t\t\t<SPRAS>S</SPRAS>\r\n\t\t\t<REGIO>08</REGIO>\r\n\t\t\t<SPRAS_ISO>ES</SPRAS_ISO>\r\n\t\t</E1EDKA1>\r\n\t\t<E1EDKA1 SEGMENT=\"1\">\r\n\t\t\t<PARVW>RG</PARVW>\r\n\t\t\t<NAME1>342234234234</NAME1>\r\n\t\t\t<STRAS>esfesfsefsef</STRAS>\r\n\t\t\t<ORT01>sefsefsefse</ORT01>\r\n\t\t\t<PSTLZ>343434</PSTLZ>\r\n\t\t\t<LAND1>ES</LAND1>\r\n\t\t\t<TELF1>235235235</TELF1>\r\n\t\t\t<TELF2>235235235</TELF2>\r\n\t\t\t<TELBX>R</TELBX>\r\n\t\t\t<TELFX>234234324</TELFX>\r\n\t\t\t<SPRAS>S</SPRAS>\r\n\t\t\t<REGIO>08</REGIO>\r\n\t\t\t<SPRAS_ISO>ES</SPRAS_ISO>\r\n\t\t</E1EDKA1>\r\n\t\t<E1EDKA1 SEGMENT=\"1\">\r\n\t\t\t<PARVW>WE</PARVW>\r\n\t\t\t<NAME1>gardgerasgesrg</NAME1>\r\n\t\t\t<STRAS>grewrewrwerewr</STRAS>\r\n\t\t\t<ORT01>ertjggjhjgh</ORT01>\r\n\t\t\t<PSTLZ>43234</PSTLZ>\r\n\t\t\t<LAND1>ES</LAND1>\r\n\t\t\t<TELF1>235235235</TELF1>\r\n\t\t\t<TELFX>235235235</TELFX>\r\n\t\t\t<SPRAS>S</SPRAS>\r\n\t\t\t<REGIO>38</REGIO>\r\n\t\t\t<SPRAS_ISO>ES</SPRAS_ISO>\r\n\t\t</E1EDKA1>\r\n\t\t<E1EDK02 SEGMENT=\"1\">\r\n\t\t\t<QUALF>009</QUALF>\r\n\t\t\t<BELNR>235235235</BELNR>\r\n\t\t\t<DATUM>3242342</DATUM>\r\n\t\t</E1EDK02>\r\n\t\t<E1EDK02 SEGMENT=\"1\">\r\n\t\t\t<QUALF>001</QUALF>\r\n\t\t\t<BELNR>235235235</BELNR>\r\n\t\t\t<DATUM>23423423</DATUM>\r\n\t\t</E1EDK02>\r\n\t\t<E1EDK02 SEGMENT=\"1\">\r\n\t\t\t<QUALF>002</QUALF>\r\n\t\t\t<BELNR>235235235</BELNR>\r\n\t\t\t<DATUM>23432424</DATUM>\r\n\t\t</E1EDK02>\r\n\t\t<E1EDK02 SEGMENT=\"1\">\r\n\t\t\t<QUALF>012</QUALF>\r\n\t\t\t<BELNR>23444</BELNR>\r\n\t\t\t<DATUM>4242344</DATUM>\r\n\t\t</E1EDK02>\r\n\t\t<E1EDK02 SEGMENT=\"1\">\r\n\t\t\t<QUALF>017</QUALF>\r\n\t\t\t<BELNR>23423423</BELNR>\r\n\t\t</E1EDK02>\r\n\t\t<E1EDK02 SEGMENT=\"1\">\r\n\t\t\t<QUALF>005</QUALF>\r\n\t\t\t<BELNR>0</BELNR>\r\n\t\t</E1EDK02>\r\n\t\t<E1EDK03 SEGMENT=\"1\">\r\n\t\t\t<IDDAT>026</IDDAT>\r\n\t\t\t<DATUM>2342344</DATUM>\r\n\t\t\t<UZEIT>42332</UZEIT>\r\n\t\t</E1EDK03>\r\n\t\t<E1EDK03 SEGMENT=\"1\">\r\n\t\t\t<IDDAT>002</IDDAT>\r\n\t\t\t<DATUM>23423443</DATUM>\r\n\t\t</E1EDK03>\r\n\t\t<E1EDK03 SEGMENT=\"1\">\r\n\t\t\t<IDDAT>001</IDDAT>\r\n\t\t\t<DATUM>23423443</DATUM>\r\n\t\t</E1EDK03>\r\n\t\t<E1EDK03 SEGMENT=\"1\">\r\n\t\t\t<IDDAT>022</IDDAT>\r\n\t\t\t<DATUM>23424323</DATUM>\r\n\t\t</E1EDK03>\r\n\t\t<E1EDK03 SEGMENT=\"1\">\r\n\t\t\t<IDDAT>012</IDDAT>\r\n\t\t\t<DATUM>534345</DATUM>\r\n\t\t</E1EDK03>\r\n\t\t<E1EDK03 SEGMENT=\"1\">\r\n\t\t\t<IDDAT>011</IDDAT>\r\n\t\t\t<DATUM>54354345</DATUM>\r\n\t\t</E1EDK03>\r\n\t\t<E1EDK03 SEGMENT=\"1\">\r\n\t\t\t<IDDAT>024</IDDAT>\r\n\t\t\t<DATUM>34345345</DATUM>\r\n\t\t</E1EDK03>\r\n\t\t<E1EDK03 SEGMENT=\"1\">\r\n\t\t\t<IDDAT>028</IDDAT>\r\n\t\t\t<DATUM>34534534</DATUM>\r\n\t\t\t<UZEIT>04</UZEIT>\r\n\t\t</E1EDK03>\r\n\t\t<E1EDK03 SEGMENT=\"1\">\r\n\t\t\t<IDDAT>048</IDDAT>\r\n\t\t\t<DATUM>20220401</DATUM>\r\n\t\t</E1EDK03>\r\n\t\t<E1EDK04 SEGMENT=\"1\">\r\n\t\t\t<MWSKZ>IGI</MWSKZ>\r\n\t\t\t<MSATZ>3</MSATZ>\r\n\t\t\t<MWSBT>2.48</MWSBT>\r\n\t\t\t<TXJCD>2.48</TXJCD>\r\n\t\t\t<KTEXT>82.56</KTEXT>\r\n\t\t</E1EDK04>\r\n\t\t<E1EDK17 SEGMENT=\"1\">\r\n\t\t\t<QUALF>001</QUALF>\r\n\t\t\t<LKOND>klj</LKOND>\r\n\t\t\t<LKTEXT>fgdgdfdfg</LKTEXT>\r\n\t\t</E1EDK17>\r\n\t\t<E1EDK17 SEGMENT=\"1\">\r\n\t\t\t<QUALF>002</QUALF>\r\n\t\t\t<LKOND>rgd</LKOND>\r\n\t\t\t<LKTEXT>ewrewewew</LKTEXT>\r\n\t\t</E1EDK17>\r\n\t\t<E1EDK18 SEGMENT=\"1\">\r\n\t\t\t<QUALF>001</QUALF>\r\n\t\t\t<TAGE>100</TAGE>\r\n\t\t\t<PRZNT>3.230</PRZNT>\r\n\t\t\t<ZTERM_TXT>werewrewrwe</ZTERM_TXT>\r\n\t\t</E1EDK18>\r\n\t\t<E1EDK18 SEGMENT=\"1\">\r\n\t\t\t<QUALF>005</QUALF>\r\n\t\t</E1EDK18>\r\n\t\t<E1EDK28 SEGMENT=\"1\">\r\n\t\t\t<BCOUN>ES</BCOUN>\r\n\t\t\t<BRNUM>wefefwefw</BRNUM>\r\n\t\t\t<BNAME>werewf</BNAME>\r\n\t\t\t<ACNUM>gregrgreger</ACNUM>\r\n\t\t\t<ACNAM>regerggregregre</ACNAM>\r\n\t\t</E1EDK28>\r\n\t\t<E1EDK28 SEGMENT=\"1\">\r\n\t\t\t<BCOUN>ES</BCOUN>\r\n\t\t\t<BRNUM>ewrerwerw</BRNUM>\r\n\t\t\t<BNAME>wererwerw</BNAME>\r\n\t\t\t<ACNUM>werewrbgfngfd</ACNUM>\r\n\t\t\t<ACNAM>bdfgsdfdfbbfd</ACNAM>\r\n\t\t</E1EDK28>\r\n\t\t<E1EDK28 SEGMENT=\"1\">\r\n\t\t\t<BCOUN>ES</BCOUN>\r\n\t\t\t<BRNUM>egrgrewe</BRNUM>\r\n\t\t\t<BNAME>gergrdgdr</BNAME>\r\n\t\t\t<BALOC>erggrgrgr</BALOC>\r\n\t\t\t<ACNUM>erggregbfdr</ACNUM>\r\n\t\t\t<ACNAM>regggr</ACNAM>\r\n\t\t</E1EDK28>\r\n\t\t<E1EDK28 SEGMENT=\"1\">\r\n\t\t\t<BCOUN>ES</BCOUN>\r\n\t\t\t<BRNUM>yutryrty</BRNUM>\r\n\t\t\t<BNAME>rtyryt</BNAME>\r\n\t\t\t<BALOC>rtyrtyryt</BALOC>\r\n\t\t\t<ACNUM>rtyhtdhtrhft</ACNUM>\r\n\t\t\t<ACNAM>jtyjtyjygjh</ACNAM>\r\n\t\t</E1EDK28>\r\n\t\t<E1EDK28 SEGMENT=\"1\">\r\n\t\t\t<BCOUN>ES</BCOUN>\r\n\t\t\t<BRNUM>rtyurdtdhrt</BRNUM>\r\n\t\t\t<BNAME>jtyjytjytjyg</BNAME>\r\n\t\t\t<BALOC>jtyjtytjytjy</BALOC>\r\n\t\t\t<ACNUM>tuyjtyjdjyt</ACNUM>\r\n\t\t\t<ACNAM>tyjtjyjyt</ACNAM>\r\n\t\t</E1EDK28>\r\n\t\t<E1EDK28 SEGMENT=\"1\">\r\n\t\t\t<BCOUN>ES</BCOUN>\r\n\t\t\t<BRNUM>gdrsgdrsgdr</BRNUM>\r\n\t\t\t<BNAME>gdsrgdrgsdr</BNAME>\r\n\t\t\t<ACNUM>erghrgergds</ACNUM>\r\n\t\t\t<ACNAM>tjytyjjytjyt</ACNAM>\r\n\t\t</E1EDK28>\r\n\t\t<E1EDK28 SEGMENT=\"1\">\r\n\t\t\t<BCOUN>ES</BCOUN>\r\n\t\t\t<BRNUM>srgddgrgdr</BRNUM>\r\n\t\t\t<BNAME>sdrrgsdgrds</BNAME>\r\n\t\t\t<BALOC>sdgrdssgrd</BALOC>\r\n\t\t\t<ACNUM>gsrdgrsdsgd</ACNUM>\r\n\t\t\t<ACNAM>sdgsgdrgsdr</ACNAM>\r\n\t\t</E1EDK28>\r\n\t\t<E1EDK28 SEGMENT=\"1\">\r\n\t\t\t<BCOUN>ES</BCOUN>\r\n\t\t\t<BRNUM>gsdrsgdrsgrd</BRNUM>\r\n\t\t\t<BNAME>srgdsrdggrd</BNAME>\r\n\t\t\t<BALOC>sdrgsdrsrd</BALOC>\r\n\t\t\t<ACNUM>dsrdgrgdrssgrd</ACNUM>\r\n\t\t\t<ACNAM>srdgdrgrdsg</ACNAM>\r\n\t\t</E1EDK28>\r\n\t\t<E1EDK28 SEGMENT=\"1\">\r\n\t\t\t<BCOUN>ES</BCOUN>\r\n\t\t\t<BRNUM>sdrgsredgrd</BRNUM>\r\n\t\t\t<BNAME>sdrgsdrgdr</BNAME>\r\n\t\t\t<BALOC>sdrgsdrgsd</BALOC>\r\n\t\t\t<ACNUM>sdrgsgdrd</ACNUM>\r\n\t\t\t<ACNAM>srdgsdrgdsr</ACNAM>\r\n\t\t</E1EDK28>\r\n\t\t<E1EDK28 SEGMENT=\"1\">\r\n\t\t\t<BCOUN>ES</BCOUN>\r\n\t\t\t<BRNUM>sdrggrd</BRNUM>\r\n\t\t\t<BNAME>sdrgsdrg</BNAME>\r\n\t\t\t<BALOC>sdrgrdgdrsg</BALOC>\r\n\t\t\t<ACNUM>sdrgsrdgsdrsg</ACNUM>\r\n\t\t\t<ACNAM>srdgsdrgdsrg</ACNAM>\r\n\t\t</E1EDK28>\r\n\t\t<E1EDK28 SEGMENT=\"1\">\r\n\t\t\t<BCOUN>ES</BCOUN>\r\n\t\t\t<BRNUM>wetwetert</BRNUM>\r\n\t\t\t<BNAME>sdrgsdrg</BNAME>\r\n\t\t\t<BALOC>sdrgrdgdrsg</BALOC>\r\n\t\t\t<ACNUM>sdrgsrdgsdrsg</ACNUM>\r\n\t\t</E1EDK28>\r\n\t\t<E1EDK28 SEGMENT=\"1\">\r\n\t\t\t<BCOUN>ES</BCOUN>\r\n\t\t\t<BRNUM>te4rte43wt34</BRNUM>\r\n\t\t\t<BNAME>sdrgsdrg</BNAME>\r\n\t\t\t<BALOC>sdrgrdgdrsg</BALOC>\r\n\t\t\t<ACNUM>sdrgsrdgsdrsg</ACNUM>\r\n\t\t</E1EDK28>\r\n\t\t<E1EDK29 SEGMENT=\"1\">\r\n\t\t\t<LAND1>ES.</LAND1>\r\n\t\t</E1EDK29>\r\n\t\t<E1EDKT1 SEGMENT=\"1\">\r\n\t\t\t<TDID>ZF01</TDID>\r\n\t\t\t<TSSPRAS>S</TSSPRAS>\r\n\t\t\t<TSSPRAS_ISO>ES</TSSPRAS_ISO>\r\n\t\t\t<E1EDKT2 SEGMENT=\"1\">\r\n\t\t\t\t<TDLINE>wergewrgerwgwer</TDLINE>\r\n\t\t\t\t<TDFORMAT>*</TDFORMAT>\r\n\t\t\t</E1EDKT2>\r\n\t\t\t<E1EDKT2 SEGMENT=\"1\">\r\n\t\t\t\t<TDLINE>esdagersgergwer</TDLINE>\r\n\t\t\t\t<TDFORMAT>*</TDFORMAT>\r\n\t\t\t</E1EDKT2>\r\n\t\t\t<E1EDKT2 SEGMENT=\"1\">\r\n\t\t\t\t<TDLINE>wergewrgewrgewr</TDLINE>\r\n\t\t\t\t<TDFORMAT>*</TDFORMAT>\r\n\t\t\t</E1EDKT2>\r\n\t\t</E1EDKT1>\r\n\t\t<E1EDK14 SEGMENT=\"1\">\r\n\t\t\t<QUALF>008</QUALF>\r\n\t\t\t<ORGID>10</ORGID>\r\n\t\t</E1EDK14>\r\n\t\t<E1EDK14 SEGMENT=\"1\">\r\n\t\t\t<QUALF>007</QUALF>\r\n\t\t\t<ORGID>10</ORGID>\r\n\t\t</E1EDK14>\r\n\t\t<E1EDK14 SEGMENT=\"1\">\r\n\t\t\t<QUALF>006</QUALF>\r\n\t\t\t<ORGID>10</ORGID>\r\n\t\t</E1EDK14>\r\n\t\t<E1EDK14 SEGMENT=\"1\">\r\n\t\t\t<QUALF>015</QUALF>\r\n\t\t\t<ORGID>F2</ORGID>\r\n\t\t</E1EDK14>\r\n\t\t<E1EDK14 SEGMENT=\"1\">\r\n\t\t\t<QUALF>003</QUALF>\r\n\t\t\t<ORGID>JGC</ORGID>\r\n\t\t</E1EDK14>\r\n\t\t<E1EDK14 SEGMENT=\"1\">\r\n\t\t\t<QUALF>021</QUALF>\r\n\t\t\t<ORGID>M</ORGID>\r\n\t\t</E1EDK14>\r\n\t\t<E1EDK14 SEGMENT=\"1\">\r\n\t\t\t<QUALF>016</QUALF>\r\n\t\t\t<ORGID>2</ORGID>\r\n\t\t</E1EDK14>\r\n\t\t<E1EDK14 SEGMENT=\"1\">\r\n\t\t\t<QUALF>Z01</QUALF>\r\n\t\t\t<ORGID>42</ORGID>\r\n\t\t</E1EDK14>\r\n\t\t<E1EDP01 SEGMENT=\"1\">\r\n\t\t\t<POSEX>000010</POSEX>\r\n\t\t\t<MENGE>120.000</MENGE>\r\n\t\t\t<MENEE>UC</MENEE>\r\n\t\t\t<NTGEW>120.000</NTGEW>\r\n\t\t\t<GEWEI>KGM</GEWEI>\r\n\t\t\t<BPUMZ>12</BPUMZ>\r\n\t\t\t<BRGEW>130.000</BRGEW>\r\n\t\t\t<PSTYV>TAN</PSTYV>\r\n\t\t\t<WERKS>OL59</WERKS>\r\n\t\t\t<E1EDP02 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>001</QUALF>\r\n\t\t\t\t<BELNR>S451792083</BELNR>\r\n\t\t\t\t<DATUM>20220309</DATUM>\r\n\t\t\t</E1EDP02>\r\n\t\t\t<E1EDP02 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>002</QUALF>\r\n\t\t\t\t<BELNR>0005310621</BELNR>\r\n\t\t\t\t<ZEILE>000010</ZEILE>\r\n\t\t\t\t<DATUM>20220309</DATUM>\r\n\t\t\t</E1EDP02>\r\n\t\t\t<E1EDP02 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>016</QUALF>\r\n\t\t\t\t<BELNR>32495</BELNR>\r\n\t\t\t\t<ZEILE>000010</ZEILE>\r\n\t\t\t\t<DATUM>20220401</DATUM>\r\n\t\t\t</E1EDP02>\r\n\t\t\t<E1EDP03 SEGMENT=\"1\">\r\n\t\t\t\t<IDDAT>029</IDDAT>\r\n\t\t\t\t<DATUM>20220309</DATUM>\r\n\t\t\t</E1EDP03>\r\n\t\t\t<E1EDP03 SEGMENT=\"1\">\r\n\t\t\t\t<IDDAT>001</IDDAT>\r\n\t\t\t\t<DATUM>20220314</DATUM>\r\n\t\t\t</E1EDP03>\r\n\t\t\t<E1EDP03 SEGMENT=\"1\">\r\n\t\t\t\t<IDDAT>011</IDDAT>\r\n\t\t\t\t<DATUM>20240424</DATUM>\r\n\t\t\t</E1EDP03>\r\n\t\t\t<E1EDP03 SEGMENT=\"1\">\r\n\t\t\t\t<IDDAT>025</IDDAT>\r\n\t\t\t\t<DATUM>20220401</DATUM>\r\n\t\t\t</E1EDP03>\r\n\t\t\t<E1EDP03 SEGMENT=\"1\">\r\n\t\t\t\t<IDDAT>027</IDDAT>\r\n\t\t\t\t<DATUM>20220401</DATUM>\r\n\t\t\t</E1EDP03>\r\n\t\t\t<E1EDP03 SEGMENT=\"1\">\r\n\t\t\t\t<IDDAT>023</IDDAT>\r\n\t\t\t\t<DATUM>20220101</DATUM>\r\n\t\t\t</E1EDP03>\r\n\t\t\t<E1EDP03 SEGMENT=\"1\">\r\n\t\t\t\t<IDDAT>022</IDDAT>\r\n\t\t\t\t<DATUM>20220309</DATUM>\r\n\t\t\t</E1EDP03>\r\n\t\t\t<E1EDP19 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>010</QUALF>\r\n\t\t\t\t<IDTNR>J131</IDTNR>\r\n\t\t\t</E1EDP19>\r\n\t\t\t<E1EDP19 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>001</QUALF>\r\n\t\t\t\t<IDTNR>200189</IDTNR>\r\n\t\t\t</E1EDP19>\r\n\t\t\t<E1EDP19 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>002</QUALF>\r\n\t\t\t\t<IDTNR>000000000000000603</IDTNR>\r\n\t\t\t\t<KTEXT>Zrhthrtrthrthrth</KTEXT>\r\n\t\t\t</E1EDP19>\r\n\t\t\t<E1EDP19 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>003</QUALF>\r\n\t\t\t\t<IDTNR>8410261380100</IDTNR>\r\n\t\t\t</E1EDP19>\r\n\t\t\t<E1EDP19 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>006</QUALF>\r\n\t\t\t\t<IDTNR>000000000000000600</IDTNR>\r\n\t\t\t</E1EDP19>\r\n\t\t\t<E1EDP26 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>004</QUALF>\r\n\t\t\t\t<BETRG>82.56</BETRG>\r\n\t\t\t</E1EDP26>\r\n\t\t\t<E1EDP26 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>003</QUALF>\r\n\t\t\t\t<BETRG>82.56</BETRG>\r\n\t\t\t</E1EDP26>\r\n\t\t\t<E1EDP26 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>010</QUALF>\r\n\t\t\t\t<BETRG>41.73</BETRG>\r\n\t\t\t</E1EDP26>\r\n\t\t\t<E1EDP26 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>011</QUALF>\r\n\t\t\t\t<BETRG>82.56</BETRG>\r\n\t\t\t</E1EDP26>\r\n\t\t\t<E1EDP26 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>012</QUALF>\r\n\t\t\t\t<BETRG>82.56</BETRG>\r\n\t\t\t</E1EDP26>\r\n\t\t\t<E1EDP26 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>013</QUALF>\r\n\t\t\t\t<BETRG>14.53-</BETRG>\r\n\t\t\t</E1EDP26>\r\n\t\t\t<E1EDP26 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>014</QUALF>\r\n\t\t\t\t<BETRG>82.56</BETRG>\r\n\t\t\t</E1EDP26>\r\n\t\t\t<E1EDP26 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>015</QUALF>\r\n\t\t\t\t<BETRG>11.28-</BETRG>\r\n\t\t\t</E1EDP26>\r\n\t\t\t<E1EDP26 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>001</QUALF>\r\n\t\t\t\t<BETRG>0.688</BETRG>\r\n\t\t\t</E1EDP26>\r\n\t\t\t<E1EDP26 SEGMENT=\"1\">\r\n\t\t\t\t<QUALF>006</QUALF>\r\n\t\t\t\t<BETRG>0.688</BETRG>\r\n\t\t\t</E1EDP26>\r\n\t\t\t<E1EDP04 SEGMENT=\"1\">\r\n\t\t\t\t<MWSKZ>IGI</MWSKZ>\r\n\t\t\t\t<MSATZ>3</MSATZ>\r\n\t\t\t\t<MWSBT>2.48</MWSBT>\r\n\t\t\t</E1EDP04>\r\n\t\t\t<E1EDP28 SEGMENT=\"1\">\r\n\t\t\t\t<STAWN>20097199</STAWN>\r\n\t\t\t\t<HERKL>ES</HERKL>\r\n\t\t\t</E1EDP28>\r\n\t\t\t<E1EDPT1 SEGMENT=\"1\">\r\n\t\t\t\t<TDID>0001</TDID>\r\n\t\t\t\t<TSSPRAS>S</TSSPRAS>\r\n\t\t\t\t<TSSPRAS_ISO>ES</TSSPRAS_ISO>\r\n\t\t\t\t<E1EDPT2 SEGMENT=\"1\">\r\n\t\t\t\t\t<TDLINE>rthhtrhrtshtrs</TDLINE>\r\n\t\t\t\t\t<TDFORMAT>*</TDFORMAT>\r\n\t\t\t\t</E1EDPT2>\r\n\t\t\t\t<E1EDPT2 SEGMENT=\"1\">\r\n\t\t\t\t\t<TDLINE>shtrrtrtstsrh</TDLINE>\r\n\t\t\t\t\t<TDFORMAT>/</TDFORMAT>\r\n\t\t\t\t</E1EDPT2>\r\n\t\t\t\t<E1EDPT2 SEGMENT=\"1\">\r\n\t\t\t\t\t<TDFORMAT>/</TDFORMAT>\r\n\t\t\t\t</E1EDPT2>\r\n\t\t\t\t<E1EDPT2 SEGMENT=\"1\">\r\n\t\t\t\t\t<TDLINE>shttrhr</TDLINE>\r\n\t\t\t\t\t<TDFORMAT>/</TDFORMAT>\r\n\t\t\t\t</E1EDPT2>\r\n\t\t\t\t<E1EDPT2 SEGMENT=\"1\">\r\n\t\t\t\t\t<TDLINE>shtrhsrt</TDLINE>\r\n\t\t\t\t\t<TDFORMAT>/</TDFORMAT>\r\n\t\t\t\t</E1EDPT2>\r\n\t\t\t\t<E1EDPT2 SEGMENT=\"1\">\r\n\t\t\t\t\t<TDLINE>Ejp:  12/12/15</TDLINE>\r\n\t\t\t\t\t<TDFORMAT>/</TDFORMAT>\r\n\t\t\t\t</E1EDPT2>\r\n\t\t\t\t<E1EDPT2 SEGMENT=\"1\">\r\n\t\t\t\t\t<TDLINE>PR:12/12/14JU 1412:00</TDLINE>\r\n\t\t\t\t\t<TDFORMAT>/</TDFORMAT>\r\n\t\t\t\t</E1EDPT2>\r\n\t\t\t\t<E1EDPT2 SEGMENT=\"1\">\r\n\t\t\t\t\t<TDFORMAT>/</TDFORMAT>\r\n\t\t\t\t</E1EDPT2>\r\n\t\t\t</E1EDPT1>\r\n\t\t</E1EDP01>\r\n\t\t<E1EDS01 SEGMENT=\"1\">\r\n\t\t\t<SUMID>001</SUMID>\r\n\t\t\t<SUMME>1</SUMME>\r\n\t\t</E1EDS01>\r\n\t\t<E1EDS01 SEGMENT=\"1\">\r\n\t\t\t<SUMID>012</SUMID>\r\n\t\t\t<SUMME>82.56</SUMME>\r\n\t\t\t<WAERQ>EUR</WAERQ>\r\n\t\t</E1EDS01>\r\n\t\t<E1EDS01 SEGMENT=\"1\">\r\n\t\t\t<SUMID>005</SUMID>\r\n\t\t\t<SUMME>2.48</SUMME>\r\n\t\t\t<WAERQ>EUR</WAERQ>\r\n\t\t</E1EDS01>\r\n\t\t<E1EDS01 SEGMENT=\"1\">\r\n\t\t\t<SUMID>011</SUMID>\r\n\t\t\t<SUMME>85.04</SUMME>\r\n\t\t\t<WAERQ>EUR</WAERQ>\r\n\t\t</E1EDS01>\r\n\t\t<E1EDS01 SEGMENT=\"1\">\r\n\t\t\t<SUMID>010</SUMID>\r\n\t\t\t<SUMME>82.56</SUMME>\r\n\t\t\t<WAERQ>EUR</WAERQ>\r\n\t\t</E1EDS01>\r\n\t\t<E1EDS01 SEGMENT=\"1\">\r\n\t\t\t<SUMID>003</SUMID>\r\n\t\t\t<SUMME>82.56</SUMME>\r\n\t\t\t<WAERQ>EUR</WAERQ>\r\n\t\t</E1EDS01>\r\n\t\t<E1EDS01 SEGMENT=\"1\">\r\n\t\t\t<SUMID>015</SUMID>\r\n\t\t\t<SUMME>82.56</SUMME>\r\n\t\t\t<WAERQ>EUR</WAERQ>\r\n\t\t</E1EDS01>\r\n\t\t<E1EDS01 SEGMENT=\"1\">\r\n\t\t\t<SUMID>004</SUMID>\r\n\t\t\t<SUMME>120.000</SUMME>\r\n\t\t</E1EDS01>\r\n\t</IDOC>\r\n</INVOIC01>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{Host}}/http/IDOCFlatConvertor/TC2/XML2Flat",
+									"protocol": "https",
+									"host": [
+										"{{Host}}"
+									],
+									"path": [
+										"http",
+										"IDOCFlatConvertor",
+										"TC2",
+										"XML2Flat"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IDOC - Flat2XML - INVOICE01",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "EDI_DC40  1324546546565456465756 3012  INVOIC01                                                    INVOIC                              E321321INVOIC123123    LS  1231231231                                                                                           IS_BAB_INVKURE1231312312                                                                                           20240424180850                                          urn:sap.com:msgid=1231231231232131312312                              1231231231233       \r\nE2EDK01005                    132454654656545646500000100000001    EUREUR1.00000     rtyu             ewrtewtert          234234234           444 2342342343                         120.000           130.000           KGMLR                                                     0000590381                                                                    L                                                                  \r\nE2EDKA1003                    132454654656545646500000200000002RS 234234234234                      gdfgdrfgdfgdfg                                                                                                                              dfgdfgdfgdfg                                                                                             dgfdfgdfg                                   423432            ES                                                                                                342343242                                                                  242342342                                                                  S                                                              30                                                        234234                             10                            234234234                                                                                                                                                                                                                \r\nE2EDKA1003                    132454654656545646500000300000002AG                                   2345234234                                                                                                                                  efsgrg                                                                                                   gregegerger                                 432423            ES                                                                                                324234243                                                                  432423423                                                                  S                                                              38                                                                                                                                                                                                                                                                                                                                 ES               \r\nE2EDKA1003                    132454654656545646500000400000002RE                                   fdgvgredsgdg                                                                                                                                rgdsgrdgdrg                                                                                              drgrdegdg                                   34343             ES                                                                                                235235235                235235235                                         235235235                                                                  S                                                              08                                                                                                                                                                                                                                                                                                                                 ES               \r\nE2EDKA1003                    132454654656545646500000500000002RG                                   342234234234                                                                                                                                esfesfsefsef                                                                                             sefsefsefse                                 343434            ES                                                                                                235235235                235235235                R                        234234324                                                                  S                                                              08                                                                                                                                                                                                                                                                                                                                 ES               \r\nE2EDKA1003                    132454654656545646500000600000002WE                                   gardgerasgesrg                                                                                                                              grewrewrwerewr                                                                                           ertjggjhjgh                                 43234             ES                                                                                                235235235                                                                  235235235                                                                  S                                                              38                                                                                                                                                                                                                                                                                                                                 ES               \r\nE2EDK02                       132454654656545646500000700000002009235235235                                3242342       \r\nE2EDK02                       132454654656545646500000800000002001235235235                                23423423      \r\nE2EDK02                       132454654656545646500000900000002002235235235                                23432424      \r\nE2EDK02                       13245465465654564650000100000000201223444                                    4242344       \r\nE2EDK02                       13245465465654564650000110000000201723423423                                               \r\nE2EDK02                       1324546546565456465000012000000020050                                                      \r\nE2EDK03                       1324546546565456465000013000000020262342344 42332 \r\nE2EDK03                       13245465465654564650000140000000200223423443      \r\nE2EDK03                       13245465465654564650000150000000200123423443      \r\nE2EDK03                       13245465465654564650000160000000202223424323      \r\nE2EDK03                       132454654656545646500001700000002012534345        \r\nE2EDK03                       13245465465654564650000180000000201154354345      \r\nE2EDK03                       13245465465654564650000190000000202434345345      \r\nE2EDK03                       1324546546565456465000020000000020283453453404    \r\nE2EDK03                       13245465465654564650000210000000204820220401      \r\nE2EDK04001                    132454654656545646500002200000002IGI    3                2.48              2.48           82.56                                             \r\nE2EDK17                       132454654656545646500002300000002001kljfgdgdfdfg                                                             \r\nE2EDK17                       132454654656545646500002400000002002rgdewrewewew                                                             \r\nE2EDK18                       132454654656545646500002500000002001100     3.230   werewrewrwe                                                           \r\nE2EDK18                       132454654656545646500002600000002005                                                                                      \r\nE2EDK28001                    132454654656545646500002700000002ES wefefwefw        werewf                                                                                                                                      gregrgreger                   regerggregregre                                                      \r\nE2EDK28001                    132454654656545646500002800000002ES ewrerwerw        wererwerw                                                                                                                                   werewrbgfngfd                 bdfgsdfdfbbfd                                                        \r\nE2EDK28001                    132454654656545646500002900000002ES egrgrewe         gergrdgdr                                                             erggrgrgr                                                             erggregbfdr                   regggr                                                               \r\nE2EDK28001                    132454654656545646500003000000002ES yutryrty         rtyryt                                                                rtyrtyryt                                                             rtyhtdhtrhft                  jtyjtyjygjh                                                          \r\nE2EDK28001                    132454654656545646500003100000002ES rtyurdtdhrt      jtyjytjytjyg                                                          jtyjtytjytjy                                                          tuyjtyjdjyt                   tyjtjyjyt                                                            \r\nE2EDK28001                    132454654656545646500003200000002ES gdrsgdrsgdr      gdsrgdrgsdr                                                                                                                                 erghrgergds                   tjytyjjytjyt                                                         \r\nE2EDK28001                    132454654656545646500003300000002ES srgddgrgdr       sdrrgsdgrds                                                           sdgrdssgrd                                                            gsrdgrsdsgd                   sdgsgdrgsdr                                                          \r\nE2EDK28001                    132454654656545646500003400000002ES gsdrsgdrsgrd     srgdsrdggrd                                                           sdrgsdrsrd                                                            dsrdgrgdrssgrd                srdgdrgrdsg                                                          \r\nE2EDK28001                    132454654656545646500003500000002ES sdrgsredgrd      sdrgsdrgdr                                                            sdrgsdrgsd                                                            sdrgsgdrd                     srdgsdrgdsr                                                          \r\nE2EDK28001                    132454654656545646500003600000002ES sdrggrd          sdrgsdrg                                                              sdrgrdgdrsg                                                           sdrgsrdgsdrsg                 srdgsdrgdsrg                                                         \r\nE2EDK28001                    132454654656545646500003700000002ES wetwetert        sdrgsdrg                                                              sdrgrdgdrsg                                                           sdrgsrdgsdrsg                                                                                      \r\nE2EDK28001                    132454654656545646500003800000002ES te4rte43wt34     sdrgsdrg                                                              sdrgrdgdrsg                                                           sdrgsrdgsdrsg                                                                                      \r\nE2EDK29003                    132454654656545646500003900000002                                                                                                                                                        ES.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \r\nE2EDKT1002                    132454654656545646500004000000002ZF01S  ES                                                                                \r\nE2EDKT2001                    132454654656545646500004100004003wergewrgerwgwer                                                       * \r\nE2EDKT2001                    132454654656545646500004200004003esdagersgergwer                                                       * \r\nE2EDKT2001                    132454654656545646500004300004003wergewrgewrgewr                                                       * \r\nE2EDK14                       13245465465654564650000440000000200810                                 \r\nE2EDK14                       13245465465654564650000450000000200710                                 \r\nE2EDK14                       13245465465654564650000460000000200610                                 \r\nE2EDK14                       132454654656545646500004700000002015F2                                 \r\nE2EDK14                       132454654656545646500004800000002003JGC                                \r\nE2EDK14                       132454654656545646500004900000002021M                                  \r\nE2EDK14                       1324546546565456465000050000000020162                                  \r\nE2EDK14                       132454654656545646500005100000002Z0142                                 \r\nE2EDP01008                    132454654656545646500005200000002000010     120.000        UC                                                                                                        120.000           KGM                                                     12                                                 130.000           TAN                                 OL59                                                                                                                                                                                                                                    \r\nE2EDP02001                    132454654656545646500005300005203001S451792083                               20220309                                                                       \r\nE2EDP02001                    1324546546565456465000054000052030020005310621                         00001020220309                                                                       \r\nE2EDP02001                    13245465465654564650000550000520301632495                              00001020220401                                                                       \r\nE2EDP03                       13245465465654564650000560000520302920220309      \r\nE2EDP03                       13245465465654564650000570000520300120220314      \r\nE2EDP03                       13245465465654564650000580000520301120240424      \r\nE2EDP03                       13245465465654564650000590000520302520220401      \r\nE2EDP03                       13245465465654564650000600000520302720220401      \r\nE2EDP03                       13245465465654564650000610000520302320220101      \r\nE2EDP03                       13245465465654564650000620000520302220220309      \r\nE2EDP19002                    132454654656545646500006300005203010J131                                                                                                                                                                                                                                           \r\nE2EDP19002                    132454654656545646500006400005203001200189                                                                                                                                                                                                                                         \r\nE2EDP19002                    132454654656545646500006500005203002000000000000000603                 Zrhthrtrthrthrth                                                                                                                                                                                            \r\nE2EDP19002                    1324546546565456465000066000052030038410261380100                                                                                                                                                                                                                                  \r\nE2EDP19002                    132454654656545646500006700005203006000000000000000600                                                                                                                                                                                                                             \r\nE2EDP26                       13245465465654564650000680000520300482.56             \r\nE2EDP26                       13245465465654564650000690000520300382.56             \r\nE2EDP26                       13245465465654564650000700000520301041.73             \r\nE2EDP26                       13245465465654564650000710000520301182.56             \r\nE2EDP26                       13245465465654564650000720000520301282.56             \r\nE2EDP26                       13245465465654564650000730000520301314.53-            \r\nE2EDP26                       13245465465654564650000740000520301482.56             \r\nE2EDP26                       13245465465654564650000750000520301511.28-            \r\nE2EDP26                       1324546546565456465000076000052030010.688             \r\nE2EDP26                       1324546546565456465000077000052030060.688             \r\nE2EDP04001                    132454654656545646500007800005203IGI    3                2.48                                                                               \r\nE2EDP28003                    132454654656545646500007900005203                20097199                ES                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    \r\nE2EDPT1001                    1324546546565456465000080000052030001S  ES\r\nE2EDPT2001                    132454654656545646500008100008004rthhtrhrtshtrs                                                        * \r\nE2EDPT2001                    132454654656545646500008200008004shtrrtrtstsrh                                                         / \r\nE2EDPT2001                    132454654656545646500008300008004                                                                      / \r\nE2EDPT2001                    132454654656545646500008400008004shttrhr                                                               / \r\nE2EDPT2001                    132454654656545646500008500008004shtrhsrt                                                              / \r\nE2EDPT2001                    132454654656545646500008600008004Ejp:  12/12/15                                                        / \r\nE2EDPT2001                    132454654656545646500008700008004PR:12/12/14JU 1412:00                                                 / \r\nE2EDPT2001                    132454654656545646500008800008004                                                                      / \r\nE2EDS01                       1324546546565456465000089000000020011                       \r\nE2EDS01                       13245465465654564650000900000000201282.56                EUR\r\nE2EDS01                       1324546546565456465000091000000020052.48                 EUR\r\nE2EDS01                       13245465465654564650000920000000201185.04                EUR\r\nE2EDS01                       13245465465654564650000930000000201082.56                EUR\r\nE2EDS01                       13245465465654564650000940000000200382.56                EUR\r\nE2EDS01                       13245465465654564650000950000000201582.56                EUR\r\nE2EDS01                       132454654656545646500009600000002004120.000                 \r\n",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{Host}}/http/IDOCFlatConvertor/TC1/Flat2XML",
+									"protocol": "https",
+									"host": [
+										"{{Host}}"
+									],
+									"path": [
+										"http",
+										"IDOCFlatConvertor",
+										"TC1",
+										"Flat2XML"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "AddSOAPHeaderBean",
+			"item": [
+				{
+					"name": "AddSOAPHeaderBean",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<Records>\r\n\t<NumberOfExams>8.383</NumberOfExams>\r\n\t<MonthYear>202208</MonthYear>\r\n</Records>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/AddSOAPHeaderBean/trigger",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"AddSOAPHeaderBean",
+								"trigger"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{clientsecret}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{clientid}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Host",
+			"value": "Host",
+			"type": "string"
+		},
+		{
+			"key": "clientid",
+			"value": "clientid",
+			"type": "string"
+		},
+		{
+			"key": "clientsecret",
+			"value": "clientsecret",
+			"type": "string"
+		}
+	]
+}
