@@ -1,0 +1,40 @@
+{
+  "header": [
+    "key1",
+    "key2",
+    "validTo",
+    "validFrom",
+    "conditionValue",
+    "priceUnit",
+    "unitOfMeasure",
+    "currency",
+    "attribute1",
+    "attribute3"
+  ],
+  "data": [
+    [
+      "A1",
+      "fi9DEvUlLrhR00P",
+      "9999-12-31",
+      "2025-01-01",
+      10,
+      1,
+      "PC",
+      "USD",
+      "A",
+      "B"
+    ],
+    [
+      "A2",
+      "VbvNyqfbWouPQ9g",
+      "9999-12-31",
+      "2025-01-01",
+      10,
+      1,
+      "PC",
+      "USD",
+      "A",
+      "B"
+    ]
+  ]
+}

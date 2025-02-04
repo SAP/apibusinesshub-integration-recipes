@@ -149,7 +149,7 @@ class ResponseUtilTest extends Specification {
         "10" == node.get(PFXConstants.FIELD_VALUE).textValue()
 
         when:
-        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE,dummy,  node2, false)
+        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE, dummy, node2, false)
 
         then:
         3 == node2.fieldNames().size()
@@ -158,7 +158,7 @@ class ResponseUtilTest extends Specification {
         "test" == node2.get("attribute2").textValue()
 
         when:
-        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE,dummy,  node3, false)
+        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE, dummy, node3, false)
 
         then:
         2 == node3.fieldNames().size()
@@ -167,7 +167,7 @@ class ResponseUtilTest extends Specification {
         "test" == node3.get("attribute2").textValue()
 
         when:
-        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE,dummy,  node4, false)
+        ResponseUtil.formatResponse(PFXTypeCode.LOOKUPTABLE, dummy, node4, false)
 
         then:
         3 == node4.fieldNames().size()
@@ -222,7 +222,7 @@ class ResponseUtilTest extends Specification {
         node.set(PFXConstants.FIELD_OUTPUTS, lineItemOutputArray.deepCopy())
 
         when:
-        ResponseUtil.formatResponse(PFXTypeCode.QUOTE, null,node, true)
+        ResponseUtil.formatResponse(PFXTypeCode.QUOTE, null, node, true)
 
         then:
         !node.get(PFXConstants.FIELD_LINEITEMS).get(0).get(PFXConstants.FIELD_INPUTS).get(0).get("param")
@@ -289,7 +289,7 @@ class ResponseUtilTest extends Specification {
         node.set("fields", fields)
 
         when:
-        ResponseUtil.formatResponse(PFXTypeCode.DATAFEED, null,node, false)
+        ResponseUtil.formatResponse(PFXTypeCode.DATAFEED, null, node, false)
 
         then:
         "def" == node.get("abc").textValue()

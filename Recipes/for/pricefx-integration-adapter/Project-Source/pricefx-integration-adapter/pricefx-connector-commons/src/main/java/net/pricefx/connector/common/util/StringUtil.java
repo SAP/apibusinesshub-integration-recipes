@@ -10,7 +10,7 @@ public class StringUtil {
 
     public static String getIdFromTypedId(String typedId) {
         if (StringUtils.isEmpty(typedId) || typedId.split("\\.") == null ||
-                typedId.split("\\.").length < 2){
+                typedId.split("\\.").length < 2) {
             throw new RequestValidationException("TypedId is not valid");
         }
 

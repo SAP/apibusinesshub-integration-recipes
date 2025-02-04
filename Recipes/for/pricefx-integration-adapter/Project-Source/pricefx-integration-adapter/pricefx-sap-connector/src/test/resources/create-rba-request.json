@@ -1,0 +1,160 @@
+{
+  "rebateAgreement": {
+    "version": null,
+    "typedId": null,
+    "uniqueName": null,
+    "label": "RBA001",
+    "targetDate": "2021-11-26",
+    "workflowStatus": "DRAFT",
+    "headerText": "",
+    "inputs": [
+      {
+        "name": "CustomerGroup",
+        "label": "Customer(s)",
+        "lookupTableId": null,
+        "url": null,
+        "type": "CUSTOMERGROUP",
+        "value": {
+          "customerFieldName": "customerId",
+          "customerFieldValue": "00003",
+          "customerFieldLabel": "customerId",
+          "customerHint": "Kate Smith"
+        },
+        "valueHint": "Kate Smith",
+        "readOnly": null,
+        "filter": null,
+        "parameterGroup": null,
+        "required": null,
+        "labelTranslations": null,
+        "addUnknownValues": null,
+        "typedId": null,
+        "alwaysEditable": null,
+        "inputs": [],
+        "parameterConfig": {},
+        "formattingOptions": {},
+        "valueOptions": null
+      },
+      {
+        "name": "ProductGroup",
+        "label": "Product(s)",
+        "lookupTableId": null,
+        "url": null,
+        "type": "PRODUCTGROUP",
+        "value": {
+          "productFilterCriteria": {
+            "_constructor": "AdvancedCriteria",
+            "operator": "or",
+            "criteria": [
+              {
+                "_constructor": "AdvancedCriteria",
+                "operator": "and",
+                "criteria": [
+                  {
+                    "fieldName": "sku",
+                    "operator": "iEquals",
+                    "value": "11111"
+                  }
+                ]
+              },
+              {
+                "_constructor": "AdvancedCriteria",
+                "operator": "and",
+                "criteria": [
+                  {
+                    "fieldName": "sku",
+                    "operator": "iEquals",
+                    "value": "22222"
+                  }
+                ]
+              },
+              {
+                "_constructor": "AdvancedCriteria",
+                "operator": "and",
+                "criteria": [
+                  {
+                    "fieldName": "sku",
+                    "operator": "iEquals",
+                    "value": "33333"
+                  }
+                ]
+              }
+            ]
+          },
+          "label": "SKU equals to 11111 or SKU equals to 22222 or SKU equals to 33333"
+        },
+        "valueHint": "SKU equals to 11111 or SKU equals to 22222 or SKU equals to 33333",
+        "readOnly": null,
+        "filter": null,
+        "parameterGroup": null,
+        "required": null,
+        "labelTranslations": null,
+        "addUnknownValues": null,
+        "typedId": null,
+        "alwaysEditable": null,
+        "inputs": [],
+        "parameterConfig": {},
+        "formattingOptions": {},
+        "valueOptions": null
+      }
+    ],
+    "viewState": {
+      "gridViewState": null,
+      "openFolders": null,
+      "selectedNodes": null
+    },
+    "outputs": [],
+    "lastUpdateByName": null,
+    "createdByName": null,
+    "submittedByName": null,
+    "calculationStatus": 0,
+    "dirty": false,
+    "refreshInputs": false,
+    "nodeId": null,
+    "userGroupEdit": null,
+    "userGroupViewDetails": null,
+    "serverMessages": [
+      "Rebates calculated successfully"
+    ],
+    "additionalInfo1": null,
+    "additionalInfo2": null,
+    "additionalInfo3": null,
+    "additionalInfo4": null,
+    "numberOfAttachments": 0,
+    "creationWorkflowStatus": null,
+    "creationWorkflowCurrentStep": null,
+    "creationWorkflowStepCount": null,
+    "creationWorkflowStepLabel": null,
+    "signature": null,
+    "lineItems": [],
+    "seller": null,
+    "customerGroup": null,
+    "startDate": "2021-11-26",
+    "endDate": "2021-11-26",
+    "payoutDate": "2021-11-26",
+    "rebateRecordSetId": null,
+    "rebateRecordSetLabel": null,
+    "simulationSet": null,
+    "simulationType": null,
+    "status": "DRAFT",
+    "approvedByName": null,
+    "deniedByName": null,
+    "renderInfo": null,
+    "serverMessagesExtended": [
+      {
+        "key": null,
+        "message": "Rebates calculated successfully"
+      }
+    ],
+    "approvalRequiredEmailAttachmentsJson": null,
+    "hasWorkflowHistory": false,
+    "createDate": "2021-11-26T13:42:10",
+    "createdBy": 2147490696,
+    "lastUpdateDate": "2021-11-26T13:42:10",
+    "lastUpdateBy": 2147490696,
+    "supersededBy": null,
+    "prevRev": null,
+    "rootUniqueName": null,
+    "headerRebateType": null,
+    "sellerName": null
+  }
+}

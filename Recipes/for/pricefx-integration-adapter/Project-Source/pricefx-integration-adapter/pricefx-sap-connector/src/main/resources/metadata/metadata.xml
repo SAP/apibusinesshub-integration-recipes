@@ -303,6 +303,10 @@
                             <OrCondition>
                                 <EditCondition>
                                     <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>CONDITION_RECORD</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
                                     <AttributeValue>PRODUCT</AttributeValue>
                                 </EditCondition>
                                 <EditCondition>
@@ -368,6 +372,22 @@
                 </AttributeReference>
 
                 <AttributeReference>
+                    <ReferenceName>lastUpdateTimestamp</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>UPDATE</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>updateTargetType</AttributeName>
+                            <AttributeValue>CONDITION_RECORD</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+
+
+                <AttributeReference>
                     <ReferenceName>extensionName</ReferenceName>
 
                     <OrCondition>
@@ -416,13 +436,12 @@
                                 <AttributeName>operationType</AttributeName>
                                 <AttributeValue>UPDATE</AttributeValue>
                             </EditCondition>
-                            <OrCondition>
-                                <EditCondition>
-                                    <AttributeName>updateTargetType</AttributeName>
-                                    <AttributeValue>CONDITION_RECORD</AttributeValue>
-                                </EditCondition>
 
-                            </OrCondition>
+                            <EditCondition>
+                                <AttributeName>updateTargetType</AttributeName>
+                                <AttributeValue>CONDITION_RECORD</AttributeValue>
+                            </EditCondition>
+
                         </AndCondition>
                         <AndCondition>
                             <EditCondition>
@@ -590,6 +609,10 @@
                                 <EditCondition>
                                     <AttributeName>bulkloadTargetType</AttributeName>
                                     <AttributeValue>DATAFEED</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>bulkloadTargetType</AttributeName>
+                                    <AttributeValue>CONDITION_RECORD_STAGING</AttributeValue>
                                 </EditCondition>
                             </OrCondition>
                         </AndCondition>
@@ -782,6 +805,18 @@
         <isparameterized>true</isparameterized>
         <GuiLabels guid="ca7917b1-3533-4041-8524-b957e10fc499">
             <Label language="EN">Target Name</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>lastUpdateTimestamp</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default></Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="45a482d5-f79f-4f67-b1da-097c68a9a1d6">
+            <Label language="EN">Last Update Timestamp</Label>
         </GuiLabels>
     </AttributeMetadata>
 
@@ -1098,6 +1133,18 @@
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
+                <Value>REBATEAGREEMENT</Value>
+                <GuiLabels guid="b15b7c19-3e6a-4f20-bdd2-4a430b4c68e0">
+                    <Label language="EN">Rebate agreement</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CONTRACT</Value>
+                <GuiLabels guid="68a984de-2f41-4297-be6b-1e07a923d029">
+                    <Label language="EN">Contract</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
                 <Value>CUSTOMER</Value>
                 <GuiLabels guid="cf61bba2-1490-4fa3-bc78-7bd4d97ed228">
                     <Label language="EN">Customer</Label>
@@ -1199,6 +1246,18 @@
                 <Value>TOKEN</Value>
                 <GuiLabels guid="ccf4b74b-daf8-4405-ab0a-fbee78b29fac">
                     <Label language="EN">Token</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>REBATEAGREEMENT</Value>
+                <GuiLabels guid="ab66fb82-5c7e-4150-bbcb-dc08debf210a">
+                    <Label language="EN">Rebate agreement</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CONTRACT</Value>
+                <GuiLabels guid="9e0ce737-bf42-48cd-8337-5e6c739a7295">
+                    <Label language="EN">Contract</Label>
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
@@ -1350,7 +1409,7 @@
             <FixedValue>
                 <Value>CONDITION_RECORD</Value>
                 <GuiLabels guid="8ce3c6b9-16aa-4f78-98da-90a11cc17331">
-                    <Label language="EN">Condition Record</Label>
+                    <Label language="EN">Condition Record (Pricefx version 13 only)</Label>
                 </GuiLabels>
             </FixedValue>
 
@@ -1568,6 +1627,12 @@
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
+                <Value>REBATEAGREEMENT</Value>
+                <GuiLabels guid="1d2473d4-314b-4146-af1a-534e2199aed7">
+                    <Label language="EN">Rebate agreement</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
                 <Value>CUSTOMER</Value>
                 <GuiLabels guid="2130e5e9-ca5b-49b5-8be4-784e1651a40e">
                     <Label language="EN">Customer</Label>
@@ -1577,6 +1642,12 @@
                 <Value>QUOTE</Value>
                 <GuiLabels guid="890d467d-556e-4e2a-b634-273c08695675">
                     <Label language="EN">Quote</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CONTRACT</Value>
+                <GuiLabels guid="16865a8a-25b4-4b66-83d7-136a73b82f62">
+                    <Label language="EN">Contract</Label>
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
@@ -1610,6 +1681,18 @@
                 <Value>PRODUCT</Value>
                 <GuiLabels guid="3b958642-6867-4fb4-83dd-294d288d9b63">
                     <Label language="EN">Product</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>REBATEAGREEMENT</Value>
+                <GuiLabels guid="3b958642-6867-4fb4-83dd-294d288d9b63">
+                    <Label language="EN">Rebate agreement</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>CONTRACT</Value>
+                <GuiLabels guid="02b1b8c2-fe42-47da-b2aa-f69679356c2d">
+                    <Label language="EN">Contract</Label>
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
@@ -1907,7 +1990,12 @@
                     <Label language="EN">Price Record</Label>
                 </GuiLabels>
             </FixedValue>
-
+            <FixedValue>
+                <Value>CONDITION_RECORD_STAGING</Value>
+                <GuiLabels guid="4c983d15-e5f9-416d-8189-c8e6df4c5b8e">
+                    <Label language="EN">Condition Record (Pricefx version 14+)</Label>
+                </GuiLabels>
+            </FixedValue>
         </FixedValues>
     </AttributeMetadata>
 

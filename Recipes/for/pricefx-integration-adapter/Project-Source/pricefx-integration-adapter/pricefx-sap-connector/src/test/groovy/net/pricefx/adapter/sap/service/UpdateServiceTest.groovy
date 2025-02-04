@@ -16,13 +16,13 @@ class UpdateServiceTest extends Specification {
         def request = new ObjectMapper().readTree(UpdateServiceTest.class.getResourceAsStream("/assign-role-request.json"))
 
         when:
-        def result = new UpdateService(pfxClient, PFXTypeCode.ROLE, null, "USER").execute(request.toString())
+        def result = new UpdateService(pfxClient, PFXTypeCode.ROLE, "USER").execute(request.toString())
 
         then:
         Boolean.TRUE.toString() == result.get(PFXConstants.FIELD_VALUE).textValue()
 
         when:
-        new UpdateService(pfxClient, PFXTypeCode.PRODUCT, null, "TEST").execute(request.toString())
+        new UpdateService(pfxClient, PFXTypeCode.PRODUCT, "TEST").execute(request.toString())
 
         then:
         thrown(UnsupportedOperationException.class)

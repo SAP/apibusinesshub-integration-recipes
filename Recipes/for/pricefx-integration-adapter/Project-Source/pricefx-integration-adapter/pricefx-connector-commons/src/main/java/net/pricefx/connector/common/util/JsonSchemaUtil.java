@@ -5,21 +5,23 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import net.pricefx.connector.common.operation.IPFXObjectFetcher;
 import net.pricefx.connector.common.validation.ConnectorException;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.SetUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXJsonSchema.POST_REQUEST;
-import static net.pricefx.connector.common.util.PFXTypeCode.*;
+import static net.pricefx.connector.common.util.PFXTypeCode.LOOKUPTABLE;
+import static net.pricefx.connector.common.util.PFXTypeCode.QUOTE;
 
 public class JsonSchemaUtil {
     public static final String ITEMS = "items";
@@ -31,11 +33,11 @@ public class JsonSchemaUtil {
     private JsonSchemaUtil() {
     }
 
-    public static List<String> getFields(JsonNode schemaNode) {
+    public static Set<String> getFields(JsonNode schemaNode) {
         if (schemaNode.get(SCHEMA_PROPERTIES) != null) {
-            return ImmutableList.copyOf(schemaNode.get(SCHEMA_PROPERTIES).fieldNames());
+            return ImmutableSet.copyOf(schemaNode.get(SCHEMA_PROPERTIES).fieldNames());
         } else {
-            return Collections.emptyList();
+            return SetUtils.emptySet();
         }
     }
 
@@ -111,8 +113,8 @@ public class JsonSchemaUtil {
                 }
             }
         } else {
-            //generic upsert (array)
-            if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode == CONDITION_RECORD) {
+            //generic upsert (array) - test condtion record again after version 14.1. adding key attributes should not be needed
+            if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode.isConditionRecord()) {
                 int additionalKeys = getAdditionalKeys(pfxTypeCode, extensionType, showAdditionalKeys);
                 addSchemaAttributes(schema, "key", additionalKeys, withType);
             }
@@ -129,7 +131,7 @@ public class JsonSchemaUtil {
             return 0;
         }
 
-        if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode == CONDITION_RECORD) {
+        if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode.isConditionRecord()) {
             return extensionType.getAdditionalKeys();
         }
 
@@ -160,6 +162,7 @@ public class JsonSchemaUtil {
                     return MAX_PAYOUT_ATTRIBUTES;
                 case PRODUCT:
                 case CONDITION_RECORD:
+                case CONDITION_RECORD_STAGING:
                 case CUSTOMER:
                 case PRICERECORD:
                     return MAX_ATTRIBUTES;
@@ -185,5 +188,29 @@ public class JsonSchemaUtil {
 
     public static JsonNode loadEmptySchema() {
         return loadSchema(POST_REQUEST, false);
+    }
+
+    /**
+     * get schema for validation. additional attributes are added from metadata
+     *
+     * @param schema
+     * @param typeCode
+     * @param extensionType
+     * @param attributes
+     * @param showAdditionalKeys
+     * @param showAdditionalAttributes
+     * @param withType
+     * @return
+     */
+    public static JsonNode loadSchema(PFXJsonSchema schema, PFXTypeCode typeCode,
+                                      IPFXExtensionType extensionType, List<Pair<String, String>> attributes, boolean showAdditionalKeys,
+                                      boolean showAdditionalAttributes, boolean withType, boolean useValidation) {
+
+        JsonNode schemaNode = loadSchema(schema, useValidation);
+
+        updateSchemaWithMetadata(schemaNode, typeCode, extensionType, attributes, showAdditionalKeys, showAdditionalAttributes, withType);
+
+        return schemaNode;
+
     }
 }

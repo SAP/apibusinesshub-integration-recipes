@@ -79,7 +79,7 @@ public class ResponseUtil {
         try {
             JsonNode criteriaNode = new ObjectMapper().reader().readTree(criteria);
             ((ObjectNode) criteriaNode).remove("_constructor");
-            criteriaNode.get("criteria").forEach((JsonNode c) -> ((ObjectNode) c).remove("_constructor"));
+            criteriaNode.get(FIELD_CRITERIA).forEach((JsonNode c) -> ((ObjectNode) c).remove("_constructor"));
             node.set(fieldName, criteriaNode);
         } catch (Exception ex) {
             node.remove(fieldName);
@@ -195,7 +195,7 @@ public class ResponseUtil {
 
     private static void appendId(PFXTypeCode typeCode, IPFXExtensionType extensionType, ObjectNode result) {
         String suffix = typeCode.getTypeCode();
-        if (extensionType != null ){
+        if (extensionType != null) {
             suffix = extensionType.getTypeCodeSuffix();
         }
 

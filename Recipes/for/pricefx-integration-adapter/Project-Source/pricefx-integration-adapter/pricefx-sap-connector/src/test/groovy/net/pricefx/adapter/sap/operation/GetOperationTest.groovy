@@ -1,6 +1,6 @@
 package net.pricefx.adapter.sap.operation
 
-import net.pricefx.connector.common.connection.MockFailedPFXOperationClient
+
 import net.pricefx.connector.common.connection.MockPFXOperationClient
 import net.pricefx.connector.common.util.*
 import spock.lang.Specification

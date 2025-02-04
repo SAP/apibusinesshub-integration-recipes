@@ -1,0 +1,252 @@
+{
+  "contract": {
+    "version": null,
+    "typedId": null,
+    "uniqueName": null,
+    "label": "New Agreement & Promotion",
+    "targetDate": "2022-01-04",
+    "workflowStatus": "DRAFT",
+    "headerText": "header text",
+    "inputs": [
+      {
+        "name": "CustomerGroup",
+        "label": "Customer(s)",
+        "lookupTableId": null,
+        "url": null,
+        "type": "CUSTOMERGROUP",
+        "value": null,
+        "valueHint": null,
+        "readOnly": null,
+        "filter": null,
+        "parameterGroup": null,
+        "required": null,
+        "labelTranslations": null,
+        "addUnknownValues": null,
+        "typedId": null,
+        "alwaysEditable": null,
+        "inputs": [],
+        "parameterConfig": {},
+        "formattingOptions": {},
+        "valueOptions": null
+      },
+      {
+        "name": "ProductGroup",
+        "label": "Product(s)",
+        "lookupTableId": null,
+        "url": null,
+        "type": "PRODUCTGROUP",
+        "value": {
+          "productFieldName": "sku",
+          "productFieldLabel": "ProductID",
+          "productFieldValue": "B-0002"
+        },
+        "valueHint": "B-0002 (ProductID)",
+        "readOnly": null,
+        "filter": null,
+        "parameterGroup": null,
+        "required": null,
+        "labelTranslations": null,
+        "addUnknownValues": null,
+        "typedId": null,
+        "alwaysEditable": null,
+        "inputs": [],
+        "parameterConfig": {},
+        "formattingOptions": {},
+        "valueOptions": null
+      }
+    ],
+    "viewState": {
+      "openFolders": [
+        "ROOT"
+      ],
+      "gridViewState": "({field:[{name:\"CLITN_Status\",frozen:true,width:25},{name:\"CLITN_Status1\",frozen:true,width:25},{name:\"dirtyField\",frozen:true,width:25},{name:\"CLITN_Desc\",frozen:true},{name:\"label\"},{name:\"customerGroup\",visible:false},{name:\"productGroup\",visible:false},{name:\"INPUT_Discount__\",visible:false},{name:\"OUTPUT_CustomerGroup\",visible:false},{name:\"OUTPUT_ProductGroup\",visible:false},{name:\"OUTPUT_StandardDiscount\",visible:false}]})",
+      "selectedNodes": [
+        "1OVM0Hxdn1zeLjN"
+      ]
+    },
+    "outputs": [],
+    "lastUpdateByName": null,
+    "createdByName": null,
+    "submittedByName": null,
+    "calculationStatus": 2,
+    "dirty": false,
+    "refreshInputs": false,
+    "nodeId": 0,
+    "userGroupEdit": null,
+    "userGroupViewDetails": null,
+    "serverMessages": [
+      "Agreements & Promotions calculated successfully"
+    ],
+    "additionalInfo1": null,
+    "additionalInfo2": null,
+    "additionalInfo3": null,
+    "additionalInfo4": null,
+    "numberOfAttachments": 0,
+    "creationWorkflowStatus": null,
+    "creationWorkflowCurrentStep": null,
+    "creationWorkflowStepCount": null,
+    "creationWorkflowStepLabel": null,
+    "signature": null,
+    "lineItems": [
+      {
+        "version": null,
+        "typedId": null,
+        "clicId": null,
+        "inputs": [
+          {
+            "name": "Discount %",
+            "label": "Discount %",
+            "lookupTableId": null,
+            "url": null,
+            "type": "USERENTRY",
+            "value": null,
+            "valueHint": null,
+            "readOnly": null,
+            "filter": null,
+            "parameterGroup": null,
+            "required": null,
+            "labelTranslations": null,
+            "addUnknownValues": null,
+            "typedId": null,
+            "alwaysEditable": null,
+            "inputs": [],
+            "parameterConfig": {
+              "dataType": "float"
+            },
+            "formattingOptions": {},
+            "valueOptions": null,
+            "inheritedValue": null
+          },
+          {
+            "name": "CustomerGroup",
+            "label": "Customer(s)",
+            "lookupTableId": null,
+            "url": null,
+            "type": "CUSTOMERGROUP",
+            "value": null,
+            "valueHint": null,
+            "readOnly": null,
+            "filter": null,
+            "parameterGroup": null,
+            "required": null,
+            "labelTranslations": null,
+            "addUnknownValues": null,
+            "typedId": null,
+            "alwaysEditable": null,
+            "inputs": [],
+            "parameterConfig": {},
+            "formattingOptions": {},
+            "valueOptions": null,
+            "inheritedValue": null
+          },
+          {
+            "name": "ProductGroup",
+            "label": "Product(s)",
+            "lookupTableId": null,
+            "url": null,
+            "type": "PRODUCTGROUP",
+            "value": null,
+            "valueHint": null,
+            "readOnly": null,
+            "filter": null,
+            "parameterGroup": null,
+            "required": null,
+            "labelTranslations": null,
+            "addUnknownValues": null,
+            "typedId": null,
+            "alwaysEditable": null,
+            "inputs": [],
+            "parameterConfig": {},
+            "formattingOptions": {},
+            "valueOptions": null,
+            "inheritedValue": null
+          }
+        ],
+        "outputs": [],
+        "dirty": false,
+        "lineId": "1OVM0Hxdn1zeLjN",
+        "parentId": null,
+        "calculationStatus": 2,
+        "editabilityStatus": 0,
+        "label": "Promotion Discount",
+        "startDate": null,
+        "endDate": null,
+        "priceRecordId": null,
+        "customerGroup": null,
+        "productGroup": {
+          "label": null,
+          "productFieldName": "sku",
+          "productFieldLabel": "ProductID",
+          "productFieldValue": "B-0002",
+          "productFilterCriteria": null
+        },
+        "calculationBaseJson": "{\"includedCustomerGroups\":[],\"includedProductGroups\":[{\"productFieldName\":\"sku\",\"productFieldLabel\":\"ProductID\",\"productFieldValue\":\"B-0002\"}],\"includedSellerReferences\":[],\"excludedCustomerGroups\":[],\"excludedproductGroups\":[],\"excludedSellerReferences\":[],\"includedTimePeriods\":[{\"timeUnit\":\"DAY\",\"startDate\":\"2022-01-04\",\"endDate\":\"2022-01-04\",\"single\":false}],\"excludedTimePeriods\":[],\"otherFilters\":[],\"dateDimFieldName\":\"<timeField>\"}",
+        "calculationBase": {
+          "includedCustomerGroups": [],
+          "includedProductGroups": [
+            {
+              "label": null,
+              "productFieldName": "sku",
+              "productFieldLabel": "ProductID",
+              "productFieldValue": "B-0002",
+              "productFilterCriteria": null
+            }
+          ],
+          "includedSellerReferences": [],
+          "excludedCustomerGroups": [],
+          "excludedproductGroups": [],
+          "excludedSellerReferences": [],
+          "includedTimePeriods": [
+            {
+              "timeUnit": "DAY",
+              "startDate": "2022-01-04",
+              "endDate": "2022-01-04",
+              "single": false
+            }
+          ],
+          "excludedTimePeriods": [],
+          "otherFilters": [],
+          "dateDimFieldName": "<timeField>"
+        },
+        "folder": false,
+        "treeLabel": "Promotion Discount",
+        "createDate": "2022-01-04T15:00:47",
+        "createdBy": 2147490187,
+        "lastUpdateDate": "2022-01-04T15:00:47",
+        "lastUpdateBy": 2147490187,
+        "contractTermType": "test"
+      }
+    ],
+    "customerGroup": null,
+    "productGroup": {
+      "label": null,
+      "productFieldName": "sku",
+      "productFieldLabel": "ProductID",
+      "productFieldValue": "B-0002",
+      "productFilterCriteria": null
+    },
+    "externalRef": null,
+    "contractStatus": "DRAFT",
+    "startDate": "2022-01-04",
+    "endDate": "2022-01-04",
+    "status": "DRAFT",
+    "serverMessagesExtended": [
+      {
+        "key": null,
+        "message": "Agreements & Promotions calculated successfully"
+      }
+    ],
+    "hasWorkflowHistory": false,
+    "renderInfo": null,
+    "approvedByName": null,
+    "deniedByName": null,
+    "approvalRequiredEmailAttachmentsJson": null,
+    "createDate": "2022-01-04T15:00:47",
+    "createdBy": 2147490187,
+    "lastUpdateDate": "2022-01-04T15:00:47",
+    "lastUpdateBy": 2147490187,
+    "supersededBy": null,
+    "prevRev": null,
+    "rootUniqueName": null
+  }
+}

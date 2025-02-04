@@ -50,6 +50,9 @@ public enum PFXOperation {
     PA_FETCH("datamart.fetch"),
     GET_DATALOADS("datamart.getdataloads"),
 
+    //contract
+    FETCH_CONTRACT("contractmanager.fetch"),
+
     //Quote
     SUBMIT_QUOTE("quotemanager.submit"),
     FETCH_QUOTE("quotemanager.fetch"),
@@ -79,6 +82,8 @@ public enum PFXOperation {
     //Options
     FORCEFILTER,
     BATCH,
+
+    FETCH_RBA("rebateagreement.fetch"),
 
     //Extensions
     PRODUCTEXTENSION_LIST("configurationmanager.get/productextension/versioned"),

@@ -79,11 +79,11 @@ public interface IPFXConnection {
             extensionType = getLookupTableType(tableName, validAfter);
         }
 
-        if (extensionType == null && typeCode == PFXTypeCode.CONDITION_RECORD) {
+        if (extensionType == null && typeCode.isConditionRecord()) {
             extensionType = getConditionRecordType(typeCode, tableName);
         }
 
-        if (extensionType == null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE || typeCode == PFXTypeCode.CONDITION_RECORD)) {
+        if (extensionType == null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE || typeCode.isConditionRecord())) {
             throw new ConnectorException(TABLE_NOT_FOUND);
         }
 
@@ -114,7 +114,7 @@ public interface IPFXConnection {
     }
 
     default IPFXExtensionType getConditionRecordType(PFXTypeCode typeCode, String tableName) {
-        if (typeCode == PFXTypeCode.CONDITION_RECORD && !StringUtils.isEmpty(tableName)) {
+        if (typeCode.isConditionRecord() && !StringUtils.isEmpty(tableName)) {
             try {
                 ObjectNode node = getConditionRecordTable(tableName);
 
@@ -301,7 +301,7 @@ public interface IPFXConnection {
                     JsonNode error = JsonUtil.getResponse(obj);
                     if (JsonUtil.isObjectNode(error)) {
                         nodes.add(error);
-                    }else {
+                    } else {
                         nodes.add(obj);
                     }
                 }

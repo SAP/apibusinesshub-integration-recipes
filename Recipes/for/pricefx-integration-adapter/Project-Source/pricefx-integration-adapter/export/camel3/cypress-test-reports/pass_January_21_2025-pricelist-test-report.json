@@ -1,0 +1,221 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 7,
+    "passes": 7,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-01-21T01:22:39.242Z",
+    "end": "2025-01-21T01:22:52.801Z",
+    "duration": 13559,
+    "testsRegistered": 7,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2273c2fc-b726-422c-a656-0f6eea8aec6e",
+      "title": "",
+      "fullFile": "cypress/camel3/pricelist-test.ts",
+      "file": "cypress/camel3/pricelist-test.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "32b81ad4-43a0-4abc-8e2a-9c48adbf3d90",
+          "title": "SAP Camel 3 Adapter - Price list Regression Test",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Update Pricefx access token",
+              "fullTitle": "SAP Camel 3 Adapter - Price list Regression Test Update Pricefx access token",
+              "timedOut": null,
+              "duration": 2838,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.login();",
+              "err": {},
+              "uuid": "1deb420c-aa85-4d1b-911d-775cc6c11328",
+              "parentUUID": "32b81ad4-43a0-4abc-8e2a-9c48adbf3d90",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TypedId - price list item",
+              "fullTitle": "SAP Camel 3 Adapter - Price list Regression Test TypedId - price list item",
+              "timedOut": null,
+              "duration": 823,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const authToken = Cypress.env('authToken');\nlet requestMessage = utils.buildTypedIdRequestWithUniqueId(\"252767672.PLI\", pricelistId + \"\", authToken);\ncy.request(requestMessage).then((response) => {\n    const jsonData = JSON.parse(response.body);\n    expect(jsonData.sku).to.eql(\"TEST2\");\n    expect(jsonData.label).to.eql(\"do not delete\");\n    expect(jsonData.resultPrice).to.eql(10.0);\n    expect(jsonData.pricelistId).to.eql(pricelistId);\n    expect(jsonData.attribute1).to.eql(10);\n});",
+              "err": {},
+              "uuid": "b77601e1-96e3-45f8-8c69-a29050ba73be",
+              "parentUUID": "32b81ad4-43a0-4abc-8e2a-9c48adbf3d90",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TypedId - price list",
+              "fullTitle": "SAP Camel 3 Adapter - Price list Regression Test TypedId - price list",
+              "timedOut": null,
+              "duration": 2241,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const authToken = Cypress.env('authToken');\nlet requestMessage = utils.buildBasicTypedIdRequest(pricelistId + \".PL\", authToken);\ncy.request(requestMessage).then((response) => {\n    const jsonData = JSON.parse(response.body);\n    expect(jsonData.id).to.eql(pricelistId);\n    expect(jsonData.targetDate).to.eql(\"2021-10-31\");\n    expect(jsonData.label).to.eql(\"SAP/Boomi Regression Testing PL - DO NOT MODIFY OR DELETE\");\n    expect(jsonData.numberOfItems).to.eql(2);\n    expect(jsonData.pricelistType).to.eql(\"SIMPLE\");\n    expect(jsonData.status).to.eql(\"READY\");\n});",
+              "err": {},
+              "uuid": "7b707b05-09e6-452e-9bbd-f9132dc72c05",
+              "parentUUID": "32b81ad4-43a0-4abc-8e2a-9c48adbf3d90",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Metadata",
+              "fullTitle": "SAP Camel 3 Adapter - Price list Regression Test Metadata",
+              "timedOut": null,
+              "duration": 2165,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const authToken = Cypress.env('authToken');\nlet requestMessage = utils.buildMetadataRequestWithUniqueId('PRICELIST_ITEM', pricelistId, authToken);\ncy.request(requestMessage).then((response) => {\n    const jsonData = JSON.parse(response.body);\n    expect(jsonData[0].fieldName).to.eql(\"attribute1\");\n    expect(jsonData[0].label).to.eql(\"Price\");\n    expect(jsonData[0].fieldType).to.eql(\"REAL\");\n    expect(jsonData[0].requiredField).to.eql(false);\n});",
+              "err": {},
+              "uuid": "90d036c8-6272-426a-89d2-5b80f83454ed",
+              "parentUUID": "32b81ad4-43a0-4abc-8e2a-9c48adbf3d90",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Fetch price list items",
+              "fullTitle": "SAP Camel 3 Adapter - Price list Regression Test Fetch price list items",
+              "timedOut": null,
+              "duration": 2313,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const authToken = Cypress.env('authToken');\nconst payload = {\n    \"data\": {\n        \"criteria\": [\n            {\n                \"fieldName\": \"sku\",\n                \"operator\": \"equals\",\n                \"value\": \"TEST\"\n            },\n            {\n                \"fieldName\": \"sku\",\n                \"operator\": \"equals\",\n                \"value\": \"TEST2\"\n            }\n        ],\n        \"operator\": \"or\"\n    },\n    \"sortBy\": [\n        \"sku\"\n    ]\n};\nlet requestMessage = utils.buildFetchRequestWithUniqueId('PRICELIST_ITEM', payload, pricelistId, authToken);\ncy.request(requestMessage).then((response) => {\n    expect(response.status).to.eq(200);\n    cy.task(\"logToCLI\", response.body);\n    const jsonData = response.body;\n    expect(jsonData[1].sku).to.eql(\"TEST2\");\n    expect(jsonData[1].label).to.eql(\"do not delete\");\n    expect(jsonData[1].resultPrice).to.eql(10.0);\n    expect(jsonData[1].pricelistId).to.eql(parseInt(pricelistId));\n    expect(jsonData[1].attribute1).to.eql(10);\n    expect(jsonData[0].sku).to.eql(\"TEST\");\n    expect(jsonData[0].label).to.eql(\"do not delete\");\n    expect(jsonData[0].resultPrice).to.eql(10.0);\n    expect(jsonData[0].pricelistId).to.eql(parseInt(pricelistId));\n    expect(jsonData[0].attribute1).to.eql(10);\n});",
+              "err": {},
+              "uuid": "fd322685-7ce8-4428-b293-c7185829d965",
+              "parentUUID": "32b81ad4-43a0-4abc-8e2a-9c48adbf3d90",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Get price list items",
+              "fullTitle": "SAP Camel 3 Adapter - Price list Regression Test Get price list items",
+              "timedOut": null,
+              "duration": 2232,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const authToken = Cypress.env('authToken');\nlet requestMessage = utils.buildBasicGetRequest('PRICELIST_ITEM', pricelistId, authToken);\ncy.request(requestMessage).then((response) => {\n    expect(response.status).to.eq(200);\n    const jsonData = JSON.parse(response.body);\n    expect(jsonData[1].sku).to.be.oneOf([\"TEST\", \"TEST2\"]);\n    expect(jsonData[1].label).to.eql(\"do not delete\");\n    expect(jsonData[1].resultPrice).to.eql(10.0);\n    expect(jsonData[1].pricelistId).to.eql(parseInt(pricelistId));\n    expect(jsonData[1].attribute1).to.eql(10);\n    expect(jsonData[0].sku).to.be.oneOf([\"TEST\", \"TEST2\"]);\n    expect(jsonData[0].label).to.eql(\"do not delete\");\n    expect(jsonData[0].resultPrice).to.eql(10.0);\n    expect(jsonData[0].pricelistId).to.eql(parseInt(pricelistId));\n    expect(jsonData[0].attribute1).to.eql(10);\n});",
+              "err": {},
+              "uuid": "df66406c-c69b-40fe-adb3-051692c78abf",
+              "parentUUID": "32b81ad4-43a0-4abc-8e2a-9c48adbf3d90",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Fetch price lists",
+              "fullTitle": "SAP Camel 3 Adapter - Price list Regression Test Fetch price lists",
+              "timedOut": null,
+              "duration": 765,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const authToken = Cypress.env('authToken');\nconst payload = {\n    \"data\": {\n        \"criteria\": [\n            {\n                \"fieldName\": \"id\",\n                \"operator\": \"equals\",\n                \"value\": \"785673\"\n            },\n            {\n                \"fieldName\": \"status\",\n                \"operator\": \"equals\",\n                \"value\": \"error\"\n            }\n        ],\n        \"operator\": \"and\"\n    },\n    \"sortBy\": [\n        \"id\"\n    ]\n};\nlet requestMessage = utils.buildBasicFetchRequest('PRICELIST', payload, authToken);\ncy.request(requestMessage).then((response) => {\n    expect(response.status).to.eq(200);\n    const jsonData = response.body;\n    expect(jsonData[0].targetDate).to.eql(\"2021-04-16\");\n    expect(jsonData[0].label).to.eql(\"SAP/Boomi Regression Testing PL - DO NOT MODIFY OR DELETE\");\n    expect(jsonData[0].numberOfItems).to.eql(0);\n    expect(jsonData[0].pricelistType).to.eql(\"SIMPLE\");\n    expect(jsonData[0].id).to.eql(785673);\n    expect(jsonData[0].status).to.eql(\"ERROR\");\n});",
+              "err": {},
+              "uuid": "7fbdf8f0-f869-44ef-901f-561f52138f3e",
+              "parentUUID": "32b81ad4-43a0-4abc-8e2a-9c48adbf3d90",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1deb420c-aa85-4d1b-911d-775cc6c11328",
+            "b77601e1-96e3-45f8-8c69-a29050ba73be",
+            "7b707b05-09e6-452e-9bbd-f9132dc72c05",
+            "90d036c8-6272-426a-89d2-5b80f83454ed",
+            "fd322685-7ce8-4428-b293-c7185829d965",
+            "df66406c-c69b-40fe-adb3-051692c78abf",
+            "7fbdf8f0-f869-44ef-901f-561f52138f3e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 13377,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "reportDir": "cypress/reports",
+        "overwrite": true,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

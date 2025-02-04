@@ -1,5 +1,6 @@
 package net.pricefx.connector.common.operation
 
+import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
@@ -168,6 +169,19 @@ class GenericUpsertorTest extends Specification {
         then:
         noExceptionThrown()
 
+
+        when:
+        request = new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_SKU, "")
+                .put("attribute1", "1").put("attribute2", "1")
+
+        JsonNode schemaNode = JsonSchemaUtil.loadSchema(PFXJsonSchema.POST_REQUEST, true)
+
+        new GenericUpsertor(pfxClient, PFXOperation.INTEGRATE.getOperation(),
+                PFXTypeCode.PRODUCT, null, schemaNode).validateRequest(request, false)
+
+        then:
+        noExceptionThrown()
+
     }
 
 
@@ -192,6 +206,53 @@ class GenericUpsertorTest extends Specification {
         then:
         thrown(RequestValidationException.class)
 
+
+    }
+
+    def "getSchemaFields"() {
+        given:
+        JsonNode schemaNode = JsonSchemaUtil.loadSchema(PFXJsonSchema.PRODUCT_UPSERT_REQUEST, true)
+        JsonSchemaUtil.updateSchemaWithMetadata(schemaNode, PFXTypeCode.PRODUCT, null, null, true, true, false)
+
+        def upsertor = new GenericUpsertor(pfxClient, PFXOperation.INTEGRATE.getOperation(),
+                PFXTypeCode.PRODUCT, null, null)
+
+        when:
+        def results = upsertor.getSchemaFields(schemaNode)
+
+        then:
+        results.contains(PFXConstants.FIELD_SKU)
+        results.size() == 36
+
+
+    }
+
+    def "validateExtraFields"() {
+        given:
+
+        JsonNode schemaNode = JsonSchemaUtil.loadSchema(PFXJsonSchema.PRODUCT_UPSERT_REQUEST, true)
+        JsonSchemaUtil.updateSchemaWithMetadata(schemaNode, PFXTypeCode.PRODUCT, null, null, true, true, false)
+
+        def upsertor = new GenericUpsertor(pfxClient, PFXOperation.INTEGRATE.getOperation(),
+                PFXTypeCode.PRODUCT, null, null)
+
+        when:
+        def request = JsonUtil.createArrayNode(
+                new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_SKU, "x").put("attribute1", "").put("attribute2", "x"))
+
+        upsertor.validateExtraFields(schemaNode, request)
+
+        then:
+        noExceptionThrown()
+
+        when:
+        request = JsonUtil.createArrayNode(
+                new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_SKU, "x").put("attributeX", "").put("attribute2", "x"))
+
+        upsertor.validateExtraFields(schemaNode, request)
+
+        then:
+        thrown(RequestValidationException.class)
 
     }
 

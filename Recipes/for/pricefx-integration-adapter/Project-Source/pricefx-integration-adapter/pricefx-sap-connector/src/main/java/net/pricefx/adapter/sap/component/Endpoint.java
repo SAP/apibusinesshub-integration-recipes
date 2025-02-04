@@ -93,6 +93,9 @@ public class Endpoint extends DefaultEndpoint {
     private boolean retryLoginFailure;
 
     @UriParam
+    private String lastUpdateTimestamp;
+
+    @UriParam
     private String postPath;
 
     public Endpoint(final String endpointUri, final Component component) {
@@ -336,5 +339,13 @@ public class Endpoint extends DefaultEndpoint {
 
     public void setPostPath(String postPath) {
         this.postPath = postPath;
+    }
+
+    public String getLastUpdateTimestamp() {
+        return lastUpdateTimestamp;
+    }
+
+    public void setLastUpdateTimestamp(String lastUpdateTimestamp) {
+        this.lastUpdateTimestamp = lastUpdateTimestamp;
     }
 }

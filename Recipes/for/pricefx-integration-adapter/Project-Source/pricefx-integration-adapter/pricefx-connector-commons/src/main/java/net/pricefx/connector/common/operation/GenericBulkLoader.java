@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import net.pricefx.connector.common.connection.PFXOperationClient;
-import net.pricefx.connector.common.connection.RequestFactory;
 import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.JsonValidationUtil;
 import net.pricefx.connector.common.validation.RequestValidationException;
@@ -31,7 +30,13 @@ public class GenericBulkLoader implements IPFXObjectBulkLoader {
     public GenericBulkLoader(PFXOperationClient pfxClient, PFXTypeCode typeCode, IPFXExtensionType extensionType, String tableName) {
         this.pfxClient = pfxClient;
         this.typeCode = typeCode;
-        this.tableName = tableName;
+
+        if (StringUtils.isEmpty(tableName) && extensionType != null) {
+            this.tableName = extensionType.getTable();
+        } else {
+            this.tableName = tableName;
+        }
+
         this.extensionType = extensionType;
 
     }
@@ -80,7 +85,13 @@ public class GenericBulkLoader implements IPFXObjectBulkLoader {
         //validate no of data fields = no of column header
         validateDataLength(inputNode.get(FIELD_DATA), inputNode.get(HEADER).size());
 
+        if (typeCode == PFXTypeCode.CONDITION_RECORD_STAGING) {
+            validateKeyFields(inputNode.get(HEADER));
+            validateExtraFields(inputNode.get(HEADER));
+        }
+
         if (validate) {
+
             Iterable<ObjectNode> metadata = pfxClient.doFetchMetadata(typeCode, extensionType, null);
 
             Map<String, ObjectNode> metadataMap = new HashMap<>();
@@ -96,6 +107,7 @@ public class GenericBulkLoader implements IPFXObjectBulkLoader {
 
 
     }
+
 
     private void validateDataLength(JsonNode dataNode, int columns) {
         if (columns < 1) {
@@ -224,6 +236,36 @@ public class GenericBulkLoader implements IPFXObjectBulkLoader {
         return pfxClient;
     }
 
+    private void validateKeyFields(JsonNode headerNode) {
+        Set<String> keyFields = new HashSet<>();
+        Collections.addAll(keyFields, typeCode.getIdentifierFieldNames());
+        if (extensionType != null) keyFields.addAll(extensionType.getBusinessKeys());
+
+        if (headerNode != null && headerNode.isArray()) {
+            List<String> headers = JsonUtil.getStringArray(headerNode);
+            keyFields.removeAll(headers);
+        }
+
+        if (!keyFields.isEmpty()) {
+            throw new RequestValidationException(MISSING_MANDATORY_ATTRIBUTES, keyFields.toString());
+        }
+    }
+
+    private void validateExtraFields(JsonNode headerNode) {
+        PFXJsonSchema schema = PFXJsonSchema.getFetchResponseSchema(typeCode, extensionType);
+        Set<String> validFields = JsonSchemaUtil.getFields(
+                JsonSchemaUtil.loadSchema(schema, typeCode, extensionType, null, true, true, false, false));
+
+        if (headerNode != null && headerNode.isArray()) {
+            List<String> headers = JsonUtil.getStringArray(headerNode);
+            headers.removeAll(validFields);
+
+            if (!headers.isEmpty()) {
+                throw new RequestValidationException(
+                        SCHEMA_VALIDATION_ERROR, "Contains Extra Fields not stated in schema:" + headers);
+            }
+        }
+    }
 }
 
 

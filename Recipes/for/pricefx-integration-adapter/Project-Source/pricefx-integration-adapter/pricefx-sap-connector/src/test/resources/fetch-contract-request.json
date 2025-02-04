@@ -1,0 +1,15 @@
+{
+  "data": {
+    "operator": "and",
+    "criteria": [
+      {
+        "fieldName": "uniqueName",
+        "operator": "startsWith",
+        "value": "C-1000"
+      }
+    ]
+  },
+  "sortBy": [
+    "uniqueName"
+  ]
+}

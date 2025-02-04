@@ -9,10 +9,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.smartgwt.client.types.OperatorId;
 import net.pricefx.connector.common.connection.PFXOperationClient;
-import net.pricefx.connector.common.operation.GenericFetcher;
-import net.pricefx.connector.common.operation.GenericMetadataFetcher;
-import net.pricefx.connector.common.operation.ManualPriceListFetcher;
-import net.pricefx.connector.common.operation.QuoteFetcher;
+import net.pricefx.connector.common.operation.*;
 import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.RequestValidationException;
 import net.pricefx.pckg.client.okhttp.PfxCommonService;
@@ -126,6 +123,14 @@ public class FetchService {
 
 
         switch (pfxTypeCode) {
+            case CONTRACT:
+                results = new ContractFetcher(pfxClient, false).withFullResult(fullResult).
+                        fetch(criterion, ImmutableList.of(FIELD_UNIQUENAME), false, formatted);
+                break;
+            case REBATEAGREEMENT:
+                results = new RebateAgreementFetcher(pfxClient, false).withFullResult(fullResult).
+                        fetch(criterion, ImmutableList.of(FIELD_UNIQUENAME), false, formatted);
+                break;
             case DATAFEED:
             case DATASOURCE:
             case DATAMART:

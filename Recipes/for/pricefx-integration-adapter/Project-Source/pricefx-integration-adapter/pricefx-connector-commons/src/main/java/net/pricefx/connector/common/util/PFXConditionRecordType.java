@@ -1,10 +1,11 @@
 package net.pricefx.connector.common.util;
 
+import com.google.common.collect.ImmutableSet;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static net.pricefx.connector.common.util.PFXConstants.MAX_ATTRIBUTES;
+import static net.pricefx.connector.common.util.PFXConstants.MAX_CONDITION_ATTRIBUTES;
 
 public class PFXConditionRecordType implements IPFXExtensionType {
 
@@ -25,7 +26,7 @@ public class PFXConditionRecordType implements IPFXExtensionType {
 
     @Override
     public int getAdditionalAttributes() {
-        return MAX_ATTRIBUTES;
+        return MAX_CONDITION_ATTRIBUTES;
     }
 
     @Override
@@ -45,7 +46,7 @@ public class PFXConditionRecordType implements IPFXExtensionType {
 
     @Override
     public Set<String> getMandatoryFields() {
-        return new HashSet<>();
+        return ImmutableSet.of("validTo", "validFrom");
     }
 
     @Override
@@ -54,6 +55,8 @@ public class PFXConditionRecordType implements IPFXExtensionType {
         for (int i = 1; i <= keys; i++) {
             businessKeys.add("key" + i);
         }
+        businessKeys.add("validTo");
+        businessKeys.add("validFrom");
         return businessKeys;
     }
 

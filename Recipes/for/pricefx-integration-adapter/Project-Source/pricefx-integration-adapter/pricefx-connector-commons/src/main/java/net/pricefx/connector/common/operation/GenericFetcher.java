@@ -5,16 +5,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import net.pricefx.connector.common.connection.PFXOperationClient;
-import net.pricefx.connector.common.connection.RequestFactory;
 import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.RequestValidationException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static com.smartgwt.client.types.OperatorId.EQUALS;
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath;
@@ -191,10 +188,10 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
         }
 
         if (validate) {
-            JsonNode schemaNode = loadSchema(PFXJsonSchema.getFetchResponseSchema(typeCode, extensionType), typeCode, extensionType, new ArrayList<>(),
-                    true, true, false);
+            JsonNode schemaNode = JsonSchemaUtil.loadSchema(PFXJsonSchema.getFetchResponseSchema(typeCode, extensionType), typeCode, extensionType, new ArrayList<>(),
+                    true, true, false, false);
 
-            final List<String> fields = new ArrayList<>();
+            final Set<String> fields = new HashSet<>();
             if (PFXTypeCode.isDataCollectionTypeCodes(typeCode) && !StringUtils.isEmpty(uniqueId)) {
                 ObjectNode tableDefinition = Iterables.get(pfxClient.doFetch(typeCode,
                         createPath(GET_FCS.getOperation(), typeCode.getTypeCode()),

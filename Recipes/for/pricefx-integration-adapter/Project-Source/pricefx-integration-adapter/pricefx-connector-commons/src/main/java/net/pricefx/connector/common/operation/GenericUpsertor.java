@@ -8,10 +8,10 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import net.pricefx.connector.common.connection.PFXOperationClient;
-import net.pricefx.connector.common.connection.RequestFactory;
 import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.JsonValidationUtil;
 import net.pricefx.connector.common.validation.RequestValidationException;
+import org.apache.commons.collections4.SetUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -46,8 +46,22 @@ public class GenericUpsertor implements IPFXObjectUpsertor {
         Iterable<ObjectNode> metadata = pfxClient.doFetchMetadata(typeCode, extensionType, null);
         List<Pair<String, String>> attributes = createMetadataFields(metadata);
         this.schema = (schema != null) ? schema :
-                loadSchema(PFXJsonSchema.getUpsertRequestSchema(typeCode, extensionType), typeCode, extensionType, attributes,
-                        true, true, false);
+                JsonSchemaUtil.loadSchema(PFXJsonSchema.getUpsertRequestSchema(typeCode, extensionType), typeCode, extensionType, attributes,
+                        true, true, false, true);
+
+    }
+
+    public GenericUpsertor(PFXOperationClient pfxClient, String apiPath, PFXTypeCode typeCode, IPFXExtensionType extensionType, JsonNode schema, boolean showAdditionalKeys, boolean showAdditionalAttributes) {
+        this.pfxClient = pfxClient;
+        this.apiPath = apiPath;
+        this.typeCode = typeCode;
+        this.extensionType = extensionType;
+
+        Iterable<ObjectNode> metadata = pfxClient.doFetchMetadata(typeCode, extensionType, null);
+        List<Pair<String, String>> attributes = createMetadataFields(metadata);
+        this.schema = (schema != null) ? schema :
+                JsonSchemaUtil.loadSchema(PFXJsonSchema.getUpsertRequestSchema(typeCode, extensionType), typeCode, extensionType, attributes,
+                        showAdditionalKeys, showAdditionalAttributes, false, true);
 
     }
 
@@ -94,6 +108,8 @@ public class GenericUpsertor implements IPFXObjectUpsertor {
         JsonValidationUtil.validatePayload(schema, inputNode);
         validateExtraFields(schema, inputNode);
 
+        Set<String> schemaFields = getSchemaFields(schema);
+
 
         int count = JsonUtil.countJson(inputNode);
         if (count > maximumRecords) {
@@ -109,7 +125,7 @@ public class GenericUpsertor implements IPFXObjectUpsertor {
                     .collect(Collectors.toMap((ObjectNode obj) -> JsonUtil.getValueAsText(obj.get(FIELD_FIELDNAME)), obj -> obj));
         }
 
-        validateAttributes(inputNode, metadataMap, extensionType, typeCode, replaceNullKey);
+        validateAttributes(inputNode, metadataMap, schemaFields, extensionType, typeCode, replaceNullKey);
 
     }
 
@@ -133,10 +149,12 @@ public class GenericUpsertor implements IPFXObjectUpsertor {
         throw new UnsupportedOperationException("Request is not a valid object");
     }
 
-    private void validateAttributes(JsonNode inputNode, Map<String, ObjectNode> metadataMap,
+    private void validateAttributes(JsonNode inputNode, Map<String, ObjectNode> metadataMap, Set<String> schemaFields,
                                     IPFXExtensionType extensionType, PFXTypeCode typeCode, boolean replaceNullKey) {
 
         Set<String> mandatory = JsonValidationUtil.getMandatoryAttributes(metadataMap, extensionType, typeCode);
+        mandatory = SetUtils.intersection(mandatory, schemaFields).toSet();
+
         if (!JsonUtil.isArrayNode(inputNode)) {
             return;
         }

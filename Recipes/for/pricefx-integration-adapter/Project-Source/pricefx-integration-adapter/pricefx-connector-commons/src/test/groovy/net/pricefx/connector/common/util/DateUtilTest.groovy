@@ -7,32 +7,49 @@ import java.text.ParseException
 
 class DateUtilTest extends Specification {
 
-    def "getDateTime"() {
+    def "getTrimmedDate"() {
         when:
-        def result = DateUtil.getDateTime("2020-01-01T00:00:00")
+        def result = DateUtil.getTrimmedDate("2020-01-01T01:01:01")
 
         then:
-        result
+        "2020-01-01" == result
+    }
+
+    def "getDateTime"() {
+        given:
+        Calendar calendar = GregorianCalendar.getInstance()
+
+        when:
+        def result = DateUtil.getDateTime("2020-01-01T00:01:00")
+        calendar.setTime(result)
+
+        then:
+        2020 == calendar.get(Calendar.YEAR)
+        1 == calendar.get(Calendar.MINUTE)
 
         when:
         result = DateUtil.getDateTime("2020-01-01TX")
 
         then:
-        !result
+        null == result
     }
 
     def "getDate"() {
+        given:
+        Calendar calendar = GregorianCalendar.getInstance()
+
         when:
         def result = DateUtil.getDate("2020-01-01")
+        calendar.setTime(result)
 
         then:
-        result
+        2020 == calendar.get(Calendar.YEAR)
 
         when:
         result = DateUtil.getDate("2020/01/01")
 
         then:
-        !result
+        null == result
     }
 
     def "getFormattedDate"() {
@@ -45,7 +62,7 @@ class DateUtilTest extends Specification {
         then:
         "2020-01-01" == result
 
-                when:
+        when:
         result = DateUtil.getFormattedDate(null)
 
         then:

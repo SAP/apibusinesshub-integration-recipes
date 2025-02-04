@@ -1,6 +1,54 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "filterCriteria": {
+      "type": "object",
+      "properties": {
+        "_constructor": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "operator": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "customerGroup": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "customerFieldName": {
+          "type": "string"
+        },
+        "customerFieldLabel": {
+          "type": "string"
+        },
+        "customerFieldValue": {
+          "type": "string"
+        },
+        "customerFilterCriteria": {
+          "$ref": "#/definitions/filterCriteria"
+        }
+      }
+    },
     "calculableInput": {
       "type": "object",
       "properties": {
@@ -24,9 +72,6 @@
         },
         "valueHint": {
           "type": "string"
-        },
-        "parameterConfig": {
-          "type": "object"
         },
         "lookupTableId": {
           "type": "string"
@@ -198,7 +243,7 @@
       "type": "string"
     },
     "customerGroup": {
-      "type": "string"
+      "$ref": "#/definitions/customerGroup"
     },
     "approvedByName": {
       "type": "string"
