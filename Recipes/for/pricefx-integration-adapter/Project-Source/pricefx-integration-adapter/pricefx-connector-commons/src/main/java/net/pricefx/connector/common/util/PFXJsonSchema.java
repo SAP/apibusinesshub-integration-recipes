@@ -85,6 +85,12 @@ public enum PFXJsonSchema {
     //PAYOUT
     PAYOUT_FETCH_RESPONSE("/schemas/fetch-payout-output-schema.json"),
 
+    //REBATE AGREEMENT
+    RBA_FETCH_RESPONSE("/schemas/fetch-agreement-output-schema.json"),
+
+    //CONTRACT
+    CONTRACT_FETCH_RESPONSE("/schemas/fetch-contract-output-schema.json"),
+
     //PA DATA
     DATALOAD_FETCH_RESPONSE("/schemas/fetch-dataload-output-schema.json"),
     DATAFEED_FETCH_RESPONSE("/schemas/fetch-datafeed-output-schema.json"),
@@ -183,7 +189,12 @@ public enum PFXJsonSchema {
     public static PFXJsonSchema getFetchResponseSchema(PFXTypeCode pfxTypeCode, IPFXExtensionType extensionType) {
         if (pfxTypeCode != null) {
             switch (pfxTypeCode) {
+                case CONTRACT:
+                    return CONTRACT_FETCH_RESPONSE;
+                case REBATEAGREEMENT:
+                    return RBA_FETCH_RESPONSE;
                 case CONDITION_RECORD:
+                case CONDITION_RECORD_STAGING:
                     return CONDITION_RECORD_FETCH_RESPONSE;
                 case PAYOUT:
                     return PAYOUT_FETCH_RESPONSE;

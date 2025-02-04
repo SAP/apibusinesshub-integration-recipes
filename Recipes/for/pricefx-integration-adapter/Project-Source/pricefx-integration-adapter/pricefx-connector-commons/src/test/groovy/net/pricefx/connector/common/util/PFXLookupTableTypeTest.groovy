@@ -11,7 +11,7 @@ class PFXLookupTableTypeTest extends Specification {
     static simpleDate = PFXLookupTableType.valueOf(PFXLookupTableType.LookupTableType.SIMPLE_DATE_KEY.name(), PFXLookupTableType.LookupTableValueType.STRING.name())
     static range = PFXLookupTableType.valueOf(PFXLookupTableType.LookupTableType.RANGE.name(), PFXLookupTableType.LookupTableValueType.STRING.name())
 
-    def "getTypeCodeSuffix" () {
+    def "getTypeCodeSuffix"() {
         when:
         def result = range.getTypeCodeSuffix()
 

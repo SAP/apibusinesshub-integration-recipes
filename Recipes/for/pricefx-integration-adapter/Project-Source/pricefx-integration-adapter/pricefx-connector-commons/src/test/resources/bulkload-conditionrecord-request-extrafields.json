@@ -1,0 +1,40 @@
+{
+  "header": [
+    "key1",
+    "key2",
+    "key3",
+    "key4",
+    "validFrom",
+    "validTo",
+    "integrationStatus",
+    "attribute9",
+    "attribute10",
+    "attributeX"
+  ],
+  "data": [
+    [
+      "C1",
+      "C1",
+      "C1",
+      "",
+      "2024-01-01",
+      "2024-12-31",
+      1,
+      1,
+      "dummy1",
+      "dummy1"
+    ],
+    [
+      "C2",
+      "C2",
+      "C2",
+      "",
+      "2024-01-01",
+      "2024-12-31",
+      1,
+      1,
+      "dummy2",
+      "dummy2"
+    ]
+  ]
+}

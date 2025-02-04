@@ -10,9 +10,7 @@ import spock.lang.Specification
 
 import static com.smartgwt.client.types.OperatorId.EQUALS
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath
-import static net.pricefx.connector.common.util.PFXConstants.FIELD_TYPEDID
-import static net.pricefx.connector.common.util.PFXConstants.FIELD_UNIQUENAME
-import static net.pricefx.connector.common.util.PFXConstants.MAX_ATTRIBUTES
+import static net.pricefx.connector.common.util.PFXConstants.*
 import static net.pricefx.connector.common.util.RequestUtil.createSimpleFetchRequest
 
 class IPFXConnectionTest extends Specification {
@@ -151,7 +149,7 @@ class IPFXConnectionTest extends Specification {
         "Condition006" == ((PFXConditionRecordType) result).getTable()
         PFXTypeCode.CONDITION_RECORD.getTypeCode() + "4" == ((PFXConditionRecordType) result).getTypeCodeSuffix()
         4 == ((PFXConditionRecordType) result).getAdditionalKeys()
-        MAX_ATTRIBUTES == ((PFXConditionRecordType) result).getAdditionalAttributes()
+        MAX_CONDITION_ATTRIBUTES == ((PFXConditionRecordType) result).getAdditionalAttributes()
 
     }
 
@@ -227,12 +225,12 @@ class IPFXConnectionTest extends Specification {
 
     }
 
-    def "getTableDetails" () {
+    def "getTableDetails"() {
         given:
-        ObjectNode request = createSimpleFetchRequest(PfxCommonService.buildSimpleCriterion(FIELD_UNIQUENAME, EQUALS.getValue(), "Condition006"));
+        ObjectNode request = createSimpleFetchRequest(PfxCommonService.buildSimpleCriterion(FIELD_UNIQUENAME, EQUALS.getValue(), "Condition006"))
 
         when:
-        def result = pfxClient.getTableDetails(createPath(PFXOperation.getFetchOperation(PFXTypeCode.CONDITION_RECORD_SET).getOperation(), PFXTypeCode.CONDITION_RECORD_SET.getTypeCode()), request);
+        def result = pfxClient.getTableDetails(createPath(PFXOperation.getFetchOperation(PFXTypeCode.CONDITION_RECORD_SET).getOperation(), PFXTypeCode.CONDITION_RECORD_SET.getTypeCode()), request)
 
         then:
         "Condition006" == result.get(PFXConstants.FIELD_UNIQUENAME).textValue()

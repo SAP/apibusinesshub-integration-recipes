@@ -10,18 +10,8 @@
     ],
     "properties": {
       "id": {
-
-      },
-      "conditionRecordSetId": {
-        "type": "number"
       },
       "priceUnit": {
-        "type": "string"
-      },
-      "validTo": {
-        "type": "string"
-      },
-      "validFrom": {
         "type": "string"
       },
       "conditionValue": {
@@ -34,13 +24,6 @@
         "type": "string"
       },
       "integrationStatus": {
-
-      },
-      "lastUpdateDate": {
-        "type": "string"
-      },
-      "createDate": {
-        "type": "string"
       }
     }
   }

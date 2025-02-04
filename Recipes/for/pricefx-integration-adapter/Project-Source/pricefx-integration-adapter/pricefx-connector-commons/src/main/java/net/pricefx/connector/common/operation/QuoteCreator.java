@@ -5,11 +5,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
 import net.pricefx.connector.common.connection.PFXOperationClient;
-import net.pricefx.connector.common.connection.RequestFactory;
-import net.pricefx.connector.common.util.JsonUtil;
-import net.pricefx.connector.common.util.PFXJsonSchema;
-import net.pricefx.connector.common.util.PFXOperation;
-import net.pricefx.connector.common.util.ResponseUtil;
+import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.ConnectorException;
 import net.pricefx.connector.common.validation.JsonValidationUtil;
 import net.pricefx.connector.common.validation.QuoteRequestValidator;
@@ -45,8 +41,8 @@ public class QuoteCreator implements IPFXObjectUpsertor, ICalculableObjectUpsert
 
         List<Pair<String, String>> attributes = createMetadataFields(metadata);
         this.schema = (schema != null) ? schema :
-                loadSchema(PFXJsonSchema.QUOTE_CREATE_REQUEST, QUOTE, null, attributes,
-                        false, false, false);
+                JsonSchemaUtil.loadSchema(PFXJsonSchema.QUOTE_CREATE_REQUEST, QUOTE, null, attributes,
+                        false, false, false, true);
     }
 
 

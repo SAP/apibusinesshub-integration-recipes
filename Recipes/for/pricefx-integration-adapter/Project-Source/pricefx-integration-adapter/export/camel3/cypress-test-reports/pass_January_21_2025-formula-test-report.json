@@ -1,0 +1,145 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-01-21T01:21:30.224Z",
+    "end": "2025-01-21T01:21:42.962Z",
+    "duration": 12738,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c94a7057-2d43-43ad-a6a6-a3ed9495ebb6",
+      "title": "",
+      "fullFile": "cypress/camel3/formula-test.ts",
+      "file": "cypress/camel3/formula-test.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "63bad578-ad0b-4241-a9be-1d3643fc15cc",
+          "title": "SAP Camel 3 Adapter - Formula Test",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Update Pricefx access token",
+              "fullTitle": "SAP Camel 3 Adapter - Formula Test Update Pricefx access token",
+              "timedOut": null,
+              "duration": 7616,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.login();",
+              "err": {},
+              "uuid": "92a0a052-fca4-4211-89be-85a844de50b0",
+              "parentUUID": "63bad578-ad0b-4241-a9be-1d3643fc15cc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Execute Formula - 1",
+              "fullTitle": "SAP Camel 3 Adapter - Formula Test Execute Formula - 1",
+              "timedOut": null,
+              "duration": 4213,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const authToken = Cypress.env('authToken');\nconst payload = {\n    \"hello\": \"xxx1\"\n};\nlet requestMessage = buildRequest(payload, authToken);\ncy.request(requestMessage).then((response) => {\n    expect(response.status).to.eq(200);\n    expect(response.body[0].resultName).to.eql(\"hello\");\n    expect(response.body[0].result).to.eql(\"xxx1\");\n    expect(response.body[1].resultName).to.eql(\"Discount\");\n    expect(response.body[1].result).to.eql(null);\n});",
+              "err": {},
+              "uuid": "f4e1751c-c216-4e6c-83dc-b2aff617de52",
+              "parentUUID": "63bad578-ad0b-4241-a9be-1d3643fc15cc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Execute Formula - 2",
+              "fullTitle": "SAP Camel 3 Adapter - Formula Test Execute Formula - 2",
+              "timedOut": null,
+              "duration": 795,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const authToken = Cypress.env('authToken');\nconst payload = {\n    \"hello\": \"xxx1\",\n    \"Discount\": 0.9\n};\nlet requestMessage = buildRequest(payload, authToken);\ncy.request(requestMessage).then((response) => {\n    expect(response.status).to.eq(200);\n    expect(response.body[0].resultName).to.eql(\"hello\");\n    expect(response.body[0].result).to.eql(\"xxx1\");\n    expect(response.body[1].resultName).to.eql(\"Discount\");\n    expect(response.body[1].result).to.eql(0.9);\n});",
+              "err": {},
+              "uuid": "6cfabef6-c694-4c50-b12e-347401decba2",
+              "parentUUID": "63bad578-ad0b-4241-a9be-1d3643fc15cc",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "92a0a052-fca4-4211-89be-85a844de50b0",
+            "f4e1751c-c216-4e6c-83dc-b2aff617de52",
+            "6cfabef6-c694-4c50-b12e-347401decba2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 12624,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportFilename": "[status]_[datetime]-[name]-report",
+        "timestamp": "longDate",
+        "reportDir": "cypress/reports",
+        "overwrite": true,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

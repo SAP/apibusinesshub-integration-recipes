@@ -343,7 +343,7 @@ class JsonUtilTest extends Specification {
         [b: 2] == result
     }
 
-    def "createArrayNodeFromStrings" () {
+    def "createArrayNodeFromStrings"() {
         given:
         List<String> strings = new ArrayList<>()
         strings.add("a")
@@ -360,13 +360,13 @@ class JsonUtilTest extends Specification {
         3 == node.size()
 
         when:
-        node = JsonUtil.createArrayNodeFromStrings((List)null)
+        node = JsonUtil.createArrayNodeFromStrings((List) null)
 
         then:
         0 == node.size()
     }
 
-    def "createArrayNodeFromStrings - set" () {
+    def "createArrayNodeFromStrings - set"() {
         given:
         Set<String> strings = new HashSet<>()
         strings.add("a")
@@ -389,11 +389,11 @@ class JsonUtilTest extends Specification {
         0 == node.size()
     }
 
-    def "createArrayNode" () {
+    def "createArrayNode"() {
         given:
-        ObjectNode node1 = new ObjectNode(JsonNodeFactory.instance).put("id","a")
-        ObjectNode node2 = new ObjectNode(JsonNodeFactory.instance).put("id","b")
-        ObjectNode node3 = new ObjectNode(JsonNodeFactory.instance).put("id","c")
+        ObjectNode node1 = new ObjectNode(JsonNodeFactory.instance).put("id", "a")
+        ObjectNode node2 = new ObjectNode(JsonNodeFactory.instance).put("id", "b")
+        ObjectNode node3 = new ObjectNode(JsonNodeFactory.instance).put("id", "c")
 
         when:
         ArrayNode node = JsonUtil.createArrayNode(node1, node2, node3)
@@ -411,14 +411,14 @@ class JsonUtilTest extends Specification {
         0 == node.size()
     }
 
-    def "createArrayNode - list" () {
+    def "createArrayNode - list"() {
         given:
-        ObjectNode node1 = new ObjectNode(JsonNodeFactory.instance).put("id","a")
-        ObjectNode node2 = new ObjectNode(JsonNodeFactory.instance).put("id","b")
-        ObjectNode node3 = new ObjectNode(JsonNodeFactory.instance).put("id","c")
+        ObjectNode node1 = new ObjectNode(JsonNodeFactory.instance).put("id", "a")
+        ObjectNode node2 = new ObjectNode(JsonNodeFactory.instance).put("id", "b")
+        ObjectNode node3 = new ObjectNode(JsonNodeFactory.instance).put("id", "c")
 
         when:
-        ArrayNode node = JsonUtil.createArrayNode(ImmutableList.of(node1,node2,node3))
+        ArrayNode node = JsonUtil.createArrayNode(ImmutableList.of(node1, node2, node3))
 
         then:
         "a" == node.get(0).get("id").textValue()

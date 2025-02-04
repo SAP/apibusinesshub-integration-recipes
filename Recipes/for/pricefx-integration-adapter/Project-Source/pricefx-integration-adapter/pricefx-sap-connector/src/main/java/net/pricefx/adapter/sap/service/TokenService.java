@@ -49,13 +49,13 @@ public class TokenService {
 
     }
 
-    private void updateTokenTimestampConfig(String token){
+    private void updateTokenTimestampConfig(String token) {
 
         ObjectNode updateAdvRequest = new ObjectNode(JsonNodeFactory.instance)
                 .put(FIELD_UNIQUENAME, SAP_TOKEN_LAST_UPDATE).put(FIELD_VALUE, DateUtil.getCurrentTime());
 
         pfxClient.updateOAuthToken(token);
-        new UpdateService(pfxClient, PFXTypeCode.ADVANCED_CONFIG, null, SAP_TOKEN_LAST_UPDATE).execute(updateAdvRequest);
+        new UpdateService(pfxClient, PFXTypeCode.ADVANCED_CONFIG, null).execute(updateAdvRequest);
 
 
     }
@@ -77,7 +77,7 @@ public class TokenService {
 
             PFXOperationClient updatedPfxClient = (PFXOperationClient) builder.build();
 
-            new UpdateService(updatedPfxClient, PFXTypeCode.ADVANCED_CONFIG, null, SAP_TOKEN_LAST_UPDATE).execute(updateAdvRequest);
+            new UpdateService(updatedPfxClient, PFXTypeCode.ADVANCED_CONFIG, null).execute(updateAdvRequest);
 
             return new ObjectNode(JsonNodeFactory.instance).put(ACCESS_TOKEN, results);
         } catch (Exception e) {
@@ -113,7 +113,7 @@ public class TokenService {
 
     }
 
-    public static boolean isTokenRetryAllowanceExpired(PFXOperationClient pfxClient){
+    public static boolean isTokenRetryAllowanceExpired(PFXOperationClient pfxClient) {
 
         try {
             JsonNode node = new GetOperation(pfxClient, PFXTypeCode.ADVANCED_CONFIG, TokenService.SAP_TOKEN_LAST_UPDATE, null, null)
@@ -124,7 +124,7 @@ public class TokenService {
             String fourHourAgo = DateUtil.getFormattedDateTime(DateUtils.addHours(
                     DateUtil.getDateTime(DateUtil.getCurrentTime()), -4));
             return !DateUtil.isAfterTimestamp(value, fourHourAgo);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return true;
         }
     }

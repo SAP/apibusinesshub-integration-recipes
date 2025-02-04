@@ -246,7 +246,7 @@ class GenericFetcherTest extends Specification {
 
     }
 
-    def "fetchCount" () {
+    def "fetchCount"() {
 
         given:
         def request = new ObjectMapper().readTree(GenericFetcherTest.class.getResourceAsStream(requestFile))

@@ -18,7 +18,6 @@ import java.util.Map;
 
 import static com.smartgwt.client.types.OperatorId.*;
 import static net.pricefx.connector.common.util.PFXConstants.*;
-import static net.pricefx.connector.common.util.PFXTypeCode.CONDITION_RECORD;
 import static net.pricefx.connector.common.util.PFXTypeCode.LOOKUPTABLE;
 import static net.pricefx.connector.common.validation.ConnectorException.ErrorType.TABLE_NOT_FOUND;
 import static net.pricefx.connector.common.validation.RequestValidationException.ErrorType.INVALID_NUMBER_FORMAT;
@@ -41,6 +40,10 @@ public class RequestUtil {
     }
 
     private RequestUtil() {
+    }
+
+    public static ObjectNode buildSimpleCriterion(String fieldName, String operator) {
+        return new ObjectNode(JsonNodeFactory.instance).put(FIELD_FIELDNAME, fieldName).put(OPERATOR, operator);
     }
 
     public static int getPageSize(String pageSize, int maxAllowedRecords) {
@@ -184,7 +187,7 @@ public class RequestUtil {
     }
 
     public static void validateExtensionType(PFXTypeCode typeCode, IPFXExtensionType extensionType) {
-        if ((typeCode.isExtension() || typeCode == LOOKUPTABLE || typeCode == CONDITION_RECORD) &&
+        if ((typeCode.isExtension() || typeCode == LOOKUPTABLE || typeCode.isConditionRecord()) &&
                 (extensionType == null || StringUtils.isEmpty(extensionType.getTable()))) {
             throw new ConnectorException(TABLE_NOT_FOUND);
         }

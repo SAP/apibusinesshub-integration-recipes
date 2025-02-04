@@ -17,17 +17,24 @@ public class DateUtil {
     }
 
     public static String getFormattedDateTime(Date date) {
-        if (date == null){
+        if (date == null) {
             return StringUtils.EMPTY;
         }
         return new SimpleDateFormat(DATETIME_FORMAT).format(date);
     }
 
     public static String getFormattedDate(Date date) {
-        if (date == null){
+        if (date == null) {
             return StringUtils.EMPTY;
         }
         return new SimpleDateFormat(DATE_FORMAT).format(date);
+    }
+
+    public static String getTrimmedDate(String dateTime) {
+        if (dateTime == null) {
+            return StringUtils.EMPTY;
+        }
+        return new SimpleDateFormat(DATE_FORMAT).format(getDateTime(dateTime));
     }
 
     public static boolean isAfter(String date1, String date2) throws ParseException {

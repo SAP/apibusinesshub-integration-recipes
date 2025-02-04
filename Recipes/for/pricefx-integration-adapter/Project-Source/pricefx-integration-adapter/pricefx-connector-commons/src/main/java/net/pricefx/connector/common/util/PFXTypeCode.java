@@ -25,6 +25,7 @@ public enum PFXTypeCode {
     DATAFILE("DATAFILE", new String[]{"DATAFILE"}),
 
     //real PFX type
+    CONDITION_RECORD_STAGING("CRCP", "Condtion Records", new String[]{"validFrom", "validTo", "key1"}, "CRCIM"),
     CONDITION_RECORD("CRCI", "Condition Records", new String[]{FIELD_ID}, "CRCIM"),
     CONDITION_RECORD_SET("CRCS", new String[]{FIELD_UNIQUENAME}),
 
@@ -46,6 +47,7 @@ public enum PFXTypeCode {
     PRODUCT("P", new String[]{FIELD_SKU}, "PAM"),
     PRODUCTEXTENSION("PX", "PRODUCT EXTENSION", new String[]{FIELD_SKU}, "PXAM"),
 
+    CONTRACT("CT", "Contract", new String[]{FIELD_UNIQUENAME}, "CTAM"),
     QUOTE("Q", "QUOTE", new String[]{FIELD_UNIQUENAME}, "QAM", new QuoteRequestValidator(), null),
 
     DATALOAD("DMDL", new String[]{FIELD_TYPEDID}),
@@ -61,7 +63,7 @@ public enum PFXTypeCode {
     PRICELISTITEM("PLI", "PRICELIST ITEM", new String[]{FIELD_PLI_PRICELISTID}, "PLIM"),
     MATRIXPRICELISTITEM("XPLI", new String[]{FIELD_PLI_PRICELISTID}),
 
-    REBATEAGREEMENT("RBA", new String[]{FIELD_UNIQUENAME}),
+    REBATEAGREEMENT("RBA", "REBATE AGREEMENT", new String[]{FIELD_UNIQUENAME}, "RBAAM"),
     REBATETYPE("RBT", new String[]{FIELD_UNIQUENAME}),
     REBATERECORD("RR", new String[]{FIELD_UNIQUENAME}),
 
@@ -225,6 +227,10 @@ public enum PFXTypeCode {
 
     public boolean isExtension() {
         return (this == PRODUCTEXTENSION || this == CUSTOMEREXTENSION);
+    }
+
+    public boolean isConditionRecord() {
+        return (this == CONDITION_RECORD || this == CONDITION_RECORD_STAGING);
     }
 
     public String[] getIdentifierFieldNames() {

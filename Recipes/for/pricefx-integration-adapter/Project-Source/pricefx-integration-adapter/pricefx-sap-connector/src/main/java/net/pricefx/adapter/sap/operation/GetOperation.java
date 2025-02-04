@@ -23,7 +23,7 @@ public class GetOperation {
     public GetOperation(PFXOperationClient pfxClient, PFXTypeCode typeCode, String uniqueId, String secondaryId, IPFXExtensionType extensionType) {
         this.typeCode = typeCode;
         this.pfxClient = pfxClient;
-        if (typeCode == PFXTypeCode.CONDITION_RECORD){
+        if (typeCode == PFXTypeCode.CONDITION_RECORD) {
             this.uniqueId = Integer.toString(((PFXConditionRecordType) extensionType).getTableId());
         } else {
             this.uniqueId = uniqueId;
@@ -40,6 +40,8 @@ public class GetOperation {
 
         JsonNode node;
         switch (typeCode) {
+            case CONTRACT:
+            case REBATEAGREEMENT:
             case QUOTE:
                 node = new FetchService(pfxClient, typeCode, extensionType, uniqueId).get(typeCode.getIdentifierFieldNames()[0], uniqueId, true, formatted, pageNumber, pageSize);
                 break;
