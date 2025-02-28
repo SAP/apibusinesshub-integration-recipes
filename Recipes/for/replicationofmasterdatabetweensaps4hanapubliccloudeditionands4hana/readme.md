@@ -46,4 +46,16 @@ Replicate Business Partner Attachment from S/4HANA Private Cloud to S/4HANA Publ
  ![input-image](Replicate_Business_Partner_Attachment_from_S4HANA_Private_Cloud_to_S4HANA_Public_Cloud_Edition_4.png)
 ### Replicate WBS Code from S4HANA Public Cloud Edition to S4HANA Private Cloud 
 Replicate Work Breakdown Structure (WBS) Code from S4HANA Public Cloud Edition to S4HANA Private Cloud \
- ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud.png)
+ ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_1.png)
+ ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_2.png)
+  ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_3.png)
+ ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_4.png)
+  ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_5.png)
+ ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_6.png)
+  ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_7.png)
+ ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_8.png)
+  ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_9.png)
+ ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_10.png)
+  ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_11.png)
+ ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_12.png)
+  ![input-image](Replicate_WBS_Code_from_S4HANA_Public_Cloud_Edition_to_S4HANA_Private_Cloud_13.png)
