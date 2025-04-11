@@ -229,9 +229,6 @@ public enum PFXTypeCode {
         return (this == PRODUCTEXTENSION || this == CUSTOMEREXTENSION);
     }
 
-    public boolean isConditionRecord() {
-        return (this == CONDITION_RECORD || this == CONDITION_RECORD_STAGING);
-    }
 
     public String[] getIdentifierFieldNames() {
         return getIdentifierFieldNames(null);

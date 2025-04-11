@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import com.smartgwt.client.types.OperatorId;
 import net.pricefx.connector.common.validation.RequestValidationException;
 import net.pricefx.pckg.client.okhttp.PfxCommonService;
 import org.apache.commons.collections4.CollectionUtils;
@@ -20,8 +19,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.smartgwt.client.types.OperatorId.AND;
-import static com.smartgwt.client.types.OperatorId.EQUALS;
+import static net.pricefx.connector.common.util.OperatorId.AND;
+import static net.pricefx.connector.common.util.OperatorId.EQUALS;
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXLookupTableType.LOWERBOUND;
 import static net.pricefx.connector.common.util.PFXLookupTableType.UPPERBOUND;
@@ -79,6 +78,7 @@ public class RequestFactory {
         if (typeCode != null) {
 
             switch (typeCode) {
+                case CONDITION_RECORD_STAGING:
                 case CUSTOMEREXTENSION:
                 case PRODUCTEXTENSION:
                 case LOOKUPTABLE:
@@ -285,7 +285,7 @@ public class RequestFactory {
             criterion = buildSimpleCriterion(FIELD_PLI_PRICELISTID, EQUALS.getValue(), uniqueKey);
         } else if (!StringUtils.isEmpty(uniqueKey) && typeCode == PFXTypeCode.ROLE) {
             criterion = buildSimpleCriterion("module", EQUALS.getValue(), uniqueKey);
-        } else if (typeCode!= null && extensionType != null && typeCode.isConditionRecord()) {
+        } else if (typeCode != null && extensionType != null && typeCode == PFXTypeCode.CONDITION_RECORD) {
             criterion = buildSimpleCriterion(FIELD_CONDITIONRECRODSETID, EQUALS.getValue(),
                     ((PFXConditionRecordType) extensionType).getTableId() + "");
         } else if (extensionType != null && extensionType.getTypeCode() != null && !StringUtils.isEmpty(extensionType.getTable())) {

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
-import com.smartgwt.client.types.OperatorId;
 import net.pricefx.connector.common.validation.ConnectorException;
 import net.pricefx.connector.common.validation.RequestValidationException;
 import okhttp3.HttpUrl;
@@ -16,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static com.smartgwt.client.types.OperatorId.*;
+import static net.pricefx.connector.common.util.OperatorId.*;
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXTypeCode.LOOKUPTABLE;
 import static net.pricefx.connector.common.validation.ConnectorException.ErrorType.TABLE_NOT_FOUND;
@@ -187,7 +186,7 @@ public class RequestUtil {
     }
 
     public static void validateExtensionType(PFXTypeCode typeCode, IPFXExtensionType extensionType) {
-        if ((typeCode.isExtension() || typeCode == LOOKUPTABLE || typeCode.isConditionRecord()) &&
+        if ((typeCode.isExtension() || typeCode == LOOKUPTABLE || typeCode == PFXTypeCode.CONDITION_RECORD) &&
                 (extensionType == null || StringUtils.isEmpty(extensionType.getTable()))) {
             throw new ConnectorException(TABLE_NOT_FOUND);
         }

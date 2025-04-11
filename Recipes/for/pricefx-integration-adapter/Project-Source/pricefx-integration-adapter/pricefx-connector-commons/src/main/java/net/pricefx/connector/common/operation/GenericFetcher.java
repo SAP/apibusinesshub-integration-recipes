@@ -13,9 +13,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
-import static com.smartgwt.client.types.OperatorId.EQUALS;
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath;
 import static net.pricefx.connector.common.util.Constants.MAX_RECORDS;
+import static net.pricefx.connector.common.util.OperatorId.EQUALS;
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXOperation.GET_FCS;
 import static net.pricefx.pckg.client.okhttp.PfxCommonService.buildSimpleCriterion;

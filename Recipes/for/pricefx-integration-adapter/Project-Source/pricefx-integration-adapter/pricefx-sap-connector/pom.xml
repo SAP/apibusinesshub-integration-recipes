@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.pricefx.adapter.sap</groupId>
     <artifactId>pricefx-sap-connector</artifactId>
-    <version>4.0.0</version>
+    <version>6.0.0</version>
     <packaging>bundle</packaging>
     <name>${project.artifactId}</name>
 
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>org.apache.servicemix.bundles</groupId>
             <artifactId>org.apache.servicemix.bundles.okhttp</artifactId>
-            <version>3.14.1_1</version>
+            <version>3.14.1_2</version>
         </dependency>
 
         <dependency>
@@ -130,7 +130,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <id>add-test-source</id>
@@ -152,14 +152,14 @@
 
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>4.2.1</version>
+                <version>3.5.1</version>
                 <extensions>true</extensions>
 
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.13.0</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
@@ -193,7 +193,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
+                <version>0.8.12</version>
                 <executions>
                     <execution>
                         <id>default-prepare-agent</id>

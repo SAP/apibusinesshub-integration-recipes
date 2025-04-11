@@ -54,7 +54,7 @@ public class QuoteUpdater implements IPFXObjectUpsertor, ICalculableObjectUpsert
         JsonNode schema = (initialSchema != null) ? initialSchema :
                 JsonSchemaUtil.loadSchema(pfxJsonSchema, QUOTE, null, attributes, false, false, false, true);
         JsonValidationUtil.validatePayload(schema, request);
-        validateExtraFields(schema, request);
+        JsonValidationUtil.validateExtraFields(schema, request);
 
         //SAVE_QUOTE
         if (save) {

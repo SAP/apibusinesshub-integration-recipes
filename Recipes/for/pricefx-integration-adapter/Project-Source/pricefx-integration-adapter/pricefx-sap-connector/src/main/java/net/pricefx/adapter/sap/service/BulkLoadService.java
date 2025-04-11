@@ -3,7 +3,7 @@ package net.pricefx.adapter.sap.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import net.pricefx.connector.common.connection.PFXOperationClient;
-import net.pricefx.connector.common.operation.GenericBulkLoader;
+import net.pricefx.connector.common.operation.*;
 import net.pricefx.connector.common.util.IPFXExtensionType;
 import net.pricefx.connector.common.util.PFXTypeCode;
 
@@ -24,7 +24,18 @@ public class BulkLoadService extends AbstractJsonRequestService {
 
     @Override
     protected JsonNode execute(JsonNode request) {
-        return new TextNode(
-                new GenericBulkLoader(getPfxClient(), typeCode, extensionType, tableName).bulkLoad(request, validation));
+
+        switch (typeCode) {
+            case CONDITION_RECORD:
+                return new TextNode(
+                        new ConditionRecordBulkLoader(getPfxClient(), extensionType).bulkLoad(request, validation));
+            case DATAFEED:
+                return new TextNode(
+                        new DatafeedBulkLoader(getPfxClient(), tableName).bulkLoad(request));
+            default:
+                return new TextNode(
+                        new GenericBulkLoader(getPfxClient(), typeCode, extensionType, tableName).bulkLoad(request, validation));
+        }
+
     }
 }

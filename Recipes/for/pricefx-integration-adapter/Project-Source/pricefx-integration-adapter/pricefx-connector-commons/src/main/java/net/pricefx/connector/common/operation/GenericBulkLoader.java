@@ -49,22 +49,32 @@ public class GenericBulkLoader implements IPFXObjectBulkLoader {
     @Override
     public String bulkLoad(JsonNode request, boolean validate) {
 
-        validateRequest(request, validate);
-
-        String apiPath = RequestPathFactory.buildBulkLoadPath(extensionType, typeCode, tableName);
-
-        JsonNode resp = pfxClient.doPost(apiPath, RequestFactory.buildBulkLoadRequest(typeCode, (ObjectNode) request, extensionType));
-
-        if (typeCode == PFXTypeCode.DATAFEED) {
-            return "0"; //server isn't returning the number of records updated
-        } else {
-            return JsonUtil.getValueAsText(JsonUtil.getFirstDataNode(resp), "0");
+        validateStructure(request);
+        if (validate){
+            validateData(request);
         }
+
+        String apiPath = getApiPath();
+
+        JsonNode resp = pfxClient.doPost(apiPath, getRequestPayload(request));
+
+        return JsonUtil.getValueAsText(JsonUtil.getFirstDataNode(resp), "0");
 
     }
 
-    protected void validateRequest(JsonNode inputNode, boolean validate) {
+    public String bulkLoad(JsonNode request) {
+        return bulkLoad(request, false);
+    }
 
+    protected ObjectNode getRequestPayload(JsonNode request){
+        return RequestFactory.buildBulkLoadRequest(typeCode, (ObjectNode) request, extensionType);
+    }
+
+    protected String getApiPath(){
+        return RequestPathFactory.buildBulkLoadPath(extensionType, typeCode, tableName);
+    }
+
+    protected void validateStructure(JsonNode inputNode){
         RequestUtil.validateExtensionType(typeCode, extensionType);
 
         JsonNode schema = JsonSchemaUtil.loadSchema(PFXJsonSchema.BULK_LOAD_REQUEST, true);
@@ -85,27 +95,23 @@ public class GenericBulkLoader implements IPFXObjectBulkLoader {
         //validate no of data fields = no of column header
         validateDataLength(inputNode.get(FIELD_DATA), inputNode.get(HEADER).size());
 
-        if (typeCode == PFXTypeCode.CONDITION_RECORD_STAGING) {
-            validateKeyFields(inputNode.get(HEADER));
-            validateExtraFields(inputNode.get(HEADER));
+
+    }
+
+    protected void validateData(JsonNode inputNode){
+        validateExtraFields(inputNode.get(HEADER));
+
+        Iterable<ObjectNode> metadata = pfxClient.doFetchMetadata(typeCode, extensionType, null);
+
+        Map<String, ObjectNode> metadataMap = new HashMap<>();
+
+        if (metadata != null) {
+            metadataMap = StreamSupport.stream(metadata.spliterator(), false)
+                    .collect(Collectors.toMap((ObjectNode obj) -> JsonUtil.getValueAsText(obj.get(FIELD_FIELDNAME)), obj -> obj));
         }
-
-        if (validate) {
-
-            Iterable<ObjectNode> metadata = pfxClient.doFetchMetadata(typeCode, extensionType, null);
-
-            Map<String, ObjectNode> metadataMap = new HashMap<>();
-
-            if (metadata != null) {
-                metadataMap = StreamSupport.stream(metadata.spliterator(), false)
-                        .collect(Collectors.toMap((ObjectNode obj) -> JsonUtil.getValueAsText(obj.get(FIELD_FIELDNAME)), obj -> obj));
-            }
-            if (JsonUtil.isArrayNode(inputNode.get(HEADER))) {
-                validateMandatoryAttributes((ArrayNode) inputNode.get(HEADER), inputNode.get(FIELD_DATA), metadataMap);
-            }
+        if (JsonUtil.isArrayNode(inputNode.get(HEADER))) {
+            validateMandatoryAttributes((ArrayNode) inputNode.get(HEADER), inputNode.get(FIELD_DATA), metadataMap);
         }
-
-
     }
 
 
@@ -137,10 +143,6 @@ public class GenericBulkLoader implements IPFXObjectBulkLoader {
 
     private void validateMandatoryAttributes(ArrayNode headerNode, JsonNode dataNode,
                                              Map<String, ObjectNode> metadataMap) {
-
-        if (typeCode == PFXTypeCode.DATAFEED) {
-            return;
-        }
 
         Set<String> mandatory = getMandatoryAttributes(metadataMap);
 
@@ -232,29 +234,10 @@ public class GenericBulkLoader implements IPFXObjectBulkLoader {
 
     }
 
-    public PFXOperationClient getPfxClient() {
-        return pfxClient;
-    }
-
-    private void validateKeyFields(JsonNode headerNode) {
-        Set<String> keyFields = new HashSet<>();
-        Collections.addAll(keyFields, typeCode.getIdentifierFieldNames());
-        if (extensionType != null) keyFields.addAll(extensionType.getBusinessKeys());
-
-        if (headerNode != null && headerNode.isArray()) {
-            List<String> headers = JsonUtil.getStringArray(headerNode);
-            keyFields.removeAll(headers);
-        }
-
-        if (!keyFields.isEmpty()) {
-            throw new RequestValidationException(MISSING_MANDATORY_ATTRIBUTES, keyFields.toString());
-        }
-    }
-
     private void validateExtraFields(JsonNode headerNode) {
-        PFXJsonSchema schema = PFXJsonSchema.getFetchResponseSchema(typeCode, extensionType);
+        PFXJsonSchema schema = PFXJsonSchema.getFetchResponseSchema(typeCode, getExtensionType());
         Set<String> validFields = JsonSchemaUtil.getFields(
-                JsonSchemaUtil.loadSchema(schema, typeCode, extensionType, null, true, true, false, false));
+                JsonSchemaUtil.loadSchema(schema, typeCode, getExtensionType(), null, true, true, false, false));
 
         if (headerNode != null && headerNode.isArray()) {
             List<String> headers = JsonUtil.getStringArray(headerNode);
@@ -265,6 +248,14 @@ public class GenericBulkLoader implements IPFXObjectBulkLoader {
                         SCHEMA_VALIDATION_ERROR, "Contains Extra Fields not stated in schema:" + headers);
             }
         }
+    }
+
+    public PFXOperationClient getPfxClient() {
+        return pfxClient;
+    }
+
+    public IPFXExtensionType getExtensionType() {
+        return extensionType;
     }
 }
 

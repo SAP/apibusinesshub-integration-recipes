@@ -1,12 +1,11 @@
 package net.pricefx.connector.common.operation
 
-
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.fasterxml.jackson.databind.node.ObjectNode
-import com.smartgwt.client.types.OperatorId
 import net.pricefx.connector.common.connection.MockDummyPFXOperationClient
 import net.pricefx.connector.common.connection.MockPFXOperationClient
 import net.pricefx.connector.common.util.JsonUtil
+import net.pricefx.connector.common.util.OperatorId
 import net.pricefx.connector.common.util.PFXConstants
 import net.pricefx.connector.common.util.RequestUtil
 import net.pricefx.connector.common.validation.ConnectorException

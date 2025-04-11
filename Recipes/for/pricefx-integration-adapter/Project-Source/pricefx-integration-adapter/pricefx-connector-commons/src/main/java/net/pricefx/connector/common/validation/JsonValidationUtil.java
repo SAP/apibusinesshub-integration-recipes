@@ -23,6 +23,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static net.pricefx.connector.common.util.JsonSchemaUtil.ITEMS;
+import static net.pricefx.connector.common.util.JsonSchemaUtil.SCHEMA_PROPERTIES;
 import static net.pricefx.connector.common.util.PFXConstants.FIELD_FIELDNAME;
 import static net.pricefx.connector.common.util.PFXConstants.FIELD_ID;
 import static net.pricefx.connector.common.util.PFXLookupTableType.LOWERBOUND;
@@ -33,6 +35,48 @@ import static net.pricefx.connector.common.validation.RequestValidationException
 public class JsonValidationUtil {
 
     private JsonValidationUtil() {
+    }
+
+    public static void validateExtraFields(JsonNode schemaNode, JsonNode inputNode) {
+        if (schemaNode == null) {
+            return;
+        }
+        JsonNode propertiesNode;
+
+        if (schemaNode.get(ITEMS) != null && schemaNode.get(ITEMS).get(SCHEMA_PROPERTIES) != null) {
+            propertiesNode = schemaNode.get(ITEMS).get(SCHEMA_PROPERTIES);
+        } else {
+            propertiesNode = schemaNode.get(SCHEMA_PROPERTIES);
+        }
+
+        if (propertiesNode == null) {
+            return;
+        }
+
+        Set<String> fieldNames = ImmutableSet.copyOf(propertiesNode.fieldNames());
+
+        if (JsonUtil.isArrayNode(inputNode)) {
+            for (int i = 0; i < inputNode.size(); i++) {
+                JsonNode node = inputNode.get(i);
+                if (!fieldNames.containsAll(ImmutableList.copyOf(node.fieldNames()))) {
+                    throw new RequestValidationException(i + 1,
+                            SCHEMA_VALIDATION_ERROR, "Contains Extra Fields not stated in schema");
+                }
+            }
+        } else if (JsonUtil.isObjectNode(inputNode) &&
+                (!fieldNames.containsAll(ImmutableList.copyOf(inputNode.fieldNames())))) {
+
+            throw new RequestValidationException(
+                    SCHEMA_VALIDATION_ERROR, "Contains Extra Fields not stated in schema");
+        }
+
+    }
+
+    public static void validateMaxElements(JsonNode payload, int maximumRecords) {
+        int count = JsonUtil.countJson(payload);
+        if (count > maximumRecords) {
+            throw new RequestValidationException("Too many elements. Please make sure no of elements < " + maximumRecords);
+        }
     }
 
     public static void validatePayload(JsonNode schemaNode, JsonNode payload) {
@@ -57,28 +101,6 @@ public class JsonValidationUtil {
             }
         }
 
-    }
-
-
-    public static void validateExtraFields(JsonNode propertiesNode, JsonNode inputNode) {
-        if (propertiesNode != null) {
-            Set<String> fieldNames = ImmutableSet.copyOf(propertiesNode.fieldNames());
-
-            if (JsonUtil.isArrayNode(inputNode)) {
-                for (int i = 0; i < inputNode.size(); i++) {
-                    JsonNode node = inputNode.get(i);
-                    if (!fieldNames.containsAll(ImmutableList.copyOf(node.fieldNames()))) {
-                        throw new RequestValidationException(i + 1,
-                                SCHEMA_VALIDATION_ERROR, "Contains Extra Fields not stated in schema");
-                    }
-                }
-            } else if (JsonUtil.isObjectNode(inputNode) &&
-                    (!fieldNames.containsAll(ImmutableList.copyOf(inputNode.fieldNames())))) {
-
-                throw new RequestValidationException(
-                        SCHEMA_VALIDATION_ERROR, "Contains Extra Fields not stated in schema");
-            }
-        }
     }
 
     public static Set<String> getMandatoryAttributes(Map<String, ObjectNode> metadataMap,

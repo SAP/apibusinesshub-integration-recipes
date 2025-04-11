@@ -59,7 +59,7 @@ public class UserAccessUpdater implements IPFXObjectUpsertor {
         }
 
         JsonValidationUtil.validatePayload(schema, request);
-        validateExtraFields(schema, request);
+        JsonValidationUtil.validateExtraFields(schema, request);
 
         pfxClient.validateUserRoles(JsonUtil.getStringArray(request.get("add")), typeCode);
     }

@@ -5,57 +5,46 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
-import com.smartgwt.client.types.OperatorId;
 import net.pricefx.connector.common.connection.PFXOperationClient;
 import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.ConnectorException;
+import net.pricefx.connector.common.validation.JsonValidationUtil;
 import net.pricefx.connector.common.validation.RequestValidationException;
-import org.apache.commons.collections4.ListUtils;
-import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.collections4.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
+import static net.pricefx.connector.common.util.Constants.MAX_UPSERT_RECORDS;
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXTypeCode.CONDITION_RECORD;
 
 
-public class ConditionRecordUpdater extends GenericUpsertor {
+public class ConditionRecordUpdater extends GenericBulkLoader {
 
-    private final PFXConditionRecordType conditionRecordType;
+    private final IPFXExtensionType conditionRecordType;
     private static final int MAX_FETCH_BATCH_SIZE = 100;
 
     private final String lastUpdateTimestamp;
 
-    private static final String ERRORS = "errors";
+    private final JsonNode schema;
 
-    public ConditionRecordUpdater(PFXOperationClient pfxClient, PFXConditionRecordType conditionRecordType, JsonNode schema, String lastUpdateTimestamp) {
-        super(pfxClient,
-                RequestPathFactory.buildUpdatePath(CONDITION_RECORD, conditionRecordType, null),
-                CONDITION_RECORD, conditionRecordType, schema, false, true);
+    public ConditionRecordUpdater(PFXOperationClient pfxClient, IPFXExtensionType conditionRecordType, String lastUpdateTimestamp) {
+        super(pfxClient, CONDITION_RECORD, conditionRecordType, null);
 
         this.lastUpdateTimestamp = lastUpdateTimestamp;
         this.conditionRecordType = conditionRecordType;
 
+        this.schema = JsonSchemaUtil.loadSchema(PFXJsonSchema.CONDITION_RECORD_UPDATE_REQUEST, CONDITION_RECORD, conditionRecordType, null,
+                false, true, false, true);
+
     }
 
-    private List<String> findConflictedIds(List<String> idList, List<ObjectNode> fetchResults) {
-        List<String> fetchedIds = JsonUtil.getStringArray(fetchResults, FIELD_TYPEDID);
 
-
-        final List<String> results = fetchedIds.stream()
-                .map(s -> s.replace("." + conditionRecordType.getTypeCodeSuffix(), ""))
-                .collect(Collectors.toList());
-
-        return ListUtils.removeAll(idList, results);
-    }
-
-    private Map<String, Map<String, Object>> getUpdateEntities(ArrayNode request, List<String> conflictedIds) {
+    private Map<String, Map<String, Object>> getUpdateEntities(ArrayNode request) {
         String path = RequestPathFactory.buildFetchPath(conditionRecordType, CONDITION_RECORD, null, null);
         List<String> ids = JsonUtil.getStringArray(request, FIELD_ID);
         List<List<String>> idLists = ListUtils.partition(ids, MAX_FETCH_BATCH_SIZE);
@@ -70,29 +59,18 @@ public class ConditionRecordUpdater extends GenericUpsertor {
                     CONDITION_RECORD, conditionRecordType, null, false).fetch(
                     fetchRequest, ImmutableList.of("key1"), false, false);
 
-            if (conflictedIds == null) {
-                conflictedIds = new ArrayList<>();
-            }
-            conflictedIds.addAll(findConflictedIds(idList, fetchResults));
 
             for (ObjectNode fetchResult : fetchResults) {
 
                 String typedId = null;
-                Number number = null;
 
                 if (JsonUtil.isObjectNode(fetchResult)) {
                     typedId = JsonUtil.getValueAsText(fetchResult.get(FIELD_TYPEDID));
-                    number = JsonUtil.getNumericValue(fetchResult.get(FIELD_VERSION));
                 }
 
                 if (!StringUtils.isEmpty(typedId)) {
                     Map<String, Object> map = new HashMap<>();
                     map.put(FIELD_TYPEDID, typedId);
-
-                    if (number != null) {
-                        map.put(FIELD_VERSION, number.intValue());
-                    }
-
                     map.put(FIELD_LASTUPDATEDATE, JsonUtil.getValueAsText(fetchResult.get(FIELD_LASTUPDATEDATE)));
                     results.put(StringUtil.getIdFromTypedId(typedId), map);
                 }
@@ -101,7 +79,7 @@ public class ConditionRecordUpdater extends GenericUpsertor {
         return results;
     }
 
-    private void validateUpdateRecord(String typedId, String lastUpdateDate) throws ParseException {
+    private void validateLastUpdateDate(String typedId, String lastUpdateDate) throws ParseException {
 
         if (!StringUtils.isEmpty(lastUpdateDate) && !StringUtils.isEmpty(lastUpdateTimestamp) &&
                 DateUtil.isAfterTimestamp(lastUpdateDate, lastUpdateTimestamp)) {
@@ -110,63 +88,137 @@ public class ConditionRecordUpdater extends GenericUpsertor {
         }
     }
 
-    @Override
-    protected List<JsonNode> doUpsert(ArrayNode request) {
-        List<String> conflictedIds = new ArrayList<>();
-        Map<String, Map<String, Object>> metadatas = getUpdateEntities(request, conflictedIds);
-
-        ArrayNode requestArray = new ArrayNode(JsonNodeFactory.instance);
-        List<String> typedIds = new ArrayList<>();
-        List<ObjectNode> errorNodes = new ArrayList<>();
-
+    private List<String> validateLastUpdateDate(JsonNode request){
+        List<String> errorNodes = new ArrayList<>();
+        Map<String, Map<String, Object>> metadatas = getUpdateEntities((ArrayNode) request);
         for (JsonNode node : request) {
-
             String id = JsonUtil.getValueAsText(node.get(FIELD_ID));
             Map<String, Object> metadata = metadatas.get(id);
-
             String lastUpdateDate = MapUtils.getString(metadata, FIELD_LASTUPDATEDATE);
             String typedId = MapUtils.getString(metadata, FIELD_TYPEDID);
-            Integer number = MapUtils.getInteger(metadata, (FIELD_VERSION));
 
-            if (!StringUtils.isEmpty(typedId) && number != null && number >= 0) {
+            if (StringUtils.isEmpty(typedId)) {
+                errorNodes.add(id);
+            } else {
                 try {
-                    validateUpdateRecord(typedId, lastUpdateDate);
-                    typedIds.add(typedId);
-
-                    ((ObjectNode) node).put(FIELD_VERSION, number).put(FIELD_TYPEDID, typedId);
-                    ((ObjectNode) node).remove(FIELD_ID);
-                    requestArray.add(node);
-
+                    validateLastUpdateDate(typedId, lastUpdateDate);
                 } catch (ParseException ex) {
                     throw new ConnectorException("Error in updating condition records. Please check logs:" + lastUpdateDate + ":" + lastUpdateTimestamp, ex);
                 } catch (RequestValidationException ex) {
-                    errorNodes.add(new ObjectNode(JsonNodeFactory.instance).put(FIELD_TYPEDID, typedId).
-                            put(ERRORS, ex.getMessage()).put("request", node.toPrettyString()));
+                    errorNodes.add(id);
                 }
             }
+        }
+        return errorNodes;
+    }
 
+
+
+    private ObjectNode buildBulkLoadRequest(List<JsonNode> requestArray, List<String> allFieldNames){
+        ArrayNode allHeaders = new ArrayNode(JsonNodeFactory.instance);
+        for (String fieldName : allFieldNames) {
+            allHeaders.add(fieldName);
         }
 
-        for (String id : conflictedIds) {
-            errorNodes.add(new ObjectNode(JsonNodeFactory.instance).put(FIELD_TYPEDID, id + "." + conditionRecordType.getTypeCodeSuffix()).
-                    put(ERRORS, "record not found or version conflicted"));
-        }
-
-        List<JsonNode> updateResult = super.doUpsert(requestArray);
-
-        List<JsonNode> finalResult = new ArrayList<>();
-
-        for (int i = 0; i < updateResult.size(); i++) {
-            JsonNode updatedNode = updateResult.get(i);
-            if (JsonUtil.isObjectNode(updatedNode) && updatedNode.has(ERRORS)) {
-                ((ObjectNode) updatedNode).put(FIELD_TYPEDID, typedIds.get(i));
+        ArrayNode allData = new ArrayNode(JsonNodeFactory.instance);
+        for (JsonNode node : requestArray) {
+            ArrayNode values = new ArrayNode(JsonNodeFactory.instance);
+            for (JsonNode header : allHeaders) {
+                String fieldName = header.textValue();
+                values.add(JsonUtil.getValueAsText(node.get(fieldName)));
             }
-            finalResult.add(updatedNode);
+            allData.add(values);
         }
 
-        finalResult.addAll(errorNodes);
+        ObjectNode dataLoadReq = new ObjectNode(JsonNodeFactory.instance);
+        dataLoadReq.set(FIELD_DATA, allData);
+        dataLoadReq.set("header", allHeaders);
 
-        return finalResult;
+        return dataLoadReq;
+    }
+
+    @Override
+    protected void validateData(JsonNode inputNode){
+        RequestUtil.validateExtensionType(CONDITION_RECORD, conditionRecordType);
+        JsonValidationUtil.validateMaxElements(inputNode, MAX_UPSERT_RECORDS);
+        JsonValidationUtil.validatePayload(schema, inputNode);
+        JsonValidationUtil.validateExtraFields(schema, inputNode);
+
+        Set<String> schemaFields = JsonSchemaUtil.getFields(schema);
+        Iterable<ObjectNode> metadata = getPfxClient().doFetchMetadata(CONDITION_RECORD, conditionRecordType, null);
+
+        Map<String, ObjectNode> metadataMap = new HashMap<>();
+
+        if (metadata != null) {
+            metadataMap = StreamSupport.stream(metadata.spliterator(), false)
+                    .collect(Collectors.toMap((ObjectNode obj) -> JsonUtil.getValueAsText(obj.get(FIELD_FIELDNAME)), obj -> obj));
+        }
+
+        validateAttributes(inputNode, metadataMap, schemaFields);
+    }
+
+    private void validateFields(List<String> allFieldNames, List<String> thisFieldNames){
+        Collection<String> diff = CollectionUtils.removeAll(thisFieldNames, allFieldNames);
+        if (!CollectionUtils.isEmpty(diff)){
+            throw new RequestValidationException(
+                    "All objects to be updated should contain same set of fields");
+        }
+    }
+    @Override
+    public String bulkLoad(JsonNode request, boolean validate) {
+        if (!JsonUtil.isArrayNode(request)) {
+            return super.bulkLoad(request, false);
+        }
+
+        List<String> errorNodes = new ArrayList<>();
+        if (validate) {
+            validateData(request);
+            errorNodes = validateLastUpdateDate(request);
+        }
+
+        List<JsonNode> requestArray = new ArrayList<>();
+        List<String> allFieldNames = new ArrayList<>();
+        for (JsonNode node : request) {
+            List<String> thisFieldNames = IteratorUtils.toList(node.fieldNames());
+            if (CollectionUtils.isEmpty(allFieldNames)) {
+                allFieldNames.addAll(thisFieldNames);
+            }
+
+            if (!errorNodes.contains(JsonUtil.getValueAsText(node.get(FIELD_ID)))){
+                validateFields(allFieldNames, thisFieldNames);
+                requestArray.add(node);
+            }
+        }
+
+        if (!CollectionUtils.isEmpty(requestArray)){
+            ObjectNode dataLoadReq = buildBulkLoadRequest(requestArray, allFieldNames);
+            super.bulkLoad(dataLoadReq, false);
+        }
+        return "errored: " + StringUtils.join(errorNodes, ",");
+    }
+
+    private void validateAttributes(JsonNode inputNode, Map<String, ObjectNode> metadataMap, Set<String> schemaFields) {
+
+        Set<String> mandatory = JsonValidationUtil.getMandatoryAttributes(metadataMap, conditionRecordType, CONDITION_RECORD);
+        mandatory = SetUtils.intersection(mandatory, schemaFields).toSet();
+
+        if (!JsonUtil.isArrayNode(inputNode)) {
+            return;
+        }
+
+        for (int i = 0; i < inputNode.size(); i++) {
+            JsonNode node = inputNode.get(i);
+            if (JsonUtil.isObjectNode(node)) {
+                final int lineNo = i + 1;
+                JsonValidationUtil.validateMissingMandatoryAttributes((ObjectNode) node, mandatory, lineNo);
+
+                node.fields().forEachRemaining(field -> {
+                    if (field != null) {
+                        JsonValidationUtil.validateDataType(field.getValue(), metadataMap.get(field.getKey()), field.getKey(), lineNo);
+                    }
+                });
+            }
+        }
     }
 
 }

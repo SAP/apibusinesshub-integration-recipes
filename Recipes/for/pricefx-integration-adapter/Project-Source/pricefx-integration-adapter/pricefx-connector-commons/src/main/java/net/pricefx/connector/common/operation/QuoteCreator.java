@@ -50,7 +50,7 @@ public class QuoteCreator implements IPFXObjectUpsertor, ICalculableObjectUpsert
     public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple, boolean showSystemFields) {
         Iterable<ObjectNode> metadata = pfxClient.doFetchMetadata(QUOTE, null, null);
         JsonValidationUtil.validatePayload(schema, request);
-        validateExtraFields(schema, request);
+        JsonValidationUtil.validateExtraFields(schema, request);
         replaceAttributeExtension(request, metadata);
 
         new QuoteRequestValidator().validate(request);
