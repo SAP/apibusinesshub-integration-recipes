@@ -1,6 +1,6 @@
 package net.pricefx.connector.common.validation
 
-
+import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.*
 import com.google.common.collect.ImmutableSet
@@ -77,17 +77,19 @@ class JsonValidationUtilTest extends Specification {
 
     }
 
-    def "validateExtraFields"() {
-        given:
-        def propertiesNode = new ObjectNode(JsonNodeFactory.instance)
-        propertiesNode.set("test", new ObjectNode(JsonNodeFactory.instance))
-        propertiesNode.set("test2", new ObjectNode(JsonNodeFactory.instance))
 
-        def inputNode = new ObjectNode(JsonNodeFactory.instance).put("test", "x").put("test2", "y")
+    def "validateExtraFields"() {
+
+        given:
+
+        JsonNode schemaNode = JsonSchemaUtil.loadSchema(PFXJsonSchema.PRODUCT_UPSERT_REQUEST, true)
+
+
+        def inputNode = new ObjectNode(JsonNodeFactory.instance).put("sku", "x").put("label", "y")
 
         def arrayNode = JsonUtil.createArrayNode(
-                new ObjectNode(JsonNodeFactory.instance).put("test", "x").put("test2", "y"),
-                new ObjectNode(JsonNodeFactory.instance).put("test", "x").put("test2", "y"))
+                new ObjectNode(JsonNodeFactory.instance).put("sku", "x").put("label", "y"),
+                new ObjectNode(JsonNodeFactory.instance).put("sku", "x").put("label", "y"))
 
         when:
         JsonValidationUtil.validateExtraFields(null, null)
@@ -96,27 +98,27 @@ class JsonValidationUtilTest extends Specification {
         noExceptionThrown()
 
         when:
-        JsonValidationUtil.validateExtraFields(propertiesNode, inputNode)
+        JsonValidationUtil.validateExtraFields(schemaNode, inputNode)
 
         then:
         noExceptionThrown()
 
         when:
-        JsonValidationUtil.validateExtraFields(propertiesNode, arrayNode)
+        JsonValidationUtil.validateExtraFields(schemaNode, arrayNode)
 
         then:
         noExceptionThrown()
 
         when:
         inputNode.put("test3", "x")
-        JsonValidationUtil.validateExtraFields(propertiesNode, inputNode)
+        JsonValidationUtil.validateExtraFields(schemaNode, inputNode)
 
         then:
         thrown(RequestValidationException.class)
 
         when:
         arrayNode.add(inputNode)
-        JsonValidationUtil.validateExtraFields(propertiesNode, arrayNode)
+        JsonValidationUtil.validateExtraFields(schemaNode, arrayNode)
 
         then:
         thrown(RequestValidationException.class)

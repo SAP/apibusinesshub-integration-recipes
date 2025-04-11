@@ -151,12 +151,13 @@ public class Producer extends DefaultProducer {
                 node = new CreateService(pfxClient, typeCode).execute(input);
                 break;
             case UPDATE:
+                String lastUpdatedTimestamp = null;
                 if (typeCode == CONDITION_RECORD) {
-                    node = new ConditionRecordUpdateService(pfxClient, extensionType,
-                            getDynamicValue(exchange, ((Endpoint) getEndpoint()).getLastUpdateTimestamp())).execute(input);
-                } else {
-                    node = new UpdateService(pfxClient, typeCode, uniqueId).execute(input);
+                    lastUpdatedTimestamp =
+                            getDynamicValue(exchange, ((Endpoint) getEndpoint()).getLastUpdateTimestamp());
                 }
+                node = new UpdateService(pfxClient, typeCode, extensionType, uniqueId, lastUpdatedTimestamp).execute(input);
+
                 break;
             case UPSERT:
                 node = new UpsertService(pfxClient, typeCode, extensionType,
@@ -365,7 +366,7 @@ public class Producer extends DefaultProducer {
     }
 
     private IPFXExtensionType getPFXExtensionType(PFXOperationClient pfxClient, PFXTypeCode typeCode, Exchange exchange) {
-        if (typeCode != null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE || typeCode.isConditionRecord())) {
+        if (typeCode != null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE || typeCode == CONDITION_RECORD)) {
             return pfxClient.createExtensionType(typeCode, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()),
                     getDynamicValue(exchange, ((Endpoint) getEndpoint()).getTargetDate()));
         }

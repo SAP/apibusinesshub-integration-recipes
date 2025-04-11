@@ -1,5 +1,6 @@
 package net.pricefx.connector.common.util
 
+import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.databind.node.TextNode
@@ -39,11 +40,29 @@ class JsonSchemaUtilTest extends Specification {
             "}"
 
     def schemaNode = new ObjectMapper().readTree(schema)
+    def arraySchemaNode = new ObjectMapper().readTree(arraySchema)
 
 
     def "getFields"() {
+        given:
+        JsonNode productSchemaNode = JsonSchemaUtil.loadSchema(PFXJsonSchema.PRODUCT_UPSERT_REQUEST, true)
+        JsonSchemaUtil.updateSchemaWithMetadata(productSchemaNode, PFXTypeCode.PRODUCT, null, null, true, true, false)
+
         when:
-        def results = JsonSchemaUtil.getFields(schemaNode)
+        def results = JsonSchemaUtil.getFields(productSchemaNode)
+
+        then:
+        results.contains(PFXConstants.FIELD_SKU)
+        results.size() == 36
+
+        when:
+        results = JsonSchemaUtil.getFields(schemaNode)
+
+        then:
+        PFXConstants.FIELD_SKU == results.first()
+
+        when:
+        results = JsonSchemaUtil.getFields(arraySchemaNode)
 
         then:
         PFXConstants.FIELD_SKU == results.first()

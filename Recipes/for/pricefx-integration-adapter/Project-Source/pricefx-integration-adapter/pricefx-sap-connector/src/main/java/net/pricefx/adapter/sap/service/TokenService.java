@@ -55,7 +55,7 @@ public class TokenService {
                 .put(FIELD_UNIQUENAME, SAP_TOKEN_LAST_UPDATE).put(FIELD_VALUE, DateUtil.getCurrentTime());
 
         pfxClient.updateOAuthToken(token);
-        new UpdateService(pfxClient, PFXTypeCode.ADVANCED_CONFIG, null).execute(updateAdvRequest);
+        new UpdateService(pfxClient, PFXTypeCode.ADVANCED_CONFIG, null, null, null).execute(updateAdvRequest);
 
 
     }
@@ -77,7 +77,7 @@ public class TokenService {
 
             PFXOperationClient updatedPfxClient = (PFXOperationClient) builder.build();
 
-            new UpdateService(updatedPfxClient, PFXTypeCode.ADVANCED_CONFIG, null).execute(updateAdvRequest);
+            new UpdateService(updatedPfxClient, PFXTypeCode.ADVANCED_CONFIG, null, null, null).execute(updateAdvRequest);
 
             return new ObjectNode(JsonNodeFactory.instance).put(ACCESS_TOKEN, results);
         } catch (Exception e) {

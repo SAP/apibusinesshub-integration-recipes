@@ -78,11 +78,13 @@ public class RequestPathFactory {
             throw new UnsupportedOperationException("Data load operation not supported for unknown typeCode");
         }
 
-        if (typeCode == PFXTypeCode.LOOKUPTABLE) {
+        if (typeCode == PFXTypeCode.CONDITION_RECORD && extensionType != null) {
+            return createPath(BULK_LOAD.getOperation(), typeCode.getTypeCode() + extensionType.getAdditionalKeys());
+        } else if (typeCode == PFXTypeCode.LOOKUPTABLE && extensionType != null) {
             return createPath(LOOKUPTABLE_VALUES_BULK_LOAD.getOperation(), ((PFXLookupTableType) extensionType).getLookupValueTypeCode());
         } else if (typeCode == PFXTypeCode.DATASOURCE || typeCode == PFXTypeCode.DATAFEED) {
             return createPath(PA_BULK_LOAD.getOperation(), typeCode.getFullTargetName(tableName));
-        } else if (typeCode.isExtension()) {
+        } else if (typeCode.isExtension() && extensionType != null) {
             return createPath(BULK_LOAD.getOperation(), extensionType.getTypeCodeSuffix());
         } else {
             return createPath(BULK_LOAD.getOperation(), typeCode.getTypeCode());
@@ -103,7 +105,7 @@ public class RequestPathFactory {
         }
     }
 
-    public static String buildUpdatePath(PFXTypeCode typeCode, IPFXExtensionType extensionType, ObjectNode inputNode) {
+    public static String buildUpdatePath(PFXTypeCode typeCode, ObjectNode inputNode) {
         if (typeCode == PFXTypeCode.QUOTE &&
                 ((inputNode.get(FIELD_INPUTS) != null &&
                         JsonUtil.isArrayNode(inputNode.get(FIELD_INPUTS)) && inputNode.get(FIELD_INPUTS).size() > 0) ||
@@ -115,10 +117,6 @@ public class RequestPathFactory {
 
         if (typeCode == PFXTypeCode.ROLE || typeCode == PFXTypeCode.BUSINESSROLE || typeCode == PFXTypeCode.USERGROUP || typeCode == PFXTypeCode.QUOTE) {
             return createPath(UPDATE.getOperation(), typeCode.getTypeCode());
-        }
-
-        if (typeCode == PFXTypeCode.CONDITION_RECORD && extensionType != null) {
-            return createPath(UPDATE.getOperation(), typeCode.getTypeCode() + extensionType.getAdditionalKeys());
         }
 
         throw new UnsupportedOperationException("Update operation not supported for " + typeCode);

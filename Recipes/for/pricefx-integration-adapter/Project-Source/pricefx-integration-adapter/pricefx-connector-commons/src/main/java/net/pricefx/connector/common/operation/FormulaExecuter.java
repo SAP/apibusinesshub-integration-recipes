@@ -19,9 +19,9 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
-import static com.smartgwt.client.types.OperatorId.AND;
-import static com.smartgwt.client.types.OperatorId.EQUALS;
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath;
+import static net.pricefx.connector.common.util.OperatorId.AND;
+import static net.pricefx.connector.common.util.OperatorId.EQUALS;
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXOperation.EXECUTE_FORMULA;
 import static net.pricefx.connector.common.util.PFXOperation.FETCH;

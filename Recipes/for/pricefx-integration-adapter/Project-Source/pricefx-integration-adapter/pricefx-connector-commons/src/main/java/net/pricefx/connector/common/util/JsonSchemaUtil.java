@@ -20,8 +20,7 @@ import java.util.Set;
 
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXJsonSchema.POST_REQUEST;
-import static net.pricefx.connector.common.util.PFXTypeCode.LOOKUPTABLE;
-import static net.pricefx.connector.common.util.PFXTypeCode.QUOTE;
+import static net.pricefx.connector.common.util.PFXTypeCode.*;
 
 public class JsonSchemaUtil {
     public static final String ITEMS = "items";
@@ -34,6 +33,14 @@ public class JsonSchemaUtil {
     }
 
     public static Set<String> getFields(JsonNode schemaNode) {
+        if (schemaNode == null) {
+            return SetUtils.emptySet();
+        }
+
+        if (schemaNode.get(ITEMS) != null && schemaNode.get(ITEMS).get(SCHEMA_PROPERTIES) != null) {
+            schemaNode = schemaNode.get(ITEMS);
+        }
+
         if (schemaNode.get(SCHEMA_PROPERTIES) != null) {
             return ImmutableSet.copyOf(schemaNode.get(SCHEMA_PROPERTIES).fieldNames());
         } else {
@@ -113,8 +120,7 @@ public class JsonSchemaUtil {
                 }
             }
         } else {
-            //generic upsert (array) - test condtion record again after version 14.1. adding key attributes should not be needed
-            if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode.isConditionRecord()) {
+            if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode == CONDITION_RECORD) {
                 int additionalKeys = getAdditionalKeys(pfxTypeCode, extensionType, showAdditionalKeys);
                 addSchemaAttributes(schema, "key", additionalKeys, withType);
             }
@@ -131,7 +137,7 @@ public class JsonSchemaUtil {
             return 0;
         }
 
-        if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode.isConditionRecord()) {
+        if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode == CONDITION_RECORD) {
             return extensionType.getAdditionalKeys();
         }
 
@@ -162,7 +168,6 @@ public class JsonSchemaUtil {
                     return MAX_PAYOUT_ATTRIBUTES;
                 case PRODUCT:
                 case CONDITION_RECORD:
-                case CONDITION_RECORD_STAGING:
                 case CUSTOMER:
                 case PRICERECORD:
                     return MAX_ATTRIBUTES;

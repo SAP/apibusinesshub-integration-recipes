@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
-import com.smartgwt.client.types.OperatorId;
 import net.pricefx.connector.common.connection.PFXOperationClient;
 import net.pricefx.connector.common.util.JsonUtil;
 import net.pricefx.connector.common.util.RequestUtil;
@@ -19,6 +18,7 @@ import java.util.List;
 
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath;
 import static net.pricefx.connector.common.util.Constants.MAX_RECORDS;
+import static net.pricefx.connector.common.util.OperatorId.EQUALS;
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXOperation.ADD;
 import static net.pricefx.connector.common.util.PFXOperation.UPDATE;
@@ -53,7 +53,7 @@ public class AdvancedConfigurationUpsertor implements IPFXObjectUpsertor {
         String uniqueName = JsonUtil.getValueAsText(request.get(FIELD_UNIQUENAME));
 
         ObjectNode criterion = RequestUtil.createSimpleFetchRequest(buildSimpleCriterion(
-                FIELD_UNIQUENAME, OperatorId.EQUALS.getValue(), uniqueName));
+                FIELD_UNIQUENAME, EQUALS.getValue(), uniqueName));
 
         List<ObjectNode> advConfigs =
                 new GenericFetcher(pfxClient, ADVANCED_CONFIG, null, uniqueName, false).

@@ -612,7 +612,7 @@
                                 </EditCondition>
                                 <EditCondition>
                                     <AttributeName>bulkloadTargetType</AttributeName>
-                                    <AttributeValue>CONDITION_RECORD_STAGING</AttributeValue>
+                                    <AttributeValue>CONDITION_RECORD</AttributeValue>
                                 </EditCondition>
                             </OrCondition>
                         </AndCondition>
@@ -1409,7 +1409,7 @@
             <FixedValue>
                 <Value>CONDITION_RECORD</Value>
                 <GuiLabels guid="8ce3c6b9-16aa-4f78-98da-90a11cc17331">
-                    <Label language="EN">Condition Record (Pricefx version 13 only)</Label>
+                    <Label language="EN">Condition Record</Label>
                 </GuiLabels>
             </FixedValue>
 
@@ -1991,9 +1991,9 @@
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
-                <Value>CONDITION_RECORD_STAGING</Value>
+                <Value>CONDITION_RECORD</Value>
                 <GuiLabels guid="4c983d15-e5f9-416d-8189-c8e6df4c5b8e">
-                    <Label language="EN">Condition Record (Pricefx version 14+)</Label>
+                    <Label language="EN">Condition Record</Label>
                 </GuiLabels>
             </FixedValue>
         </FixedValues>

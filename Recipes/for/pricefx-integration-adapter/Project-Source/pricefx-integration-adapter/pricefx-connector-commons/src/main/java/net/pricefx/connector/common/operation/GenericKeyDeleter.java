@@ -16,7 +16,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Set;
 
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath;
-import static net.pricefx.connector.common.util.JsonSchemaUtil.SCHEMA_PROPERTIES;
 import static net.pricefx.connector.common.util.JsonSchemaUtil.STRING;
 import static net.pricefx.connector.common.util.PFXOperation.DELETE;
 
@@ -60,9 +59,8 @@ public class GenericKeyDeleter implements IPFXObjectDeleter {
     }
 
     private void validate(JsonNode request) {
-        if (schemaNode != null && schemaNode.get(SCHEMA_PROPERTIES) != null) {
-            JsonValidationUtil.validateExtraFields(schemaNode.get(SCHEMA_PROPERTIES), request);
-        }
+
+        JsonValidationUtil.validateExtraFields(schemaNode, request);
 
         Set<String> mandatory = ImmutableSet.copyOf(typeCode.getIdentifierFieldNames());
         JsonValidationUtil.validateMissingMandatoryAttributes((ObjectNode) request, mandatory, -1);

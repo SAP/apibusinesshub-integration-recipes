@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.fasterxml.jackson.databind.node.ObjectNode
-import com.smartgwt.client.types.OperatorId
 import net.pricefx.connector.common.connection.MockPFXOperationClient
 import net.pricefx.connector.common.util.*
 import net.pricefx.connector.common.validation.RequestValidationException

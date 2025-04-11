@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.smartgwt.client.types.OperatorId;
 import net.pricefx.connector.common.operation.DataloadRunner;
 import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.ConnectorException;
@@ -23,11 +22,11 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.StreamSupport;
 
-import static com.smartgwt.client.types.OperatorId.AND;
-import static com.smartgwt.client.types.OperatorId.EQUALS;
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath;
 import static net.pricefx.connector.common.util.Constants.*;
 import static net.pricefx.connector.common.util.JsonUtil.getFirstDataNode;
+import static net.pricefx.connector.common.util.OperatorId.AND;
+import static net.pricefx.connector.common.util.OperatorId.EQUALS;
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXOperation.*;
 import static net.pricefx.connector.common.util.RequestUtil.createSimpleFetchRequest;
@@ -79,11 +78,11 @@ public interface IPFXConnection {
             extensionType = getLookupTableType(tableName, validAfter);
         }
 
-        if (extensionType == null && typeCode.isConditionRecord()) {
+        if (extensionType == null && typeCode == PFXTypeCode.CONDITION_RECORD) {
             extensionType = getConditionRecordType(typeCode, tableName);
         }
 
-        if (extensionType == null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE || typeCode.isConditionRecord())) {
+        if (extensionType == null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE || typeCode == PFXTypeCode.CONDITION_RECORD)) {
             throw new ConnectorException(TABLE_NOT_FOUND);
         }
 
@@ -114,7 +113,7 @@ public interface IPFXConnection {
     }
 
     default IPFXExtensionType getConditionRecordType(PFXTypeCode typeCode, String tableName) {
-        if (typeCode.isConditionRecord() && !StringUtils.isEmpty(tableName)) {
+        if (typeCode == PFXTypeCode.CONDITION_RECORD && !StringUtils.isEmpty(tableName)) {
             try {
                 ObjectNode node = getConditionRecordTable(tableName);
 
