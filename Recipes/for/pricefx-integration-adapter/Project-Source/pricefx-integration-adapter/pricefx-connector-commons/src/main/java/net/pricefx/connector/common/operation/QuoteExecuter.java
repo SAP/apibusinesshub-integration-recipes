@@ -17,9 +17,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.ArrayList;
 import java.util.Map;
 
-import static com.smartgwt.client.types.OperatorId.EQUALS;
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath;
 import static net.pricefx.connector.common.util.Constants.UNIQUE_KEY;
+import static net.pricefx.connector.common.util.OperatorId.EQUALS;
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXConstants.WorkflowStatus.SUBMITTED;
 import static net.pricefx.connector.common.util.PFXConstants.WorkflowStatus.WITHDRAWN;

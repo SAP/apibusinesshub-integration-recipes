@@ -83,7 +83,7 @@ class RequestPathFactoryTest extends Specification {
         def request = new ObjectNode(JsonNodeFactory.instance)
         request.putArray(PFXConstants.FIELD_INPUTS).add(new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_NAME, "location").put(PFXConstants.FIELD_VALUE, "test"))
 
-        def result = RequestPathFactory.buildUpdatePath(PFXTypeCode.QUOTE, null, request)
+        def result = RequestPathFactory.buildUpdatePath(PFXTypeCode.QUOTE,  request)
 
         then:
         PFXOperation.SAVE_QUOTE.getOperation() == result
@@ -91,30 +91,21 @@ class RequestPathFactoryTest extends Specification {
         when:
         request = new ObjectNode(JsonNodeFactory.instance)
 
-        result = RequestPathFactory.buildUpdatePath(PFXTypeCode.QUOTE, null, request)
+        result = RequestPathFactory.buildUpdatePath(PFXTypeCode.QUOTE,  request)
 
         then:
         createPath(PFXOperation.UPDATE.getOperation(), PFXTypeCode.QUOTE.getTypeCode()) == result
 
         when:
 
-        result = RequestPathFactory.buildUpdatePath(PFXTypeCode.ROLE, null, request)
+        result = RequestPathFactory.buildUpdatePath(PFXTypeCode.ROLE, request)
 
         then:
         createPath(PFXOperation.UPDATE.getOperation(), PFXTypeCode.ROLE.getTypeCode()) == result
 
         when:
 
-        result = RequestPathFactory.buildUpdatePath(PFXTypeCode.CONDITION_RECORD,
-                new PFXConditionRecordType(5), request)
-
-        then:
-        createPath(PFXOperation.UPDATE.getOperation(), PFXTypeCode.CONDITION_RECORD.getTypeCode() + "5") == result
-
-
-        when:
-
-        RequestPathFactory.buildUpdatePath(PFXTypeCode.PRODUCT, null, request)
+        RequestPathFactory.buildUpdatePath(PFXTypeCode.PRODUCT, request)
 
         then:
         thrown(UnsupportedOperationException.class)

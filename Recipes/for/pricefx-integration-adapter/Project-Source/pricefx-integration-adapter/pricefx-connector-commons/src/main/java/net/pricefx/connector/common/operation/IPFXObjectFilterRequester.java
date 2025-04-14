@@ -10,8 +10,8 @@ import net.pricefx.connector.common.validation.JsonValidationUtil;
 import net.pricefx.connector.common.validation.RequestValidationException;
 import org.apache.commons.lang3.StringUtils;
 
-import static com.smartgwt.client.types.OperatorId.AND;
-import static com.smartgwt.client.types.OperatorId.OR;
+import static net.pricefx.connector.common.util.OperatorId.AND;
+import static net.pricefx.connector.common.util.OperatorId.OR;
 import static net.pricefx.connector.common.util.PFXConstants.*;
 
 public interface IPFXObjectFilterRequester {

@@ -91,7 +91,7 @@ public enum PFXJsonSchema {
     //CONTRACT
     CONTRACT_FETCH_RESPONSE("/schemas/fetch-contract-output-schema.json"),
 
-    //PA DATA
+    //PA
     DATALOAD_FETCH_RESPONSE("/schemas/fetch-dataload-output-schema.json"),
     DATAFEED_FETCH_RESPONSE("/schemas/fetch-datafeed-output-schema.json"),
     DATAMART_FETCH_RESPONSE("/schemas/fetch-datamart-output-schema.json"),
@@ -122,8 +122,6 @@ public enum PFXJsonSchema {
     public static PFXJsonSchema getUpsertRequestSchema(PFXTypeCode pfxTypeCode, IPFXExtensionType extensionType) {
         if (pfxTypeCode != null) {
             switch (pfxTypeCode) {
-                case CONDITION_RECORD:
-                    return CONDITION_RECORD_UPDATE_REQUEST;
                 case PRICERECORD:
                     return PRICERECORD_UPSERT_REQUEST;
                 case QUOTE:
@@ -194,7 +192,6 @@ public enum PFXJsonSchema {
                 case REBATEAGREEMENT:
                     return RBA_FETCH_RESPONSE;
                 case CONDITION_RECORD:
-                case CONDITION_RECORD_STAGING:
                     return CONDITION_RECORD_FETCH_RESPONSE;
                 case PAYOUT:
                     return PAYOUT_FETCH_RESPONSE;
@@ -222,12 +219,6 @@ public enum PFXJsonSchema {
                     return CX_FETCH_RESPONSE;
                 case DATALOAD:
                     return DATALOAD_FETCH_RESPONSE;
-                case DATAFEED:
-                    return DATAFEED_FETCH_RESPONSE;
-                case DATASOURCE:
-                    return DATASOURCE_FETCH_RESPONSE;
-                case DATAMART:
-                    return DATAMART_FETCH_RESPONSE;
                 case QUOTE:
                     return QUOTE_FETCH_RESPONSE;
                 case USER:
@@ -255,7 +246,7 @@ public enum PFXJsonSchema {
                     }
                     break;
                 default:
-                    return POST_RESPONSE;
+                    return FETCH_RESPONSE;
             }
         }
         return null;

@@ -2,14 +2,13 @@ package net.pricefx.connector.common.util
 
 import com.fasterxml.jackson.databind.node.*
 import com.google.common.collect.ImmutableList
-import com.smartgwt.client.types.OperatorId
 import net.pricefx.connector.common.connection.MockPFXOperationClient
 import net.pricefx.connector.common.validation.RequestValidationException
 import net.pricefx.pckg.client.okhttp.PfxCommonService
 import org.apache.commons.lang3.tuple.Pair
 import spock.lang.Specification
 
-import static com.smartgwt.client.types.OperatorId.AND
+import static net.pricefx.connector.common.util.OperatorId.AND
 import static net.pricefx.connector.common.util.PFXConstants.FIELD_CRITERIA
 import static net.pricefx.connector.common.util.PFXConstants.FIELD_VALUE
 import static net.pricefx.pckg.client.okhttp.PfxCommonService.buildSimpleCriterion

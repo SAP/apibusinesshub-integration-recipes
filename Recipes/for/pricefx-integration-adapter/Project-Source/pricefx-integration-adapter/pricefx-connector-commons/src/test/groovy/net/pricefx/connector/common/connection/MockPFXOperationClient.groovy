@@ -40,27 +40,10 @@ class MockPFXOperationClient extends PFXOperationClient {
         try {
             ArrayNode response = new ArrayNode(JsonNodeFactory.instance)
             if (request.get(0).get(FIELD_TYPEDID).textValue().contains(PFXTypeCode.CONDITION_RECORD.getTypeCode())) {
-                if (request.size() == 3) {
-                    for (JsonNode node : request) {
-                        ObjectNode objectNode = new ObjectNode(JsonNodeFactory.instance)
-                        objectNode.set(FIELD_RESPONSE, node)
-                        response.add(objectNode)
-                    }
-                } else {
-                    for (int i = 0; i < request.size(); i++) {
-                        JsonNode node = request.get(i)
-                        ObjectNode responseNode = new ObjectNode(JsonNodeFactory.instance)
-                        responseNode.set(FIELD_RESPONSE, node)
-
-                        if (i % 2 != 0) {
-                            ObjectNode errorMsg = new ObjectNode(JsonNodeFactory.instance)
-                            errorMsg.put("errorMessage", "version conflicted")
-                            ObjectNode objectNode = new ObjectNode(JsonNodeFactory.instance)
-                            objectNode.set("errors", new ObjectNode(JsonNodeFactory.instance).set(FIELD_VERSION, errorMsg))
-                            responseNode.set(FIELD_RESPONSE, objectNode)
-                        }
-                        response.add(responseNode)
-                    }
+                for (JsonNode node : request) {
+                    ObjectNode objectNode = new ObjectNode(JsonNodeFactory.instance)
+                    objectNode.set(FIELD_RESPONSE, node)
+                    response.add(objectNode)
                 }
             }
             return response

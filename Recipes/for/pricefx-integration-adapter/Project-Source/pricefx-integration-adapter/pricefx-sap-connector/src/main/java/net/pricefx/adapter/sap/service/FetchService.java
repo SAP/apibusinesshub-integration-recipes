@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.smartgwt.client.types.OperatorId;
+
 import net.pricefx.connector.common.connection.PFXOperationClient;
 import net.pricefx.connector.common.operation.*;
 import net.pricefx.connector.common.util.*;

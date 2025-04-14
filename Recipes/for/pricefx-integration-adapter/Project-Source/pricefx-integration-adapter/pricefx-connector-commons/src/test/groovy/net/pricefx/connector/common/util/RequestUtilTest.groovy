@@ -1,6 +1,5 @@
 package net.pricefx.connector.common.util
 
-
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
@@ -8,7 +7,6 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.fasterxml.jackson.databind.node.MissingNode
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.google.common.collect.ImmutableList
-import com.smartgwt.client.types.OperatorId
 import net.pricefx.connector.common.validation.RequestValidationException
 import spock.lang.Specification
 

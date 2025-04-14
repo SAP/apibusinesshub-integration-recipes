@@ -106,10 +106,9 @@ public class GenericUpsertor implements IPFXObjectUpsertor {
     protected void validateRequest(JsonNode inputNode, boolean replaceNullKey) {
 
         JsonValidationUtil.validatePayload(schema, inputNode);
-        validateExtraFields(schema, inputNode);
+        JsonValidationUtil.validateExtraFields(schema, inputNode);
 
-        Set<String> schemaFields = getSchemaFields(schema);
-
+        Set<String> schemaFields = JsonSchemaUtil.getFields(schema);
 
         int count = JsonUtil.countJson(inputNode);
         if (count > maximumRecords) {

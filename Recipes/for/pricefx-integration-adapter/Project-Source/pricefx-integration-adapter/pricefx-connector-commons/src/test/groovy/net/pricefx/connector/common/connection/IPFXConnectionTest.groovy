@@ -8,8 +8,8 @@ import net.pricefx.connector.common.validation.RequestValidationException
 import net.pricefx.pckg.client.okhttp.PfxCommonService
 import spock.lang.Specification
 
-import static com.smartgwt.client.types.OperatorId.EQUALS
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath
+import static net.pricefx.connector.common.util.OperatorId.EQUALS
 import static net.pricefx.connector.common.util.PFXConstants.*
 import static net.pricefx.connector.common.util.RequestUtil.createSimpleFetchRequest
 
