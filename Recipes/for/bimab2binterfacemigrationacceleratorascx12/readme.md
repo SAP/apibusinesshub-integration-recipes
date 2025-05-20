@@ -36,10 +36,12 @@ This is a sample inbound message mapping imported from SAP PI/PO system \
  ![input-image](MM_ASC850_4010_TO_ORDERS05_Sample.png)
 ### BIMA - ASCX12 Flow - Inbound_TEMPLATE 
 This iFlow template can be used to migrate B2B ASCX12 message type inbound interfaces from SAP PI/PO to Cloud Integration \
- ![input-image](BIMA_-_ASCX12_Flow_-_Inbound_TEMPLATE.png)
+ ![input-image](BIMA_-_ASCX12_Flow_-_Inbound_TEMPLATE_1.png)
+ ![input-image](BIMA_-_ASCX12_Flow_-_Inbound_TEMPLATE_2.png)
 ### BIMA - ASCX12 Structure Modifier Flow - Inbound 
 This generic iFlow contains the logic to modify Cloud Integration Specific ASCX12 XML to PI/PO specific XML file and forward it to Mapper flow \
  ![input-image](BIMA_-_ASCX12_Structure_Modifier_Flow_-_Inbound.png)
 ### BIMA - ASCX12 Flow - Outbound_TEMPLATE 
 This iFlow template can be used to migrate B2B ASCX12 message type outbound interfaces from SAP PI/PO to Cloud Integration \
- ![input-image](BIMA_-_ASCX12_Flow_-_Outbound_TEMPLATE.png)
+ ![input-image](BIMA_-_ASCX12_Flow_-_Outbound_TEMPLATE_1.png)
+ ![input-image](BIMA_-_ASCX12_Flow_-_Outbound_TEMPLATE_2.png)
