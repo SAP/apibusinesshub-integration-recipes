@@ -4,9 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.fasterxml.jackson.databind.node.ObjectNode
-
 import net.pricefx.connector.common.connection.MockPFXOperationClient
-import net.pricefx.connector.common.util.*
+import net.pricefx.connector.common.util.JsonUtil
+import net.pricefx.connector.common.util.PFXConstants
+import net.pricefx.connector.common.util.PFXTypeCode
 import net.pricefx.connector.common.validation.RequestValidationException
 import spock.lang.Specification
 

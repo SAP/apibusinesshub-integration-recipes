@@ -13,6 +13,12 @@ class StringUtilTest extends Specification {
         "abc" == result
 
         when:
+        result = StringUtil.getPropertyNameFromExpression('${exchangeProperty.abc}')
+
+        then:
+        "abc" == result
+
+        when:
         result = StringUtil.getPropertyNameFromExpression('${header.abc}')
 
         then:

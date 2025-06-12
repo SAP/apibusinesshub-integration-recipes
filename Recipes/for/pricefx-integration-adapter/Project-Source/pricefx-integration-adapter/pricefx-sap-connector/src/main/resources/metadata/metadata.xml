@@ -132,6 +132,16 @@
                 </AttributeReference>
 
                 <AttributeReference>
+                    <ReferenceName>postRaw</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>POST</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
                     <ReferenceName>validation</ReferenceName>
                     <AndCondition>
                         <EditCondition>
@@ -876,6 +886,17 @@
         <isparameterized>true</isparameterized>
         <GuiLabels guid="e1a108de-6720-4702-8431-eb2a9a7bdfa6">
             <Label language="EN">Pricefx API Path</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>postRaw</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="68477782-9091-415d-8ec1-4874b8e6eeac">
+            <Label language="EN">Raw Request</Label>
         </GuiLabels>
     </AttributeMetadata>
 

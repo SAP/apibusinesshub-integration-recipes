@@ -1,8 +1,8 @@
 package net.pricefx.connector.common.operation;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import net.pricefx.connector.common.connection.PFXOperationClient;
-import net.pricefx.connector.common.util.*;
 
 import static net.pricefx.connector.common.util.PFXTypeCode.DATAFEED;
 
@@ -15,9 +15,9 @@ public class DatafeedBulkLoader extends GenericBulkLoader {
     }
 
     @Override
-    public String bulkLoad(JsonNode request, boolean validate) {
+    public JsonNode bulkLoad(JsonNode request, boolean validate) {
         super.bulkLoad(request, false);
-        return "0"; //server isn't returning the number of records updated
+        return new TextNode("0"); //server isn't returning the number of records updated
     }
 
 }

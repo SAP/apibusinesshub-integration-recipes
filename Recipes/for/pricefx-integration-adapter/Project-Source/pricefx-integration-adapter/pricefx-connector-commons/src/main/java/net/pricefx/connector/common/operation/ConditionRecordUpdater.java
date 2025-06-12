@@ -92,11 +92,12 @@ public class ConditionRecordUpdater extends GenericBulkLoader {
         List<String> errorNodes = new ArrayList<>();
         Map<String, Map<String, Object>> metadatas = getUpdateEntities((ArrayNode) request);
         for (JsonNode node : request) {
+
             String id = JsonUtil.getValueAsText(node.get(FIELD_ID));
+
             Map<String, Object> metadata = metadatas.get(id);
             String lastUpdateDate = MapUtils.getString(metadata, FIELD_LASTUPDATEDATE);
             String typedId = MapUtils.getString(metadata, FIELD_TYPEDID);
-
             if (StringUtils.isEmpty(typedId)) {
                 errorNodes.add(id);
             } else {
@@ -165,7 +166,7 @@ public class ConditionRecordUpdater extends GenericBulkLoader {
         }
     }
     @Override
-    public String bulkLoad(JsonNode request, boolean validate) {
+    public JsonNode bulkLoad(JsonNode request, boolean validate) {
         if (!JsonUtil.isArrayNode(request)) {
             return super.bulkLoad(request, false);
         }
@@ -183,8 +184,7 @@ public class ConditionRecordUpdater extends GenericBulkLoader {
             if (CollectionUtils.isEmpty(allFieldNames)) {
                 allFieldNames.addAll(thisFieldNames);
             }
-
-            if (!errorNodes.contains(JsonUtil.getValueAsText(node.get(FIELD_ID)))){
+            if (!errorNodes.contains(JsonUtil.getValueAsText(node.get(FIELD_ID)))) {
                 validateFields(allFieldNames, thisFieldNames);
                 requestArray.add(node);
             }
@@ -194,7 +194,16 @@ public class ConditionRecordUpdater extends GenericBulkLoader {
             ObjectNode dataLoadReq = buildBulkLoadRequest(requestArray, allFieldNames);
             super.bulkLoad(dataLoadReq, false);
         }
-        return "errored: " + StringUtils.join(errorNodes, ",");
+
+        ArrayNode ids = new ArrayNode(JsonNodeFactory.instance);
+        for (String errorNode : errorNodes){
+            ids.add(errorNode);
+        }
+
+        ObjectNode resultNode = new ObjectNode(JsonNodeFactory.instance);
+        resultNode.set("errored", ids);
+        return resultNode;
+
     }
 
     private void validateAttributes(JsonNode inputNode, Map<String, ObjectNode> metadataMap, Set<String> schemaFields) {

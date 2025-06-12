@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class StringUtil {
     public static final String PROPERTY_PREFIX = "${property.";
+    public static final String EXCHANGE_PROPERTY_PREFIX = "${exchangeProperty.";
     public static final String HEADER_PREFIX = "${header.";
 
 
@@ -11,7 +12,13 @@ public class StringUtil {
     }
 
     public static String getPropertyNameFromExpression(String expression) {
-        return getNameFromExpression(expression, PROPERTY_PREFIX);
+        String result = getNameFromExpression(expression, PROPERTY_PREFIX);
+        if (StringUtils.isEmpty(result)){
+            return getNameFromExpression(expression, EXCHANGE_PROPERTY_PREFIX);
+        } else {
+            return result;
+        }
+
     }
 
     public static String getHeaderNameFromExpression(String expression) {

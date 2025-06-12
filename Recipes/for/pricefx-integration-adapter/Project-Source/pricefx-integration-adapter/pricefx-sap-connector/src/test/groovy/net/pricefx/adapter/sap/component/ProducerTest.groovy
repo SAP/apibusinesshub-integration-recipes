@@ -9,7 +9,7 @@ import net.pricefx.connector.common.validation.ConnectorException
 import net.pricefx.connector.common.validation.RequestValidationException
 import org.apache.camel.CamelContext
 import org.apache.camel.impl.DefaultCamelContext
-import org.apache.camel.impl.DefaultExchange
+import org.apache.camel.support.DefaultExchange
 import spock.lang.Specification
 
 class ProducerTest extends Specification {
