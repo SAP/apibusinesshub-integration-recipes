@@ -23,7 +23,7 @@ class DatafeedBulkLoaderTest extends Specification {
         def result = new DatafeedBulkLoader(pfxClient,  "TESTING").bulkLoad(request, false)
 
         then:
-        "0" == result
+        "0" == result.textValue()
     }
     def "validateStructure"() {
 

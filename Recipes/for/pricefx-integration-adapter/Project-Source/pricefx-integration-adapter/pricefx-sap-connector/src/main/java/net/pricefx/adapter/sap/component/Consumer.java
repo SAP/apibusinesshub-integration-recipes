@@ -3,7 +3,7 @@ package net.pricefx.adapter.sap.component;
 import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.Processor;
-import org.apache.camel.impl.DefaultConsumer;
+import org.apache.camel.support.DefaultConsumer;
 
 
 public class Consumer extends DefaultConsumer {

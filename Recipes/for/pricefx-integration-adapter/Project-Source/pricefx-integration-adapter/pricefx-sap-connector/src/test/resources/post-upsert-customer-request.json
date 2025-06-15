@@ -1,0 +1,14 @@
+[
+  {
+    "data": {
+      "customerId": "CUSTOMER10",
+      "attribute1": 10
+    }
+  },
+  {
+    "data": {
+      "customerId": "CUSTOMER20",
+      "attribute1": 20
+    }
+  }
+]

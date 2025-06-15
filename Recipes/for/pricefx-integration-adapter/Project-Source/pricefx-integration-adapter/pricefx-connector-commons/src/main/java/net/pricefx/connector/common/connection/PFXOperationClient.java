@@ -10,10 +10,13 @@ import net.pricefx.connector.common.util.PFXTypeCode;
 import net.pricefx.connector.common.validation.ConnectorException;
 import net.pricefx.pckg.client.okhttp.AuthV2EnabledPfxClient;
 import net.pricefx.pckg.client.okhttp.FileUploadProvider;
+import net.pricefx.pckg.processing.ProcessingMarkers;
 
+import javax.naming.LimitExceededException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import static net.pricefx.connector.common.util.JsonUtil.getData;
 import static net.pricefx.connector.common.util.PFXOperation.TOKEN;
@@ -55,9 +58,33 @@ public class PFXOperationClient extends AuthV2EnabledPfxClient implements IPFXCo
     @Override
     public JsonNode doPostRaw(String apiPath, Object request) {
         try {
+            if (request instanceof ArrayNode){
+                return postRawBatch(apiPath, (ArrayNode) request, ConnectionUtil.createExceptionMapper(apiPath));
+            }
             return super.postRetry(apiPath, request);
         } catch (IOException e) {
             throw new ConnectorException("Unable to execute " + apiPath, e);
+        }
+    }
+
+
+    private ArrayNode postRawBatch(String apiPath, ArrayNode batchRequests, Function<Exception, RuntimeException> exceptionMapper) {
+        if (batchRequests.size() > this.chunkSize) {
+            throw exceptionMapper.apply(new LimitExceededException("please limit batch size to " + this.chunkSize));
+        } else if (batchRequests.size() > 0) {
+
+            JsonNode process = ProcessingMarkers.removeProcessField((ObjectNode)batchRequests.get(0));
+
+            ArrayNode var6;
+            try {
+                var6 = this.postBatch(apiPath, batchRequests, exceptionMapper);
+            } finally {
+                ProcessingMarkers.setProcessField((ObjectNode)batchRequests.get(0), process);
+            }
+
+            return var6;
+        } else {
+            return this.objectMapper().createArrayNode();
         }
     }
 

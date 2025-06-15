@@ -2,9 +2,9 @@ package net.pricefx.adapter.sap.component;
 
 
 import org.apache.camel.Processor;
-import org.apache.camel.impl.DefaultEndpoint;
 import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
+import org.apache.camel.support.DefaultEndpoint;
 
 @UriEndpoint(scheme = "pfx-sap-general", syntax = "", title = "")
 public class Endpoint extends DefaultEndpoint {
@@ -98,6 +98,9 @@ public class Endpoint extends DefaultEndpoint {
     @UriParam
     private String postPath;
 
+    @UriParam
+    private boolean postRaw;
+
     public Endpoint(final String endpointUri, final Component component) {
         super(endpointUri, component);
     }
@@ -134,6 +137,7 @@ public class Endpoint extends DefaultEndpoint {
         return new Consumer(this, processor);
     }
 
+    @Override
     public boolean isSingleton() {
         return true;
     }
@@ -347,5 +351,13 @@ public class Endpoint extends DefaultEndpoint {
 
     public void setLastUpdateTimestamp(String lastUpdateTimestamp) {
         this.lastUpdateTimestamp = lastUpdateTimestamp;
+    }
+
+    public boolean isPostRaw() {
+        return postRaw;
+    }
+
+    public void setPostRaw(boolean postRaw) {
+        this.postRaw = postRaw;
     }
 }

@@ -1,7 +1,6 @@
 package net.pricefx.adapter.sap.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.TextNode;
 import net.pricefx.connector.common.connection.PFXOperationClient;
 import net.pricefx.connector.common.operation.AdvancedConfigurationUpsertor;
 import net.pricefx.connector.common.operation.ConditionRecordUpdater;
@@ -35,8 +34,7 @@ public class UpdateService extends AbstractJsonRequestService {
         JsonNode node;
         switch (typeCode) {
             case CONDITION_RECORD:
-                node =  new TextNode(
-                        new ConditionRecordUpdater(getPfxClient(), extensionType, lastUpdatedTimestamp).bulkLoad(request, true));
+                node = new ConditionRecordUpdater(getPfxClient(), extensionType, lastUpdatedTimestamp).bulkLoad(request, true);
                 break;
             case ADVANCED_CONFIG:
                 node = new AdvancedConfigurationUpsertor(getPfxClient()).upsert(request, true, false, false, false, false).get(0);

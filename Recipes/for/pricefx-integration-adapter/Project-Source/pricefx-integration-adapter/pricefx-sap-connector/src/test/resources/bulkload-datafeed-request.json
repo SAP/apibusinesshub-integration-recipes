@@ -1,19 +1,16 @@
 {
   "header": [
     "attribute1",
-    "attribute2",
-    "attribute3"
+    "attribute2"
   ],
   "data": [
     [
       "PRODUCT9",
-      "PRODUCT9",
-      "m"
+      "PRODUCT9"
     ],
     [
       "PRODUCT8",
-      "PRODUCT8",
-      "m"
+      "PRODUCT8"
     ]
   ]
 }

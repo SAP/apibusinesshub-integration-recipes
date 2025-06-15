@@ -6,15 +6,17 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.pricefx.adapter.sap</groupId>
     <artifactId>pricefx-sap-connector</artifactId>
-    <version>6.0.0</version>
+    <version>8.0.0</version>
     <packaging>bundle</packaging>
     <name>${project.artifactId}</name>
 
     <properties>
-        <camel.version>2.24.2</camel.version>
-        <spock.version>2.0-M2-groovy-3.0</spock.version>
-        <surefire.version>2.22.2</surefire.version>
-        <gmaven.version>2.1.0</gmaven.version>
+        <camel.version>3.14.7</camel.version>
+        <junit.version>4.13.2</junit.version>
+        <spock.version>2.4-M6-groovy-3.0</spock.version>
+
+        <surefire.version>3.5.3</surefire.version>
+        <gmaven.version>3.0.2</gmaven.version>
     </properties>
 
     <dependencies>
@@ -30,8 +32,21 @@
         <dependency>
             <groupId>com.sap.cloud.adk</groupId>
             <artifactId>com.sap.cloud.adk.build.archive</artifactId>
-            <version>1.44.0</version>
+            <version>2.3.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.sap.cloud.adk</groupId>
+            <artifactId>com.sap.cloud.adk.archetype-adapter</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sap.cloud.adk</groupId>
+            <artifactId>com.sap.cloud.adk.archetype-adapter-component-reuse</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.servicemix.bundles</groupId>
@@ -79,8 +94,69 @@
             <scope>system</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.sap.cloud.adk</groupId>
+            <artifactId>generic.api</artifactId>
+            <version>3.16.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sap.cloud.adk</groupId>
+            <artifactId>adapter.api</artifactId>
+            <version>3.16.0</version>
+        </dependency>
+
 
         <!-- testing -->
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.6.14</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>1.6.14</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <version>2.5.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-commons</artifactId>
+            <version>1.10.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.10.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.opentest4j</groupId>
+            <artifactId>opentest4j</artifactId>
+            <version>1.3.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-engine</artifactId>
+            <version>1.10.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.camel</groupId>
@@ -88,39 +164,39 @@
             <version>${camel.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
-            <scope>test</scope>
             <version>${spock.version}</version>
+            <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>com.sun.activation</groupId>
             <artifactId>javax.activation</artifactId>
             <scope>test</scope>
             <version>1.2.0</version>
         </dependency>
-
-
         <dependency>
-            <groupId>com.sap.cloud.adk</groupId>
-            <artifactId>generic.api</artifactId>
-            <version>2.31.0</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>com.sap.cloud.adk</groupId>
-            <artifactId>adapter.api</artifactId>
-            <version>2.31.0</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.3.3</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
-
-
         <testResources>
             <testResource>
                 <directory>src/test/resources</directory>
@@ -140,7 +216,7 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>src/test/java</source>
+                                <source>src/test/groovy</source>
                                 <source>src/test/integration</source>
                             </sources>
                         </configuration>
@@ -159,13 +235,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>3.14.0</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
@@ -181,10 +256,10 @@
                 <configuration>
                     <testSources>
                         <testSource>
-                            <directory>${project.basedir}/src/test/groovy</directory>
+                            <directory>src/test/groovy</directory>
                         </testSource>
                         <testSource>
-                            <directory>${project.basedir}/src/test/integration</directory>
+                            <directory>src/test/integration</directory>
                         </testSource>
                     </testSources>
                 </configuration>
@@ -193,7 +268,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version>
+                <version>0.8.13</version>
                 <executions>
                     <execution>
                         <id>default-prepare-agent</id>
@@ -221,31 +296,43 @@
                         <exclude>**/*IntegrationTest</exclude>
                     </excludes>
                 </configuration>
+
             </plugin>
+
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${surefire.version}</version>
+
                 <executions>
                     <execution>
+                        <id>integration-test</id>
                         <goals>
-                            <goal>verify</goal>
                             <goal>integration-test</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
                 </executions>
+
                 <configuration>
                     <includes>
-                        <include>**/*IntegrationTest</include>
+                        <include>**/*IntegrationTest*</include>
                     </includes>
                 </configuration>
             </plugin>
 
+
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
+                <version>3.8.1</version>
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
@@ -274,13 +361,13 @@
             <plugin>
                 <groupId>com.sap.cloud.adk</groupId>
                 <artifactId>com.sap.cloud.adk.build.archive</artifactId>
-                <version>1.39.0</version>
+                <version>2.3.0</version>
             </plugin>
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>2.0.0</version>
+                <version>2.5.0</version>
                 <executions>
                     <execution>
                         <id>download-licenses</id>
@@ -316,7 +403,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <version>2.0.0</version>
+                    <version>2.5.0</version>
                 </plugin>
 
             </plugins>
