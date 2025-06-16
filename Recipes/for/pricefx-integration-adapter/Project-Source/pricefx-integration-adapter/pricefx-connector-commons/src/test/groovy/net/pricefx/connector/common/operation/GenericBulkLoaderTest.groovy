@@ -25,7 +25,7 @@ class GenericBulkLoaderTest extends Specification {
                 new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION).withAttributes(10).withTable("testTable"), null).bulkLoad(request, true)
 
         then:
-        original.get(PFXConstants.FIELD_DATA).size() + "" == result
+        original.get(PFXConstants.FIELD_DATA).size() + "" == result.textValue()
 
     }
 

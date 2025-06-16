@@ -177,8 +177,9 @@ class ConditionRecordUpdaterTest extends Specification {
         def result = new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").bulkLoad(request, true)
 
         then:
-        result =="errored: 4,5"
-
+        result.get("errored").get(0).textValue() == "4"
+        result.get("errored").get(1).textValue() == "5"
+        println result
     }
 
 }

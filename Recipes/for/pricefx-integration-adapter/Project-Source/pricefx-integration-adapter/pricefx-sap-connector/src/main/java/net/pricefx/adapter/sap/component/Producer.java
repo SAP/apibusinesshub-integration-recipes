@@ -16,7 +16,7 @@ import net.pricefx.connector.common.validation.ConnectorException;
 import net.pricefx.pckg.client.okhttp.PfxClientBuilder;
 import net.pricefx.pckg.processing.ProcessingException;
 import org.apache.camel.Exchange;
-import org.apache.camel.impl.DefaultProducer;
+import org.apache.camel.support.DefaultProducer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.HttpURLConnection;
@@ -26,7 +26,8 @@ import static net.pricefx.adapter.sap.util.Constants.*;
 import static net.pricefx.adapter.sap.util.SupportedOperation.GET;
 import static net.pricefx.connector.common.util.Constants.DEFAULT_TIMEOUT;
 import static net.pricefx.connector.common.util.Constants.MAX_RECORDS;
-import static net.pricefx.connector.common.util.PFXTypeCode.*;
+import static net.pricefx.connector.common.util.PFXTypeCode.CONDITION_RECORD;
+import static net.pricefx.connector.common.util.PFXTypeCode.TOKEN;
 import static net.pricefx.connector.common.validation.ConnectorException.ErrorType.CONNECTION_ERROR;
 
 
@@ -176,7 +177,7 @@ public class Producer extends DefaultProducer {
                         execute(input);
                 break;
             case POST:
-                node = new PostService(pfxClient, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getPostPath())).execute(input);
+                node = new PostService(pfxClient, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getPostPath()), ((Endpoint) getEndpoint()).isPostRaw()).execute(input);
                 break;
             case METADATA:
                 int pageSize = RequestUtil.getPageSize(getProperty(exchange.getProperty(PAGE_SIZE)), MAX_FETCH_RECORDS);
@@ -211,6 +212,7 @@ public class Producer extends DefaultProducer {
 
     }
 
+    @Override
     public void process(final Exchange exchange) throws Exception {
         CredentialsOperation credentialsOperation = createCredentialsOperation();
         PFXTypeCode typeCode = getTargetType();
@@ -254,6 +256,8 @@ public class Producer extends DefaultProducer {
                 throw ex;
             }
         }
+
+
 
     }
 

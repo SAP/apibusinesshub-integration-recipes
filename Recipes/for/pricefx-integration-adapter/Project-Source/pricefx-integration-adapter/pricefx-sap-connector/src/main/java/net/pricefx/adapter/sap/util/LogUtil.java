@@ -16,7 +16,7 @@ public class LogUtil {
 
     public static void writeTrace(Endpoint endpoint, Exchange exchange, byte[] traceData) {
         AdapterMessageLogFactory msgLogFactory = (AdapterMessageLogFactory) endpoint.getCamelContext().getRegistry()
-                .lookupByName(com.sap.it.api.msglog.adapter.AdapterMessageLogFactory.class.getName());
+                .lookupByName(AdapterMessageLogFactory.class.getName());
 
         AdapterMessageLog mplLog = msgLogFactory.getMessageLog(exchange, "Receiving message", "ctype::Adapter/cname::Pricefx-SAP-Integration-Adapter/vendor::Pricefx/version::1.0.0",
                 UUID.randomUUID().toString());

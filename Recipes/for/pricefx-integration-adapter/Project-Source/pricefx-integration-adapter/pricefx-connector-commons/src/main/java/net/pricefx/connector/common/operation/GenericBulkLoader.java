@@ -2,7 +2,9 @@ package net.pricefx.connector.common.operation;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import net.pricefx.connector.common.connection.PFXOperationClient;
 import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.JsonValidationUtil;
@@ -47,7 +49,7 @@ public class GenericBulkLoader implements IPFXObjectBulkLoader {
     }
 
     @Override
-    public String bulkLoad(JsonNode request, boolean validate) {
+    public JsonNode bulkLoad(JsonNode request, boolean validate) {
 
         validateStructure(request);
         if (validate){
@@ -57,12 +59,20 @@ public class GenericBulkLoader implements IPFXObjectBulkLoader {
         String apiPath = getApiPath();
 
         JsonNode resp = pfxClient.doPost(apiPath, getRequestPayload(request));
+        JsonNode node = JsonUtil.getFirstDataNode(resp);
+        if (node == null || node.isNull()) {
+            return new TextNode("0");
+        } else if (node instanceof IntNode){
+            return new TextNode(node.intValue()+"");
+        } else{
+            return node;
+        }
 
-        return JsonUtil.getValueAsText(JsonUtil.getFirstDataNode(resp), "0");
+
 
     }
 
-    public String bulkLoad(JsonNode request) {
+    public JsonNode bulkLoad(JsonNode request) {
         return bulkLoad(request, false);
     }
 
