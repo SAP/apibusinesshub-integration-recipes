@@ -30,10 +30,12 @@ This script collection includes Groovy Scripts which facilitates B2B EDIFACT Int
  ![input-image](BIMA_-_EDIFACT_Essential_Scripts.png)
 ### BIMA - EDIFACT Flow - Outbound_TEMPLATE 
 This iFlow template can be used to migrate B2B UN/EDIFACT message type outbound interfaces from SAP PI/PO to Cloud Integration \
- ![input-image](BIMA_-_EDIFACT_Flow_Outbound_TEMPLATE.png)
+ ![input-image](BIMA_-_EDIFACT_Flow_Outbound_TEMPLATE_1.png)
+ ![input-image](BIMA_-_EDIFACT_Flow_Outbound_TEMPLATE_2.png)
 ### BIMA - EDIFACT Flow - Inbound_TEMPLATE 
 This iFlow template can be used to migrate B2B UN/EDIFACT message type inbound interfaces from SAP PI/PO to Cloud Integration \
- ![input-image](BIMA_-_EDIFACT_Flow_Inbound_TEMPLATE.png)
+ ![input-image](BIMA_-_EDIFACT_Flow_Inbound_TEMPLATE_1.png)
+ ![input-image](BIMA_-_EDIFACT_Flow_Inbound_TEMPLATE_2.png)
 ### BIMA - EDIFACT Structure Modifier Flow - Inbound 
 This generic iFlow contains the logic to modify Cloud Integration Specific UN/EDIFACT XML to PI/PO specific XML file and forward it to Mapper flow \
  ![input-image](BIMA_-_Structure_Modifier_Flow_-_Inbound.png)
