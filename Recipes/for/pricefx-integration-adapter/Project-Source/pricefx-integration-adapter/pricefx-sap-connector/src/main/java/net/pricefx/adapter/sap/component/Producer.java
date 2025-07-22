@@ -214,7 +214,7 @@ public class Producer extends DefaultProducer {
 
     @Override
     public void process(final Exchange exchange) throws Exception {
-        CredentialsOperation credentialsOperation = createCredentialsOperation();
+        CredentialsOperation credentialsOperation = createCredentialsOperation(exchange);
         PFXTypeCode typeCode = getTargetType();
 
         String token = getProperty(exchange.getProperty(ACCESS_TOKEN));
@@ -279,9 +279,10 @@ public class Producer extends DefaultProducer {
         return false;
     }
 
-    protected CredentialsOperation createCredentialsOperation() throws SecureStoreException, MalformedURLException, InvalidContextException {
-        return new CredentialsOperation(((Endpoint) getEndpoint()).getSecurityMaterial(),
-                ((Endpoint) getEndpoint()).getPricefxHost());
+    protected CredentialsOperation createCredentialsOperation(final Exchange exchange) throws SecureStoreException, MalformedURLException, InvalidContextException {
+        return new CredentialsOperation(
+                getDynamicValue(exchange, ((Endpoint) getEndpoint()).getSecurityMaterial()),
+                getDynamicValue(exchange, ((Endpoint) getEndpoint()).getPricefxHost()));
     }
 
     public static PfxClientBuilder getPFXClientBuilder(String partitionName, String url, String token) {
