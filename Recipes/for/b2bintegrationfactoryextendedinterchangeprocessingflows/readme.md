@@ -21,6 +21,10 @@ This package provides flows and scripts to fulfil additional requirements that a
 [View high level effort](../b2bintegrationfactorycloudintegrationtradingpartnermanagement/effort.md)
 
 ## Integration flows
+### Interchange Processing Flow - SAP PI-PO Operating Mapping Process 
+This flow is a generic SAP PI-PO operating mapping process for processing the source message payload into the target message payload according to the sequence maintained in the respective Operating Mapping. \
+ ![input-image](Interchange_Processing_Flow_-_SAP_PI-PO_Operating_Mapping_Process_1.png)
+ ![input-image](Interchange_Processing_Flow_-_SAP_PI-PO_Operating_Mapping_Process_2.png)
 ### UN-EDIFACT Extracted Key Value Change 
 This Flow is responsible to change the extracted UN-EDIFACT key values, which is needed to match the unique PID. \
  ![input-image](UN-EDIFACT_Extracted_Key_Value_Change.png)
