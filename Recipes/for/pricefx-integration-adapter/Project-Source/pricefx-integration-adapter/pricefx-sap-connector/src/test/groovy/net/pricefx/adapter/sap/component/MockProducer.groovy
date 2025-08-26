@@ -7,6 +7,7 @@ import com.sap.it.api.securestore.exception.SecureStoreException
 import net.pricefx.adapter.sap.operation.CredentialsOperation
 import net.pricefx.connector.common.connection.PFXOperationClient
 import net.pricefx.connector.common.util.PFXTypeCode
+import org.apache.camel.Exchange
 
 class MockProducer extends Producer {
     private PFXOperationClient pfxOperationClient
@@ -22,7 +23,7 @@ class MockProducer extends Producer {
     }
 
     @Override
-    protected CredentialsOperation createCredentialsOperation() throws SecureStoreException, MalformedURLException, InvalidContextException {
+    protected CredentialsOperation createCredentialsOperation(final Exchange exchange) throws SecureStoreException, MalformedURLException, InvalidContextException {
         return new CredentialsOperation("token", "https://app.pricefx.eu") {
             @Override
             protected void init(String securityMaterial, String host) {
