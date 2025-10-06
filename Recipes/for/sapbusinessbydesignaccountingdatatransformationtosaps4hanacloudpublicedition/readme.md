@@ -14,6 +14,6 @@ Transform the data in accounting data objects of SAP Business ByDesign into a fo
 [View documentation](SAPBusinessByDesignAccountingDataTransformationtoSAPS4HANACloudPublicEdition.pdf)\
 [View high level effort](effort.md)
 ## Integration flows
-### Inventory Data Transformation 
+### ByD Inventory Data Transformation 
 Transform the data in Inventory object of SAP Business ByDesign into the Material Inventory Balance migration template of SAP S/4HANA Cloud Public Edition, suitable for upload via Migration cockpit. \
  ![input-image](Inventory_Data_Transformation.png)
