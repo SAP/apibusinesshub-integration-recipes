@@ -1,0 +1,268 @@
+{
+  "name": "[B2B Integration Factory] - Order to Cash SOAP Scenario",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "01. a) Sales Order Request - Inbound",
+      "filename": "01. a) Sales Order Request - Inbound.bru",
+      "seq": 1,
+      "request": {
+        "url": "{{_.url}}/http/tpm/b2b/simulate",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "type_system",
+            "value": "SAP_S4HANA_Cloud_SOA",
+            "enabled": true
+          },
+          {
+            "name": "communication_protocol",
+            "value": "SOAP",
+            "enabled": true
+          },
+          {
+            "name": "message_content_type",
+            "value": "application/XML",
+            "enabled": true
+          },
+          {
+            "name": "SAP_EDI_Split_Sender_Per_Interchange",
+            "value": "false",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "xml",
+          "xml": "<n0:OrderRequest xmlns:n0=\"http://sap.com/xi/EDI\" xmlns:prx=\"urn:sap.com:proxy:CCF:/1SAI/TAS813A0CAF5E48F72CEACA:775\">\n\t<MessageHeader>\n\t\t<ID>9418820AC0A91EE8BCFB85E204AE4199</ID>\n\t\t<CreationDateTime>2018-11-29T13:39:25Z</CreationDateTime>\n\t\t<SenderBusinessSystemID>TP_SOAP_ID</SenderBusinessSystemID>\n\t\t<ReceiverBusinessSystemID>Company_CloudSOAP_ID</ReceiverBusinessSystemID>\n\t\t<SenderParty>\n\t\t\t<InternalID>TP_SOAP_ID</InternalID>\n\t\t</SenderParty>\n\t\t<RecipientParty>\n\t\t\t<InternalID>Company_CloudSOAP_ID</InternalID>\n\t\t</RecipientParty>\n\t</MessageHeader>\n\t<Order>\n\t\t<ActionCode>01</ActionCode>\n\t\t<PurchaseOrderID>4500000670</PurchaseOrderID>\n\t\t<PurchasingDocumentType>NB</PurchasingDocumentType>\n\t\t<PurchasingOrganization>1010</PurchasingOrganization>\n\t\t<PurchasingGroup>001</PurchasingGroup>\n\t\t<PurchaseOrderCreationDate>2018-11-29</PurchaseOrderCreationDate>\n\t\t<PurchaseOrderLastChangeDate>2018-11-29</PurchaseOrderLastChangeDate>\n\t\t<TransactionCurrency>EUR</TransactionCurrency>\n\t\t<BuyerCompanyCodeCurrency>EUR</BuyerCompanyCodeCurrency>\n\t\t<BuyerExchangeRate>1.0</BuyerExchangeRate>\n\t\t<BuyerVATRegistration>DE123456789</BuyerVATRegistration>\n\t\t<Party PartyType=\"SoldTo\">\n\t\t\t<BuyerPartyID>10300099</BuyerPartyID>\n\t\t\t<SupplierPartyID>10100090</SupplierPartyID>\n\t\t\t<Address>\n\t\t\t<StreetAddressName>Rosengasse 13 order</StreetAddressName>\n\t\t\t</Address>\n\t\t</Party>\n\t\t<Party PartyType=\"BillTo\">\n\t\t\t<BuyerPartyID>0010300099</BuyerPartyID>\n\t\t\t<Address>\n\t\t\t\t<AddressAdditionalName>EDI Supplier (2EJ)</AddressAdditionalName>\n\t\t\t\t<StreetName>Rosengasse 12</StreetName>\n\t\t\t\t<StreetAddressName>Rosengasse 12 order</StreetAddressName>\n\t\t\t\t<PostalCode>69126</PostalCode>\n\t\t\t\t<CityName>Heidelberg</CityName>\n\t\t\t\t<Country>DE</Country>\n\t\t\t\t<CorrespondenceLanguage>en</CorrespondenceLanguage>\n\t\t\t</Address>\n\t\t</Party>\n\t\t<Party PartyType=\"Supplier\">\n\t\t\t<BuyerPartyID>10300099</BuyerPartyID>\n\t\t\t<SupplierPartyID>10100090</SupplierPartyID>\n\t\t\t<Address>\n\t\t\t<StreetAddressName>Rosengasse 13 order</StreetAddressName>\n\t\t\t</Address>\n\t\t</Party>\n\t\t<PaymentTerms>\n\t\t\t<BuyerPaymentTermsID>0004</BuyerPaymentTermsID>\n\t\t\t<SupplierPaymentTermsID>0004</SupplierPaymentTermsID>\n\t\t</PaymentTerms>\n\t\t<OrderItem>\n\t\t\t<PurchaseOrderItemID>10</PurchaseOrderItemID>\n\t\t\t<PurchaseOrderItemCategory>0</PurchaseOrderItemCategory>\n\t\t\t<OrderItemText>Trading Good 0011,PD,Regular Proc.</OrderItemText>\n\t\t\t<RequestedQuantity unitCode=\"PCE\">1.0</RequestedQuantity>\n\t\t\t<Product>\n\t\t\t\t<BuyerProductID>TG0011</BuyerProductID>\n\t\t\t</Product>\n\t\t\t<ExpectedNetPrice>\n\t\t\t\t<Amount currencyCode=\"EUR\">50.0</Amount>\n\t\t\t\t<BaseQuantity unitCode=\"PCE\">1.0</BaseQuantity>\n\t\t\t</ExpectedNetPrice>\n\t\t\t<ExpectedNetAmount currencyCode=\"EUR\">50.0</ExpectedNetAmount>\n\t\t\t<Party PartyType=\"ShipTo\">\n\t\t\t\t<BuyerPartyID>1010</BuyerPartyID>\n\t\t\t\t<Address>\n\t\t\t\t\t<StreetName>Test 1 item</StreetName>\n\t\t\t\t\t<StreetAddressName>Test 1 item</StreetAddressName>\n\t\t\t\t\t<PostalCode>12345</PostalCode>\n\t\t\t\t\t<Country>DE</Country>\n\t\t\t\t\t<CorrespondenceLanguage>en</CorrespondenceLanguage>\n\t\t\t\t</Address>\n\t\t\t</Party>\n\t\t\t\n\t\t\t<Party PartyType=\"ShipTo\">\n\t\t\t\t<BuyerPartyID>1020</BuyerPartyID>\n\t\t\t\t<Address>\n\t\t\t\t\t<StreetName>Test 2 item</StreetName>\n\t\t\t\t\t<StreetAddressName>Test 2 item</StreetAddressName>\n\t\t\t\t\t<PostalCode>12345</PostalCode>\n\t\t\t\t\t<Country>DE</Country>\n\t\t\t\t\t<CorrespondenceLanguage>en</CorrespondenceLanguage>\n\t\t\t\t</Address>\n\t\t\t</Party>\n\t\t\t<ScheduleLine>\n\t\t\t\t<RequestedDeliveryDate>2018-11-29</RequestedDeliveryDate>\n\t\t\t\t<ScheduleLineOrderQuantity unitCode=\"PCE\">1.0</ScheduleLineOrderQuantity>\n\t\t\t</ScheduleLine>\n\t\t</OrderItem>\n\t\t<OrderItem>\n\t\t\t<PurchaseOrderItemID>20</PurchaseOrderItemID>\n\t\t\t<PurchaseOrderItemCategory>0</PurchaseOrderItemCategory>\n\t\t\t<OrderItemText>Trading Good 0011,PD,Regular Proc.</OrderItemText>\n\t\t\t<RequestedQuantity unitCode=\"PCE\">1.0</RequestedQuantity>\n\t\t\t<Product>\n\t\t\t\t<BuyerProductID>TG0011</BuyerProductID>\n\t\t\t</Product>\n\t\t\t<ExpectedNetPrice>\n\t\t\t\t<Amount currencyCode=\"EUR\">50.0</Amount>\n\t\t\t\t<BaseQuantity unitCode=\"PCE\">1.0</BaseQuantity>\n\t\t\t</ExpectedNetPrice>\n\t\t\t<ExpectedNetAmount currencyCode=\"EUR\">50.0</ExpectedNetAmount>\n\t\t\t<Party PartyType=\"ShipTo\">\n\t\t\t\t<BuyerPartyID>1010</BuyerPartyID>\n\t\t\t\t<Address>\n\t\t\t\t\t<StreetName>Test 2 111</StreetName>\n\t\t\t\t\t<PostalCode>12345</PostalCode>\n\t\t\t\t\t<Country>DE</Country>\n\t\t\t\t\t<CorrespondenceLanguage>en</CorrespondenceLanguage>\n\t\t\t\t</Address>\n\t\t\t</Party>\n\t\t\t<ScheduleLine>\n\t\t\t\t<RequestedDeliveryDate>2018-11-29</RequestedDeliveryDate>\n\t\t\t\t<ScheduleLineOrderQuantity unitCode=\"PCE\">1.0</ScheduleLineOrderQuantity>\n\t\t\t</ScheduleLine>\n\t\t</OrderItem>\n\t</Order>\n</n0:OrderRequest>",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "basic",
+          "basic": {
+            "username": "{{_.clientid}}",
+            "password": "{{_.clientsecret}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "01. b) Sales Order Response - Outbound",
+      "filename": "01. b) Sales Order Response - Outbound.bru",
+      "seq": 2,
+      "request": {
+        "url": "{{_.url}}/http/tpm/b2b/simulate",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "type_system",
+            "value": "SAP_IDoc",
+            "enabled": true
+          },
+          {
+            "name": "communication_protocol",
+            "value": "IDOC",
+            "enabled": true
+          },
+          {
+            "name": "message_content_type",
+            "value": "application/XML",
+            "enabled": true
+          },
+          {
+            "name": "SAP_EDI_Split_Sender_Per_Interchange",
+            "value": "false",
+            "enabled": true
+          },
+          {
+            "name": "Content-Type",
+            "value": "application/xml",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "xml",
+          "xml": "<ORDERS05>\n\t<IDOC BEGIN=\"1\">\n\t\t<EDI_DC40 SEGMENT=\"1\">\n\t\t\t<TABNAM>EDI_DC40</TABNAM>\n\t\t\t<MANDT>801</MANDT>\n\t\t\t<DOCNUM>0000000000019005</DOCNUM>\n\t\t\t<DOCREL>755</DOCREL>\n\t\t\t<STATUS>30</STATUS>\n\t\t\t<DIRECT>1</DIRECT>\n\t\t\t<OUTMOD>2</OUTMOD>\n\t\t\t<IDOCTYP>ORDERS05</IDOCTYP>\n\t\t\t<MESTYP>ORDRSP</MESTYP>\n\t\t\t<SNDPOR>SAPQKB</SNDPOR>\n\t\t\t<SNDPRT></SNDPRT>\n\t\t\t<SNDPRN>Company_IDOC_SOA_ID</SNDPRN>\n\t\t\t<RCVPOR>ORDCNF_CCF</RCVPOR>\n\t\t\t<RCVPRT></RCVPRT>\n\t\t\t<RCVPFC></RCVPFC>\n\t\t\t<RCVPRN>TP_IDOC_ID</RCVPRN>\n\t\t\t<CREDAT>20190909</CREDAT>\n\t\t\t<CRETIM>165815</CRETIM>\n\t\t\t<SERIAL>20190909165814</SERIAL>\n\t\t</EDI_DC40>\n\t\t<E1EDK01 SEGMENT=\"1\">\n\t\t\t<ACTION>004</ACTION>\n\t\t\t<CURCY>EUR</CURCY>\n\t\t\t<WKURS>1.00000</WKURS>\n\t\t\t<ZTERM>0004</ZTERM>\n\t\t\t<BELNR>0000001390</BELNR>\n\t\t\t<VSART>01</VSART>\n\t\t\t<VSART_BEZ>Standard</VSART_BEZ>\n\t\t\t<RECIPNT_NO>EDI-001</RECIPNT_NO>\n\t\t\t<KZAZU>X</KZAZU>\n\t\t</E1EDK01>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>006</QUALF>\n\t\t\t<ORGID>00</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>007</QUALF>\n\t\t\t<ORGID>10</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>008</QUALF>\n\t\t\t<ORGID>1010</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>012</QUALF>\n\t\t\t<ORGID>TA</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>002</IDDAT>\n\t\t\t<DATUM>20181218</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>012</IDDAT>\n\t\t\t<DATUM>20181218</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>024</IDDAT>\n\t\t\t<DATUM>20181218</DATUM>\n\t\t\t<UZEIT>154022</UZEIT>\n\t\t</E1EDK03>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>023</IDDAT>\n\t\t\t<DATUM>20181218</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDK04 SEGMENT=\"1\">\n\t\t\t<MWSKZ>A1</MWSKZ>\n\t\t\t<MSATZ>19.000</MSATZ>\n\t\t\t<MWSBT>9.50</MWSBT>\n\t\t</E1EDK04>\n\t\t<E1EDK02 SEGMENT=\"1\">\n\t\t\t<QUALF>001</QUALF>\n\t\t\t<BELNR>xpm</BELNR>\n\t\t\t<DATUM>00000000</DATUM>\n\t\t</E1EDK02>\n\t\t<E1EDK02 SEGMENT=\"1\">\n\t\t\t<QUALF>002</QUALF>\n\t\t\t<BELNR>0000001390</BELNR>\n\t\t\t<DATUM>20181218</DATUM>\n\t\t</E1EDK02>\n\t\t<E1EDK17 SEGMENT=\"1\">\n\t\t\t<QUALF>001</QUALF>\n\t\t\t<LKOND>EXW</LKOND>\n\t\t\t<LKTEXT>Ex Works</LKTEXT>\n\t\t</E1EDK17>\n\t\t<E1EDK17 SEGMENT=\"1\">\n\t\t\t<QUALF>002</QUALF>\n\t\t\t<LKTEXT>Walldorf</LKTEXT>\n\t\t</E1EDK17>\n\t\t<E1EDK18 SEGMENT=\"1\">\n\t\t\t<QUALF>001</QUALF>\n\t\t\t<TAGE>0</TAGE>\n\t\t\t<PRZNT>0.000</PRZNT>\n\t\t\t<ZTERM_TXT>Up to 31.12.2018 without deduction</ZTERM_TXT>\n\t\t</E1EDK18>\n\t\t<E1EDK18 SEGMENT=\"1\">\n\t\t\t<QUALF>002</QUALF>\n\t\t\t<TAGE>1</TAGE>\n\t\t\t<PRZNT>1.000</PRZNT>\n\t\t\t<ZTERM_TXT>Up to 31.12.2019 without deduction</ZTERM_TXT>\n\t\t</E1EDK18>\n\t\t\n\t\t<E1EDK36 SEGMENT=\"1\">\n\t\t\t<EXDATBI>20181218</EXDATBI>\n\t\t</E1EDK36>\n\t\t\n\t\t<E1EDP01 SEGMENT=\"1\">\n\t\t\t\t\t<POSEX>000010</POSEX>\n\t\t\t<ACTION>001</ACTION>\n\t\t\t<MENGE>1.000</MENGE>\n\t\t\t<MENEE>PCE</MENEE>\n\t\t\t<PMENE>PCE</PMENE>\n\t\t\t<VPREI>50.00</VPREI>\n\t\t\t<PEINH>1</PEINH>\n\t\t\t<NETWR>50.00</NETWR>\n\t\t\t<NTGEW>0.900</NTGEW>\n\t\t\t<GEWEI>KGM</GEWEI>\n\t\t\t<CURCY>EUR</CURCY>\n\t\t\t<MATKL>L001</MATKL>\n\t\t\t<BRGEW>1.000</BRGEW>\n\t\t\t<PSTYV>TAN</PSTYV>\n\t\t\t<WERKS>1010</WERKS>\n\t\t\t<VSTEL>1010</VSTEL>\n\t\t\t<FIXMG>X</FIXMG>\n\t\t\t<E1EDP02 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<BELNR>xpm</BELNR>\n\t\t\t</E1EDP02>\n\t\t\t<E1EDP02 SEGMENT=\"1\">\n\t\t\t\t<QUALF>002</QUALF>\n\t\t\t\t<BELNR>0000001390</BELNR>\n\t\t\t\t<ZEILE>000010</ZEILE>\n\t\t\t\t<DATUM>20181218</DATUM>\n\t\t\t</E1EDP02>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>025</IDDAT>\n\t\t\t\t<DATUM>20181218</DATUM>\n\t\t\t\t<UZEIT>154052</UZEIT>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>023</IDDAT>\n\t\t\t\t<DATUM>20181218</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>026</IDDAT>\n\t\t\t\t<DATUM>20181218</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP05 SEGMENT=\"1\">\n\t\t\t\t<ALCKZ>+</ALCKZ>\n\t\t\t\t<KOTXT>Gross Value</KOTXT>\n\t\t\t\t<BETRG>50.00</BETRG>\n\t\t\t\t<KRATE>50.00</KRATE>\n\t\t\t\t<UPRBS>       1</UPRBS>\n\t\t\t\t<MEAUN>PCE</MEAUN>\n\t\t\t\t<KOEIN>EUR</KOEIN>\n\t\t\t</E1EDP05>\n\t\t\t<E1EDP05 SEGMENT=\"1\">\n\t\t\t\t<ALCKZ>+</ALCKZ>\n\t\t\t\t<KOTXT>Net Value 1</KOTXT>\n\t\t\t\t<BETRG>50.00</BETRG>\n\t\t\t\t<KRATE>50.00</KRATE>\n\t\t\t\t<UPRBS>       1</UPRBS>\n\t\t\t\t<MEAUN>PCE</MEAUN>\n\t\t\t\t<KOEIN>EUR</KOEIN>\n\t\t\t</E1EDP05>\n\t\t\t<E1EDP20 SEGMENT=\"1\">\n\t\t\t\t<WMENG>1.000</WMENG>\n\t\t\t\t<EDATU>20181227</EDATU>\n\t\t\t</E1EDP20>\n\t\t\t<E1EDP19 SEGMENT=\"1\">\n\t\t\t\t<QUALF>002</QUALF>\n\t\t\t\t<IDTNR>TG0011</IDTNR>\n\t\t\t\t<KTEXT>Trading Good 0011,PD,Regular Proc.</KTEXT>\n\t\t\t\t<IDTNR_LONG>TG0011</IDTNR_LONG>\n\t\t\t</E1EDP19>\n\t\t\t<E1EDP19 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<IDTNR>TG001</IDTNR>\n\t\t\t</E1EDP19>\n\t\t</E1EDP01>\n\t\t\n\t\t<E1EDP01 SEGMENT=\"1\">\n\t\t\t\t\t<POSEX>000010</POSEX>\n\t\t\t<ACTION>001</ACTION>\n\t\t\t<MENGE>1.000</MENGE>\n\t\t\t<MENEE>PCE</MENEE>\n\t\t\t<PMENE>PCE</PMENE>\n\t\t\t<VPREI>50.00</VPREI>\n\t\t\t<PEINH>1</PEINH>\n\t\t\t<NETWR>50.00</NETWR>\n\t\t\t<NTGEW>0.900</NTGEW>\n\t\t\t<GEWEI>KGM</GEWEI>\n\t\t\t<CURCY>EUR</CURCY>\n\t\t\t<MATKL>L001</MATKL>\n\t\t\t<BRGEW>1.000</BRGEW>\n\t\t\t<PSTYV>TAN</PSTYV>\n\t\t\t<WERKS>1010</WERKS>\n\t\t\t<VSTEL>1010</VSTEL>\n\t\t\t<FIXMG></FIXMG>\n\t\t\t<E1EDP02 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<BELNR>xpm</BELNR>\n\t\t\t</E1EDP02>\n\t\t\t<E1EDP02 SEGMENT=\"1\">\n\t\t\t\t<QUALF>002</QUALF>\n\t\t\t\t<BELNR>0000001390</BELNR>\n\t\t\t\t<ZEILE>000010</ZEILE>\n\t\t\t\t<DATUM>20181218</DATUM>\n\t\t\t</E1EDP02>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>025</IDDAT>\n\t\t\t\t<DATUM>20181218</DATUM>\n\t\t\t\t<UZEIT>154052</UZEIT>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>023</IDDAT>\n\t\t\t\t<DATUM>20181218</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>026</IDDAT>\n\t\t\t\t<DATUM>20181218</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP05 SEGMENT=\"1\">\n\t\t\t\t<ALCKZ>+</ALCKZ>\n\t\t\t\t<KOTXT>Gross Value</KOTXT>\n\t\t\t\t<BETRG>50.00</BETRG>\n\t\t\t\t<KRATE>50.00</KRATE>\n\t\t\t\t<UPRBS>       1</UPRBS>\n\t\t\t\t<MEAUN>PCE</MEAUN>\n\t\t\t\t<KOEIN>EUR</KOEIN>\n\t\t\t</E1EDP05>\n\t\t\t<E1EDP05 SEGMENT=\"1\">\n\t\t\t\t<ALCKZ>+</ALCKZ>\n\t\t\t\t<KOTXT>Net Value 1</KOTXT>\n\t\t\t\t<BETRG>50.00</BETRG>\n\t\t\t\t<KRATE>50.00</KRATE>\n\t\t\t\t<UPRBS>       1</UPRBS>\n\t\t\t\t<MEAUN>PCE</MEAUN>\n\t\t\t\t<KOEIN>EUR</KOEIN>\n\t\t\t</E1EDP05>\n\t\t\t<E1EDP20 SEGMENT=\"1\">\n\t\t\t\t<WMENG>1.000</WMENG>\n\t\t\t\t<EDATU>20181227</EDATU>\n\t\t\t</E1EDP20>\n\t\t\t<E1EDP19 SEGMENT=\"1\">\n\t\t\t\t<QUALF>002</QUALF>\n\t\t\t\t<IDTNR>TG0011</IDTNR>\n\t\t\t\t<KTEXT>Trading Good 0011,PD,Regular Proc.</KTEXT>\n\t\t\t\t<IDTNR_LONG>TG0011</IDTNR_LONG>\n\t\t\t</E1EDP19>\n\t\t\t<E1EDP19 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<IDTNR>TG001</IDTNR>\n\t\t\t</E1EDP19>\n\t\t</E1EDP01>\n\t\t<E1EDS01 SEGMENT=\"1\">\n\t\t\t<SUMID>001</SUMID>\n\t\t\t<SUMME>1</SUMME>\n\t\t</E1EDS01>\n\t\t<E1EDS01 SEGMENT=\"1\">\n\t\t\t<SUMID>002</SUMID>\n\t\t\t<SUMME>50.00</SUMME>\n\t\t\t<SUNIT>EUR</SUNIT>\n\t\t</E1EDS01>\n\t</IDOC>\n</ORDERS05>",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "basic",
+          "basic": {
+            "username": "{{_.clientid}}",
+            "password": "{{_.clientsecret}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "02.) Delivery Notification - Outbound",
+      "filename": "02.) Delivery Notification - Outbound.bru",
+      "seq": 3,
+      "request": {
+        "url": "{{url}}/http/tpm/b2b/simulate",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "type_system",
+            "value": "SAP_IDoc",
+            "enabled": true
+          },
+          {
+            "name": "communication_protocol",
+            "value": "IDOC",
+            "enabled": true
+          },
+          {
+            "name": "message_content_type",
+            "value": "application/XML",
+            "enabled": true
+          },
+          {
+            "name": "SAP_EDI_Split_Sender_Per_Interchange",
+            "value": "false",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "xml",
+          "xml": "<DELVRY07>\n\t<IDOC BEGIN=\"1\">\n\t\t<EDI_DC40 SEGMENT=\"1\">\n\t\t\t<TABNAM>EDI_DC40</TABNAM>\n\t\t\t<MANDT>801</MANDT>\n\t\t\t<DOCNUM>0000000000019013</DOCNUM>\n\t\t\t<DOCREL>755</DOCREL>\n\t\t\t<STATUS>30</STATUS>\n\t\t\t<DIRECT>1</DIRECT>\n\t\t\t<OUTMOD>2</OUTMOD>\n\t\t\t<IDOCTYP>DELVRY07</IDOCTYP>\n\t\t\t<MESTYP>DESADV</MESTYP>\n\t\t\t<STDMES>DESADV</STDMES>\n\t\t\t<SNDPOR>SAPQKB</SNDPOR>\n\t\t\t<SNDPRT></SNDPRT>\n\t\t\t<SNDPRN>Company_IDOC_SOA_ID</SNDPRN>\n\t\t\t<RCVPOR>DELREQ_CCF</RCVPOR>\n\t\t\t<RCVPRT></RCVPRT>\n\t\t\t<RCVPRN>TP_IDOC_ID</RCVPRN>\n\t\t\t<CREDAT>20190909</CREDAT>\n\t\t\t<CRETIM>173258</CRETIM>\n\t\t\t<SERIAL>20181218154720</SERIAL>\n\t\t</EDI_DC40>\n\t\t<E1EDL20 SEGMENT=\"1\">\n\t\t\t<VBELN>0080000849</VBELN>\n\t\t\t<VSTEL>3010</VSTEL>\n\t\t\t<VKORG>3010</VKORG>\n\t\t\t<INCO1>EXW</INCO1>\n\t\t\t<INCO2>Walldorf</INCO2>\n\t\t\t<VSBED>01</VSBED>\n\t\t\t<BTGEW>1.000</BTGEW>\n\t\t\t<NTGEW>0.900</NTGEW>\n\t\t\t<GEWEI>KGM</GEWEI>\n\t\t\t<VOLUM>0.000</VOLUM>\n\t\t\t<ANZPK>00000</ANZPK>\n\t\t\t<PARID>10300085</PARID>\n\t\t\t<PODAT>20181218</PODAT>\n\t\t\t<POTIM>154721</POTIM>\n\t\t\t<INCO2_L>Walldorf</INCO2_L>\n\t\t\t<E1EDL22 SEGMENT=\"1\">\n\t\t\t\t<VSTEL_BEZ>Plant 1 AU</VSTEL_BEZ>\n\t\t\t\t<VKORG_BEZ>Dom. Sales Org DE</VKORG_BEZ>\n\t\t\t\t<INCO1_BEZ>Ex Works</INCO1_BEZ>\n\t\t\t\t<VSBED_BEZ>Standard</VSBED_BEZ>\n\t\t\t</E1EDL22>\n\t\t\t<E1EDL21 SEGMENT=\"1\">\n\t\t\t\t<LFART>LF</LFART>\n\t\t\t\t<LPRIO>00</LPRIO>\n\t\t\t\t<KDGRP>01</KDGRP>\n\t\t\t\t<TRAGR>0001</TRAGR>\n\t\t\t\t<E1EDL23 SEGMENT=\"1\">\n\t\t\t\t\t<LFART_BEZ>Delivery</LFART_BEZ>\n\t\t\t\t\t<KDGRP_BEZ>Customer Group 01</KDGRP_BEZ>\n\t\t\t\t\t<TRAGR_BEZ>On pallets</TRAGR_BEZ>\n\t\t\t\t</E1EDL23>\n\t\t\t</E1EDL21>\n\t\t\t<E1EDL18 SEGMENT=\"1\">\n\t\t\t\t<QUALF>ORI</QUALF>\n\t\t\t</E1EDL18>\n\t\t\t<E1ADRM1 SEGMENT=\"1\">\n\t\t\t\t<PARTNER_Q>AG</PARTNER_Q>\n\t\t\t\t<PARTNER_ID>EDI-001</PARTNER_ID>\n\t\t\t\t<LANGUAGE>EN</LANGUAGE>\n\t\t\t\t<FORMOFADDR>Company</FORMOFADDR>\n\t\t\t\t<NAME1>EDI Customer (2EL)</NAME1>\n\t\t\t\t<STREET1>Rosengasse 7</STREET1>\n\t\t\t\t<POSTL_COD1>69126</POSTL_COD1>\n\t\t\t\t<CITY1>Heidelberg</CITY1>\n\t\t\t\t<COUNTRY1>DE</COUNTRY1>\n\t\t\t\t<E1ADRE1 SEGMENT=\"1\">\n\t\t\t\t\t<EXTEND_Q>300</EXTEND_Q>\n\t\t\t\t\t<EXTEND_D>10300085</EXTEND_D>\n\t\t\t\t</E1ADRE1>\n\t\t\t</E1ADRM1>\n\t\t\t<E1ADRM1 SEGMENT=\"1\">\n\t\t\t\t<PARTNER_Q>WE</PARTNER_Q>\n\t\t\t\t<PARTNER_ID>EDI-001</PARTNER_ID>\n\t\t\t\t<LANGUAGE>EN</LANGUAGE>\n\t\t\t\t<FORMOFADDR>Company</FORMOFADDR>\n\t\t\t\t<NAME1>EDI Customer (2EL)</NAME1>\n\t\t\t\t<STREET1>Rosengasse 7</STREET1>\n\t\t\t\t<POSTL_COD1>69126</POSTL_COD1>\n\t\t\t\t<CITY1>Heidelberg</CITY1>\n\t\t\t\t<COUNTRY1>DE</COUNTRY1>\n\t\t\t\t<E1ADRE1 SEGMENT=\"1\">\n\t\t\t\t\t<EXTEND_Q>300</EXTEND_Q>\n\t\t\t\t\t<EXTEND_D>10300085</EXTEND_D>\n\t\t\t\t</E1ADRE1>\n\t\t\t</E1ADRM1>\n\t\t\t<E1ADRM1 SEGMENT=\"1\">\n\t\t\t\t<PARTNER_Q>OSP</PARTNER_Q>\n\t\t\t\t<PARTNER_ID>3010</PARTNER_ID>\n\t\t\t\t<LANGUAGE>DE</LANGUAGE>\n\t\t\t\t<NAME1>Shipping Point 1010 - Address Name 1</NAME1>\n\t\t\t\t<STREET1>Neurottstr. 16</STREET1>\n\t\t\t\t<HOUSE_SUPL>16</HOUSE_SUPL>\n\t\t\t\t<POSTL_COD1>69190</POSTL_COD1>\n\t\t\t\t<CITY1>Walldorf</CITY1>\n\t\t\t\t<E_MAIL>noreply@sap.com</E_MAIL>\n\t\t\t\t<COUNTRY1>DE</COUNTRY1>\n\t\t\t\t<REGION>BW</REGION>\n\t\t\t</E1ADRM1>\n\t\t\t<E1ADRM1 SEGMENT=\"1\">\n\t\t\t\t<PARTNER_Q>OSO</PARTNER_Q>\n\t\t\t\t<PARTNER_ID>3010</PARTNER_ID>\n\t\t\t\t<LANGUAGE>DE</LANGUAGE>\n\t\t\t\t<NAME1>Sales Organization 1010 - Address Name 1</NAME1>\n\t\t\t\t<STREET1>Dietmar-Hopp-Allee 16</STREET1>\n\t\t\t\t<HOUSE_SUPL>16</HOUSE_SUPL>\n\t\t\t\t<POSTL_COD1>69190</POSTL_COD1>\n\t\t\t\t<CITY1>Walldorf</CITY1>\n\t\t\t\t<E_MAIL>noreply@sap.com</E_MAIL>\n\t\t\t\t<COUNTRY1>DE</COUNTRY1>\n\t\t\t\t<REGION>BW</REGION>\n\t\t\t</E1ADRM1>\n\t\t\t<E1EDT13 SEGMENT=\"1\">\n\t\t\t\t<QUALF>006</QUALF>\n\t\t\t\t<NTANF>20240205</NTANF>\n\t\t\t\t<NTANZ>000000</NTANZ>\n\t\t\t\t<NTEND>20240205</NTEND>\n\t\t\t\t<NTENZ>000000</NTENZ>\n\t\t\t\t<TZONE_BEG>CET</TZONE_BEG>\n\t\t\t\t<ISDD>20181218</ISDD>\n\t\t\t\t<ISDZ>000000</ISDZ>\n\t\t\t\t<IEDD>20181218</IEDD>\n\t\t\t\t<IEDZ>000000</IEDZ>\n\t\t\t\t<TZONE_END>CET</TZONE_END>\n\t\t\t</E1EDT13>\n\t\t\t<E1EDT13 SEGMENT=\"1\">\n\t\t\t\t<QUALF>003</QUALF>\n\t\t\t\t<NTANF>20240205</NTANF>\n\t\t\t\t<NTANZ>000000</NTANZ>\n\t\t\t\t<NTEND>20240205</NTEND>\n\t\t\t\t<NTENZ>000000</NTENZ>\n\t\t\t\t<TZONE_BEG>CET</TZONE_BEG>\n\t\t\t\t<ISDD>00000000</ISDD>\n\t\t\t\t<ISDZ>000000</ISDZ>\n\t\t\t\t<IEDD>00000000</IEDD>\n\t\t\t\t<IEDZ>000000</IEDZ>\n\t\t\t</E1EDT13>\n\t\t\t<E1EDT13 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<NTANF>20240205</NTANF>\n\t\t\t\t<NTANZ>000000</NTANZ>\n\t\t\t\t<NTEND>20240205</NTEND>\n\t\t\t\t<NTENZ>000000</NTENZ>\n\t\t\t\t<TZONE_BEG>CET</TZONE_BEG>\n\t\t\t\t<ISDD>00000000</ISDD>\n\t\t\t\t<ISDZ>000000</ISDZ>\n\t\t\t\t<IEDD>00000000</IEDD>\n\t\t\t\t<IEDZ>000000</IEDZ>\n\t\t\t</E1EDT13>\n\t\t\t<E1EDT13 SEGMENT=\"1\">\n\t\t\t\t<QUALF>007</QUALF>\n\t\t\t\t<NTANF>20240205</NTANF>\n\t\t\t\t<NTANZ>000000</NTANZ>\n\t\t\t\t<NTEND>20240205</NTEND>\n\t\t\t\t<NTENZ>000000</NTENZ>\n\t\t\t\t<TZONE_BEG>UTC+8</TZONE_BEG>\n\t\t\t\t<ISDD>00000000</ISDD>\n\t\t\t\t<ISDZ>000000</ISDZ>\n\t\t\t\t<IEDD>00000000</IEDD>\n\t\t\t\t<IEDZ>000000</IEDZ>\n\t\t\t</E1EDT13>\n\t\t\t<E1EDT13 SEGMENT=\"1\">\n\t\t\t\t<QUALF>010</QUALF>\n\t\t\t\t<NTANF>20240205</NTANF>\n\t\t\t\t<NTANZ>000000</NTANZ>\n\t\t\t\t<NTEND>20240205</NTEND>\n\t\t\t\t<NTENZ>000000</NTENZ>\n\t\t\t\t<TZONE_BEG>PST</TZONE_BEG>\n\t\t\t\t<ISDD>00000000</ISDD>\n\t\t\t\t<ISDZ>000000</ISDZ>\n\t\t\t\t<IEDD>00000000</IEDD>\n\t\t\t\t<IEDZ>000000</IEDZ>\n\t\t\t</E1EDT13>\n\t\t\t<E1EDT13 SEGMENT=\"1\">\n\t\t\t\t<QUALF>015</QUALF>\n\t\t\t\t<NTANF>20240205</NTANF>\n\t\t\t\t<NTANZ>000000</NTANZ>\n\t\t\t\t<NTEND>20240205</NTEND>\n\t\t\t\t<NTENZ>000000</NTENZ>\n\t\t\t\t<ISDD>00000000</ISDD>\n\t\t\t\t<ISDZ>000000</ISDZ>\n\t\t\t\t<IEDD>00000000</IEDD>\n\t\t\t\t<IEDZ>000000</IEDZ>\n\t\t\t</E1EDT13>\n\t\t\t<E1EDL33 SEGMENT=\"1\">\n\t\t\t\t<ALAND>DE</ALAND>\n\t\t\t</E1EDL33>\n\t\t\t<E1EDL24 SEGMENT=\"1\">\n\t\t\t\t<POSNR>000010</POSNR>\n\t\t\t\t<MATNR>TG-D120_AU</MATNR>\n\t\t\t\t<MATWA>TG-D120_AU</MATWA>\n\t\t\t\t<ARKTX>AUSTRALIA</ARKTX>\n\t\t\t\t<MATKL>L001</MATKL>\n\t\t\t\t<WERKS>3010</WERKS>\n\t\t\t\t<LGORT>301A</LGORT>\n\t\t\t\t<KDMAT>TG-D120_AU </KDMAT>\n\t\t\t\t<LFIMG>1.000</LFIMG>\n\t\t\t\t<VRKME>PCE</VRKME>\n\t\t\t\t<LGMNG>1.000</LGMNG>\n\t\t\t\t<MEINS>PCE</MEINS>\n\t\t\t\t<NTGEW>0.900</NTGEW>\n\t\t\t\t<BRGEW>1.000</BRGEW>\n\t\t\t\t<GEWEI>KGM</GEWEI>\n\t\t\t\t<VOLUM>0.000</VOLUM>\n\t\t\t\t<LADGR>0001</LADGR>\n\t\t\t\t<TRAGR>0001</TRAGR>\n\t\t\t\t<VTWEG>10</VTWEG>\n\t\t\t\t<SPART>00</SPART>\n\t\t\t\t<GRKOR>000</GRKOR>\n\t\t\t\t<KDMAT35>TG-D120_AU</KDMAT35>\n\t\t\t\t<POSEX>000000</POSEX>\n\t\t\t\t<VFDAT>20241119</VFDAT>\n\t\t\t\t<EXPIRY_DATE_EXT>0</EXPIRY_DATE_EXT>\n\t\t\t\t<VGBEL>0000001390</VGBEL>\n\t\t\t\t<VGPOS>000010</VGPOS>\n\t\t\t\t<ORMNG>         1.000</ORMNG>\n\t\t\t\t<EXPIRY_DATE_EXT_B>0</EXPIRY_DATE_EXT_B>\n\t\t\t\t<E1EDL25 SEGMENT=\"1\">\n\t\t\t\t\t<LGORT_BEZ>Std. storage 1</LGORT_BEZ>\n\t\t\t\t\t<LADGR_BEZ>Crane</LADGR_BEZ>\n\t\t\t\t\t<TRAGR_BEZ>On pallets</TRAGR_BEZ>\n\t\t\t\t\t<VTWEG_BEZ>Direct Sales</VTWEG_BEZ>\n\t\t\t\t\t<SPART_BEZ>Product Division 00</SPART_BEZ>\n\t\t\t\t</E1EDL25>\n\t\t\t\t<E1EDL26 SEGMENT=\"1\">\n\t\t\t\t\t<PSTYV>TAN</PSTYV>\n\t\t\t\t\t<MATKL>L001</MATKL>\n\t\t\t\t\t<UMVKZ>1</UMVKZ>\n\t\t\t\t\t<UMVKN>1</UMVKN>\n\t\t\t\t\t<UEBTO>0.0</UEBTO>\n\t\t\t\t\t<UNTTO>0.0</UNTTO>\n\t\t\t\t\t<MATNR_LONG>TG-D120_AU </MATNR_LONG>\n\t\t\t\t\t<MATWA_LONG>TG-D120_AU </MATWA_LONG>\n\t\t\t\t\t<E1EDL27 SEGMENT=\"1\">\n\t\t\t\t\t\t<PSTYV_BEZ>Standard Item</PSTYV_BEZ>\n\t\t\t\t\t\t<MATKL_BEZ>Trading Materials</MATKL_BEZ>\n\t\t\t\t\t\t<WERKS_BEZ>Plant 1 DE</WERKS_BEZ>\n\t\t\t\t\t</E1EDL27>\n\t\t\t\t</E1EDL26>\n\t\t\t\t<E1EDL43 SEGMENT=\"1\">\n\t\t\t\t\t<QUALF>C</QUALF>\n\t\t\t\t\t<BELNR>0000001390</BELNR>\n\t\t\t\t\t<POSNR>000010</POSNR>\n\t\t\t\t\t<DATUM>20181218</DATUM>\n\t\t\t\t</E1EDL43>\n\t\t\t\t<E1EDL41 SEGMENT=\"1\">\n\t\t\t\t\t<QUALI>001</QUALI>\n\t\t\t\t\t<BSTNR>4500003532</BSTNR>\n\t\t\t\t\t<BSTDT>00000000</BSTDT>\n\t\t\t\t\t<POSEX>000010</POSEX>\n\t\t\t\t</E1EDL41>\n\t\t\t</E1EDL24>\n\t\t</E1EDL20>\n\t</IDOC>\n</DELVRY07>",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "basic",
+          "basic": {
+            "username": "{{clientid}}",
+            "password": "{{clientsecret}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "03.) Invoice - Outbound",
+      "filename": "03.) Invoice - Outbound.bru",
+      "seq": 4,
+      "request": {
+        "url": "{{url}}/http/tpm/b2b/simulate",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "type_system",
+            "value": "SAP_IDoc",
+            "enabled": true
+          },
+          {
+            "name": "communication_protocol",
+            "value": "IDOC",
+            "enabled": true
+          },
+          {
+            "name": "message_content_type",
+            "value": "application/XML",
+            "enabled": true
+          },
+          {
+            "name": "SAP_EDI_Split_Sender_Per_Interchange",
+            "value": "false",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "xml",
+          "xml": "<INVOIC02>\n\t<IDOC BEGIN=\"1\">\n\t\t<EDI_DC40 SEGMENT=\"1\">\n\t\t\t<TABNAM>EDI_DC40</TABNAM>\n\t\t\t<MANDT>715</MANDT>\n\t\t\t<DOCNUM>0000000000130006</DOCNUM>\n\t\t\t<DOCREL>755</DOCREL>\n\t\t\t<STATUS>30</STATUS>\n\t\t\t<DIRECT>1</DIRECT>\n\t\t\t<OUTMOD>2</OUTMOD>\n\t\t\t<IDOCTYP>INVOIC02</IDOCTYP>\n\t\t\t<MESTYP>INVOIC</MESTYP>\n\t\t\t<SNDPOR>SAPQKX</SNDPOR>\n\t\t\t<SNDPRT></SNDPRT>\n\t\t\t<SNDPRN>Company_IDOC_SOA_ID</SNDPRN>\n\t\t\t<RCVPOR>INVREQ_CCF</RCVPOR>\n\t\t\t<RCVPRT></RCVPRT>\n\t\t\t<RCVPRN>TP_IDOC_ID</RCVPRN>\n\t\t\t<CREDAT>20181026</CREDAT>\n\t\t\t<CRETIM>142036</CRETIM>\n\t\t\t<SERIAL>20181026142033</SERIAL>\n\t\t</EDI_DC40>\n\t\t<E1EDK01 SEGMENT=\"1\">\n\t\t\t<CURCY>EUR</CURCY>\n\t\t\t<HWAER>EUR</HWAER>\n\t\t\t<WKURS>1.00000</WKURS>\n\t\t\t<ZTERM>0004</ZTERM>\n\t\t\t<EIGENUINR>DE123456789</EIGENUINR>\n\t\t\t<BSART>INVO</BSART>\n\t\t\t<BELNR>0090001519</BELNR>\n\t\t\t<NTGEW>8.100</NTGEW>\n\t\t\t<BRGEW>9.000</BRGEW>\n\t\t\t<GEWEI>KGM</GEWEI>\n\t\t\t<FKART_RL>LR</FKART_RL>\n\t\t\t<RECIPNT_NO>0010100090</RECIPNT_NO>\n\t\t\t<FKTYP>L</FKTYP>\n\t\t</E1EDK01>\n\t\t<E1EDKA1 SEGMENT=\"1\">\n\t\t\t<PARVW>RS</PARVW>\n\t\t\t<PARTN>10300098</PARTN>\n\t\t\t<LIFNR>0010100090</LIFNR>\n\t\t\t<NAME1>Sales Organization 1010 - Address N</NAME1>\n\t\t\t<STRAS>Dietmar-Hopp-Allee 16</STRAS>\n\t\t\t<ORT01>Walldorf</ORT01>\n\t\t\t<PSTLZ>69190</PSTLZ>\n\t\t\t<LAND1>DE</LAND1>\n\t\t\t<SPRAS>D</SPRAS>\n\t\t\t<REGIO>BW</REGIO>\n\t\t\t<BNAME>SCHRAMMP</BNAME>\n\t\t\t<PAORG>1010</PAORG>\n\t\t</E1EDKA1>\n\t\t<E1EDKA1 SEGMENT=\"1\">\n\t\t\t<PARVW>SP</PARVW>\n\t\t\t<PARTN>0010100090</PARTN>\n\t\t\t<LIFNR>10300098</LIFNR>\n\t\t\t<NAME1>EDI Customer (2EL)</NAME1>\n\t\t\t<STRAS>Rosengasse 7</STRAS>\n\t\t\t<ORT01>Heidelberg</ORT01>\n\t\t\t<PSTLZ>69126</PSTLZ>\n\t\t\t<LAND1>DE</LAND1>\n\t\t\t<SPRAS>E</SPRAS>\n\t\t\t<ANRED>Gesellschaft</ANRED>\n\t\t\t<SPRAS_ISO>EN</SPRAS_ISO>\n\t\t</E1EDKA1>\n\t\t<E1EDKA1 SEGMENT=\"1\">\n\t\t\t<PARVW>RE</PARVW>\n\t\t\t<PARTN>0010100090</PARTN>\n\t\t\t<LIFNR>0010300098</LIFNR>\n\t\t\t<NAME1>EDI Customer (2EL)</NAME1>\n\t\t\t<NAME2>EDI Supplier (2EJ)</NAME2>\n\t\t\t<STRAS>Rosengasse 7</STRAS>\n\t\t\t<ORT01>Walldorf</ORT01>\n\t\t\t<PSTLZ>69126</PSTLZ>\n\t\t\t<LAND1>DE</LAND1>\n\t\t\t<SPRAS>E</SPRAS>\n\t\t\t<ANRED>Gesellschaft</ANRED>\n\t\t\t<SPRAS_ISO>EN</SPRAS_ISO>\n\t\t</E1EDKA1>\n\t\t<E1EDKA1 SEGMENT=\"1\">\n\t\t\t<PARVW>RG</PARVW>\n\t\t\t<PARTN>0010100090</PARTN>\n\t\t\t<LIFNR>10300098</LIFNR>\n\t\t\t<NAME1>EDI Customer (2EL)</NAME1>\n\t\t\t<STRAS>Rosengasse 7</STRAS>\n\t\t\t<ORT01>Heidelberg</ORT01>\n\t\t\t<PSTLZ>69126</PSTLZ>\n\t\t\t<LAND1>DE</LAND1>\n\t\t\t<SPRAS>E</SPRAS>\n\t\t\t<ANRED>Gesellschaft</ANRED>\n\t\t\t<SPRAS_ISO>EN</SPRAS_ISO>\n\t\t</E1EDKA1>\n\t\t<E1EDKA1 SEGMENT=\"1\">\n\t\t\t<PARVW>WE</PARVW>\n\t\t\t<LIFNR>1010</LIFNR>\n\t\t\t<NAME1>Company Code 1010 - Address Name 1</NAME1>\n\t\t\t<STRAS>Dietmar-Hopp-Allee 16</STRAS>\n\t\t\t<PFACH>7820</PFACH>\n\t\t\t<ORT01>Walldorf</ORT01>\n\t\t\t<COUNC>BW</COUNC>\n\t\t\t<PSTLZ>69190</PSTLZ>\n\t\t\t<PSTL2>69190</PSTL2>\n\t\t\t<LAND1>DE</LAND1>\n\t\t\t<ORT02>Industriegebiet</ORT02>\n\t\t\t<REGIO>BW</REGIO>\n\t\t</E1EDKA1>\n\t\t<E1EDKA1 SEGMENT=\"1\">\n\t\t\t<PARVW>LF</PARVW>\n\t\t\t<LIFNR>1010</LIFNR>\n\t\t\t<NAME1>Company Code 1010 - Address Name 1</NAME1>\n\t\t\t<STRAS>Dietmar-Hopp-Allee 16</STRAS>\n\t\t\t<PFACH>7820</PFACH>\n\t\t\t<ORT01>Walldorf</ORT01>\n\t\t\t<COUNC>BW</COUNC>\n\t\t\t<PSTLZ>69190</PSTLZ>\n\t\t\t<PSTL2>69190</PSTL2>\n\t\t\t<LAND1>DE</LAND1>\n\t\t\t<ORT02>Industriegebiet</ORT02>\n\t\t\t<REGIO>BW</REGIO>\n\t\t</E1EDKA1>\n\t\t<E1EDK02 SEGMENT=\"1\">\n\t\t\t<QUALF>009</QUALF>\n\t\t\t<BELNR>0090001519</BELNR>\n\t\t\t<DATUM>20181026</DATUM>\n\t\t</E1EDK02>\n\t\t<E1EDK02 SEGMENT=\"1\">\n\t\t\t<QUALF>001</QUALF>\n\t\t\t<BELNR>4500003561</BELNR>\n\t\t\t<DATUM>20181026</DATUM>\n\t\t</E1EDK02>\n\t\t<E1EDK02 SEGMENT=\"1\">\n\t\t\t<QUALF>002</QUALF>\n\t\t\t<BELNR>0000005829</BELNR>\n\t\t\t<DATUM>20181026</DATUM>\n\t\t</E1EDK02>\n\t\t<E1EDK02 SEGMENT=\"1\">\n\t\t\t<QUALF>012</QUALF>\n\t\t\t<BELNR>0080003710</BELNR>\n\t\t\t<DATUM>20181026</DATUM>\n\t\t</E1EDK02>\n\t\t<E1EDK02 SEGMENT=\"1\">\n\t\t\t<QUALF>087</QUALF>\n\t\t\t<BELNR>0090001519</BELNR>\n\t\t</E1EDK02>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>026</IDDAT>\n\t\t\t<DATUM>20181026</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>001</IDDAT>\n\t\t\t<DATUM>20181026</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>022</IDDAT>\n\t\t\t<DATUM>20181026</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>012</IDDAT>\n\t\t\t<DATUM>20181026</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>011</IDDAT>\n\t\t\t<DATUM>20181026</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>024</IDDAT>\n\t\t\t<DATUM>20181031</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>028</IDDAT>\n\t\t\t<DATUM>20181031</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>048</IDDAT>\n\t\t\t<DATUM>20181026</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDK04 SEGMENT=\"1\">\n\t\t\t<MWSKZ>A1</MWSKZ>\n\t\t\t<MSATZ>19.000</MSATZ>\n\t\t\t<MWSBT>85.50</MWSBT>\n\t\t</E1EDK04>\n\t\t<E1EDK17 SEGMENT=\"1\">\n\t\t\t<QUALF>001</QUALF>\n\t\t\t<LKOND>EXW</LKOND>\n\t\t\t<LKTEXT>Ab Werk</LKTEXT>\n\t\t</E1EDK17>\n\t\t<E1EDK17 SEGMENT=\"1\">\n\t\t\t<QUALF>002</QUALF>\n\t\t\t<LKOND>EXW</LKOND>\n\t\t\t<LKTEXT>Walldorf</LKTEXT>\n\t\t</E1EDK17>\n\t\t<E1EDK18 SEGMENT=\"1\">\n\t\t\t<QUALF>001</QUALF>\n\t\t\t<TAGE>0</TAGE>\n\t\t\t<PRZNT>0</PRZNT>\n\t\t\t<ZTERM_TXT>Bis zum 31.10.2018 ohne Abzug</ZTERM_TXT>\n\t\t</E1EDK18>\n\t\t<E1EDK18 SEGMENT=\"1\">\n\t\t\t<QUALF>005</QUALF>\n\t\t\t<ZTERM_TXT>Ab Monatsende</ZTERM_TXT>\n\t\t</E1EDK18>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEFFYYY</BRNUM>\n\t\t\t<BNAME>ERP_FIN</BNAME>\n\t\t\t<ACNUM>DE45999910010005950688</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE45999910010005950688</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEFFYYY</BRNUM>\n\t\t\t<BNAME>ERP_FIN</BNAME>\n\t\t\t<ACNUM>DE13999910010004030858</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE13999910010004030858</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEBB160</BRNUM>\n\t\t\t<BNAME>ERP FINANCE - Test Bank</BNAME>\n\t\t\t<ACNUM>DE46990620690000584272</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE46990620690000584272</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEBB160</BRNUM>\n\t\t\t<BNAME>ERP FINANCE - Test Bank</BNAME>\n\t\t\t<ACNUM>DE42990271520004877417</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE42990271520004877417</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEBB160</BRNUM>\n\t\t\t<BNAME>ERP FINANCE - Test Bank</BNAME>\n\t\t\t<ACNUM>DE41993109070009275788</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE41993109070009275788</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEBB160</BRNUM>\n\t\t\t<BNAME>ERP FINANCE - Test Bank</BNAME>\n\t\t\t<ACNUM>DE06991467790769440200</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE06991467790769440200</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEFFYYY</BRNUM>\n\t\t\t<BNAME>ERP_FIN</BNAME>\n\t\t\t<ACNUM>DE76999910010005126988</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE76999910010005126988</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEBB160</BRNUM>\n\t\t\t<BNAME>ERP FINANCE - Test Bank</BNAME>\n\t\t\t<ACNUM>DE41996725090958669600</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE41996725090958669600</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEFFYYY</BRNUM>\n\t\t\t<BNAME>ERP_FIN</BNAME>\n\t\t\t<ACNUM>DE52999910010008237434</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE52999910010008237434</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEBB160</BRNUM>\n\t\t\t<BNAME>ERP FINANCE - Test Bank</BNAME>\n\t\t\t<ACNUM>DE53996110620005263294</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE53996110620005263294</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEFFYYY</BRNUM>\n\t\t\t<BNAME>ERP_FIN</BNAME>\n\t\t\t<ACNUM>DE84999910010004417289</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE84999910010004417289</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEFFYYY</BRNUM>\n\t\t\t<BNAME>ERP_FIN</BNAME>\n\t\t\t<ACNUM>DE02999910010004917539</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE02999910010004917539</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEBB160</BRNUM>\n\t\t\t<BNAME>ERP FINANCE - Test Bank</BNAME>\n\t\t\t<ACNUM>DE03994928560000590861</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE03994928560000590861</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEFFYYY</BRNUM>\n\t\t\t<BNAME>ERP_FIN</BNAME>\n\t\t\t<ACNUM>DE54999910010004485729</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE54999910010004485729</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEFFYYY</BRNUM>\n\t\t\t<BNAME>ERP_FIN</BNAME>\n\t\t\t<ACNUM>DE76999910010001969638</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE76999910010001969638</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK28 SEGMENT=\"1\">\n\t\t\t<BCOUN>DE</BCOUN>\n\t\t\t<BRNUM>DEUTDEFFYYY</BRNUM>\n\t\t\t<BNAME>ERP_FIN</BNAME>\n\t\t\t<ACNUM>DE13999910010003367863</ACNUM>\n\t\t\t<ACNAM>Sales Organization 1010 - Address N</ACNAM>\n\t\t\t<BIBAN>DE13999910010003367863</BIBAN>\n\t\t</E1EDK28>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>008</QUALF>\n\t\t\t<ORGID>1010</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>007</QUALF>\n\t\t\t<ORGID>10</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>006</QUALF>\n\t\t\t<ORGID>00</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>015</QUALF>\n\t\t\t<ORGID>F2</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>003</QUALF>\n\t\t\t<ORGID>1010</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>021</QUALF>\n\t\t\t<ORGID>M</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDP01 SEGMENT=\"1\">\n\t\t\t<POSEX>000010</POSEX>\n\t\t\t<MENGE>5.000</MENGE>\n\t\t\t<MENEE>PCE</MENEE>\n\t\t\t<NTGEW>4.500</NTGEW>\n\t\t\t<GEWEI>KGM</GEWEI>\n\t\t\t<BRGEW>5.000</BRGEW>\n\t\t\t<PSTYV>TAN</PSTYV>\n\t\t\t<WERKS>1010</WERKS>\n\t\t\t<E1EDP02 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<BELNR>4500003561</BELNR>\n\t\t\t\t<ZEILE>000010</ZEILE>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t\t<BSARK>DFUE</BSARK>\n\t\t\t</E1EDP02>\n\t\t\t<E1EDP02 SEGMENT=\"1\">\n\t\t\t\t<QUALF>002</QUALF>\n\t\t\t\t<BELNR>0000005829</BELNR>\n\t\t\t\t<ZEILE>000010</ZEILE>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP02>\n\t\t\t<E1EDP02 SEGMENT=\"1\">\n\t\t\t\t<QUALF>016</QUALF>\n\t\t\t\t<BELNR>0080003710</BELNR>\n\t\t\t\t<ZEILE>000010</ZEILE>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP02>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>029</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>001</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>011</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>025</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>027</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>023</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>022</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP19 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<IDTNR>TG0011</IDTNR>\n\t\t\t</E1EDP19>\n\t\t\t<E1EDP19 SEGMENT=\"1\">\n\t\t\t\t<QUALF>002</QUALF>\n\t\t\t\t<IDTNR>TG0011</IDTNR>\n\t\t\t\t<KTEXT>Trading Good 0011,PD,Regular Proc.</KTEXT>\n\t\t\t\t<IDTNR_LONG>TG0011</IDTNR_LONG>\n\t\t\t</E1EDP19>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>004</QUALF>\n\t\t\t\t<BETRG>297.50</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>003</QUALF>\n\t\t\t\t<BETRG>250.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>010</QUALF>\n\t\t\t\t<BETRG>250.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>011</QUALF>\n\t\t\t\t<BETRG>250.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>012</QUALF>\n\t\t\t\t<BETRG>250.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<BETRG>50.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>002</QUALF>\n\t\t\t\t<BETRG>250.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDPA1 SEGMENT=\"1\">\n\t\t\t\t<PARVW>WE</PARVW>\n\t\t\t\t<PARTN>0010100090</PARTN>\n\t\t\t\t<LIFNR>1010</LIFNR>\n\t\t\t\t<NAME1>Plant 1010 - Address Name 1</NAME1>\n\t\t\t\t<STRAS>Rosengasse 7</STRAS>\n\t\t\t\t<ORT01>Heidelberg</ORT01>\n\t\t\t\t<PSTLZ>69190</PSTLZ>\n\t\t\t\t<LAND1>DE</LAND1>\n\t\t\t\t<SPRAS>D</SPRAS>\n\t\t\t\t<ANRED>Gesellschaft</ANRED>\n\t\t\t\t<HAUSN>000000</HAUSN>\n\t\t\t\t<REGIO>BW</REGIO>\n\t\t\t\t<SPRAS_ISO>DE</SPRAS_ISO>\n\t\t\t</E1EDPA1>\n\t\t\t<E1EDP05 SEGMENT=\"1\">\n\t\t\t\t<ALCKZ>+</ALCKZ>\n\t\t\t\t<KOTXT>Bruttowert</KOTXT>\n\t\t\t\t<BETRG>250.00</BETRG>\n\t\t\t\t<KRATE>50.00</KRATE>\n\t\t\t\t<UPRBS>1</UPRBS>\n\t\t\t\t<MEAUN>PCE</MEAUN>\n\t\t\t\t<KOEIN>EUR</KOEIN>\n\t\t\t\t<KOBAS>5</KOBAS>\n\t\t\t</E1EDP05>\n\t\t\t<E1EDP05 SEGMENT=\"1\">\n\t\t\t\t<ALCKZ>+</ALCKZ>\n\t\t\t\t<KOTXT>Nettowert 1</KOTXT>\n\t\t\t\t<BETRG>250.00</BETRG>\n\t\t\t\t<KRATE>50.00</KRATE>\n\t\t\t\t<UPRBS>1</UPRBS>\n\t\t\t\t<MEAUN>PCE</MEAUN>\n\t\t\t\t<KOEIN>EUR</KOEIN>\n\t\t\t\t<KOBAS>5</KOBAS>\n\t\t\t</E1EDP05>\n\t\t\t<E1EDP04 SEGMENT=\"1\">\n\t\t\t\t<MWSKZ>A1</MWSKZ>\n\t\t\t\t<MSATZ>19.000</MSATZ>\n\t\t\t\t<MWSBT>47.50</MWSBT>\n\t\t\t</E1EDP04>\n\t\t</E1EDP01>\n\t\t<E1EDP01 SEGMENT=\"1\">\n\t\t\t<POSEX>000020</POSEX>\n\t\t\t<MENGE>4.000</MENGE>\n\t\t\t<MENEE>PCE</MENEE>\n\t\t\t<NTGEW>3.600</NTGEW>\n\t\t\t<GEWEI>KGM</GEWEI>\n\t\t\t<BRGEW>4.000</BRGEW>\n\t\t\t<PSTYV>TAN</PSTYV>\n\t\t\t<WERKS>1010</WERKS>\n\t\t\t<E1EDP02 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<BELNR>4500003561</BELNR>\n\t\t\t\t<ZEILE>000020</ZEILE>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t\t<BSARK>DFUE</BSARK>\n\t\t\t</E1EDP02>\n\t\t\t<E1EDP02 SEGMENT=\"1\">\n\t\t\t\t<QUALF>002</QUALF>\n\t\t\t\t<BELNR>0000005829</BELNR>\n\t\t\t\t<ZEILE>000020</ZEILE>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP02>\n\t\t\t<E1EDP02 SEGMENT=\"1\">\n\t\t\t\t<QUALF>016</QUALF>\n\t\t\t\t<BELNR>0080003710</BELNR>\n\t\t\t\t<ZEILE>000020</ZEILE>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP02>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>029</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>001</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>011</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>025</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>027</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>023</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP03 SEGMENT=\"1\">\n\t\t\t\t<IDDAT>022</IDDAT>\n\t\t\t\t<DATUM>20181026</DATUM>\n\t\t\t</E1EDP03>\n\t\t\t<E1EDP19 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<IDTNR>TG0011</IDTNR>\n\t\t\t</E1EDP19>\n\t\t\t<E1EDP19 SEGMENT=\"1\">\n\t\t\t\t<QUALF>002</QUALF>\n\t\t\t\t<IDTNR>TG0011</IDTNR>\n\t\t\t\t<KTEXT>Trading Good 0011,PD,Regular Proc.</KTEXT>\n\t\t\t\t<IDTNR_LONG>TG0011</IDTNR_LONG>\n\t\t\t</E1EDP19>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>004</QUALF>\n\t\t\t\t<BETRG>238.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>003</QUALF>\n\t\t\t\t<BETRG>200.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>010</QUALF>\n\t\t\t\t<BETRG>200.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>011</QUALF>\n\t\t\t\t<BETRG>200.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>012</QUALF>\n\t\t\t\t<BETRG>200.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<BETRG>50.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDP26 SEGMENT=\"1\">\n\t\t\t\t<QUALF>002</QUALF>\n\t\t\t\t<BETRG>200.00</BETRG>\n\t\t\t</E1EDP26>\n\t\t\t<E1EDPA1 SEGMENT=\"1\">\n\t\t\t\t<PARVW>WE</PARVW>\n\t\t\t\t<PARTN>0010100090</PARTN>\n\t\t\t\t<LIFNR>1010</LIFNR>\n\t\t\t\t<NAME1>Plant 1010 - Address Name 1</NAME1>\n\t\t\t\t<STRAS>Rosengasse 7</STRAS>\n\t\t\t\t<ORT01>Heidelberg</ORT01>\n\t\t\t\t<PSTLZ>69190</PSTLZ>\n\t\t\t\t<LAND1>DE</LAND1>\n\t\t\t\t<SPRAS>D</SPRAS>\n\t\t\t\t<ANRED>Gesellschaft</ANRED>\n\t\t\t\t<HAUSN>000000</HAUSN>\n\t\t\t\t<REGIO>BW</REGIO>\n\t\t\t\t<SPRAS_ISO>DE</SPRAS_ISO>\n\t\t\t</E1EDPA1>\n\t\t\t<E1EDP05 SEGMENT=\"1\">\n\t\t\t\t<ALCKZ>+</ALCKZ>\n\t\t\t\t<KOTXT>Bruttowert</KOTXT>\n\t\t\t\t<BETRG>200.00</BETRG>\n\t\t\t\t<KRATE>50.00</KRATE>\n\t\t\t\t<UPRBS>1</UPRBS>\n\t\t\t\t<MEAUN>PCE</MEAUN>\n\t\t\t\t<KOEIN>EUR</KOEIN>\n\t\t\t\t<KOBAS>4</KOBAS>\n\t\t\t</E1EDP05>\n\t\t\t<E1EDP05 SEGMENT=\"1\">\n\t\t\t\t<ALCKZ>+</ALCKZ>\n\t\t\t\t<KOTXT>Nettowert 1</KOTXT>\n\t\t\t\t<BETRG>200.00</BETRG>\n\t\t\t\t<KRATE>50.00</KRATE>\n\t\t\t\t<UPRBS>1</UPRBS>\n\t\t\t\t<MEAUN>PCE</MEAUN>\n\t\t\t\t<KOEIN>EUR</KOEIN>\n\t\t\t\t<KOBAS>4</KOBAS>\n\t\t\t</E1EDP05>\n\t\t\t<E1EDP04 SEGMENT=\"1\">\n\t\t\t\t<MWSKZ>A1</MWSKZ>\n\t\t\t\t<MSATZ>19.000</MSATZ>\n\t\t\t\t<MWSBT>38.00</MWSBT>\n\t\t\t</E1EDP04>\n\t\t</E1EDP01>\n\t\t<E1EDS01 SEGMENT=\"1\">\n\t\t\t<SUMID>001</SUMID>\n\t\t\t<SUMME>2</SUMME>\n\t\t</E1EDS01>\n\t\t<E1EDS01 SEGMENT=\"1\">\n\t\t\t<SUMID>012</SUMID>\n\t\t\t<SUMME>535.50</SUMME>\n\t\t\t<WAERQ>EUR</WAERQ>\n\t\t</E1EDS01>\n\t\t<E1EDS01 SEGMENT=\"1\">\n\t\t\t<SUMID>005</SUMID>\n\t\t\t<SUMME>85.50</SUMME>\n\t\t\t<WAERQ>EUR</WAERQ>\n\t\t</E1EDS01>\n\t\t<E1EDS01 SEGMENT=\"1\">\n\t\t\t<SUMID>011</SUMID>\n\t\t\t<SUMME>535.50</SUMME>\n\t\t\t<WAERQ>EUR</WAERQ>\n\t\t</E1EDS01>\n\t\t<E1EDS01 SEGMENT=\"1\">\n\t\t\t<SUMID>010</SUMID>\n\t\t\t<SUMME>450.00</SUMME>\n\t\t\t<WAERQ>EUR</WAERQ>\n\t\t</E1EDS01>\n\t</IDOC>\n</INVOIC02>",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "basic",
+          "basic": {
+            "username": "{{clientid}}",
+            "password": "{{clientsecret}}"
+          }
+        }
+      }
+    }
+  ],
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "url",
+          "value": "https://b2b-mapping-factory-dev-d6xaa3qy.it-accd003-rt.cfapps.eu12.hana.ondemand.com",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "clientid",
+          "value": "sb-e94893a5-f5d9-481e-b0da-36a6f206c547!b394389|it-rt-b2b-mapping-factory-dev-d6xaa3qy!b1806",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "clientsecret",
+          "value": "8b3aa9fb-ba1c-43d5-a16a-787d2814663d$TnIoIQFSVgxwL3IKTTaPHkwp1Jh4iDl-N0eOW4m3_po=",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "B2BIF DEV"
+    }
+  ],
+  "root": {
+    "request": {
+      "auth": {
+        "mode": "none"
+      }
+    },
+    "meta": {
+      "name": "Order to Cash SOAP Scenario"
+    }
+  },
+  "brunoConfig": {
+    "version": "1",
+    "name": "[B2B Integration Factory] - Order to Cash SOAP Scenario",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.03685474395751953,
+    "filesCount": 6
+  }
+}
