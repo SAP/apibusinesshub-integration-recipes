@@ -597,7 +597,7 @@
 			]
 		},
 		{
-			"name": "IDOC",
+			"name": "IDOCFlatConvertor",
 			"item": [
 				{
 					"name": "ORDERS",
@@ -758,6 +758,265 @@
 								"http",
 								"AddSOAPHeaderBean",
 								"trigger"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TextCodepageConversionBean",
+			"item": [
+				{
+					"name": "TCCB - ISO-8859-1",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "TEXT/PLAIN; charset=UTF-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Füssener",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/TextCodepageConversionBean/ISO-8859-1",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"TextCodepageConversionBean",
+								"ISO-8859-1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ConvertCRLFfromToLF",
+			"item": [
+				{
+					"name": "Convert to LF",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "TEXT/PLAIN; charset=UTF-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Füssener\r\ngrrgr\r\ngr",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/ConvertCRLFfromToLF",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"ConvertCRLFfromToLF"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ReplaceStringBean",
+			"item": [
+				{
+					"name": "TC1",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "TEXT/PLAIN; charset=UTF-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Date  Mat       PO        GR1GR2GRP3GRP4AMT            CRDT\r\n202310FABCDX    01TEST123 4530450801000100000002825999010152023\r\n202310FABCDF    01TEST456 3530150801000100000014582444010152023\r\n202310FABCDA    01TEST789 5530250801000100000023264182710152023",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/ReplaceStringBean/TC1",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"ReplaceStringBean",
+								"TC1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC2",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "TEXT/PLAIN; charset=UTF-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Date  Mat       PO        GR1GR2GRP3GRP4AMT            CRDT\r\n202310FABCDX    01TEST123 4530450801000100000002825999010152023\r\n202310FABCDF    01TEST456 3530150801000100000014582444010152023\r\n202310FABCDA    01TEST789 5530250801000100000023264182710152023",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/ReplaceStringBean/TC2",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"ReplaceStringBean",
+								"TC2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PayloadSwapBean",
+			"item": [
+				{
+					"name": "Form-Data name",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "test2",
+									"value": "gtrrferfreferer",
+									"description": "fereferfef",
+									"type": "text"
+								},
+								{
+									"key": "test1",
+									"type": "file",
+									"src": "/C:/Users/I546892/Downloads/BG_WOOperation_sample.xml"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/PayloadSwapBean/form-data/payload_name",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"PayloadSwapBean",
+								"form-data",
+								"payload_name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Form-Data content-type",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "test2",
+									"value": "gtrrferfreferer",
+									"description": "fereferfef",
+									"type": "text"
+								},
+								{
+									"key": "test3",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "tet1",
+									"description": "rfreferfe",
+									"type": "file",
+									"src": "/C:/Users/I546892/Downloads/BG_WOOperation_sample.xml"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{Host}}/http/PayloadSwapBean/form-data/content-type",
+							"protocol": "https",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"http",
+								"PayloadSwapBean",
+								"form-data",
+								"content-type"
 							]
 						}
 					},
