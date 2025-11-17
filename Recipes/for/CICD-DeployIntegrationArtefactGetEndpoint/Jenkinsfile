@@ -53,7 +53,8 @@ pipeline {
 		  
 		      //check until max check counter reached or we have a final state
           while (counter < env.DeploymentCheckRetryCounter.toInteger() & continueLoop == true) {
-            Thread.sleep(3000);
+            //Thread.sleep(3000);
+			  sleep time: 3, unit: 'SECONDS'
             counter = counter + 1;
             def statusResp = httpRequest acceptType: 'APPLICATION_JSON',
               customHeaders: [
@@ -127,4 +128,5 @@ pipeline {
       }
     }
   }
+
 }
