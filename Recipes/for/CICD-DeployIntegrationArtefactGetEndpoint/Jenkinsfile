@@ -103,25 +103,56 @@ pipeline {
             sh 'exit 1';
           } else {
             if (env.GetEndpoint.equalsIgnoreCase("true")) {
-              //Get endpoint as configured above
-              def endpointResp = httpRequest acceptType: 'APPLICATION_JSON',
-                customHeaders: [
-                  [maskValue: false, name: 'Authorization', value: env.token]
-                ],
-                httpMode: 'GET',
-                responseHandle: 'LEAVE_OPEN',
-                timeout: 30,
-                url: 'https://' + "${env.CPIHost}" + '/api/v1/ServiceEndpoints?$filter=Name%20eq%20\'' + "${env.IntegrationFlowID}" + '\'&$select=EntryPoints&$format=json&$expand=EntryPoints'
-              def jsonEndpointObj = readJSON text: endpointResp.content;
-              def endpoint = jsonEndpointObj.d.results.EntryPoints.results.Url;
-              def size = (jsonEndpointObj.d.results.EntryPoints.results).size();
-              endpointResp.close();
-			        //check if the flow has an endpoint
-              if (size != 0) {
-                println("Endpoint: " + endpoint);
-              } else {
-                unstable("The specified integration flow does not have an endpoint. Please check the flow or tenant")
-              }
+                // START: Minimal change for retry logic
+                def endpointResp;
+                def jsonEndpointObj;
+                def endpoint;
+                def size = 0;
+                def maxRetries = 3;
+                def retryCount = 0;
+                def success = false;
+                
+                while (retryCount < maxRetries && !success) {
+                    try {
+                        println("Attempting to get endpoint (Attempt ${retryCount + 1} of ${maxRetries}).");
+                        //Get endpoint as configured above
+                        endpointResp = httpRequest acceptType: 'APPLICATION_JSON',
+                            customHeaders: [
+                                [maskValue: false, name: 'Authorization', value: env.token]
+                            ],
+                            httpMode: 'GET',
+                            responseHandle: 'LEAVE_OPEN',
+                            timeout: 30,
+                            url: 'https://' + "${env.CPIHost}" + '/api/v1/ServiceEndpoints?$filter=Name%20eq%20\'' + "${env.IntegrationFlowID}" + '\'&$select=EntryPoints&$format=json&$expand=EntryPoints'
+                        
+                        jsonEndpointObj = readJSON text: endpointResp.content;
+                        endpoint = jsonEndpointObj.d.results.EntryPoints.results.Url;
+                        size = (jsonEndpointObj.d.results.EntryPoints.results).size();
+                        endpointResp.close();
+                        success = true; // Set success to true to exit the loop
+                        
+                    } catch (Exception e) {
+                        println("ServiceEndpoint API call failed: ${e.getMessage()}");
+                        retryCount++;
+                        if (retryCount < maxRetries) {
+                            println("Sleeping for 5 seconds before retrying...");
+                            sleep time: 5, unit: 'SECONDS';
+                        }
+                    }
+                }
+                
+                // Check if the loop completed without success
+                if (!success) {
+                    error("Failed to retrieve Service Endpoint after ${maxRetries} attempts.");
+                }
+                // END: Minimal change for retry logic
+
+			    //check if the flow has an endpoint
+                if (size != 0) {
+                    println("Endpoint: " + endpoint);
+                } else {
+                    unstable("The specified integration flow does not have an endpoint. Please check the flow or tenant")
+                }
             }
           }
         }
@@ -130,3 +161,4 @@ pipeline {
   }
 
 }
+
