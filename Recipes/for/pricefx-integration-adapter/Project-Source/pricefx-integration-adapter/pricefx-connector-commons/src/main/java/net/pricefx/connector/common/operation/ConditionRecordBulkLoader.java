@@ -1,9 +1,13 @@
 package net.pricefx.connector.common.operation;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import net.pricefx.connector.common.connection.PFXOperationClient;
-import net.pricefx.connector.common.util.*;
+import net.pricefx.connector.common.util.IPFXExtensionType;
+import net.pricefx.connector.common.util.JsonUtil;
+import net.pricefx.connector.common.util.RequestFactory;
+import net.pricefx.connector.common.util.RequestPathFactory;
 import net.pricefx.connector.common.validation.RequestValidationException;
 
 import java.util.Collections;
@@ -18,10 +22,12 @@ import static net.pricefx.connector.common.validation.RequestValidationException
 
 
 public class ConditionRecordBulkLoader extends GenericBulkLoader {
+    private final boolean superseded;
 
 
-    public ConditionRecordBulkLoader(PFXOperationClient pfxClient, IPFXExtensionType extensionType) {
+    public ConditionRecordBulkLoader(PFXOperationClient pfxClient, IPFXExtensionType extensionType, boolean superseded) {
         super(pfxClient, CONDITION_RECORD, extensionType, null);
+        this.superseded = superseded;
     }
 
     @Override
@@ -44,16 +50,28 @@ public class ConditionRecordBulkLoader extends GenericBulkLoader {
             throw new RequestValidationException(MISSING_MANDATORY_ATTRIBUTES, keyFields.toString());
         }
     }
+
     @Override
-    protected ObjectNode getRequestPayload(JsonNode request){
-        return RequestFactory.buildBulkLoadRequest(CONDITION_RECORD_STAGING, (ObjectNode) request, getExtensionType());
+    protected ObjectNode getRequestPayload(JsonNode request) {
+        ObjectNode req = RequestFactory.buildBulkLoadRequest(CONDITION_RECORD_STAGING, (ObjectNode) request, getExtensionType());
+
+        if (superseded) {
+            ObjectNode splicing = new ObjectNode(JsonNodeFactory.instance);
+            splicing.put("supersedeRecords", true);
+            ObjectNode conditionRecords = new ObjectNode(JsonNodeFactory.instance);
+            conditionRecords.set("splicing", splicing);
+            ObjectNode options = new ObjectNode(JsonNodeFactory.instance);
+            options.set("conditionRecords", conditionRecords);
+            req.set("options", options);
+        }
+
+        return req;
     }
 
     @Override
-    protected String getApiPath(){
+    protected String getApiPath() {
         return RequestPathFactory.buildBulkLoadPath(getExtensionType(), CONDITION_RECORD_STAGING, null);
     }
-
 
 
 }

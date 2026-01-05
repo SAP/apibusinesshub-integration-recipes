@@ -142,7 +142,7 @@ class IPFXConnectionTest extends Specification {
 
     def "getConditionRecordType"() {
         when:
-        def result = pfxClient.getConditionRecordType(PFXTypeCode.CONDITION_RECORD, "Condition006")
+        def result = pfxClient.getConditionRecordType(PFXTypeCode.CONDITION_RECORD, "Condition006", false, true)
 
         then:
         result instanceof PFXConditionRecordType
@@ -196,7 +196,7 @@ class IPFXConnectionTest extends Specification {
         null == result
 
         when:
-        result = pfxClient.createExtensionType(PFXTypeCode.CONDITION_RECORD, "Condition006", "")
+        result = pfxClient.createExtensionType(PFXTypeCode.CONDITION_RECORD, "Condition006", "", false, true)
 
         then:
         result instanceof PFXConditionRecordType

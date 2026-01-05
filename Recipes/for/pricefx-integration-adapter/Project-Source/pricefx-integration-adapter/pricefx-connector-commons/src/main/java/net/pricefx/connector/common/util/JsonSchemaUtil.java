@@ -27,7 +27,7 @@ public class JsonSchemaUtil {
     public static final String SCHEMA_PROPERTIES = "properties";
     public static final String SCHEMA_TYPE = "type";
 
-    public static final String STRING = "string";
+
 
     private JsonSchemaUtil() {
     }
@@ -78,7 +78,7 @@ public class JsonSchemaUtil {
         if (!CollectionUtils.isEmpty(metadata)) {
             for (Map<String, Object> field : metadata) {
                 addSchemaAttribute(schema, (String) field.get(FIELD_NAME), true,
-                        (boolean) field.get("numeric") ? "number" : STRING);
+                        (boolean) field.get("numeric") ? NodeType.NUMBER.value() : NodeType.STRING.value());
             }
         }
     }
@@ -120,7 +120,7 @@ public class JsonSchemaUtil {
                 }
             }
         } else {
-            if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode == CONDITION_RECORD) {
+            if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode.isConditionRecordTypeCodes()) {
                 int additionalKeys = getAdditionalKeys(pfxTypeCode, extensionType, showAdditionalKeys);
                 addSchemaAttributes(schema, "key", additionalKeys, withType);
             }
@@ -137,7 +137,7 @@ public class JsonSchemaUtil {
             return 0;
         }
 
-        if (pfxTypeCode == LOOKUPTABLE || pfxTypeCode == CONDITION_RECORD) {
+        if (pfxTypeCode != null && (pfxTypeCode == LOOKUPTABLE || pfxTypeCode.isConditionRecordTypeCodes())) {
             return extensionType.getAdditionalKeys();
         }
 
@@ -149,12 +149,12 @@ public class JsonSchemaUtil {
 
         if (JsonUtil.isObjectNode(schemaNode.get(SCHEMA_PROPERTIES))) {
             for (int i = 1; i <= attributes; i++) {
-                addSchemaAttribute(schemaNode, prefix + i, withType, STRING);
+                addSchemaAttribute(schemaNode, prefix + i, withType, NodeType.STRING.value());
             }
         } else if (JsonUtil.isObjectNode(schemaNode.get(ITEMS)) &&
                 JsonUtil.isObjectNode(schemaNode.get(ITEMS).get(SCHEMA_PROPERTIES))) {
             for (int i = 1; i <= attributes; i++) {
-                addSchemaAttribute(schemaNode.get(ITEMS), prefix + i, withType, STRING);
+                addSchemaAttribute(schemaNode.get(ITEMS), prefix + i, withType, NodeType.STRING.value());
             }
         }
     }
@@ -166,9 +166,14 @@ public class JsonSchemaUtil {
             switch (pfxTypeCode) {
                 case PAYOUT:
                     return MAX_PAYOUT_ATTRIBUTES;
-                case PRODUCT:
+                case CONDITION_RECORD_ALL:
+                case CONDITION_RECORD_HISTORY:
                 case CONDITION_RECORD:
+                    return MAX_CONDITION_ATTRIBUTES;
+                case PRODUCT:
                 case CUSTOMER:
+                case ACTION:
+                case ACTION_PLAN:
                 case PRICERECORD:
                     return MAX_ATTRIBUTES;
                 case PRODUCTEXTENSION:

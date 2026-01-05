@@ -5,21 +5,20 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import net.pricefx.connector.common.connection.PFXOperationClient;
+import net.pricefx.connector.common.operation.ActionItemUpdater;
+import net.pricefx.connector.common.operation.ActionPlanUpdater;
 import net.pricefx.connector.common.operation.GenericUpsertor;
 import net.pricefx.connector.common.operation.UserUpsertor;
 import net.pricefx.connector.common.util.IPFXExtensionType;
 import net.pricefx.connector.common.util.PFXTypeCode;
-import net.pricefx.connector.common.util.RequestPathFactory;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 
 public class UpsertService extends AbstractJsonRequestService {
 
-
     private final PFXTypeCode typeCode;
 
-    private final String path;
     private final IPFXExtensionType extensionType;
     private final boolean simpleResult;
     private final boolean replaceNullWithEmpty;
@@ -32,8 +31,6 @@ public class UpsertService extends AbstractJsonRequestService {
         this.replaceNullWithEmpty = replaceNullWithEmpty;
         this.typeCode = typeCode;
         this.extensionType = extensionType;
-
-        this.path = RequestPathFactory.buildUpsertPath(extensionType, typeCode);
         this.simpleResult = simpleResult;
         this.showSystemFields = showSystemFields;
     }
@@ -43,11 +40,17 @@ public class UpsertService extends AbstractJsonRequestService {
 
         List<JsonNode> results;
         switch (typeCode) {
+            case ACTION_PLAN:
+                results = new ActionPlanUpdater(getPfxClient()).upsert(request, true, false, false, false, false,true);
+                break;
+            case ACTION:
+                results = new ActionItemUpdater(getPfxClient()).upsert(request, true, false, false, false, false, true);
+                break;
             case USER:
-                results = new UserUpsertor(getPfxClient()).upsert(request, true, false, false, false, false);
+                results = new UserUpsertor(getPfxClient()).upsert(request, true, false, false, false, false, false);
                 break;
             default:
-                results = new GenericUpsertor(getPfxClient(), path, typeCode, extensionType, null).upsert(request, true, replaceNullWithEmpty, false, simpleResult, showSystemFields);
+                results = new GenericUpsertor(getPfxClient(), typeCode, extensionType, null).upsert(request, true, replaceNullWithEmpty, false, simpleResult, showSystemFields, false);
         }
 
 

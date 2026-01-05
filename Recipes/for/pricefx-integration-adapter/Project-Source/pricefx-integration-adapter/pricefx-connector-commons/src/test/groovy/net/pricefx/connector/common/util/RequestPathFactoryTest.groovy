@@ -1,12 +1,10 @@
 package net.pricefx.connector.common.util
 
-import com.fasterxml.jackson.databind.node.JsonNodeFactory
-import com.fasterxml.jackson.databind.node.ObjectNode
+
 import spock.lang.Specification
 
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath
-import static net.pricefx.connector.common.util.PFXOperation.SAVE_QUOTE
-
+import static net.pricefx.connector.common.util.PFXOperation.*
 
 class RequestPathFactoryTest extends Specification {
 
@@ -17,7 +15,7 @@ class RequestPathFactoryTest extends Specification {
         where:
         extensionType                                                        | typeCode                     | uniqueName | subtype | result
         null                                                                 | PFXTypeCode.PRODUCTEXTENSION | "1234.PX3" | "PX3"   | ConnectionUtil.createPath(PFXOperation.FETCH.getOperation(), "PX3")
-        new PFXConditionRecordType(4).withTable("TEST")                      | PFXTypeCode.CONDITION_RECORD | null       | null    | ConnectionUtil.createPath(PFXOperation.FETCH.getOperation(), PFXTypeCode.CONDITION_RECORD.getTypeCode() + "4")
+        new PFXConditionRecordType(4, false, true).withTable("TEST")                      | PFXTypeCode.CONDITION_RECORD | null       | null    | ConnectionUtil.createPath(PFXOperation.FETCH.getOperation(), PFXTypeCode.CONDITION_RECORD.getTypeCode() + "4")
         new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION).withTable("TEST") | PFXTypeCode.PRODUCTEXTENSION | null       | null    | ConnectionUtil.createPath(PFXOperation.PRODUCTEXTENSION_FETCH.getOperation(), "TEST")
         null                                                                 | PFXTypeCode.QUOTE            | null       | null    | PFXOperation.FETCH_QUOTES.getOperation()
         null                                                                 | PFXTypeCode.PRODUCT          | null       | null    | ConnectionUtil.createPath(PFXOperation.FETCH.getOperation(), PFXTypeCode.PRODUCT.getTypeCode())
@@ -53,15 +51,15 @@ class RequestPathFactoryTest extends Specification {
 
     def "buildUpsertPath"(extensionType, typeCode, result) {
         expect:
-        result == RequestPathFactory.buildUpsertPath(extensionType, typeCode)
+        result == RequestPathFactory.buildUpsertPath(extensionType, typeCode, false, false)
 
         where:
         extensionType                                                                                                                                    | typeCode                     | result
-        new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION).withAttributes(3).withTable("TEST")                                                           | PFXTypeCode.PRODUCTEXTENSION |
-                ConnectionUtil.createPath(PFXOperation.INTEGRATE.getOperation(), "PX3")
-        PFXLookupTableType.valueOf(PFXLookupTableType.LookupTableType.MATRIX.name(), PFXLookupTableType.LookupTableType.MATRIX.name()).withTable("1234") |
-                PFXTypeCode.LOOKUPTABLE                                                                                                                                                 | ConnectionUtil.createPath(PFXOperation.LOOKUPTABLE_VALUES_INTEGRATE.getOperation(), "1234")
+        new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION).withAttributes(3).withTable("TEST")                                                           | PFXTypeCode.PRODUCTEXTENSION | ConnectionUtil.createPath(PFXOperation.INTEGRATE.getOperation(), "PX3")
+        PFXLookupTableType.valueOf(PFXLookupTableType.LookupTableType.MATRIX.name(), PFXLookupTableType.LookupTableType.MATRIX.name()).withTable("1234") | PFXTypeCode.LOOKUPTABLE      | ConnectionUtil.createPath(PFXOperation.LOOKUPTABLE_VALUES_INTEGRATE.getOperation(), "1234")
         null                                                                                                                                             | PFXTypeCode.PRODUCT          | ConnectionUtil.createPath(PFXOperation.INTEGRATE.getOperation(), PFXTypeCode.PRODUCT.getTypeCode())
+        null                                                                                                                                             | PFXTypeCode.QUOTE            | ConnectionUtil.createPath(PFXOperation.SAVE_QUOTE.getOperation())
+
     }
 
     def "buildCreatePath"() {
@@ -78,36 +76,20 @@ class RequestPathFactoryTest extends Specification {
         thrown(UnsupportedOperationException.class)
     }
 
-    def "buildUpdatePath"() {
+    def "buildUpsertPath - update"() {
         when:
-        def request = new ObjectNode(JsonNodeFactory.instance)
-        request.putArray(PFXConstants.FIELD_INPUTS).add(new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_NAME, "location").put(PFXConstants.FIELD_VALUE, "test"))
-
-        def result = RequestPathFactory.buildUpdatePath(PFXTypeCode.QUOTE,  request)
+        def result = RequestPathFactory.buildUpsertPath(null, PFXTypeCode.QUOTE, true, true)
 
         then:
-        PFXOperation.SAVE_QUOTE.getOperation() == result
+        createPath(UPDATE.getOperation(), PFXTypeCode.QUOTE.typeCode, BATCH.getOperation()) == result
 
         when:
-        request = new ObjectNode(JsonNodeFactory.instance)
-
-        result = RequestPathFactory.buildUpdatePath(PFXTypeCode.QUOTE,  request)
+        result = RequestPathFactory.buildUpsertPath(null, PFXTypeCode.QUOTE, false, true)
 
         then:
-        createPath(PFXOperation.UPDATE.getOperation(), PFXTypeCode.QUOTE.getTypeCode()) == result
+        createPath(UPDATE.getOperation(), PFXTypeCode.QUOTE.typeCode) == result
 
-        when:
 
-        result = RequestPathFactory.buildUpdatePath(PFXTypeCode.ROLE, request)
-
-        then:
-        createPath(PFXOperation.UPDATE.getOperation(), PFXTypeCode.ROLE.getTypeCode()) == result
-
-        when:
-
-        RequestPathFactory.buildUpdatePath(PFXTypeCode.PRODUCT, request)
-
-        then:
-        thrown(UnsupportedOperationException.class)
     }
+
 }

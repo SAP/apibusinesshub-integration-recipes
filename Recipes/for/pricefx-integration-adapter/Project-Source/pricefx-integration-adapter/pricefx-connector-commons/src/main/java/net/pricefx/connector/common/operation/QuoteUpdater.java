@@ -31,7 +31,7 @@ public class QuoteUpdater implements IPFXObjectUpsertor, ICalculableObjectUpsert
         this.initialSchema = schema;
     }
 
-    public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple, boolean showSystemFields) {
+    public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple, boolean showSystemFields, boolean rawPost) {
         String uniqueName = JsonUtil.getValueAsText(request.get(FIELD_UNIQUENAME));
 
         JsonNode quote = pfxClient.action(createPath(FETCH_QUOTE.getOperation(), uniqueName));
@@ -102,7 +102,7 @@ public class QuoteUpdater implements IPFXObjectUpsertor, ICalculableObjectUpsert
             if (save) {
                 return pfxClient.doPost(PFXOperation.SAVE_QUOTE.getOperation(), (ObjectNode) request);
             } else {
-                return pfxClient.doPost(createPath(PFXOperation.UPDATE.getOperation(), QUOTE.getTypeCode()), (ObjectNode) request);
+                return pfxClient.doPost(RequestPathFactory.buildUpsertPath(null, QUOTE, false, true), (ObjectNode) request);
             }
         }
 

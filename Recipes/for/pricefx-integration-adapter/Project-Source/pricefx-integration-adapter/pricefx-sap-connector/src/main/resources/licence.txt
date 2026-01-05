@@ -227,7 +227,7 @@
     <dependency>
       <groupId>com.squareup.okio</groupId>
       <artifactId>okio</artifactId>
-      <version>1.17.2</version>
+      <version>1.17.6</version>
       <licenses>
         <license>
           <name>Apache 2.0</name>
@@ -381,7 +381,6 @@
           <name>Eclipse Public License 1.0</name>
           <url>http://www.eclipse.org/legal/epl-v10.html</url>
           <distribution>repo</distribution>
-          <file>eclipse public license 1.0 - epl-v10.html</file>
         </license>
       </licenses>
     </dependency>
@@ -1071,32 +1070,6 @@
       </licenses>
     </dependency>
     <dependency>
-      <groupId>org.apache.servicemix.bundles</groupId>
-      <artifactId>org.apache.servicemix.bundles.okhttp</artifactId>
-      <version>3.14.1_2</version>
-      <licenses>
-        <license>
-          <name>The Apache Software License, Version 2.0</name>
-          <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-          <distribution>repo</distribution>
-          <file>the apache software license, version 2.0 - license-2.0.txt</file>
-        </license>
-      </licenses>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.servicemix.bundles</groupId>
-      <artifactId>org.apache.servicemix.bundles.okio</artifactId>
-      <version>1.15.0_1</version>
-      <licenses>
-        <license>
-          <name>The Apache Software License, Version 2.0</name>
-          <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-          <distribution>repo</distribution>
-          <file>the apache software license, version 2.0 - license-2.0.txt</file>
-        </license>
-      </licenses>
-    </dependency>
-    <dependency>
       <groupId>org.apache.tika</groupId>
       <artifactId>tika-core</artifactId>
       <version>2.9.2</version>
@@ -1206,6 +1179,7 @@
         <license>
           <name>Eclipse Public License v2.0</name>
           <url>https://www.eclipse.org/legal/epl-v20.html</url>
+          <file>eclipse public license v2.0 - epl-v20.html</file>
         </license>
       </licenses>
     </dependency>
@@ -1316,7 +1290,6 @@
         <license>
           <name>BSD</name>
           <url>http://asm.ow2.org/license.html</url>
-          <file>bsd - license.html</file>
         </license>
       </licenses>
     </dependency>

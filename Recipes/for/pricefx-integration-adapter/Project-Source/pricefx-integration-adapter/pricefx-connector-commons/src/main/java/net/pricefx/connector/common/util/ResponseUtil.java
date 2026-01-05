@@ -188,7 +188,8 @@ public class ResponseUtil {
     }
 
     public static void preformatResponse(PFXTypeCode typeCode, IPFXExtensionType extensionType, ObjectNode result) {
-        if (typeCode == PFXTypeCode.MANUALPRICELIST || typeCode == PFXTypeCode.PAYOUT || typeCode == PFXTypeCode.CONDITION_RECORD) {
+        if (typeCode != null &&
+                (typeCode == PFXTypeCode.MANUALPRICELIST || typeCode == PFXTypeCode.PAYOUT || typeCode.isConditionRecordTypeCodes())) {
             appendId(typeCode, extensionType, result);
         }
     }

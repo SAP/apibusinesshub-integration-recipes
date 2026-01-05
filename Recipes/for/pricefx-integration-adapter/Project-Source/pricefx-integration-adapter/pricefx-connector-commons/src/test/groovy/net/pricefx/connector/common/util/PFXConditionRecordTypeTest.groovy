@@ -1,13 +1,13 @@
 package net.pricefx.connector.common.util
 
-
+import net.pricefx.connector.common.validation.ConnectorException
 import spock.lang.Specification
 
 class PFXConditionRecordTypeTest extends Specification {
 
     def "getBusinessKeys"() {
         when:
-        def keys = new PFXConditionRecordType(3).getBusinessKeys()
+        def keys = new PFXConditionRecordType(3, false, true).getBusinessKeys()
 
         then:
         5 == keys.size()
@@ -21,7 +21,7 @@ class PFXConditionRecordTypeTest extends Specification {
     def "getTypeCodeSuffix"() {
 
         when:
-        def name = new PFXConditionRecordType(5).getTypeCodeSuffix()
+        def name = new PFXConditionRecordType(5, false, true).getTypeCodeSuffix()
 
         then:
         PFXTypeCode.CONDITION_RECORD.getTypeCode() + "5" == name
@@ -31,10 +31,39 @@ class PFXConditionRecordTypeTest extends Specification {
     def "getTable"() {
 
         when:
-        def type = new PFXConditionRecordType(5).withTable("1")
+        def type = new PFXConditionRecordType(5, false, true).withTable("1")
 
         then:
         "1" == type.getTable()
+
+
+    }
+
+    def "getTypeCode"() {
+
+        when:
+        def type = new PFXConditionRecordType(5, false, true).withTable("1").getTypeCode()
+
+        then:
+        PFXTypeCode.CONDITION_RECORD == type
+
+        when:
+        type = new PFXConditionRecordType(5, true, true).withTable("1").getTypeCode()
+
+        then:
+        PFXTypeCode.CONDITION_RECORD_ALL == type
+
+        when:
+        type = new PFXConditionRecordType(5, true, false).withTable("1").getTypeCode()
+
+        then:
+        PFXTypeCode.CONDITION_RECORD_HISTORY == type
+
+        when:
+        new PFXConditionRecordType(5, false, false).withTable("1").getTypeCode()
+
+        then:
+        thrown(ConnectorException.class)
 
 
     }

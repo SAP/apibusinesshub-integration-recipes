@@ -58,7 +58,7 @@ public class PFXConstants {
 
     public static final List<String> SYSTEM_FIELDS =
             ImmutableList.of(FIELD_TYPEDID, FIELD_VERSION, "actionUUID", "createdBy", "lastUpdateBy", "updatedBy", "updateDate", "nodeId", "tableId", "dbTable", "dbKey", "clicId", "dbColumn",
-                    "fetchVerb", "integrateVerb", "bulkloadVerb", "keyFields", "viewState", "renderInfo", "fieldNames", "keyFieldNames");
+                    "fetchVerb", "integrateVerb", "bulkloadVerb", "keyFields", "viewState", "renderInfo", "fieldNames", "keyFieldNames","translations");
     public static final List<String> LOOKUP_SYSTEM_FIELDS = ImmutableList.of(FIELD_TYPE, FIELD_RAWVALUE, FIELD_VALUETYPE, "lookupTableTypedId");
 
     private PFXConstants() {

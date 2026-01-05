@@ -1,0 +1,15 @@
+{
+  "header": [
+    "validFrom",
+    "validTo",
+    "attribute1",
+    "key1"
+  ],
+  "data": [
+    [
+      "2024-01-01",
+      "2024-12-31",
+      "testing2superseded"
+    ]
+  ]
+}

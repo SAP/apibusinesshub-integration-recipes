@@ -228,6 +228,72 @@
                 </AttributeReference>
 
                 <AttributeReference>
+                    <ReferenceName>superseded</ReferenceName>
+                    <AndCondition>
+                        <EditCondition>
+                            <AttributeName>operationType</AttributeName>
+                            <AttributeValue>BULKLOAD</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                            <AttributeName>bulkloadTargetType</AttributeName>
+                            <AttributeValue>CONDITION_RECORD</AttributeValue>
+                        </EditCondition>
+                    </AndCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>history</ReferenceName>
+                    <OrCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>FETCH</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>fetchTargetType</AttributeName>
+                                <AttributeValue>CONDITION_RECORD</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>FETCH_COUNT</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>fetchCountTargetType</AttributeName>
+                                <AttributeValue>CONDITION_RECORD</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+                    </OrCondition>
+                </AttributeReference>
+
+                <AttributeReference>
+                    <ReferenceName>active</ReferenceName>
+                    <OrCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>FETCH</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>fetchTargetType</AttributeName>
+                                <AttributeValue>CONDITION_RECORD</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+                        <AndCondition>
+                            <EditCondition>
+                                <AttributeName>operationType</AttributeName>
+                                <AttributeValue>FETCH_COUNT</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>fetchCountTargetType</AttributeName>
+                                <AttributeValue>CONDITION_RECORD</AttributeValue>
+                            </EditCondition>
+                        </AndCondition>
+                    </OrCondition>
+                </AttributeReference>
+
+                <AttributeReference>
                     <ReferenceName>showSystemFields</ReferenceName>
                     <OrCondition>
                         <AndCondition>
@@ -256,6 +322,14 @@
                                 <EditCondition>
                                     <AttributeName>fetchTargetType</AttributeName>
                                     <AttributeValue>LOOKUPTABLE</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>ACTION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>fetchTargetType</AttributeName>
+                                    <AttributeValue>ACTION_PLAN</AttributeValue>
                                 </EditCondition>
                                 <EditCondition>
                                     <AttributeName>fetchTargetType</AttributeName>
@@ -343,7 +417,14 @@
                                     <AttributeName>getTargetType</AttributeName>
                                     <AttributeValue>TYPEDID</AttributeValue>
                                 </EditCondition>
-
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>ACTION</AttributeValue>
+                                </EditCondition>
+                                <EditCondition>
+                                    <AttributeName>getTargetType</AttributeName>
+                                    <AttributeValue>ACTION_PLAN</AttributeValue>
+                                </EditCondition>
 
                             </OrCondition>
 
@@ -867,6 +948,42 @@
     </AttributeMetadata>
 
     <AttributeMetadata>
+        <Name>superseded</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default>true</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="5fbd2873-ebd0-4a5e-8e92-652f9e1ebeea">
+            <Label language="EN">Superseded old records?</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>history</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default>false</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="79a2d4a5-a738-495b-93be-704c0f7b12a8">
+            <Label language="EN">History Records?</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
+        <Name>active</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default>true</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="98449a86-fe7b-471a-bdcb-78165619aebd">
+            <Label language="EN">Active Records?</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+
+    <AttributeMetadata>
         <Name>replaceNullWithEmpty</Name>
         <Usage>false</Usage>
         <DataType>xsd:boolean</DataType>
@@ -1114,6 +1231,18 @@
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
+                <Value>ACTION</Value>
+                <GuiLabels guid="badcf4d8-5ad7-4973-9167-84fb488ab314">
+                    <Label language="EN">Action</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>ACTION_PLAN</Value>
+                <GuiLabels guid="fb50966e-749b-47bf-a3fc-b4f69cd4cd33">
+                    <Label language="EN">Action Plan</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
                 <Value>DATAMART</Value>
                 <GuiLabels guid="43f50810-9118-494f-8f18-ea90dc6fa0a5">
                     <Label language="EN">Datamart</Label>
@@ -1163,6 +1292,18 @@
                 <Value>CONTRACT</Value>
                 <GuiLabels guid="68a984de-2f41-4297-be6b-1e07a923d029">
                     <Label language="EN">Contract</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>ACTION</Value>
+                <GuiLabels guid="9551c46d-f618-4a90-9990-d1f4156b6141">
+                    <Label language="EN">Action</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>ACTION_PLAN</Value>
+                <GuiLabels guid="3b9807d8-2f00-4214-b94c-85415d5aaabe">
+                    <Label language="EN">Action Plan</Label>
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
@@ -1288,6 +1429,18 @@
                 </GuiLabels>
             </FixedValue>
             <FixedValue>
+                <Value>ACTION</Value>
+                <GuiLabels guid="2d9712e8-eb0c-41a4-94a5-1a3c92b7b6c2">
+                    <Label language="EN">Action</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>ACTION_PLAN</Value>
+                <GuiLabels guid="403fdd9d-1b0e-4d60-a67c-4bf475a1639f">
+                    <Label language="EN">Action Plan</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
                 <Value>PRODUCT</Value>
                 <GuiLabels guid="553c0b31-5007-41c5-b936-6268f15f8af6">
                     <Label language="EN">Product</Label>
@@ -1403,6 +1556,18 @@
             <Label language="EN">Target</Label>
         </GuiLabels>
         <FixedValues>
+            <FixedValue>
+                <Value>ACTION</Value>
+                <GuiLabels guid="cae55474-f74a-418d-9372-b36cdb5d7dfa">
+                    <Label language="EN">Action</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>ACTION_PLAN</Value>
+                <GuiLabels guid="9c747cca-2e74-4fa6-b68f-0be7a6749b07">
+                    <Label language="EN">Action Plan</Label>
+                </GuiLabels>
+            </FixedValue>
             <FixedValue>
                 <Value>ROLE</Value>
                 <GuiLabels guid="2ec9166b-f356-4426-960a-2c414182f6c7">
@@ -1698,6 +1863,18 @@
             <Label language="EN">Target</Label>
         </GuiLabels>
         <FixedValues>
+            <FixedValue>
+                <Value>ACTION</Value>
+                <GuiLabels guid="753b08bf-0b51-4363-aa01-dde967fcc99d">
+                    <Label language="EN">Action</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>ACTION_PLAN</Value>
+                <GuiLabels guid="a185d317-54e5-4b28-b986-6847e1c78bdb">
+                    <Label language="EN">Action Plan</Label>
+                </GuiLabels>
+            </FixedValue>
             <FixedValue>
                 <Value>PRODUCT</Value>
                 <GuiLabels guid="3b958642-6867-4fb4-83dd-294d288d9b63">

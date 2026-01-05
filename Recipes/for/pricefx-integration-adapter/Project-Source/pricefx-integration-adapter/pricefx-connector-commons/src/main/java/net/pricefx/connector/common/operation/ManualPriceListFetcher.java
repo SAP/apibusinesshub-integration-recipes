@@ -15,16 +15,18 @@ public class ManualPriceListFetcher extends GenericFetcher {
 
     }
 
+
     @Override
-    public List<ObjectNode> fetch(ObjectNode advancedCriteria, List<String> sortBy, List<String> valueFields, Long startRow, int pageSize, boolean validate, boolean formatted) {
-        List<ObjectNode> results = super.fetch(advancedCriteria, sortBy, valueFields, startRow, pageSize, validate, false);
+    public List<ObjectNode> fetch(ObjectNode request, Long startRow, int pageSize, boolean validate, boolean formatted) {
+        List<ObjectNode> results = super.fetch(request, startRow, pageSize, validate, false, true);
 
         if (formatted) {
             ResponseUtil.formatResponse(MANUALPRICELIST, null, results, false);
+
         }
 
         return results;
-    }
 
+    }
 
 }

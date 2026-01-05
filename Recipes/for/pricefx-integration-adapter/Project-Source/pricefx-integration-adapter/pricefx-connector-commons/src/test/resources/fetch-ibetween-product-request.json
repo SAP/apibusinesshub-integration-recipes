@@ -1,0 +1,20 @@
+{
+  "data": {
+    "operator": "and",
+    "criteria": [
+      {
+        "fieldName": "sku",
+        "operator": "betweenInclusive",
+        "start": "PRODUCT2",
+        "end": "PRODUCT3"
+      }
+    ]
+  },
+  "sortBy": [
+    "sku"
+  ],
+  "resultFields": [
+    "sku",
+    "label"
+  ]
+}

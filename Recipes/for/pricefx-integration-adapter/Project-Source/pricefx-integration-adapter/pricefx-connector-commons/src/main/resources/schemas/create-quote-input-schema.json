@@ -86,7 +86,6 @@
               "inputs": {
                 "type": "array",
                 "items": {
-                  "type": "object",
                   "$ref": "#/definitions/calculableInputDefinition"
                 }
               }
@@ -115,7 +114,6 @@
     "inputs": {
       "type": "array",
       "items": {
-        "type": "object",
         "$ref": "#/definitions/calculableInputDefinition"
       }
     },
@@ -170,7 +168,6 @@
     "lineItems": {
       "type": "array",
       "items": {
-        "type": "object",
         "$ref": "#/definitions/itemGroupDefinition"
       }
     }

@@ -75,6 +75,14 @@
               "value": {
                 "type": "string",
                 "description": "value"
+              },
+              "start": {
+                "type": "string",
+                "description": "value"
+              },
+              "end": {
+                "type": "string",
+                "description": "value"
               }
             }
           }

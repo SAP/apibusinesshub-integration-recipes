@@ -59,17 +59,23 @@ class JsonSchemaUtilTest extends Specification {
         results = JsonSchemaUtil.getFields(schemaNode)
 
         then:
-        PFXConstants.FIELD_SKU == results.first()
+        results.first() == PFXConstants.FIELD_SKU
 
         when:
         results = JsonSchemaUtil.getFields(arraySchemaNode)
 
         then:
-        PFXConstants.FIELD_SKU == results.first()
+        results.first() == PFXConstants.FIELD_SKU
 
         when:
         def empty = ((ObjectNode) schemaNode.deepCopy()).remove(JsonSchemaUtil.SCHEMA_PROPERTIES)
         results = JsonSchemaUtil.getFields(empty)
+
+        then:
+        results.isEmpty()
+
+        when:
+        results = JsonSchemaUtil.getFields(null)
 
         then:
         results.isEmpty()
@@ -85,7 +91,7 @@ class JsonSchemaUtilTest extends Specification {
         JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, null)
 
         then:
-        schemaNode == tempSchemaNode
+        tempSchemaNode == schemaNode
 
         when:
         def field = new HashMap<String, String>()
@@ -96,49 +102,47 @@ class JsonSchemaUtilTest extends Specification {
         JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, meta)
 
         then:
-        null != tempSchemaNode.get(JsonSchemaUtil.SCHEMA_PROPERTIES).get("testing")
+        tempSchemaNode.get(JsonSchemaUtil.SCHEMA_PROPERTIES).get("testing") != null
 
         when:
         tempSchemaNode = schemaNode.deepCopy()
         JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, null, null, null, false, false, true)
 
         then:
-        schemaNode == tempSchemaNode
+        tempSchemaNode == schemaNode
 
         when:
         JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, LOOKUPTABLE, matrix, null, true, true, true)
 
         then:
-
-
-        1 == tempSchemaNode.toString().count("\"attribute1\"")
-        1 == tempSchemaNode.toString().count("\"attribute10\"")
-        1 == tempSchemaNode.toString().count("\"key1\"")
+        tempSchemaNode.toString().count("\"attribute1\"") == 1
+        tempSchemaNode.toString().count("\"attribute10\"") == 1
+        tempSchemaNode.toString().count("\"key1\"") == 1
 
         when:
         tempSchemaNode = new TextNode("x")
         JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, LOOKUPTABLE, matrix, null, true, true, true)
 
         then:
-        "x" == tempSchemaNode.textValue()
+        tempSchemaNode.textValue() == "x"
 
         when:
         tempSchemaNode = new ObjectMapper().readTree(arraySchema)
         JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, LOOKUPTABLE, matrix, null, true, true, true)
 
         then:
-        1 == tempSchemaNode.toString().count("\"attribute1\"")
-        1 == tempSchemaNode.toString().count("\"attribute10\"")
-        1 == tempSchemaNode.toString().count("\"key1\"")
+        tempSchemaNode.toString().count("\"attribute1\"") == 1
+        tempSchemaNode.toString().count("\"attribute10\"") == 1
+        tempSchemaNode.toString().count("\"key1\"") == 1
 
         when:
         tempSchemaNode = new ObjectMapper().readTree(schema)
         JsonSchemaUtil.updateSchemaWithMetadata(tempSchemaNode, LOOKUPTABLE, matrix, null, true, true, false)
 
         then:
-        1 == tempSchemaNode.toString().count("\"attribute1\"")
-        1 == tempSchemaNode.toString().count("\"attribute10\"")
-        1 == tempSchemaNode.toString().count("\"key1\"")
-        2 == tempSchemaNode.toString().count("\"type\"")
+        tempSchemaNode.toString().count("\"attribute1\"") == 1
+        tempSchemaNode.toString().count("\"attribute10\"") == 1
+        tempSchemaNode.toString().count("\"key1\"") == 1
+        tempSchemaNode.toString().count("\"type\"") == 2
     }
 }

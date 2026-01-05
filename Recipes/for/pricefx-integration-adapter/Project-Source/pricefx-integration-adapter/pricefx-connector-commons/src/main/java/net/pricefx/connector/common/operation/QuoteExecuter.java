@@ -36,10 +36,15 @@ public class QuoteExecuter extends AbstractGenericExecuter {
 
     @Override
     protected void validateRequest(JsonNode request) {
+        if (customOperation == null) {
+            throw new ConnectorException("Missing action");
+        }
+
         String objectId = getParameters().get(UNIQUE_KEY);
         if (StringUtils.isEmpty(objectId)) {
             throw new ConnectorException("Unique ID is not provided. Cannot execute Quote Action");
         }
+
     }
 
     @Override

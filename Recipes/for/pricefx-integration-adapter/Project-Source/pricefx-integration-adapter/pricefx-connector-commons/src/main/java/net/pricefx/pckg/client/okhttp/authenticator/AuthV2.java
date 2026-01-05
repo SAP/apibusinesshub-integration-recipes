@@ -5,6 +5,7 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 
@@ -93,6 +94,10 @@ public class AuthV2 extends AuthV1 {
     @Override
     public void setTfaVerificationCode(String tfaVerificationCode) {
         throw new UnsupportedOperationException("TFA token not supported in OAuth");
+    }
+
+    public boolean hasToken(){
+        return !StringUtils.isEmpty(token);
     }
 
 }

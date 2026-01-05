@@ -12,7 +12,7 @@ public interface IPFXObjectFetcher {
 
     List<ObjectNode> fetch(ObjectNode advancedCriteria, List<String> sortBy, boolean validate, boolean formatted);
 
+    List<ObjectNode> fetch(ObjectNode request, Long startRow, int pageSize, boolean validate, boolean formatted, boolean rawPost);
     List<ObjectNode> fetch(ObjectNode request, Long startRow, int pageSize, boolean validate, boolean formatted);
-
 
 }

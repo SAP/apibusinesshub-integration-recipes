@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "definitions": {
+    "configurationDefinition": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "tabs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "icon": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "translationKey": {
+                "type": "string"
+              },
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "renderOutputsAs": {
+                    "type": "string"
+                  }
+                }
+              },
+              "hiddenCheck": {
+                "type": "object",
+                "properties": {
+                  "operator": {
+                    "type": "string"
+                  },
+                  "fieldName": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "customFormTypeObjectDefinition": {
+      "type": "object",
+      "properties": {
+        "uniqueName": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "headerFormulaName": {
+          "type": "string"
+        },
+        "embedded": {
+          "type": "boolean"
+        },
+        "supportedParentTypeCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "moduleCategoryUN": {
+          "type": "string"
+        },
+        "configuration": {
+          "$ref": "#/definitions/configurationDefinition"
+        },
+        "createDate": {
+          "type": "string"
+        },
+        "lastUpdateDate": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "uniqueName": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "typeId": {
+      "type": "integer"
+    },
+    "moduleCategoryUN": {
+      "type": "string"
+    },
+    "calculationStatus": {
+      "type": "integer"
+    },
+    "submitDate": {
+      "type": "string"
+    },
+    "workflowStatus": {
+      "type": "string"
+    },
+    "formStatus": {
+      "type": "string"
+    },
+    "approvedByName": {
+      "type": "string"
+    },
+    "createdByName": {
+      "type": "string"
+    },
+    "lastUpdateByName": {
+      "type": "string"
+    },
+    "serverMessagesExtended": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "approvalRequiredEmailAttachments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "createDate": {
+      "type": "string"
+    },
+    "lastUpdateDate": {
+      "type": "string"
+    },
+    "customFormTypeObject": {
+      "$ref": "#/definitions/customFormTypeObjectDefinition"
+    },
+    "rootUniqueName": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "calculableOutputDefinition": {
+      "type": "object",
+      "properties": {
+        "resultName": {
+          "type": "string"
+        },
+        "resultLabel": {
+          "type": "string"
+        },
+        "resultObject": {
+          "type": "object"
+        },
+        "result": {
+          "type": "string"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alertMessage": {
+          "type": "string"
+        },
+        "alertType": {
+          "type": "string"
+        },
+        "displayOptions": {
+          "type": "number"
+        },
+        "formatType": {
+          "type": "string"
+        },
+        "suffix": {
+          "type": "string"
+        },
+        "resultType": {
+          "type": "string"
+        },
+        "cssProperties": {
+          "type": "string"
+        },
+        "userGroup": {
+          "type": "string"
+        },
+        "resultGroup": {
+          "type": "string"
+        },
+        "overrideValueOptions": {
+          "type": "string"
+        },
+        "overrideAllowEmpty": {
+          "type": "boolean"
+        },
+        "excludeFromExport": {
+          "type": "boolean"
+        },
+        "labelTranslations": {
+          "type": "string"
+        },
+        "overridable": {
+          "type": "boolean"
+        },
+        "overridden": {
+          "type": "boolean"
+        },
+        "resultDescription": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "uniqueName": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "completedDate": {
+      "type": "string"
+    },
+    "originatorTypedId": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "number"
+    },
+    "createDate": {
+      "type": "number"
+    },
+    "completedByName": {
+      "type": "string"
+    },
+    "parentTypedId": {
+      "type": "string"
+    },
+    "targetContext": {
+      "type": "string"
+    },
+    "sourceContext": {
+      "type": "string"
+    },
+    "assignedToGroup": {
+      "type": "string"
+    },
+    "parentTabName": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "actionItemType": {
+      "type": "string"
+    },
+    "dueDate": {
+      "type": "string"
+    },
+    "createdByName": {
+      "type": "string"
+    },
+    "assignedToName": {
+      "type": "string"
+    },
+    "lastUpdateDate": {
+      "type": "string"
+    },
+    "lastUpdateByName": {
+      "type": "string"
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/calculableOutputDefinition"
+      }
+    }
+  }
+}
