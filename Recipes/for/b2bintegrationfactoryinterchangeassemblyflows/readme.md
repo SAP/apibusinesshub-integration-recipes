@@ -17,33 +17,34 @@ This package includes all integration flows, which are responsible for the final
  <li>GS1XML</li>
  <li>TradeXML</li>
 </ul>
-<p>Furthermore, you'll find a template that you can use to create your own Interchange Assembly.</p>
-<p>&nbsp;</p>
+<p>Furthermore, you'll find a template that you can use to create your own Interchange Assembly flow based upon the type system.</p>
 
 [Download the integration package](B2BIntegrationFactoryInterchangeAssemblyFlows.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/B2BIntegrationFactoryInterchangeAssemblyFlows)\
-[View documentation, page 18](../b2bintegrationfactorycloudintegrationtradingpartnermanagement/B2B_Integration_Factory_TPM_Integration_Packages.pdf)\
-[View high level effort](../b2bintegrationfactorycloudintegrationtradingpartnermanagement/effort.md)
+[View documentation](B2BIntegrationFactoryInterchangeAssemblyFlows.pdf)\
+[View high level effort](effort.md)
 ## Integration flows
-### UN-EDIFACT Interchange Assembly Process 
-Assembles the UN/EDIFACT interchange payload and inserts the TPA Business Transaction Activity parameters into the relevant header elements.\
- ![input-image](MS3_UN-EDIFACT_Interchange_Assembly_Process.png)
-### TRADACOMS Interchange Assembly Process
-Assembles the TRADACOMS interchange payload and inserts the TPA Business Transaction Activity parameters into the relevant header elements.\
+### TRADACOMS Interchange Assembly Process 
+Assembles the TRADACOMS interchange payload and inserts the TPA Business Transaction Activity parameters into the relevant header elements. \
  ![input-image](TRADACOMS_Interchange_Assembly_Process.png)
-### TEMPLATE Interchange Assembly Process 
-Assembles the type system's message payload and inserts the TPA Business Transaction Activity parameters into the relevant header elements. \
- ![input-image](TEMPLATE_Interchange_Assembly_Process.png)
+### SAP-S4HANA-OnPremise-SOA Interchange Assembly Process 
+Assembles the SAP SOAP message payload and inserts the TPA Business Transaction Activity parameters into the relevant header elements. \
+ ![input-image](MS3_SAP_S4HANA_OnPremise_SOA_Interchange_Assembly_Process.png)
 ### SAP-IDoc Interchange Assembly Process 
 Assembles the SAP IDOC message payload and inserts the TPA Business Transaction Activity parameters into the relevant header elements. \
  ![input-image](MS3_SAP-IDoc_Interchange_Assembly_Process.png)
-### SAP-S4HANA-OnPremise-SOA Interchange Assembly Process
-Assembles the SAP SOAP message payload and inserts the TPA Business Transaction Activity parameters into the relevant header elements. \
- ![input-image](MS3_SAP_S4HANA_OnPremise_SOA_Interchange_Assembly_Process.png)
-### GS1XML Interchange Assembly Process
-Assembles the GS1XML interchange payload and inserts the TPA Business Transaction Activity parameters into the relevant header elements.\
- ![input-image](MS3_GS1XML_Interchange_Assembly_Process.png)
-### ASC-X12 Interchange Assembly Process
-Assembles the ASC X12 interchange receiver payload and inserts the TPA Business Transaction Activity parameters into the relevant ASC X12 headers.\
+### ASC-X12 Interchange Assembly Process 
+Assembles the ASC X12 interchange receiver payload and inserts the TPA Business Transaction Activity parameters into the relevant ASC X12 headers. \
  ![input-image](ASC-X12_Interchange_Assembly_Process.png)
-
+### GS1XML Interchange Assembly Process 
+Assembles the GS1XML interchange payload and inserts the TPA Business Transaction Activity parameters into the relevant header elements. \
+ ![input-image](MS3_GS1XML_Interchange_Assembly_Process.png)
+### SAP-S4HANA-Cloud-SOA Interchange Assembly Process 
+Assembles the SAP SOAP message payload and inserts the TPA Business Transaction Activity parameters into the relevant header elements. \
+ ![input-image](SAP-S4HANA-Cloud-SOA_Interchange_Assembly_Process.png)
+### TEMPLATE Interchange Assembly Process 
+Assembles the type system's message payload and inserts the TPA Business Transaction Activity parameters into the relevant header elements. \
+ ![input-image](TEMPLATE_Interchange_Assembly_Process.png)
+### UN-EDIFACT Interchange Assembly Process 
+Assembles the UN/EDIFACT interchange payload and inserts the TPA Business Transaction Activity parameters into the relevant header elements. \
+ ![input-image](MS3_UN-EDIFACT_Interchange_Assembly_Process.png)

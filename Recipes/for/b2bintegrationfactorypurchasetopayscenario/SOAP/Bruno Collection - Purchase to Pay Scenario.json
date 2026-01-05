@@ -1,0 +1,269 @@
+{
+  "name": "[B2B Integration Factory] - Purchase to Pay Scenario",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "01.a) Sales Order Request - Outbound",
+      "filename": "01.a) Sales Order Request - Outbound.bru",
+      "seq": 1,
+      "request": {
+        "url": "{{url}}/http/tpm/b2b/simulate",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "type_system",
+            "value": "SAP_IDoc",
+            "enabled": true
+          },
+          {
+            "name": "communication_protocol",
+            "value": "IDOC",
+            "enabled": true
+          },
+          {
+            "name": "message_content_type",
+            "value": "application/XML",
+            "enabled": true
+          },
+          {
+            "name": "SAP_EDI_Split_Sender_Per_Interchange",
+            "value": "false",
+            "enabled": true
+          },
+          {
+            "name": "Content-Type",
+            "value": "application/xml",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "xml",
+          "xml": "<ORDERS05>\n\t<IDOC BEGIN=\"1\">\n\t\t<EDI_DC40 SEGMENT=\"1\">\n\t\t\t<TABNAM>EDI_DC40</TABNAM>\n\t\t\t<MANDT>715</MANDT>\n\t\t\t<DOCNUM>0000000000146002</DOCNUM>\n\t\t\t<DOCREL>755</DOCREL>\n\t\t\t<STATUS>30</STATUS>\n\t\t\t<DIRECT>1</DIRECT>\n\t\t\t<OUTMOD>2</OUTMOD>\n\t\t\t<IDOCTYP>ORDERS05</IDOCTYP>\n\t\t\t<MESTYP>ORDERS</MESTYP>\n\t\t\t<SNDPOR>SAPQKX</SNDPOR>\n\t\t\t<SNDPRT></SNDPRT>\n\t\t\t<SNDPRN>Company_IDOC_SOA_ID</SNDPRN>\n\t\t\t<RCVPOR>ORDREQ_CCF</RCVPOR>\n\t\t\t<RCVPRT></RCVPRT>\n\t\t\t<RCVPFC></RCVPFC>\n\t\t\t<RCVPRN>TP_IDOC_SOA_ID</RCVPRN>\n\t\t\t<CREDAT>20181129</CREDAT>\n\t\t\t<CRETIM>142809</CRETIM>\n\t\t\t<SERIAL>20181129142808</SERIAL>\n\t\t</EDI_DC40>\n\t\t<E1EDK01 SEGMENT=\"1\">\n\t\t\t<CURCY>EUR</CURCY>\n\t\t\t<HWAER>EUR</HWAER>\n\t\t\t<WKURS>1.00000</WKURS>\n\t\t\t<ZTERM>0004</ZTERM>\n\t\t\t<BSART>NB</BSART>\n\t\t\t<BELNR>4500000670</BELNR>\n\t\t\t<RECIPNT_NO>0010300097</RECIPNT_NO>\n\t\t</E1EDK01>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>014</QUALF>\n\t\t\t<ORGID>1010</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>009</QUALF>\n\t\t\t<ORGID>001</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>013</QUALF>\n\t\t\t<ORGID>NB</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK14 SEGMENT=\"1\">\n\t\t\t<QUALF>011</QUALF>\n\t\t\t<ORGID>1010</ORGID>\n\t\t</E1EDK14>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>012</IDDAT>\n\t\t\t<DATUM>20181129</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDK03 SEGMENT=\"1\">\n\t\t\t<IDDAT>011</IDDAT>\n\t\t\t<DATUM>20181129</DATUM>\n\t\t</E1EDK03>\n\t\t<E1EDKA1 SEGMENT=\"1\">\n\t\t\t<PARVW>AG</PARVW>\n\t\t\t<PARTN>10100098</PARTN>\n\t\t\t<LIFNR>10100099</LIFNR>\n\t\t\t<TELF1>770 840 9421</TELF1>\n\t\t\t<TELFX>770 840 9000</TELFX>\n\t\t\t<BNAME>Group 001</BNAME>\n\t\t\t<PAORG>1010</PAORG>\n\t\t\t<ORGTX>Purch. Org. 1010</ORGTX>\n\t\t\t<PAGRU>001</PAGRU>\n\t\t\t<IHREZ>test_ihrez</IHREZ>\n\t\t</E1EDKA1>\n\t\t<E1EDKA1 SEGMENT=\"1\">\n\t\t\t<PARVW>RE</PARVW>\n\t\t\t<PARTN>10100098</PARTN>\n\t\t\t<TELF1>770 840 9421</TELF1>\n\t\t\t<TELFX>770 840 9000</TELFX>\n\t\t\t<BNAME>Group 001</BNAME>\n\t\t\t<PAORG>1010</PAORG>\n\t\t\t<ORGTX>Purch. Org. 1010</ORGTX>\n\t\t\t<PAGRU>001</PAGRU>\n\t\t</E1EDKA1>\n\t\t<E1EDKA1 SEGMENT=\"1\">\n\t\t\t<PARVW>LF</PARVW>\n\t\t\t<PARTN>10100099</PARTN>\n\t\t\t<LIFNR>10100099</LIFNR>\n\t\t\t<SPRAS>E</SPRAS>\n\t\t\t<SPRAS_ISO>EN</SPRAS_ISO>\n\t\t</E1EDKA1>\n\t\n\t\t<E1EDKA1 SEGMENT=\"1\">\n\t\t\t<PARVW>LF</PARVW>\n\t\t\t<PARTN>10100098</PARTN>\n\t\t\t<SPRAS>E</SPRAS>\n\t\t\t<SPRAS_ISO>EN</SPRAS_ISO>\n\t\t</E1EDKA1>\n\t\t<E1EDKA1 SEGMENT=\"1\">\n\t\t\t<PARVW>LF</PARVW>\n\t\t\t<LIFNR>10100099</LIFNR>\n\t\t\t<SPRAS>E</SPRAS>\n\t\t\t<SPRAS_ISO>EN</SPRAS_ISO>\n\t\t</E1EDKA1>\n\t\t<E1EDK02 SEGMENT=\"1\">\n\t\t\t<QUALF>001</QUALF>\n\t\t\t<BELNR>4500000670</BELNR>\n\t\t\t<DATUM>20181129</DATUM>\n\t\t\t<UZEIT>142808</UZEIT>\n\t\t</E1EDK02>\n\t\t<E1EDP01 SEGMENT=\"1\">\n\t\t\t<POSEX>00010</POSEX>\n\t\t\t<ACTION>001</ACTION>\n\t\t\t<PSTYP>0</PSTYP>\n\t\t\t<MENGE>1.000</MENGE>\n\t\t\t<MENEE>PCE</MENEE>\n\t\t\t<BMNG2>1.000</BMNG2>\n\t\t\t<PMENE>PCE</PMENE>\n\t\t\t<VPREI>50</VPREI>\n\t\t\t<PEINH>1</PEINH>\n\t\t\t<NETWR>50</NETWR>\n\t\t\t<NTGEW>0.9</NTGEW>\n\t\t\t<GEWEI>KGM</GEWEI>\n\t\t\t<MATKL>L001</MATKL>\n\t\t\t<BPUMN>1</BPUMN>\n\t\t\t<BPUMZ>1</BPUMZ>\n\t\t\t<BRGEW>1</BRGEW>\n\t\t\t<WERKS>1010</WERKS>\n\t\t\t<E1EDP20 SEGMENT=\"1\">\n\t\t\t\t<WMENG>1.000</WMENG>\n\t\t\t\t<AMENG>0.000</AMENG>\n\t\t\t\t<EDATU>20181129</EDATU>\n\t\t\t</E1EDP20>\n\t\t\t<E1EDPA1 SEGMENT=\"1\">\n\t\t\t\t<PARVW>WE</PARVW>\n\t\t\t\t<LIFNR>1010</LIFNR>\n\t\t\t\t<NAME1>Plant 1010 - Test 1</NAME1>\n\t\t\t\t<STRAS>Neurottstr. 16</STRAS>\n\t\t\t\t<ORT01>Walldorf</ORT01>\n\t\t\t\t<PSTLZ>69190</PSTLZ>\n\t\t\t\t<LAND1>DE</LAND1>\n\t\t\t\t<SPRAS>D</SPRAS>\n\t\t\t\t<REGIO>BW</REGIO>\n\t\t\t</E1EDPA1>\n\t\t\t<E1EDP19 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<IDTNR>TG0011</IDTNR>\n\t\t\t\t<KTEXT>Trading Good 0011,PD,Regular Proc.</KTEXT>\n\t\t\t\t<IDTNR_LONG>TG0011</IDTNR_LONG>\n\t\t\t</E1EDP19>\n\t\t\t<E1EDPT1 SEGMENT=\"1\">\n\t\t\t\t<TDID>F03</TDID>\n\t\t\t\t<TSSPRAS>E</TSSPRAS>\n\t\t\t\t<TSSPRAS_ISO>EN</TSSPRAS_ISO>\n\t\t\t\t<E1EDPT2 SEGMENT=\"1\">\n\t\t\t\t\t<TDLINE>Kaubeldavate toodete ost</TDLINE>\n\t\t\t\t</E1EDPT2>\n\t\t\t</E1EDPT1>\n\t\t</E1EDP01>\n\t\t<E1EDP01 SEGMENT=\"1\">\n\t\t\t<POSEX>00020</POSEX>\n\t\t\t<ACTION>001</ACTION>\n\t\t\t<PSTYP>0</PSTYP>\n\t\t\t<MENGE>1.000</MENGE>\n\t\t\t<MENEE>PCE</MENEE>\n\t\t\t<BMNG2>1.000</BMNG2>\n\t\t\t<PMENE>PCE</PMENE>\n\t\t\t<VPREI>50</VPREI>\n\t\t\t<PEINH>1</PEINH>\n\t\t\t<NETWR>50</NETWR>\n\t\t\t<NTGEW>0.9</NTGEW>\n\t\t\t<GEWEI>KGM</GEWEI>\n\t\t\t<MATKL>L001</MATKL>\n\t\t\t<BPUMN>1</BPUMN>\n\t\t\t<BPUMZ>1</BPUMZ>\n\t\t\t<BRGEW>1</BRGEW>\n\t\t\t<WERKS>1010</WERKS>\n\t\t\t<E1EDP20 SEGMENT=\"1\">\n\t\t\t\t<WMENG>1.000</WMENG>\n\t\t\t\t<AMENG>0.000</AMENG>\n\t\t\t\t<EDATU>20181129</EDATU>\n\t\t\t</E1EDP20>\n\t\t\t<E1EDPA1 SEGMENT=\"1\">\n\t\t\t\t<PARVW>WE</PARVW>\n\t\t\t\t<LIFNR>1010</LIFNR>\n\t\t\t\t<NAME1>Plant 1010 - Test 2</NAME1>\n\t\t\t\t<STRAS>Neurottstr. 16</STRAS>\n\t\t\t\t<ORT01>Walldorf</ORT01>\n\t\t\t\t<PSTLZ>69190</PSTLZ>\n\t\t\t\t<LAND1>DE</LAND1>\n\t\t\t\t<SPRAS>D</SPRAS>\n\t\t\t\t<REGIO>BW</REGIO>\n\t\t\t</E1EDPA1>\n\t\t\t<E1EDP19 SEGMENT=\"1\">\n\t\t\t\t<QUALF>001</QUALF>\n\t\t\t\t<IDTNR>TG0011</IDTNR>\n\t\t\t\t<KTEXT>Trading Good 0011,PD,Regular Proc.</KTEXT>\n\t\t\t\t<IDTNR_LONG>TG0011</IDTNR_LONG>\n\t\t\t</E1EDP19>\n\t\t\t<E1EDPT1 SEGMENT=\"1\">\n\t\t\t\t<TDID>F03</TDID>\n\t\t\t\t<TSSPRAS>E</TSSPRAS>\n\t\t\t\t<TSSPRAS_ISO>EN</TSSPRAS_ISO>\n\t\t\t\t<E1EDPT2 SEGMENT=\"1\">\n\t\t\t\t\t<TDLINE>Kaubeldavate toodete ost</TDLINE>\n\t\t\t\t</E1EDPT2>\n\t\t\t</E1EDPT1>\n\t\t</E1EDP01>\n\t\t<E1EDS01 SEGMENT=\"1\">\n\t\t\t<SUMID>002</SUMID>\n\t\t\t<SUMME>100</SUMME>\n\t\t\t<SUNIT>EUR</SUNIT>\n\t\t</E1EDS01>\n\t</IDOC>\n</ORDERS05>",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "basic",
+          "basic": {
+            "username": "{{clientid}}",
+            "password": "{{clientsecret}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "01.b) Sales Order Response - Inbound",
+      "filename": "01.b) Sales Order Response - Inbound.bru",
+      "seq": 2,
+      "request": {
+        "url": "{{url}}/http/tpm/b2b/simulate",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "type_system",
+            "value": "SAP_S4HANA_Cloud_SOA",
+            "enabled": true
+          },
+          {
+            "name": "communication_protocol",
+            "value": "SOAP",
+            "enabled": true
+          },
+          {
+            "name": "message_content_type",
+            "value": "application/xml",
+            "enabled": true
+          },
+          {
+            "name": "SAP_EDI_Split_Sender_Per_Interchange",
+            "value": "false",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "xml",
+          "xml": "<n0:OrderConfRequest xmlns:n0=\"http://sap.com/xi/EDI\" xmlns:soap-env=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:prx=\"urn:sap.com:proxy:CC2:/1SAI/TASABE4326CFDBA44D16E1E:774\">\n\t<MessageHeader>\n\t\t<ID>ECEBB8895A651EE8AD99E1B32A6F309B</ID>\n\t\t<CreationDateTime>2018-09-10T07:56:41Z</CreationDateTime>\n\t\t<SenderBusinessSystemID>TP_SOA_ID</SenderBusinessSystemID>\n\t\t<ReceiverBusinessSystemID>Company_CloudSOAP_ID</ReceiverBusinessSystemID>\n\t\t<SenderParty>\n\t\t\t<InternalID>TP_SOA_ID</InternalID>\n\t\t</SenderParty>\n\t\t<RecipientParty>\n\t\t\t<InternalID>Company_CloudSOAP_ID</InternalID>\n\t\t</RecipientParty>\n\t</MessageHeader>\n\t<OrderConfirmation>\n\t\t<PurchaseOrderID>4500000494</PurchaseOrderID>\n\t\t<SalesOrderID>60002212</SalesOrderID>\n\t\t<SalesDocumentType>CBAR</SalesDocumentType>\n\t\t<SalesOrderCreationDate>2018-09-10</SalesOrderCreationDate>\n\t\t<TransactionCurrency>EUR</TransactionCurrency>\n\t\t<BuyerExchangeRate>1.0</BuyerExchangeRate>\n\t<ItemListIsCompletelyTransferred>true</ItemListIsCompletelyTransferred>\n\t\t<Party PartyType=\"SoldTo\">\n\t\t\t<BuyerPartyID>10300085</BuyerPartyID>\n\t\t\t<SupplierPartyID>10100015</SupplierPartyID>\n\t\t\t<Address>\n\t\t\t\t<FormOfAddressName>Company</FormOfAddressName>\n\t\t\t\t<AddressName>Customer (EDI)</AddressName>\n\t\t\t\t<HouseNumber>8</HouseNumber>\n\t\t\t\t<PostalCode>69126</PostalCode>\n\t\t\t\t<CityName>Heidelberg</CityName>\n\t\t\t\t<Country>DE</Country>\n\t\t\t\t<PhoneNumber>770 840 9421</PhoneNumber>\n\t\t\t\t<FaxNumber>770 840 9000</FaxNumber>\n\t\t\t\t<CorrespondenceLanguage>en</CorrespondenceLanguage>\n\t\t\t</Address>\n\t\t</Party>\n\t\t<Party PartyType=\"BillTo\">\n\t\t\t<SupplierPartyID>10100015</SupplierPartyID>\n\t\t\t<Address>\n\t\t\t\t<FormOfAddressName>Company</FormOfAddressName>\n\t\t\t\t<AddressName>Customer (EDI)</AddressName>\n\t\t\t\t<HouseNumber>8</HouseNumber>\n\t\t\t\t<PostalCode>69126</PostalCode>\n\t\t\t\t<CityName>Heidelberg</CityName>\n\t\t\t\t<Country>DE</Country>\n\t\t\t\t<CorrespondenceLanguage>en</CorrespondenceLanguage>\n\t\t\t</Address>\n\t\t</Party>\n\t\t<Party PartyType=\"Payer\">\n\t\t\t<SupplierPartyID>10100015</SupplierPartyID>\n\t\t\t<Address>\n\t\t\t\t<FormOfAddressName>Company</FormOfAddressName>\n\t\t\t\t<AddressName>Customer (EDI)</AddressName>\n\t\t\t\t<HouseNumber>8</HouseNumber>\n\t\t\t\t<PostalCode>69126</PostalCode>\n\t\t\t\t<CityName>Heidelberg</CityName>\n\t\t\t\t<Country>DE</Country>\n\t\t\t\t<CorrespondenceLanguage>en</CorrespondenceLanguage>\n\t\t\t</Address>\n\t\t</Party>\n\t\t<Party PartyType=\"ShipTo\">\n\t\t\t<BuyerPartyID>10300085</BuyerPartyID>\n\t\t\t<SupplierPartyID>10100015</SupplierPartyID>\n\t\t\t<Address>\n\t\t\t\t<FormOfAddressName>Company</FormOfAddressName>\n\t\t\t\t<AddressName>Inlandslieferant DE (EDI)</AddressName>\n\t\t\t\t<HouseNumber>8</HouseNumber>\n\t\t\t\t<PostalCode>69126</PostalCode>\n\t\t\t\t<CityName>Heidelberg</CityName>\n\t\t\t\t<Country>DE</Country>\n\t\t\t\t<CorrespondenceLanguage>en</CorrespondenceLanguage>\n\t\t\t</Address>\n\t\t</Party>\n\t\t<RequestedDeliveryDate>2018-09-10</RequestedDeliveryDate>\n\t\t<OrderCombinationIsAllowed>true</OrderCombinationIsAllowed>\n\t\t<HeaderIncoterms>\n\t\t\t<IncotermsClassification>EXW</IncotermsClassification>\n\t\t\t<IncotermsLocation1>Walldorf</IncotermsLocation1>\n\t\t</HeaderIncoterms>\n\t\t<PaymentTerms>\n\t\t\t<BuyerPaymentTermsID>0004</BuyerPaymentTermsID>\n\t\t\t<SupplierPaymentTermsID>0004</SupplierPaymentTermsID>\n\t\t</PaymentTerms>\n\t\t<Item>\n\t\t\t<PurchaseOrderItemID>00010</PurchaseOrderItemID>\n\t\t\t<PurchaseOrderItemCategory>RENV</PurchaseOrderItemCategory>\n\t\t\t<SalesOrderItemID>10</SalesOrderItemID>\n\t\t\t<SalesOrderItemCategory>RENV</SalesOrderItemCategory>\n\t\t\t<OrderItemText>Trading Good 0011,PD,Regular Proc.</OrderItemText>\n\t\t\t<RequestedQuantity unitCode=\"PCE\">10.0</RequestedQuantity>\n\t\t\t<Product>\n\t\t\t\t<BuyerProductID>TG0011</BuyerProductID>\n\t\t\t\t<SupplierProductID>TG0011</SupplierProductID>\n\t\t\t</Product>\n\t\t\t<NetPrice>\n\t\t\t\t<Amount currencyCode=\"EUR\">50.0</Amount>\n\t\t\t\t<BaseQuantity unitCode=\"PCE\">1.0</BaseQuantity>\n\t\t\t</NetPrice>\n\t\t\t<NetAmount currencyCode=\"EUR\">500.0</NetAmount>\n\t\t\t<Plant>1010</Plant>\n\t\t\t<ScheduleLine>\n\t\t\t\t<ConfirmedDeliveryDate>2018-09-10</ConfirmedDeliveryDate>\n\t\t\t\t<ConfirmedOrderQuantityByMaterialAvailableCheck unitCode=\"PCE\">10.0</ConfirmedOrderQuantityByMaterialAvailableCheck>\n\t\t\t</ScheduleLine>\n\t\t</Item>\n\t\t<Item>\n\t\t\t<PurchaseOrderItemID>000020</PurchaseOrderItemID>\n\t\t\t<PurchaseOrderItemCategory>RENV</PurchaseOrderItemCategory>\n\t\t\t<SalesOrderItemID>20</SalesOrderItemID>\n\t\t\t<SalesOrderItemCategory>RENV</SalesOrderItemCategory>\n\t\t\t<OrderItemText>Trading Good 0011,PD,Regular Proc.</OrderItemText>\n\t\t\t<RequestedQuantity unitCode=\"PCE\">20.0</RequestedQuantity>\n\t\t\t<SalesDocumentRjcnReason>59</SalesDocumentRjcnReason>\n\t\t\t<SalesDocumentRjcnReasonName>Damaged by customer</SalesDocumentRjcnReasonName>\n\t\t\t<Product>\n\t\t\t\t<BuyerProductID>TG0011</BuyerProductID>\n\t\t\t\t<SupplierProductID>TG0011</SupplierProductID>\n\t\t\t</Product>\n\t\t\t<NetAmount currencyCode=\"EUR\">1000.0</NetAmount>\n\t\t\t<Plant>1010</Plant>\n\t\t\t<ScheduleLine>\n\t\t\t\t<ConfirmedDeliveryDate>2018-09-10</ConfirmedDeliveryDate>\n\t\t\t\t<ConfirmedOrderQuantityByMaterialAvailableCheck unitCode=\"PCE\">20.0</ConfirmedOrderQuantityByMaterialAvailableCheck>\n\t\t\t</ScheduleLine>\n\t\t</Item>\n\t\t<Item>\n\t\t\t<PurchaseOrderItemID>00030</PurchaseOrderItemID>\n\t\t\t<PurchaseOrderItemCategory>RENV</PurchaseOrderItemCategory>\n\t\t\t<SalesOrderItemID>30</SalesOrderItemID>\n\t\t\t<SalesOrderItemCategory>RENV</SalesOrderItemCategory>\n\t\t\t<OrderItemText>Trading Good 0011,PD,Regular Proc.</OrderItemText>\n\t\t\t<RequestedQuantity unitCode=\"PCE\">30.0</RequestedQuantity>\n\t\t\t<ReturnAttributes>\n\t\t\t\t<ProductToRemainWithCust>true</ProductToRemainWithCust>\n\t\t\t\t<ReturnMaterialAuthID>0060002212-000030</ReturnMaterialAuthID>\n\t\t\t</ReturnAttributes>\n\t\t\t<Product>\n\t\t\t\t<BuyerProductID>TG0011</BuyerProductID>\n\t\t\t\t<SupplierProductID>TG0011</SupplierProductID>\n\t\t\t</Product>\n\t\t\t<NetPrice>\n\t\t\t\t<Amount currencyCode=\"EUR\">50.0</Amount>\n\t\t\t\t<BaseQuantity unitCode=\"PCE\">1.0</BaseQuantity>\n\t\t\t</NetPrice>\n\t\t\t<NetAmount currencyCode=\"EUR\">1500.0</NetAmount>\n\t\t\t<Plant>1010</Plant>\n\t\t\t<ScheduleLine>\n\t\t\t\t<ConfirmedDeliveryDate>2018-09-10</ConfirmedDeliveryDate>\n\t\t\t\t<ConfirmedOrderQuantityByMaterialAvailableCheck unitCode=\"PCE\">30.0</ConfirmedOrderQuantityByMaterialAvailableCheck>\n\t\t\t</ScheduleLine>\n\t\t</Item>\n\t\t<Item>\n\t\t\t<PurchaseOrderItemID>000040</PurchaseOrderItemID>\n\t\t\t<PurchaseOrderItemCategory>RENV</PurchaseOrderItemCategory>\n\t\t\t<SalesOrderItemID>40</SalesOrderItemID>\n\t\t\t<SalesOrderItemCategory>RENV</SalesOrderItemCategory>\n\t\t\t<OrderItemText>Trading Good 0011,PD,Regular Proc.</OrderItemText>\n\t\t\t<RequestedQuantity unitCode=\"PCE\">40.0</RequestedQuantity>\n\t\t\t<SalesDocumentRjcnReason>60</SalesDocumentRjcnReason>\n\t\t\t<SalesDocumentRjcnReasonName>Order cancelled due to Error</SalesDocumentRjcnReasonName>\n\t\t\t<ReturnAttributes>\n\t\t\t\t<ProductToRemainWithCust>true</ProductToRemainWithCust>\n\t\t\t</ReturnAttributes>\n\t\t\t<Product>\n\t\t\t\t<BuyerProductID>TG0011</BuyerProductID>\n\t\t\t\t<SupplierProductID>TG0011</SupplierProductID>\n\t\t\t</Product>\n\t\t\t<NetAmount currencyCode=\"EUR\">2000.0</NetAmount>\n\t\t\t<Plant>1010</Plant>\n\t\t\t<ScheduleLine>\n\t\t\t\t<ConfirmedDeliveryDate>2018-09-10</ConfirmedDeliveryDate>\n\t\t\t\t<ConfirmedOrderQuantityByMaterialAvailableCheck unitCode=\"PCE\">40.0</ConfirmedOrderQuantityByMaterialAvailableCheck>\n\t\t\t</ScheduleLine>\n\t\t</Item>\n\t\t<Item>\n\t\t\t<PurchaseOrderItemID>00050</PurchaseOrderItemID>\n\t\t\t<PurchaseOrderItemCategory>RENV</PurchaseOrderItemCategory>\n\t\t\t<SalesOrderItemID>50</SalesOrderItemID>\n\t\t\t<SalesOrderItemCategory>RENV</SalesOrderItemCategory>\n\t\t\t<OrderItemText>Trading Good 0011,PD,Regular Proc.</OrderItemText>\n\t\t\t<RequestedQuantity unitCode=\"PCE\">50.0</RequestedQuantity>\n\t\t\t<ReturnAttributes>\n\t\t\t\t<ReturnMaterialAuthID>0060002212-000050</ReturnMaterialAuthID>\n\t\t\t</ReturnAttributes>\n\t\t\t<Product>\n\t\t\t\t<BuyerProductID>TG0011</BuyerProductID>\n\t\t\t\t<SupplierProductID>TG0011</SupplierProductID>\n\t\t\t</Product>\n\t\t\t<NetPrice>\n\t\t\t\t<Amount currencyCode=\"EUR\">50.0</Amount>\n\t\t\t\t<BaseQuantity unitCode=\"PCE\">1.0</BaseQuantity>\n\t\t\t</NetPrice>\n\t\t\t<NetAmount currencyCode=\"EUR\">2500.0</NetAmount>\n\t\t\t<Plant>1010</Plant>\n\t\t\t<ScheduleLine>\n\t\t\t\t<ConfirmedDeliveryDate>2018-09-10</ConfirmedDeliveryDate>\n\t\t\t\t<ConfirmedOrderQuantityByMaterialAvailableCheck unitCode=\"PCE\">50.0</ConfirmedOrderQuantityByMaterialAvailableCheck>\n\t\t\t</ScheduleLine>\n\t\t</Item>\n\t</OrderConfirmation>\n</n0:OrderConfRequest>",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "basic",
+          "basic": {
+            "username": "{{clientid}}",
+            "password": "{{clientsecret}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "02.) Delivery Notification - Inbound",
+      "filename": "02.) Delivery Notification - Inbound.bru",
+      "seq": 3,
+      "request": {
+        "url": "{{url}}/http/tpm/b2b/simulate",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "type_system",
+            "value": "SAP_S4HANA_Cloud_SOA",
+            "enabled": true
+          },
+          {
+            "name": "communication_protocol",
+            "value": "SOAP",
+            "enabled": true
+          },
+          {
+            "name": "message_content_type",
+            "value": "application/XML",
+            "enabled": true
+          },
+          {
+            "name": "SAP_EDI_Split_Sender_Per_Interchange",
+            "value": "false",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "xml",
+          "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ns1:DeliveryRequest\n\txmlns:ns1=\"http://sap.com/xi/EDI\">\n\t<MessageHeader>\n\t\t<ID>ECEBB8895A651EE8AD99E1B32A6F309B</ID>\n\t\t<CreationDateTime>2018-09-10T07:56:41Z</CreationDateTime>\n\t\t<SenderBusinessSystemID>TP_SOA_ID</SenderBusinessSystemID>\n\t\t<ReceiverBusinessSystemID>Company_CloudSOAP_ID</ReceiverBusinessSystemID>\n\t\t<SenderParty>\n\t\t\t<InternalID>TP_SOA_ID</InternalID>\n\t\t</SenderParty>\n\t\t<RecipientParty>\n\t\t\t<InternalID>Company_CloudSOAP_ID</InternalID>\n\t\t</RecipientParty>\n\t</MessageHeader>\n\t<Delivery>\n\t\t<DeliveryDocument>0080000849</DeliveryDocument>\n\t\t<SalesOrganization>3010</SalesOrganization>\n\t\t<ShippingPoint>3010</ShippingPoint>\n\t\t<Party PartyType=\"SoldTo\">\n\t\t\t<BuyerPartyID>EDI-001</BuyerPartyID>\n\t\t\t<SupplierPartyID>EDI-001</SupplierPartyID>\n\t\t\t<Address>\n\t\t\t\t<FormOfAddressName>Company</FormOfAddressName>\n\t\t\t\t<AddressName>EDI Customer (2EL)</AddressName>\n\t\t\t\t<StreetName>Rosengasse 7</StreetName>\n\t\t\t\t<PostalCode>69126</PostalCode>\n\t\t\t\t<CityName>Heidelberg</CityName>\n\t\t\t\t<Country>DE</Country>\n\t\t\t\t<CorrespondenceLanguage>EN</CorrespondenceLanguage>\n\t\t\t</Address>\n\t\t</Party>\n\t\t<Party PartyType=\"ShipTo\">\n\t\t\t<BuyerPartyID>EDI-001</BuyerPartyID>\n\t\t\t<SupplierPartyID>EDI-001</SupplierPartyID>\n\t\t\t<Address>\n\t\t\t\t<FormOfAddressName>Company</FormOfAddressName>\n\t\t\t\t<AddressName>EDI Customer (2EL)</AddressName>\n\t\t\t\t<StreetName>Rosengasse 7</StreetName>\n\t\t\t\t<PostalCode>69126</PostalCode>\n\t\t\t\t<CityName>Heidelberg</CityName>\n\t\t\t\t<CorrespondenceLanguage>EN</CorrespondenceLanguage>\n\t\t\t</Address>\n\t\t</Party>\n\t\t<Party PartyType=\"ShippingPoint\">\n\t\t\t<BuyerPartyID>3010</BuyerPartyID>\n\t\t\t<SupplierPartyID>3010</SupplierPartyID>\n\t\t\t<Address>\n\t\t\t\t<AddressName>Shipping Point 1010 - Address Name 1</AddressName>\n\t\t\t\t<StreetName>Neurottstr. 16</StreetName>\n\t\t\t\t<PostalCode>69190</PostalCode>\n\t\t\t\t<CityName>Walldorf</CityName>\n\t\t\t\t<Country>DE</Country>\n\t\t\t\t<Region>BW</Region>\n\t\t\t\t<CorrespondenceLanguage>DE</CorrespondenceLanguage>\n\t\t\t</Address>\n\t\t</Party>\n\t\t<Party PartyType=\"SalesOrganization\">\n\t\t\t<BuyerPartyID>3010</BuyerPartyID>\n\t\t\t<SupplierPartyID>3010</SupplierPartyID>\n\t\t\t<Address>\n\t\t\t\t<AddressName>Sales Organization 1010 - Address Name 1</AddressName>\n\t\t\t\t<StreetName>Dietmar-Hopp-Allee 16</StreetName>\n\t\t\t\t<PostalCode>69190</PostalCode>\n\t\t\t\t<CityName>Walldorf</CityName>\n\t\t\t\t<Country>DE</Country>\n\t\t\t\t<Region>BW</Region>\n\t\t\t\t<CorrespondenceLanguage>DE</CorrespondenceLanguage>\n\t\t\t</Address>\n\t\t</Party>\n\t\t<Party PartyType=\"\"/>\n\t\t<Party PartyType=\"\"/>\n\t\t<Party PartyType=\"\"/>\n\t\t<PickingDateTime timeZoneCode=\"PST\">2024-02-05T00:00:00</PickingDateTime>\n\t\t<LoadingDateTime timeZoneCode=\"CET\">2024-02-05T00:00:00</LoadingDateTime>\n\t\t<GoodsIssueDateTime timeZoneCode=\"CET\">2024-02-05T00:00:00</GoodsIssueDateTime>\n\t\t<ProofOfDeliveryDateTime>2018-12-18T15:47:21</ProofOfDeliveryDateTime>\n\t\t<ActualGoodsMovementDateTime timeZoneCode=\"CET\">2018-12-18T00:00:00</ActualGoodsMovementDateTime>\n\t\t<DeliveryDateTime timeZoneCode=\"UTC+8\">2024-02-05T00:00:00</DeliveryDateTime>\n\t\t<DocumentDate>2024-02-05</DocumentDate>\n\t\t<IsCopyWeightVolumeRequested>ORI</IsCopyWeightVolumeRequested>\n\t\t<HeaderGrossWeight unitCode=\"KGM\">1.000</HeaderGrossWeight>\n\t\t<HeaderNetWeight unitCode=\"KGM\">0.900</HeaderNetWeight>\n\t\t<HeaderVolume unitCode=\"\">0.000</HeaderVolume>\n\t\t<Incoterms>\n\t\t\t<IncotermsClassification>EXW</IncotermsClassification>\n\t\t\t<IncotermsLocation1>Walldorf</IncotermsLocation1>\n\t\t\t<IncotermsLocation2>Walldorf</IncotermsLocation2>\n\t\t</Incoterms>\n\t\t<ShippingCondition>01</ShippingCondition>\n\t\t<DeliveryItem>\n\t\t\t<DeliveryDocumentItem>000010</DeliveryDocumentItem>\n\t\t\t<DeliveryDocumentItemBySupplier>000000</DeliveryDocumentItemBySupplier>\n\t\t\t<Material>\n\t\t\t\t<BuyerProductID>TG-D120_AU</BuyerProductID>\n\t\t\t\t<SupplierProductID>TG-D120_AU</SupplierProductID>\n\t\t\t</Material>\n\t\t\t<ActualDeliveryQuantity unitCode=\"PCE\">1.000</ActualDeliveryQuantity>\n\t\t\t<ActualDeliveredQtyInBaseUnit unitCode=\"PCE\">1.000</ActualDeliveredQtyInBaseUnit>\n\t\t\t<OriginalDeliveryQuantity>         1.000</OriginalDeliveryQuantity>\n\t\t\t<DeliveryDocumentItemCategory>TAN</DeliveryDocumentItemCategory>\n\t\t\t<DeliveryDocumentItemText>AUSTRALIA</DeliveryDocumentItemText>\n\t\t\t<ItemNetWeight unitCode=\"KGM\">0.900</ItemNetWeight>\n\t\t\t<ItemGrossWeight unitCode=\"KGM\">1.000</ItemGrossWeight>\n\t\t\t<ItemVolume unitCode=\"\">0.000</ItemVolume>\n\t\t\t<Batch>\n\t\t\t\t<ShelfLifeExpirationDate>2024-11-19</ShelfLifeExpirationDate>\n\t\t\t</Batch>\n\t\t\t<Plant>3010</Plant>\n\t\t\t<StorageLocation>301A</StorageLocation>\n\t\t\t<DistributionChannel>10</DistributionChannel>\n\t\t\t<Division>00</Division>\n\t\t\t<LoadingGroup>0001</LoadingGroup>\n\t\t\t<TransportationGroup>0001</TransportationGroup>\n\t\t\t<DeliveryGroup>000</DeliveryGroup>\n\t\t\t<UnderlyingPurchaseOrder>4500003532</UnderlyingPurchaseOrder>\n\t\t\t<UnderlyingPurchaseOrderItem>000010</UnderlyingPurchaseOrderItem>\n\t\t\t<ReferenceSDDocument>0000001390</ReferenceSDDocument>\n\t\t\t<ReferenceSDDocumentItem>000010</ReferenceSDDocumentItem>\n\t\t\t<DeliveryToBaseQuantityDnmntr>1</DeliveryToBaseQuantityDnmntr>\n\t\t\t<DeliveryToBaseQuantityNmrtr>1</DeliveryToBaseQuantityNmrtr>\n\t\t\t<UnderdelivTolrtdLmtRatioInPct>0.0</UnderdelivTolrtdLmtRatioInPct>\n\t\t\t<OverdelivTolrtdLmtRatioInPct>0.0</OverdelivTolrtdLmtRatioInPct>\n\t\t\t<MaterialGroup>L001</MaterialGroup>\n\t\t</DeliveryItem>\n\t</Delivery>\n</ns1:DeliveryRequest>",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "basic",
+          "basic": {
+            "username": "{{clientid}}",
+            "password": "{{clientsecret}}"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "03.) Invoice - Inbound",
+      "filename": "03.) Invoice - Inbound.bru",
+      "seq": 4,
+      "request": {
+        "url": "{{url}}/http/tpm/b2b/simulate",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "type_system",
+            "value": "SAP_S4HANA_Cloud_SOA",
+            "enabled": true
+          },
+          {
+            "name": "communication_protocol",
+            "value": "SOAP",
+            "enabled": true
+          },
+          {
+            "name": "message_content_type",
+            "value": "application/XML",
+            "enabled": true
+          },
+          {
+            "name": "SAP_EDI_Split_Sender_Per_Interchange",
+            "value": "false",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "xml",
+          "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n  <ns2:InvoiceRequest xmlns:ns2=\"http://sap.com/xi/EDI\">\n\t<MessageHeader>\n\t\t<CreationDateTime>2018-05-08T15:40:13Z</CreationDateTime>\n\t\t<SenderBusinessSystemID>TP_SOA_ID</SenderBusinessSystemID>\n\t\t<ReceiverBusinessSystemID>Company_CloudSOAP_ID</ReceiverBusinessSystemID>\n\t\t<SenderParty>\n\t\t\t<InternalID>TP_SOA_ID</InternalID>\n\t\t</SenderParty>\n\t\t<RecipientParty>\n\t\t\t<InternalID>Company_CloudSOAP_ID</InternalID>\n\t\t</RecipientParty>\n\t</MessageHeader>\n\t<Invoice>\n\t\t<SupplierInvoiceID>0090000047</SupplierInvoiceID>\n\t\t<SupplierInvoiceTypeCode>004</SupplierInvoiceTypeCode>\n\t\t<DocumentDate>2018-03-27</DocumentDate>\n\t\t<GrossAmount currencyCode=\"EUR\">42.84</GrossAmount>\n\t\t<Party PartyType=\"BillFrom\">\n\t\t\t<BuyerPartyID>10300089</BuyerPartyID>\n\t\t\t<SupplierPartyID>0010101000</SupplierPartyID>\n\t\t</Party>\n\t\t<Party PartyType=\"AG\"/>\n\t\t<Party PartyType=\"BillTo\">\n\t\t\t<SupplierPartyID>0010101000</SupplierPartyID>\n\t\t\t<Address>\n\t\t\t\t<AddressName>Superstore AG</AddressName>\n\t\t\t</Address>\n\t\t</Party>\n\t\t<Party PartyType=\"RG\"/>\n\t\t<Party PartyType=\"BK\"/>\n\t\t<PaymentTerms>\n\t\t\t<DueCalculationBaseDate>2018-03-31</DueCalculationBaseDate>\n\t\t\t<CashDiscount1Percent>0</CashDiscount1Percent>\n\t\t\t<CashDiscount1Days>0</CashDiscount1Days>\n\t\t</PaymentTerms>\n\t\t<HeaderTax>\n\t\t\t<SupplierTaxTypeCode>A1</SupplierTaxTypeCode>\n\t\t\t<Amount currencyCode=\"EUR\">6.84</Amount>\n\t\t\t<TaxPercentage>19.000</TaxPercentage>\n\t\t</HeaderTax>\n\t\t<Item>\n\t\t\t<SupplierInvoiceItemID>000010</SupplierInvoiceItemID>\n\t\t\t<SupplierInvoiceItemTypeCode>002</SupplierInvoiceItemTypeCode>\n\t\t\t<NetAmount currencyCode=\"EUR\">36.00</NetAmount>\n\t\t\t<InvoicedQuantity unitCode=\"PCE\">3.000</InvoicedQuantity>\n\t\t\t<PurchaseOrderID>4500006405</PurchaseOrderID>\n\t\t\t<PurchaseOrderItemID>000010</PurchaseOrderItemID>\n\t\t\t<DeliveryNote></DeliveryNote>\n\t\t\t<Product>\n\t\t\t\t<BuyerProductID>TG10</BuyerProductID>\n\t\t\t\t<SupplierProductID>TG10</SupplierProductID>\n\t\t\t</Product>\n\t\t\t<ItemTax>\n\t\t\t\t<SupplierTaxTypeCode>A1</SupplierTaxTypeCode>\n\t\t\t\t<TaxPercentage>19.000</TaxPercentage>\n\t\t\t\t<TaxDeterminationDate>2020-10-20</TaxDeterminationDate>\n\t\t\t</ItemTax>\n\t\t</Item>\n\t</Invoice>\n</ns2:InvoiceRequest>",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "basic",
+          "basic": {
+            "username": "{{clientid}}",
+            "password": "{{clientsecret}}"
+          }
+        }
+      }
+    }
+  ],
+  "activeEnvironmentUid": "DVZRDcOJnNrHaax2w5nFR",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "url",
+          "value": "https://b2b-mapping-factory-dev-d6xaa3qy.it-accd003-rt.cfapps.eu12.hana.ondemand.com",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "clientsecret",
+          "value": "8b3aa9fb-ba1c-43d5-a16a-787d2814663d$TnIoIQFSVgxwL3IKTTaPHkwp1Jh4iDl-N0eOW4m3_po=",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "clientid",
+          "value": "sb-e94893a5-f5d9-481e-b0da-36a6f206c547!b394389|it-rt-b2b-mapping-factory-dev-d6xaa3qy!b1806",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "B2B_DEV"
+    }
+  ],
+  "root": {
+    "request": {
+      "auth": {
+        "mode": "none"
+      }
+    },
+    "meta": {
+      "name": "Purchase to Pay Scenario"
+    }
+  },
+  "brunoConfig": {
+    "version": "1",
+    "name": "[B2B Integration Factory] - Purchase to Pay Scenario",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.02263927459716797,
+    "filesCount": 6
+  }
+}

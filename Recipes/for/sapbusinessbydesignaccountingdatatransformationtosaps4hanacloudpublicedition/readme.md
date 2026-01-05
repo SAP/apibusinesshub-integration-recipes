@@ -7,13 +7,28 @@
 
 Transform the data in accounting data objects of SAP Business ByDesign into a form suitable for migration into SAP S/4HANA Cloud Public Edition object.
 
-<p>This package supports you with the transformation of data in business objects of SAP Business ByDesign into a form suitable for migration into SAP S/4HANA Cloud Public Edition object. Each integration flow in this package provides the field level mapping of standard attributes in business object of SAP Business ByDesign to attributes in object of SAP S/4HANA Cloud Public Edition. The artifact in this package works without connecting the integration suite to source system and target system. The payload is passed manually to integration flows and the output is received as a file that is stored locally.</p>
+<p>This package supports you with the transformation of data in business objects of SAP Business ByDesign (ByD) into a form suitable for migration into SAP S/4HANA Cloud Public Edition object.</p>
+<p>Each integration flow in this package provides the field level mapping of standard attributes in business object of SAP Business ByDesign to attributes in object of SAP S/4HANA Cloud Public Edition.</p>
+<p>The artifacts in this package works without connecting the integration suite to source system and target system. The payload is passed manually to integration flows and the output is received as a file that is stored locally.</p>
+<p>This package provides three integration flows:</p>
+<ol>
+ <li>ByD Inventory Data Transformation</li>
+ <li>ByD Open Items Payable Data Transformation</li>
+ <li>ByD Open Items Receivable Data Transformation</li>
+</ol>
+<p>&nbsp;</p>
 
 [Download the integration package](SAPBusinessByDesignAccountingDataTransformationtoSAPS4HANACloudPublicEdition.zip)\
 [View package on the SAP Business Accelerator Hub](https://api.sap.com/package/SAPBusinessByDesignAccountingDataTransformationtoSAPS4HANACloudPublicEdition)\
 [View documentation](SAPBusinessByDesignAccountingDataTransformationtoSAPS4HANACloudPublicEdition.pdf)\
 [View high level effort](effort.md)
 ## Integration flows
-### Inventory Data Transformation 
+### ByD Open Items Receivable Data Transformation 
+Transform the data in Open Items Receivable object of SAP Business ByDesign into the FI - Accounts receivable open item migration template of SAP S/4HANA Cloud Public Edition, suitable for upload via Migration cockpit. \
+ ![input-image](ByD_Open_Items_Receivable_Data_Transformation.png)
+### ByD Inventory Data Transformation 
 Transform the data in Inventory object of SAP Business ByDesign into the Material Inventory Balance migration template of SAP S/4HANA Cloud Public Edition, suitable for upload via Migration cockpit. \
  ![input-image](Inventory_Data_Transformation.png)
+### ByD Open Items Payable Data Transformation 
+Transform the data in Open Items Payable object of SAP Business ByDesign into the FI - Accounts payable open item migration template of SAP S/4HANA Cloud Public Edition, suitable for upload via Migration cockpit. \
+ ![input-image](ByD_Open_Items_Payable_Data_Transformation.png)
