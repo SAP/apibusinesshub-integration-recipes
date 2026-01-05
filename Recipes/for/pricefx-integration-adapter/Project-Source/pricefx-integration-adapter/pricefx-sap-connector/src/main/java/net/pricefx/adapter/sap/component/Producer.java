@@ -23,11 +23,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 
 import static net.pricefx.adapter.sap.util.Constants.*;
-import static net.pricefx.adapter.sap.util.SupportedOperation.GET;
+import static net.pricefx.adapter.sap.util.SupportedOperation.*;
 import static net.pricefx.connector.common.util.Constants.DEFAULT_TIMEOUT;
 import static net.pricefx.connector.common.util.Constants.MAX_RECORDS;
-import static net.pricefx.connector.common.util.PFXTypeCode.CONDITION_RECORD;
-import static net.pricefx.connector.common.util.PFXTypeCode.TOKEN;
+import static net.pricefx.connector.common.util.PFXTypeCode.*;
 import static net.pricefx.connector.common.validation.ConnectorException.ErrorType.CONNECTION_ERROR;
 
 
@@ -110,10 +109,12 @@ public class Producer extends DefaultProducer {
 
         validateTargetDate(typeCode, exchange);
 
-        IPFXExtensionType extensionType = getPFXExtensionType(pfxClient, typeCode, exchange);
+        SupportedOperation operation = SupportedOperation.valueOf(((Endpoint) getEndpoint()).getOperationType());
+
+        IPFXExtensionType extensionType = getPFXExtensionType(pfxClient, typeCode, exchange, operation);
 
         JsonNode node = new ObjectNode(JsonNodeFactory.instance);
-        switch (SupportedOperation.valueOf(((Endpoint) getEndpoint()).getOperationType())) {
+        switch (operation) {
             case FETCH_COUNT:
                 node = new FetchService(
                         pfxClient, typeCode,
@@ -137,7 +138,7 @@ public class Producer extends DefaultProducer {
             case BULKLOAD:
                 node = new BulkLoadService(pfxClient, typeCode, extensionType,
                         getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()),
-                        ((Endpoint) getEndpoint()).isValidation()).execute(input);
+                        ((Endpoint) getEndpoint()).isValidation(), ((Endpoint) getEndpoint()).isSuperseded()).execute(input);
                 break;
             case EXECUTE:
                 node = new ExecuteOperation(pfxClient, ((Endpoint) getEndpoint()).getExecuteTargetType(), uniqueId, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()), typeCode).execute(input);
@@ -152,19 +153,21 @@ public class Producer extends DefaultProducer {
                 node = new CreateService(pfxClient, typeCode).execute(input);
                 break;
             case UPDATE:
+            case UPSERT:
                 String lastUpdatedTimestamp = null;
                 if (typeCode == CONDITION_RECORD) {
                     lastUpdatedTimestamp =
                             getDynamicValue(exchange, ((Endpoint) getEndpoint()).getLastUpdateTimestamp());
                 }
-                node = new UpdateService(pfxClient, typeCode, extensionType, uniqueId, lastUpdatedTimestamp).execute(input);
-
-                break;
-            case UPSERT:
-                node = new UpsertService(pfxClient, typeCode, extensionType,
-                        ((Endpoint) getEndpoint()).isSimpleResult(),
-                        ((Endpoint) getEndpoint()).isShowSystemFields(),
-                        ((Endpoint) getEndpoint()).isReplaceNullWithEmpty()).execute(input);
+                if (SupportedOperation.valueOf(((Endpoint) getEndpoint()).getOperationType()) == UPSERT ||
+                        typeCode == ACTION || typeCode == ACTION_PLAN){
+                    node = new UpsertService(pfxClient, typeCode, extensionType,
+                            ((Endpoint) getEndpoint()).isSimpleResult(),
+                            ((Endpoint) getEndpoint()).isShowSystemFields(),
+                            ((Endpoint) getEndpoint()).isReplaceNullWithEmpty()).execute(input);
+                } else{
+                    node = new UpdateService(pfxClient, typeCode, extensionType, uniqueId, lastUpdatedTimestamp).execute(input);
+                }
                 break;
             case DELETE:
                 node = new DeleteOperation(pfxClient, typeCode, uniqueId, extensionType, false).delete(input);
@@ -370,10 +373,21 @@ public class Producer extends DefaultProducer {
         }
     }
 
-    private IPFXExtensionType getPFXExtensionType(PFXOperationClient pfxClient, PFXTypeCode typeCode, Exchange exchange) {
-        if (typeCode != null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE || typeCode == CONDITION_RECORD)) {
+    private IPFXExtensionType getPFXExtensionType(PFXOperationClient pfxClient, PFXTypeCode typeCode, Exchange exchange, SupportedOperation operation) {
+        if (typeCode != null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE )) {
             return pfxClient.createExtensionType(typeCode, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()),
                     getDynamicValue(exchange, ((Endpoint) getEndpoint()).getTargetDate()));
+        } else if (typeCode == CONDITION_RECORD){
+            switch (operation){
+                case FETCH_COUNT:
+                case FETCH:
+                    return pfxClient.createExtensionType(typeCode, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()),
+                            getDynamicValue(exchange, ((Endpoint) getEndpoint()).getTargetDate()),
+                            ((Endpoint) getEndpoint()).isHistory(), ((Endpoint) getEndpoint()).isActive());
+                default:
+                    return pfxClient.createExtensionType(typeCode, getDynamicValue(exchange, ((Endpoint) getEndpoint()).getExtensionName()),
+                            getDynamicValue(exchange, ((Endpoint) getEndpoint()).getTargetDate()));
+            }
         }
 
         return null;

@@ -1,0 +1,15 @@
+{
+  "data": {
+    "operator": "and",
+    "criteria": [
+      {
+        "fieldName": "description",
+        "operator": "equals",
+        "value": "INTEGRATION TEST ONLY"
+      }
+    ]
+  },
+  "sortBy": [
+    "uniqueName"
+  ]
+}

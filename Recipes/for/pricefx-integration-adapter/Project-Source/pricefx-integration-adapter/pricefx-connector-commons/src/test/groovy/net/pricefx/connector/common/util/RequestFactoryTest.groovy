@@ -253,36 +253,26 @@ class RequestFactoryTest extends Specification {
 
     def "buildUpsertRequest"() {
         given:
-        def node = new ObjectNode(JsonNodeFactory.instance).put(RequestUtil.OPERATOR, OperatorId.AND.getValue())
-                .set("criteria", JsonUtil.createArrayNode(
-                        new ObjectNode(JsonNodeFactory.instance).put(RequestUtil.OPERATOR, OperatorId.NOT_NULL.getValue()).put(PFXConstants.FIELD_FIELDNAME, PFXConstants.FIELD_SKU)))
-        def userNode = new ObjectNode(JsonNodeFactory.instance).put("loginName", "TEST").set("productFilterCriteria", node)
         def extensionType = new PFXExtensionType(PFXTypeCode.PRODUCTEXTENSION).withAttributes(6).withTable("TEST")
 
-        when:
-        def results = RequestFactory.buildUpsertRequest(PFXTypeCode.USER, null, userNode)
-
-        then:
-        results.get(0).get("productFilterCriteria").isTextual()
-        results.get(0).get("productFilterCriteria").textValue().contains("AdvancedCriteria")
 
         when:
-        results = RequestFactory.buildUpsertRequest(PFXTypeCode.USER, null, null)
+        def results = RequestFactory.buildUpsertRequest(PFXTypeCode.USER, null, null)
 
         then:
-        !results
+        null == results
 
         when:
         results = RequestFactory.buildUpsertRequest(PFXTypeCode.USER, null, new TextNode(null))
 
         then:
-        !results
+        null == results
 
         when:
         results = RequestFactory.buildUpsertRequest(PFXTypeCode.USER, null, new ArrayNode(JsonNodeFactory.instance))
 
         then:
-        !results
+        null == results
 
         when:
         results = RequestFactory.buildUpsertRequest(PFXTypeCode.PRODUCTEXTENSION, extensionType, new ObjectNode(JsonNodeFactory.instance).put(PFXConstants.FIELD_SKU, "1234"))
@@ -299,9 +289,6 @@ class RequestFactoryTest extends Specification {
         def request = RequestUtil.createSimpleFetchRequest(
                 buildSimpleCriterion("attribute1", OperatorId.EQUALS.getValue(), "005"))
 
-        def conditionRecordType = pfxClient.createExtensionType(PFXTypeCode.CONDITION_RECORD, "Condition006", "")
-
-
         when:
         def result = RequestFactory.buildFetchDataRequest(request, PFXTypeCode.PRODUCT, null)
 
@@ -309,7 +296,16 @@ class RequestFactoryTest extends Specification {
         request == result
 
         when:
-        result = RequestFactory.buildFetchDataRequest(request, PFXTypeCode.CONDITION_RECORD, conditionRecordType)
+        def conditionRecordType = pfxClient.createExtensionType(PFXTypeCode.CONDITION_RECORD, "Condition006", "", false, true)
+        result = RequestFactory.buildFetchDataRequest(request, conditionRecordType.getTypeCode(), conditionRecordType)
+
+        then:
+        request == result.get(FIELD_CRITERIA).get(1)
+        "1" == result.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue()
+
+        when:
+        conditionRecordType = pfxClient.createExtensionType(PFXTypeCode.CONDITION_RECORD, "Condition006", "", true, true)
+        result = RequestFactory.buildFetchDataRequest(request, conditionRecordType.getTypeCode(), conditionRecordType)
 
         then:
         request == result.get(FIELD_CRITERIA).get(1)

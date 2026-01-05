@@ -35,7 +35,7 @@ public class RequestUtil {
                 CONTAINS, STARTS_WITH, ENDS_WITH, ICONTAINS, ISTARTS_WITH, IENDS_WITH,
                 INOT_STARTS_WITH, INOT_ENDS_WITH,
                 NOT_CONTAINS, NOT_STARTS_WITH, NOT_ENDS_WITH, INOT_CONTAINS, IS_NULL, NOT_NULL,
-                IN_SET, NOT_IN_SET);
+                IN_SET, NOT_IN_SET, BETWEEN, BETWEEN_INCLUSIVE);
     }
 
     private RequestUtil() {
@@ -158,12 +158,15 @@ public class RequestUtil {
         return SUPPORTED_OPERATORS.stream().filter((OperatorId op) -> operatorIdValue.equals(op.getValue())).count() > 0;
     }
 
-    public static boolean isValidValue(String operatorIdValue, JsonNode value) {
+    public static boolean isValidValue(String operatorIdValue, JsonNode value, JsonNode start, JsonNode end) {
         OperatorId operatorId = getOperatorId(operatorIdValue);
         if ("isEmpty".equals(operatorIdValue) || "notEmpty".equals(operatorIdValue)) return true;
         if (operatorId == null) return false;
 
         switch (operatorId) {
+            case BETWEEN:
+            case BETWEEN_INCLUSIVE:
+                return (start != null || end != null);
             case IN_SET:
             case NOT_IN_SET:
                 return (value != null && value.isArray() && value.size() > 0);
@@ -186,7 +189,7 @@ public class RequestUtil {
     }
 
     public static void validateExtensionType(PFXTypeCode typeCode, IPFXExtensionType extensionType) {
-        if ((typeCode.isExtension() || typeCode == LOOKUPTABLE || typeCode == PFXTypeCode.CONDITION_RECORD) &&
+        if (typeCode != null && (typeCode.isExtension() || typeCode == LOOKUPTABLE || typeCode.isConditionRecordTypeCodes()) &&
                 (extensionType == null || StringUtils.isEmpty(extensionType.getTable()))) {
             throw new ConnectorException(TABLE_NOT_FOUND);
         }

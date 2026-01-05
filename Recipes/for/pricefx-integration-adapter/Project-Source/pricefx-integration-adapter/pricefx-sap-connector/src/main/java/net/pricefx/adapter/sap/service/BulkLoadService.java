@@ -15,12 +15,15 @@ public class BulkLoadService extends AbstractJsonRequestService {
     private final String tableName;
     private final boolean validation;
 
-    public BulkLoadService(PFXOperationClient pfxClient, PFXTypeCode typeCode, IPFXExtensionType extensionType, String tableName, boolean validation) {
+    private final boolean superseded;
+
+    public BulkLoadService(PFXOperationClient pfxClient, PFXTypeCode typeCode, IPFXExtensionType extensionType, String tableName, boolean validation, boolean superseded) {
         super(pfxClient);
         this.typeCode = typeCode;
         this.extensionType = extensionType;
         this.tableName = tableName;
         this.validation = validation;
+        this.superseded = superseded;
     }
 
     @Override
@@ -28,7 +31,7 @@ public class BulkLoadService extends AbstractJsonRequestService {
 
         switch (typeCode) {
             case CONDITION_RECORD:
-                return new ConditionRecordBulkLoader(getPfxClient(), extensionType).bulkLoad(request, validation);
+                return new ConditionRecordBulkLoader(getPfxClient(), extensionType, superseded).bulkLoad(request, validation);
             case DATAFEED:
                 return new DatafeedBulkLoader(getPfxClient(), tableName).bulkLoad(request);
             default:

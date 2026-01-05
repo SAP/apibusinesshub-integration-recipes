@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.fasterxml.jackson.databind.node.MissingNode
 import com.fasterxml.jackson.databind.node.ObjectNode
+import com.fasterxml.jackson.databind.node.TextNode
 import com.google.common.collect.ImmutableList
 import net.pricefx.connector.common.validation.RequestValidationException
 import spock.lang.Specification
@@ -198,25 +199,30 @@ class RequestUtilTest extends Specification {
         where:
         operator                   | result1
         OperatorId.ENDS_WITH.value | true
-        OperatorId.BETWEEN.value   | false
+        OperatorId.BETWEEN.value   | true
+        OperatorId.BETWEEN_INCLUSIVE.value   | true
         null                       | false
     }
 
-    def "isValidValue"(operator, node, result2) {
+    def "isValidValue"(operator, node, start, end, result2) {
         expect:
-        result2 == RequestUtil.isValidValue(operator, node)
+        result2 == RequestUtil.isValidValue(operator, node, start, end)
 
         where:
-        operator                 | node                                                | result2
-        OperatorId.EQUALS.value  | null                                                | false
-        OperatorId.EQUALS.value  | MissingNode.instance                                | false
-        OperatorId.EQUALS.value  | new ObjectNode(JsonNodeFactory.instance)            | true
-        OperatorId.IS_NULL.value | null                                                | true
-        OperatorId.IN_SET.value  | null                                                | false
-        OperatorId.IN_SET.value  | new ObjectNode(JsonNodeFactory.instance)            | false
-        OperatorId.IN_SET.value  | new ArrayNode(JsonNodeFactory.instance)             | false
-        OperatorId.IN_SET.value  | new ArrayNode(JsonNodeFactory.instance).add("test") | true
-        "xx"                     | null                                                | false
+        operator                 | node                                                | start| end | result2
+        OperatorId.EQUALS.value  | null                                                | null | null |false
+        OperatorId.EQUALS.value  | MissingNode.instance                                | null | null |false
+        OperatorId.EQUALS.value  | new TextNode("xxx") | null | null |true
+        OperatorId.IS_NULL.value | null                                                | null | null |true
+        OperatorId.IN_SET.value  | null                                                | null | null |false
+        OperatorId.IN_SET.value  | new ObjectNode(JsonNodeFactory.instance)            | null | null |false
+        OperatorId.IN_SET.value  | new ArrayNode(JsonNodeFactory.instance)             | null | null |false
+        OperatorId.IN_SET.value  | new ArrayNode(JsonNodeFactory.instance).add("test") | null | null |true
+        "xx"                     | null                                                | null | null |false
+        OperatorId.BETWEEN.value  | null                                               | new TextNode("1") | new TextNode("2")  |true
+        OperatorId.BETWEEN_INCLUSIVE.value  | null                                     | new TextNode("1")  | null |true
+        OperatorId.BETWEEN_INCLUSIVE.value  | null                                     | null | null |false
+        OperatorId.BETWEEN.value  | null                                               | null | new TextNode("2")  |true
     }
 
     def "getOperatorId"(operator, result3) {

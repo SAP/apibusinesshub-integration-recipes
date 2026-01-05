@@ -18,10 +18,14 @@ class ConditionRecordUpdaterTest extends Specification {
 
     def "validateData"() {
         given:
-        def request = new ObjectMapper().readTree(ConditionRecordUpdaterTest.class.getResourceAsStream(requestFile))
-
+        def request = null
+        ConditionRecordUpdaterTest.class
+                .getResourceAsStream(requestFile)
+                .withCloseable { is ->
+                    request = new ObjectMapper().readTree(is)
+                }
         when:
-        new ConditionRecordUpdater(pfxClient, conditionRecordType,  "2024-01-01T00:00:00").validateData(request)
+        new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").validateData(request)
 
         then:
         noExceptionThrown()
@@ -38,7 +42,7 @@ class ConditionRecordUpdaterTest extends Specification {
                         .put("attribute10", "50")
                         .put("attribute2", "50")
                         .put("attributeX", "50"))
-        new ConditionRecordUpdater(pfxClient, conditionRecordType,  "2024-01-01T00:00:00").validateData(request)
+        new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").validateData(request)
 
         then:
         thrown(RequestValidationException.class)
@@ -53,7 +57,7 @@ class ConditionRecordUpdaterTest extends Specification {
                         .put(PFXConstants.FIELD_ID, 2)
                         .put("attribute10", "50")
                         .put("attribute2", "50"))
-        new ConditionRecordUpdater(pfxClient, conditionRecordType,  "2024-01-01T00:00:00").validateData(request)
+        new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").validateData(request)
 
         then:
         noExceptionThrown()
@@ -67,7 +71,7 @@ class ConditionRecordUpdaterTest extends Specification {
                 new ObjectNode(JsonNodeFactory.instance)
                         .put(PFXConstants.FIELD_ID, 2)
                         .put("attribute2", "50"))
-        new ConditionRecordUpdater(pfxClient, conditionRecordType,  "2024-01-01T00:00:00").validateData(request)
+        new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").validateData(request)
 
         then:
         thrown(RequestValidationException.class)
@@ -78,7 +82,7 @@ class ConditionRecordUpdaterTest extends Specification {
                 .put("attribute10", "50")
                 .put("attribute2", 50)
 
-        new ConditionRecordUpdater(pfxClient, conditionRecordType,  "2024-01-01T00:00:00").validateData(request)
+        new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").validateData(request)
 
         then:
         thrown(RequestValidationException.class)
@@ -92,7 +96,7 @@ class ConditionRecordUpdaterTest extends Specification {
                 new ObjectNode(JsonNodeFactory.instance)
                         .put("attribute10", "50")
                         .put("attribute2", "50"))
-        new ConditionRecordUpdater(pfxClient, conditionRecordType,  "2024-01-01T00:00:00").validateData(request)
+        new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").validateData(request)
 
         then:
         thrown(RequestValidationException.class)
@@ -104,7 +108,7 @@ class ConditionRecordUpdaterTest extends Specification {
                         .put("attribute10", "50")
                         .put("attribute2", 50),
                 new TextNode("x"))
-        new ConditionRecordUpdater(pfxClient, conditionRecordType,  "2024-01-01T00:00:00").validateData(request)
+        new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").validateData(request)
 
         then:
         thrown(RequestValidationException.class)
@@ -117,7 +121,7 @@ class ConditionRecordUpdaterTest extends Specification {
                 new ObjectNode(JsonNodeFactory.instance)
                         .put(PFXConstants.FIELD_ID, 2).put("validFrom", "2024-10-31").put("attribute10", "50")
                         .put("attribute2", "50"))
-        new ConditionRecordUpdater(pfxClient, conditionRecordType,  "2024-01-01T00:00:00").validateData(request)
+        new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").validateData(request)
 
         then:
         thrown(RequestValidationException.class)
@@ -130,7 +134,7 @@ class ConditionRecordUpdaterTest extends Specification {
                 new ObjectNode(JsonNodeFactory.instance)
                         .put(PFXConstants.FIELD_ID, 2).put("key1", "abc").put("attribute10", "50")
                         .put("attribute2", "50"))
-        new ConditionRecordUpdater(pfxClient, conditionRecordType,  "2024-01-01T00:00:00").validateData(request)
+        new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").validateData(request)
 
         then:
         thrown(RequestValidationException.class)
@@ -146,7 +150,7 @@ class ConditionRecordUpdaterTest extends Specification {
                         .put(PFXConstants.FIELD_ID, 2)
                         .put("attribute10", "50")
                         .put("attribute2", "50"))
-        new ConditionRecordUpdater(pfxClient, conditionRecordType,  "2024-01-01T00:00:00").validateData(request)
+        new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").validateData(request)
 
         then:
         thrown(RequestValidationException.class)
@@ -163,7 +167,7 @@ class ConditionRecordUpdaterTest extends Specification {
                         .put("attribute10", "50")
                         .put("attributeX", "50")
                         .put("attribute2", "50"))
-        new ConditionRecordUpdater(pfxClient, conditionRecordType,  "2024-01-01T00:00:00").validateData(request)
+        new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").validateData(request)
 
         then:
         thrown(RequestValidationException.class)
@@ -171,7 +175,12 @@ class ConditionRecordUpdaterTest extends Specification {
 
     def "update"() {
         given:
-        def request = new ObjectMapper().readTree(ConditionRecordUpdaterTest.class.getResourceAsStream(requestFile))
+        def request = null
+        ConditionRecordUpdaterTest.class
+                .getResourceAsStream(requestFile)
+                .withCloseable { is ->
+                    request = new ObjectMapper().readTree(is)
+                }
 
         when:
         def result = new ConditionRecordUpdater(pfxClient, conditionRecordType, "2024-01-01T00:00:00").bulkLoad(request, true)
@@ -179,7 +188,7 @@ class ConditionRecordUpdaterTest extends Specification {
         then:
         result.get("errored").get(0).textValue() == "4"
         result.get("errored").get(1).textValue() == "5"
-        println result
+        result.get("erroredMessage").textValue() == "Latest updates already in Pricefx. Update ignored"
     }
 
 }

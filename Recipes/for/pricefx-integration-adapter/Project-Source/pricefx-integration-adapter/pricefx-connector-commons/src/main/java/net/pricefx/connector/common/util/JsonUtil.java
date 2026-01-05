@@ -135,7 +135,7 @@ public class JsonUtil {
                 getValueAsText(node.get(FIELD_VALUETYPE)));
     }
 
-    public static PFXConditionRecordType getConditionRecordType(ObjectNode node) {
+    public static PFXConditionRecordType getConditionRecordType(ObjectNode node, boolean history, boolean active) {
         Number number = getNumericValue(node.get("keySize"));
         int keys = 0;
         if (number != null) {
@@ -148,7 +148,7 @@ public class JsonUtil {
             tableId = number.intValue();
         }
 
-        return new PFXConditionRecordType(keys).withTableId(tableId).withTable(
+        return new PFXConditionRecordType(keys, history, active).withTableId(tableId).withTable(
                 getValueAsText(node.get(FIELD_UNIQUENAME)));
 
 
@@ -227,6 +227,14 @@ public class JsonUtil {
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    public static String getTextValue(JsonNode node) {
+        if (node != null && node.isTextual()) {
+            return node.textValue();
+        }
+
+        return StringUtils.EMPTY;
     }
 
     /**
@@ -310,7 +318,14 @@ public class JsonUtil {
         return () -> jsonNode != null ? jsonNode.fields() : Collections.emptyIterator();
     }
 
+    public static boolean hasArrayNodeElements(final JsonNode jsonNode){
+        return (isArrayNode(jsonNode) && jsonNode.size() > 0);
+    }
+
     public static Set<String> getExistingFields(ObjectNode inputNode) {
+        if (inputNode == null){
+            return Collections.emptySet();
+        }
 
         Iterator<Map.Entry<String, JsonNode>> fields =
                 Iterators.filter(

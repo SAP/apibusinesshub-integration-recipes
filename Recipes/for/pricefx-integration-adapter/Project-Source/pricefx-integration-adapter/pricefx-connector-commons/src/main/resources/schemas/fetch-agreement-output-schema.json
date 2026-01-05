@@ -414,14 +414,12 @@
     "inputs": {
       "type": "array",
       "items": {
-        "type": "object",
         "$ref": "#/definitions/calculableInput"
       }
     },
     "outputs": {
       "type": "array",
       "items": {
-        "type": "object",
         "$ref": "#/definitions/calculableOutput"
       }
     },
@@ -458,14 +456,12 @@
             "includedCustomerGroups": {
               "type": "array",
               "items": {
-                "type": "object",
                 "$ref": "#/definitions/customerGroup"
               }
             },
             "includedProductGroups": {
               "type": "array",
               "items": {
-                "type": "object",
                 "$ref": "#/definitions/productGroup"
               }
             },
@@ -473,14 +469,12 @@
             "excludedCustomerGroups": {
               "type": "array",
               "items": {
-                "type": "object",
                 "$ref": "#/definitions/customerGroup"
               }
             },
             "excludedproductGroups": {
               "type": "array",
               "items": {
-                "type": "object",
                 "$ref": "#/definitions/productGroup"
               }
             },
@@ -493,14 +487,12 @@
             "includedTimePeriods": {
               "type": "array",
               "items": {
-                "type": "object",
                 "$ref": "#/definitions/timePeriod"
               }
             },
             "excludedTimePeriods": {
               "type": "array",
               "items": {
-                "type": "object",
                 "$ref": "#/definitions/timePeriod"
               }
             },
@@ -553,14 +545,12 @@
           "inputs": {
             "type": "array",
             "items": {
-              "type": "object",
               "$ref": "#/definitions/calculableInput"
             }
           },
           "outputs": {
             "type": "array",
             "items": {
-              "type": "object",
               "$ref": "#/definitions/calculableOutput"
             }
           }

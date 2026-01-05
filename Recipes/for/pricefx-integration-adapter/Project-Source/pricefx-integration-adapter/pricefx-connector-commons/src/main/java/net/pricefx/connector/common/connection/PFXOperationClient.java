@@ -10,6 +10,7 @@ import net.pricefx.connector.common.util.PFXTypeCode;
 import net.pricefx.connector.common.validation.ConnectorException;
 import net.pricefx.pckg.client.okhttp.AuthV2EnabledPfxClient;
 import net.pricefx.pckg.client.okhttp.FileUploadProvider;
+import net.pricefx.pckg.client.okhttp.PfxClientException;
 import net.pricefx.pckg.processing.ProcessingMarkers;
 
 import javax.naming.LimitExceededException;
@@ -19,6 +20,8 @@ import java.util.Map;
 import java.util.function.Function;
 
 import static net.pricefx.connector.common.util.JsonUtil.getData;
+import static net.pricefx.connector.common.util.PFXConstants.FIELD_DATA;
+import static net.pricefx.connector.common.util.PFXConstants.FIELD_RESPONSE;
 import static net.pricefx.connector.common.util.PFXOperation.TOKEN;
 
 public class PFXOperationClient extends AuthV2EnabledPfxClient implements IPFXConnection {
@@ -62,7 +65,15 @@ public class PFXOperationClient extends AuthV2EnabledPfxClient implements IPFXCo
                 return postRawBatch(apiPath, (ArrayNode) request, ConnectionUtil.createExceptionMapper(apiPath));
             }
             return super.postRetry(apiPath, request);
-        } catch (IOException e) {
+        } catch (PfxClientException e) {
+            if (PfxClientException.describeApplicationStatus(e.getApplicationStatus()).contains("VALIDATION_ERROR")){
+                ObjectNode node = new ObjectNode(JsonNodeFactory.instance).set(FIELD_DATA,
+                        new ObjectNode(JsonNodeFactory.instance).put("error", e.getMessage()));
+                node = new ObjectNode(JsonNodeFactory.instance).set(FIELD_RESPONSE, node);
+                return node;
+            }
+            throw new ConnectorException("Unable to execute " + apiPath, e);
+        } catch (Exception e) {
             throw new ConnectorException("Unable to execute " + apiPath, e);
         }
     }

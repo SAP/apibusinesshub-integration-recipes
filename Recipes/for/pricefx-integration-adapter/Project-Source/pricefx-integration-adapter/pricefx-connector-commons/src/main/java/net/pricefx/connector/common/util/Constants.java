@@ -48,6 +48,7 @@ public class Constants {
 
     public static final String DEFAULT_DATA_FILE_NAME = "upload.xlsx";
 
+    public static final String EXTENSION_SEPARATOR = "_____";
 
     private Constants() {
     }

@@ -86,12 +86,12 @@ class MockPFXOperationClient extends PFXOperationClient {
                 return new ObjectMapper().readTree(MockPFXOperationClient.class.getResourceAsStream("/execute-formula-response.json"))
             case BULK_LOAD:
                 return new ArrayNode(JsonNodeFactory.instance).add(request.get(FIELD_DATA).size())
-                break
             case UPDATE:
                 if ("update/Q".equals(apiPath)) {
                     return request.get("quote")
+                } else {
+                    return request
                 }
-                break
             case SUBMIT_QUOTE:
                 return new ObjectNode(JsonNodeFactory.instance).put("workflowStatus", "SUBMITTED")
             case WITHDRAW_WORKFLOW:
@@ -103,11 +103,11 @@ class MockPFXOperationClient extends PFXOperationClient {
             case SAVE_QUOTE:
                 return new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME,
                         "P-1000")
-                        .put("version", "0")
+                        .put("version", 0)
                         .set(FIELD_INPUTS, JsonUtil.createArrayNode(new ObjectNode(JsonNodeFactory.instance)
                                 .put(FIELD_NAME, "Qty").put(FIELD_VALUE, 1000)))
             case LOOKUPTABLE_FETCH:
-                def dataNode = new ArrayNode(JsonNodeFactory.instance)
+                ArrayNode dataNode = new ArrayNode(JsonNodeFactory.instance)
                 String tableName = request.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue()
                 if (tableName == "RangeParameters") {
                     dataNode.add(new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME, "RangeParameters")
@@ -158,7 +158,7 @@ class MockPFXOperationClient extends PFXOperationClient {
                     return JsonUtil.createArrayNode(request)
                 }
             default:
-                return new ObjectNode(JsonNodeFactory.instance)
+                return request
         }
     }
 
@@ -223,14 +223,14 @@ class MockPFXOperationClient extends PFXOperationClient {
                 String uniqueName = apiPath.replace(FETCH_QUOTE.getOperation() + "/", "")
                 PFXConstants.WorkflowStatus workflowStatus = PFXConstants.WorkflowStatus.DRAFT
                 if (uniqueName.equalsIgnoreCase("P-10000")) {
-                    workflowStatus == PFXConstants.WorkflowStatus.SUBMITTED
+                    workflowStatus = PFXConstants.WorkflowStatus.SUBMITTED
                 } else if (uniqueName.equalsIgnoreCase("P-12345")) {
-                    workflowStatus == PFXConstants.WorkflowStatus.WITHHDRAWN
+                    workflowStatus = PFXConstants.WorkflowStatus.WITHDRAWN
                 }
 
                 ObjectNode objectNode = new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME, uniqueName)
                         .put(FIELD_WORKFLOWSTATUS, workflowStatus.name())
-                        .put("version", "0").put(FIELD_TYPEDID, uniqueName.replaceAll("P-", "") + ".Q")
+                        .put("version", 0).put(FIELD_TYPEDID, uniqueName.replaceAll("P-", "") + ".Q")
 
                 ArrayNode inputNode = JsonUtil.createArrayNode(new ObjectNode(JsonNodeFactory.instance).put(FIELD_NAME, "Qty").put(FIELD_VALUE, 1000))
                 objectNode.set(FIELD_INPUTS, inputNode)
@@ -247,7 +247,7 @@ class MockPFXOperationClient extends PFXOperationClient {
 
                 ObjectNode objectNode = new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME, uniqueName)
                         .put(FIELD_WORKFLOWSTATUS, "APPROVED")
-                        .put("version", "0").put(FIELD_TYPEDID, uniqueName.replaceAll("R-", "") + ".RBA")
+                        .put("version", 0).put(FIELD_TYPEDID, uniqueName.replaceAll("R-", "") + ".RBA")
 
                 ArrayNode inputNode = JsonUtil.createArrayNode(new ObjectNode(JsonNodeFactory.instance).put(FIELD_NAME, "Qty").put(FIELD_VALUE, 1000))
                 objectNode.set(FIELD_INPUTS, inputNode)
@@ -264,7 +264,7 @@ class MockPFXOperationClient extends PFXOperationClient {
 
                 ObjectNode objectNode = new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME, uniqueName)
                         .put(FIELD_WORKFLOWSTATUS, "APPROVED")
-                        .put("version", "0").put(FIELD_TYPEDID, uniqueName.replaceAll("C-", "") + ".CT")
+                        .put("version", 0).put(FIELD_TYPEDID, uniqueName.replaceAll("C-", "") + ".CT")
 
                 ArrayNode inputNode = JsonUtil.createArrayNode(new ObjectNode(JsonNodeFactory.instance).put(FIELD_NAME, "Qty").put(FIELD_VALUE, 1000))
                 objectNode.set(FIELD_INPUTS, inputNode)
@@ -348,7 +348,7 @@ class MockPFXOperationClient extends PFXOperationClient {
                         return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME,
                                 advancedCriteria.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue())
                                 .put(FIELD_TYPEDID, "1000.Q")
-                                .put(FIELD_VERSION, "0"))
+                                .put(FIELD_VERSION, 0))
                     }
                     break
                 case PFXTypeCode.REBATEAGREEMENT:
@@ -356,7 +356,7 @@ class MockPFXOperationClient extends PFXOperationClient {
                         return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME,
                                 advancedCriteria.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue())
                                 .put(FIELD_TYPEDID, "1000.RBA")
-                                .put(FIELD_VERSION, "0"))
+                                .put(FIELD_VERSION, 0))
                     }
                     break
                 case PFXTypeCode.CONTRACT:
@@ -364,19 +364,19 @@ class MockPFXOperationClient extends PFXOperationClient {
                         return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(FIELD_UNIQUENAME,
                                 advancedCriteria.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue())
                                 .put(FIELD_TYPEDID, "1000.CT")
-                                .put(FIELD_VERSION, "0"))
+                                .put(FIELD_VERSION, 0))
                     }
                     break
                 case PFXTypeCode.PRODUCT:
                     if (!apiPath.contains(PFXTypeCode.PRODUCT.getMetadataTypeCode())) {
                         return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance).put(FIELD_SKU,
                                 advancedCriteria.get(FIELD_CRITERIA).get(0).get(FIELD_VALUE).textValue())
-                                .put(FIELD_VERSION, "0"))
+                                .put(FIELD_VERSION, 0))
                     }
                     break
                 default:
                     return ImmutableList.of(new ObjectNode(JsonNodeFactory.instance)
-                            .put(FIELD_UNIQUENAME, "test").put(FIELD_TYPEDID, "1." + typeCode.getTypeCode()))
+                            .put(FIELD_UNIQUENAME, "test").put(FIELD_VERSION, 1).put(FIELD_TYPEDID, "1." + typeCode.getTypeCode()))
             }
         }
         return null

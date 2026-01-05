@@ -1,6 +1,7 @@
 package net.pricefx.connector.common.operation;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
 import net.pricefx.connector.common.util.JsonSchemaUtil;
 import net.pricefx.connector.common.util.JsonUtil;
@@ -40,6 +41,13 @@ public interface IPFXObjectFilterRequester {
             throw new UnsupportedOperationException("Invalid criteria. Operators not supported or missing fieldName");
         }
 
+        for (JsonNode node : inputNode.get(FIELD_CRITERIA)) {
+            if (node.get(FIELD_VALUE) != null && node.get(FIELD_VALUE).isNumber()){
+                ((ObjectNode) node).put(FIELD_VALUE, node.get(FIELD_VALUE).numberValue()+"");
+            }
+        }
+
+
     }
 
     default boolean validateCriteria(JsonNode inputNode) {
@@ -51,7 +59,8 @@ public interface IPFXObjectFilterRequester {
             if (!JsonUtil.isObjectNode(node) ||
                     StringUtils.isEmpty(JsonUtil.getValueAsText(node.get(FIELD_FIELDNAME))) ||
                     !RequestUtil.isOperatorSupported(JsonUtil.getValueAsText(node.get(RequestUtil.OPERATOR))) ||
-                    !RequestUtil.isValidValue(JsonUtil.getValueAsText(node.get(RequestUtil.OPERATOR)), node.get(FIELD_VALUE))) {
+                    !RequestUtil.isValidValue(JsonUtil.getValueAsText(node.get(RequestUtil.OPERATOR)), node.get(FIELD_VALUE),
+                             node.get("start"), node.get("end"))) {
                 return false;
             }
         }

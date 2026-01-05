@@ -7,12 +7,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Lists;
 import net.pricefx.connector.common.connection.PFXOperationClient;
 import net.pricefx.connector.common.util.JsonUtil;
-import net.pricefx.connector.common.validation.RequestValidationException;
-import org.apache.commons.collections4.MapUtils;
+import net.pricefx.connector.common.util.RequestUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.Map;
 
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath;
 import static net.pricefx.connector.common.util.PFXConstants.*;
@@ -23,24 +21,38 @@ import static net.pricefx.connector.common.util.PFXTypeCode.USER;
 public class UserUpsertor extends GenericUpsertor {
 
     public UserUpsertor(PFXOperationClient pfxClient) {
-        super(pfxClient, null, USER, null, null);
+        super(pfxClient, USER, null, null);
+        setUpdateOnly(true);
         withMaximumRecords(5);
     }
 
     @Override
-    protected void validateRequest(JsonNode inputNode, boolean replaceNullKey) {
-        super.validateRequest(inputNode, replaceNullKey);
+    protected ArrayNode buildUpsertRequest(JsonNode request) {
 
-        if (JsonUtil.isArrayNode(inputNode) && inputNode.size() > 1) {
-            Map<String, Integer> duplicates = JsonUtil.findDuplicates((ArrayNode) inputNode, FIELD_USER_LOGINNAME);
-            if (!MapUtils.isEmpty(duplicates)) {
-                throw new RequestValidationException("Update request message should not contain records of same login names: " + duplicates);
-            }
+        request = super.buildUpsertRequest(request);
+        if (request == null) {
+            return null;
+        }
+
+        request.forEach((JsonNode node) -> {
+            addUserFilterCriteria(node, "productFilterCriteria");
+            addUserFilterCriteria(node, "customerFilterCriteria");
+        });
+
+        return (ArrayNode) request;
+
+    }
+
+    private static void addUserFilterCriteria(JsonNode request, String fieldName) {
+        JsonNode criteriaNode = request.get(fieldName);
+        if (criteriaNode != null && criteriaNode.isObject()) {
+            RequestUtil.addAdvancedCriteria((ObjectNode) criteriaNode);
+            ((ObjectNode) request).put(fieldName, criteriaNode.toString());
         }
     }
 
     @Override
-    protected List<JsonNode> doUpsert(ArrayNode request) {
+    protected List<JsonNode> doUpsert(ArrayNode request, boolean rawPost) {
         ArrayNode updateList = new ArrayNode(JsonNodeFactory.instance);
         ArrayNode addList = new ArrayNode(JsonNodeFactory.instance);
 
@@ -70,8 +82,8 @@ public class UserUpsertor extends GenericUpsertor {
 
 
         final ArrayNode results = new ArrayNode(JsonNodeFactory.instance)
-                .addAll(getPfxClient().postBatch(createPath(UPDATE.getOperation(), USER.getTypeCode(), BATCH.getOperation()), updateList))
-                .addAll(getPfxClient().postBatch(createPath(ADD.getOperation(), USER.getTypeCode(), BATCH.getOperation()), addList));
+                .addAll(getPfxClient().postBatch(getApiPath(true), updateList, false))
+                .addAll(getPfxClient().postBatch(createPath(ADD.getOperation(), USER.getTypeCode(), BATCH.getOperation()), addList, false));
 
         if (results == null) {
             return Lists.newArrayList();

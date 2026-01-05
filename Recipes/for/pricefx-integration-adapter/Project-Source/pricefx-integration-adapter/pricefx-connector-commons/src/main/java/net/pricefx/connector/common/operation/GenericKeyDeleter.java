@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableSet;
 import net.pricefx.connector.common.connection.PFXOperationClient;
-import net.pricefx.connector.common.util.IPFXExtensionType;
-import net.pricefx.connector.common.util.JsonSchemaUtil;
-import net.pricefx.connector.common.util.JsonUtil;
-import net.pricefx.connector.common.util.PFXTypeCode;
+import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.JsonValidationUtil;
 import net.pricefx.pckg.processing.ProcessingException;
 import org.apache.commons.lang3.ArrayUtils;
@@ -16,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Set;
 
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath;
-import static net.pricefx.connector.common.util.JsonSchemaUtil.STRING;
+
 import static net.pricefx.connector.common.util.PFXOperation.DELETE;
 
 
@@ -36,7 +33,7 @@ public class GenericKeyDeleter implements IPFXObjectDeleter {
         schemaNode = JsonSchemaUtil.loadEmptySchema();
         if (!ArrayUtils.isEmpty(typeCode.getIdentifierFieldNames())) {
             for (String k : typeCode.getIdentifierFieldNames()) {
-                JsonSchemaUtil.addSchemaAttribute(schemaNode, k, true, STRING);
+                JsonSchemaUtil.addSchemaAttribute(schemaNode, k, true, NodeType.STRING.value());
             }
         }
     }

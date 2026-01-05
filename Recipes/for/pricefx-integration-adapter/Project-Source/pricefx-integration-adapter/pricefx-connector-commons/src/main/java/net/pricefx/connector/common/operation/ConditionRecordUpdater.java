@@ -8,22 +8,24 @@ import com.google.common.collect.ImmutableList;
 import net.pricefx.connector.common.connection.PFXOperationClient;
 import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.ConnectorException;
+import net.pricefx.connector.common.validation.IUpsertRequestValidator;
 import net.pricefx.connector.common.validation.JsonValidationUtil;
 import net.pricefx.connector.common.validation.RequestValidationException;
-import org.apache.commons.collections4.*;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.IteratorUtils;
+import org.apache.commons.collections4.ListUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static net.pricefx.connector.common.util.Constants.MAX_UPSERT_RECORDS;
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXTypeCode.CONDITION_RECORD;
 
 
-public class ConditionRecordUpdater extends GenericBulkLoader {
+public class ConditionRecordUpdater extends GenericBulkLoader implements IUpsertRequestValidator {
 
     private final IPFXExtensionType conditionRecordType;
     private static final int MAX_FETCH_BATCH_SIZE = 100;
@@ -88,7 +90,7 @@ public class ConditionRecordUpdater extends GenericBulkLoader {
         }
     }
 
-    private List<String> validateLastUpdateDate(JsonNode request){
+    private List<String> validateLastUpdateDate(JsonNode request) {
         List<String> errorNodes = new ArrayList<>();
         Map<String, Map<String, Object>> metadatas = getUpdateEntities((ArrayNode) request);
         for (JsonNode node : request) {
@@ -114,8 +116,7 @@ public class ConditionRecordUpdater extends GenericBulkLoader {
     }
 
 
-
-    private ObjectNode buildBulkLoadRequest(List<JsonNode> requestArray, List<String> allFieldNames){
+    private ObjectNode buildBulkLoadRequest(List<JsonNode> requestArray, List<String> allFieldNames) {
         ArrayNode allHeaders = new ArrayNode(JsonNodeFactory.instance);
         for (String fieldName : allFieldNames) {
             allHeaders.add(fieldName);
@@ -139,32 +140,24 @@ public class ConditionRecordUpdater extends GenericBulkLoader {
     }
 
     @Override
-    protected void validateData(JsonNode inputNode){
+    protected void validateData(JsonNode inputNode) {
+
         RequestUtil.validateExtensionType(CONDITION_RECORD, conditionRecordType);
         JsonValidationUtil.validateMaxElements(inputNode, MAX_UPSERT_RECORDS);
-        JsonValidationUtil.validatePayload(schema, inputNode);
-        JsonValidationUtil.validateExtraFields(schema, inputNode);
 
-        Set<String> schemaFields = JsonSchemaUtil.getFields(schema);
         Iterable<ObjectNode> metadata = getPfxClient().doFetchMetadata(CONDITION_RECORD, conditionRecordType, null);
+        validate(inputNode, metadata, schema, CONDITION_RECORD, conditionRecordType, false);
 
-        Map<String, ObjectNode> metadataMap = new HashMap<>();
-
-        if (metadata != null) {
-            metadataMap = StreamSupport.stream(metadata.spliterator(), false)
-                    .collect(Collectors.toMap((ObjectNode obj) -> JsonUtil.getValueAsText(obj.get(FIELD_FIELDNAME)), obj -> obj));
-        }
-
-        validateAttributes(inputNode, metadataMap, schemaFields);
     }
 
-    private void validateFields(List<String> allFieldNames, List<String> thisFieldNames){
+    private void validateFields(List<String> allFieldNames, List<String> thisFieldNames) {
         Collection<String> diff = CollectionUtils.removeAll(thisFieldNames, allFieldNames);
-        if (!CollectionUtils.isEmpty(diff)){
+        if (!CollectionUtils.isEmpty(diff)) {
             throw new RequestValidationException(
                     "All objects to be updated should contain same set of fields");
         }
     }
+
     @Override
     public JsonNode bulkLoad(JsonNode request, boolean validate) {
         if (!JsonUtil.isArrayNode(request)) {
@@ -190,44 +183,23 @@ public class ConditionRecordUpdater extends GenericBulkLoader {
             }
         }
 
-        if (!CollectionUtils.isEmpty(requestArray)){
+        if (!CollectionUtils.isEmpty(requestArray)) {
             ObjectNode dataLoadReq = buildBulkLoadRequest(requestArray, allFieldNames);
             super.bulkLoad(dataLoadReq, false);
         }
 
         ArrayNode ids = new ArrayNode(JsonNodeFactory.instance);
-        for (String errorNode : errorNodes){
+        for (String errorNode : errorNodes) {
             ids.add(errorNode);
         }
 
         ObjectNode resultNode = new ObjectNode(JsonNodeFactory.instance);
         resultNode.set("errored", ids);
+        if (!ids.isEmpty()){
+            resultNode.put("erroredMessage", "Latest updates already in Pricefx. Update ignored");
+        }
         return resultNode;
 
-    }
-
-    private void validateAttributes(JsonNode inputNode, Map<String, ObjectNode> metadataMap, Set<String> schemaFields) {
-
-        Set<String> mandatory = JsonValidationUtil.getMandatoryAttributes(metadataMap, conditionRecordType, CONDITION_RECORD);
-        mandatory = SetUtils.intersection(mandatory, schemaFields).toSet();
-
-        if (!JsonUtil.isArrayNode(inputNode)) {
-            return;
-        }
-
-        for (int i = 0; i < inputNode.size(); i++) {
-            JsonNode node = inputNode.get(i);
-            if (JsonUtil.isObjectNode(node)) {
-                final int lineNo = i + 1;
-                JsonValidationUtil.validateMissingMandatoryAttributes((ObjectNode) node, mandatory, lineNo);
-
-                node.fields().forEachRemaining(field -> {
-                    if (field != null) {
-                        JsonValidationUtil.validateDataType(field.getValue(), metadataMap.get(field.getKey()), field.getKey(), lineNo);
-                    }
-                });
-            }
-        }
     }
 
 }

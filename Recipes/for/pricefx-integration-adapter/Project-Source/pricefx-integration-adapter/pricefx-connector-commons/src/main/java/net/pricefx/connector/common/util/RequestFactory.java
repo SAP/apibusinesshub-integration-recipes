@@ -61,6 +61,14 @@ public class RequestFactory {
 
     public static ObjectNode buildDeleteRequest(PFXTypeCode typeCode, ObjectNode filter, IPFXExtensionType extensionType) {
         if (typeCode.isExtension()) {
+            filter.get(FILTER_CRITERIA).get("criteria").forEach(
+                    (JsonNode criteria) -> {
+                        if (criteria.get(FIELD_VALUE) != null && criteria.get(FIELD_VALUE).isNumber()) {
+                            ((ObjectNode) criteria).put(FIELD_VALUE, JsonUtil.getValueAsText(criteria.get(FIELD_VALUE)));
+                        }
+                    }
+            );
+
             ObjectNode criterion = PfxCommonService.buildSimpleCriterion(FIELD_NAME, OperatorId.EQUALS.getValue(), extensionType.getTable());
 
             ObjectNode rootNode = new ObjectNode(JsonNodeFactory.instance);
@@ -254,7 +262,7 @@ public class RequestFactory {
 
     public static ObjectNode buildFetchDataRequest(ObjectNode dataRequest, PFXTypeCode typeCode, IPFXExtensionType extensionType) {
 
-        if (typeCode == PFXTypeCode.CONDITION_RECORD) {
+        if (typeCode != null && typeCode.isConditionRecordTypeCodes()) {
             ObjectNode criterion = buildSimpleCriterion(FIELD_CONDITIONRECRODSETID, EQUALS.getValue(),
                     ((PFXConditionRecordType) extensionType).getTableId() + "");
             ArrayNode arrayNode = new ArrayNode(JsonNodeFactory.instance);
@@ -277,15 +285,13 @@ public class RequestFactory {
         ObjectNode criterion = null;
 
 
-        if (typeCode == PFXTypeCode.PRICELISTITEM) {
+        if (typeCode == PFXTypeCode.PRICELISTITEM || typeCode == PFXTypeCode.MANUALPRICELISTITEM) {
             criterion = buildSimpleCriterion(FIELD_PLI_PRICELISTID, EQUALS.getValue(), uniqueKey);
         } else if (typeCode == PFXTypeCode.PRICEGRIDITEM) {
             criterion = buildSimpleCriterion(FIELD_PGI_PRICEGRIDID, EQUALS.getValue(), uniqueKey);
-        } else if (typeCode == PFXTypeCode.MANUALPRICELISTITEM) {
-            criterion = buildSimpleCriterion(FIELD_PLI_PRICELISTID, EQUALS.getValue(), uniqueKey);
         } else if (!StringUtils.isEmpty(uniqueKey) && typeCode == PFXTypeCode.ROLE) {
             criterion = buildSimpleCriterion("module", EQUALS.getValue(), uniqueKey);
-        } else if (typeCode != null && extensionType != null && typeCode == PFXTypeCode.CONDITION_RECORD) {
+        } else if (extensionType != null && typeCode != null && typeCode.isConditionRecordTypeCodes()) {
             criterion = buildSimpleCriterion(FIELD_CONDITIONRECRODSETID, EQUALS.getValue(),
                     ((PFXConditionRecordType) extensionType).getTableId() + "");
         } else if (extensionType != null && extensionType.getTypeCode() != null && !StringUtils.isEmpty(extensionType.getTable())) {
@@ -310,25 +316,13 @@ public class RequestFactory {
             request = JsonUtil.createArrayNode(request);
         }
 
-        if (typeCode == PFXTypeCode.USER) {
-            request.forEach((JsonNode node) -> {
-                addUserFilterCriteria(node, "productFilterCriteria");
-                addUserFilterCriteria(node, "customerFilterCriteria");
-            });
-        } else if (typeCode.isExtension() && extensionType != null) {
+        if (typeCode.isExtension() && extensionType != null) {
             request.forEach((JsonNode node) -> addExtensionName(node, extensionType));
         }
 
         return (ArrayNode) request;
     }
 
-    private static void addUserFilterCriteria(JsonNode request, String fieldName) {
-        JsonNode criteriaNode = request.get(fieldName);
-        if (criteriaNode != null && criteriaNode.isObject()) {
-            RequestUtil.addAdvancedCriteria((ObjectNode) criteriaNode);
-            ((ObjectNode) request).put(fieldName, criteriaNode.toString());
-        }
-    }
 
     private static void addExtensionName(JsonNode node, IPFXExtensionType extensionType) {
         if (JsonUtil.isObjectNode(node) && !StringUtils.isEmpty(extensionType.getTable())) {

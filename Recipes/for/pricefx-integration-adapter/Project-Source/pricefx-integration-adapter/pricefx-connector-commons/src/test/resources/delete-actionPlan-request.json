@@ -1,0 +1,10 @@
+{
+  "operator": "and",
+  "criteria": [
+    {
+      "fieldName": "label",
+      "operator": "equals",
+      "value": "INTEGRATION TEST ONLY"
+    }
+  ]
+}

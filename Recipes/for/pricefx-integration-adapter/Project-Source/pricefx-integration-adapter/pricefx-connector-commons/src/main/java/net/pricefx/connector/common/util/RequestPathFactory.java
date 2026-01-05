@@ -1,12 +1,9 @@
 package net.pricefx.connector.common.util;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import net.pricefx.connector.common.validation.RequestValidationException;
 import org.apache.commons.lang3.StringUtils;
 
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath;
-import static net.pricefx.connector.common.util.PFXConstants.FIELD_INPUTS;
-import static net.pricefx.connector.common.util.PFXConstants.FIELD_LINEITEMS;
 import static net.pricefx.connector.common.util.PFXOperation.*;
 
 public class RequestPathFactory {
@@ -78,7 +75,7 @@ public class RequestPathFactory {
             throw new UnsupportedOperationException("Data load operation not supported for unknown typeCode");
         }
 
-        if (typeCode == PFXTypeCode.CONDITION_RECORD && extensionType != null) {
+        if (typeCode == PFXTypeCode.CONDITION_RECORD && extensionType != null) { //update case
             return createPath(BULK_LOAD.getOperation(), typeCode.getTypeCode() + extensionType.getAdditionalKeys());
         } else if (typeCode == PFXTypeCode.LOOKUPTABLE && extensionType != null) {
             return createPath(LOOKUPTABLE_VALUES_BULK_LOAD.getOperation(), ((PFXLookupTableType) extensionType).getLookupValueTypeCode());
@@ -105,33 +102,29 @@ public class RequestPathFactory {
         }
     }
 
-    public static String buildUpdatePath(PFXTypeCode typeCode, ObjectNode inputNode) {
-        if (typeCode == PFXTypeCode.QUOTE &&
-                ((inputNode.get(FIELD_INPUTS) != null &&
-                        JsonUtil.isArrayNode(inputNode.get(FIELD_INPUTS)) && inputNode.get(FIELD_INPUTS).size() > 0) ||
-                        inputNode.get("headerText") != null ||
-                        (inputNode.get(FIELD_LINEITEMS) != null &&
-                                JsonUtil.isArrayNode(inputNode.get(FIELD_LINEITEMS)) && inputNode.get(FIELD_LINEITEMS).size() > 0))) {
-            return SAVE_QUOTE.getOperation();
+    private static String buildUpdatePath(PFXTypeCode typeCode, boolean batch) {
+        if (batch) {
+            return createPath(UPDATE.getOperation(), typeCode.getTypeCode(), BATCH.getOperation());
         }
-
-        if (typeCode == PFXTypeCode.ROLE || typeCode == PFXTypeCode.BUSINESSROLE || typeCode == PFXTypeCode.USERGROUP || typeCode == PFXTypeCode.QUOTE) {
-            return createPath(UPDATE.getOperation(), typeCode.getTypeCode());
-        }
-
-        throw new UnsupportedOperationException("Update operation not supported for " + typeCode);
+        return createPath(UPDATE.getOperation(), typeCode.getTypeCode());
 
     }
 
-    public static String buildUpsertPath(IPFXExtensionType extensionType, PFXTypeCode typeCode) {
+    public static String buildUpsertPath(IPFXExtensionType extensionType, PFXTypeCode typeCode, boolean batch, boolean updateOnly) {
         if (typeCode == null) {
             throw new UnsupportedOperationException("Upsert operation not supported for unknown typeCode");
+        }
+
+        if (updateOnly) {
+            return buildUpdatePath(typeCode, batch);
         }
 
         if (typeCode.isExtension()) {
             return createPath(INTEGRATE.getOperation(), extensionType.getTypeCodeSuffix());
         } else if (typeCode == PFXTypeCode.LOOKUPTABLE) {
             return createPath(LOOKUPTABLE_VALUES_INTEGRATE.getOperation(), extensionType.getTable());
+        } else if (typeCode == PFXTypeCode.QUOTE) {
+            return SAVE_QUOTE.getOperation();
         } else {
             return createPath(INTEGRATE.getOperation(), typeCode.getTypeCode());
         }

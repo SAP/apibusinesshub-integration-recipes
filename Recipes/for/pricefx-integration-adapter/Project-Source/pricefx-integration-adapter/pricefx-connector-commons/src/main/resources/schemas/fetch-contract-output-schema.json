@@ -155,6 +155,9 @@
         "displayOptions": {
           "type": "number"
         },
+        "excludeFromExport": {
+          "type": "boolean"
+        },
         "formatType": {
           "type": "string"
         },
@@ -355,14 +358,12 @@
     "inputs": {
       "type": "array",
       "items": {
-        "type": "object",
         "$ref": "#/definitions/calculableInput"
       }
     },
     "outputs": {
       "type": "array",
       "items": {
-        "type": "object",
         "$ref": "#/definitions/calculableOutput"
       }
     },
@@ -428,14 +429,12 @@
           "inputs": {
             "type": "array",
             "items": {
-              "type": "object",
               "$ref": "#/definitions/calculableInput"
             }
           },
           "outputs": {
             "type": "array",
             "items": {
-              "type": "object",
               "$ref": "#/definitions/calculableOutput"
             }
           }

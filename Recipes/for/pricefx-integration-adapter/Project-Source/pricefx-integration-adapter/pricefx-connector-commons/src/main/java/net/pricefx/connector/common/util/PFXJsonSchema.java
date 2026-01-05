@@ -91,6 +91,17 @@ public enum PFXJsonSchema {
     //CONTRACT
     CONTRACT_FETCH_RESPONSE("/schemas/fetch-contract-output-schema.json"),
 
+    //ACTION
+    ACTION_UPDATE_REQUEST("/schemas/update-action-input-schema.json"),
+    ACTION_FETCH_RESPONSE("/schemas/fetch-action-output-schema.json"),
+
+    ACTIONPLAN_FETCH_RESPONSE("/schemas/fetch-actionPlan-output-schema.json"),
+    ACTIONPLAN_UPDATE_REQUEST("/schemas/update-actionPlan-input-schema.json"),
+
+    //Adv config
+    ADVCONF_UPDATE_REQUEST("/schemas/update-advancedConfig-input-schema.json"),
+    ADVCONF_FETCH_RESPONSE("/schemas/fetch-advancedConfig-output-schema.json"),
+
     //PA
     DATALOAD_FETCH_RESPONSE("/schemas/fetch-dataload-output-schema.json"),
     DATAFEED_FETCH_RESPONSE("/schemas/fetch-datafeed-output-schema.json"),
@@ -122,6 +133,12 @@ public enum PFXJsonSchema {
     public static PFXJsonSchema getUpsertRequestSchema(PFXTypeCode pfxTypeCode, IPFXExtensionType extensionType) {
         if (pfxTypeCode != null) {
             switch (pfxTypeCode) {
+                case ACTION_PLAN:
+                    return ACTIONPLAN_UPDATE_REQUEST;
+                case ACTION:
+                    return ACTION_UPDATE_REQUEST;
+                case ADVANCED_CONFIG:
+                    return ADVCONF_UPDATE_REQUEST;
                 case PRICERECORD:
                     return PRICERECORD_UPSERT_REQUEST;
                 case QUOTE:
@@ -184,13 +201,37 @@ public enum PFXJsonSchema {
         return FETCH_REQUEST;
     }
 
+    public static PFXJsonSchema getPADefinitionResponseSchema(PFXTypeCode pfxTypeCode) {
+        if (pfxTypeCode != null) {
+            switch (pfxTypeCode) {
+                case DATAFEED:
+                    return DATAFEED_FETCH_RESPONSE;
+                case DATASOURCE:
+                    return DATASOURCE_FETCH_RESPONSE;
+                case DATAMART:
+                    return DATAMART_FETCH_RESPONSE;
+                default:
+                    break;
+            }
+        }
+        return FETCH_REQUEST;
+    }
+
     public static PFXJsonSchema getFetchResponseSchema(PFXTypeCode pfxTypeCode, IPFXExtensionType extensionType) {
         if (pfxTypeCode != null) {
             switch (pfxTypeCode) {
+                case ACTION_PLAN:
+                    return ACTIONPLAN_FETCH_RESPONSE;
+                case ACTION:
+                    return ACTION_FETCH_RESPONSE;
+                case ADVANCED_CONFIG:
+                    return ADVCONF_FETCH_RESPONSE;
                 case CONTRACT:
                     return CONTRACT_FETCH_RESPONSE;
                 case REBATEAGREEMENT:
                     return RBA_FETCH_RESPONSE;
+                case CONDITION_RECORD_HISTORY:
+                case CONDITION_RECORD_ALL:
                 case CONDITION_RECORD:
                     return CONDITION_RECORD_FETCH_RESPONSE;
                 case PAYOUT:

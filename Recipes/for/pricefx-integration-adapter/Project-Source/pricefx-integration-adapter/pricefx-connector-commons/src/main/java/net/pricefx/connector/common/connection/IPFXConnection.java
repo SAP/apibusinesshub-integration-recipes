@@ -19,7 +19,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.StreamSupport;
 
 import static net.pricefx.connector.common.util.ConnectionUtil.createPath;
@@ -52,8 +51,6 @@ public interface IPFXConnection {
 
     JsonNode doPostRaw(String apiPath, Object request) throws IOException;
 
-    ObjectNode post(String apiPath, Object body, Function<Exception, RuntimeException> exceptionFunction);
-
     default JsonNode post(ObjectNode request, String apiPath, PFXTypeCode typeCode, IPFXExtensionType extensionType) {
         if (typeCode != null) {
             RequestUtil.validateExtensionType(typeCode, extensionType);
@@ -64,7 +61,7 @@ public interface IPFXConnection {
 
     JsonNode doPost(String apiPath, ObjectNode request);
 
-    default IPFXExtensionType createExtensionType(PFXTypeCode typeCode, String tableName, String validAfter) {
+    default IPFXExtensionType createExtensionType(PFXTypeCode typeCode, String tableName, String validAfter, boolean history, boolean active) {
         if (typeCode == null) return null;
         if (StringUtils.isEmpty(tableName)) return null;
 
@@ -79,7 +76,7 @@ public interface IPFXConnection {
         }
 
         if (extensionType == null && typeCode == PFXTypeCode.CONDITION_RECORD) {
-            extensionType = getConditionRecordType(typeCode, tableName);
+            extensionType = getConditionRecordType(typeCode, tableName, history, active);
         }
 
         if (extensionType == null && (typeCode.isExtension() || typeCode == PFXTypeCode.LOOKUPTABLE || typeCode == PFXTypeCode.CONDITION_RECORD)) {
@@ -87,6 +84,10 @@ public interface IPFXConnection {
         }
 
         return extensionType;
+    }
+
+    default IPFXExtensionType createExtensionType(PFXTypeCode typeCode, String tableName, String validAfter) {
+        return createExtensionType(typeCode, tableName, validAfter, false, true);
     }
 
     default IPFXExtensionType getExtensionType(PFXTypeCode typeCode, String tableName) {
@@ -112,13 +113,13 @@ public interface IPFXConnection {
         return null;
     }
 
-    default IPFXExtensionType getConditionRecordType(PFXTypeCode typeCode, String tableName) {
+    default IPFXExtensionType getConditionRecordType(PFXTypeCode typeCode, String tableName, boolean history, boolean active) {
         if (typeCode == PFXTypeCode.CONDITION_RECORD && !StringUtils.isEmpty(tableName)) {
             try {
                 ObjectNode node = getConditionRecordTable(tableName);
 
                 if (node != null) {
-                    return JsonUtil.getConditionRecordType(node);
+                    return JsonUtil.getConditionRecordType(node, history, active);
                 }
 
                 return null;
@@ -185,7 +186,7 @@ public interface IPFXConnection {
 
     default Iterable<ObjectNode> doFetchMetadata(PFXTypeCode typeCode, IPFXExtensionType extensionType, String uniqueKey) {
         ObjectNode advancedCriterion = RequestFactory.buildFetchMetadataRequest(typeCode, extensionType, uniqueKey);
-        return doFetchMetadata(typeCode, extensionType, 0l, MAX_METADATA_RECORDS, advancedCriterion);
+        return doFetchMetadata(typeCode, extensionType, 0L, MAX_METADATA_RECORDS, advancedCriterion);
     }
 
     default Iterable<ObjectNode> doFetchMetadata(PFXTypeCode typeCode, IPFXExtensionType extensionType, long startRow, int pageSize,
@@ -229,7 +230,7 @@ public interface IPFXConnection {
             if (node.isPresent()) {
                 List<Map<String, Object>> dataFields = new ArrayList<>();
                 Iterator<? extends JsonNode> itr = node.get().get("fields").iterator();
-                while (itr != null && itr.hasNext()) {
+                while (itr.hasNext()) {
                     JsonNode n = itr.next();
                     if (n.isObject()) {
                         String name = JsonUtil.getValueAsText(n.get(FIELD_NAME));
@@ -283,31 +284,38 @@ public interface IPFXConnection {
         }
     }
 
-    default List<JsonNode> postBatch(String apiPath, ArrayNode request) {
+    default List<JsonNode> postBatch(String apiPath, ArrayNode request, boolean rawPost) {
         if (request == null || request.size() == 0) {
             return Collections.emptyList();
         }
+        try {
+            ArrayNode batches;
+            if (rawPost) {
+                batches = (ArrayNode) doPostRaw(apiPath, request);
+            } else {
+                batches = doPostBatch(apiPath, request);
+            }
 
-        ArrayNode batches = doPostBatch(apiPath, request);
-        List<JsonNode> nodes = new ArrayList<>();
-        batches.forEach((JsonNode obj) -> {
-            if (JsonUtil.isObjectNode(obj)) {
-                JsonNode result = JsonUtil.getFirstDataNode(JsonUtil.getData(obj));
+            List<JsonNode> nodes = new ArrayList<>();
+            batches.forEach((JsonNode obj) -> {
+                if (JsonUtil.isObjectNode(obj)) {
+                    JsonNode result = JsonUtil.getFirstDataNode(JsonUtil.getData(obj));
 
-                if (JsonUtil.isObjectNode(result)) {
-                    nodes.add(result);
-                } else {
-                    JsonNode error = JsonUtil.getResponse(obj);
-                    if (JsonUtil.isObjectNode(error)) {
-                        nodes.add(error);
+                    if (JsonUtil.isObjectNode(result)) {
+                        nodes.add(result);
+                    } else if (JsonUtil.isObjectNode(JsonUtil.getResponse(obj))) {
+                        nodes.add(JsonUtil.getResponse(obj));
                     } else {
                         nodes.add(obj);
                     }
-                }
-            }
-        });
 
-        return nodes;
+                }
+            });
+
+            return nodes;
+        }catch(IOException ex){
+            throw new ConnectorException("Unable to execute " + apiPath, ex);
+        }
     }
 
     ArrayNode doPostBatch(String apiPath, ArrayNode request);
@@ -362,5 +370,7 @@ public interface IPFXConnection {
         }
         return results;
     }
+
+
 
 }

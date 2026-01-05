@@ -26,11 +26,12 @@ public abstract class DetailObjectFetcher extends GenericFetcher {
         return this;
     }
 
-    @Override
-    public List<ObjectNode> fetch(ObjectNode advancedCriteria, List<String> sortBy, List<String> valueFields, Long startRow, int pageSize, boolean validate, boolean formatted) {
+    public List<ObjectNode> fetch(ObjectNode request, Long startRow, int pageSize, boolean validate) {
+        List<ObjectNode> results = super.fetch(request, startRow, pageSize, validate, false);
+        return format(results);
+    }
 
-        List<ObjectNode> results = super.fetch(advancedCriteria, sortBy, valueFields, startRow, pageSize, validate, false);
-
+    private List<ObjectNode> format(List<ObjectNode> results){
         if (fullResult && !CollectionUtils.isEmpty(results) && results.size() == 1) {
             //fullresult is only supported for fetching one Object to avoid exceeding message size
             ObjectNode obj = Iterables.get(results, 0);
@@ -43,7 +44,12 @@ public abstract class DetailObjectFetcher extends GenericFetcher {
         } else {
             return results;
         }
+    }
 
+    public List<ObjectNode> fetch(ObjectNode advancedCriteria, List<String> sortBy, List<String> valueFields, Long startRow, int pageSize, boolean validate) {
+
+        List<ObjectNode> results = super.fetch(advancedCriteria, sortBy, valueFields, startRow, pageSize, validate, false);
+        return format(results);
     }
 
     protected abstract String getPath(ObjectNode obj);
