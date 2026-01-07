@@ -7,12 +7,13 @@ import com.google.common.collect.ImmutableList;
 import net.pricefx.connector.common.connection.PFXOperationClient;
 import net.pricefx.connector.common.util.*;
 import net.pricefx.connector.common.validation.ConnectorException;
+
 import net.pricefx.connector.common.validation.JsonValidationUtil;
-import net.pricefx.connector.common.validation.QuoteRequestValidator;
 import net.pricefx.connector.common.validation.RequestValidationException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXOperation.ADD_LINEITEM_QUOTE;
 import static net.pricefx.connector.common.util.PFXOperation.FETCH_QUOTE;
 import static net.pricefx.connector.common.util.PFXTypeCode.QUOTE;
+
 
 public class QuoteCreator implements IPFXObjectUpsertor, ICalculableObjectUpsertor {
 
@@ -45,17 +47,29 @@ public class QuoteCreator implements IPFXObjectUpsertor, ICalculableObjectUpsert
                         false, false, false, true);
     }
 
-
-    @Override
-    public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple, boolean showSystemFields) {
-        Iterable<ObjectNode> metadata = pfxClient.doFetchMetadata(QUOTE, null, null);
+    public void validate(JsonNode request) {
         JsonValidationUtil.validatePayload(schema, request);
         JsonValidationUtil.validateExtraFields(schema, request);
-        replaceAttributeExtension(request, metadata);
+        QUOTE.validate(request);
+    }
 
-        new QuoteRequestValidator().validate(request);
+
+    @Override
+    public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple, boolean showSystemFields, boolean rawPost) {
+        if (validate) {
+            validate(request);
+        }
+
+        if (!rawPost) {
+            Iterable<ObjectNode> metadata = pfxClient.doFetchMetadata(QUOTE, null, null);
+            replaceAttributeExtension(request, metadata);
+
+        }
+
+
 
         request = RequestFactory.buildCreateRequest(QUOTE, request);
+
 
         ArrayNode folderItems = ((ArrayNode) request.get(FIELD_QUOTE).get(FIELD_FOLDERS));
         Map<String, String> folderMap = createFolderMap(folderItems);
@@ -73,7 +87,7 @@ public class QuoteCreator implements IPFXObjectUpsertor, ICalculableObjectUpsert
 
         ((ObjectNode) request.get(FIELD_QUOTE)).set(FIELD_LINEITEMS, folderItems);
 
-        List<JsonNode> resp = new GenericUpsertor(pfxClient, PFXOperation.SAVE_QUOTE.getOperation(), QUOTE, null, null).upsert(request, false, false, convertValueToString, false, false);
+        List<JsonNode> resp = new GenericUpsertor(pfxClient, QUOTE, null, null).upsert(request, false, false, convertValueToString, false, false, false);
 
         if (CollectionUtils.isEmpty(resp)) return new ArrayList<>();
 
@@ -110,7 +124,7 @@ public class QuoteCreator implements IPFXObjectUpsertor, ICalculableObjectUpsert
 
         ObjectNode addItemRequest = JsonUtil.buildObjectNode(Pair.of(FIELD_QUOTE, quote));
 
-        new GenericUpsertor(pfxClient, PFXOperation.SAVE_QUOTE.getOperation(), QUOTE, null, null).upsert(JsonUtil.createArrayNode(addItemRequest), false, false, convertValueToString, false, false);
+        new GenericUpsertor(pfxClient, QUOTE, null, null).upsert(JsonUtil.createArrayNode(addItemRequest), false, false, convertValueToString, false, false, false);
 
         quote = pfxClient.action(createPath(FETCH_QUOTE.getOperation(), uniqueName));
 

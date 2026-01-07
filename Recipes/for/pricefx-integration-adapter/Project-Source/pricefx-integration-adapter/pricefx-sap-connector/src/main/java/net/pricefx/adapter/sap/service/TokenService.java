@@ -81,7 +81,6 @@ public class TokenService {
 
             return new ObjectNode(JsonNodeFactory.instance).put(ACCESS_TOKEN, results);
         } catch (Exception e) {
-            e.printStackTrace();
             throw new ConnectorException("Cannot get JWT Token:" + e.getMessage());
         }
 

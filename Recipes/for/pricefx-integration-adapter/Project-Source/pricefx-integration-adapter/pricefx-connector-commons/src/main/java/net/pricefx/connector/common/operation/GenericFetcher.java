@@ -1,6 +1,7 @@
 package net.pricefx.connector.common.operation;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -25,6 +26,8 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
 
 
     private final PFXOperationClient pfxClient;
+
+    private static final String RESULT_FIELDS = "resultFields";
 
     private final String apiPath;
     private final PFXTypeCode typeCode;
@@ -64,7 +67,7 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
         this.apiPath = RequestPathFactory.buildFetchPath(extensionType, typeCode, uniqueId, null);
     }
 
-    protected GenericFetcher(PFXOperationClient pfxClient, String apiPath, PFXTypeCode typeCode, IPFXExtensionType extensionType, String uniqueId, boolean convertValueToString) {
+    public GenericFetcher(PFXOperationClient pfxClient, String apiPath, PFXTypeCode typeCode, IPFXExtensionType extensionType, String uniqueId, boolean convertValueToString) {
         this.pfxClient = pfxClient;
         this.typeCode = typeCode;
         this.extensionType = extensionType;
@@ -129,10 +132,10 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
         JsonNode sortByNode = request.get("sortBy");
         List<String> sortBy = getArrayNodeFields(sortByNode);
 
-        JsonNode resultFieldsNode = request.get("resultFields");
+        JsonNode resultFieldsNode = request.get(RESULT_FIELDS);
         List<String> resultFields = getArrayNodeFields(resultFieldsNode);
 
-        validateRequest(request, true, resultFields, sortBy);
+        validateRequest(request, resultFields, sortBy);
 
         ObjectNode dataRequest = RequestFactory.buildFetchDataRequest(((ObjectNode) request.get(FIELD_DATA)), typeCode, extensionType);
         RequestUtil.addAdvancedCriteria(dataRequest);
@@ -151,25 +154,38 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
 
     @Override
     public List<ObjectNode> fetch(ObjectNode request, Long startRow, int pageSize, boolean validate, boolean formatted) {
+        return fetch(request,startRow,pageSize,validate,formatted,false);
+    }
+
+    @Override
+    public List<ObjectNode> fetch(ObjectNode request, Long startRow, int pageSize, boolean validate, boolean formatted, boolean rawPost) {
         JsonNode sortByNode = request.get("sortBy");
         List<String> sortBy = getArrayNodeFields(sortByNode);
 
-        JsonNode resultFieldsNode = request.get("resultFields");
+        JsonNode resultFieldsNode = request.get(RESULT_FIELDS);
         List<String> resultFields = getArrayNodeFields(resultFieldsNode);
 
+        if (validate) {
+            validateRequest(request, resultFields, sortBy);
+        }
 
-        validateRequest(request, validate, resultFields, sortBy);
+        if ((!CollectionUtils.isEmpty(resultFields)) && typeCode != null &&
+                (typeCode == PFXTypeCode.MANUALPRICELIST || typeCode == PFXTypeCode.PAYOUT || typeCode.isConditionRecordTypeCodes())){
+            ((ArrayNode) request.get(RESULT_FIELDS)).add(FIELD_TYPEDID);
+        }
+
 
         ObjectNode dataRequest = RequestFactory.buildFetchDataRequest(((ObjectNode) request.get(FIELD_DATA)), typeCode, extensionType);
         RequestUtil.addAdvancedCriteria(dataRequest);
         request.set(FIELD_DATA, dataRequest);
 
-        if (formatted) {
-            return fetch((ObjectNode) request.get(FIELD_DATA), sortBy, resultFields, startRow, pageSize, validate, true);
-        } else {
+        if (rawPost){
             request.put(FIELD_STARTROW, startRow).put(FIELD_ENDROW, pageSize + startRow);
             return fetchRaw(request, getApiPath());
+        } else {
+            return fetch((ObjectNode) request.get(FIELD_DATA), sortBy, resultFields, startRow, pageSize, validate, formatted);
         }
+
     }
 
     private List<String> getArrayNodeFields(JsonNode node) {
@@ -180,34 +196,34 @@ public class GenericFetcher implements IPFXObjectFetcher, IPFXObjectFilterReques
         return results;
     }
 
-    private void validateRequest(ObjectNode request, boolean validate, List<String> resultFields, List<String> sortBy) {
+    private void validateRequest(ObjectNode request, List<String> resultFields, List<String> sortBy) {
         this.validateCriteria(request.get(FIELD_DATA), false, PFXJsonSchema.FILTER_REQUEST);
 
         if (CollectionUtils.isEmpty(sortBy)) {
             throw new RequestValidationException("Sort By is mandatory");
         }
 
-        if (validate) {
-            JsonNode schemaNode = JsonSchemaUtil.loadSchema(PFXJsonSchema.getFetchResponseSchema(typeCode, extensionType), typeCode, extensionType, new ArrayList<>(),
-                    true, true, false, false);
 
-            final Set<String> fields = new HashSet<>();
-            if (PFXTypeCode.isDataCollectionTypeCodes(typeCode) && !StringUtils.isEmpty(uniqueId)) {
-                ObjectNode tableDefinition = Iterables.get(pfxClient.doFetch(typeCode,
-                        createPath(GET_FCS.getOperation(), typeCode.getTypeCode()),
-                        RequestUtil.createSimpleFetchRequest(buildSimpleCriterion(FIELD_UNIQUENAME, EQUALS.getValue(), uniqueId)),
-                        ImmutableList.of(FIELD_UNIQUENAME), Collections.emptyList(), 0L, MAX_RECORDS), 0);
+        JsonNode schemaNode = JsonSchemaUtil.loadSchema(PFXJsonSchema.getFetchResponseSchema(typeCode, extensionType), typeCode, extensionType, new ArrayList<>(),
+                true, true, false, false);
 
-                tableDefinition.get("fields").forEach(field -> fields.add(field.get(FIELD_NAME).textValue()));
-            } else {
-                fields.addAll(JsonSchemaUtil.getFields(schemaNode));
-            }
+        final Set<String> fields = new HashSet<>();
+        if (PFXTypeCode.isDataCollectionTypeCodes(typeCode) && !StringUtils.isEmpty(uniqueId)) {
+            ObjectNode tableDefinition = Iterables.get(pfxClient.doFetch(typeCode,
+                    createPath(GET_FCS.getOperation(), typeCode.getTypeCode()),
+                    RequestUtil.createSimpleFetchRequest(buildSimpleCriterion(FIELD_UNIQUENAME, EQUALS.getValue(), uniqueId)),
+                    ImmutableList.of(FIELD_UNIQUENAME), Collections.emptyList(), 0L, MAX_RECORDS), 0);
 
-            if ((resultFields != null && !fields.containsAll(resultFields)) ||
-                    !fields.containsAll(sortBy)) {
-                throw new RequestValidationException("Contains fields which do not exist in the target table");
-            }
+            tableDefinition.get("fields").forEach(field -> fields.add(field.get(FIELD_NAME).textValue()));
+        } else {
+            fields.addAll(JsonSchemaUtil.getFields(schemaNode));
         }
+
+        if ((resultFields != null && !fields.containsAll(resultFields)) ||
+                !fields.containsAll(sortBy)) {
+            throw new RequestValidationException("Contains fields which do not exist in the target table");
+        }
+
     }
 
     public List<ObjectNode> fetchRaw(ObjectNode request, String apiPath) {

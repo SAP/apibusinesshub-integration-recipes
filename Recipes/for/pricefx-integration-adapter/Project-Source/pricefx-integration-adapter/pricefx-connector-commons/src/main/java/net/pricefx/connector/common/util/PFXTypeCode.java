@@ -3,8 +3,7 @@ package net.pricefx.connector.common.util;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import net.pricefx.connector.common.validation.QuoteRequestValidator;
-import net.pricefx.connector.common.validation.RequestValidator;
+import net.pricefx.connector.common.validation.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -25,11 +24,16 @@ public enum PFXTypeCode {
     DATAFILE("DATAFILE", new String[]{"DATAFILE"}),
 
     //real PFX type
-    CONDITION_RECORD_STAGING("CRCP", "Condtion Records", new String[]{"validFrom", "validTo", "key1"}, "CRCIM"),
-    CONDITION_RECORD("CRCI", "Condition Records", new String[]{FIELD_ID}, "CRCIM"),
+
+    ACTION("AI", "Actions", new String[]{FIELD_UNIQUENAME}, "AIAM", new ActionUpsertRequestValidator(), null),
+    ACTION_PLAN("CFO", "Action Plans", new String[]{FIELD_UNIQUENAME},"CFOMCAAM"),
+    CONDITION_RECORD_STAGING("CRCP", "Condtion Records", new String[]{"validFrom", "validTo", "key1"}, null),
+    CONDITION_RECORD("CRCI", "Condition Records", new String[]{FIELD_ID}, null),
+    CONDITION_RECORD_HISTORY("CRCIH", "Condition Records History", new String[]{FIELD_ID}, null),
+    CONDITION_RECORD_ALL("CRCIALL", "Condition Records include history", new String[]{FIELD_ID}, null),
     CONDITION_RECORD_SET("CRCS", new String[]{FIELD_UNIQUENAME}),
 
-    ADVANCED_CONFIG("AP", new String[]{FIELD_UNIQUENAME}),
+    ADVANCED_CONFIG("AP", "Advanced Config", new String[]{FIELD_UNIQUENAME}, new AdvancedConfigUpsertRequestValidator(), null),
     CUSTOMER("C", new String[]{FIELD_CUSTOMER_ID}, "CAM"),
     CUSTOMEREXTENSION("CX", "CUSTOMER EXTENSION", new String[]{FIELD_CUSTOMER_ID}, "CXAM"),
 
@@ -48,7 +52,7 @@ public enum PFXTypeCode {
     PRODUCTEXTENSION("PX", "PRODUCT EXTENSION", new String[]{FIELD_SKU}, "PXAM"),
 
     CONTRACT("CT", "Contract", new String[]{FIELD_UNIQUENAME}, "CTAM"),
-    QUOTE("Q", "QUOTE", new String[]{FIELD_UNIQUENAME}, "QAM", new QuoteRequestValidator(), null),
+    QUOTE("Q", "QUOTE", new String[]{FIELD_UNIQUENAME}, "QAM", new QuoteUpsertRequestValidator(), null),
 
     DATALOAD("DMDL", new String[]{FIELD_TYPEDID}),
 
@@ -67,7 +71,7 @@ public enum PFXTypeCode {
     REBATETYPE("RBT", new String[]{FIELD_UNIQUENAME}),
     REBATERECORD("RR", new String[]{FIELD_UNIQUENAME}),
 
-    USER("U", "USER", new String[]{FIELD_USER_LOGINNAME}, null, null, new String[]{"email"}),
+    USER("U", "USER", new String[]{FIELD_USER_LOGINNAME},  new UserUpsertRequestValidator(), new String[]{"email"}),
 
     USERGROUP("UG", "USER GROUP", new String[]{FIELD_UNIQUENAME}, "UG"),
     ROLE("R", "ROLE", new String[]{FIELD_UNIQUENAME}, "R"),
@@ -82,7 +86,7 @@ public enum PFXTypeCode {
     private final String[] identifierFieldNames;
     private final String metadataTypeCode;
     private final String[] additionalMandatoryFields;
-    private RequestValidator validator;
+    private IPFXObjectUpsertRequestValidator validator;
 
     PFXTypeCode(String value, String[] identifierFieldNames) {
         this.typeCode = value;
@@ -96,7 +100,11 @@ public enum PFXTypeCode {
         this.typeCode = value;
         this.label = this.name();
         this.identifierFieldNames = identifierFieldNames;
-        this.metadataTypeCode = metadataTypeCode;
+        if (StringUtils.isEmpty(metadataTypeCode)){
+            this.metadataTypeCode = value+"M";
+        } else {
+            this.metadataTypeCode = metadataTypeCode;
+        }
         this.additionalMandatoryFields = null;
     }
 
@@ -105,21 +113,38 @@ public enum PFXTypeCode {
         this.typeCode = value;
         this.label = label;
         this.identifierFieldNames = identifierFieldNames;
-        this.metadataTypeCode = metadataTypeCode;
+        if (StringUtils.isEmpty(metadataTypeCode)){
+            this.metadataTypeCode = value+"M";
+        } else {
+            this.metadataTypeCode = metadataTypeCode;
+        }
         this.additionalMandatoryFields = null;
     }
 
-    PFXTypeCode(String value, String label, String[] identifierFieldNames, String metadataTypeCode, RequestValidator validator, String[] additionalMandatoryFields) {
+    PFXTypeCode(String value, String label, String[] identifierFieldNames, IPFXObjectUpsertRequestValidator validator, String[] additionalMandatoryFields) {
         this.typeCode = value;
         this.label = label;
         this.identifierFieldNames = identifierFieldNames;
-        this.metadataTypeCode = metadataTypeCode;
+        this.metadataTypeCode = null;
+        this.validator = validator;
+        this.additionalMandatoryFields = additionalMandatoryFields;
+    }
+
+    PFXTypeCode(String value, String label, String[] identifierFieldNames, String metadataTypeCode, IPFXObjectUpsertRequestValidator validator, String[] additionalMandatoryFields) {
+        this.typeCode = value;
+        this.label = label;
+        this.identifierFieldNames = identifierFieldNames;
+        if (StringUtils.isEmpty(metadataTypeCode)){
+            this.metadataTypeCode = value+"M";
+        } else {
+            this.metadataTypeCode = metadataTypeCode;
+        }
         this.validator = validator;
         this.additionalMandatoryFields = additionalMandatoryFields;
     }
 
     public static PFXTypeCode findByLabel(String label) {
-        return Stream.of(PFXTypeCode.values()).filter((PFXTypeCode pfxTypeCode) -> pfxTypeCode.getLabel().equalsIgnoreCase(label)).findFirst().orElse(null);
+        return Stream.of(values()).filter((PFXTypeCode pfxTypeCode) -> pfxTypeCode.getLabel().equalsIgnoreCase(label)).findFirst().orElse(null);
     }
 
     public String getLabel() {
@@ -167,7 +192,12 @@ public enum PFXTypeCode {
 
         try {
             PFXTypeCode typeCode = validValueOf(objectTypeId);
-            if (typeCode == null) {
+
+            if (typeCode == null && objectTypeId.split("\\.").length > 0) {
+                typeCode = findByTypeCodeOrName(objectTypeId.split("\\.")[0], null);
+            }
+
+            if (typeCode == null && objectTypeId.split("\\.").length > 1) {
                 typeCode = findByTypeCodeOrName(objectTypeId.split("\\.")[1], null);
             }
 
@@ -182,16 +212,22 @@ public enum PFXTypeCode {
         if (EnumUtils.isValidEnum(PFXTypeCode.class, typeCode)) {
             return PFXTypeCode.valueOf(typeCode);
         }
-        return null;
+        return getExtensionTypeCode(typeCode);
     }
 
     public static PFXTypeCode findByTypeCodeOrName(String typeCode, PFXTypeCode defaultTypeCode) {
+        if ("FEED".equalsIgnoreCase(typeCode)) {
+            return DATAFEED;
+        }
+
         return Stream.of(values()).filter(
                         (PFXTypeCode pfxTypeCode) ->
                                 pfxTypeCode.getTypeCode().equalsIgnoreCase(typeCode) || pfxTypeCode.name().equalsIgnoreCase(typeCode) ||
                                         getExtensionBySubtype(typeCode) == pfxTypeCode)
                 .findFirst().orElse(defaultTypeCode);
     }
+
+
 
     public String getTypeCode() {
         return typeCode;
@@ -214,6 +250,25 @@ public enum PFXTypeCode {
         return null;
 
     }
+
+    private static PFXTypeCode getExtensionTypeCode(String objectTypeId) {
+        if (objectTypeId == null) return null;
+
+        if (objectTypeId.startsWith(PRODUCTEXTENSION.name() + Constants.EXTENSION_SEPARATOR)) {
+            return PRODUCTEXTENSION;
+        }
+
+        if (objectTypeId.startsWith(CUSTOMEREXTENSION.name() + Constants.EXTENSION_SEPARATOR)) {
+            return CUSTOMEREXTENSION;
+        }
+
+        if (objectTypeId.startsWith(LOOKUPTABLE.name() + Constants.EXTENSION_SEPARATOR)) {
+            return LOOKUPTABLE;
+        }
+
+        return null;
+    }
+
 
     public static PFXTypeCode findByTypeCode(String typeCode) {
         return Stream.of(values()).filter((PFXTypeCode pfxTypeCode) ->
@@ -263,6 +318,10 @@ public enum PFXTypeCode {
         return this == DATAFEED || this == DATAMART || this == DATASOURCE;
     }
 
+    public boolean isConditionRecordTypeCodes() {
+        return this == CONDITION_RECORD || this == CONDITION_RECORD_ALL || this == CONDITION_RECORD_HISTORY;
+    }
+
 
     public Set<String> getMandatoryFields() {
 
@@ -274,6 +333,9 @@ public enum PFXTypeCode {
     }
 
     public String getFullTargetName(String targetName) {
+        if (getTypeCode(targetName) == this){
+            return targetName;
+        }
         return getTypeCode() + "." + targetName;
 
     }

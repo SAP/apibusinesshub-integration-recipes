@@ -40,6 +40,14 @@ public class AuthV2EnabledPfxClient extends PfxClient {
 
     }
 
+    public boolean hasOAuthToken(){
+        if (authenticator instanceof AuthV2) {
+            return ((AuthV2) authenticator).hasToken();
+        }
+
+        return false;
+    }
+
     public void deleteAccessToken(String apiPath) throws IOException {
         okhttp3.Request.Builder builder = createTokenRequest(apiPath);
         builder.delete();

@@ -1,6 +1,7 @@
 package net.pricefx.connector.common.operation
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.node.ObjectNode
 import net.pricefx.connector.common.connection.MockPFXOperationClient
 import net.pricefx.connector.common.util.Constants
 import net.pricefx.connector.common.util.PFXConstants
@@ -16,7 +17,7 @@ class ContractFetcherTest extends Specification {
 
         when:
         def result = new ContractFetcher(pfxClient, false).
-                fetch(request.deepCopy(), 0L, Constants.MAX_RECORDS, true, true)
+                fetch((ObjectNode)request.deepCopy(), 0L, Constants.MAX_RECORDS, true)
 
 
         then:
@@ -24,7 +25,7 @@ class ContractFetcherTest extends Specification {
 
         when:
         result = new ContractFetcher(pfxClient, false).withFullResult(true).
-                fetch(request.deepCopy(), 0L, Constants.MAX_RECORDS, true, true)
+                fetch((ObjectNode)request.deepCopy(), 0L, Constants.MAX_RECORDS, true)
 
 
         then:

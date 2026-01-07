@@ -1,6 +1,7 @@
 package net.pricefx.adapter.sap.util;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class StringUtil {
     public static final String PROPERTY_PREFIX = "${property.";
@@ -26,9 +27,8 @@ public class StringUtil {
     }
 
     private static String getNameFromExpression(String expression, String prefix) {
-        if (!StringUtils.isEmpty(expression) && StringUtils.startsWith(expression,
-                prefix)) {
-            return StringUtils.removeEndIgnoreCase(StringUtils.removeStartIgnoreCase(expression, prefix), "}");
+        if (!StringUtils.isEmpty(expression) && expression.startsWith(prefix)) {
+            return Strings.CI.removeEnd(Strings.CI.removeStart(expression, prefix), "}");
         }
 
         return StringUtils.EMPTY;

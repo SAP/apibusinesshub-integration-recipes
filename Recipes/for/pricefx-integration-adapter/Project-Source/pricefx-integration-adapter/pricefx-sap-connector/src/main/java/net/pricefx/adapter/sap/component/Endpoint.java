@@ -10,6 +10,15 @@ import org.apache.camel.support.DefaultEndpoint;
 public class Endpoint extends DefaultEndpoint {
 
     @UriParam
+    private boolean history;
+
+    @UriParam
+    private boolean active;
+
+    @UriParam
+    private boolean superseded;
+
+    @UriParam
     private boolean replaceNullWithEmpty;
 
     @UriParam
@@ -359,5 +368,29 @@ public class Endpoint extends DefaultEndpoint {
 
     public void setPostRaw(boolean postRaw) {
         this.postRaw = postRaw;
+    }
+
+    public boolean isSuperseded() {
+        return superseded;
+    }
+
+    public void setSuperseded(boolean superseded) {
+        this.superseded = superseded;
+    }
+
+    public boolean isHistory() {
+        return history;
+    }
+
+    public void setHistory(boolean history) {
+        this.history = history;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

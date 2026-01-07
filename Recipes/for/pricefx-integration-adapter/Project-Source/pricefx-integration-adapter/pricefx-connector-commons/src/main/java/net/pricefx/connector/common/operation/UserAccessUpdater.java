@@ -17,7 +17,7 @@ import static net.pricefx.connector.common.util.ConnectionUtil.createPath;
 import static net.pricefx.connector.common.util.PFXConstants.*;
 import static net.pricefx.connector.common.util.PFXOperation.*;
 import static net.pricefx.connector.common.util.PFXTypeCode.*;
-import static net.pricefx.connector.common.validation.ConnectorException.ErrorType.UNSUPPORTED_OPERATION;
+
 
 
 public class UserAccessUpdater implements IPFXObjectUpsertor {
@@ -30,7 +30,7 @@ public class UserAccessUpdater implements IPFXObjectUpsertor {
 
     public UserAccessUpdater(PFXOperationClient pfxClient, PFXTypeCode typeCode, String uniqueId, JsonNode schema) {
         if (typeCode != ROLE && typeCode != BUSINESSROLE && typeCode != USERGROUP) {
-            throw new ConnectorException(UNSUPPORTED_OPERATION, "Type code is not supported");
+            throw new UnsupportedOperationException("Type code is not supported");
         }
 
         this.pfxClient = pfxClient;
@@ -66,7 +66,7 @@ public class UserAccessUpdater implements IPFXObjectUpsertor {
 
 
     @Override
-    public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple, boolean showSystemFields) {
+    public List<JsonNode> upsert(JsonNode request, boolean validate, boolean replaceNullKey, boolean convertValueToString, boolean isSimple, boolean showSystemFields, boolean rawPost) {
 
         if (validate) {
             validateRequest(request);

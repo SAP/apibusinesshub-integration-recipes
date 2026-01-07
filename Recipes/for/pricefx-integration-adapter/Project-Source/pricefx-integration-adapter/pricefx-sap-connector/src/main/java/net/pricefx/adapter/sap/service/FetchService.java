@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static net.pricefx.adapter.sap.util.RequestUtil.convertRequestToJson;
+import static net.pricefx.connector.common.util.PFXConstants.FIELD_DATA;
 import static net.pricefx.connector.common.util.PFXConstants.FIELD_UNIQUENAME;
 import static net.pricefx.connector.common.util.PFXTypeCode.QUOTE;
 import static net.pricefx.pckg.client.okhttp.PfxCommonService.buildSimpleCriterion;
@@ -99,7 +100,7 @@ public class FetchService {
         Iterable<ObjectNode> results;
 
         PFXTypeCode pfxTypeCode = this.typeCode;
-        ObjectNode criterion;
+        ObjectNode criterion = RequestUtil.createSimpleFetchRequest(buildSimpleCriterion(key, OperatorId.EQUALS.getValue(), value));
         if (pfxTypeCode == PFXTypeCode.TYPEDID) {
 
             GenericFetcher fetcher = new GenericFetcher(pfxClient, value, uniqueKey, false);
@@ -116,19 +117,26 @@ public class FetchService {
                         PfxCommonService.buildSimpleCriterion(pfxTypeCode.getIdentifierFieldNames()[0], OperatorId.EQUALS.getValue(),
                                 newValue));
             }
-        } else {
-            criterion = RequestUtil.createSimpleFetchRequest(buildSimpleCriterion(key, OperatorId.EQUALS.getValue(), value));
         }
 
+        ObjectNode requestNode = new ObjectNode(JsonNodeFactory.instance).set(FIELD_DATA, criterion);
+        requestNode.set("sortBy", JsonUtil.createArrayNodeFromStrings(ImmutableList.of(FIELD_UNIQUENAME)));
+        requestNode.set("resultFields", new ArrayNode(JsonNodeFactory.instance));
+
+        DetailObjectFetcher fetcher = getFetcher(pfxTypeCode);
 
         switch (pfxTypeCode) {
-            case CONTRACT:
-                results = new ContractFetcher(pfxClient, false).withFullResult(fullResult).
-                        fetch(criterion, ImmutableList.of(FIELD_UNIQUENAME), false, formatted);
-                break;
+            case QUOTE:
             case REBATEAGREEMENT:
-                results = new RebateAgreementFetcher(pfxClient, false).withFullResult(fullResult).
-                        fetch(criterion, ImmutableList.of(FIELD_UNIQUENAME), false, formatted);
+            case CONTRACT:
+                if (fetcher != null) {
+                    results = fetcher.withFullResult(fullResult).fetch(requestNode, 0L, Constants.MAX_RECORDS, false);
+                    if (formatted) {
+                        results = ResponseUtil.formatResponse(pfxTypeCode, extensionType, results, false);
+                    }
+                } else {
+                    results = Collections.emptyList();
+                }
                 break;
             case DATAFEED:
             case DATASOURCE:
@@ -136,10 +144,6 @@ public class FetchService {
                 results = new GenericFetcher(pfxClient, pfxTypeCode, extensionType, null, false).
                         fetch(criterion, ImmutableList.of(pfxTypeCode.getIdentifierFieldNames()[0]), Collections.emptyList(),
                                 startRow, pageSize, true, formatted);
-                break;
-            case QUOTE:
-                results = new QuoteFetcher(pfxClient, false).withFullResult(fullResult).
-                        fetch(criterion, ImmutableList.of(FIELD_UNIQUENAME), false, formatted);
                 break;
             default:
                 results = new GenericFetcher(pfxClient, pfxTypeCode, extensionType, value, false).
@@ -156,6 +160,19 @@ public class FetchService {
         List<ObjectNode> results = new GenericMetadataFetcher(pfxClient, typeCode, extensionType).
                 fetch(startRow, pageSize, uniqueKey);
         return convertFetchResults(results);
+    }
+
+    private DetailObjectFetcher getFetcher(PFXTypeCode pfxTypeCode){
+        switch (pfxTypeCode) {
+            case CONTRACT:
+                return new ContractFetcher(pfxClient, false);
+            case REBATEAGREEMENT:
+                return new RebateAgreementFetcher(pfxClient, false);
+            case QUOTE:
+                return new QuoteFetcher(pfxClient, false);
+            default:
+                return null;
+        }
     }
 
 }

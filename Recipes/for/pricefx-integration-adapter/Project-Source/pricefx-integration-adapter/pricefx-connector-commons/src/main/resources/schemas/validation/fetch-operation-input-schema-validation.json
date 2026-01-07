@@ -72,6 +72,10 @@
                 "description": "operator - equals, greaterThan, lessThan"
               },
               "value": {
+              },
+              "start": {
+              },
+              "end": {
               }
             }
           }

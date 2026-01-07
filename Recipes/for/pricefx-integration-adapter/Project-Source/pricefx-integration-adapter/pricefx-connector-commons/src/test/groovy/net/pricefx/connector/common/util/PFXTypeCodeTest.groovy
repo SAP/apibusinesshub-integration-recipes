@@ -1,5 +1,6 @@
 package net.pricefx.connector.common.util
 
+import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.fasterxml.jackson.databind.node.ObjectNode
 import net.pricefx.connector.common.validation.RequestValidationException
@@ -165,23 +166,28 @@ class PFXTypeCodeTest extends Specification {
 
     def "validate"() {
         when:
-        PFXTypeCode.QUOTE.validate(new ObjectNode(JsonNodeFactory.instance)
-                .put("expiryDate", "2021-01-01")
-                .put("targetDate", "2020-01-01"))
+        PFXTypeCode.ACTION.validate(new ArrayNode(JsonNodeFactory.instance).add(new ObjectNode(JsonNodeFactory.instance)
+                .put("uniqueName", "AI-1")))
 
         then:
         noExceptionThrown()
 
         when:
-        PFXTypeCode.QUOTE.validate(new ObjectNode(JsonNodeFactory.instance)
+        PFXTypeCode.ACTION.validate(new ArrayNode(JsonNodeFactory.instance).add(new ObjectNode(JsonNodeFactory.instance)
                 .put("expiryDate", "2020-01-01")
-                .put("targetDate", "2021-01-01"))
+                .put("targetDate", "2021-01-01")))
 
         then:
         thrown(RequestValidationException.class)
 
         when:
-        PFXTypeCode.QUOTE.validate(new ObjectNode(JsonNodeFactory.instance))
+        PFXTypeCode.ACTION.validate(new ArrayNode(JsonNodeFactory.instance).add(new ObjectNode(JsonNodeFactory.instance)))
+
+        then:
+        thrown(RequestValidationException.class)
+
+        when:
+        PFXTypeCode.ACTION.validate(new ObjectNode(JsonNodeFactory.instance))
 
         then:
         thrown(RequestValidationException.class)

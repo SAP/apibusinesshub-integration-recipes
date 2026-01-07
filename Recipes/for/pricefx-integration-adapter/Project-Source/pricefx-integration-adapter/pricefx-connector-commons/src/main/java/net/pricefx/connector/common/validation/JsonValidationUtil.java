@@ -113,6 +113,7 @@ public class JsonValidationUtil {
         }
 
         mandatory.addAll(getMandatoryAttributes(metadataMap));
+        mandatory.addAll(typeCode.getMandatoryFields());
 
         return mandatory;
     }

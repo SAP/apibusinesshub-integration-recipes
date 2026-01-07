@@ -30,6 +30,12 @@
     "integrationStatus": {
       "type": "number"
     },
+    "status": {
+      "type": "string"
+    },
+    "createdByObj": {
+      "type": "string"
+    },
     "lastUpdateDate": {
       "type": "string"
     },

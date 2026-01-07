@@ -20,17 +20,34 @@ class ConditionRecordBulkLoaderTest extends Specification {
     def ext = pfxClient.createExtensionType(PFXTypeCode.CONDITION_RECORD, "Condition006", "")
 
 
+    def "getRequestPayload"(){
+        when:
+        def payload = new ObjectMapper().readTree(GenericBulkLoaderTest.class.getResourceAsStream(requestFile))
+        def request = new ConditionRecordBulkLoader(pfxClient, ext, false).getRequestPayload(payload)
+
+        then:
+        JsonUtil.getStringArray(request.get(PFXConstants.HEADER)).contains("conditionRecordSetName")
+        null == request.get("options")
+
+        when:
+        request = new ConditionRecordBulkLoader(pfxClient, ext, true).getRequestPayload(payload)
+
+        then:
+        JsonUtil.getStringArray(request.get(PFXConstants.HEADER)).contains("conditionRecordSetName")
+        request.get("options") != null
+    }
+
     def "bulk load"() {
         when:
         def request = new ObjectMapper().readTree(GenericBulkLoaderTest.class.getResourceAsStream(requestFile))
-        new ConditionRecordBulkLoader(pfxClient,  ext).bulkLoad(request, true)
+        new ConditionRecordBulkLoader(pfxClient, ext, false).bulkLoad(request, true)
 
         then:
         noExceptionThrown()
 
         when:
         request = new ObjectMapper().readTree(GenericBulkLoaderTest.class.getResourceAsStream(requestFileConditionRecordMissingKeys))
-        new ConditionRecordBulkLoader(pfxClient,  ext).bulkLoad(request, true)
+        new ConditionRecordBulkLoader(pfxClient, ext, false).bulkLoad(request, true)
 
         then:
         thrown(RequestValidationException.class)
@@ -38,21 +55,21 @@ class ConditionRecordBulkLoaderTest extends Specification {
         when:
         ext = pfxClient.createExtensionType(PFXTypeCode.CONDITION_RECORD, "Condition006", "")
         request = new ObjectMapper().readTree(GenericBulkLoaderTest.class.getResourceAsStream(requestFileConditionRecordExtraFields))
-        new ConditionRecordBulkLoader(pfxClient,  ext).bulkLoad(request, true)
+        new ConditionRecordBulkLoader(pfxClient, ext, false).bulkLoad(request, true)
 
         then:
         thrown(RequestValidationException.class)
 
     }
 
-    def "validateData" () {
+    def "validateData"() {
         when:
         def request = new ObjectNode(JsonNodeFactory.instance)
         request.set(PFXConstants.FIELD_DATA, JsonUtil.createArrayNode(
                 new ArrayNode(JsonNodeFactory.instance).add("x").add("x").add("x").add("x").add("x").add("x").add("x").add("x")))
         request.set("header", new ArrayNode(JsonNodeFactory.instance).add("key1").add("key2").add("key3").add("key4").add("validTo").add("validFrom").add("attribute2").add("attribute10"))
 
-        new ConditionRecordBulkLoader(pfxClient,  ext).validateData(request)
+        new ConditionRecordBulkLoader(pfxClient, ext, false).validateData(request)
 
         then:
         noExceptionThrown()
@@ -63,7 +80,7 @@ class ConditionRecordBulkLoaderTest extends Specification {
                 new ArrayNode(JsonNodeFactory.instance).add("x").add("x").add("x").add("x").add("x").add("x").add("x").add("x")))
         request.set("header", new ArrayNode(JsonNodeFactory.instance).add("key1").add("key2").add("key3").add("key4").add("validTo").add("attribute1").add("attribute2").add("attribute10"))
 
-        new ConditionRecordBulkLoader(pfxClient,  ext).validateData(request)
+        new ConditionRecordBulkLoader(pfxClient, ext, false).validateData(request)
 
         then:
         thrown(RequestValidationException.class)
@@ -74,12 +91,13 @@ class ConditionRecordBulkLoaderTest extends Specification {
                 new ArrayNode(JsonNodeFactory.instance).add("x").add("x").add("x").add("x").add("x").add("x").add("x").add("x")))
         request.set("header", new ArrayNode(JsonNodeFactory.instance).add("key1").add("key2").add("key3").add("key4").add("validTo").add("validFrom").add("attributeX").add("attribute10"))
 
-        new ConditionRecordBulkLoader(pfxClient,  ext).validateData(request)
+        new ConditionRecordBulkLoader(pfxClient, ext, false).validateData(request)
 
         then:
         thrown(RequestValidationException.class)
 
     }
+
     def "validateStructure"() {
 
 
@@ -89,7 +107,7 @@ class ConditionRecordBulkLoaderTest extends Specification {
                 new ArrayNode(JsonNodeFactory.instance).add("x").add("x").add("x").add("x").add("x").add("x").add("x").add("x")))
         request.set("header", new ArrayNode(JsonNodeFactory.instance).add("key1").add("key2").add("key3").add("key4").add("validTo").add("validFrom").add("attribute2").add("attribute10"))
 
-        new ConditionRecordBulkLoader(pfxClient,  ext).validateStructure(request)
+        new ConditionRecordBulkLoader(pfxClient, ext, false).validateStructure(request)
 
         then:
         noExceptionThrown()
@@ -101,19 +119,13 @@ class ConditionRecordBulkLoaderTest extends Specification {
                 new ArrayNode(JsonNodeFactory.instance).add("x").add("x").add("x").add("x").add("x").add("x").add("x")))
         request.set("header", new ArrayNode(JsonNodeFactory.instance).add("key1").add("key2").add("key3").add("key4").add("validTo").add("validFrom").add("attribute2").add("attribute10"))
 
-        new ConditionRecordBulkLoader(pfxClient,  ext).validateStructure(request)
+        new ConditionRecordBulkLoader(pfxClient, ext, false).validateStructure(request)
 
         then:
         thrown(RequestValidationException.class)
 
 
-
-
-
-
     }
-
-
 
 
 }

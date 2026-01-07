@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "AdvancedConfigUpdateRequest",
+  "type": "object",
+  "required": [
+    "uniqueName"
+  ],
+  "properties": {
+    "uniqueName": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "label": "test create quote",
+  "targetDate": "2020-06-09",
+  "headerText": "hello",
+  "inputs": [
+    {
+      "name": "Customer",
+      "label": "Customer",
+      "url": "/fetch/C/",
+      "type": "CUSTOMER",
+      "value": "0001",
+      "valueHint": "Boomi",
+      "parameterConfig": {
+      }
+    },
+    {
+      "name": "headerQty",
+      "label": "headerQty",
+      "type": "",
+      "value": 100,
+      "parameterConfig": {
+      }
+    }
+  ],
+  "refreshInputs": false,
+  "userGroupEdit": "Manager",
+  "userGroupViewDetails": "Manager",
+  "additionalInfo1": 1,
+  "additionalInfo2": 2,
+  "additionalInfo3": "x",
+  "additionalInfo4": "y",
+  "expiryDate": "1999-12-31",
+  "externalRef": "abc",
+  "customerId": "0001",
+  "approvalRequiredEmailAttachmentsJson": "[]",
+  "folders": [
+    "FOLDER1",
+    "FOLDER2"
+  ],
+  "lineItems": [
+    {
+      "parent": "ROOT",
+      "skus": [
+        {
+          "sku": "TEST",
+          "inputs": [
+            {
+              "name": "Qty",
+              "label": "Qty",
+              "type": "USERENTRY",
+              "value": 100,
+              "parameterConfig": {
+                "dataType": "float"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "parent": "FOLDER1",
+      "skus": [
+        {
+          "sku": "TEST",
+          "inputs": [
+            {
+              "name": "Qty",
+              "label": "Qty",
+              "type": "USERENTRY",
+              "value": 100,
+              "parameterConfig": {
+                "dataType": "float"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "parent": "FOLDER2",
+      "skus": [
+        {
+          "sku": "TEST",
+          "inputs": [
+            {
+              "name": "Qty",
+              "label": "Qty",
+              "type": "USERENTRY",
+              "value": 100,
+              "parameterConfig": {
+                "dataType": "float"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
