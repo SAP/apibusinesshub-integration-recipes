@@ -1,5 +1,5 @@
 Adapter-Name=Pricefx-SAP-Integration-Adapter
 Adapter-Vendor=Pricefx
-Adapter-Version=9.0.0
+Adapter-Version=9.0.1
 Enable-Maven=true
 Adapter-ID=Pricefx-SAP-Integration-Adapter

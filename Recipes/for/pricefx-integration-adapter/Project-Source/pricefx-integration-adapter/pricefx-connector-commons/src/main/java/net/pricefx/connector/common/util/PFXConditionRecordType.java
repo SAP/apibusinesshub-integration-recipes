@@ -1,7 +1,7 @@
 package net.pricefx.connector.common.util;
 
 import com.google.common.collect.ImmutableSet;
-import net.pricefx.connector.common.validation.ConnectorException;
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -44,7 +44,7 @@ public class PFXConditionRecordType implements IPFXExtensionType {
     @Override
     public PFXTypeCode getTypeCode() {
         if (!active && !history){
-            throw new ConnectorException("Please select what type of condition record you would like to fetch");
+            return PFXTypeCode.CONDITION_RECORD;
         }
 
         if (active && history) {

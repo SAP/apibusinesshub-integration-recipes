@@ -1,6 +1,6 @@
 package net.pricefx.connector.common.util
 
-import net.pricefx.connector.common.validation.ConnectorException
+
 import spock.lang.Specification
 
 class PFXConditionRecordTypeTest extends Specification {
@@ -60,10 +60,10 @@ class PFXConditionRecordTypeTest extends Specification {
         PFXTypeCode.CONDITION_RECORD_HISTORY == type
 
         when:
-        new PFXConditionRecordType(5, false, false).withTable("1").getTypeCode()
+        type = new PFXConditionRecordType(5, false, false).withTable("1").getTypeCode()
 
         then:
-        thrown(ConnectorException.class)
+        PFXTypeCode.CONDITION_RECORD == type
 
 
     }

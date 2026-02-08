@@ -381,6 +381,7 @@
           <name>Eclipse Public License 1.0</name>
           <url>http://www.eclipse.org/legal/epl-v10.html</url>
           <distribution>repo</distribution>
+          <file>eclipse public license 1.0 - epl-v10.html</file>
         </license>
       </licenses>
     </dependency>
@@ -1290,6 +1291,7 @@
         <license>
           <name>BSD</name>
           <url>http://asm.ow2.org/license.html</url>
+          <file>bsd - license.html</file>
         </license>
       </licenses>
     </dependency>
