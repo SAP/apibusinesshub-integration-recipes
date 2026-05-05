@@ -21,6 +21,9 @@ import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriParams;
 import org.apache.camel.spi.UriPath;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisPassword;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
@@ -32,9 +35,9 @@ public class RedisConfiguration {
     private boolean managedListenerContainer;
     private boolean managedConnectionFactory;
 
-    @UriPath @Metadata(required = "true")
+    @UriPath @Metadata(required = true)
     private String host;
-    @UriPath @Metadata(required = "true")
+    @UriPath @Metadata(required = true)
     private Integer port;
     @UriParam(defaultValue = "SET")
     private Command command = Command.SET;
@@ -48,16 +51,15 @@ public class RedisConfiguration {
     private RedisConnectionFactory connectionFactory;
     @UriParam
     private RedisSerializer serializer;
+    @UriParam
+    private String password;
+    @UriParam(defaultValue = "false")
+    private boolean ssl = false;
 
     public Command getCommand() {
         return command;
     }
 
-    /**
-     * Default command, which can be overridden by message header.
-     * <p/>
-     * Notice the consumer only supports the following commands: PSUBSCRIBE and SUBSCRIBE
-     */
     public void setCommand(Command command) {
         this.command = command;
     }
@@ -66,9 +68,6 @@ public class RedisConfiguration {
         return port;
     }
 
-    /**
-     * Redis server port number
-     */
     public void setPort(Integer port) {
         this.port = port;
     }
@@ -77,20 +76,30 @@ public class RedisConfiguration {
         return host;
     }
 
-    /**
-     * The host where Redis server is running.
-     */
     public void setHost(String host) {
         this.host = host;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isSsl() {
+        return ssl;
+    }
+
+    public void setSsl(boolean ssl) {
+        this.ssl = ssl;
     }
 
     public RedisTemplate getRedisTemplate() {
         return redisTemplate != null ? redisTemplate : createDefaultTemplate();
     }
 
-    /**
-     * Reference to a pre-configured RedisTemplate instance to use.
-     */
     public void setRedisTemplate(RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
@@ -99,9 +108,6 @@ public class RedisConfiguration {
         return listenerContainer != null ? listenerContainer : createDefaultListenerContainer();
     }
 
-    /**
-     * Reference to a pre-configured RedisMessageListenerContainer instance to use.
-     */
     public void setListenerContainer(RedisMessageListenerContainer listenerContainer) {
         this.listenerContainer = listenerContainer;
     }
@@ -110,16 +116,10 @@ public class RedisConfiguration {
         return channels;
     }
 
-    /**
-     * List of topic names or name patterns to subscribe to. Multiple names can be separated by comma.
-     */
     public void setChannels(String channels) {
         this.channels = channels;
     }
 
-    /**
-     * Reference to a pre-configured RedisConnectionFactory instance to use.
-     */
     public void setConnectionFactory(RedisConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
@@ -132,23 +132,32 @@ public class RedisConfiguration {
         return serializer != null ? serializer : createDefaultSerializer();
     }
 
-    /**
-     * Reference to a pre-configured RedisSerializer instance to use.
-     */
     public void setSerializer(RedisSerializer serializer) {
         this.serializer = serializer;
     }
 
     private RedisConnectionFactory createDefaultConnectionFactory() {
-        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
         managedConnectionFactory = true;
 
+        RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration();
         if (host != null) {
-            jedisConnectionFactory.setHostName(host);
+            redisConfig.setHostName(host);
         }
         if (port != null) {
-            jedisConnectionFactory.setPort(port);
+            redisConfig.setPort(port);
         }
+        if (password != null && !password.isEmpty()) {
+            redisConfig.setPassword(RedisPassword.of(password));
+        }
+
+        JedisClientConfiguration.JedisClientConfigurationBuilder clientConfigBuilder =
+                JedisClientConfiguration.builder();
+        if (ssl) {
+            clientConfigBuilder.useSsl();
+        }
+
+        JedisConnectionFactory jedisConnectionFactory =
+                new JedisConnectionFactory(redisConfig, clientConfigBuilder.build());
         jedisConnectionFactory.afterPropertiesSet();
         connectionFactory = jedisConnectionFactory;
         return jedisConnectionFactory;
@@ -178,7 +187,7 @@ public class RedisConfiguration {
 
     public void stop() throws Exception {
         if (managedConnectionFactory) {
-            ((JedisConnectionFactory)connectionFactory).destroy();
+            ((JedisConnectionFactory) connectionFactory).destroy();
         }
         if (managedListenerContainer) {
             listenerContainer.destroy();
