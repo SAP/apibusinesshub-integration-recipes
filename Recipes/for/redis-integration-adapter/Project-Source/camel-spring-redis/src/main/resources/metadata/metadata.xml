@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ComponentMetadata ComponentId="ctype::Adapter/cname::Redis/vendor::ApacheCamel/version::1.0.0" ComponentName="Redis" UIElementType="Adapter" IsExtension="false" IsFinal="true" IsPreserves="true" IsDefaultGenerator="true" ComponentDisplayName="Redis" xmlns:gen="http://www.sap.hci.adk.com/gen" xmlns:bp="http://www.adk.gen/xmlns/blueprint">
-    <Variant VariantName="Redis Component Sender" VariantId="ctype::AdapterVariant/cname::Redis/vendor::ApacheCamel/tp::spring-redis/mp::spring-redis/direction::Sender/version::1.0.0" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="spring-redis" AttachmentBehavior="Preserve">
+<ComponentMetadata ComponentId="ctype::Adapter/cname::Redis/vendor::ApacheCamel/version::1.0.1" ComponentName="Redis" UIElementType="Adapter" IsExtension="false" IsFinal="true" IsPreserves="true" IsDefaultGenerator="true" ComponentDisplayName="Redis" xmlns:gen="http://www.sap.hci.adk.com/gen" xmlns:bp="http://www.adk.gen/xmlns/blueprint">
+    <Variant VariantName="Redis Component Sender" VariantId="ctype::AdapterVariant/cname::Redis/vendor::ApacheCamel/tp::spring-redis/mp::spring-redis/direction::Sender/version::1.0.1" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="spring-redis" AttachmentBehavior="Preserve">
         <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
             <Content>
                 <ContentType>Any</ContentType>
@@ -63,11 +63,31 @@
                     <ReferenceName>command</ReferenceName>
                     <description>Configure command</description>
                 </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>username</ReferenceName>
+                    <description>Configure username</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>password</ReferenceName>
+                    <description>Configure password</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>ssl</ReferenceName>
+                    <description>Configure ssl</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>connectTimeout</ReferenceName>
+                    <description>Configure connectTimeout</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>readTimeout</ReferenceName>
+                    <description>Configure readTimeout</description>
+                </AttributeReference>
 
             </AttributeGroup>
         </Tab>
     </Variant>
-    <Variant VariantName="Redis Component Receiver" VariantId="ctype::AdapterVariant/cname::Redis/vendor::ApacheCamel/tp::spring-redis/mp::spring-redis/direction::Receiver/version::1.0.0" IsRequestResponse="true" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="spring-redis" AttachmentBehavior="Preserve">
+    <Variant VariantName="Redis Component Receiver" VariantId="ctype::AdapterVariant/cname::Redis/vendor::ApacheCamel/tp::spring-redis/mp::spring-redis/direction::Receiver/version::1.0.1" IsRequestResponse="true" MetadataVersion="2.0" gen:RuntimeComponentBaseUri="spring-redis" AttachmentBehavior="Preserve">
         <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
             <Content>
                 <ContentType>Any</ContentType>
@@ -129,6 +149,26 @@
  <AttributeReference>
                     <ReferenceName>command</ReferenceName>
                     <description>Configure command</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>username</ReferenceName>
+                    <description>Configure username</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>password</ReferenceName>
+                    <description>Configure password</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>ssl</ReferenceName>
+                    <description>Configure ssl</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>connectTimeout</ReferenceName>
+                    <description>Configure connectTimeout</description>
+                </AttributeReference>
+ <AttributeReference>
+                    <ReferenceName>readTimeout</ReferenceName>
+                    <description>Configure readTimeout</description>
                 </AttributeReference>
 
             </AttributeGroup>
@@ -221,6 +261,64 @@
         <GuiLabels guid="778a0b5f-b726-4ed8-aca3-3f4e7bebff44">
             <Label language="EN">command</Label>
             <Label language="DE">command</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>username</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="15442b3b-c407-4a42-8d85-b380a8f7ac86">
+            <Label language="EN">username</Label>
+            <Label language="DE">username</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>password</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="5ea363a6-4fa5-4a4b-badc-49a36d079f35">
+            <Label language="EN">password</Label>
+            <Label language="DE">password</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>ssl</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:boolean</DataType>
+        <Default>false</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="5f0d1f57-5e3f-4357-96ca-96de675488d7">
+            <Label language="EN">ssl</Label>
+            <Label language="DE">ssl</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>connectTimeout</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>2000</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="3a4174fe-8a90-4320-866e-aed0444cd029">
+            <Label language="EN">connectTimeout</Label>
+            <Label language="DE">connectTimeout</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+<AttributeMetadata>
+        <Name>readTimeout</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>2000</Default>
+        <Length></Length>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="8430e933-6856-4a36-a55f-6b9a0e37dd253">
+            <Label language="EN">readTimeout</Label>
+            <Label language="DE">readTimeout</Label>
         </GuiLabels>
     </AttributeMetadata>
 

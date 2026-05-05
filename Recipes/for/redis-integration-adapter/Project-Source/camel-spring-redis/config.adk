@@ -4,4 +4,4 @@ Adapter-Name=Redis
 Adapter-Vendor=ApacheCamel
 Enable-Maven=true
 Adapter-ID=Redis
-Adapter-Version=1.0.0
+Adapter-Version=1.0.1

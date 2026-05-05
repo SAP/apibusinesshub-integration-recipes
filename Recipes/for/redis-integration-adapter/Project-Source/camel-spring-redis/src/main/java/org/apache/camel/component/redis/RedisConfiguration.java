@@ -16,6 +16,8 @@
  */
 package org.apache.camel.component.redis;
 
+import java.time.Duration;
+
 import org.apache.camel.spi.Metadata;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriParams;
@@ -52,9 +54,15 @@ public class RedisConfiguration {
     @UriParam
     private RedisSerializer serializer;
     @UriParam
+    private String username;
+    @UriParam
     private String password;
     @UriParam(defaultValue = "false")
     private boolean ssl = false;
+    @UriParam(defaultValue = "2000")
+    private int connectTimeout = 2000;
+    @UriParam(defaultValue = "2000")
+    private int readTimeout = 2000;
 
     public Command getCommand() {
         return command;
@@ -84,6 +92,14 @@ public class RedisConfiguration {
         return password;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -94,6 +110,22 @@ public class RedisConfiguration {
 
     public void setSsl(boolean ssl) {
         this.ssl = ssl;
+    }
+
+    public int getConnectTimeout() {
+        return connectTimeout;
+    }
+
+    public void setConnectTimeout(int connectTimeout) {
+        this.connectTimeout = connectTimeout;
+    }
+
+    public int getReadTimeout() {
+        return readTimeout;
+    }
+
+    public void setReadTimeout(int readTimeout) {
+        this.readTimeout = readTimeout;
     }
 
     public RedisTemplate getRedisTemplate() {
@@ -146,12 +178,17 @@ public class RedisConfiguration {
         if (port != null) {
             redisConfig.setPort(port);
         }
+        if (username != null && !username.isEmpty()) {
+            redisConfig.setUsername(username);
+        }
         if (password != null && !password.isEmpty()) {
             redisConfig.setPassword(RedisPassword.of(password));
         }
 
         JedisClientConfiguration.JedisClientConfigurationBuilder clientConfigBuilder =
-                JedisClientConfiguration.builder();
+                JedisClientConfiguration.builder()
+                        .connectTimeout(Duration.ofMillis(connectTimeout))
+                        .readTimeout(Duration.ofMillis(readTimeout));
         if (ssl) {
             clientConfigBuilder.useSsl();
         }
