@@ -2,6 +2,7 @@
 \| [Browse by Topic](../readme.md)  \| [Browse by Author](../author.md) \| Browsing by Artefact Type \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Request&template=recipe-request.md&title=How+to++) \| [Report a broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=documentation&template=bug_report.md&title=Broken%20Link) \| [Contribute](https://github.com/SAP-samples/apibusinesshub-integration-recipes/blob/master/CONTRIBUTING.md) \|
 
 ## Artefact Type
+* [API and MCP Configuration Recipes](#api-and-mcp-configuration-recipes)
 * [Groovy Scripts](#groovy-scripts)
 * [Integration Adapters](#integration-adapters)
 * [Reusable integration flows](#reusable-integration-flows)
@@ -160,3 +161,12 @@ Recipe|Description|Topic
 [Invoke Java functions from XSLT Mapping](InvokeJavaFunctionsFromXSLT30)|Writing reflexive extension functions in Java to be invoked from XSLT Mappings | [Mappings](../readme.md#mappings) |
 
 ***
+
+***
+
+### API and MCP Configuration Recipes
+
+Recipe|Description
+---|---
+[Model API-centric integration on Integration Cell](APICentricIntegrationOnIntegrationCell/readme.md)|Configure an API artifact with policies, integration processing, deployment, and verification.
+[Expose an API through MCP Gateway](ExposeAPIThroughMCPGateway/readme.md)|Expose an eligible API as MCP tools with OAuth, Developer Hub subscription, and source synchronization.
