@@ -11,19 +11,3 @@ DISCLAIMER: The package content was removed from GitHub. The integration flow ap
 
 Replication of Payroll posting data from SAP SuccessFactors Employee Central to SAP ERP or SAP S/4HANA. This data includes Cost Center/GL accounts/Expenses.
 
-This package contains 2 iflows:
-
-* Pre-check for Payroll posting
-* Posting of Payroll data.
-
-[View documentation](ConfigGuide_PayrollPostingFromSAPSucccessfactorsEmployeeCentralPayrolltoS4HANAorSAPERP.pdf)
-
-## Integration flows
-
-### Prechecks for Payroll Posting
-Integration Flow to perform Pre-checks before actual G/L Posting\
-![Prechecks for Payroll Posting](prechecks-for-payroll-posting.png)
-
-### Replicate Payroll Data
-This Integration flow for Payroll Posting from Employee Central Payroll to S4HANA system.\
-![Replicate Payroll Data](replicate-payroll-data.png)
