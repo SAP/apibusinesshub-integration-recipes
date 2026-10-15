@@ -1,6 +1,14 @@
 # Integration Recipes
 \| Browsing by Topic \| [Browse by Author](author.md) \| [Browse by Artefact Type](for/readme.md) \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Request&template=recipe-request.md&title=How+to++) \| [Report a broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=documentation&template=bug_report.md&title=Broken%20Link) \| [Contribute](https://github.com/SAP-samples/cloud-integration-flow/wiki/Things-to-do-on-this-repo#contribute)\|
 
+
+## Current runtime guidance
+
+| Recipe | Purpose |
+| --- | --- |
+| [Reuse scripts with Script Collections](for/ReuseScriptsWithScriptCollections/readme.md) | Configure shared scripts and validate dependent flows. |
+| [Assess Edge Integration Cell compatibility](for/AssessEdgeIntegrationCellCompatibility/readme.md) | Check runtime scope, adapters, credentials, and recovery. |
+
 ## Topics
 * [Amazon](#amazon-web-services)
 * [B2B Integration Factory](#B2B-integrtion-factory)
@@ -125,7 +133,7 @@ Recipe|Description|Author
 ### Mappings
 Recipe|Description|Author
 ---|---|---
-[Accessing Value Mappings from Groovy script](for/AccessValueMappingsDynamicallyScript)|Use ```ITApiFactory.getApi()``` to get ```ValueMappingAPI``` class that can be used to retrieve the mappings.|[Sharad Dixit](author.md#sharad-dixit)|
+[Accessing Value Mappings from Groovy script](for/AccessValueMappingsDynamicallyScript)|Use ```ITApiFactory.getService()``` to get ```ValueMappingAPI``` class that can be used to retrieve the mappings.|[Sharad Dixit](author.md#sharad-dixit)|
 [Convert JSON to XML using XSLT Mappings](for/ConvertJsonToXMLusingXSLT30)|This recipe converts and incoming file from JSON format to XML format.|[Kamlesh Zanje](author.md#kamlesh-zanje)|
 [Invoke Java functions from XSLT Mapping](for/InvokeJavaFunctionsFromXSLT30)|Writing reflexive extension functions in Java to be invoked from XSLT.|[Kamlesh Zanje](author.md#kamlesh-zanje)|
 [Use Map data structures in XSLT Mapping](for/ConstructMapDataStructsUsingXSLT30)|Utilize [Map](https://www.w3.org/TR/xslt-30/#map) data structures in XSLT Mappings flow step.|[Kamlesh Zanje](author.md#kamlesh-zanje) |
@@ -421,4 +429,3 @@ Recipe|Description|Author
 [Third Party Invoice Status Integration with SAP Ariba network](for/thirdpartyinvoicestatusintegrationwiththearibanetwork) | Invoice status handling from any Invoice system to SAP Ariba Network based on cXML | [SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Ticketmaster Journal Entry Integration with SAP S/4HANA Cloud](for/ticketmasterjournalentryintegrationwithsaps4hanacloud)|Create Journal Entries from ticket sales originating from Ticketmaster Archtics and Host.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Integration between TM Form and SAP S/4HANA BRIM](for/tmforumtobrimimplementationtemplates) | This package provides integration content to connect TM Forum APIs to SAP Billing and Revenue Innovation Management (BRIM).|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
-

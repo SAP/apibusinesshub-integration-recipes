@@ -4,7 +4,7 @@
 ![Sharad Dixit](https://github.com/sharadiiita.png?size=50 )|[Sharad Dixit](https://github.com/sharadiiita)|
 ----|----|
 
-Use ```ITApiFactory.getApi()``` to get ```ValueMappingAPI``` class that can be used to retrieve the mappings.
+Use ```ITApiFactory.getService()``` to get ```ValueMappingAPI``` class that can be used to retrieve the mappings.
 
 [Download the integration flow Sample](AccessValueMappingsFromScript.zip)
 
@@ -13,7 +13,7 @@ Use ```ITApiFactory.getApi()``` to get ```ValueMappingAPI``` class that can be u
 Step|Code|Why?
 ----|----|----
 Import classes | ```com.sap.it.api.ITApiFactory;``` ```com.sap.it.api.mapping.ValueMappingApi;```|
-Get a handle to ```ITApiFactory```  | ```def valueMapApi         = ITApiFactory.getApi(ValueMappingApi.class, null);```|
+Get a handle to ```ITApiFactory```  | ```def valueMapApi         = ITApiFactory.getService(ValueMappingApi.class, null);```|
 Retrieve the Value Mappings| ```def value = valueMapApi.getMappedValue(sourceAgency, sourceIdentifier, sourceValue, targetAgency, targetIdentifier); ```|Input the source and target schema for the value mappings and source value for which value mapping need to be retrieved  
 Print the output value | ```messageLog.addAttachmentAsString("Output : Target Value Mapping is  ", value, "text/plain");```| Output the selected value mapping.
 
@@ -26,7 +26,11 @@ We have a scheduler set at "Run Once". A Content Modifier will take user input v
 
 
 ### Sample Script
-This is the script used in the sample
+This documentation example uses the supported service factory. The downloadable ZIP is a historical sample; replace `ITApiFactory.getApi` with `ITApiFactory.getService` in its script before deploying.
+
+SAP's [ITApiFactory API reference](https://help.sap.com/doc/471310fc71c94c2d913884e2ff1b4039/Cloud/en-US/com/sap/it/api/ITApiFactory.html) marks `getApi` as deprecated and documents `getService` as its replacement.
+
+This is the updated example
 ```
 import com.sap.gateway.ip.core.customdev.util.Message;
 import java.util.HashMap;
@@ -37,7 +41,7 @@ import com.sap.it.api.mapping.ValueMappingApi;
 def Message processData(Message message) {
     //Body
 
-    def valueMapApi         = ITApiFactory.getApi(ValueMappingApi.class, null);
+    def valueMapApi         = ITApiFactory.getService(ValueMappingApi.class, null);
     def map                 = message.getProperties();
 
     def sourceAgency        = map.get("sourceAgency");
