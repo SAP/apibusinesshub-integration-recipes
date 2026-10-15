@@ -19,15 +19,15 @@ package org.apache.camel.component.redis;
 import java.util.Map;
 
 import org.apache.camel.Endpoint;
-import org.apache.camel.impl.UriEndpointComponent;
+import org.apache.camel.support.DefaultComponent;
 
 /**
  * Represents the component that manages {@link RedisEndpoint}.
  */
-public class RedisComponent extends UriEndpointComponent {
+public class RedisComponent extends DefaultComponent {
 
     public RedisComponent() {
-        super(RedisEndpoint.class);
+        super();
     }
 
     protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters)
