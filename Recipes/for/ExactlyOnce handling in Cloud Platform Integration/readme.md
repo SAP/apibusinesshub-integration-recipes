@@ -13,17 +13,13 @@ In this recipe we will show, how enable ExactlyOnce message processing through m
 
 **Motivation:**
 
-In Cloud Platform Integration, when message processing fails, there is no means to retry the message processing automatically by the system out-of-the-box. It has to resent from the source system. In cases where the incoming message contains multiple records and some were successfully processed before the message processing failed, retriggering the entire message from the sender results in not optimal.
+Cloud Integration now provides building blocks for retry and duplicate handling. SAP's [Quality of Service guidance](https://help.sap.com/docs/cloud-integration/sap-cloud-integration/quality-of-service) explains that the end-to-end guarantee depends on the protocols and participating systems. Exactly Once is not a blanket guarantee for every integration flow.
 
-The issue worsens when there are multiple receivers and the message is successfully delivered to some receivers. In this case, it is not possible to resend the message from the source system.
+For asynchronous delivery, consider [JMS queues](https://help.sap.com/docs/cloud-integration/sap-cloud-integration/use-case-for-jms): an ingress flow persists a message using the JMS receiver adapter, and a delivery flow consumes it using the JMS sender adapter. Transfer failures can then trigger broker retries.
 
-SAP Cloud Platform Integration does not support Quality of Service (QoS) Exactly Once (EO) as a standard feature, however it is on the roadmap.
+To suppress repeated successful processing, consider the [Idempotent Process Call](https://help.sap.com/docs/cloud-integration/sap-cloud-integration/define-idempotent-process-call). It records completion only after the called local process succeeds. A timeout after the receiver has committed can still cause duplicate side effects; use receiver-side idempotency with a stable business message ID for an end-to-end Exactly Once design.
 
-Nonetheless, Exactly Once handling can be simulated by modeling the integration process in a way that ensures that we record and retry only failed messages and deliver them only to the desired receivers.
-
-In order to accomplish this, we make use of a permanent persistence in the Cloud Integration stack’s own database.
-Here we can make use of a datastore which can be kept in the persistence layer for a large number of days (as configured in the process step – default being 90 days); or a variable which stays in the database for 400 days after the last access. As the name suggests, datastore is used to store messages or group of messages, whereas variables can be used to store information points.
-
+The data-store pattern below is a historical modeling alternative. It requires explicit retry, cleanup, monitoring, and receiver-side duplicate handling; persistence alone does not guarantee Exactly Once. Check current retention settings on your tenant instead of relying on historical defaults.
 
 **Design** your flows as follows:
 
@@ -57,9 +53,13 @@ If the system finds a datastore entry, the sub-flow will try to resend the messa
 
  ![modeling4](modeling4.png)
 
-Alternatively, in the Select step, you can choose to delete the datastore entry and then reenter the record in the datastore from the sub-process if it fails again.
+Retain the persisted message until successful delivery is confirmed. Deleting it before delivery and reinserting it on failure introduces a loss window if processing stops between those operations. Review transaction boundaries and test recovery before adopting this pattern.
 
 
 ### Related Recipes
-* [upstream-recipe-name](../upstream-recipe-folder-name)
-* [alternate-recipe-name](../alternate-recipe-folder-name)
+* [Enabling Exactly Once in Order via Cloud Integration](../enablingexactlyonceinorderviacloudintegration)
+* [Data Store Operations](../Data%20Store%20Operations)
+
+### Verification
+
+In a non-production environment, resend the same business message ID after success, force a receiver failure and retry, and simulate an ambiguous timeout after receiver processing. Check receiver records as well as message processing logs. Verify recovery separately for each receiver.
