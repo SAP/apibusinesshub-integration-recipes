@@ -2,6 +2,7 @@
 \| Browsing by Topic \| [Browse by Author](author.md) \| [Browse by Artefact Type](for/readme.md) \| [Request a Recipe](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=Recipe%20Request&template=recipe-request.md&title=How+to++) \| [Report a broken link](https://github.com/SAP-samples/cloud-integration-flow/issues/new?assignees=&labels=documentation&template=bug_report.md&title=Broken%20Link) \| [Contribute](https://github.com/SAP-samples/cloud-integration-flow/wiki/Things-to-do-on-this-repo#contribute)\|
 
 ## Topics
+* [API-centric Integration and MCP](#api-centric-integration-and-mcp)
 * [Amazon](#amazon-web-services)
 * [B2B Integration Factory](#B2B-integrtion-factory)
 * [CICD](#cicd)
@@ -422,3 +423,11 @@ Recipe|Description|Author
 [Ticketmaster Journal Entry Integration with SAP S/4HANA Cloud](for/ticketmasterjournalentryintegrationwithsaps4hanacloud)|Create Journal Entries from ticket sales originating from Ticketmaster Archtics and Host.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [Integration between TM Form and SAP S/4HANA BRIM](for/tmforumtobrimimplementationtemplates) | This package provides integration content to connect TM Forum APIs to SAP Billing and Revenue Innovation Management (BRIM).|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 
+***
+
+### API-centric Integration and MCP
+
+Recipe|Description
+---|---
+[Model API-centric integration on Integration Cell](for/APICentricIntegrationOnIntegrationCell/readme.md)|Configure an API artifact with policies, integration processing, deployment, and verification.
+[Expose an API through MCP Gateway](for/ExposeAPIThroughMCPGateway/readme.md)|Expose an eligible API as MCP tools with OAuth, Developer Hub subscription, and source synchronization.
