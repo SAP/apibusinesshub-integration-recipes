@@ -52,7 +52,7 @@ public class RedisStringIdempotentRepository extends RedisIdempotentRepository {
     @ManagedOperation(description = "Adds the key to the store")
     @Override
     public boolean add(String key) {
-        boolean added = valueOperations.setIfAbsent(createRedisKey(key), key);
+        boolean added = Boolean.TRUE.equals(valueOperations.setIfAbsent(createRedisKey(key), key));
         if (expiry > 0) {
             valueOperations.getOperations().expire(createRedisKey(key), expiry, TimeUnit.SECONDS);
         }

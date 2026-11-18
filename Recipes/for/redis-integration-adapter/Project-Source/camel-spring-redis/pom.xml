@@ -26,10 +26,10 @@
 
   <properties>
     <camel.osgi.export.pkg>org.apache.camel.component.redis.*</camel.osgi.export.pkg>
-    <camel.osgi.import.before.defaults>org.springframework.data.*;version="[1.0,2)"</camel.osgi.import.before.defaults>
-    <camel.osgi.export.service>org.apache.camel.spi.ComponentResolver;component=redis</camel.osgi.export.service>
-  <camel.version>2.17.4</camel.version>
-<spring4-version>5.0.0.RELEASE</spring4-version>
+    <camel.osgi.import.before.defaults>!org.springframework.data.*,!org.springframework.beans.*,!org.springframework.core.*,!org.springframework.context.*,!org.springframework.util.*</camel.osgi.import.before.defaults>
+    <camel.osgi.export.service>org.apache.camel.spi.ComponentResolver;component=spring-redis</camel.osgi.export.service>
+  <camel.version>3.14.7</camel.version>
+<spring4-version>5.3.39</spring4-version>
 </properties>
 
   <dependencies>
@@ -42,12 +42,12 @@
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-redis</artifactId>
-      <version>1.5.0.RELEASE</version>
+      <version>2.7.18</version>
     </dependency>
     <dependency>
       <groupId>redis.clients</groupId>
       <artifactId>jedis</artifactId>
-      <version>2.6.2</version>
+      <version>3.9.0</version>
     </dependency>
     
     <!-- https://mvnrepository.com/artifact/javax.cache/cache-api -->
@@ -120,13 +120,13 @@
 <dependency>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-pool2</artifactId>
-    <version>2.2</version>
+    <version>2.11.1</version>
 </dependency>
 
   </dependencies>
 
 <groupId>org.apache.camel</groupId>
-<version>2.17.4</version>
+<version>3.14.7</version>
 <build>
     <defaultGoal>install</defaultGoal>
     <plugins>
@@ -137,10 +137,12 @@
 
         <configuration>
           <instructions>
-          <Embed-Dependency>*;scope=!provided|test</Embed-Dependency>
-         	<Import-Package>javax.*,*;resolution:=optional</Import-Package>
-           <Embed-Transitive>true</Embed-Transitive>
-           </instructions>
+            <Embed-Dependency>*;scope=!provided|test</Embed-Dependency>
+            <Import-Package>javax.*;resolution:=optional,*;resolution:=optional</Import-Package>
+            <Embed-Transitive>true</Embed-Transitive>
+            <Export-Service>${camel.osgi.export.service}</Export-Service>
+            <Service-Component>OSGI-INF/redis-component.xml</Service-Component>
+          </instructions>
         </configuration>
       </plugin>
       <plugin>
@@ -148,15 +150,15 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.2</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
       
       <plugin>
         <groupId>com.sap.cloud.adk</groupId>
         <artifactId>com.sap.cloud.adk.build.archive</artifactId>
-        <version>1.25.0</version>    
+        <version>2.1.1</version>
       </plugin>
     </plugins>
     <pluginManagement>
