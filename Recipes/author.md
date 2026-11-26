@@ -13,6 +13,7 @@
 * [Sharad Dixit](#sharad-dixit)
 * [Shweta Walaskar](#shweta-walaskar)
 * [Sunny Kapoor](#sunny-kapoor)
+* [cahthuranag](#cahthuranag)
 
 ***
 
@@ -193,5 +194,15 @@ Recipe|Description|Topic
 [Upload Single API Provider](for/CICD-UploadSingleAPIProvider)|Checkout the configured API Provider from the source code repository and either update or create the artefact on the API Portal tenant.|[CICD](readme.md#cicd)|
 [Upload Single API Proxy](for/CICD-UploadSingleAPIProxy)|Checkout the configured API Proxy from the source code repository and either update or create the artefact on the API Portal tenant.|[CICD](readme.md#cicd)|
 [Upload Single Key Value Map](for/CICD-UploadSingleKeyValueMap)|Checkout the configured Key Value Map from the source code repository and either update or create the artefact on the API Portal tenant.|[CICD](readme.md#cicd)|
+
+***
+
+### [cahthuranag](https://github.com/cahthuranag)
+![cahthuranag](https://github.com/cahthuranag.png?size=50 )|Exchange rate data integrations|
+----|----|
+
+Recipe|Description|Topic
+---|---|---
+[Load official exchange rates into SAP S/4HANA via IDoc](for/loadofficialexchangeratesintosaps4hanaviaidoc)|Load central bank or customs authority exchange rate tables from an HTTP API into TCURR as EXCHANGE_RATE01 IDocs, dated with the authority's own table date.|[SAP S/4HANA](readme.md#sap-s4hana) \|[SAP Global Trade Services](readme.md#sap-global-trade-services)|
 
 ***
