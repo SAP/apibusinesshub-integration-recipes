@@ -276,6 +276,7 @@ Recipe|Description|Author
 Recipe|Description|Author
 ---|---|---
 [Reguvis Fachmedien Integration with SAP GTS](for/bundesanzeigerintegrationwithsaps4hanagtsonpremise)|Reguvis Fachmedien Integration with SAP GTS provides an Integration with SLP sanction list of Reguvis Fachmedien to SAP GTS (Global Trade Services) System in order to replicate blocked Business Partners|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Load official exchange rates into SAP S/4HANA via IDoc](for/loadofficialexchangeratesintosaps4hanaviaidoc)|Load central bank or customs authority exchange rate tables from an HTTP API into TCURR as EXCHANGE_RATE01 IDocs, dated with the authority's own table date.|[cahthuranag](author.md#cahthuranag)
 
 ***
 
@@ -301,6 +302,7 @@ Recipe|Description|Author
 [SAP Document Compliance with Third Party - eDocuments](for/saps4hanaintegrationwiththirdpartyedocuments)| Exchange electronic invoices with the tax authorities for Chile, Colombia and Mexico, available for SAP S/4HANA, and SAP ERP (available as of SAP ERP 6.0 EHP5)|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP S/4HANA Access Request Integration with SAP Cloud Identity Access Governance](for/saps4hanaaccessrequestintegrationwithsapcloudidentityaccessgovernance)|Integrate SAP Cloud Identity Access Governance (IAG) solution with your SAP S/4HANA HR systems to enable changes in employee status (HR triggers) to initiate access requests via SAP Cloud Identity Access Governance (IAG).|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP S/4HANA Integration with Third-Party - Exchange Rate Load](for/saps4hanaintegrationwithbloombergbank)|Automatically upload exchange rates daily in the SAP system from Bloomberg, a third-party provider of exchange rate data.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
+[Load official exchange rates into SAP S/4HANA via IDoc](for/loadofficialexchangeratesintosaps4hanaviaidoc)|Load central bank or customs authority exchange rate tables from an HTTP API into TCURR as EXCHANGE_RATE01 IDocs, dated with the authority's own table date.|[cahthuranag](author.md#cahthuranag)
 [SAP S/4HANA OnPremise Integration with SAP Concur](for/s4hanaonpremiseintegrationwithsapconcur)|SAP S/4HANA OnPremise Integration with SAP Concur in order to replicate the exchange rates via a standard BAPI to a SFTP Server.|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP S/4HANA OnPremise HCM Integration with SAP Concur](for/sapconcurintegrationwiths4hanaonpremisehcm)| SAP S/4HANA OnPremise HCM Integration with SAP Concur in order to replicate employee data via a custom BAPI and using an SFTP Server |[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
 [SAP S/4HANA - Service Order Replication with SAP Marketing Cloud](for/s4hanaserviceorderintegrationwithsapmarketingcloud)| Send Service Orders from SAP S/4HANA OnPremise to SAP Marketing Cloud|[SAP Business Accelerator Hub](author.md#sap-api-business-hub)
